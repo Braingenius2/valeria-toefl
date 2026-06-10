@@ -287,6 +287,31 @@
     .profile-info-label {
       color: var(--text-muted);
     }
+
+    /* Mobile Responsiveness */
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+        padding: 1rem;
+      }
+
+      .container {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        margin: 1rem auto;
+        padding: 0 1rem;
+      }
+
+      .card {
+        padding: 1.25rem;
+      }
+
+      .profile-card {
+        position: static;
+      }
+    }
   </style>
 </head>
 <body>
