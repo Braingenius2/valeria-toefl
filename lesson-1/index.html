@@ -549,10 +549,7 @@
         <span class="sidebar-num">04</span> Task 2: Speaking Timers
       </button>
       <button class="sidebar-btn" onclick="switchSlide(4)">
-        <span class="sidebar-num">05</span> Live Feedback Board
-      </button>
-      <button class="sidebar-btn" onclick="switchSlide(5)">
-        <span class="sidebar-num">06</span> Homework & Resources
+        <span class="sidebar-num">05</span> Homework
       </button>
     </div>
 
@@ -742,52 +739,8 @@
         </div>
       </div>
 
-      <!-- SLIDE 5: LIVE FEEDBACK BOARD -->
+      <!-- SLIDE 5: HOMEWORK -->
       <div class="slide" id="slide-4">
-        <div class="card">
-          <div class="card-title">📝 Teacher's Live Feedback Board (TOEFL Score Metrics)</div>
-          <p class="text-muted" style="margin-bottom: 1rem;">
-            Record Valeria's speaking performance during the 60-second trial. Mark vocabulary repetitions and grammar drops.
-          </p>
-
-          <textarea class="notepad-area" id="live-notepad" placeholder="Type sentences here during the speaking phase...
-Example:
-She said that buses are not running often (Repetitive vocab -> 'bus frequency is highly inadequate')"></textarea>
-          
-          <div style="margin-top: 1rem; display: flex; gap: 0.5rem;">
-            <button class="btn btn-primary" onclick="addNoteToTable()">Add to Correction List</button>
-            <button class="btn btn-secondary" onclick="clearNotepad()">Clear Notes</button>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="card-title">🛠️ Real-Time Error Log</div>
-          <table class="correction-table" id="correction-table">
-            <thead>
-              <tr>
-                <th style="width: 45%;">Valeria's Sentence (Bug)</th>
-                <th style="width: 45%;">Alternative C1 Upgrade (Patch)</th>
-                <th style="width: 10%;">Category</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>She is not liking the decision because transit is bad.</td>
-                <td style="color: var(--accent-green); font-weight: 500;">She vehemently opposes the policy due to the unreliability of public transit.</td>
-                <td><span class="badge-exam" style="font-size: 0.65rem; color: var(--accent-purple); border-color: var(--accent-purple); background: rgba(168,85,247,0.1);">Vocab</span></td>
-              </tr>
-              <tr>
-                <td>If she goes home late, she must to wait one hour.</td>
-                <td style="color: var(--accent-green); font-weight: 500;">If she stays late, she has to wait for up to an hour.</td>
-                <td><span class="badge-exam" style="font-size: 0.65rem; color: var(--accent-red); border-color: var(--accent-red); background: rgba(239,68,68,0.1);">Grammar</span></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <!-- SLIDE 6: HOMEWORK & RESOURCES -->
-      <div class="slide" id="slide-5">
         <div class="card">
           <div class="card-title">📋 TOEFL Homework Assignments</div>
           <p class="text-muted" style="margin-bottom: 1.5rem;">Complete the tasks below before our next class. Submit your writing and audio recordings via your usual chat/email channels.</p>
@@ -824,15 +777,6 @@ She said that buses are not running often (Repetitive vocab -> 'bus frequency is
               </p>
             </div>
           </div>
-        </div>
-
-        <div class="card">
-          <div class="card-title">🔗 TOEFL Quick-Access Resources</div>
-          <ul style="padding-left: 1.25rem; line-height: 1.8; font-size: 0.95rem;">
-            <li><a href="https://goarno.io/blog/listen-and-repeat-practice-questions-with-answers-toefl-new-format/" target="_blank" style="color: var(--accent-blue); text-decoration: none;">GoArno Listen & Repeat Practice</a></li>
-            <li><a href="https://www.toeflresources.com/" target="_blank" style="color: var(--accent-blue); text-decoration: none;">TOEFL Resources (Templates & Guides)</a></li>
-            <li><a href="https://www.test-guide.com/quizzes/toefl-structure-practice-test-1" target="_blank" style="color: var(--accent-blue); text-decoration: none;">TOEFL Structure Practice Quizzes</a></li>
-          </ul>
         </div>
       </div>
 
