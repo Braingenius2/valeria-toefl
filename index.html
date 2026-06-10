@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Valeria's TOEFL Prep Portal</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-dark: #090d16;
+      --bg-card: #131a26;
+      --border-color: #243042;
+      --text-main: #f1f5f9;
+      --text-muted: #64748b;
+      --primary: #f59e0b;
+      --primary-hover: #d97706;
+      --accent-blue: #38bdf8;
+      --accent-green: #10b981;
+      --accent-purple: #a855f7;
+      --glass-bg: rgba(19, 26, 38, 0.85);
+      --glass-border: rgba(255, 255, 255, 0.03);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background: radial-gradient(circle at top right, rgba(245, 158, 11, 0.03), transparent 800px),
+                  radial-gradient(circle at bottom left, rgba(56, 189, 248, 0.02), transparent 800px);
+    }
+
+    header {
+      border-bottom: 1px solid var(--border-color);
+      padding: 1.5rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(9, 13, 22, 0.7);
+      backdrop-filter: blur(12px);
+    }
+
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .badge-exam {
+      background: rgba(245, 158, 11, 0.1);
+      border: 1px solid var(--primary);
+      color: var(--primary);
+      padding: 0.25rem 0.6rem;
+      border-radius: 4px;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.75rem;
+      font-weight: bold;
+      letter-spacing: 0.05em;
+    }
+
+    h1 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 2rem auto;
+      padding: 0 1.5rem;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 2.2fr 1fr;
+      gap: 2rem;
+    }
+
+    @media (max-width: 900px) {
+      .container {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Cards */
+    .card {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+      margin-bottom: 2rem;
+    }
+
+    .card-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      padding-bottom: 0.75rem;
+    }
+
+    /* Lesson List */
+    .lesson-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .lesson-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.01);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 1.25rem 1.5rem;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .lesson-item:hover {
+      border-color: var(--primary);
+      background: rgba(245, 158, 11, 0.03);
+      transform: translateY(-2px);
+    }
+
+    .lesson-info {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .lesson-number {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.8rem;
+      color: var(--accent-blue);
+      font-weight: 600;
+    }
+
+    .lesson-name {
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+
+    .lesson-date {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .btn-go {
+      background: var(--primary);
+      color: #000;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      transition: all 0.2s ease;
+    }
+
+    .lesson-item:hover .btn-go {
+      background: #fff;
+      transform: scale(1.05);
+    }
+
+    /* Metrics Grid */
+    .metric-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .metric-box {
+      background: rgba(0, 0, 0, 0.2);
+      border: 1px solid var(--border-color);
+      padding: 1rem;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .metric-value {
+      font-size: 1.75rem;
+      font-weight: bold;
+      color: var(--accent-green);
+    }
+
+    .metric-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-top: 0.25rem;
+    }
+
+    /* Homework List */
+    .hw-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .hw-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      font-size: 0.95rem;
+      background: rgba(255, 255, 255, 0.01);
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.02);
+    }
+
+    .hw-status {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      margin-top: 6px;
+      flex-shrink: 0;
+    }
+
+    .status-pending { background-color: var(--primary); }
+    .status-completed { background-color: var(--accent-green); }
+
+    /* Right column stats */
+    .profile-card {
+      position: sticky;
+      top: 100px;
+    }
+
+    .profile-avatar {
+      width: 70px;
+      height: 70px;
+      background: rgba(245, 158, 11, 0.15);
+      border: 2px solid var(--primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      margin: 0 auto 1rem;
+    }
+
+    .profile-name {
+      text-align: center;
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+
+    .profile-detail {
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+    }
+
+    .profile-info-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.9rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    }
+
+    .profile-info-row:last-child {
+      border-bottom: none;
+    }
+
+    .profile-info-label {
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo-area">
+      <div class="badge-exam">TOEFL STUDY ROOM</div>
+      <h1>Valeria's Portal</h1>
+    </div>
+    <div style="font-size: 0.9rem; color: var(--text-muted);">
+      Target Destination: <strong>Hungary 🇭🇺</strong>
+    </div>
+  </header>
+
+  <div class="container">
+    
+    <!-- Main Board -->
+    <div class="main-column">
+      
+      <!-- Lesson Index -->
+      <div class="card">
+        <div class="card-title">📖 Interactive Lessons</div>
+        <div class="lesson-grid">
+          
+          <!-- Lesson 1 -->
+          <a href="lesson-1/index.html" class="lesson-item">
+            <div class="lesson-info">
+              <span class="lesson-number">LESSON 01</span>
+              <span class="lesson-name">Campus Policy Synthesis & Advanced Syntax</span>
+              <span class="lesson-date">Class Date: June 10, 2026</span>
+            </div>
+            <div class="btn-go">→</div>
+          </a>
+
+        </div>
+      </div>
+
+      <!-- Current Homework -->
+      <div class="card">
+        <div class="card-title">📝 Homework assignments</div>
+        <div class="hw-list">
+          <div class="hw-item">
+            <span class="hw-status status-pending"></span>
+            <div>
+              <strong>Speaking Recording:</strong> Record a 60s TOEFL Speaking Task 2 response on: <em>"Library laptop bans"</em>. Focus on C1 transitions and zero hesitation.
+            </div>
+          </div>
+          <div class="hw-item">
+            <span class="hw-status status-pending"></span>
+            <div>
+              <strong>Writing Synthesis:</strong> Write a 120-150 word summary of the library announcement and speaker's counterarguments using inversion and subjunctive syntax.
+            </div>
+          </div>
+          <div class="hw-item">
+            <span class="hw-status status-pending"></span>
+            <div>
+              <strong>Vocabulary Journal:</strong> Contextualize upgraded academic verbs (<em>vehemently oppose, assert, highly inadequate</em>) in Hungary study scenarios.
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Sidebar Profile -->
+    <div class="profile-column">
+      <div class="card profile-card">
+        <div class="profile-avatar">🎓</div>
+        <div class="profile-name">Valeria</div>
+        <div class="profile-detail">Prepping for TOEFL Exam</div>
+
+        <div class="profile-info-row">
+          <span class="profile-info-label">Current Level</span>
+          <span><strong>B2 / C1</strong></span>
+        </div>
+        <div class="profile-info-row">
+          <span class="profile-info-label">Target Score</span>
+          <span style="color: var(--primary);"><strong>100+</strong></span>
+        </div>
+        <div class="profile-info-row">
+          <span class="profile-info-label">Schedule</span>
+          <span>Fridays, 1 hour</span>
+        </div>
+        
+        <div class="card-title" style="margin-top: 2rem; font-size: 1rem; margin-bottom: 1rem; padding-bottom: 0.5rem;">🎯 Score Goals</div>
+        <div class="metric-grid">
+          <div class="metric-box">
+            <div class="metric-value">26+</div>
+            <div class="metric-label">Speaking</div>
+          </div>
+          <div class="metric-box">
+            <div class="metric-value">27+</div>
+            <div class="metric-label">Writing</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>

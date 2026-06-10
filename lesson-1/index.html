@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Valeria's Lesson: TOEFL Speaking Task 2 & Advanced Structure</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-dark: #090d16;
+      --bg-card: #131a26;
+      --border-color: #243042;
+      --text-main: #f1f5f9;
+      --text-muted: #64748b;
+      --primary: #f59e0b; /* Amber/Gold for TOEFL/Exam vibe */
+      --primary-hover: #d97706;
+      --accent-blue: #38bdf8;
+      --accent-green: #10b981;
+      --accent-red: #ef4444;
+      --accent-purple: #a855f7;
+      --glass-bg: rgba(19, 26, 38, 0.85);
+      --glass-border: rgba(255, 255, 255, 0.03);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    header {
+      background: rgba(9, 13, 22, 0.9);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-color);
+      padding: 1rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .badge-exam {
+      background: rgba(245, 158, 11, 0.15);
+      border: 1px solid var(--primary);
+      color: var(--primary);
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      font-weight: bold;
+      letter-spacing: 0.05em;
+    }
+
+    h1 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: -0.025em;
+    }
+
+    .lesson-meta {
+      display: flex;
+      gap: 1.5rem;
+      font-size: 0.875rem;
+      color: var(--text-muted);
+    }
+
+    .meta-item strong {
+      color: var(--text-main);
+    }
+
+    .main-container {
+      display: flex;
+      flex: 1;
+      height: calc(100vh - 65px);
+    }
+
+    /* Sidebar Navigation */
+    .sidebar {
+      width: 280px;
+      border-right: 1px solid var(--border-color);
+      padding: 1.5rem 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      background: rgba(9, 13, 22, 0.5);
+    }
+
+    .sidebar-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      width: 100%;
+      padding: 0.75rem 1rem;
+      background: transparent;
+      border: 1px solid transparent;
+      border-radius: 8px;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .sidebar-btn:hover {
+      background: rgba(255, 255, 255, 0.02);
+      color: var(--text-main);
+    }
+
+    .sidebar-btn.active {
+      background: var(--bg-card);
+      border-color: var(--border-color);
+      color: var(--primary);
+      font-weight: 600;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .sidebar-num {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.8rem;
+      opacity: 0.6;
+    }
+
+    /* Content Area */
+    .content-area {
+      flex: 1;
+      padding: 2.5rem;
+      overflow-y: auto;
+      background: radial-gradient(circle at top right, rgba(245, 158, 11, 0.04), transparent 900px);
+    }
+
+    .slide {
+      display: none;
+      animation: fadeIn 0.3s ease-in-out forwards;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .slide.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Cards & Glassmorphism */
+    .card {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 12px;
+      padding: 1.75rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+    }
+
+    .card-title {
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      padding-bottom: 0.5rem;
+    }
+
+    /* Shadowing Audio Block */
+    .shadowing-box {
+      border-left: 4px solid var(--accent-blue);
+      background: rgba(56, 189, 248, 0.03);
+    }
+
+    .shadowing-text {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: var(--text-main);
+      margin: 1.5rem 0;
+      background: rgba(0, 0, 0, 0.25);
+      padding: 1.5rem;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.02);
+    }
+
+    .shadowing-word {
+      display: inline-block;
+      margin-right: 0.25rem;
+      transition: all 0.15s ease;
+    }
+
+    .shadowing-word.highlighted {
+      background: rgba(56, 189, 248, 0.25);
+      color: #fff;
+      border-radius: 3px;
+      padding: 0 2px;
+    }
+
+    .btn {
+      padding: 0.6rem 1.2rem;
+      border-radius: 6px;
+      border: none;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.2s ease;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #000;
+    }
+
+    .btn-primary:hover {
+      background: #e08e09;
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-main);
+      border: 1px solid var(--border-color);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    /* Exam Timers */
+    .timer-container {
+      display: flex;
+      gap: 1rem;
+      margin: 1rem 0;
+    }
+
+    .exam-timer {
+      background: #000;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 1rem;
+      text-align: center;
+      flex: 1;
+    }
+
+    .timer-val {
+      font-family: 'Fira Code', monospace;
+      font-size: 2.25rem;
+      font-weight: bold;
+      color: var(--primary);
+    }
+
+    .timer-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+      margin-top: 0.25rem;
+    }
+
+    /* TOEFL Structure console */
+    .console-container {
+      background: #05070c;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      font-family: 'Fira Code', monospace;
+      overflow: hidden;
+    }
+
+    .console-header {
+      background: #101622;
+      padding: 0.6rem 1rem;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      display: inline-block;
+      margin-right: 4px;
+    }
+
+    .dot.red { background: #ff5f56; }
+    .dot.yellow { background: #ffbd2e; }
+    .dot.green { background: #27c93f; }
+
+    .console-body {
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .toefl-item {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+      padding-bottom: 1.25rem;
+      cursor: pointer;
+    }
+
+    .toefl-item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .toefl-question {
+      color: var(--text-main);
+      line-height: 1.5;
+    }
+
+    .toefl-reveal {
+      margin-top: 0.75rem;
+      color: var(--accent-green);
+      display: none;
+      font-size: 0.95rem;
+    }
+
+    .toefl-explanation {
+      margin-top: 0.25rem;
+      color: var(--text-muted);
+      display: none;
+      font-size: 0.85rem;
+    }
+
+    /* Speaking Task 2 Split layout */
+    .task2-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 768px) {
+      .task2-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .panel-reading {
+      background: rgba(255, 255, 255, 0.01);
+      border: 1px solid var(--border-color);
+      padding: 1.25rem;
+      border-radius: 8px;
+    }
+
+    .panel-listening {
+      background: rgba(255, 158, 11, 0.02);
+      border: 1px solid var(--border-color);
+      padding: 1.25rem;
+      border-radius: 8px;
+    }
+
+    .script-text {
+      background: rgba(0, 0, 0, 0.3);
+      padding: 1rem;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      line-height: 1.6;
+      margin-top: 0.75rem;
+      color: var(--text-muted);
+      max-height: 200px;
+      overflow-y: auto;
+      border: 1px solid rgba(255, 255, 255, 0.02);
+    }
+
+    /* Template Cards */
+    .template-box {
+      background: rgba(168, 85, 247, 0.03);
+      border-left: 4px solid var(--accent-purple);
+      padding: 1.25rem;
+      border-radius: 4px;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    /* Homework List Styles */
+    .hw-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    /* Live Teacher Board */
+    .notepad-area {
+      width: 100%;
+      height: 150px;
+      background: #05070c;
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      color: var(--text-main);
+      padding: 0.75rem;
+      font-family: inherit;
+      resize: vertical;
+      font-size: 0.95rem;
+    }
+
+    .notepad-area:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+
+    .correction-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+
+    .correction-table th, .correction-table td {
+      border: 1px solid var(--border-color);
+      padding: 0.75rem;
+      text-align: left;
+    }
+
+    .correction-table th {
+      background: rgba(255, 255, 255, 0.02);
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .correction-table tr:hover {
+      background: rgba(255, 255, 255, 0.01);
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo-area">
+      <div class="badge-exam">TOEFL Prep</div>
+      <h1>Valeria: Task 2 Synthesis & C1 Structure</h1>
+    </div>
+    <div class="lesson-meta">
+      <div class="meta-item">Student: <strong>Valeria (B2/C1)</strong></div>
+      <div class="meta-item">Duration: <strong>60 mins</strong></div>
+      <div class="meta-item">Focus: <strong>Speaking Synthesis & Templates</strong></div>
+    </div>
+  </header>
+
+  <div class="main-container">
+    <!-- Sidebar navigation -->
+    <div class="sidebar">
+      <button class="sidebar-btn active" onclick="switchSlide(0)">
+        <span class="sidebar-num">01</span> Warm-up: Shadowing
+      </button>
+      <button class="sidebar-btn" onclick="switchSlide(1)">
+        <span class="sidebar-num">02</span> TOEFL Structure Challenge
+      </button>
+      <button class="sidebar-btn" onclick="switchSlide(2)">
+        <span class="sidebar-num">03</span> Task 2: Reading & Audio
+      </button>
+      <button class="sidebar-btn" onclick="switchSlide(3)">
+        <span class="sidebar-num">04</span> Task 2: Speaking Timers
+      </button>
+      <button class="sidebar-btn" onclick="switchSlide(4)">
+        <span class="sidebar-num">05</span> Live Feedback Board
+      </button>
+      <button class="sidebar-btn" onclick="switchSlide(5)">
+        <span class="sidebar-num">06</span> Homework & Resources
+      </button>
+    </div>
+
+    <!-- Content panels -->
+    <div class="content-area">
+      
+      <!-- SLIDE 1: WARM-UP SHADOWING -->
+      <div class="slide active" id="slide-0">
+        <div class="card shadowing-box">
+          <div class="card-title">
+            <span>🔊</span> TOEFL Listen & Repeat: Housing Policy
+          </div>
+          <p class="text-muted" style="font-size: 0.95rem;">
+            <strong>Shadowing Focus:</strong> Advanced pacing, linking (/v/, /d/, and vowel glides), and high-register academic intonation.
+          </p>
+          
+          <div class="shadowing-text" id="shadowing-text-block">
+            <!-- Programmatically split words for pacers -->
+          </div>
+
+          <div class="shadowing-controls">
+            <button class="btn btn-primary" onclick="toggleShadowingTimer()" id="btn-timer">
+              <span>▶</span> Start Timer
+            </button>
+            <div class="timer-display" id="shadowing-timer" style="font-family:'Fira Code', monospace;">00:00</div>
+            <button class="btn btn-secondary" onclick="resetShadowingTimer()">Reset</button>
+            <button class="btn btn-secondary" onclick="autoHighlightWords()">Auto Pacer</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">🎯 C1 Vocal Mechanics (Advanced Polish)</div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; font-size: 0.9rem;">
+            <div>
+              <p><strong>1. Content Word Stress & Pitch Range</strong></p>
+              <p style="color: var(--text-muted); margin-top: 0.25rem;">
+                Valeria's pronunciation is very good, but to reach a native TOEFL 28+ score, she must hit key vocabulary stress points clearly: *"al-lo-<strong>cat</strong>-ing"*, *"<strong>ran</strong>-dom-ized"*, *"<strong>lot</strong>-te-ry"*.
+              </p>
+            </div>
+            <div>
+              <p><strong>2. Flapping and Linking</strong></p>
+              <p style="color: var(--text-muted); margin-top: 0.25rem;">
+                Ensure smooth transitions: *"will_implement"* (vowel linking), *"reside_outside"* (glide link), and American flapping in *"lottery"* (/lɑːdər-i/).
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 2: TOEFL STRUCTURE CHALLENGE -->
+      <div class="slide" id="slide-1">
+        <div class="card">
+          <div class="card-title">📝 TOEFL Structure & Inversion Lab (C1 Check)</div>
+          <p class="text-muted" style="margin-bottom: 1.25rem;">
+            Excellent writing and speaking require mastery of high-scoring grammatical structures. Analyze these TOEFL-style items with Valeria. Click to reveal answer and syntax explanation.
+          </p>
+
+          <div class="console-container">
+            <div class="console-header">
+              <div>
+                <span class="dot red"></span>
+                <span class="dot yellow"></span>
+                <span class="dot green"></span>
+                <span>toefl_structure_tests.py</span>
+              </div>
+            </div>
+            <div class="console-body">
+              
+              <!-- Item 1 -->
+              <div class="toefl-item" onclick="revealToefl(1)">
+                <div class="toefl-question">
+                  <strong>1.</strong> Not until the late 19th century __________ as a distinct academic discipline. <br>
+                  <span style="color: var(--text-muted); font-size: 0.85rem;">(A) sociology emerged / (B) did sociology emerge / (C) sociology did emerge / (D) sociology emerging</span>
+                </div>
+                <div class="toefl-reveal" id="toefl-rev-1">🟢 Correct Answer: (B) did sociology emerge</div>
+                <div class="toefl-explanation" id="toefl-exp-1">
+                  <strong>Grammar Concept:</strong> Negative inversion. When a sentence starts with a limiting phrase like "Not until...", the auxiliary verb must precede the subject.
+                </div>
+              </div>
+
+              <!-- Item 2 -->
+              <div class="toefl-item" onclick="revealToefl(2)">
+                <div class="toefl-question">
+                  <strong>2.</strong> The dean proposed that the department chairperson __________ a new committee to investigate student complaints. <br>
+                  <span style="color: var(--text-muted); font-size: 0.85rem;">(A) appoints / (B) appoint / (C) appointing / (D) appointed</span>
+                </div>
+                <div class="toefl-reveal" id="toefl-rev-2">🟢 Correct Answer: (B) appoint</div>
+                <div class="toefl-explanation" id="toefl-exp-2">
+                  <strong>Grammar Concept:</strong> Subjunctive mood. Verbs of demanding, suggesting, or proposing (e.g., "propose that...") require the base form of the verb (appoint) regardless of the subject's grammatical person.
+                </div>
+              </div>
+
+              <!-- Item 3 -->
+              <div class="toefl-item" onclick="revealToefl(3)">
+                <div class="toefl-question">
+                  <strong>3.</strong> Modern computers can process data faster, store more files, and __________ than older models. <br>
+                  <span style="color: var(--text-muted); font-size: 0.85rem;">(A) network security is better / (B) provide better security network / (C) secure networks more efficiently / (D) security of network is higher</span>
+                </div>
+                <div class="toefl-reveal" id="toefl-rev-3">🟢 Correct Answer: (C) secure networks more efficiently</div>
+                <div class="toefl-explanation" id="toefl-exp-3">
+                  <strong>Grammar Concept:</strong> Parallel structure. The verbs must match: "process data...", "store files...", and "secure networks...".
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 3: TASK 2 CASE STUDY -->
+      <div class="slide" id="slide-2">
+        <div class="card">
+          <div class="card-title">📖 TOEFL Speaking Task 2: Campus Announcement</div>
+          
+          <div class="task2-grid">
+            
+            <!-- Reading Block -->
+            <div class="panel-reading">
+              <h3 style="font-size:1rem; margin-bottom:0.5rem; color:var(--accent-blue);">Reading Passage (45 Seconds)</h3>
+              <p style="font-size:0.9rem; line-height:1.6; color:#cbd5e1;">
+                <strong>Elimination of Free Student Parking</strong><br><br>
+                The University Board has decided to eliminate all free student parking lots starting in September. The space currently occupied by these parking lots will be converted into green spaces and outdoor study areas. The administration claims that this measure will significantly reduce the campus carbon footprint by encouraging students to utilize public transit. Furthermore, a transit pass will now be included in the tuition fee, making public transport free for all enrolled students.
+              </p>
+              
+              <div style="margin-top: 1rem; display: flex; align-items: center; gap: 1rem;">
+                <button class="btn btn-secondary" style="padding: 0.4rem 0.8rem;" onclick="startReadingTimer()">Start reading timer</button>
+                <span id="read-timer-display" style="font-family:'Fira Code', monospace; font-weight:bold; color:var(--accent-blue);">45s</span>
+              </div>
+            </div>
+
+            <!-- Listening Block -->
+            <div class="panel-listening">
+              <h3 style="font-size:1rem; margin-bottom:0.5rem; color:var(--primary);">Listening Transcript (Dialogue)</h3>
+              <p class="text-muted" style="font-size:0.85rem;">Review the spoken logic below once audio simulation is complete.</p>
+              
+              <div class="script-text">
+                <strong>Man:</strong> Hey, did you see the new parking announcement?<br>
+                <strong>Woman:</strong> Yeah, and to be honest, I think it's a terrible idea.<br>
+                <strong>Man:</strong> Really? Free transit passes sound pretty good though, don't they?<br>
+                <strong>Woman:</strong> Sure, in theory. But in reality, the bus service around here is completely unreliable. If you study late at the library, buses run only once an hour after 8 PM. Also, if you live in the student housing complex on the east side of town, it takes at least 45 minutes by bus compared to a 10-minute drive. And biking in the winter here is basically impossible because of the heavy snow and ice. I don't see how replacing parking spots with grass helps students get to their classes on time.
+              </div>
+
+              <div style="margin-top: 1rem; display: flex; gap: 0.5rem;">
+                <button class="btn btn-primary" style="padding: 0.4rem 0.8rem;" onclick="toggleScriptText()">Show/Hide Transcript</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 4: TASK 2 SPEAKING TIMERS -->
+      <div class="slide" id="slide-3">
+        <div class="card">
+          <div class="card-title">⏱️ Official TOEFL Speaking Simulator</div>
+          <p class="text-muted" style="margin-bottom: 1rem;">
+            <strong>Prompt:</strong> The woman expresses her opinion of the university's plan. State her opinion and explain the reasons she gives for holding that opinion.
+          </p>
+
+          <div class="timer-container">
+            <div class="exam-timer">
+              <div class="timer-val" id="prep-time">30</div>
+              <div class="timer-label">Preparation Time (seconds)</div>
+            </div>
+            <div class="exam-timer">
+              <div class="timer-val" id="speak-time">60</div>
+              <div class="timer-label">Speaking Response (seconds)</div>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 0.5rem; justify-content: center; margin-bottom: 1.5rem;">
+            <button class="btn btn-primary" onclick="runTOEFLTimers()">Start TOEFL Clock</button>
+            <button class="btn btn-secondary" onclick="resetTOEFLTimers()">Reset Clocks</button>
+          </div>
+
+          <div class="template-box">
+            <h4 style="color: var(--accent-purple); font-size: 0.95rem; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.25rem;">
+              <span>📋</span> TOEFL Speaking Task 2 Template (From TOEFL Resources)
+            </h4>
+            <ul style="padding-left: 1.25rem; font-size: 0.9rem;">
+              <li><strong>Introduce policy:</strong> "According to the announcement, the university plans to [change policy] because [reason 1]."</li>
+              <li><strong>State opinion:</strong> "The woman in the conversation disagrees with this plan, stating that..."</li>
+              <li><strong>Reason 1:</strong> "First, she argues that [unreliable bus schedule]. Specifically..."</li>
+              <li><strong>Reason 2:</strong> "Second, she points out that [commute/winter conditions]. For instance..."</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 5: LIVE FEEDBACK BOARD -->
+      <div class="slide" id="slide-4">
+        <div class="card">
+          <div class="card-title">📝 Teacher's Live Feedback Board (TOEFL Score Metrics)</div>
+          <p class="text-muted" style="margin-bottom: 1rem;">
+            Record Valeria's speaking performance during the 60-second trial. Mark vocabulary repetitions and grammar drops.
+          </p>
+
+          <textarea class="notepad-area" id="live-notepad" placeholder="Type sentences here during the speaking phase...
+Example:
+She said that buses are not running often (Repetitive vocab -> 'bus frequency is highly inadequate')"></textarea>
+          
+          <div style="margin-top: 1rem; display: flex; gap: 0.5rem;">
+            <button class="btn btn-primary" onclick="addNoteToTable()">Add to Correction List</button>
+            <button class="btn btn-secondary" onclick="clearNotepad()">Clear Notes</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">🛠️ Real-Time Error Log</div>
+          <table class="correction-table" id="correction-table">
+            <thead>
+              <tr>
+                <th style="width: 45%;">Valeria's Sentence (Bug)</th>
+                <th style="width: 45%;">Alternative C1 Upgrade (Patch)</th>
+                <th style="width: 10%;">Category</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>She is not liking the decision because transit is bad.</td>
+                <td style="color: var(--accent-green); font-weight: 500;">She vehemently opposes the policy due to the unreliability of public transit.</td>
+                <td><span class="badge-exam" style="font-size: 0.65rem; color: var(--accent-purple); border-color: var(--accent-purple); background: rgba(168,85,247,0.1);">Vocab</span></td>
+              </tr>
+              <tr>
+                <td>If she goes home late, she must to wait one hour.</td>
+                <td style="color: var(--accent-green); font-weight: 500;">If she stays late, she has to wait for up to an hour.</td>
+                <td><span class="badge-exam" style="font-size: 0.65rem; color: var(--accent-red); border-color: var(--accent-red); background: rgba(239,68,68,0.1);">Grammar</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- SLIDE 6: HOMEWORK & RESOURCES -->
+      <div class="slide" id="slide-5">
+        <div class="card">
+          <div class="card-title">📋 TOEFL Homework Assignments</div>
+          <p class="text-muted" style="margin-bottom: 1.5rem;">Complete the tasks below before our next class. Submit your writing and audio recordings via your usual chat/email channels.</p>
+          
+          <div class="hw-list">
+            <div class="card" style="background: rgba(255,255,255,0.01); border-color: var(--border-color); margin-bottom: 1rem; padding: 1.25rem;">
+              <h3 style="font-size: 1.05rem; color: var(--accent-blue); margin-bottom: 0.5rem;">Task 1: Speaking (Audio Recording)</h3>
+              <p style="font-size: 0.95rem; line-height: 1.6;">
+                <strong>Scenario:</strong> University library bans personal laptops to prevent screen glare and encourage the use of institutional computers.
+              </p>
+              <ul style="padding-left: 1.25rem; font-size: 0.9rem; margin: 0.5rem 0; color: var(--text-muted);">
+                <li>Prepare for 30 seconds, record for exactly 60 seconds.</li>
+                <li>Focus on using C1 transitions (<em>vehemently opposes, asserts, posits</em>).</li>
+                <li>Ensure zero hesitation and smooth sentence transitions.</li>
+              </ul>
+            </div>
+
+            <div class="card" style="background: rgba(255,255,255,0.01); border-color: var(--border-color); margin-bottom: 1rem; padding: 1.25rem;">
+              <h3 style="font-size: 1.05rem; color: var(--accent-purple); margin-bottom: 0.5rem;">Task 2: Writing Synthesis</h3>
+              <p style="font-size: 0.95rem; line-height: 1.6;">
+                Write a <strong>120-150 word summary</strong> of the parking announcement from today's class and the speaker's objections.
+              </p>
+              <ul style="padding-left: 1.25rem; font-size: 0.9rem; margin: 0.5rem 0; color: var(--text-muted);">
+                <li>You must include at least one instance of <strong>Negative Inversion</strong> (<em>e.g., "Not only did..."</em>).</li>
+                <li>You must include at least one instance of <strong>Subjunctive Mood</strong> (<em>e.g., "It is essential that the university..."</em>).</li>
+                <li>Pay attention to indirect question word order.</li>
+              </ul>
+            </div>
+
+            <div class="card" style="background: rgba(255,255,255,0.01); border-color: var(--border-color); margin-bottom: 0; padding: 1.25rem;">
+              <h3 style="font-size: 1.05rem; color: var(--accent-green); margin-bottom: 0.5rem;">Task 3: Vocabulary Journal</h3>
+              <p style="font-size: 0.95rem; line-height: 1.6;">
+                Write <strong>5 contextualized sentences</strong> using our upgraded C1 vocabulary (<em>vehemently oppose, assert, highly inadequate, commute, reside</em>), linking them to scenarios about studying in Hungary.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">🔗 TOEFL Quick-Access Resources</div>
+          <ul style="padding-left: 1.25rem; line-height: 1.8; font-size: 0.95rem;">
+            <li><a href="https://goarno.io/blog/listen-and-repeat-practice-questions-with-answers-toefl-new-format/" target="_blank" style="color: var(--accent-blue); text-decoration: none;">GoArno Listen & Repeat Practice</a></li>
+            <li><a href="https://www.toeflresources.com/" target="_blank" style="color: var(--accent-blue); text-decoration: none;">TOEFL Resources (Templates & Guides)</a></li>
+            <li><a href="https://www.test-guide.com/quizzes/toefl-structure-practice-test-1" target="_blank" style="color: var(--accent-blue); text-decoration: none;">TOEFL Structure Practice Quizzes</a></li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    // Slide Management
+    function switchSlide(index) {
+      document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('.sidebar-btn').forEach(b => b.classList.remove('active'));
+      
+      document.getElementById(`slide-${index}`).classList.add('active');
+      document.querySelectorAll('.sidebar-btn')[index].classList.add('active');
+    }
+
+    // Shadowing text parser & highlighting
+    const text = "Starting next academic semester, the university will implement a new housing application system. Rather than allocating dormitories on a first-come, first-served basis, rooms will be distributed through a randomized lottery. This change is intended to address the growing complaints about registration servers crashing on opening day. Additionally, students who choose to stay off-campus will be eligible for a transport stipend, provided they reside outside a three-mile radius from the main campus center.";
+    
+    function initShadowing() {
+      const container = document.getElementById('shadowing-text-block');
+      const words = text.split(' ');
+      container.innerHTML = words.map((w, i) => `<span class="shadowing-word" id="word-${i}">${w}</span>`).join(' ');
+    }
+
+    // Shadowing Timer Logic
+    let timerInterval = null;
+    let timerSeconds = 0;
+
+    function toggleShadowingTimer() {
+      const btn = document.getElementById('btn-timer');
+      if (timerInterval) {
+        clearInterval(timerInterval);
+        timerInterval = null;
+        btn.innerHTML = '<span>▶</span> Resume Timer';
+      } else {
+        btn.innerHTML = '<span>⏸</span> Pause Timer';
+        timerInterval = setInterval(() => {
+          timerSeconds++;
+          const mins = String(Math.floor(timerSeconds / 60)).padStart(2, '0');
+          const secs = String(timerSeconds % 60).padStart(2, '0');
+          document.getElementById('shadowing-timer').textContent = `${mins}:${secs}`;
+        }, 1000);
+      }
+    }
+
+    function resetShadowingTimer() {
+      clearInterval(timerInterval);
+      timerInterval = null;
+      timerSeconds = 0;
+      document.getElementById('shadowing-timer').textContent = '00:00';
+      document.getElementById('btn-timer').innerHTML = '<span>▶</span> Start Timer';
+      document.querySelectorAll('.shadowing-word').forEach(w => w.classList.remove('highlighted'));
+    }
+
+    // Auto Pacer Highlighter simulation
+    let paceInterval = null;
+    function autoHighlightWords() {
+      document.querySelectorAll('.shadowing-word').forEach(w => w.classList.remove('highlighted'));
+      let currentWordIndex = 0;
+      const totalWords = text.split(' ').length;
+      
+      if (paceInterval) clearInterval(paceInterval);
+      
+      paceInterval = setInterval(() => {
+        if (currentWordIndex >= totalWords) {
+          clearInterval(paceInterval);
+          return;
+        }
+        document.querySelectorAll('.shadowing-word').forEach(w => w.classList.remove('highlighted'));
+        const wordEl = document.getElementById(`word-${currentWordIndex}`);
+        if (wordEl) {
+          wordEl.classList.add('highlighted');
+          wordEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+        currentWordIndex++;
+      }, 290); // Fast C1 academic shadowing pace
+    }
+
+    // TOEFL structure reveal
+    function revealToefl(index) {
+      document.getElementById(`toefl-rev-${index}`).style.display = 'block';
+      document.getElementById(`toefl-exp-${index}`).style.display = 'block';
+    }
+
+    // Script visibility toggle
+    function toggleScriptText() {
+      const panel = document.querySelector('.script-text');
+      if (panel.style.color === 'var(--text-main)') {
+        panel.style.color = 'var(--text-muted)';
+      } else {
+        panel.style.color = 'var(--text-main)';
+      }
+    }
+
+    // 45s Reading Timer
+    let readInterval = null;
+    function startReadingTimer() {
+      let timeLeft = 45;
+      const display = document.getElementById('read-timer-display');
+      display.style.color = 'var(--accent-blue)';
+      if (readInterval) clearInterval(readInterval);
+      
+      readInterval = setInterval(() => {
+        timeLeft--;
+        display.textContent = `${timeLeft}s`;
+        if (timeLeft <= 10) {
+          display.style.color = 'var(--accent-red)';
+        }
+        if (timeLeft <= 0) {
+          clearInterval(readInterval);
+          display.textContent = "Time's Up!";
+        }
+      }, 1000);
+    }
+
+    // 30s Prep & 60s Speaking Timers
+    let examPrepInterval = null;
+    let examSpeakInterval = null;
+
+    function runTOEFLTimers() {
+      resetTOEFLTimers();
+      let prepTime = 30;
+      let speakTime = 60;
+      
+      const prepVal = document.getElementById('prep-time');
+      const speakVal = document.getElementById('speak-time');
+      
+      prepVal.style.color = 'var(--accent-blue)';
+      
+      examPrepInterval = setInterval(() => {
+        prepTime--;
+        prepVal.textContent = prepTime;
+        if (prepTime <= 5) {
+          prepVal.style.color = 'var(--accent-red)';
+        }
+        if (prepTime <= 0) {
+          clearInterval(examPrepInterval);
+          prepVal.textContent = "0";
+          prepVal.style.color = 'var(--text-muted)';
+          
+          // Start Speaking timer
+          speakVal.style.color = 'var(--accent-green)';
+          examSpeakInterval = setInterval(() => {
+            speakTime--;
+            speakVal.textContent = speakTime;
+            if (speakTime <= 10) {
+              speakVal.style.color = 'var(--accent-red)';
+            }
+            if (speakTime <= 0) {
+              clearInterval(examSpeakInterval);
+              speakVal.textContent = "Done!";
+            }
+          }, 1000);
+        }
+      }, 1000);
+    }
+
+    function resetTOEFLTimers() {
+      if (examPrepInterval) clearInterval(examPrepInterval);
+      if (examSpeakInterval) clearInterval(examSpeakInterval);
+      document.getElementById('prep-time').textContent = "30";
+      document.getElementById('prep-time').style.color = 'var(--primary)';
+      document.getElementById('speak-time').textContent = "60";
+      document.getElementById('speak-time').style.color = 'var(--primary)';
+    }
+
+    // Live Notepad logic
+    function addNoteToTable() {
+      const notepad = document.getElementById('live-notepad');
+      const val = notepad.value.trim();
+      if (!val) return;
+      
+      const lines = val.split('\n');
+      const errorText = lines[0] || "";
+      const correctionText = lines[1] || "Needs correction...";
+      
+      const table = document.getElementById('correction-table').getElementsByTagName('tbody')[0];
+      const newRow = table.insertRow(0);
+      
+      const cell1 = newRow.insertCell(0);
+      const cell2 = newRow.insertCell(1);
+      const cell3 = newRow.insertCell(2);
+      
+      cell1.textContent = errorText;
+      cell2.textContent = correctionText;
+      cell2.style.color = "var(--accent-green)";
+      cell2.style.fontWeight = "500";
+      cell3.innerHTML = `<span class="badge-exam" style="font-size:0.65rem; background:rgba(245,158,11,0.15); border-color:var(--primary); color:var(--primary);">Valeria</span>`;
+      
+      notepad.value = "";
+    }
+
+    function clearNotepad() {
+      document.getElementById('live-notepad').value = "";
+    }
+
+    // Initialize elements on load
+    window.onload = () => {
+      initShadowing();
+    };
+  </script>
+</body>
+</html>
