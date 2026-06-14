@@ -288,6 +288,70 @@
       color: var(--text-muted);
     }
 
+    /* Exam Structure Table */
+    .exam-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+      background: rgba(0,0,0,0.2);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .exam-table th, .exam-table td {
+      border: 1px solid var(--border-color);
+      padding: 0.9rem 1rem;
+      text-align: left;
+      font-size: 0.9rem;
+    }
+    .exam-table th {
+      background: rgba(245, 158, 11, 0.08);
+      color: var(--primary);
+      font-weight: 600;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .exam-table td:first-child {
+      font-weight: 600;
+      color: #cbd5e1;
+    }
+    .exam-table tr:hover {
+      background: rgba(255,255,255,0.02);
+    }
+    .takeaway-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-top: 1.5rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid var(--border-color);
+    }
+    .takeaway-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+    .takeaway-bullet {
+      color: var(--primary);
+      font-size: 1.1rem;
+      flex-shrink: 0;
+      margin-top: 0.1rem;
+    }
+    .takeaway-item strong {
+      color: var(--primary);
+    }
+    .takeaway-meta {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+    .table-wrapper {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
     /* Mobile Responsiveness */
     @media (max-width: 768px) {
       header {
@@ -344,6 +408,87 @@
             <div class="btn-go">→</div>
           </a>
 
+          <!-- Lesson 2 -->
+          <a href="lesson-2/index.html" class="lesson-item">
+            <div class="lesson-info">
+              <span class="lesson-number">LESSON 02</span>
+              <span class="lesson-name">Speaking Task 3: Cognitive Dissonance</span>
+              <span class="lesson-date">Class Date: June 12, 2026</span>
+            </div>
+            <div class="btn-go">→</div>
+          </a>
+
+          <!-- Lesson 3 -->
+          <a href="lesson-3/index.html" class="lesson-item">
+            <div class="lesson-info">
+              <span class="lesson-number">LESSON 03</span>
+              <span class="lesson-name">Writing Task 1: Asteroid Mining</span>
+              <span class="lesson-date">Class Date: June 16, 2026</span>
+            </div>
+            <div class="btn-go">→</div>
+          </a>
+
+        </div>
+      </div>
+
+      <!-- TOEFL Exam Structure -->
+      <div class="card">
+        <div class="card-title">📋 TOEFL iBT Exam Structure</div>
+        <p style="color: var(--text-muted); margin-bottom: 1rem; line-height: 1.6;">
+          The total test time is <strong style="color: var(--text-main);">about 2 hours</strong>, and all sections are completed on the same day.
+        </p>
+        <div class="table-wrapper">
+          <table class="exam-table">
+            <thead>
+              <tr>
+                <th>Section</th>
+                <th>Time Limit</th>
+                <th>Questions / Tasks</th>
+                <th>Task Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>📖 Reading</td>
+                <td>35 minutes</td>
+                <td>20 questions</td>
+                <td>Read 2 academic passages and answer multiple-choice questions.</td>
+              </tr>
+              <tr>
+                <td>🎧 Listening</td>
+                <td>36 minutes</td>
+                <td>28 questions</td>
+                <td>Listen to 3 lectures and 2 conversations, then answer multiple-choice questions.</td>
+              </tr>
+              <tr>
+                <td>🎤 Speaking</td>
+                <td>16 minutes</td>
+                <td>4 tasks</td>
+                <td>1 independent task (express an opinion) + 3 integrated tasks (read/listen, then speak).</td>
+              </tr>
+              <tr>
+                <td>✍️ Writing</td>
+                <td>29 minutes</td>
+                <td>2 tasks</td>
+                <td>1 integrated task (read/listen, then write) + 1 Writing for an Academic Discussion task.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card-title" style="margin-top: 1.5rem; font-size: 1.1rem;">💡 Key Takeaways</div>
+        <div class="takeaway-list">
+          <div class="takeaway-item">
+            <span class="takeaway-bullet">⚡</span>
+            <div><strong>No more 10-minute break:</strong> The exam is streamlined and run straight through.</div>
+          </div>
+          <div class="takeaway-item">
+            <span class="takeaway-bullet">⏱</span>
+            <div><strong>Shorter &amp; faster:</strong> The total test time has been reduced to about 2 hours, down from the previous 3+ hours.</div>
+          </div>
+          <div class="takeaway-item">
+            <span class="takeaway-bullet">💬</span>
+            <div><strong>Academic Discussion Task:</strong> This replaced the old Independent Writing essay. You read an online classroom discussion and write a contribution to it.</div>
+          </div>
         </div>
       </div>
 
@@ -354,19 +499,19 @@
           <div class="hw-item">
             <span class="hw-status status-pending"></span>
             <div>
-              <strong>Speaking Recording:</strong> Record a 60s TOEFL Speaking Task 2 response on: <em>"Library laptop bans"</em>. Focus on C1 transitions and zero hesitation.
+              <strong>Full Integrated Essay:</strong> Write a 150–225 word integrated response on Vertical Farming. Use the 3-paragraph synthesis structure.
             </div>
           </div>
           <div class="hw-item">
             <span class="hw-status status-pending"></span>
             <div>
-              <strong>Writing Synthesis:</strong> Write a 120-150 word summary of the library announcement and speaker's counterarguments using inversion and subjunctive syntax.
+              <strong>Vocabulary Journal:</strong> Write 5 sentences using today's synthesis vocabulary (<em>posits, counters, casts doubt on, contends, refutes</em>).
             </div>
           </div>
           <div class="hw-item">
             <span class="hw-status status-pending"></span>
             <div>
-              <strong>Vocabulary Journal:</strong> Contextualize upgraded academic verbs (<em>vehemently oppose, assert, highly inadequate</em>) in university-level study scenarios.
+              <strong>Error Correction Review:</strong> Self-correct the 3 sentences provided at the end of Lesson 3 regarding subjunctive and parallelism.
             </div>
           </div>
         </div>
