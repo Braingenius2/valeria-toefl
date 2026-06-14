@@ -826,6 +826,10 @@
     function resetShadowingTimer() {
       clearInterval(timerInterval);
       timerInterval = null;
+      if (paceInterval) {
+        clearInterval(paceInterval);
+        paceInterval = null;
+      }
       timerSeconds = 0;
       document.getElementById('shadowing-timer').textContent = '00:00';
       document.getElementById('btn-timer').innerHTML = '<span>▶</span> Start Timer';
@@ -853,7 +857,7 @@
           wordEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         }
         currentWordIndex++;
-      }, 290); // Fast C1 academic shadowing pace
+      }, 320); // Comfortable shadowing pace
     }
 
     // TOEFL structure reveal
