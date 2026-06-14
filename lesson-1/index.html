@@ -693,7 +693,7 @@
               </div>
 
               <div style="margin-top: 1rem; display: flex; gap: 0.5rem;">
-                <button class="btn btn-primary" style="padding: 0.4rem 0.8rem;" onclick="toggleScriptText()">Show/Hide Transcript</button>
+                <button class="btn btn-primary" style="padding: 0.4rem 0.8rem;" onclick="toggleScriptText()" id="transcript-btn">Hide Transcript</button>
               </div>
             </div>
 
@@ -865,10 +865,13 @@
     // Script visibility toggle
     function toggleScriptText() {
       const panel = document.querySelector('.script-text');
-      if (panel.style.color === 'var(--text-main)') {
-        panel.style.color = 'var(--text-muted)';
+      const btn = document.getElementById('transcript-btn');
+      if (panel.style.display === 'none') {
+        panel.style.display = 'block';
+        btn.textContent = 'Hide Transcript';
       } else {
-        panel.style.color = 'var(--text-main)';
+        panel.style.display = 'none';
+        btn.textContent = 'Show Transcript';
       }
     }
 
