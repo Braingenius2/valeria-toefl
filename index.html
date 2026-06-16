@@ -134,7 +134,7 @@
       color: inherit;
     }
 
-    .lesson-item:hover {
+    .lesson-item:hover:not(.disabled) {
       border-color: var(--primary);
       background: rgba(245, 158, 11, 0.03);
       transform: translateY(-2px);
@@ -176,7 +176,7 @@
       transition: all 0.2s ease;
     }
 
-    .lesson-item:hover .btn-go {
+    .lesson-item:hover:not(.disabled) .btn-go {
       background: #fff;
       transform: scale(1.05);
     }
@@ -435,6 +435,26 @@
               <span class="lesson-date">Class Date: June 16, 2026</span>
             </div>
             <div class="btn-go">→</div>
+          </a>
+
+          <!-- Lesson 4 (Coming Soon) -->
+          <a class="lesson-item disabled" style="opacity: 0.4; pointer-events: none; cursor: default;">
+            <div class="lesson-info">
+              <span class="lesson-number">LESSON 04</span>
+              <span class="lesson-name">Academic Discussion: AI, Privacy & Society</span>
+              <span class="lesson-date" style="color: var(--text-muted);">Coming soon</span>
+            </div>
+            <div class="btn-go" style="color: var(--text-muted);">🔒</div>
+          </a>
+
+          <!-- Lesson 5 (Coming Soon) -->
+          <a class="lesson-item disabled" style="opacity: 0.4; pointer-events: none; cursor: default;">
+            <div class="lesson-info">
+              <span class="lesson-number">LESSON 05</span>
+              <span class="lesson-name">Speaking Interview + Academic Discussion Review</span>
+              <span class="lesson-date" style="color: var(--text-muted);">Coming soon</span>
+            </div>
+            <div class="btn-go" style="color: var(--text-muted);">🔒</div>
           </a>
 
         </div>
