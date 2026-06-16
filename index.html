@@ -228,16 +228,8 @@
       border: 1px solid rgba(255, 255, 255, 0.02);
     }
 
-    .hw-status {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      margin-top: 6px;
-      flex-shrink: 0;
-    }
-
-    .status-pending { background-color: var(--primary); }
-    .status-completed { background-color: var(--accent-green); }
+    .hw-checkbox { accent-color: var(--accent-green); width: 18px; height: 18px; cursor: pointer; vertical-align: middle; margin-right: 0.5rem; }
+    .hw-checkbox:checked + label { opacity: 0.6; text-decoration: line-through; }
 
     /* Right column stats */
     .profile-card {
@@ -516,21 +508,24 @@
         <div class="card-title">📝 Homework Assignments — Lesson 1</div>
         <div class="hw-list">
           <div class="hw-item">
-            <span class="hw-status status-pending"></span>
-            <div>
-              <strong>Speaking Task (Audio Recording):</strong> Record a 60-second response to a new Speaking Task 2 topic: <em>University library bans personal laptops to prevent screen glare and encourage use of institutional computers.</em> (30s prep, 60s record.)
+            <input type="checkbox" class="hw-checkbox" data-hw="speaking" id="hw-speaking">
+            <label for="hw-speaking"><strong>Speaking Task (Audio Recording)</strong></label>
+            <div style="margin-top:0.5rem;">
+              Record a 60-second response to a new Speaking Task 2 topic: <em>University library bans personal laptops to prevent screen glare and encourage use of institutional computers.</em> (30s prep, 60s record.)
             </div>
           </div>
           <div class="hw-item">
-            <span class="hw-status status-pending"></span>
-            <div>
-              <strong>Writing Task:</strong> Write a 120–150 word summary of the library announcement and the speakers' counterarguments. Use at least one instance of <strong>Negative Inversion</strong> and one instance of <strong>Subjunctive Mood</strong>.
+            <input type="checkbox" class="hw-checkbox" data-hw="writing" id="hw-writing">
+            <label for="hw-writing"><strong>Writing Task</strong></label>
+            <div style="margin-top:0.5rem;">
+              Write a 120–150 word summary of the library announcement and the speakers' counterarguments. Use at least one instance of <strong>Negative Inversion</strong> and one instance of <strong>Subjunctive Mood</strong>.
             </div>
           </div>
           <div class="hw-item">
-            <span class="hw-status status-pending"></span>
-            <div>
-              <strong>Vocabulary Journal:</strong> Write 5 sentences using upgraded C1 terms (<em>vehemently oppose, assert, highly inadequate, commute, reside</em>), framing them around university study in Hungary.
+            <input type="checkbox" class="hw-checkbox" data-hw="vocabulary" id="hw-vocabulary">
+            <label for="hw-vocabulary"><strong>Vocabulary Journal</strong></label>
+            <div style="margin-top:0.5rem;">
+              Write 5 sentences using upgraded C1 terms (<em>vehemently oppose, assert, highly inadequate, commute, reside</em>), framing them around university study in Hungary.
             </div>
           </div>
         </div>
@@ -574,5 +569,14 @@
 
   </div>
 
+<script>
+  document.querySelectorAll('.hw-checkbox').forEach(cb => {
+    const key = 'valeria_hw_' + cb.dataset.hw;
+    cb.checked = localStorage.getItem(key) === 'true';
+    cb.addEventListener('change', () => {
+      localStorage.setItem(key, cb.checked);
+    });
+  });
+</script>
 </body>
 </html>

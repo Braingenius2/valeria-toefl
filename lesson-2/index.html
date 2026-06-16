@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Valeria's Lesson: Academic Speaking — Concept Synthesis</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-dark: #090d16;
+      --bg-card: #131a26;
+      --border-color: #243042;
+      --text-main: #f1f5f9;
+      --text-muted: #64748b;
+      --primary: #f59e0b; /* Amber/Gold for TOEFL */
+      --primary-hover: #d97706;
+      --accent-blue: #38bdf8;
+      --accent-green: #10b981;
+      --accent-red: #ef4444;
+      --accent-purple: #a855f7;
+      --glass-bg: rgba(19, 26, 38, 0.85);
+      --glass-border: rgba(255, 255, 255, 0.03);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Outfit', sans-serif; background-color: var(--bg-dark); color: var(--text-main); min-height: 100vh; display: flex; flex-direction: column; overflow-x: hidden; }
+    
+    header { background: rgba(9, 13, 22, 0.9); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border-color); padding: 1rem 2rem; position: sticky; top: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; }
+    .logo-area { display: flex; align-items: center; gap: 0.75rem; }
+    .badge-exam { background: rgba(245, 158, 11, 0.15); border: 1px solid var(--primary); color: var(--primary); padding: 0.25rem 0.5rem; border-radius: 4px; font-family: 'Fira Code', monospace; font-size: 0.75rem; text-transform: uppercase; font-weight: bold; letter-spacing: 0.05em; }
+    .back-link { color: var(--text-muted); text-decoration: none; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 0.3rem; transition: color 0.2s ease; }
+    .back-link:hover { color: var(--text-main); }
+    h1 { font-size: 1.25rem; font-weight: 700; letter-spacing: -0.025em; }
+    .lesson-meta { display: flex; gap: 1.5rem; font-size: 0.875rem; color: var(--text-muted); }
+    .meta-item strong { color: var(--text-main); }
+    
+    .main-container { display: flex; flex: 1; height: calc(100vh - 65px); }
+    .sidebar { width: 280px; border-right: 1px solid var(--border-color); padding: 1.5rem 1rem; display: flex; flex-direction: column; gap: 0.5rem; background: rgba(9, 13, 22, 0.5); }
+    .sidebar-btn { display: flex; align-items: center; gap: 0.75rem; width: 100%; padding: 0.75rem 1rem; background: transparent; border: 1px solid transparent; border-radius: 8px; color: var(--text-muted); font-size: 0.9rem; text-align: left; cursor: pointer; transition: all 0.2s ease; }
+    .sidebar-btn:hover { background: rgba(255, 255, 255, 0.02); color: var(--text-main); }
+    .sidebar-btn.active { background: var(--bg-card); border-color: var(--border-color); color: var(--primary); font-weight: 600; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); }
+    .sidebar-num { font-family: 'Fira Code', monospace; font-size: 0.8rem; opacity: 0.6; }
+    
+    .content-area { flex: 1; padding: 2.5rem; overflow-y: auto; background: radial-gradient(circle at top right, rgba(245, 158, 11, 0.04), transparent 900px); }
+    .slide { display: none; animation: fadeIn 0.3s ease-in-out forwards; max-width: 1000px; margin: 0 auto; }
+    .slide.active { display: block; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    
+    .card { background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 12px; padding: 1.75rem; margin-bottom: 1.5rem; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25); }
+    .card-title { font-size: 1.15rem; font-weight: 600; margin-bottom: 1rem; color: var(--primary); display: flex; align-items: center; gap: 0.5rem; border-bottom: 1px solid rgba(255, 255, 255, 0.05); padding-bottom: 0.5rem; }
+    
+    .shadowing-box { border-left: 4px solid var(--accent-blue); background: rgba(56, 189, 248, 0.03); }
+    .shadowing-text { font-size: 1.1rem; line-height: 1.8; color: var(--text-main); margin: 1.5rem 0; background: rgba(0, 0, 0, 0.25); padding: 1.5rem; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.02); }
+    .shadowing-word { display: inline-block; margin-right: 0.25rem; transition: all 0.15s ease; }
+    .shadowing-word.highlighted { background: rgba(56, 189, 248, 0.25); color: #fff; border-radius: 3px; padding: 0 2px; }
+    
+    .btn { padding: 0.6rem 1.2rem; border-radius: 6px; border: none; font-weight: 600; font-family: inherit; cursor: pointer; display: flex; align-items: center; gap: 0.5rem; transition: all 0.2s ease; }
+    .btn-primary { background: var(--primary); color: #000; }
+    .btn-primary:hover { background: var(--primary-hover); }
+    .btn-secondary { background: rgba(255, 255, 255, 0.05); color: var(--text-main); border: 1px solid var(--border-color); }
+    .btn-secondary:hover { background: rgba(255, 255, 255, 0.1); }
+    
+    .timer-container { display: flex; gap: 1rem; margin: 1rem 0; }
+    .exam-timer { background: #000; border: 1px solid var(--border-color); border-radius: 8px; padding: 1rem; text-align: center; flex: 1; }
+    .timer-val { font-family: 'Fira Code', monospace; font-size: 2.25rem; font-weight: bold; color: var(--primary); }
+    .timer-label { font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.05em; margin-top: 0.25rem; }
+    
+    .reading-passage { background: #000; padding: 1.5rem; border-left: 4px solid var(--accent-purple); border-radius: 8px; font-size: 1.05rem; line-height: 1.7; margin-bottom: 1.5rem; }
+    .lecture-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .lecture-col { background: rgba(255,255,255,0.02); padding: 1rem; border-radius: 8px; border: 1px solid var(--border-color); }
+    .lecture-col h4 { margin-bottom: 0.5rem; color: var(--accent-blue); font-size: 0.9rem; text-transform: uppercase; }
+
+    @media (max-width: 768px) {
+      header { flex-direction: column; align-items: flex-start; gap: 0.75rem; padding: 1rem; }
+      .main-container { flex-direction: column; height: auto; }
+      .sidebar { width: 100%; flex-direction: row; overflow-x: auto; border-right: none; border-bottom: 1px solid var(--border-color); padding: 0.5rem; position: sticky; top: 65px; z-index: 90; background: rgba(9, 13, 22, 0.95); }
+      .sidebar-btn { padding: 0.5rem 0.75rem; white-space: nowrap; width: auto; font-size: 0.8rem; }
+      .sidebar-num { display: none; }
+      .content-area { padding: 1rem; }
+      .lecture-grid { grid-template-columns: 1fr; }
+    }
+    .recorder-bar { display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap; margin-top: 0.75rem; padding-top: 0.75rem; border-top: 1px solid var(--border-color); }
+    .rec-btn { padding: 0.35rem 0.75rem; font-size: 0.8rem; border-radius: 20px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); color: var(--text-muted); font-family: inherit; cursor: pointer; transition: all 0.2s ease; display: inline-flex; align-items: center; gap: 0.3rem; }
+    .rec-btn:hover { background: rgba(255,255,255,0.1); }
+    .rec-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+    .rec-btn.recording { background: var(--accent-rose); color: #000; border-color: var(--accent-rose); }
+    .rec-status { font-size: 0.75rem; color: var(--text-muted); }
+    .disclaimer { background: rgba(239, 68, 68, 0.08); border: 1px solid rgba(239, 68, 68, 0.3); border-left: 4px solid var(--accent-red); border-radius: 8px; padding: 1rem; margin-bottom: 1.5rem; font-size: 0.9rem; color: #fca5a5; line-height: 1.6; }
+    .disclaimer strong { color: var(--accent-red); }
+    .disclaimer a { color: #fbbf24; }
+    .practice-item { background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); border-radius: 8px; padding: 1rem; margin-bottom: 0.75rem; }
+    .practice-item .q { color: #cbd5e1; font-size: 0.95rem; }
+    .practice-item .a { color: var(--accent-green); font-size: 0.9rem; display: none; margin-top: 0.5rem; padding: 0.5rem; background: rgba(16,185,129,0.05); border-radius: 4px; }
+    .practice-item .reveal-btn { background: transparent; border: 1px solid var(--border-color); color: var(--text-muted); padding: 0.25rem 0.75rem; border-radius: 4px; cursor: pointer; font-size: 0.8rem; margin-top: 0.5rem; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo-area">
+    <div class="badge-exam">Academic Speaking</div>
+    <a href="../index.html" class="back-link">← Portal</a>
+    <h1>Valeria: Concept Synthesis (2026 TOEFL-adapted)</h1>
+    </div>
+    <div class="lesson-meta">
+      <div class="meta-item">Student: <strong>Valeria (B2/C1)</strong></div>
+      <div class="meta-item">Focus: <strong>Cognitive Dissonance</strong></div>
+    </div>
+  </header>
+
+  <div class="main-container">
+    <div class="sidebar">
+      <button class="sidebar-btn active" onclick="switchSlide(0)"><span class="sidebar-num">01</span> Warm-up: Shadowing</button>
+      <button class="sidebar-btn" onclick="switchSlide(1)"><span class="sidebar-num">02</span> Reading Passage</button>
+      <button class="sidebar-btn" onclick="switchSlide(2)"><span class="sidebar-num">03</span> Practice Drills</button>
+      <button class="sidebar-btn" onclick="switchSlide(3)"><span class="sidebar-num">04</span> Speaking Practice</button>
+    </div>
+
+    <div class="content-area">
+      
+      <!-- Slide 1: Shadowing -->
+      <div class="slide active" id="slide-0">
+        <div class="card shadowing-box">
+          <div class="card-title">🔊 Shadowing Pacer: Psychology Research</div>
+          <p class="text-muted">Focus on stress in multi-syllable academic vocabulary and smooth linking.</p>
+          <div id="shadowing-text" class="shadowing-text"></div>
+          <div style="display:flex; gap:0.5rem; align-items:center;">
+            <button class="btn btn-primary" onclick="toggleShadowingTimer()" id="btn-timer">▶ Start Timer</button>
+            <div id="shadowing-timer" style="font-family:'Fira Code'; font-size:1.2rem; background:#000; padding:0.4rem 1rem; border-radius:4px;">00:00</div>
+            <button class="btn btn-secondary" onclick="resetShadowingTimer()">Reset</button>
+                        <button class="btn btn-secondary" onclick="autoHighlightWords()">Auto Pacer</button>
+          </div>
+          <div class="pacer-controls">
+            <select class="speed-select" id="speedSelect">
+              <option value="500">120 WPM</option>
+              <option value="462">130 WPM</option>
+              <option value="429">140 WPM</option>
+              <option value="400" selected>150 WPM (Recommended)</option>
+              <option value="375">160 WPM</option>
+              <option value="348">175 WPM</option>
+              <option value="320">187 WPM</option>
+              <option value="300">200 WPM</option>
+            </select>
+            <button class="btn btn-secondary listen-btn" onclick="toggleSpeaking()">🔊 Listen</button>
+          </div>
+          <div class="recorder-bar">
+            <button class="rec-btn" id="startRecord">🎤 Record</button>
+            <button class="rec-btn" id="stopRecord" disabled>⏹ Stop</button>
+            <button class="rec-btn" id="playRecord" disabled>🎧 Play</button>
+            <span class="rec-status" id="recStatus">Record yourself, then compare with the model</span>
+          </div>
+        </div>
+      </div>
+
+                <audio id="shadowingAudio" preload="none" style="display:none"></audio>
+
+<!-- Slide 2: Reading Passage -->
+      <div class="slide" id="slide-1">
+        <div class="disclaimer">
+          <strong>⚠️ 2026 TOEFL Format Note:</strong> This lesson was originally designed for the old TOEFL Speaking Task 3 (read passage → listen to lecture → 60s synthesis), which was <strong>removed</strong> in the January 2026 TOEFL reform. The new Speaking section has only <em>Listen and Repeat</em> + <em>Take an Interview</em> — no integrated tasks. However, the skills practiced here — academic vocabulary, structured synthesis, connecting concepts to examples — transfer to the new <strong>Academic Discussion</strong> writing task and build general academic fluency. Use the speaking timers as <strong>structured speaking practice</strong>, not as a test simulation.
+        </div>
+        <div class="card">
+          <div class="card-title">📖 Reading Passage — Cognitive Dissonance</div>
+          <div class="reading-passage">
+            <strong>Cognitive Dissonance</strong><br><br>
+            Cognitive dissonance is a psychological theory proposed by Leon Festinger in 1957. The theory states that individuals experience mental discomfort when they hold two or more contradictory beliefs, values, or attitudes simultaneously. This discomfort motivates people to reduce the inconsistency by changing one of the conflicting elements — typically by altering their attitude rather than their behavior. According to Festinger, the greater the discrepancy between a person's actions and beliefs, the stronger the pressure to resolve the dissonance. People may rationalize their behavior, seek out confirming information, or avoid situations that highlight the contradiction.
+          </div>
+          <div class="exam-timer" style="max-width:300px; margin:0 auto;">
+            <div class="timer-val" id="read-time">45</div>
+            <div class="timer-label">Reading Time (seconds)</div>
+          </div>
+          <div style="text-align:center; margin-top:1rem;">
+            <button class="btn btn-primary" style="display:inline-flex;" onclick="runReadingClock()">Start Reading Timer</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 3: Practice Drills -->
+      <div class="slide" id="slide-2">
+        <div class="card">
+          <div class="card-title">🎧 Lecture & Synthesis Grid</div>
+          <p class="text-muted" style="margin-bottom:1rem;">How does the professor illustrate cognitive dissonance?</p>
+          <div class="lecture-grid">
+            <div class="lecture-col">
+              <h4>Reading (Concept)</h4>
+              <ul style="padding-left:1.5rem; font-size:0.95rem; color:#cbd5e1; line-height:1.6;">
+                <li>Mental discomfort from contradictory beliefs.</li>
+                <li>Reduce inconsistency by changing attitude, not behavior.</li>
+                <li>Rationalize behavior to resolve discrepancy.</li>
+              </ul>
+            </div>
+            <div class="lecture-col">
+              <h4>Lecture (Examples)</h4>
+              <ul style="padding-left:1.5rem; font-size:0.95rem; color:#cbd5e1; line-height:1.6;">
+                <li><strong>Ex 1: Smokers.</strong> Know health risks, but rationalize (e.g., "I'll quit later", "My grandpa smoked"). Adjust belief, not behavior.</li>
+                <li><strong>Ex 2: Effort Justification.</strong> Participants with severe initiation to a boring group inflated its value to justify their suffering.</li>
+              </ul>
+            </div>
+          </div>
+          <div style="margin-top:1.5rem; padding:1rem; background:rgba(16,185,129,0.1); border-left:4px solid var(--accent-green); border-radius:4px;">
+            <strong style="color:var(--accent-green);">C1 Upgrades:</strong><br>
+            Instead of <em>"change their mind"</em> → <span style="font-family:'Fira Code';">rationalize / justify their behavior</span><br>
+            Instead of <em>"feel bad"</em> → <span style="font-family:'Fira Code';">experience psychological discomfort</span><br>
+            Instead of <em>"fix the problem"</em> → <span style="font-family:'Fira Code';">reconcile the inconsistency</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">✏️ Controlled Practice — Synthesis Drills</div>
+          <p class="text-muted" style="margin-bottom:1rem;">Tap to reveal answers. Use academic register vocabulary.</p>
+
+          <div class="practice-item">
+            <div class="q"><strong>1.</strong> The reading passage defines cognitive dissonance as the mental discomfort that arises when an individual holds __________.</div>
+            <button class="reveal-btn" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Reveal Answer</button>
+            <div class="a"><strong>Answer:</strong> two or more contradictory beliefs, values, or attitudes simultaneously</div>
+          </div>
+
+          <div class="practice-item">
+            <div class="q"><strong>2.</strong> According to Festinger's theory, people reduce dissonance primarily by changing their __________ rather than their __________.</div>
+            <button class="reveal-btn" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Reveal Answer</button>
+            <div class="a"><strong>Answer:</strong> attitude(s) … behavior</div>
+          </div>
+
+          <div class="practice-item">
+            <div class="q"><strong>3.</strong> The professor's first example involves smokers who __________ their habit by telling themselves that the health risks do not apply to them personally.</div>
+            <button class="reveal-btn" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Reveal Answer</button>
+            <div class="a"><strong>Answer:</strong> rationalize (also acceptable: justify)</div>
+          </div>
+
+          <div class="practice-item">
+            <div class="q"><strong>4.</strong> In the second example, participants who underwent a __________ initiation rated a boring group as more valuable, demonstrating the effort justification effect.</div>
+            <button class="reveal-btn" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Reveal Answer</button>
+            <div class="a"><strong>Answer:</strong> severe / difficult</div>
+          </div>
+
+          <div class="practice-item">
+            <div class="q"><strong>5.</strong> The participants in the initiation experiment __________ their evaluation of the group to justify the discomfort they had endured.</div>
+            <button class="reveal-btn" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Reveal Answer</button>
+            <div class="a"><strong>Answer:</strong> inflated</div>
+          </div>
+
+          <div class="practice-item">
+            <div class="q"><strong>6.</strong> Complete the synthesis frame: "The reading explains that cognitive dissonance is __________. The professor illustrates this with two examples. First, __________. Second, __________."</div>
+            <button class="reveal-btn" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Reveal Answer</button>
+            <div class="a"><strong>Answer:</strong> "...the psychological discomfort caused by holding contradictory beliefs. The professor illustrates this with two examples. First, smokers rationalize their habit despite knowing the health risks by telling themselves exceptions apply. Second, participants who endured a difficult initiation inflated their evaluation of a boring group to justify the effort they had invested."</div>
+          </div>
+
+          <div class="practice-item">
+            <div class="q"><strong>7.</strong> Rewrite using academic vocabulary: "Smokers feel bad because they know smoking is bad but they keep doing it, so they tell themselves it's OK."</div>
+            <button class="reveal-btn" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Reveal Answer</button>
+            <div class="a"><strong>Answer:</strong> "Smokers experience psychological discomfort because their behavior contradicts their knowledge of the health risks. To reconcile this inconsistency, they engage in self-justification, rationalizing that the risks do not personally apply to them."</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 4: Speaking Practice -->
+      <div class="slide" id="slide-3">
+        <div class="disclaimer" style="margin-bottom:1rem;">
+          <strong>🎯 2026 TOEFL Relevance:</strong> The old Speaking Task 3 (integrated synthesis) no longer exists. The new <em>Take an Interview</em> section asks spontaneous 45s responses — no prep, no integrated material. Use this timer for <strong>structured speaking practice</strong>: practice explaining concepts concisely with a clear intro → example 1 → example 2 → conclusion. This organization skill transfers directly to the <strong>Academic Discussion</strong> writing task.
+        </div>
+        <div class="card">
+          <div class="card-title">⏱️ Structured Speaking Practice</div>
+          <p style="font-size:1.1rem; margin-bottom:1.5rem; text-align:center;"><strong>Prompt:</strong> "Using the reading and the lecture, explain what cognitive dissonance is and how the professor's examples illustrate the concept."</p>
+          
+          <div class="timer-container">
+            <div class="exam-timer">
+              <div class="timer-val" id="prep-time">30</div>
+              <div class="timer-label">Preparation Time (seconds)</div>
+            </div>
+            <div class="exam-timer">
+              <div class="timer-val" id="speak-time">60</div>
+              <div class="timer-label">Speaking Time (seconds)</div>
+            </div>
+          </div>
+          <div style="display:flex; gap:0.5rem; justify-content:center; margin-bottom:1.5rem;">
+            <button class="btn btn-primary" onclick="runSpeakingClock()">Start Task Timers</button>
+            <button class="btn btn-secondary" onclick="resetSpeakingClock()">Reset</button>
+          </div>
+
+          <div style="background:rgba(255,255,255,0.02); padding:1rem; border-radius:8px; border:1px solid var(--border-color);">
+            <h4 style="color:var(--accent-purple); margin-bottom:0.5rem;">Model Structure Template:</h4>
+            <div style="font-size:0.95rem; color:#cbd5e1; line-height:1.6;">
+              "The reading passage explains that [concept] is...<br>
+              According to the theory, individuals typically resolve this by...<br>
+              The professor provides two examples to illustrate this. First, he discusses...<br>
+              Second, he describes an experiment where...<br>
+              Both examples demonstrate how people engage in self-justification to..."
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    function switchSlide(index) {
+      document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('.sidebar-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById(`slide-${index}`).classList.add('active');
+      document.querySelectorAll('.sidebar-btn')[index].classList.add('active');
+    }
+
+    const text = "Recent developments in behavioral psychology have fundamentally transformed our understanding of human decision-making. Researchers have demonstrated that individuals frequently act in ways that contradict their stated beliefs, a phenomenon known as cognitive dissonance. In a landmark study conducted at Stanford University, participants who were paid a minimal amount to perform a tedious task subsequently rated the task as more enjoyable than those who received generous compensation. This counterintuitive finding suggests that people unconsciously adjust their attitudes to align with their actions, particularly when external justification is insufficient.";
+    
+    let timerInterval = null, timerSeconds = 0;
+    function toggleShadowingTimer() {
+      const btn = document.getElementById('btn-timer');
+      if (timerInterval) {
+        clearInterval(timerInterval); timerInterval = null;
+        btn.innerHTML = '▶ Resume';
+      } else {
+        btn.innerHTML = '⏸ Pause';
+        timerInterval = setInterval(() => {
+          timerSeconds++;
+          const mins = String(Math.floor(timerSeconds / 60)).padStart(2, '0');
+          const secs = String(timerSeconds % 60).padStart(2, '0');
+          document.getElementById('shadowing-timer').textContent = `${mins}:${secs}`;
+        }, 1000);
+      }
+    }
+    function resetShadowingTimer() {
+      clearInterval(timerInterval); timerInterval = null; timerSeconds = 0;
+      if (paceInterval) { clearInterval(paceInterval); paceInterval = null; }
+      document.getElementById('shadowing-timer').textContent = '00:00';
+      document.getElementById('btn-timer').innerHTML = '▶ Start Timer';
+      document.querySelectorAll('.shadowing-word').forEach(w => w.classList.remove('highlighted'));
+    }
+
+        let paceInterval = null;
+    let pacerSpeed = 400;
+
+  const shadowingText = "Recent developments in behavioral psychology have fundamentally transformed our understanding of human decision-making. Researchers have demonstrated that individuals frequently act in ways that contradict their stated beliefs, a phenomenon known as cognitive dissonance. In a landmark study conducted at Stanford University, participants who were paid a minimal amount to perform a tedious task subsequently rated the task as more enjoyable than those who received generous compensation. This counterintuitive finding suggests that people unconsciously adjust their attitudes to align with their actions, particularly when external justification is insufficient.";
+
+  function initShadowing() {
+    const container = document.getElementById('shadowing-text');
+    container.innerHTML = shadowingText.split(' ').map((w, i) => `<span class="shadowing-word" id="word-${i}">${w}</span>`).join(' ');
+  }const shadowingAudio = document.getElementById('shadowingAudio');
+  let audioFallback = false;
+  shadowingTS = [{"word":"Recent","start":0.425,"end":0.775},{"word":"developments","start":0.775,"end":1.4},{"word":"in","start":1.4,"end":1.5},{"word":"behavioral","start":1.5,"end":2.1},{"word":"psychology","start":2.1,"end":3.087},{"word":"have","start":3.087,"end":3.312},{"word":"fundamentally","start":3.312,"end":3.925},{"word":"transformed","start":3.925,"end":4.612},{"word":"our","start":4.612,"end":4.75},{"word":"understanding","start":4.75,"end":5.438},{"word":"of","start":5.438,"end":5.525},{"word":"human","start":5.525,"end":5.85},{"word":"decision-making","start":5.85,"end":7.237},{"word":"Researchers","start":7.237,"end":7.812},{"word":"have","start":7.812,"end":7.95},{"word":"demonstrated","start":7.95,"end":8.675},{"word":"that","start":8.675,"end":8.825},{"word":"individuals","start":8.825,"end":9.488},{"word":"frequently","start":9.488,"end":9.988},{"word":"act","start":9.988,"end":10.275},{"word":"in","start":10.275,"end":10.425},{"word":"ways","start":10.425,"end":10.925},{"word":"that","start":10.925,"end":11.075},{"word":"contradict","start":11.075,"end":11.625},{"word":"their","start":11.625,"end":11.8},{"word":"stated","start":11.8,"end":12.175},{"word":"beliefs","start":12.175,"end":13.2},{"word":"a","start":13.2,"end":13.275},{"word":"phenomenon","start":13.275,"end":13.925},{"word":"known","start":13.925,"end":14.15},{"word":"as","start":14.15,"end":14.312},{"word":"cognitive","start":14.312,"end":14.85},{"word":"dissonance","start":14.85,"end":16.012},{"word":"In","start":16.012,"end":16.15},{"word":"a","start":16.15,"end":16.25},{"word":"landmark","start":16.25,"end":16.825},{"word":"study","start":16.825,"end":17.15},{"word":"conducted","start":17.15,"end":17.625},{"word":"at","start":17.625,"end":17.762},{"word":"Stanford","start":17.762,"end":18.275},{"word":"University","start":18.275,"end":19.375},{"word":"participants","start":19.375,"end":20.038},{"word":"who","start":20.038,"end":20.137},{"word":"were","start":20.137,"end":20.25},{"word":"paid","start":20.25,"end":20.488},{"word":"a","start":20.488,"end":20.562},{"word":"minimal","start":20.562,"end":20.95},{"word":"amount","start":20.95,"end":21.325},{"word":"to","start":21.325,"end":21.425},{"word":"perform","start":21.425,"end":21.863},{"word":"a","start":21.863,"end":21.962},{"word":"tedious","start":21.962,"end":22.438},{"word":"task","start":22.438,"end":23.312},{"word":"subsequently","start":23.312,"end":24.062},{"word":"rated","start":24.062,"end":24.363},{"word":"the","start":24.363,"end":24.462},{"word":"task","start":24.462,"end":25.212},{"word":"as","start":25.212,"end":25.375},{"word":"more","start":25.375,"end":25.575},{"word":"enjoyable","start":25.575,"end":26.25},{"word":"than","start":26.25,"end":26.4},{"word":"those","start":26.4,"end":26.688},{"word":"who","start":26.688,"end":26.825},{"word":"received","start":26.825,"end":27.425},{"word":"generous","start":27.425,"end":27.925},{"word":"compensation","start":27.925,"end":29.387},{"word":"This","start":29.762,"end":30.0},{"word":"counterintuitive","start":30.0,"end":30.887},{"word":"finding","start":30.887,"end":31.724},{"word":"suggests","start":31.724,"end":32.337},{"word":"that","start":32.337,"end":32.487},{"word":"people","start":32.487,"end":32.874},{"word":"unconsciously","start":32.874,"end":33.787},{"word":"adjust","start":33.787,"end":34.262},{"word":"their","start":34.262,"end":34.475},{"word":"attitudes","start":34.475,"end":35.112},{"word":"to","start":35.112,"end":35.262},{"word":"align","start":35.262,"end":35.674},{"word":"with","start":35.674,"end":35.799},{"word":"their","start":35.799,"end":35.999},{"word":"actions","start":35.999,"end":37.037},{"word":"particularly","start":37.037,"end":37.937},{"word":"when","start":37.937,"end":38.087},{"word":"external","start":38.087,"end":38.649},{"word":"justification","start":38.649,"end":39.562},{"word":"is","start":39.562,"end":39.712},{"word":"insufficient","start":39.712,"end":40.937}];
+
+  shadowingAudio.ontimeupdate = () => {
+    if (!shadowingTS) return;
+    const t = shadowingAudio.currentTime;
+    let lo = 0, hi = shadowingTS.length - 1;
+    while (lo < hi) { const mid = (lo + hi + 1) >> 1; if (shadowingTS[mid].start <= t) lo = mid; else hi = mid - 1; }
+    const allWords = document.querySelectorAll('.shadowing-word');
+    allWords.forEach(w => w.classList.remove('highlighted'));
+    if (lo < allWords.length) { allWords[lo].classList.add('highlighted'); allWords[lo].scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+  };
+
+  shadowingAudio.onended = () => { speaking = false; document.querySelector('.listen-btn').textContent = '🔊 Listen'; };
+  shadowingAudio.onerror = () => { audioFallback = true; };
+
+  let speaking = false;
+
+  function ttsFallback() {
+    const text = Array.from(document.querySelectorAll('.shadowing-word')).map(w => w.textContent).join(' ');
+    if (!text.trim()) return;
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = 'en-US'; u.rate = 0.85;
+    u.onstart = () => { speaking = true; document.querySelector('.listen-btn').textContent = '■ Stop'; };
+    u.onend = u.onerror = () => { speaking = false; document.querySelector('.listen-btn').textContent = '🔊 Listen'; };
+    speechSynthesis.speak(u);
+  }
+
+  function toggleSpeaking() {
+    if (speaking) {
+      shadowingAudio.pause();
+      shadowingAudio.currentTime = 0;
+      speechSynthesis.cancel();
+      speaking = false;
+      document.querySelector('.listen-btn').textContent = '🔊 Listen';
+      document.querySelectorAll('.shadowing-word').forEach(w => w.classList.remove('highlighted'));
+      return;
+    }
+    if (!audioFallback) {
+      shadowingAudio.src = 'audio/shadowing.wav?' + Date.now();
+      shadowingAudio.play().then(() => {
+        speaking = true;
+        document.querySelector('.listen-btn').textContent = '■ Stop';
+        if (paceInterval) { clearInterval(paceInterval); paceInterval = null; }
+      }).catch(() => { audioFallback = true; ttsFallback(); });
+    } else {
+      ttsFallback();
+    }
+  }
+
+  initShadowing();
+
+    function playBeep(freq = 800, dur = 150, count = 1) {
+      try {
+        for (let i = 0; i < count; i++) {
+          setTimeout(() => {
+            const ctx = new (window.AudioContext || window.webkitAudioContext)();
+            const osc = ctx.createOscillator(); const gain = ctx.createGain();
+            osc.connect(gain); gain.connect(ctx.destination);
+            osc.frequency.value = freq; osc.type = 'sine';
+            gain.gain.setValueAtTime(0.2, ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + dur / 1000);
+            osc.start(); osc.stop(ctx.currentTime + dur / 1000);
+          }, i * 200);
+        }
+      } catch(e) {}
+    }
+
+  // Shadowing Recorder (Record → Playback → Compare)
+  let mediaRecorder = null;
+  let recordedChunks = [];
+  let audioBlobUrl = null;
+
+  document.getElementById('startRecord').addEventListener('click', async () => {
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      mediaRecorder = new MediaRecorder(stream);
+      recordedChunks = [];
+      mediaRecorder.ondataavailable = (e) => { if (e.data.size > 0) recordedChunks.push(e.data); };
+      mediaRecorder.onstop = () => {
+        const blob = new Blob(recordedChunks, { type: 'audio/webm' });
+        audioBlobUrl = URL.createObjectURL(blob);
+        document.getElementById('playRecord').disabled = false;
+        document.getElementById('recStatus').textContent = '✅ Recording saved — click Play to hear yourself, then Listen to compare with model';
+        document.getElementById('startRecord').textContent = '🎤 Record Again';
+        stream.getTracks().forEach(t => t.stop());
+      };
+      mediaRecorder.start();
+      document.getElementById('startRecord').disabled = true;
+      document.getElementById('stopRecord').disabled = false;
+      document.getElementById('recStatus').textContent = '🔴 Recording...';
+    } catch(e) {
+      document.getElementById('recStatus').textContent = '⚠️ Microphone access denied — allow mic access and try again';
+    }
+  });
+
+  document.getElementById('stopRecord').addEventListener('click', () => {
+    if (mediaRecorder && mediaRecorder.state === 'recording') {
+      mediaRecorder.stop();
+      document.getElementById('startRecord').disabled = false;
+      document.getElementById('stopRecord').disabled = true;
+    }
+  });
+
+  document.getElementById('playRecord').addEventListener('click', () => {
+    if (audioBlobUrl) {
+      const audio = new Audio(audioBlobUrl);
+      audio.play();
+      document.getElementById('recStatus').textContent = '▶️ Playing your recording...';
+      audio.onended = () => {
+        document.getElementById('recStatus').textContent = '✅ Done — click Listen above to hear the model again';
+      };
+    }
+  });
+
+    document.addEventListener('change', function(e) {
+      if (e.target.id === 'speedSelect') {
+        pacerSpeed = parseInt(e.target.value);
+      }
+    });
+
+    function autoHighlightWords() {
+      document.querySelectorAll('.shadowing-word').forEach(w => w.classList.remove('highlighted'));
+      let currentWordIndex = 0;
+      const totalWords = text.split(' ').length;
+      
+      if (paceInterval) clearInterval(paceInterval);
+      
+      paceInterval = setInterval(() => {
+        if (currentWordIndex >= totalWords) {
+          clearInterval(paceInterval);
+          return;
+        }
+        document.querySelectorAll('.shadowing-word').forEach(w => w.classList.remove('highlighted'));
+        const wordEl = document.getElementById(`word-${currentWordIndex}`);
+        if (wordEl) {
+          wordEl.classList.add('highlighted');
+          wordEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+        currentWordIndex++;
+      }, pacerSpeed);
+    }
+
+    let readInterval = null;
+    function runReadingClock() {
+      if (readInterval) clearInterval(readInterval);
+      let t = 45; const el = document.getElementById('read-time'); el.style.color = 'var(--primary)';
+      readInterval = setInterval(() => {
+        t--; el.textContent = t;
+        if(t <= 10) el.style.color = 'var(--accent-red)';
+        if(t <= 0) clearInterval(readInterval);
+      }, 1000);
+    }
+
+    let prepInterval = null, speakInterval = null;
+    function runSpeakingClock() {
+      resetSpeakingClock();
+      let prepTime = 30, speakTime = 60;
+      const prepVal = document.getElementById('prep-time'), speakVal = document.getElementById('speak-time');
+      prepVal.style.color = 'var(--accent-blue)';
+      prepInterval = setInterval(() => {
+        prepTime--; prepVal.textContent = prepTime;
+        if (prepTime <= 10) prepVal.style.color = 'var(--accent-red)';
+        if (prepTime <= 0) {
+          clearInterval(prepInterval); prepVal.textContent = "0"; prepVal.style.color = 'var(--text-muted)';
+          speakVal.style.color = 'var(--primary)';
+          speakInterval = setInterval(() => {
+            speakTime--; speakVal.textContent = speakTime;
+            if (speakTime <= 15) speakVal.style.color = 'var(--accent-red)';
+            if (speakTime <= 0) { clearInterval(speakInterval); speakVal.textContent = "Done!"; }
+          }, 1000);
+        }
+      }, 1000);
+    }
+    function resetSpeakingClock() {
+      if (prepInterval) clearInterval(prepInterval); if (speakInterval) clearInterval(speakInterval);
+      document.getElementById('prep-time').textContent = "30"; document.getElementById('prep-time').style.color = 'var(--primary)';
+      document.getElementById('speak-time').textContent = "60"; document.getElementById('speak-time').style.color = 'var(--primary)';
+    }
+
+  </script>
+</body>
+</html>
