@@ -1,0 +1,62 @@
+[
+  {
+    "word": "Solar",
+    "start": 0.275,
+    "end": 0.6
+  },
+  {
+    "word": "panels",
+    "start": 0.6,
+    "end": 1.025
+  },
+  {
+    "word": "provide",
+    "start": 1.025,
+    "end": 1.387
+  },
+  {
+    "word": "the",
+    "start": 1.387,
+    "end": 1.475
+  },
+  {
+    "word": "primary",
+    "start": 1.475,
+    "end": 1.95
+  },
+  {
+    "word": "source",
+    "start": 1.95,
+    "end": 2.237
+  },
+  {
+    "word": "of",
+    "start": 2.237,
+    "end": 2.325
+  },
+  {
+    "word": "power",
+    "start": 2.325,
+    "end": 2.7
+  },
+  {
+    "word": "for",
+    "start": 2.7,
+    "end": 2.825
+  },
+  {
+    "word": "most",
+    "start": 2.825,
+    "end": 3.05
+  },
+  {
+    "word": "space",
+    "start": 3.05,
+    "end": 3.4
+  },
+  {
+    "word": "probes",
+    "start": 3.4,
+    "end": 4.5
+  }
+]

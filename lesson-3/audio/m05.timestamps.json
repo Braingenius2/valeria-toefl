@@ -1,0 +1,67 @@
+[
+  {
+    "word": "Understanding",
+    "start": 0.45,
+    "end": 1.175
+  },
+  {
+    "word": "the",
+    "start": 1.175,
+    "end": 1.312
+  },
+  {
+    "word": "fundamental",
+    "start": 1.312,
+    "end": 1.925
+  },
+  {
+    "word": "laws",
+    "start": 1.925,
+    "end": 2.237
+  },
+  {
+    "word": "of",
+    "start": 2.237,
+    "end": 2.325
+  },
+  {
+    "word": "physics",
+    "start": 2.325,
+    "end": 3.2
+  },
+  {
+    "word": "requires",
+    "start": 3.2,
+    "end": 3.8
+  },
+  {
+    "word": "both",
+    "start": 3.8,
+    "end": 4.062
+  },
+  {
+    "word": "theoretical",
+    "start": 4.062,
+    "end": 4.7
+  },
+  {
+    "word": "insight",
+    "start": 4.7,
+    "end": 5.638
+  },
+  {
+    "word": "and",
+    "start": 5.638,
+    "end": 5.812
+  },
+  {
+    "word": "careful",
+    "start": 5.812,
+    "end": 6.25
+  },
+  {
+    "word": "experimentation",
+    "start": 6.25,
+    "end": 7.825
+  }
+]

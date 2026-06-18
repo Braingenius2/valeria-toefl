@@ -1,0 +1,447 @@
+[
+  {
+    "word": "The",
+    "start": 0.375,
+    "end": 0.5
+  },
+  {
+    "word": "exploration",
+    "start": 0.5,
+    "end": 1.275
+  },
+  {
+    "word": "of",
+    "start": 1.275,
+    "end": 1.413
+  },
+  {
+    "word": "deep",
+    "start": 1.413,
+    "end": 1.712
+  },
+  {
+    "word": "space",
+    "start": 1.712,
+    "end": 2.55
+  },
+  {
+    "word": "represents",
+    "start": 2.55,
+    "end": 3.15
+  },
+  {
+    "word": "one",
+    "start": 3.15,
+    "end": 3.288
+  },
+  {
+    "word": "of",
+    "start": 3.288,
+    "end": 3.375
+  },
+  {
+    "word": "humanity's",
+    "start": 3.375,
+    "end": 4.188
+  },
+  {
+    "word": "most",
+    "start": 4.188,
+    "end": 4.675
+  },
+  {
+    "word": "ambitious",
+    "start": 4.675,
+    "end": 5.4
+  },
+  {
+    "word": "scientific",
+    "start": 5.4,
+    "end": 6.125
+  },
+  {
+    "word": "undertakings",
+    "start": 6.125,
+    "end": 7.513
+  },
+  {
+    "word": "From",
+    "start": 7.513,
+    "end": 7.688
+  },
+  {
+    "word": "the",
+    "start": 7.688,
+    "end": 7.787
+  },
+  {
+    "word": "groundbreaking",
+    "start": 7.787,
+    "end": 8.625
+  },
+  {
+    "word": "observations",
+    "start": 8.625,
+    "end": 9.5
+  },
+  {
+    "word": "of",
+    "start": 9.5,
+    "end": 9.588
+  },
+  {
+    "word": "the",
+    "start": 9.588,
+    "end": 9.688
+  },
+  {
+    "word": "Hubble",
+    "start": 9.688,
+    "end": 10.037
+  },
+  {
+    "word": "Space",
+    "start": 10.037,
+    "end": 10.45
+  },
+  {
+    "word": "Telescope",
+    "start": 10.45,
+    "end": 11.525
+  },
+  {
+    "word": "to",
+    "start": 11.525,
+    "end": 11.65
+  },
+  {
+    "word": "the",
+    "start": 11.65,
+    "end": 11.787
+  },
+  {
+    "word": "recent",
+    "start": 11.787,
+    "end": 12.262
+  },
+  {
+    "word": "successful",
+    "start": 12.262,
+    "end": 12.875
+  },
+  {
+    "word": "deployment",
+    "start": 12.875,
+    "end": 13.463
+  },
+  {
+    "word": "of",
+    "start": 13.463,
+    "end": 13.537
+  },
+  {
+    "word": "the",
+    "start": 13.537,
+    "end": 13.662
+  },
+  {
+    "word": "James",
+    "start": 13.662,
+    "end": 14.162
+  },
+  {
+    "word": "Webb",
+    "start": 14.162,
+    "end": 14.4
+  },
+  {
+    "word": "Observatory",
+    "start": 14.4,
+    "end": 15.762
+  },
+  {
+    "word": "each",
+    "start": 15.762,
+    "end": 16.125
+  },
+  {
+    "word": "new",
+    "start": 16.125,
+    "end": 16.413
+  },
+  {
+    "word": "generation",
+    "start": 16.413,
+    "end": 17.075
+  },
+  {
+    "word": "of",
+    "start": 17.075,
+    "end": 17.212
+  },
+  {
+    "word": "instruments",
+    "start": 17.212,
+    "end": 17.825
+  },
+  {
+    "word": "has",
+    "start": 17.825,
+    "end": 18.212
+  },
+  {
+    "word": "fundamentally",
+    "start": 18.212,
+    "end": 18.962
+  },
+  {
+    "word": "transformed",
+    "start": 18.962,
+    "end": 19.875
+  },
+  {
+    "word": "our",
+    "start": 19.875,
+    "end": 20.05
+  },
+  {
+    "word": "understanding",
+    "start": 20.05,
+    "end": 20.85
+  },
+  {
+    "word": "of",
+    "start": 20.85,
+    "end": 20.938
+  },
+  {
+    "word": "the",
+    "start": 20.938,
+    "end": 21.038
+  },
+  {
+    "word": "cosmos",
+    "start": 21.038,
+    "end": 22.363
+  },
+  {
+    "word": "These",
+    "start": 0.4,
+    "end": 0.662
+  },
+  {
+    "word": "technological",
+    "start": 0.662,
+    "end": 1.488
+  },
+  {
+    "word": "marvels",
+    "start": 1.488,
+    "end": 2.025
+  },
+  {
+    "word": "have",
+    "start": 2.025,
+    "end": 2.288
+  },
+  {
+    "word": "enabled",
+    "start": 2.288,
+    "end": 2.825
+  },
+  {
+    "word": "astronomers",
+    "start": 2.825,
+    "end": 3.625
+  },
+  {
+    "word": "to",
+    "start": 3.625,
+    "end": 3.763
+  },
+  {
+    "word": "peer",
+    "start": 3.763,
+    "end": 4.2
+  },
+  {
+    "word": "billions",
+    "start": 4.2,
+    "end": 4.737
+  },
+  {
+    "word": "of",
+    "start": 4.737,
+    "end": 4.862
+  },
+  {
+    "word": "years",
+    "start": 4.862,
+    "end": 5.325
+  },
+  {
+    "word": "into",
+    "start": 5.325,
+    "end": 5.513
+  },
+  {
+    "word": "the",
+    "start": 5.513,
+    "end": 5.612
+  },
+  {
+    "word": "past",
+    "start": 5.612,
+    "end": 6.562
+  },
+  {
+    "word": "capturing",
+    "start": 6.562,
+    "end": 7.138
+  },
+  {
+    "word": "images",
+    "start": 7.138,
+    "end": 7.625
+  },
+  {
+    "word": "of",
+    "start": 7.625,
+    "end": 7.763
+  },
+  {
+    "word": "galaxies",
+    "start": 7.763,
+    "end": 8.525
+  },
+  {
+    "word": "forming",
+    "start": 8.525,
+    "end": 9.025
+  },
+  {
+    "word": "in",
+    "start": 9.025,
+    "end": 9.113
+  },
+  {
+    "word": "the",
+    "start": 9.113,
+    "end": 9.262
+  },
+  {
+    "word": "immediate",
+    "start": 9.262,
+    "end": 9.85
+  },
+  {
+    "word": "aftermath",
+    "start": 9.85,
+    "end": 10.512
+  },
+  {
+    "word": "of",
+    "start": 10.512,
+    "end": 10.588
+  },
+  {
+    "word": "the",
+    "start": 10.588,
+    "end": 10.675
+  },
+  {
+    "word": "Big",
+    "start": 10.675,
+    "end": 10.912
+  },
+  {
+    "word": "Bang",
+    "start": 10.912,
+    "end": 11.963
+  },
+  {
+    "word": "As",
+    "start": 11.963,
+    "end": 12.137
+  },
+  {
+    "word": "our",
+    "start": 12.137,
+    "end": 12.312
+  },
+  {
+    "word": "instruments",
+    "start": 12.312,
+    "end": 12.887
+  },
+  {
+    "word": "grow",
+    "start": 12.887,
+    "end": 13.2
+  },
+  {
+    "word": "more",
+    "start": 13.2,
+    "end": 13.438
+  },
+  {
+    "word": "powerful",
+    "start": 13.438,
+    "end": 14.475
+  },
+  {
+    "word": "the",
+    "start": 14.475,
+    "end": 14.613
+  },
+  {
+    "word": "line",
+    "start": 14.613,
+    "end": 15.025
+  },
+  {
+    "word": "between",
+    "start": 15.025,
+    "end": 15.45
+  },
+  {
+    "word": "science",
+    "start": 15.45,
+    "end": 15.925
+  },
+  {
+    "word": "fiction",
+    "start": 15.925,
+    "end": 16.488
+  },
+  {
+    "word": "and",
+    "start": 16.488,
+    "end": 16.65
+  },
+  {
+    "word": "scientific",
+    "start": 16.65,
+    "end": 17.35
+  },
+  {
+    "word": "reality",
+    "start": 17.35,
+    "end": 18.062
+  },
+  {
+    "word": "continues",
+    "start": 18.062,
+    "end": 18.75
+  },
+  {
+    "word": "to",
+    "start": 18.75,
+    "end": 18.887
+  },
+  {
+    "word": "blur",
+    "start": 18.887,
+    "end": 19.925
+  }
+]

@@ -1,0 +1,52 @@
+[
+  {
+    "word": "Astronomers",
+    "start": 0.45,
+    "end": 1.225
+  },
+  {
+    "word": "have",
+    "start": 1.225,
+    "end": 1.387
+  },
+  {
+    "word": "identified",
+    "start": 1.387,
+    "end": 2.038
+  },
+  {
+    "word": "numerous",
+    "start": 2.038,
+    "end": 2.438
+  },
+  {
+    "word": "exoplanets",
+    "start": 2.438,
+    "end": 3.538
+  },
+  {
+    "word": "that",
+    "start": 3.538,
+    "end": 3.7
+  },
+  {
+    "word": "could",
+    "start": 3.7,
+    "end": 3.825
+  },
+  {
+    "word": "potentially",
+    "start": 3.825,
+    "end": 4.375
+  },
+  {
+    "word": "support",
+    "start": 4.375,
+    "end": 4.75
+  },
+  {
+    "word": "life",
+    "start": 4.75,
+    "end": 5.8
+  }
+]

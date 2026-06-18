@@ -1,0 +1,112 @@
+[
+  {
+    "word": "The",
+    "start": 0.425,
+    "end": 0.5
+  },
+  {
+    "word": "discovery",
+    "start": 0.5,
+    "end": 1.125
+  },
+  {
+    "word": "of",
+    "start": 1.125,
+    "end": 1.225
+  },
+  {
+    "word": "microbial",
+    "start": 1.225,
+    "end": 1.85
+  },
+  {
+    "word": "life",
+    "start": 1.85,
+    "end": 2.312
+  },
+  {
+    "word": "beneath",
+    "start": 2.312,
+    "end": 2.675
+  },
+  {
+    "word": "the",
+    "start": 2.675,
+    "end": 2.812
+  },
+  {
+    "word": "surface",
+    "start": 2.812,
+    "end": 3.212
+  },
+  {
+    "word": "of",
+    "start": 3.212,
+    "end": 3.325
+  },
+  {
+    "word": "Mars",
+    "start": 3.325,
+    "end": 4.275
+  },
+  {
+    "word": "would",
+    "start": 4.275,
+    "end": 4.45
+  },
+  {
+    "word": "represent",
+    "start": 4.45,
+    "end": 5.188
+  },
+  {
+    "word": "one",
+    "start": 5.188,
+    "end": 5.362
+  },
+  {
+    "word": "of",
+    "start": 5.362,
+    "end": 5.438
+  },
+  {
+    "word": "the",
+    "start": 5.438,
+    "end": 5.525
+  },
+  {
+    "word": "most",
+    "start": 5.525,
+    "end": 5.812
+  },
+  {
+    "word": "significant",
+    "start": 5.812,
+    "end": 6.487
+  },
+  {
+    "word": "scientific",
+    "start": 6.487,
+    "end": 7.1
+  },
+  {
+    "word": "breakthroughs",
+    "start": 7.1,
+    "end": 7.838
+  },
+  {
+    "word": "in",
+    "start": 7.838,
+    "end": 7.975
+  },
+  {
+    "word": "human",
+    "start": 7.975,
+    "end": 8.3
+  },
+  {
+    "word": "history",
+    "start": 8.3,
+    "end": 9.5
+  }
+]

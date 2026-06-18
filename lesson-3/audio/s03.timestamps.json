@@ -1,0 +1,67 @@
+[
+  {
+    "word": "The",
+    "start": 0.25,
+    "end": 0.35
+  },
+  {
+    "word": "surface",
+    "start": 0.35,
+    "end": 0.775
+  },
+  {
+    "word": "temperature",
+    "start": 0.775,
+    "end": 1.212
+  },
+  {
+    "word": "on",
+    "start": 1.212,
+    "end": 1.375
+  },
+  {
+    "word": "Venus",
+    "start": 1.375,
+    "end": 1.887
+  },
+  {
+    "word": "is",
+    "start": 1.887,
+    "end": 2.025
+  },
+  {
+    "word": "hot",
+    "start": 2.025,
+    "end": 2.237
+  },
+  {
+    "word": "enough",
+    "start": 2.237,
+    "end": 2.525
+  },
+  {
+    "word": "to",
+    "start": 2.525,
+    "end": 2.65
+  },
+  {
+    "word": "melt",
+    "start": 2.65,
+    "end": 2.925
+  },
+  {
+    "word": "lead",
+    "start": 2.925,
+    "end": 3.25
+  },
+  {
+    "word": "and",
+    "start": 3.25,
+    "end": 3.375
+  },
+  {
+    "word": "zinc",
+    "start": 3.375,
+    "end": 4.4
+  }
+]

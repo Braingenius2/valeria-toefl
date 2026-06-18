@@ -1,0 +1,87 @@
+[
+  {
+    "word": "The",
+    "start": 0.425,
+    "end": 0.537
+  },
+  {
+    "word": "James",
+    "start": 0.537,
+    "end": 0.938
+  },
+  {
+    "word": "Webb",
+    "start": 0.938,
+    "end": 1.175
+  },
+  {
+    "word": "Space",
+    "start": 1.175,
+    "end": 1.475
+  },
+  {
+    "word": "Telescope",
+    "start": 1.475,
+    "end": 2.438
+  },
+  {
+    "word": "allows",
+    "start": 2.438,
+    "end": 2.837
+  },
+  {
+    "word": "scientists",
+    "start": 2.837,
+    "end": 3.45
+  },
+  {
+    "word": "to",
+    "start": 3.45,
+    "end": 3.6
+  },
+  {
+    "word": "observe",
+    "start": 3.6,
+    "end": 4.025
+  },
+  {
+    "word": "galaxies",
+    "start": 4.025,
+    "end": 5.088
+  },
+  {
+    "word": "that",
+    "start": 5.088,
+    "end": 5.287
+  },
+  {
+    "word": "formed",
+    "start": 5.287,
+    "end": 5.65
+  },
+  {
+    "word": "over",
+    "start": 5.65,
+    "end": 5.912
+  },
+  {
+    "word": "thirteen",
+    "start": 5.912,
+    "end": 6.45
+  },
+  {
+    "word": "billion",
+    "start": 6.45,
+    "end": 6.825
+  },
+  {
+    "word": "years",
+    "start": 6.825,
+    "end": 7.088
+  },
+  {
+    "word": "ago",
+    "start": 7.088,
+    "end": 8.075
+  }
+]

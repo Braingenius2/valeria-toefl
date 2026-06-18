@@ -1,0 +1,77 @@
+[
+  {
+    "word": "Astronauts",
+    "start": 0.275,
+    "end": 0.875
+  },
+  {
+    "word": "aboard",
+    "start": 0.875,
+    "end": 1.188
+  },
+  {
+    "word": "the",
+    "start": 1.188,
+    "end": 1.3
+  },
+  {
+    "word": "International",
+    "start": 1.3,
+    "end": 1.975
+  },
+  {
+    "word": "Space",
+    "start": 1.975,
+    "end": 2.3
+  },
+  {
+    "word": "Station",
+    "start": 2.3,
+    "end": 3.175
+  },
+  {
+    "word": "conduct",
+    "start": 3.175,
+    "end": 3.65
+  },
+  {
+    "word": "experiments",
+    "start": 3.65,
+    "end": 4.4
+  },
+  {
+    "word": "that",
+    "start": 4.4,
+    "end": 4.575
+  },
+  {
+    "word": "are",
+    "start": 4.575,
+    "end": 4.675
+  },
+  {
+    "word": "impossible",
+    "start": 4.675,
+    "end": 5.325
+  },
+  {
+    "word": "to",
+    "start": 5.325,
+    "end": 5.425
+  },
+  {
+    "word": "perform",
+    "start": 5.425,
+    "end": 5.812
+  },
+  {
+    "word": "on",
+    "start": 5.812,
+    "end": 5.95
+  },
+  {
+    "word": "Earth",
+    "start": 5.95,
+    "end": 6.95
+  }
+]

@@ -1,0 +1,42 @@
+[
+  {
+    "word": "Scientists",
+    "start": 0.475,
+    "end": 1.2
+  },
+  {
+    "word": "recently",
+    "start": 1.2,
+    "end": 1.675
+  },
+  {
+    "word": "discovered",
+    "start": 1.675,
+    "end": 2.237
+  },
+  {
+    "word": "evidence",
+    "start": 2.237,
+    "end": 2.688
+  },
+  {
+    "word": "of",
+    "start": 2.688,
+    "end": 2.775
+  },
+  {
+    "word": "water",
+    "start": 2.775,
+    "end": 3.2
+  },
+  {
+    "word": "on",
+    "start": 3.2,
+    "end": 3.375
+  },
+  {
+    "word": "Mars",
+    "start": 3.375,
+    "end": 4.525
+  }
+]

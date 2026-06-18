@@ -1,0 +1,52 @@
+[
+  {
+    "word": "The",
+    "start": 0.425,
+    "end": 0.5
+  },
+  {
+    "word": "Hubble",
+    "start": 0.5,
+    "end": 0.825
+  },
+  {
+    "word": "telescope",
+    "start": 0.825,
+    "end": 1.637
+  },
+  {
+    "word": "has",
+    "start": 1.637,
+    "end": 1.85
+  },
+  {
+    "word": "transformed",
+    "start": 1.85,
+    "end": 2.487
+  },
+  {
+    "word": "our",
+    "start": 2.487,
+    "end": 2.625
+  },
+  {
+    "word": "understanding",
+    "start": 2.625,
+    "end": 3.325
+  },
+  {
+    "word": "of",
+    "start": 3.325,
+    "end": 3.413
+  },
+  {
+    "word": "the",
+    "start": 3.413,
+    "end": 3.5
+  },
+  {
+    "word": "universe",
+    "start": 3.5,
+    "end": 4.725
+  }
+]
