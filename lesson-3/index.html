@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Valeria's Lesson: TOEFL Speaking — Listen and Repeat</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-dark: #090d16; --bg-card: #131a26; --border-color: #243042;
+      --text-main: #f1f5f9; --text-muted: #64748b;
+      --primary: #f59e0b; --primary-hover: #d97706;
+      --accent-blue: #38bdf8; --accent-green: #10b981; --accent-red: #ef4444; --accent-purple: #a855f7;
+      --glass-bg: rgba(19, 26, 38, 0.85); --glass-border: rgba(255, 255, 255, 0.03);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Outfit', sans-serif; background-color: var(--bg-dark); color: var(--text-main); min-height: 100vh; display: flex; flex-direction: column; overflow-x: hidden; }
+    
+    header { background: rgba(9, 13, 22, 0.9); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border-color); padding: 1rem 2rem; position: sticky; top: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; }
+    .logo-area { display: flex; align-items: center; gap: 0.75rem; }
+    .badge-exam { background: rgba(245, 158, 11, 0.15); border: 1px solid var(--primary); color: var(--primary); padding: 0.25rem 0.5rem; border-radius: 4px; font-family: 'Fira Code', monospace; font-size: 0.75rem; text-transform: uppercase; font-weight: bold; }
+    .back-link { color: var(--text-muted); text-decoration: none; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 0.3rem; transition: color 0.2s ease; }
+    .back-link:hover { color: var(--text-main); }
+    h1 { font-size: 1.25rem; font-weight: 700; letter-spacing: -0.025em; }
+    .lesson-meta { display: flex; gap: 1.5rem; font-size: 0.875rem; color: var(--text-muted); }
+    .meta-item strong { color: var(--text-main); }
+    
+    .main-container { display: flex; flex: 1; height: calc(100vh - 65px); }
+    .sidebar { width: 280px; border-right: 1px solid var(--border-color); padding: 1.5rem 1rem; display: flex; flex-direction: column; gap: 0.5rem; background: rgba(9, 13, 22, 0.5); }
+    .sidebar-btn { display: flex; align-items: center; gap: 0.75rem; width: 100%; padding: 0.75rem 1rem; background: transparent; border: 1px solid transparent; border-radius: 8px; color: var(--text-muted); font-size: 0.9rem; text-align: left; cursor: pointer; transition: all 0.2s ease; }
+    .sidebar-btn:hover { background: rgba(255, 255, 255, 0.02); color: var(--text-main); }
+    .sidebar-btn.active { background: var(--bg-card); border-color: var(--border-color); color: var(--primary); font-weight: 600; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); }
+    .sidebar-num { font-family: 'Fira Code', monospace; font-size: 0.8rem; opacity: 0.6; }
+    
+    .content-area { flex: 1; padding: 2.5rem; overflow-y: auto; background: radial-gradient(circle at top right, rgba(245, 158, 11, 0.04), transparent 900px); }
+    .slide { display: none; animation: fadeIn 0.3s ease-in-out forwards; max-width: 1000px; margin: 0 auto; }
+    .slide.active { display: block; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    
+    .card { background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 12px; padding: 1.75rem; margin-bottom: 1.5rem; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25); }
+    .card-title { font-size: 1.15rem; font-weight: 600; margin-bottom: 1rem; color: var(--primary); display: flex; align-items: center; gap: 0.5rem; border-bottom: 1px solid rgba(255, 255, 255, 0.05); padding-bottom: 0.5rem; }
+    
+    .shadowing-box { border-left: 4px solid var(--accent-blue); background: rgba(56, 189, 248, 0.03); }
+    .shadowing-text { font-size: 1.1rem; line-height: 1.8; color: var(--text-main); margin: 1.5rem 0; background: rgba(0, 0, 0, 0.25); padding: 1.5rem; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.02); }
+    .shadowing-word { display: inline-block; margin-right: 0.25rem; transition: all 0.15s ease; }
+    .shadowing-word.highlighted { background: rgba(56, 189, 248, 0.25); color: #fff; border-radius: 3px; padding: 0 2px; }
+    
+    .btn { padding: 0.6rem 1.2rem; border-radius: 6px; border: none; font-weight: 600; font-family: inherit; cursor: pointer; display: flex; align-items: center; gap: 0.5rem; transition: all 0.2s ease; }
+    .btn-primary { background: var(--primary); color: #000; }
+    .btn-primary:hover { background: var(--primary-hover); }
+    .btn-secondary { background: rgba(255, 255, 255, 0.05); color: var(--text-main); border: 1px solid var(--border-color); }
+    
+    .timer-container { display: flex; gap: 1rem; margin: 1rem 0; }
+    .exam-timer { background: #000; border: 1px solid var(--border-color); border-radius: 8px; padding: 1rem; text-align: center; flex: 1; }
+    .timer-val { font-family: 'Fira Code', monospace; font-size: 2.25rem; font-weight: bold; color: var(--primary); }
+    .timer-label { font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); margin-top: 0.25rem; }
+    
+    .template-card { background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-color); border-radius: 8px; padding: 1rem; margin-bottom: 0.75rem; }
+    .template-card h4 { color: var(--accent-blue); margin-bottom: 0.4rem; font-size: 0.95rem; }
+    .template-card p { color: #cbd5e1; font-size: 0.92rem; line-height: 1.6; font-style: italic; }
+    .concession-table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+    .concession-table th, .concession-table td { border: 1px solid var(--border-color); padding: 0.65rem 0.75rem; text-align: left; font-size: 0.92rem; }
+    .concession-table th { background: rgba(255, 255, 255, 0.02); color: var(--text-muted); text-transform: uppercase; font-size: 0.8rem; }
+    .concession-table td { color: #cbd5e1; }
+    .concession-table td code { font-family: 'Fira Code', monospace; font-size: 0.85rem; color: var(--accent-green); }
+    
+    .error-box { background: rgba(239, 68, 68, 0.05); border: 1px solid rgba(239, 68, 68, 0.2); border-radius: 8px; padding: 1rem; margin-top: 1rem; }
+    .error-box h4 { color: var(--accent-red); font-size: 0.95rem; margin-bottom: 0.5rem; }
+    .error-item { font-size: 0.9rem; padding: 0.35rem 0; color: #cbd5e1; }
+    .error-item .wrong { color: var(--accent-red); }
+    .error-item .right { color: var(--accent-green); }
+    
+    .thread-card { background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.25rem; margin-bottom: 1rem; }
+    .thread-card .prof { color: var(--accent-purple); font-weight: 600; }
+    .thread-card .student1 { color: var(--accent-blue); font-weight: 600; }
+    .thread-card .student2 { color: var(--accent-green); font-weight: 600; }
+    .thread-card p { color: #cbd5e1; font-size: 0.92rem; line-height: 1.6; margin-top: 0.3rem; }
+    
+    .notepad-area { width: 100%; height: 250px; background: #05070c; border: 1px solid var(--border-color); border-radius: 6px; color: var(--text-main); padding: 0.75rem; font-family: inherit; resize: vertical; font-size: 0.95rem; }
+    .correction-table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+    .correction-table th, .correction-table td { border: 1px solid var(--border-color); padding: 0.75rem; text-align: left; }
+    .correction-table th { background: rgba(255, 255, 255, 0.02); color: var(--text-muted); font-size: 0.85rem; text-transform: uppercase; }
+    .recorder-bar { display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap; margin-top: 0.75rem; padding-top: 0.75rem; border-top: 1px solid var(--border-color); }
+    .rec-btn { padding: 0.35rem 0.75rem; font-size: 0.8rem; border-radius: 20px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); color: var(--text-muted); font-family: inherit; cursor: pointer; transition: all 0.2s ease; display: inline-flex; align-items: center; gap: 0.3rem; }
+    .rec-btn:hover { background: rgba(255,255,255,0.1); }
+    .rec-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+    .rec-status { font-size: 0.75rem; color: var(--text-muted); }
+    .disclaimer { background: rgba(239, 68, 68, 0.08); border: 1px solid rgba(239, 68, 68, 0.3); border-left: 4px solid var(--accent-red); border-radius: 8px; padding: 1rem; margin-bottom: 1.5rem; font-size: 0.9rem; color: #fca5a5; line-height: 1.6; }
+    .disclaimer strong { color: var(--accent-red); }
+    .disclaimer a { color: #fbbf24; }
+    .practice-item { background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); border-radius: 8px; padding: 1rem; margin-bottom: 0.75rem; }
+    .practice-item .q { color: #cbd5e1; font-size: 0.95rem; }
+    .practice-item .a { color: var(--accent-green); font-size: 0.9rem; display: none; margin-top: 0.5rem; padding: 0.5rem; background: rgba(16,185,129,0.05); border-radius: 4px; }
+    .practice-item .reveal-btn { background: transparent; border: 1px solid var(--border-color); color: var(--text-muted); padding: 0.25rem 0.75rem; border-radius: 4px; cursor: pointer; font-size: 0.8rem; margin-top: 0.5rem; }
+    .pacer-controls { display: flex; gap: 0.75rem; align-items: center; flex-wrap: wrap; margin-top: 0.75rem; }
+    .pacer-controls select { background: #000; border: 1px solid var(--border-color); color: var(--text-main); padding: 0.4rem 0.75rem; border-radius: 4px; font-family: 'Fira Code', monospace; font-size: 0.85rem; }
+    .prompt-box { background: #000; border-left: 4px solid var(--accent-purple); padding: 1.25rem; border-radius: 8px; margin-bottom: 1rem; }
+    .prompt-box .speaker-label { font-weight: 600; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.3rem; }
+    .prompt-box .speaker-label.prof { color: var(--accent-purple); }
+    .prompt-box .speaker-label.student { color: var(--accent-blue); }
+    .prompt-box .speaker-label.student2 { color: var(--accent-green); }
+    .prompt-box p { color: #cbd5e1; font-size: 0.95rem; line-height: 1.65; }
+    .prompt-box + .prompt-box { margin-top: 0.5rem; }
+
+    .model-btn { background: transparent; border: 1px solid var(--accent-blue); color: var(--accent-blue); padding: 0.3rem 0.75rem; border-radius: 4px; cursor: pointer; font-size: 0.8rem; font-family: inherit; transition: all 0.2s ease; }
+    .model-btn:hover { background: rgba(56,189,248,0.1); }
+    .checkpoint { display: inline-flex; align-items: center; gap: 0.3rem; font-size: 0.8rem; color: var(--text-muted); margin-left: 0.5rem; }
+    .checkpoint input[type="checkbox"] { accent-color: var(--accent-green); width: 16px; height: 16px; cursor: pointer; }
+
+    .eval-table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+    .eval-table th, .eval-table td { border: 1px solid var(--border-color); padding: 0.65rem 0.75rem; text-align: center; font-size: 0.9rem; }
+    .eval-table th { background: rgba(255, 255, 255, 0.02); color: var(--text-muted); text-transform: uppercase; font-size: 0.8rem; }
+    .eval-table td:first-child { text-align: left; color: #cbd5e1; }
+    .eval-table input[type="radio"] { accent-color: var(--primary); width: 16px; height: 16px; cursor: pointer; }
+
+    .skill-grid { display: grid; grid-template-columns: 1fr; gap: 1rem; margin-top: 0.5rem; }
+    .skill-card { background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); border-radius: 8px; padding: 1rem; }
+    .skill-card h4 { color: var(--accent-blue); font-size: 0.95rem; margin-bottom: 0.4rem; }
+    .skill-card p, .skill-card ul { color: #cbd5e1; font-size: 0.9rem; line-height: 1.6; }
+    .skill-card ul { padding-left: 1.25rem; }
+    .skill-card code { font-family: 'Fira Code', monospace; color: var(--accent-green); font-size: 0.85rem; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo-area">
+      <a href="../index.html" class="back-link">← Portal</a>
+      <div class="badge-exam">Speaking</div>
+      <h1>Valeria: Listen and Repeat (2026 TOEFL)</h1>
+    </div>
+    <div class="lesson-meta">
+      <div class="meta-item">Student: <strong>Valeria (B2/C1)</strong></div>
+    </div>
+  </header>
+
+  <div class="main-container">
+    <div class="sidebar">
+      <button class="sidebar-btn active" onclick="switchSlide(0)"><span class="sidebar-num">01</span> Warm-up: Shadowing</button>
+      <button class="sidebar-btn" onclick="switchSlide(1)"><span class="sidebar-num">02</span> Input: Format & Skills</button>
+      <button class="sidebar-btn" onclick="switchSlide(2)"><span class="sidebar-num">03</span> Controlled Practice</button>
+      <button class="sidebar-btn" onclick="switchSlide(3)"><span class="sidebar-num">04</span> Speaking Simulator</button>
+      <button class="sidebar-btn" onclick="switchSlide(4)"><span class="sidebar-num">05</span> Homework</button>
+    </div>
+
+    <div class="content-area">
+      
+      <!-- Slide 0: Warm-up — Shadowing Pacer -->
+      <div class="slide active" id="slide-0">
+        <div class="card shadowing-box">
+          <div class="card-title">🔊 Shadowing Pacer: Deep Space Exploration</div>
+          <p class="text-muted">Focus on chunking the text into natural stress groups rather than reading word-by-word. This activates the same skills used in Listen and Repeat.</p>
+          <div id="shadowing-text" class="shadowing-text"></div>
+          <div style="display:flex; gap:0.5rem; align-items:center;">
+            <button class="btn btn-primary" onclick="toggleShadowingTimer()" id="btn-timer">▶ Start Timer</button>
+            <div id="shadowing-timer" style="font-family:'Fira Code'; font-size:1.2rem; background:#000; padding:0.4rem 1rem; border-radius:4px;">00:00</div>
+            <button class="btn btn-secondary" onclick="resetShadowingTimer()">Reset</button>
+            <button class="btn btn-secondary" onclick="autoHighlightWords()">Auto Pacer</button>
+          </div>
+          <div class="pacer-controls">
+            <select class="speed-select" id="speedSelect">
+              <option value="500">120 WPM</option>
+              <option value="462">130 WPM</option>
+              <option value="429">140 WPM</option>
+              <option value="400" selected>150 WPM (Recommended)</option>
+              <option value="375">160 WPM</option>
+              <option value="348">175 WPM</option>
+              <option value="320">187 WPM</option>
+              <option value="300">200 WPM</option>
+            </select>
+            <button class="btn btn-secondary listen-btn" onclick="toggleSpeaking()">🔊 Listen</button>
+          </div>
+          <div class="recorder-bar">
+            <button class="rec-btn" id="startRecord">🎤 Record</button>
+            <button class="rec-btn" id="stopRecord" disabled>⏹ Stop</button>
+            <button class="rec-btn" id="playRecord" disabled>🎧 Play</button>
+            <span class="rec-status" id="recStatus">Record yourself, then compare with the model</span>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">💬 Discussion Questions</div>
+          <ol style="padding-left: 1.25rem; color: #cbd5e1; line-height: 1.8; font-size: 0.95rem;">
+            <li>Why is chunking important for the "Listen and Repeat" task in TOEFL Speaking?</li>
+            <li>How does practicing shadowing help improve your pronunciation and fluency in English?</li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- Slide 1: Input — Listen and Repeat Format -->
+      <div class="slide" id="slide-1">
+        <div class="card">
+          <div class="card-title">📋 TOEFL Speaking: Listen and Repeat Format</div>
+          <p style="color: #cbd5e1; font-size: 0.95rem; line-height: 1.7; margin-bottom: 1rem;">
+            The <strong>Listen and Repeat</strong> task is a core component of the 2026 TOEFL Speaking section. You must:
+          </p>
+          <ol style="padding-left: 1.25rem; color: #cbd5e1; line-height: 2; font-size: 0.95rem; margin-bottom: 1rem;">
+            <li><strong>Hear</strong> a sentence <em>once</em> — no second play.</li>
+            <li><strong>Repeat</strong> the sentence exactly as you heard it.</li>
+            <li><strong>Score:</strong> Accuracy, pronunciation, and completeness.</li>
+            <li><strong>Length:</strong> 4–6 sentences per test, 8–25 words each.</li>
+          </ol>
+          <div style="background: rgba(245, 158, 11, 0.08); border-left: 4px solid var(--primary); padding: 0.75rem 1rem; border-radius: 4px; font-size: 0.9rem; color: #fcd34d;">
+            <strong>Why it is hard for Russian speakers:</strong> Russian has predictable stress, syllable-timed rhythm, and no articles or weak forms. English has unpredictable stress, stress-timed rhythm, and frequent reduced vowels — all of which make exact repetition challenging.
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">🎯 Three Core Skills</div>
+          <div class="skill-grid">
+            <div class="skill-card">
+              <h4>1. Chunking</h4>
+              <p>Group words into meaningful phrases. Each chunk has one main stress.</p>
+              <p style="margin-top:0.3rem; color: var(--accent-green); font-style:italic;">"The exploration of deep space // represents one of humanity's most ambitious // scientific undertakings."</p>
+            </div>
+            <div class="skill-card">
+              <h4>2. Stress Tracking</h4>
+              <p>Content words (nouns, main verbs, adjectives) are stressed. Function words (articles, prepositions) are reduced.</p>
+              <p style="margin-top:0.3rem; color: var(--accent-green); font-style:italic;">"<strong>SOLAR</strong> panels <strong>PRO</strong>vide the <strong>PRIMARY</strong> <strong>SOURCE</strong> of <strong>POW</strong>er <strong>FOR</strong> <strong>MOST</strong> <strong>SPACE</strong> <strong>PROBES</strong>."</p>
+            </div>
+            <div class="skill-card">
+              <h4>3. Weak Form Awareness</h4>
+              <p style="margin-bottom:0.5rem;">Function words are pronounced with reduced vowels in connected speech:</p>
+              <table class="concession-table" style="margin-top:0.25rem;">
+                <thead><tr><th>Word</th><th>Strong Form</th><th>Weak Form (IPA)</th><th>Example</th></tr></thead>
+                <tbody>
+                  <tr><td><code>to</code></td><td>/tuː/</td><td>/tə/</td><td>"go <strong>to</strong> Mars" → /ɡoʊ tə mɑrz/</td></tr>
+                  <tr><td><code>of</code></td><td>/ɒv/</td><td>/əv/</td><td>"surface <strong>of</strong> Mars" → /sɜrfəs əv mɑrz/</td></tr>
+                  <tr><td><code>and</code></td><td>/ænd/</td><td>/ən/ or /n̩/</td><td>"lead <strong>and</strong> zinc" → /lɛd ən zɪŋk/</td></tr>
+                  <tr><td><code>for</code></td><td>/fɔr/</td><td>/fər/</td><td>"responsible <strong>for</strong>" → /rɪspɑnsəbəl fər/</td></tr>
+                  <tr><td><code>a</code></td><td>/eɪ/</td><td>/ə/</td><td>"<strong>a</strong> telescope" → /ə tɛləskoʊp/</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">⚠️ Recycled Error Targets (from Lessons 1–2)</div>
+          <table class="concession-table">
+            <thead><tr><th>Error Pattern</th><th>Incorrect</th><th>Correct</th></tr></thead>
+            <tbody>
+              <tr><td>Article Drops</td><td><span class="wrong">"Hubble telescope has transformed..."</span></td><td><span class="right">"<strong>The</strong> Hubble telescope has transformed..."</span></td></tr>
+              <tr><td>Word Endings (-ed, -s)</td><td><span class="wrong">"Scientists discover evidence..."</span></td><td><span class="right">"Scientists discover<strong>ed</strong> evidence..."</span></td></tr>
+              <tr><td>Plural -s Omission</td><td><span class="wrong">"numerous exoplanet"</span></td><td><span class="right">"numerous exoplanet<strong>s</strong>"</span></td></tr>
+              <tr><td>Intonation Flattening</td><td><span class="wrong">All syllables same pitch</span></td><td><span class="right">Rising/falling on content words</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+                <audio id="shadowingAudio" preload="none" style="display:none"></audio>
+
+<!-- Slide 2: Controlled Practice — Drills -->
+      <div class="slide" id="slide-2">
+        <div class="card">
+          <div class="card-title">✏️ Drill 1: Chunking Boundaries</div>
+          <p class="text-muted" style="margin-bottom:0.75rem;">Draw // boundaries between natural stress groups. Tap to reveal.</p>
+
+          <div class="practice-item">
+            <div class="q"><strong>1.</strong> "Mars missions require precise calculations and advanced engineering."</div>
+            <button class="reveal-btn" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Reveal Chunking</button>
+            <div class="a"><strong>Answer:</strong> "Mars missions // require precise calculations // and advanced engineering."</div>
+          </div>
+          <div class="practice-item">
+            <div class="q"><strong>2.</strong> "The surface temperature on Venus is hot enough to melt lead and zinc."</div>
+            <button class="reveal-btn" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Reveal Chunking</button>
+            <div class="a"><strong>Answer:</strong> "The surface temperature on Venus // is hot enough // to melt lead and zinc."</div>
+          </div>
+          <div class="practice-item">
+            <div class="q"><strong>3.</strong> "Collaboration between space agencies across the world has been essential to the success of modern space exploration."</div>
+            <button class="reveal-btn" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Reveal Chunking</button>
+            <div class="a"><strong>Answer:</strong> "Collaboration between space agencies across the world // has been essential // to the success of modern space exploration."</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">✏️ Drill 2: Stress Tracking — Gap-fill</div>
+          <p class="text-muted" style="margin-bottom:0.75rem;">Clap on the stressed syllables in each sentence. Fill in the missing stressed words.</p>
+
+          <div class="practice-item">
+            <div class="q"><strong>1.</strong> "Solar ______ provide the ______ source of ______ for most space ______."</div>
+            <button class="reveal-btn" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Reveal Answer</button>
+            <div class="a"><strong>Answer:</strong> "Solar <strong>panels</strong> provide the <strong>primary</strong> source of <strong>power</strong> for most space <strong>probes</strong>."</div>
+          </div>
+          <div class="practice-item">
+            <div class="q"><strong>2.</strong> "______ aboard the International Space Station ______ experiments that are ______ to perform on ______."</div>
+            <button class="reveal-btn" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Reveal Answer</button>
+            <div class="a"><strong>Answer:</strong> "<strong>Astronauts</strong> aboard the International Space Station <strong>conduct</strong> experiments that are <strong>impossible</strong> to perform on <strong>Earth</strong>."</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">✏️ Drill 3: Short Sentence Reproduction (8–12 words)</div>
+          <p class="text-muted" style="margin-bottom:0.75rem;">Listen to the model, then record yourself repeating it exactly. Mark the checkbox when done.</p>
+
+          <div class="practice-item" style="display:flex; flex-wrap:wrap; align-items:center; gap:0.5rem;">
+            <div class="q" style="flex:1; min-width:200px;"><strong>1.</strong> "The Hubble telescope has transformed our understanding of the universe."</div>
+            <button class="model-btn" onclick="speakModel('The Hubble telescope has transformed our understanding of the universe.')">🎧 Hear Model</button>
+            <label class="checkpoint"><input type="checkbox"> Done</label>
+          </div>
+          <div class="practice-item" style="display:flex; flex-wrap:wrap; align-items:center; gap:0.5rem;">
+            <div class="q" style="flex:1; min-width:200px;"><strong>2.</strong> "Scientists recently discovered evidence of water on Mars."</div>
+            <button class="model-btn" onclick="speakModel('Scientists recently discovered evidence of water on Mars.')">🎧 Hear Model</button>
+            <label class="checkpoint"><input type="checkbox"> Done</label>
+          </div>
+          <div class="practice-item" style="display:flex; flex-wrap:wrap; align-items:center; gap:0.5rem;">
+            <div class="q" style="flex:1; min-width:200px;"><strong>3.</strong> "Astronomers have identified numerous exoplanets that could potentially support life."</div>
+            <button class="model-btn" onclick="speakModel('Astronomers have identified numerous exoplanets that could potentially support life.')">🎧 Hear Model</button>
+            <label class="checkpoint"><input type="checkbox"> Done</label>
+          </div>
+          <div class="recorder-bar">
+            <button class="rec-btn" id="drill3Record">🎤 Record</button>
+            <button class="rec-btn" id="drill3Stop" disabled>⏹ Stop</button>
+            <button class="rec-btn" id="drill3Play" disabled>🎧 Play</button>
+            <span class="rec-status" id="drill3Status">Record your practice</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">✏️ Drill 4: Medium Sentence Reproduction (13–16 words)</div>
+          <p class="text-muted" style="margin-bottom:0.75rem;">Listen to the model, then record yourself. Focus on chunking longer phrases.</p>
+
+          <div class="practice-item" style="display:flex; flex-wrap:wrap; align-items:center; gap:0.5rem;">
+            <div class="q" style="flex:1; min-width:200px;"><strong>1.</strong> "The International Space Station serves as a laboratory for microgravity research."</div>
+            <button class="model-btn" onclick="speakModel('The International Space Station serves as a laboratory for microgravity research.')">🎧 Hear Model</button>
+            <label class="checkpoint"><input type="checkbox"> Done</label>
+          </div>
+          <div class="practice-item" style="display:flex; flex-wrap:wrap; align-items:center; gap:0.5rem;">
+            <div class="q" style="flex:1; min-width:200px;"><strong>2.</strong> "Understanding the fundamental laws of physics requires both theoretical insight and careful experimentation."</div>
+            <button class="model-btn" onclick="speakModel('Understanding the fundamental laws of physics requires both theoretical insight and careful experimentation.')">🎧 Hear Model</button>
+            <label class="checkpoint"><input type="checkbox"> Done</label>
+          </div>
+          <div class="recorder-bar">
+            <button class="rec-btn" id="drill4Record">🎤 Record</button>
+            <button class="rec-btn" id="drill4Stop" disabled>⏹ Stop</button>
+            <button class="rec-btn" id="drill4Play" disabled>🎧 Play</button>
+            <span class="rec-status" id="drill4Status">Record your practice</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">✏️ Drill 5: Long Sentence Reproduction (18–25 words)</div>
+          <p class="text-muted" style="margin-bottom:0.75rem;">Listen to the model, then record yourself. Manage your breath and maintain intonation across the full sentence.</p>
+
+          <div class="practice-item" style="display:flex; flex-wrap:wrap; align-items:center; gap:0.5rem;">
+            <div class="q" style="flex:1; min-width:200px;"><strong>1.</strong> "The James Webb Space Telescope allows scientists to observe galaxies that formed over thirteen billion years ago."</div>
+            <button class="model-btn" onclick="speakModel('The James Webb Space Telescope allows scientists to observe galaxies that formed over thirteen billion years ago.')">🎧 Hear Model</button>
+            <label class="checkpoint"><input type="checkbox"> Done</label>
+          </div>
+          <div class="practice-item" style="display:flex; flex-wrap:wrap; align-items:center; gap:0.5rem;">
+            <div class="q" style="flex:1; min-width:200px;"><strong>2.</strong> "The discovery of microbial life beneath the surface of Mars would represent one of the most significant scientific breakthroughs in human history."</div>
+            <button class="model-btn" onclick="speakModel('The discovery of microbial life beneath the surface of Mars would represent one of the most significant scientific breakthroughs in human history.')">🎧 Hear Model</button>
+            <label class="checkpoint"><input type="checkbox"> Done</label>
+          </div>
+          <div class="recorder-bar">
+            <button class="rec-btn" id="drill5Record">🎤 Record</button>
+            <button class="rec-btn" id="drill5Stop" disabled>⏹ Stop</button>
+            <button class="rec-btn" id="drill5Play" disabled>🎧 Play</button>
+            <span class="rec-status" id="drill5Status">Record your practice</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 3: Speaking Practice — Simulator -->
+      <div class="slide" id="slide-3">
+        <div class="card">
+          <div class="card-title">🎤 Speaking Simulator — Listen and Repeat</div>
+          <p style="color: #cbd5e1; font-size: 0.95rem; line-height: 1.7; margin-bottom: 1rem;">
+            <strong>Instructions:</strong> The teacher plays each sentence once. You repeat it immediately into the recorder. Listen carefully — you will only hear each sentence one time.
+          </p>
+
+          <div class="practice-item" style="display:flex; flex-wrap:wrap; align-items:center; gap:0.5rem;">
+            <div class="q" style="flex:1; min-width:200px; font-size:0.9rem;">
+              <strong>1.</strong> (10 words) "Mars missions require precise calculations and advanced engineering."
+            </div>
+            <button class="model-btn" onclick="speakAndRecord('Mars missions require precise calculations and advanced engineering.', 0)">▶ Play & Record</button>
+            <button class="rec-btn" id="simPlay1" onclick="speakModel('Mars missions require precise calculations and advanced engineering.')" style="background:rgba(56,189,248,0.1); border-color:var(--accent-blue);">🎧 Play Only</button>
+            <button class="rec-btn" id="simRec1">🎤 Record</button>
+            <button class="rec-btn" id="simStop1" disabled>⏹ Stop</button>
+            <button class="rec-btn" id="simPlayback1" disabled>🎧 Play</button>
+            <span style="font-size:0.75rem; color:var(--text-muted);" id="simStatus1">Ready</span>
+          </div>
+
+          <div class="practice-item" style="display:flex; flex-wrap:wrap; align-items:center; gap:0.5rem;">
+            <div class="q" style="flex:1; min-width:200px; font-size:0.9rem;">
+              <strong>2.</strong> (12 words) "Solar panels provide the primary source of power for most space probes."
+            </div>
+            <button class="model-btn" onclick="speakAndRecord('Solar panels provide the primary source of power for most space probes.', 1)">▶ Play & Record</button>
+            <button class="rec-btn" onclick="speakModel('Solar panels provide the primary source of power for most space probes.')" style="background:rgba(56,189,248,0.1); border-color:var(--accent-blue);">🎧 Play Only</button>
+            <button class="rec-btn" id="simRec2">🎤 Record</button>
+            <button class="rec-btn" id="simStop2" disabled>⏹ Stop</button>
+            <button class="rec-btn" id="simPlayback2" disabled>🎧 Play</button>
+            <span style="font-size:0.75rem; color:var(--text-muted);" id="simStatus2">Ready</span>
+          </div>
+
+          <div class="practice-item" style="display:flex; flex-wrap:wrap; align-items:center; gap:0.5rem;">
+            <div class="q" style="flex:1; min-width:200px; font-size:0.9rem;">
+              <strong>3.</strong> (15 words) "The surface temperature on Venus is hot enough to melt lead and zinc."
+            </div>
+            <button class="model-btn" onclick="speakAndRecord('The surface temperature on Venus is hot enough to melt lead and zinc.', 2)">▶ Play & Record</button>
+            <button class="rec-btn" onclick="speakModel('The surface temperature on Venus is hot enough to melt lead and zinc.')" style="background:rgba(56,189,248,0.1); border-color:var(--accent-blue);">🎧 Play Only</button>
+            <button class="rec-btn" id="simRec3">🎤 Record</button>
+            <button class="rec-btn" id="simStop3" disabled>⏹ Stop</button>
+            <button class="rec-btn" id="simPlayback3" disabled>🎧 Play</button>
+            <span style="font-size:0.75rem; color:var(--text-muted);" id="simStatus3">Ready</span>
+          </div>
+
+          <div class="practice-item" style="display:flex; flex-wrap:wrap; align-items:center; gap:0.5rem;">
+            <div class="q" style="flex:1; min-width:200px; font-size:0.9rem;">
+              <strong>4.</strong> (18 words) "Astronauts aboard the International Space Station conduct experiments that are impossible to perform on Earth."
+            </div>
+            <button class="model-btn" onclick="speakAndRecord('Astronauts aboard the International Space Station conduct experiments that are impossible to perform on Earth.', 3)">▶ Play & Record</button>
+            <button class="rec-btn" onclick="speakModel('Astronauts aboard the International Space Station conduct experiments that are impossible to perform on Earth.')" style="background:rgba(56,189,248,0.1); border-color:var(--accent-blue);">🎧 Play Only</button>
+            <button class="rec-btn" id="simRec4">🎤 Record</button>
+            <button class="rec-btn" id="simStop4" disabled>⏹ Stop</button>
+            <button class="rec-btn" id="simPlayback4" disabled>🎧 Play</button>
+            <span style="font-size:0.75rem; color:var(--text-muted);" id="simStatus4">Ready</span>
+          </div>
+
+          <div class="practice-item" style="display:flex; flex-wrap:wrap; align-items:center; gap:0.5rem;">
+            <div class="q" style="flex:1; min-width:200px; font-size:0.9rem;">
+              <strong>5.</strong> (22 words) "The discovery of microbial life beneath the surface of Mars would represent one of the most significant scientific breakthroughs in human history."
+            </div>
+            <button class="model-btn" onclick="speakAndRecord('The discovery of microbial life beneath the surface of Mars would represent one of the most significant scientific breakthroughs in human history.', 4)">▶ Play & Record</button>
+            <button class="rec-btn" onclick="speakModel('The discovery of microbial life beneath the surface of Mars would represent one of the most significant scientific breakthroughs in human history.')" style="background:rgba(56,189,248,0.1); border-color:var(--accent-blue);">🎧 Play Only</button>
+            <button class="rec-btn" id="simRec5">🎤 Record</button>
+            <button class="rec-btn" id="simStop5" disabled>⏹ Stop</button>
+            <button class="rec-btn" id="simPlayback5" disabled>🎧 Play</button>
+            <span style="font-size:0.75rem; color:var(--text-muted);" id="simStatus5">Ready</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">📊 Self-Evaluation Checklist</div>
+          <p class="text-muted" style="margin-bottom:0.75rem;">After completing each sentence, evaluate your performance honestly.</p>
+          <table class="eval-table">
+            <thead>
+              <tr><th style="text-align:left; width:55%;">Criteria</th><th>Yes</th><th>Partially</th><th>No</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>1. I reproduced the complete sentence without omissions</td><td><input type="radio" name="eval1" value="yes"></td><td><input type="radio" name="eval1" value="partial"></td><td><input type="radio" name="eval1" value="no"></td></tr>
+              <tr><td>2. My pronunciation of each word was clear and accurate</td><td><input type="radio" name="eval2" value="yes"></td><td><input type="radio" name="eval2" value="partial"></td><td><input type="radio" name="eval2" value="no"></td></tr>
+              <tr><td>3. I placed stress on the correct syllables and content words</td><td><input type="radio" name="eval3" value="yes"></td><td><input type="radio" name="eval3" value="partial"></td><td><input type="radio" name="eval3" value="no"></td></tr>
+              <tr><td>4. My intonation followed the natural melody of the sentence</td><td><input type="radio" name="eval4" value="yes"></td><td><input type="radio" name="eval4" value="partial"></td><td><input type="radio" name="eval4" value="no"></td></tr>
+              <tr><td>5. I grouped words into natural chunks or phrases</td><td><input type="radio" name="eval5" value="yes"></td><td><input type="radio" name="eval5" value="partial"></td><td><input type="radio" name="eval5" value="no"></td></tr>
+              <tr><td>6. I repeated the sentence smoothly without long pauses</td><td><input type="radio" name="eval6" value="yes"></td><td><input type="radio" name="eval6" value="partial"></td><td><input type="radio" name="eval6" value="no"></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Slide 4: Homework -->
+      <div class="slide" id="slide-4">
+        <div class="card">
+          <div class="card-title">📋 Homework Assignments</div>
+          <p class="text-muted" style="margin-bottom: 1.5rem;">Complete these tasks before our next class. Submit via your usual chat channel.</p>
+
+          <div class="hw-list">
+            <div class="card" style="background: rgba(255,255,255,0.01); border-color: var(--border-color); margin-bottom: 1rem; padding: 1.25rem;">
+              <h3 style="font-size: 1.05rem; color: var(--accent-blue); margin-bottom: 0.5rem;">Task 1: Speaking Recording</h3>
+              <p style="font-size: 0.95rem; line-height: 1.6;">
+                Record yourself repeating these <strong>5 sentences</strong>. Use the recorder in this lesson's pacer or any voice recording app.
+              </p>
+              <ol style="padding-left: 1.25rem; font-size: 0.9rem; margin: 0.75rem 0; color: #cbd5e1; line-height: 1.8;">
+                <li>"The Hubble Space Telescope has revolutionized our understanding of the universe."</li>
+                <li>"Astronauts train for years before they are allowed to travel to the International Space Station."</li>
+                <li>"The surface of Mars contains evidence of ancient rivers and lakes."</li>
+                <li>"Scientists believe that there may be oceans of liquid water beneath the icy crust of Europa."</li>
+                <li>"The development of reusable rocket technology has significantly reduced the cost of space exploration."</li>
+              </ol>
+              <ul style="padding-left: 1.25rem; font-size: 0.9rem; color: var(--text-muted);">
+                <li>Pay attention to <strong>weak forms</strong> (to, of, and, for, a) and <strong>word endings</strong> (-ed, -s).</li>
+              </ul>
+            </div>
+
+            <div class="card" style="background: rgba(255,255,255,0.01); border-color: var(--border-color); margin-bottom: 1rem; padding: 1.25rem;">
+              <h3 style="font-size: 1.05rem; color: var(--accent-purple); margin-bottom: 0.5rem;">Task 2: Writing Self-Analysis</h3>
+              <p style="font-size: 0.95rem; line-height: 1.6;">
+                Listen to your recordings from Task 1 and write a short <strong>self-analysis</strong> (3–5 sentences):
+              </p>
+              <ul style="padding-left: 1.25rem; font-size: 0.9rem; margin: 0.5rem 0; color: var(--text-muted);">
+                <li>Which words did you struggle to pronounce?</li>
+                <li>Did you notice any article drops or missing plural -s?</li>
+                <li>Was your intonation natural or flat?</li>
+                <li>What will you focus on next time?</li>
+              </ul>
+            </div>
+
+            <div class="card" style="background: rgba(255,255,255,0.01); border-color: var(--border-color); margin-bottom: 0; padding: 1.25rem;">
+              <h3 style="font-size: 1.05rem; color: var(--accent-green); margin-bottom: 0.5rem;">Task 3: Vocabulary Journal</h3>
+              <p style="font-size: 0.95rem; line-height: 1.6;">
+                Write <strong>5 sentences</strong> using these listen-and-repeat target words. Practice saying each sentence aloud 3 times before writing it.
+              </p>
+              <ul style="padding-left: 1.25rem; font-size: 0.9rem; margin: 0.5rem 0; color: var(--text-muted);">
+                <li><em>groundbreaking, fundamentally, phenomena, endeavor, unprecedented</em></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    function switchSlide(index) {
+      document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('.sidebar-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById(`slide-${index}`).classList.add('active');
+      document.querySelectorAll('.sidebar-btn')[index].classList.add('active');
+    }
+
+    const shadowingText = "The exploration of deep space represents one of humanity's most ambitious scientific undertakings. From the groundbreaking observations of the Hubble Space Telescope to the recent successful deployment of the James Webb Observatory, each new generation of instruments has fundamentally transformed our understanding of the cosmos. These technological marvels have enabled astronomers to peer billions of years into the past, capturing images of galaxies forming in the immediate aftermath of the Big Bang. As our instruments grow more powerful, the line between science fiction and scientific reality continues to blur.";
+
+  function initShadowing() {
+    const container = document.getElementById('shadowing-text');
+    container.innerHTML = shadowingText.split(' ').map((w, i) => `<span class="shadowing-word" id="word-${i}">${w}</span>`).join(' ');
+  }
+  initShadowing();
+
+  const shadowingAudio = document.getElementById('shadowingAudio');
+  let audioFallback = false;
+  shadowingTS = [{"word":"The","start":0.375,"end":0.5},{"word":"exploration","start":0.5,"end":1.275},{"word":"of","start":1.275,"end":1.413},{"word":"deep","start":1.413,"end":1.712},{"word":"space","start":1.712,"end":2.55},{"word":"represents","start":2.55,"end":3.15},{"word":"one","start":3.15,"end":3.288},{"word":"of","start":3.288,"end":3.375},{"word":"humanity's","start":3.375,"end":4.188},{"word":"most","start":4.188,"end":4.675},{"word":"ambitious","start":4.675,"end":5.4},{"word":"scientific","start":5.4,"end":6.125},{"word":"undertakings","start":6.125,"end":7.513},{"word":"From","start":7.513,"end":7.688},{"word":"the","start":7.688,"end":7.787},{"word":"groundbreaking","start":7.787,"end":8.625},{"word":"observations","start":8.625,"end":9.5},{"word":"of","start":9.5,"end":9.588},{"word":"the","start":9.588,"end":9.688},{"word":"Hubble","start":9.688,"end":10.037},{"word":"Space","start":10.037,"end":10.45},{"word":"Telescope","start":10.45,"end":11.525},{"word":"to","start":11.525,"end":11.65},{"word":"the","start":11.65,"end":11.787},{"word":"recent","start":11.787,"end":12.262},{"word":"successful","start":12.262,"end":12.875},{"word":"deployment","start":12.875,"end":13.463},{"word":"of","start":13.463,"end":13.537},{"word":"the","start":13.537,"end":13.662},{"word":"James","start":13.662,"end":14.162},{"word":"Webb","start":14.162,"end":14.4},{"word":"Observatory","start":14.4,"end":15.762},{"word":"each","start":15.762,"end":16.125},{"word":"new","start":16.125,"end":16.413},{"word":"generation","start":16.413,"end":17.075},{"word":"of","start":17.075,"end":17.212},{"word":"instruments","start":17.212,"end":17.825},{"word":"has","start":17.825,"end":18.212},{"word":"fundamentally","start":18.212,"end":18.962},{"word":"transformed","start":18.962,"end":19.875},{"word":"our","start":19.875,"end":20.05},{"word":"understanding","start":20.05,"end":20.85},{"word":"of","start":20.85,"end":20.938},{"word":"the","start":20.938,"end":21.038},{"word":"cosmos","start":21.038,"end":22.363},{"word":"These","start":22.763,"end":23.025},{"word":"technological","start":23.025,"end":23.851},{"word":"marvels","start":23.851,"end":24.388},{"word":"have","start":24.388,"end":24.651},{"word":"enabled","start":24.651,"end":25.188},{"word":"astronomers","start":25.188,"end":25.988},{"word":"to","start":25.988,"end":26.126},{"word":"peer","start":26.126,"end":26.563},{"word":"billions","start":26.563,"end":27.1},{"word":"of","start":27.1,"end":27.225},{"word":"years","start":27.225,"end":27.688},{"word":"into","start":27.688,"end":27.876},{"word":"the","start":27.876,"end":27.975},{"word":"past","start":27.975,"end":28.925},{"word":"capturing","start":28.925,"end":29.501},{"word":"images","start":29.501,"end":29.988},{"word":"of","start":29.988,"end":30.126},{"word":"galaxies","start":30.126,"end":30.888},{"word":"forming","start":30.888,"end":31.388},{"word":"in","start":31.388,"end":31.476},{"word":"the","start":31.476,"end":31.625},{"word":"immediate","start":31.625,"end":32.213},{"word":"aftermath","start":32.213,"end":32.875},{"word":"of","start":32.875,"end":32.951},{"word":"the","start":32.951,"end":33.038},{"word":"Big","start":33.038,"end":33.275},{"word":"Bang","start":33.275,"end":34.326},{"word":"As","start":34.326,"end":34.5},{"word":"our","start":34.5,"end":34.675},{"word":"instruments","start":34.675,"end":35.25},{"word":"grow","start":35.25,"end":35.563},{"word":"more","start":35.563,"end":35.801},{"word":"powerful","start":35.801,"end":36.838},{"word":"the","start":36.838,"end":36.976},{"word":"line","start":36.976,"end":37.388},{"word":"between","start":37.388,"end":37.813},{"word":"science","start":37.813,"end":38.288},{"word":"fiction","start":38.288,"end":38.851},{"word":"and","start":38.851,"end":39.013},{"word":"scientific","start":39.013,"end":39.713},{"word":"reality","start":39.713,"end":40.425},{"word":"continues","start":40.425,"end":41.113},{"word":"to","start":41.113,"end":41.25},{"word":"blur","start":41.25,"end":42.288}];
+
+  shadowingAudio.ontimeupdate = () => {
+    if (!shadowingTS) return;
+    const t = shadowingAudio.currentTime;
+    let lo = 0, hi = shadowingTS.length - 1;
+    while (lo < hi) { const mid = (lo + hi + 1) >> 1; if (shadowingTS[mid].start <= t) lo = mid; else hi = mid - 1; }
+    const allWords = document.querySelectorAll('.shadowing-word');
+    allWords.forEach(w => w.classList.remove('highlighted'));
+    if (lo < allWords.length) { allWords[lo].classList.add('highlighted'); allWords[lo].scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+  };
+
+  shadowingAudio.onended = () => { speaking = false; document.querySelector('.listen-btn').textContent = '🔊 Listen'; };
+  shadowingAudio.onerror = () => { audioFallback = true; };
+
+  let speaking = false;
+  let paceInterval = null;
+  let pacerSpeed = 400;
+  let modelAudio = null;
+  const text = shadowingText;
+
+  let timerInterval = null, timerSeconds = 0;
+  function toggleShadowingTimer() {
+    const btn = document.getElementById('btn-timer');
+    if (timerInterval) { clearInterval(timerInterval); timerInterval = null; btn.innerHTML = '▶ Resume'; }
+    else {
+      btn.innerHTML = '⏸ Pause';
+      timerInterval = setInterval(() => {
+        timerSeconds++;
+        const mins = String(Math.floor(timerSeconds / 60)).padStart(2, '0');
+        const secs = String(timerSeconds % 60).padStart(2, '0');
+        document.getElementById('shadowing-timer').textContent = `${mins}:${secs}`;
+      }, 1000);
+    }
+  }
+  function resetShadowingTimer() {
+    clearInterval(timerInterval); timerInterval = null; timerSeconds = 0;
+    document.getElementById('shadowing-timer').textContent = '00:00';
+    document.getElementById('btn-timer').innerHTML = '▶ Start Timer';
+    if (paceInterval) { clearInterval(paceInterval); paceInterval = null; }
+    document.querySelectorAll('.shadowing-word').forEach(w => w.classList.remove('highlighted'));
+  }
+  function ttsFallback() {
+    const fallbackText = Array.from(document.querySelectorAll('.shadowing-word')).map(w => w.textContent).join(' ');
+    if (!fallbackText.trim()) return;
+    const u = new SpeechSynthesisUtterance(fallbackText);
+    u.lang = 'en-US'; u.rate = 0.85;
+    u.onstart = () => { speaking = true; document.querySelector('.listen-btn').textContent = '■ Stop'; };
+    u.onend = u.onerror = () => { speaking = false; document.querySelector('.listen-btn').textContent = '🔊 Listen'; };
+    speechSynthesis.speak(u);
+  }
+  function toggleSpeaking() {
+    if (speaking) {
+      shadowingAudio.pause();
+      shadowingAudio.currentTime = 0;
+      speechSynthesis.cancel();
+      speaking = false;
+      document.querySelector('.listen-btn').textContent = '🔊 Listen';
+      document.querySelectorAll('.shadowing-word').forEach(w => w.classList.remove('highlighted'));
+      return;
+    }
+    if (!audioFallback) {
+      shadowingAudio.src = 'audio/shadowing.wav?' + Date.now();
+      shadowingAudio.play().then(() => {
+        speaking = true;
+        document.querySelector('.listen-btn').textContent = '■ Stop';
+        if (paceInterval) { clearInterval(paceInterval); paceInterval = null; }
+      }).catch(() => { audioFallback = true; ttsFallback(); });
+    } else {
+      ttsFallback();
+    }
+  }
+
+    const modelWavMap = {
+      "The Hubble telescope has transformed our understanding of the universe.":"m01",
+      "Scientists recently discovered evidence of water on Mars.":"m02",
+      "Astronomers have identified numerous exoplanets that could potentially support life.":"m03",
+      "The International Space Station serves as a laboratory for microgravity research.":"m04",
+      "Understanding the fundamental laws of physics requires both theoretical insight and careful experimentation.":"m05",
+      "The James Webb Space Telescope allows scientists to observe galaxies that formed over thirteen billion years ago.":"m06",
+      "The discovery of microbial life beneath the surface of Mars would represent one of the most significant scientific breakthroughs in human history.":"m07",
+      "Mars missions require precise calculations and advanced engineering.":"s01",
+      "Solar panels provide the primary source of power for most space probes.":"s02",
+      "The surface temperature on Venus is hot enough to melt lead and zinc.":"s03",
+      "Astronauts aboard the International Space Station conduct experiments that are impossible to perform on Earth.":"s04"
+    };
+
+    function speakModel(text) {
+      if (!text.trim()) return;
+      if (modelAudio) { modelAudio.pause(); modelAudio = null; }
+      speechSynthesis.cancel();
+      const wavId = modelWavMap[text];
+      if (wavId) {
+        modelAudio = new Audio('audio/' + wavId + '.wav?' + Date.now());
+        modelAudio.play().catch(function() { modelAudio = null; ttsSpeak(text); });
+      } else {
+        ttsSpeak(text);
+      }
+    }
+
+    function ttsSpeak(text) {
+      const u = new SpeechSynthesisUtterance(text);
+      u.lang = 'en-US'; u.rate = 0.8;
+      speechSynthesis.speak(u);
+    }
+
+    function speakAndRecord(text, index) {
+      if (!text.trim()) return;
+      if (modelAudio) { modelAudio.pause(); modelAudio = null; }
+      speechSynthesis.cancel();
+      playBeep(600, 100, 1);
+      const statusEl = document.getElementById('simStatus' + (index + 1));
+      if (statusEl) statusEl.textContent = '🔊 Playing model...';
+      const wavId = modelWavMap[text];
+      function onDone() {
+        setTimeout(function() {
+          playBeep(800, 200, 1);
+          if (statusEl) statusEl.textContent = '🎤 Your turn — click Record';
+          var recBtn = document.getElementById('simRec' + (index + 1));
+          if (recBtn) recBtn.focus();
+        }, 1000);
+      }
+      if (wavId) {
+        modelAudio = new Audio('audio/' + wavId + '.wav?' + Date.now());
+        modelAudio.onended = onDone;
+        modelAudio.play().catch(function() { modelAudio = null; ttsSpeakAndRecord(text, onDone); });
+      } else {
+        ttsSpeakAndRecord(text, onDone);
+      }
+    }
+
+    function ttsSpeakAndRecord(text, onDone) {
+      var u = new SpeechSynthesisUtterance(text);
+      u.lang = 'en-US'; u.rate = 0.8;
+      u.onend = onDone;
+      speechSynthesis.speak(u);
+    }
+
+    document.addEventListener('change', function(e) {
+      if (e.target.id === 'speedSelect') {
+        pacerSpeed = parseInt(e.target.value);
+      }
+    });
+
+    function autoHighlightWords() {
+      document.querySelectorAll('.shadowing-word').forEach(w => w.classList.remove('highlighted'));
+      let currentWordIndex = 0;
+      const totalWords = text.split(' ').length;
+      
+      if (paceInterval) clearInterval(paceInterval);
+      
+      paceInterval = setInterval(() => {
+        if (currentWordIndex >= totalWords) {
+          clearInterval(paceInterval);
+          return;
+        }
+        document.querySelectorAll('.shadowing-word').forEach(w => w.classList.remove('highlighted'));
+        const wordEl = document.getElementById(`word-${currentWordIndex}`);
+        if (wordEl) {
+          wordEl.classList.add('highlighted');
+          wordEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+        currentWordIndex++;
+      }, pacerSpeed);
+    }
+
+    // Main Shadowing Recorder
+    let mediaRecorder = null;
+    let recordedChunks = [];
+    let audioBlobUrl = null;
+
+    document.getElementById('startRecord').addEventListener('click', async () => {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        mediaRecorder = new MediaRecorder(stream);
+        recordedChunks = [];
+        mediaRecorder.ondataavailable = (e) => { if (e.data.size > 0) recordedChunks.push(e.data); };
+        mediaRecorder.onstop = () => {
+          const blob = new Blob(recordedChunks, { type: 'audio/webm' });
+          audioBlobUrl = URL.createObjectURL(blob);
+          document.getElementById('playRecord').disabled = false;
+          document.getElementById('recStatus').textContent = '✅ Recording saved — click Play to hear yourself, then Listen to compare with model';
+          document.getElementById('startRecord').textContent = '🎤 Record Again';
+          stream.getTracks().forEach(t => t.stop());
+        };
+        mediaRecorder.start();
+        document.getElementById('startRecord').disabled = true;
+        document.getElementById('stopRecord').disabled = false;
+        document.getElementById('recStatus').textContent = '🔴 Recording...';
+      } catch(e) {
+        document.getElementById('recStatus').textContent = '⚠️ Microphone access denied — allow mic access and try again';
+      }
+    });
+
+    document.getElementById('stopRecord').addEventListener('click', () => {
+      if (mediaRecorder && mediaRecorder.state === 'recording') {
+        mediaRecorder.stop();
+        document.getElementById('startRecord').disabled = false;
+        document.getElementById('stopRecord').disabled = true;
+      }
+    });
+
+    document.getElementById('playRecord').addEventListener('click', () => {
+      if (audioBlobUrl) {
+        const audio = new Audio(audioBlobUrl);
+        audio.play();
+        document.getElementById('recStatus').textContent = '▶️ Playing your recording...';
+        audio.onended = () => {
+          document.getElementById('recStatus').textContent = '✅ Done — click Listen above to hear the model again';
+        };
+      }
+    });
+
+    // Drill 3 Recorder
+    let drill3Recorder = null;
+    let drill3Chunks = [];
+    let drill3BlobUrl = null;
+    document.getElementById('drill3Record').addEventListener('click', async () => {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        drill3Recorder = new MediaRecorder(stream);
+        drill3Chunks = [];
+        drill3Recorder.ondataavailable = (e) => { if (e.data.size > 0) drill3Chunks.push(e.data); };
+        drill3Recorder.onstop = () => {
+          const blob = new Blob(drill3Chunks, { type: 'audio/webm' });
+          drill3BlobUrl = URL.createObjectURL(blob);
+          document.getElementById('drill3Play').disabled = false;
+          document.getElementById('drill3Status').textContent = '✅ Saved';
+          document.getElementById('drill3Record').textContent = '🎤 Record Again';
+          stream.getTracks().forEach(t => t.stop());
+        };
+        drill3Recorder.start();
+        document.getElementById('drill3Record').disabled = true;
+        document.getElementById('drill3Stop').disabled = false;
+        document.getElementById('drill3Status').textContent = '🔴 Recording...';
+      } catch(e) {
+        document.getElementById('drill3Status').textContent = '⚠️ Mic access denied';
+      }
+    });
+    document.getElementById('drill3Stop').addEventListener('click', () => {
+      if (drill3Recorder && drill3Recorder.state === 'recording') {
+        drill3Recorder.stop();
+        document.getElementById('drill3Record').disabled = false;
+        document.getElementById('drill3Stop').disabled = true;
+      }
+    });
+    document.getElementById('drill3Play').addEventListener('click', () => {
+      if (drill3BlobUrl) { const a = new Audio(drill3BlobUrl); a.play(); }
+    });
+
+    // Drill 4 Recorder
+    let drill4Recorder = null;
+    let drill4Chunks = [];
+    let drill4BlobUrl = null;
+    document.getElementById('drill4Record').addEventListener('click', async () => {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        drill4Recorder = new MediaRecorder(stream);
+        drill4Chunks = [];
+        drill4Recorder.ondataavailable = (e) => { if (e.data.size > 0) drill4Chunks.push(e.data); };
+        drill4Recorder.onstop = () => {
+          const blob = new Blob(drill4Chunks, { type: 'audio/webm' });
+          drill4BlobUrl = URL.createObjectURL(blob);
+          document.getElementById('drill4Play').disabled = false;
+          document.getElementById('drill4Status').textContent = '✅ Saved';
+          document.getElementById('drill4Record').textContent = '🎤 Record Again';
+          stream.getTracks().forEach(t => t.stop());
+        };
+        drill4Recorder.start();
+        document.getElementById('drill4Record').disabled = true;
+        document.getElementById('drill4Stop').disabled = false;
+        document.getElementById('drill4Status').textContent = '🔴 Recording...';
+      } catch(e) {
+        document.getElementById('drill4Status').textContent = '⚠️ Mic access denied';
+      }
+    });
+    document.getElementById('drill4Stop').addEventListener('click', () => {
+      if (drill4Recorder && drill4Recorder.state === 'recording') {
+        drill4Recorder.stop();
+        document.getElementById('drill4Record').disabled = false;
+        document.getElementById('drill4Stop').disabled = true;
+      }
+    });
+    document.getElementById('drill4Play').addEventListener('click', () => {
+      if (drill4BlobUrl) { const a = new Audio(drill4BlobUrl); a.play(); }
+    });
+
+    // Drill 5 Recorder
+    let drill5Recorder = null;
+    let drill5Chunks = [];
+    let drill5BlobUrl = null;
+    document.getElementById('drill5Record').addEventListener('click', async () => {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        drill5Recorder = new MediaRecorder(stream);
+        drill5Chunks = [];
+        drill5Recorder.ondataavailable = (e) => { if (e.data.size > 0) drill5Chunks.push(e.data); };
+        drill5Recorder.onstop = () => {
+          const blob = new Blob(drill5Chunks, { type: 'audio/webm' });
+          drill5BlobUrl = URL.createObjectURL(blob);
+          document.getElementById('drill5Play').disabled = false;
+          document.getElementById('drill5Status').textContent = '✅ Saved';
+          document.getElementById('drill5Record').textContent = '🎤 Record Again';
+          stream.getTracks().forEach(t => t.stop());
+        };
+        drill5Recorder.start();
+        document.getElementById('drill5Record').disabled = true;
+        document.getElementById('drill5Stop').disabled = false;
+        document.getElementById('drill5Status').textContent = '🔴 Recording...';
+      } catch(e) {
+        document.getElementById('drill5Status').textContent = '⚠️ Mic access denied';
+      }
+    });
+    document.getElementById('drill5Stop').addEventListener('click', () => {
+      if (drill5Recorder && drill5Recorder.state === 'recording') {
+        drill5Recorder.stop();
+        document.getElementById('drill5Record').disabled = false;
+        document.getElementById('drill5Stop').disabled = true;
+      }
+    });
+    document.getElementById('drill5Play').addEventListener('click', () => {
+      if (drill5BlobUrl) { const a = new Audio(drill5BlobUrl); a.play(); }
+    });
+
+    // Simulator Recorders (5 independent recorders)
+    for (let i = 1; i <= 5; i++) {
+      (function(idx) {
+        let rec = null, chunks = [], blobUrl = null;
+        document.getElementById(`simRec${idx}`).addEventListener('click', async () => {
+          try {
+            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+            rec = new MediaRecorder(stream);
+            chunks = [];
+            rec.ondataavailable = (e) => { if (e.data.size > 0) chunks.push(e.data); };
+            rec.onstop = () => {
+              const blob = new Blob(chunks, { type: 'audio/webm' });
+              blobUrl = URL.createObjectURL(blob);
+              document.getElementById(`simPlayback${idx}`).disabled = false;
+              document.getElementById(`simStatus${idx}`).textContent = '✅ Saved';
+              document.getElementById(`simRec${idx}`).textContent = '🎤 Record Again';
+              stream.getTracks().forEach(t => t.stop());
+            };
+            rec.start();
+            document.getElementById(`simRec${idx}`).disabled = true;
+            document.getElementById(`simStop${idx}`).disabled = false;
+            document.getElementById(`simStatus${idx}`).textContent = '🔴 Recording...';
+          } catch(e) {
+            document.getElementById(`simStatus${idx}`).textContent = '⚠️ Mic access denied';
+          }
+        });
+        document.getElementById(`simStop${idx}`).addEventListener('click', () => {
+          if (rec && rec.state === 'recording') {
+            rec.stop();
+            document.getElementById(`simRec${idx}`).disabled = false;
+            document.getElementById(`simStop${idx}`).disabled = true;
+          }
+        });
+        document.getElementById(`simPlayback${idx}`).addEventListener('click', () => {
+          if (blobUrl) { const a = new Audio(blobUrl); a.play(); }
+        });
+      })(i);
+    }
+
+    function addNoteToTable() {
+      const val = document.getElementById('live-notepad').value.trim(); if (!val) return;
+      const lines = val.split('\n');
+      const table = document.getElementById('correction-table').getElementsByTagName('tbody')[0];
+      const newRow = table.insertRow(0);
+      newRow.insertCell(0).textContent = lines[0] || "";
+      const cell2 = newRow.insertCell(1); cell2.textContent = lines[1] || "Upgrade pending..."; cell2.style.color = "var(--accent-green)";
+      newRow.insertCell(2).innerHTML = `<span class="badge-exam">Valeria</span>`;
+      document.getElementById('live-notepad').value = "";
+    }
+    function clearNotepad() { document.getElementById('live-notepad').value = ""; }
+
+    // Pre-load voices
+    if (window.speechSynthesis) {
+      window.speechSynthesis.getVoices();
+      window.speechSynthesis.onvoiceschanged = () => { window.speechSynthesis.getVoices(); };
+    }
+  </script>
+</body>
+</html>
