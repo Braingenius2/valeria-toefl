@@ -1,0 +1,437 @@
+[
+  {
+    "word": "The",
+    "start": 0.25,
+    "end": 0.325
+  },
+  {
+    "word": "proliferation",
+    "start": 0.325,
+    "end": 1.012
+  },
+  {
+    "word": "of",
+    "start": 1.012,
+    "end": 1.1
+  },
+  {
+    "word": "artificial",
+    "start": 1.1,
+    "end": 1.637
+  },
+  {
+    "word": "intelligence",
+    "start": 1.637,
+    "end": 2.3
+  },
+  {
+    "word": "in",
+    "start": 2.3,
+    "end": 2.425
+  },
+  {
+    "word": "public",
+    "start": 2.425,
+    "end": 2.775
+  },
+  {
+    "word": "spaces",
+    "start": 2.775,
+    "end": 3.712
+  },
+  {
+    "word": "has",
+    "start": 3.712,
+    "end": 3.9
+  },
+  {
+    "word": "ignited",
+    "start": 3.9,
+    "end": 4.338
+  },
+  {
+    "word": "a",
+    "start": 4.338,
+    "end": 4.438
+  },
+  {
+    "word": "fierce",
+    "start": 4.438,
+    "end": 4.775
+  },
+  {
+    "word": "debate",
+    "start": 4.775,
+    "end": 5.15
+  },
+  {
+    "word": "between",
+    "start": 5.15,
+    "end": 5.5
+  },
+  {
+    "word": "security",
+    "start": 5.5,
+    "end": 6.0
+  },
+  {
+    "word": "advocates",
+    "start": 6.0,
+    "end": 6.6
+  },
+  {
+    "word": "and",
+    "start": 6.6,
+    "end": 6.725
+  },
+  {
+    "word": "privacy",
+    "start": 6.725,
+    "end": 7.175
+  },
+  {
+    "word": "defenders",
+    "start": 7.175,
+    "end": 8.588
+  },
+  {
+    "word": "Governments",
+    "start": 8.588,
+    "end": 9.125
+  },
+  {
+    "word": "argue",
+    "start": 9.125,
+    "end": 9.475
+  },
+  {
+    "word": "that",
+    "start": 9.475,
+    "end": 9.688
+  },
+  {
+    "word": "AI-powered",
+    "start": 9.688,
+    "end": 10.375
+  },
+  {
+    "word": "surveillance",
+    "start": 10.375,
+    "end": 10.875
+  },
+  {
+    "word": "systems",
+    "start": 10.875,
+    "end": 11.688
+  },
+  {
+    "word": "\u2014",
+    "start": 11.688,
+    "end": 11.775
+  },
+  {
+    "word": "equipped",
+    "start": 11.775,
+    "end": 12.162
+  },
+  {
+    "word": "with",
+    "start": 12.162,
+    "end": 12.325
+  },
+  {
+    "word": "facial",
+    "start": 12.325,
+    "end": 12.675
+  },
+  {
+    "word": "recognition",
+    "start": 12.675,
+    "end": 13.3
+  },
+  {
+    "word": "and",
+    "start": 13.3,
+    "end": 13.412
+  },
+  {
+    "word": "behavioral",
+    "start": 13.412,
+    "end": 13.975
+  },
+  {
+    "word": "analytics",
+    "start": 13.975,
+    "end": 15.012
+  },
+  {
+    "word": "\u2014",
+    "start": 15.012,
+    "end": 15.1
+  },
+  {
+    "word": "are",
+    "start": 15.1,
+    "end": 15.225
+  },
+  {
+    "word": "essential",
+    "start": 15.225,
+    "end": 15.7
+  },
+  {
+    "word": "tools",
+    "start": 15.7,
+    "end": 16.15
+  },
+  {
+    "word": "for",
+    "start": 16.15,
+    "end": 16.275
+  },
+  {
+    "word": "preventing",
+    "start": 16.275,
+    "end": 16.75
+  },
+  {
+    "word": "crime",
+    "start": 16.75,
+    "end": 17.288
+  },
+  {
+    "word": "and",
+    "start": 17.288,
+    "end": 17.413
+  },
+  {
+    "word": "enhancing",
+    "start": 17.413,
+    "end": 18.0
+  },
+  {
+    "word": "public",
+    "start": 18.0,
+    "end": 18.375
+  },
+  {
+    "word": "safety",
+    "start": 18.375,
+    "end": 19.562
+  },
+  {
+    "word": "Critics",
+    "start": 19.9,
+    "end": 20.3
+  },
+  {
+    "word": "however",
+    "start": 20.3,
+    "end": 21.125
+  },
+  {
+    "word": "contend",
+    "start": 21.125,
+    "end": 21.587
+  },
+  {
+    "word": "that",
+    "start": 21.587,
+    "end": 21.7
+  },
+  {
+    "word": "such",
+    "start": 21.7,
+    "end": 21.925
+  },
+  {
+    "word": "systems",
+    "start": 21.925,
+    "end": 22.4
+  },
+  {
+    "word": "represent",
+    "start": 22.4,
+    "end": 22.887
+  },
+  {
+    "word": "an",
+    "start": 22.887,
+    "end": 22.975
+  },
+  {
+    "word": "unprecedented",
+    "start": 22.975,
+    "end": 23.725
+  },
+  {
+    "word": "encroachment",
+    "start": 23.725,
+    "end": 24.387
+  },
+  {
+    "word": "on",
+    "start": 24.387,
+    "end": 24.55
+  },
+  {
+    "word": "civil",
+    "start": 24.55,
+    "end": 24.825
+  },
+  {
+    "word": "liberties",
+    "start": 24.825,
+    "end": 25.775
+  },
+  {
+    "word": "creating",
+    "start": 25.775,
+    "end": 26.188
+  },
+  {
+    "word": "a",
+    "start": 26.188,
+    "end": 26.25
+  },
+  {
+    "word": "surveillance",
+    "start": 26.25,
+    "end": 26.85
+  },
+  {
+    "word": "infrastructure",
+    "start": 26.85,
+    "end": 27.85
+  },
+  {
+    "word": "that",
+    "start": 27.85,
+    "end": 28.0
+  },
+  {
+    "word": "could",
+    "start": 28.0,
+    "end": 28.112
+  },
+  {
+    "word": "be",
+    "start": 28.112,
+    "end": 28.25
+  },
+  {
+    "word": "exploited",
+    "start": 28.25,
+    "end": 28.8
+  },
+  {
+    "word": "for",
+    "start": 28.8,
+    "end": 28.925
+  },
+  {
+    "word": "authoritarian",
+    "start": 28.925,
+    "end": 29.675
+  },
+  {
+    "word": "purposes",
+    "start": 29.675,
+    "end": 31.112
+  },
+  {
+    "word": "The",
+    "start": 31.112,
+    "end": 31.25
+  },
+  {
+    "word": "central",
+    "start": 31.25,
+    "end": 31.625
+  },
+  {
+    "word": "question",
+    "start": 31.625,
+    "end": 32.25
+  },
+  {
+    "word": "remains",
+    "start": 32.25,
+    "end": 32.75
+  },
+  {
+    "word": "whether",
+    "start": 32.75,
+    "end": 33.0
+  },
+  {
+    "word": "society",
+    "start": 33.0,
+    "end": 33.55
+  },
+  {
+    "word": "can",
+    "start": 33.55,
+    "end": 33.7
+  },
+  {
+    "word": "strike",
+    "start": 33.7,
+    "end": 33.962
+  },
+  {
+    "word": "a",
+    "start": 33.962,
+    "end": 34.025
+  },
+  {
+    "word": "balance",
+    "start": 34.025,
+    "end": 34.475
+  },
+  {
+    "word": "between",
+    "start": 34.475,
+    "end": 34.825
+  },
+  {
+    "word": "security",
+    "start": 34.825,
+    "end": 35.4
+  },
+  {
+    "word": "and",
+    "start": 35.4,
+    "end": 35.525
+  },
+  {
+    "word": "privacy",
+    "start": 35.525,
+    "end": 36.425
+  },
+  {
+    "word": "in",
+    "start": 36.425,
+    "end": 36.537
+  },
+  {
+    "word": "an",
+    "start": 36.537,
+    "end": 36.625
+  },
+  {
+    "word": "increasingly",
+    "start": 36.625,
+    "end": 37.325
+  },
+  {
+    "word": "digital",
+    "start": 37.325,
+    "end": 37.725
+  },
+  {
+    "word": "world",
+    "start": 37.725,
+    "end": 38.775
+  }
+]

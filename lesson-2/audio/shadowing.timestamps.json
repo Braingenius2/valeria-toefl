@@ -331,107 +331,107 @@
   },
   {
     "word": "This",
-    "start": 0.45,
-    "end": 0.662
+    "start": 29.675,
+    "end": 29.888
   },
   {
     "word": "counterintuitive",
-    "start": 0.662,
-    "end": 1.525
+    "start": 29.888,
+    "end": 30.75
   },
   {
     "word": "finding",
-    "start": 1.525,
-    "end": 2.362
+    "start": 30.75,
+    "end": 31.588
   },
   {
     "word": "suggests",
-    "start": 2.362,
-    "end": 2.975
+    "start": 31.588,
+    "end": 32.2
   },
   {
     "word": "that",
-    "start": 2.975,
-    "end": 3.125
+    "start": 32.2,
+    "end": 32.35
   },
   {
     "word": "people",
-    "start": 3.125,
-    "end": 3.513
+    "start": 32.35,
+    "end": 32.738
   },
   {
     "word": "unconsciously",
-    "start": 3.513,
-    "end": 4.35
+    "start": 32.738,
+    "end": 33.575
   },
   {
     "word": "adjust",
-    "start": 4.35,
-    "end": 4.75
+    "start": 33.575,
+    "end": 33.975
   },
   {
     "word": "their",
-    "start": 4.75,
-    "end": 4.938
+    "start": 33.975,
+    "end": 34.163
   },
   {
     "word": "attitudes",
-    "start": 4.938,
-    "end": 5.55
+    "start": 34.163,
+    "end": 34.775
   },
   {
     "word": "to",
-    "start": 5.55,
-    "end": 5.7
+    "start": 34.775,
+    "end": 34.925
   },
   {
     "word": "align",
-    "start": 5.7,
-    "end": 6.088
+    "start": 34.925,
+    "end": 35.312
   },
   {
     "word": "with",
-    "start": 6.088,
-    "end": 6.213
+    "start": 35.312,
+    "end": 35.438
   },
   {
     "word": "their",
-    "start": 6.213,
-    "end": 6.388
+    "start": 35.438,
+    "end": 35.613
   },
   {
     "word": "actions",
-    "start": 6.388,
-    "end": 7.5
+    "start": 35.613,
+    "end": 36.725
   },
   {
     "word": "particularly",
-    "start": 7.5,
-    "end": 8.537
+    "start": 36.725,
+    "end": 37.763
   },
   {
     "word": "when",
-    "start": 8.537,
-    "end": 8.7
+    "start": 37.763,
+    "end": 37.925
   },
   {
     "word": "external",
-    "start": 8.7,
-    "end": 9.25
+    "start": 37.925,
+    "end": 38.475
   },
   {
     "word": "justification",
-    "start": 9.25,
-    "end": 10.137
+    "start": 38.475,
+    "end": 39.362
   },
   {
     "word": "is",
-    "start": 10.137,
-    "end": 10.3
+    "start": 39.362,
+    "end": 39.525
   },
   {
     "word": "insufficient",
-    "start": 10.3,
-    "end": 11.675
+    "start": 39.525,
+    "end": 40.9
   }
 ]

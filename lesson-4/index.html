@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Valeria's Lesson: Academic Discussion — AI, Privacy & Society</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-dark: #090d16; --bg-card: #131a26; --border-color: #243042;
+      --text-main: #f1f5f9; --text-muted: #64748b;
+      --primary: #f59e0b; --primary-hover: #d97706;
+      --accent-blue: #38bdf8; --accent-green: #10b981; --accent-red: #ef4444; --accent-purple: #a855f7;
+      --glass-bg: rgba(19, 26, 38, 0.85); --glass-border: rgba(255, 255, 255, 0.03);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Outfit', sans-serif; background-color: var(--bg-dark); color: var(--text-main); min-height: 100vh; display: flex; flex-direction: column; overflow-x: hidden; }
+    
+    header { background: rgba(9, 13, 22, 0.9); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border-color); padding: 1rem 2rem; position: sticky; top: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; }
+    .logo-area { display: flex; align-items: center; gap: 0.75rem; }
+    .badge-exam { background: rgba(245, 158, 11, 0.15); border: 1px solid var(--primary); color: var(--primary); padding: 0.25rem 0.5rem; border-radius: 4px; font-family: 'Fira Code', monospace; font-size: 0.75rem; text-transform: uppercase; font-weight: bold; }
+    .back-link { color: var(--text-muted); text-decoration: none; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 0.3rem; transition: color 0.2s ease; }
+    .back-link:hover { color: var(--text-main); }
+    h1 { font-size: 1.25rem; font-weight: 700; letter-spacing: -0.025em; }
+    .lesson-meta { display: flex; gap: 1.5rem; font-size: 0.875rem; color: var(--text-muted); }
+    .meta-item strong { color: var(--text-main); }
+    
+    .main-container { display: flex; flex: 1; height: calc(100vh - 65px); }
+    .sidebar { width: 280px; border-right: 1px solid var(--border-color); padding: 1.5rem 1rem; display: flex; flex-direction: column; gap: 0.5rem; background: rgba(9, 13, 22, 0.5); }
+    .sidebar-btn { display: flex; align-items: center; gap: 0.75rem; width: 100%; padding: 0.75rem 1rem; background: transparent; border: 1px solid transparent; border-radius: 8px; color: var(--text-muted); font-size: 0.9rem; text-align: left; cursor: pointer; transition: all 0.2s ease; }
+    .sidebar-btn:hover { background: rgba(255, 255, 255, 0.02); color: var(--text-main); }
+    .sidebar-btn.active { background: var(--bg-card); border-color: var(--border-color); color: var(--primary); font-weight: 600; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); }
+    .sidebar-num { font-family: 'Fira Code', monospace; font-size: 0.8rem; opacity: 0.6; }
+    
+    .content-area { flex: 1; padding: 2.5rem; overflow-y: auto; background: radial-gradient(circle at top right, rgba(245, 158, 11, 0.04), transparent 900px); }
+    .slide { display: none; animation: fadeIn 0.3s ease-in-out forwards; max-width: 1000px; margin: 0 auto; }
+    .slide.active { display: block; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    
+    .card { background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 12px; padding: 1.75rem; margin-bottom: 1.5rem; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25); }
+    .card-title { font-size: 1.15rem; font-weight: 600; margin-bottom: 1rem; color: var(--primary); display: flex; align-items: center; gap: 0.5rem; border-bottom: 1px solid rgba(255, 255, 255, 0.05); padding-bottom: 0.5rem; }
+    
+    .shadowing-box { border-left: 4px solid var(--accent-blue); background: rgba(56, 189, 248, 0.03); }
+    .shadowing-text { font-size: 1.1rem; line-height: 1.8; color: var(--text-main); margin: 1.5rem 0; background: rgba(0, 0, 0, 0.25); padding: 1.5rem; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.02); }
+    .shadowing-word { display: inline-block; margin-right: 0.25rem; transition: all 0.15s ease; }
+    .shadowing-word.highlighted { background: rgba(56, 189, 248, 0.25); color: #fff; border-radius: 3px; padding: 0 2px; }
+    
+    .btn { padding: 0.6rem 1.2rem; border-radius: 6px; border: none; font-weight: 600; font-family: inherit; cursor: pointer; display: flex; align-items: center; gap: 0.5rem; transition: all 0.2s ease; }
+    .btn-primary { background: var(--primary); color: #000; }
+    .btn-primary:hover { background: var(--primary-hover); }
+    .btn-secondary { background: rgba(255, 255, 255, 0.05); color: var(--text-main); border: 1px solid var(--border-color); }
+    
+    .timer-container { display: flex; gap: 1rem; margin: 1rem 0; }
+    .exam-timer { background: #000; border: 1px solid var(--border-color); border-radius: 8px; padding: 1rem; text-align: center; flex: 1; }
+    .timer-val { font-family: 'Fira Code', monospace; font-size: 2.25rem; font-weight: bold; color: var(--primary); }
+    .timer-label { font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); margin-top: 0.25rem; }
+    
+    .template-card { background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-color); border-radius: 8px; padding: 1rem; margin-bottom: 0.75rem; }
+    .template-card h4 { color: var(--accent-blue); margin-bottom: 0.4rem; font-size: 0.95rem; }
+    .template-card p { color: #cbd5e1; font-size: 0.92rem; line-height: 1.6; font-style: italic; }
+    .concession-table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+    .concession-table th, .concession-table td { border: 1px solid var(--border-color); padding: 0.65rem 0.75rem; text-align: left; font-size: 0.92rem; }
+    .concession-table th { background: rgba(255, 255, 255, 0.02); color: var(--text-muted); text-transform: uppercase; font-size: 0.8rem; }
+    .concession-table td { color: #cbd5e1; }
+    .concession-table td code { font-family: 'Fira Code', monospace; font-size: 0.85rem; color: var(--accent-green); }
+    
+    .error-box { background: rgba(239, 68, 68, 0.05); border: 1px solid rgba(239, 68, 68, 0.2); border-radius: 8px; padding: 1rem; margin-top: 1rem; }
+    .error-box h4 { color: var(--accent-red); font-size: 0.95rem; margin-bottom: 0.5rem; }
+    .error-item { font-size: 0.9rem; padding: 0.35rem 0; color: #cbd5e1; }
+    .error-item .wrong { color: var(--accent-red); }
+    .error-item .right { color: var(--accent-green); }
+    
+    .thread-card { background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.25rem; margin-bottom: 1rem; }
+    .thread-card .prof { color: var(--accent-purple); font-weight: 600; }
+    .thread-card .student1 { color: var(--accent-blue); font-weight: 600; }
+    .thread-card .student2 { color: var(--accent-green); font-weight: 600; }
+    .thread-card p { color: #cbd5e1; font-size: 0.92rem; line-height: 1.6; margin-top: 0.3rem; }
+    
+    .notepad-area { width: 100%; height: 250px; background: #05070c; border: 1px solid var(--border-color); border-radius: 6px; color: var(--text-main); padding: 0.75rem; font-family: inherit; resize: vertical; font-size: 0.95rem; }
+    .correction-table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+    .correction-table th, .correction-table td { border: 1px solid var(--border-color); padding: 0.75rem; text-align: left; }
+    .correction-table th { background: rgba(255, 255, 255, 0.02); color: var(--text-muted); font-size: 0.85rem; text-transform: uppercase; }
+    .recorder-bar { display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap; margin-top: 0.75rem; padding-top: 0.75rem; border-top: 1px solid var(--border-color); }
+    .rec-btn { padding: 0.35rem 0.75rem; font-size: 0.8rem; border-radius: 20px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); color: var(--text-muted); font-family: inherit; cursor: pointer; transition: all 0.2s ease; display: inline-flex; align-items: center; gap: 0.3rem; }
+    .rec-btn:hover { background: rgba(255,255,255,0.1); }
+    .rec-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+    .rec-status { font-size: 0.75rem; color: var(--text-muted); }
+    .disclaimer { background: rgba(239, 68, 68, 0.08); border: 1px solid rgba(239, 68, 68, 0.3); border-left: 4px solid var(--accent-red); border-radius: 8px; padding: 1rem; margin-bottom: 1.5rem; font-size: 0.9rem; color: #fca5a5; line-height: 1.6; }
+    .disclaimer strong { color: var(--accent-red); }
+    .disclaimer a { color: #fbbf24; }
+    .practice-item { background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); border-radius: 8px; padding: 1rem; margin-bottom: 0.75rem; }
+    .practice-item .q { color: #cbd5e1; font-size: 0.95rem; }
+    .practice-item .a { color: var(--accent-green); font-size: 0.9rem; display: none; margin-top: 0.5rem; padding: 0.5rem; background: rgba(16,185,129,0.05); border-radius: 4px; }
+    .practice-item .reveal-btn { background: transparent; border: 1px solid var(--border-color); color: var(--text-muted); padding: 0.25rem 0.75rem; border-radius: 4px; cursor: pointer; font-size: 0.8rem; margin-top: 0.5rem; }
+    .pacer-controls { display: flex; gap: 0.75rem; align-items: center; flex-wrap: wrap; margin-top: 0.75rem; }
+    .pacer-controls select { background: #000; border: 1px solid var(--border-color); color: var(--text-main); padding: 0.4rem 0.75rem; border-radius: 4px; font-family: 'Fira Code', monospace; font-size: 0.85rem; }
+    .prompt-box { background: #000; border-left: 4px solid var(--accent-purple); padding: 1.25rem; border-radius: 8px; margin-bottom: 1rem; }
+    .prompt-box .speaker-label { font-weight: 600; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.3rem; }
+    .prompt-box .speaker-label.prof { color: var(--accent-purple); }
+    .prompt-box .speaker-label.student { color: var(--accent-blue); }
+    .prompt-box .speaker-label.student2 { color: var(--accent-green); }
+    .prompt-box p { color: #cbd5e1; font-size: 0.95rem; line-height: 1.65; }
+    .prompt-box + .prompt-box { margin-top: 0.5rem; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo-area">
+      <div class="badge-exam">Academic Writing</div>
+      <a href="../index.html" class="back-link">← Portal</a>
+      <h1>Valeria: Academic Discussion — AI, Privacy & Society (2026 TOEFL)</h1>
+    </div>
+    <div class="lesson-meta">
+      <div class="meta-item">Student: <strong>Valeria (B2/C1)</strong></div>
+    </div>
+  </header>
+
+  <div class="main-container">
+    <div class="sidebar">
+      <button class="sidebar-btn active" onclick="switchSlide(0)"><span class="sidebar-num">01</span> Warm-up: Shadowing</button>
+      <button class="sidebar-btn" onclick="switchSlide(1)"><span class="sidebar-num">02</span> Input: Format & Templates</button>
+      <button class="sidebar-btn" onclick="switchSlide(2)"><span class="sidebar-num">03</span> Controlled Practice</button>
+      <button class="sidebar-btn" onclick="switchSlide(3)"><span class="sidebar-num">04</span> Writing Practice</button>
+      <button class="sidebar-btn" onclick="switchSlide(4)"><span class="sidebar-num">05</span> Homework</button>
+    </div>
+
+    <div class="content-area">
+      
+      <!-- Slide 0: Warm-up — Shadowing Pacer -->
+      <div class="slide active" id="slide-0">
+        <div class="card shadowing-box">
+          <div class="card-title">🔊 Shadowing Pacer: AI Surveillance & Privacy Debate</div>
+          <p class="text-muted">Focus on stress in technical vocabulary: <em>surveillance, infrastructure, algorithmic</em>. Pay attention to smooth linking through complex clauses.</p>
+          <div id="shadowing-text" class="shadowing-text"></div>
+          <div style="display:flex; gap:0.5rem; align-items:center;">
+            <button class="btn btn-primary" onclick="toggleShadowingTimer()" id="btn-timer">▶ Start Timer</button>
+            <div id="shadowing-timer" style="font-family:'Fira Code'; font-size:1.2rem; background:#000; padding:0.4rem 1rem; border-radius:4px;">00:00</div>
+            <button class="btn btn-secondary" onclick="resetShadowingTimer()">Reset</button>
+            <button class="btn btn-secondary" onclick="autoHighlightWords()">Auto Pacer</button>
+          </div>
+          <div class="pacer-controls">
+            <select class="speed-select" id="speedSelect">
+              <option value="500">120 WPM</option>
+              <option value="462">130 WPM</option>
+              <option value="429">140 WPM</option>
+              <option value="400" selected>150 WPM (Recommended)</option>
+              <option value="375">160 WPM</option>
+              <option value="348">175 WPM</option>
+              <option value="320">187 WPM</option>
+              <option value="300">200 WPM</option>
+            </select>
+            <button class="btn btn-secondary listen-btn" onclick="toggleSpeaking()">🔊 Listen</button>
+          </div>
+          <div class="recorder-bar">
+            <button class="rec-btn" id="startRecord">🎤 Record</button>
+            <button class="rec-btn" id="stopRecord" disabled>⏹ Stop</button>
+            <button class="rec-btn" id="playRecord" disabled>🎧 Play</button>
+            <span class="rec-status" id="recStatus">Record yourself, then compare with the model</span>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">💬 Discussion Questions</div>
+          <ol style="padding-left: 1.25rem; color: #cbd5e1; line-height: 1.8; font-size: 0.95rem;">
+            <li>In your opinion, does AI surveillance in public spaces make you feel safer or more uncomfortable? Why?</li>
+            <li>Do you think people in different countries have different attitudes toward privacy? How so?</li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- Slide 1: Input — Format Explanation + Templates + Concession + Errors -->
+      <div class="slide" id="slide-1">
+        <div class="card">
+          <div class="card-title">📋 TOEFL Academic Discussion Format</div>
+          <p style="color: #cbd5e1; font-size: 0.95rem; line-height: 1.7; margin-bottom: 1rem;">
+            The Academic Discussion task replaced the Independent Essay in the 2026 TOEFL reform. You must:
+          </p>
+          <ol style="padding-left: 1.25rem; color: #cbd5e1; line-height: 2; font-size: 0.95rem; margin-bottom: 1rem;">
+            <li><strong>Read</strong> (1 min): A professor's prompt introducing a topic + two student responses.</li>
+            <li><strong>Write</strong> (10 min): A 100+ word contribution that agrees, disagrees, or partially agrees with the existing posts.</li>
+            <li><strong>Structure:</strong> State your position clearly → Add a new point/evidence → Acknowledge and build on or counter a classmate's point → Conclude.</li>
+          </ol>
+          <div style="background: rgba(245, 158, 11, 0.08); border-left: 4px solid var(--primary); padding: 0.75rem 1rem; border-radius: 4px; font-size: 0.9rem; color: #fcd34d;">
+            <strong>Scoring Criteria (ETS):</strong> Content & Development (new perspective), Language Use (academic register), Coherence (logical flow).
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">📝 Three Response Templates</div>
+          
+          <div class="template-card">
+            <h4>1. AGREE + ADD</h4>
+            <p>"I strongly agree with [name]'s point about [topic]. In fact, research has shown that [new evidence]. Furthermore, [elaboration]. This suggests that [conclusion]."</p>
+          </div>
+          <div class="template-card">
+            <h4>2. DISAGREE + COUNTER</h4>
+            <p>"While I see [name]'s perspective, I would argue that [counterpoint]. The reason is that [explanation]. For example, [specific example]. Therefore, [conclusion]."</p>
+          </div>
+          <div class="template-card">
+            <h4>3. PARTIALLY AGREE (Nuanced)</h4>
+            <p>"I agree with the premise that [shared ground]; however, I think the issue is more nuanced because [complication]. On one hand, [acknowledge opposing view]. On the other hand, [your position]. Ultimately, [balanced conclusion]."</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">🔗 Concession & Counter-Argument Structures</div>
+          <table class="concession-table">
+            <thead><tr><th>Function</th><th>Structure</th></tr></thead>
+            <tbody>
+              <tr><td>Conceding a point</td><td><code>"While it is true that..."</code>, <code>"I acknowledge that..."</code>, <code>"Admittedly,..."</code></td></tr>
+              <tr><td>Introducing your counter</td><td><code>"However, this overlooks..."</code>, <code>"Nevertheless,..."</code>, <code>"That said,..."</code></td></tr>
+              <tr><td>Building on someone's idea</td><td><code>"Building on [name]'s observation,..."</code>, <code>"[Name] raises an important point about..., and I would add that..."</code></td></tr>
+              <tr><td>Introducing new evidence</td><td><code>"A further consideration is..."</code>, <code>"What is often overlooked is..."</code>, <code>"An additional factor is..."</code></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card">
+          <div class="card-title">⚠️ Recycled Error Targets (from Lessons 1-3)</div>
+          <div class="error-item"><span class="wrong">❌ "The question is why do people accept surveillance."</span> → <span class="right">✅ "The question is why people accept surveillance."</span> <span style="color: var(--text-muted); font-size: 0.8rem;">(Indirect Question Word Order)</span></div>
+          <div class="error-item"><span class="wrong">❌ "Government should implement regulations."</span> → <span class="right">✅ "The government should implement regulations."</span> <span style="color: var(--text-muted); font-size: 0.8rem;">(Article Drops)</span></div>
+          <div class="error-item"><span class="wrong">❌ "The professor argue that..."</span> → <span class="right">✅ "The professor argues that..."</span> <span style="color: var(--text-muted); font-size: 0.8rem;">(3rd Person -s Omission)</span></div>
+        </div>
+      </div>
+
+                <audio id="shadowingAudio" preload="none" style="display:none"></audio>
+
+<!-- Slide 2: Controlled Practice -->
+      <div class="slide" id="slide-2">
+        <div class="card">
+          <div class="card-title">💬 Sample Academic Discussion Thread</div>
+
+          <div class="thread-card">
+            <div class="prof">👨‍🏫 Professor Chen:</div>
+            <p>"Let's discuss the impact of AI-powered surveillance in public spaces. Some argue that facial recognition technology and smart cameras make our cities safer by helping law enforcement identify suspects quickly. Others worry that this creates a surveillance state where citizens lose their privacy. What's your perspective? Do the security benefits justify the privacy costs?"</p>
+          </div>
+          <div class="thread-card">
+            <div class="student1">👩 Sophia (classmate):</div>
+            <p>"I think the benefits definitely outweigh the risks. In London, CCTV cameras have helped solve countless crimes, and facial recognition is just the next logical step. If you're not doing anything wrong, you have nothing to hide. Plus, AI can analyze footage much faster than humans can."</p>
+          </div>
+          <div class="thread-card">
+            <div class="student2">👨 Marcus (classmate):</div>
+            <p>"I disagree with Sophia. The 'nothing to hide' argument is dangerous — it assumes governments will always use surveillance responsibly, which history shows isn't true. Once surveillance infrastructure is built, it can easily be abused. We need strong legal protections before implementing these systems."</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">✏️ Controlled Practice — Discussion Drills</div>
+          <p class="text-muted" style="margin-bottom:1rem;">Tap to reveal answers. Use academic register vocabulary and concession frames.</p>
+
+          <div class="practice-item">
+            <div class="q"><strong>1.</strong> Identify the template: Which response structure does Sophia use? Which does Marcus use?</div>
+            <button class="reveal-btn" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Reveal Answer</button>
+            <div class="a"><strong>Answer:</strong> Sophia = AGREE + ADD (adds the "nothing to hide" and speed arguments). Marcus = DISAGREE + COUNTER (counters the "nothing to hide" argument with the abuse of power concern).</div>
+          </div>
+
+          <div class="practice-item">
+            <div class="q"><strong>2.</strong> Gap-fill — Complete: "__________ facial recognition can help solve crimes, it also raises serious privacy concerns."</div>
+            <button class="reveal-btn" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Reveal Answer</button>
+            <div class="a"><strong>Answer:</strong> "While it is true that facial recognition can help solve crimes, it also raises serious privacy concerns."</div>
+          </div>
+
+          <div class="practice-item">
+            <div class="q"><strong>3.</strong> Gap-fill — Complete: "Sophia makes a valid point about efficiency; __________, efficiency without safeguards can be dangerous."</div>
+            <button class="reveal-btn" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Reveal Answer</button>
+            <div class="a"><strong>Answer:</strong> "...Sophia makes a valid point about efficiency; nevertheless, efficiency without safeguards can be dangerous."</div>
+          </div>
+
+          <div class="practice-item">
+            <div class="q"><strong>4.</strong> Rewrite with academic register: "I think Sophia is wrong because cameras don't stop all crime and the government might use them for bad things."</div>
+            <button class="reveal-btn" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Reveal Answer</button>
+            <div class="a"><strong>Answer:</strong> "While I understand Sophia's perspective, I would argue that surveillance technology does not eliminate crime entirely. Moreover, there is a legitimate risk that such systems could be repurposed for objectives beyond public safety."</div>
+          </div>
+
+          <div class="practice-item">
+            <div class="q"><strong>5.</strong> Choose your position and write an opening sentence (2-3 sentences) using one of the three templates.</div>
+            <button class="reveal-btn" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Reveal Answer</button>
+            <div class="a"><strong>Model Answer (PARTIALLY AGREE):</strong> "I agree with Marcus that privacy protections must precede surveillance expansion; however, I also see the practical benefits Sophia mentions. The key is not whether to use AI surveillance, but how to implement it with robust oversight mechanisms."</div>
+          </div>
+
+          <div class="practice-item">
+            <div class="q"><strong>6.</strong> Error correction — Fix: "The professor explain why does surveillance matter in modern society."</div>
+            <button class="reveal-btn" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Reveal Answer</button>
+            <div class="a"><strong>Answer:</strong> "The professor explains why surveillance matters in modern society."</div>
+          </div>
+
+          <div class="practice-item">
+            <div class="q"><strong>7.</strong> Structure identification — Label each rhetorical move: "Admittedly, facial recognition has helped solve crimes. However, this overlooks the fact that the technology has a significant racial bias problem. A 2019 MIT study found that commercial AI systems misidentified dark-skinned women up to 35% of the time. This suggests that until the technology improves, we cannot trust it as a primary law enforcement tool."</div>
+            <button class="reveal-btn" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Reveal Answer</button>
+            <div class="a"><strong>Answer:</strong> "Admittedly..." = Concession. "However..." = Counter-argument introduction. "A 2019 MIT study..." = New evidence. "This suggests that..." = Conclusion.</div>
+          </div>
+
+          <div class="practice-item">
+            <div class="q"><strong>8.</strong> Write a full response (100+ words) using one of the three templates. Reference Sophia's and/or Marcus's posts.</div>
+            <button class="reveal-btn" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Reveal Answer</button>
+            <div class="a"><strong>Model Answer:</strong> "I largely agree with Marcus's concerns about surveillance infrastructure, but I'd add that the debate is not binary. On one hand, facial recognition technology has demonstrated measurable benefits — London's CCTV network has contributed to a significant reduction in street crime. On the other hand, as Marcus rightly points out, the potential for abuse is real. What is often overlooked is the possibility of intermediate solutions: AI surveillance with strict sunset clauses, independent oversight boards, and mandatory transparency reports. Ultimately, the question is not whether to use the technology, but under what conditions. A balanced approach — leveraging security benefits while enshrining privacy protections — seems the most prudent path forward."</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 3: Writing Practice — Timed Academic Discussion -->
+      <div class="slide" id="slide-3">
+        <div class="card">
+          <div class="card-title">✍️ Timed Academic Discussion — Social Media Moderation</div>
+          
+          <div class="prompt-box">
+            <div class="speaker-label prof">👨‍🏫 Professor's Prompt</div>
+            <p>"Let's discuss the role of social media platforms in moderating content. Some argue that companies like Facebook and Twitter have a responsibility to remove misinformation and hate speech. Others contend that this amounts to censorship and that platforms should remain neutral. What's your perspective? Should social media companies police content, or should they remain neutral platforms?"</p>
+          </div>
+          <div class="prompt-box">
+            <div class="speaker-label student">👩 Maya (classmate):</div>
+            <p>"I believe social media companies have a duty to moderate content. Misinformation about vaccines and elections has caused real-world harm. If platforms don't take responsibility, who will? They have the resources and technology to identify harmful content — they should use it."</p>
+          </div>
+          <div class="prompt-box">
+            <div class="speaker-label student2">👨 Tom (classmate):</div>
+            <p>"I disagree. When companies decide what speech is acceptable, they become arbiters of truth, which is a dangerous power. Who decides what counts as 'misinformation'? Today it's false health claims; tomorrow it could be political dissent. Platforms should be neutral."</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">⏱️ Timed Writing — 10 Minutes</div>
+          <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1rem;">
+            Write 100+ words. Reference Maya's and/or Tom's posts. Use at least ONE concession structure and ONE counter-argument frame. Target: 100-130 words.
+          </p>
+          <div class="exam-timer" style="max-width:300px; margin:0 auto 1.5rem;">
+            <div class="timer-val" id="write-time">10:00</div>
+            <div class="timer-label">Writing Time remaining</div>
+          </div>
+          <div style="text-align:center; margin-bottom:1.5rem;">
+            <button class="btn btn-primary" style="display:inline-flex;" onclick="runWritingClock()">Start Writing Timer</button>
+          </div>
+          <div class="word-counter" style="text-align:right;font-size:0.85rem;color:var(--text-muted);margin-top:0.5rem;font-family:'Fira Code',monospace;">
+            Words: <span id="wordCount">0</span> / 130
+          </div>
+          <textarea class="notepad-area" placeholder="Valeria, type your Academic Discussion response here (100-130 words) — use a concession structure and a counter-argument frame..." style="height:350px; font-family: 'Outfit';"></textarea>
+        </div>
+      </div>
+
+      <!-- Slide 4: Homework -->
+      <div class="slide" id="slide-4">
+        <div class="card">
+          <div class="card-title">📋 Homework Assignments</div>
+          <p class="text-muted" style="margin-bottom: 1.5rem;">Complete these tasks before our next class. Submit via your usual chat channel.</p>
+
+          <div class="hw-list">
+            <div class="card" style="background: rgba(255,255,255,0.01); border-color: var(--border-color); margin-bottom: 1rem; padding: 1.25rem;">
+              <h3 style="font-size: 1.05rem; color: var(--accent-blue); margin-bottom: 0.5rem;">Task 1: Academic Discussion Essay</h3>
+              <p style="font-size: 0.95rem; line-height: 1.6;">
+                Write a <strong>100-130 word</strong> response to this prompt:
+              </p>
+              <div style="background: #000; border-left: 4px solid var(--accent-purple); padding: 1rem; border-radius: 6px; margin: 0.75rem 0; font-size: 0.9rem; color: #cbd5e1; line-height: 1.6;">
+                <strong style="color: var(--accent-purple);">Professor:</strong> "Some universities have started using AI tools to detect plagiarism in student essays. Proponents say this ensures academic integrity. Critics argue that AI detection is unreliable and unfairly targets non-native speakers. What's your view?"<br><br>
+                <strong style="color: var(--accent-blue);">Elena:</strong> "AI plagiarism detectors are essential. Without them, students can easily cheat using tools like ChatGPT. We need technological solutions for technological problems."<br><br>
+                <strong style="color: var(--accent-green);">James:</strong> "These tools are deeply flawed. Studies show they flag non-native writing as AI-generated at much higher rates. We shouldn't punish students for imperfect English."
+              </div>
+              <ul style="padding-left: 1.25rem; font-size: 0.9rem; margin: 0.5rem 0; color: var(--text-muted);">
+                <li>Use at least <strong>ONE concession structure</strong> + <strong>ONE counter-argument frame</strong>.</li>
+                <li>Aim for 100-130 words.</li>
+              </ul>
+            </div>
+
+            <div class="card" style="background: rgba(255,255,255,0.01); border-color: var(--border-color); margin-bottom: 1rem; padding: 1.25rem;">
+              <h3 style="font-size: 1.05rem; color: var(--accent-purple); margin-bottom: 0.5rem;">Task 2: Vocabulary Journal</h3>
+              <p style="font-size: 0.95rem; line-height: 1.6;">
+                Write <strong>5 sentences</strong> using these Academic Discussion phrases:
+              </p>
+              <ul style="padding-left: 1.25rem; font-size: 0.9rem; margin: 0.5rem 0; color: var(--text-muted);">
+                <li><em>"Building on [name]'s point..."</em></li>
+                <li><em>"While it is true that...nevertheless..."</em></li>
+                <li><em>"What is often overlooked is..."</em></li>
+                <li><em>"I would argue that..."</em></li>
+                <li><em>"A further consideration is..."</em></li>
+              </ul>
+            </div>
+
+            <div class="card" style="background: rgba(255,255,255,0.01); border-color: var(--border-color); margin-bottom: 0; padding: 1.25rem;">
+              <h3 style="font-size: 1.05rem; color: var(--accent-green); margin-bottom: 0.5rem;">Task 3: Error Correction Review</h3>
+              <p style="font-size: 0.95rem; line-height: 1.6;">
+                Self-correct these sentences (recycled targets from L1-L3). Write the corrected versions:
+              </p>
+              <ol style="padding-left: 1.25rem; font-size: 0.9rem; margin: 0.5rem 0; color: var(--text-muted);">
+                <li>"The reading explain why does the author disagree with the policy." → ?</li>
+                <li>"Government must ensure that surveillance respects privacy." → ?</li>
+                <li>"It is essential that every citizen is protected from abuse." → ?</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    function switchSlide(index) {
+      document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('.sidebar-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById(`slide-${index}`).classList.add('active');
+      document.querySelectorAll('.sidebar-btn')[index].classList.add('active');
+    }
+
+    const shadowingText = "The proliferation of artificial intelligence in public spaces has ignited a fierce debate between security advocates and privacy defenders. Governments argue that AI-powered surveillance systems — equipped with facial recognition and behavioral analytics — are essential tools for preventing crime and enhancing public safety. Critics, however, contend that such systems represent an unprecedented encroachment on civil liberties, creating a surveillance infrastructure that could be exploited for authoritarian purposes. The central question remains whether society can strike a balance between security and privacy in an increasingly digital world.";
+
+  function initShadowing() {
+    const container = document.getElementById('shadowing-text');
+    container.innerHTML = shadowingText.split(' ').map((w, i) => `<span class="shadowing-word" id="word-${i}">${w}</span>`).join(' ');
+  }
+
+  const shadowingAudio = document.getElementById('shadowingAudio');
+  let audioFallback = false;
+  shadowingTS = [{"word":"The","start":0.25,"end":0.325},{"word":"proliferation","start":0.325,"end":1.012},{"word":"of","start":1.012,"end":1.1},{"word":"artificial","start":1.1,"end":1.637},{"word":"intelligence","start":1.637,"end":2.3},{"word":"in","start":2.3,"end":2.425},{"word":"public","start":2.425,"end":2.775},{"word":"spaces","start":2.775,"end":3.712},{"word":"has","start":3.712,"end":3.9},{"word":"ignited","start":3.9,"end":4.338},{"word":"a","start":4.338,"end":4.438},{"word":"fierce","start":4.438,"end":4.775},{"word":"debate","start":4.775,"end":5.15},{"word":"between","start":5.15,"end":5.5},{"word":"security","start":5.5,"end":6.0},{"word":"advocates","start":6.0,"end":6.6},{"word":"and","start":6.6,"end":6.725},{"word":"privacy","start":6.725,"end":7.175},{"word":"defenders","start":7.175,"end":8.588},{"word":"Governments","start":8.588,"end":9.125},{"word":"argue","start":9.125,"end":9.475},{"word":"that","start":9.475,"end":9.688},{"word":"AI-powered","start":9.688,"end":10.375},{"word":"surveillance","start":10.375,"end":10.875},{"word":"systems","start":10.875,"end":11.688},{"word":"\u2014","start":11.688,"end":11.775},{"word":"equipped","start":11.775,"end":12.162},{"word":"with","start":12.162,"end":12.325},{"word":"facial","start":12.325,"end":12.675},{"word":"recognition","start":12.675,"end":13.3},{"word":"and","start":13.3,"end":13.412},{"word":"behavioral","start":13.412,"end":13.975},{"word":"analytics","start":13.975,"end":15.012},{"word":"\u2014","start":15.012,"end":15.1},{"word":"are","start":15.1,"end":15.225},{"word":"essential","start":15.225,"end":15.7},{"word":"tools","start":15.7,"end":16.15},{"word":"for","start":16.15,"end":16.275},{"word":"preventing","start":16.275,"end":16.75},{"word":"crime","start":16.75,"end":17.288},{"word":"and","start":17.288,"end":17.413},{"word":"enhancing","start":17.413,"end":18.0},{"word":"public","start":18.0,"end":18.375},{"word":"safety","start":18.375,"end":19.562},{"word":"Critics","start":19.812,"end":20.212},{"word":"however","start":20.212,"end":21.037},{"word":"contend","start":21.037,"end":21.5},{"word":"that","start":21.5,"end":21.612},{"word":"such","start":21.612,"end":21.837},{"word":"systems","start":21.837,"end":22.312},{"word":"represent","start":22.312,"end":22.799},{"word":"an","start":22.799,"end":22.887},{"word":"unprecedented","start":22.887,"end":23.637},{"word":"encroachment","start":23.637,"end":24.299},{"word":"on","start":24.299,"end":24.462},{"word":"civil","start":24.462,"end":24.737},{"word":"liberties","start":24.737,"end":25.687},{"word":"creating","start":25.687,"end":26.099},{"word":"a","start":26.099,"end":26.162},{"word":"surveillance","start":26.162,"end":26.762},{"word":"infrastructure","start":26.762,"end":27.762},{"word":"that","start":27.762,"end":27.912},{"word":"could","start":27.912,"end":28.025},{"word":"be","start":28.025,"end":28.162},{"word":"exploited","start":28.162,"end":28.712},{"word":"for","start":28.712,"end":28.837},{"word":"authoritarian","start":28.837,"end":29.587},{"word":"purposes","start":29.587,"end":31.025},{"word":"The","start":31.025,"end":31.162},{"word":"central","start":31.162,"end":31.537},{"word":"question","start":31.537,"end":32.162},{"word":"remains","start":32.162,"end":32.662},{"word":"whether","start":32.662,"end":32.912},{"word":"society","start":32.912,"end":33.462},{"word":"can","start":33.462,"end":33.612},{"word":"strike","start":33.612,"end":33.874},{"word":"a","start":33.874,"end":33.937},{"word":"balance","start":33.937,"end":34.387},{"word":"between","start":34.387,"end":34.737},{"word":"security","start":34.737,"end":35.312},{"word":"and","start":35.312,"end":35.437},{"word":"privacy","start":35.437,"end":36.337},{"word":"in","start":36.337,"end":36.449},{"word":"an","start":36.449,"end":36.537},{"word":"increasingly","start":36.537,"end":37.237},{"word":"digital","start":37.237,"end":37.637},{"word":"world","start":37.637,"end":38.687}];
+
+  shadowingAudio.ontimeupdate = () => {
+    if (!shadowingTS) return;
+    const t = shadowingAudio.currentTime;
+    let lo = 0, hi = shadowingTS.length - 1;
+    while (lo < hi) { const mid = (lo + hi + 1) >> 1; if (shadowingTS[mid].start <= t) lo = mid; else hi = mid - 1; }
+    const allWords = document.querySelectorAll('.shadowing-word');
+    allWords.forEach(w => w.classList.remove('highlighted'));
+    if (lo < allWords.length) { allWords[lo].classList.add('highlighted'); allWords[lo].scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+  };
+
+  shadowingAudio.onended = () => { speaking = false; document.querySelector('.listen-btn').textContent = '🔊 Listen'; };
+  shadowingAudio.onerror = () => { audioFallback = true; };
+
+  let speaking = false;
+  let paceInterval = null;
+
+  function ttsFallback() {
+    const text = Array.from(document.querySelectorAll('.shadowing-word')).map(w => w.textContent).join(' ');
+    if (!text.trim()) return;
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = 'en-US'; u.rate = 0.85;
+    u.onstart = () => { speaking = true; document.querySelector('.listen-btn').textContent = '■ Stop'; };
+    u.onend = u.onerror = () => { speaking = false; document.querySelector('.listen-btn').textContent = '🔊 Listen'; };
+    speechSynthesis.speak(u);
+  }
+
+  function toggleSpeaking() {
+    if (speaking) {
+      shadowingAudio.pause();
+      shadowingAudio.currentTime = 0;
+      speechSynthesis.cancel();
+      speaking = false;
+      document.querySelector('.listen-btn').textContent = '🔊 Listen';
+      document.querySelectorAll('.shadowing-word').forEach(w => w.classList.remove('highlighted'));
+      return;
+    }
+    if (!audioFallback) {
+      shadowingAudio.src = 'audio/shadowing.wav?' + Date.now();
+      shadowingAudio.play().then(() => {
+        speaking = true;
+        document.querySelector('.listen-btn').textContent = '■ Stop';
+        if (paceInterval) { clearInterval(paceInterval); paceInterval = null; }
+      }).catch(() => { audioFallback = true; ttsFallback(); });
+    } else {
+      ttsFallback();
+    }
+  }
+
+  initShadowing();
+
+    function playBeep(freq = 800, dur = 150, count = 1) {
+      try {
+        for (let i = 0; i < count; i++) {
+          setTimeout(() => {
+            const ctx = new (window.AudioContext || window.webkitAudioContext)();
+            const osc = ctx.createOscillator(); const gain = ctx.createGain();
+            osc.connect(gain); gain.connect(ctx.destination);
+            osc.frequency.value = freq; osc.type = 'sine';
+            gain.gain.setValueAtTime(0.2, ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + dur / 1000);
+            osc.start(); osc.stop(ctx.currentTime + dur / 1000);
+          }, i * 200);
+        }
+      } catch(e) {}
+    }
+
+    // Shadowing Recorder
+    let mediaRecorder = null;
+    let recordedChunks = [];
+    let audioBlobUrl = null;
+
+    document.getElementById('startRecord').addEventListener('click', async () => {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        mediaRecorder = new MediaRecorder(stream);
+        recordedChunks = [];
+        mediaRecorder.ondataavailable = (e) => { if (e.data.size > 0) recordedChunks.push(e.data); };
+        mediaRecorder.onstop = () => {
+          const blob = new Blob(recordedChunks, { type: 'audio/webm' });
+          audioBlobUrl = URL.createObjectURL(blob);
+          document.getElementById('playRecord').disabled = false;
+          document.getElementById('recStatus').textContent = '✅ Recording saved — click Play to hear yourself, then Listen to compare with model';
+          document.getElementById('startRecord').textContent = '🎤 Record Again';
+          stream.getTracks().forEach(t => t.stop());
+        };
+        mediaRecorder.start();
+        document.getElementById('startRecord').disabled = true;
+        document.getElementById('stopRecord').disabled = false;
+        document.getElementById('recStatus').textContent = '🔴 Recording...';
+      } catch(e) {
+        document.getElementById('recStatus').textContent = '⚠️ Microphone access denied — allow mic access and try again';
+      }
+    });
+
+    document.getElementById('stopRecord').addEventListener('click', () => {
+      if (mediaRecorder && mediaRecorder.state === 'recording') {
+        mediaRecorder.stop();
+        document.getElementById('startRecord').disabled = false;
+        document.getElementById('stopRecord').disabled = true;
+      }
+    });
+
+    document.getElementById('playRecord').addEventListener('click', () => {
+      if (audioBlobUrl) {
+        const audio = new Audio(audioBlobUrl);
+        audio.play();
+        document.getElementById('recStatus').textContent = '▶️ Playing your recording...';
+        audio.onended = () => {
+          document.getElementById('recStatus').textContent = '✅ Done — click Listen above to hear the model again';
+        };
+      }
+    });
+
+    document.addEventListener('change', function(e) {
+      if (e.target.id === 'speedSelect') {
+        pacerSpeed = parseInt(e.target.value);
+      }
+    });
+
+    function autoHighlightWords() {
+      document.querySelectorAll('.shadowing-word').forEach(w => w.classList.remove('highlighted'));
+      let currentWordIndex = 0;
+      const totalWords = text.split(' ').length;
+      
+      if (paceInterval) clearInterval(paceInterval);
+      
+      paceInterval = setInterval(() => {
+        if (currentWordIndex >= totalWords) {
+          clearInterval(paceInterval);
+          return;
+        }
+        document.querySelectorAll('.shadowing-word').forEach(w => w.classList.remove('highlighted'));
+        const wordEl = document.getElementById(`word-${currentWordIndex}`);
+        if (wordEl) {
+          wordEl.classList.add('highlighted');
+          wordEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+        currentWordIndex++;
+      }, pacerSpeed);
+    }
+
+    let writeInterval = null;
+    function runWritingClock() {
+      if (writeInterval) clearInterval(writeInterval);
+      playBeep(400, 100);
+      let t = 600; const el = document.getElementById('write-time'); el.style.color = 'var(--primary)';
+      writeInterval = setInterval(() => {
+        t--; 
+        const m = String(Math.floor(t / 60)).padStart(2, '0');
+        const s = String(t % 60).padStart(2, '0');
+        el.textContent = `${m}:${s}`;
+        if(t <= 120) el.style.color = 'var(--accent-red)';
+        if(t <= 0) { clearInterval(writeInterval); playBeep(800, 200, 2); }
+      }, 1000);
+    }
+
+    function addNoteToTable() {
+      const val = document.getElementById('live-notepad').value.trim(); if (!val) return;
+      const lines = val.split('\n');
+      const table = document.getElementById('correction-table').getElementsByTagName('tbody')[0];
+      const newRow = table.insertRow(0);
+      newRow.insertCell(0).textContent = lines[0] || "";
+      const cell2 = newRow.insertCell(1); cell2.textContent = lines[1] || "Upgrade pending..."; cell2.style.color = "var(--accent-green)";
+      newRow.insertCell(2).innerHTML = `<span class="badge-exam">Valeria</span>`;
+      document.getElementById('live-notepad').value = "";
+    }
+    function clearNotepad() { document.getElementById('live-notepad').value = ""; }
+  
+    document.addEventListener('input', function(e) {
+      if (e.target.matches('.notepad-area')) {
+        const text = e.target.value.trim();
+        const words = text ? text.split(/\s+/).length : 0;
+        const counter = document.getElementById('wordCount');
+        if (counter) counter.textContent = words;
+      }
+    });
+  </script>
+</body>
+</html>
