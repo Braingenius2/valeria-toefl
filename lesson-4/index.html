@@ -40,7 +40,8 @@
     .slide.active { display: block; }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
     
-    .card { background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 12px; padding: 1.75rem; margin-bottom: 1.5rem; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25); }
+    .card { background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 12px; padding: 1.75rem; margin-bottom: 1.5rem; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25); transition: border-color 0.3s ease, box-shadow 0.3s ease; }
+    .card:hover { border-color: rgba(139, 92, 246, 0.15); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25), 0 0 15px rgba(139, 92, 246, 0.02); }
     .card-title { font-size: 1.15rem; font-weight: 600; margin-bottom: 1rem; color: var(--primary); display: flex; align-items: center; gap: 0.5rem; border-bottom: 1px solid rgba(255, 255, 255, 0.05); padding-bottom: 0.5rem; }
     
     .shadowing-box { border-left: 4px solid var(--accent-blue); background: rgba(56, 189, 248, 0.03); }
@@ -104,6 +105,8 @@
     .prompt-box .speaker-label.student2 { color: var(--accent-green); }
     .prompt-box p { color: #cbd5e1; font-size: 0.95rem; line-height: 1.65; }
     .prompt-box + .prompt-box { margin-top: 0.5rem; }
+    .speed-select { background:rgba(0,0,0,0.4); border:1px solid var(--border-color); border-radius:8px; color:var(--text-main); padding:0.45rem 0.8rem; font-family:inherit; font-size:0.85rem; font-weight:500; cursor:pointer; outline:none; transition:border-color 0.2s ease; }
+    .speed-select:focus { border-color:var(--primary); }
   </style>
 </head>
 <body>
@@ -135,6 +138,7 @@
           <div class="card-title">🔊 Shadowing Pacer: AI Surveillance & Privacy Debate</div>
           <p class="text-muted">Focus on stress in technical vocabulary: <em>surveillance, infrastructure, algorithmic</em>. Pay attention to smooth linking through complex clauses.</p>
           <div id="shadowing-text" class="shadowing-text"></div>
+          <canvas id="waveCanvas" width="800" height="90" style="width:100%;height:90px;background:#05070c;border-radius:6px;border:1px solid var(--border-color);margin-bottom:1.25rem;"></canvas>
           <div style="display:flex; gap:0.5rem; align-items:center;">
             <button class="btn btn-primary" onclick="toggleShadowingTimer()" id="btn-timer">▶ Start Timer</button>
             <div id="shadowing-timer" style="font-family:'Fira Code'; font-size:1.2rem; background:#000; padding:0.4rem 1rem; border-radius:4px;">00:00</div>
@@ -142,17 +146,12 @@
             <button class="btn btn-secondary" onclick="autoHighlightWords()">Auto Pacer</button>
           </div>
           <div class="pacer-controls">
-            <select class="speed-select" id="speedSelect">
-              <option value="500">120 WPM</option>
-              <option value="462">130 WPM</option>
-              <option value="429">140 WPM</option>
-              <option value="400" selected>150 WPM (Recommended)</option>
-              <option value="375">160 WPM</option>
-              <option value="348">175 WPM</option>
-              <option value="320">187 WPM</option>
-              <option value="300">200 WPM</option>
-            </select>
             <button class="btn btn-secondary listen-btn" onclick="toggleSpeaking()">🔊 Listen</button>
+            <select class="speed-select" id="speedSelect">
+              <option value="0.75">🐢 Slow</option>
+              <option value="1" selected>▶ Normal</option>
+              <option value="1.25">🐇 Fast</option>
+            </select>
           </div>
           <div class="recorder-bar">
             <button class="rec-btn" id="startRecord">🎤 Record</button>
@@ -405,28 +404,61 @@
 
   function initShadowing() {
     const container = document.getElementById('shadowing-text');
-    container.innerHTML = shadowingText.split(' ').map((w, i) => `<span class="shadowing-word" id="word-${i}">${w}</span>`).join(' ');
+    // Split preserving punctuation attached to words
+    const words = shadowingText.match(/\S+/g) || [];
+    container.innerHTML = words.map((w, i) => `<span class="shadowing-word" id="word-${i}">${w}</span>`).join(' ');
   }
 
   const shadowingAudio = document.getElementById('shadowingAudio');
+  let speaking = false;
   let audioFallback = false;
-  shadowingTS = [{"word":"The","start":0.25,"end":0.325},{"word":"proliferation","start":0.325,"end":1.012},{"word":"of","start":1.012,"end":1.1},{"word":"artificial","start":1.1,"end":1.637},{"word":"intelligence","start":1.637,"end":2.3},{"word":"in","start":2.3,"end":2.425},{"word":"public","start":2.425,"end":2.775},{"word":"spaces","start":2.775,"end":3.712},{"word":"has","start":3.712,"end":3.9},{"word":"ignited","start":3.9,"end":4.338},{"word":"a","start":4.338,"end":4.438},{"word":"fierce","start":4.438,"end":4.775},{"word":"debate","start":4.775,"end":5.15},{"word":"between","start":5.15,"end":5.5},{"word":"security","start":5.5,"end":6.0},{"word":"advocates","start":6.0,"end":6.6},{"word":"and","start":6.6,"end":6.725},{"word":"privacy","start":6.725,"end":7.175},{"word":"defenders","start":7.175,"end":8.588},{"word":"Governments","start":8.588,"end":9.125},{"word":"argue","start":9.125,"end":9.475},{"word":"that","start":9.475,"end":9.688},{"word":"AI-powered","start":9.688,"end":10.375},{"word":"surveillance","start":10.375,"end":10.875},{"word":"systems","start":10.875,"end":11.688},{"word":"\u2014","start":11.688,"end":11.775},{"word":"equipped","start":11.775,"end":12.162},{"word":"with","start":12.162,"end":12.325},{"word":"facial","start":12.325,"end":12.675},{"word":"recognition","start":12.675,"end":13.3},{"word":"and","start":13.3,"end":13.412},{"word":"behavioral","start":13.412,"end":13.975},{"word":"analytics","start":13.975,"end":15.012},{"word":"\u2014","start":15.012,"end":15.1},{"word":"are","start":15.1,"end":15.225},{"word":"essential","start":15.225,"end":15.7},{"word":"tools","start":15.7,"end":16.15},{"word":"for","start":16.15,"end":16.275},{"word":"preventing","start":16.275,"end":16.75},{"word":"crime","start":16.75,"end":17.288},{"word":"and","start":17.288,"end":17.413},{"word":"enhancing","start":17.413,"end":18.0},{"word":"public","start":18.0,"end":18.375},{"word":"safety","start":18.375,"end":19.562},{"word":"Critics","start":19.812,"end":20.212},{"word":"however","start":20.212,"end":21.037},{"word":"contend","start":21.037,"end":21.5},{"word":"that","start":21.5,"end":21.612},{"word":"such","start":21.612,"end":21.837},{"word":"systems","start":21.837,"end":22.312},{"word":"represent","start":22.312,"end":22.799},{"word":"an","start":22.799,"end":22.887},{"word":"unprecedented","start":22.887,"end":23.637},{"word":"encroachment","start":23.637,"end":24.299},{"word":"on","start":24.299,"end":24.462},{"word":"civil","start":24.462,"end":24.737},{"word":"liberties","start":24.737,"end":25.687},{"word":"creating","start":25.687,"end":26.099},{"word":"a","start":26.099,"end":26.162},{"word":"surveillance","start":26.162,"end":26.762},{"word":"infrastructure","start":26.762,"end":27.762},{"word":"that","start":27.762,"end":27.912},{"word":"could","start":27.912,"end":28.025},{"word":"be","start":28.025,"end":28.162},{"word":"exploited","start":28.162,"end":28.712},{"word":"for","start":28.712,"end":28.837},{"word":"authoritarian","start":28.837,"end":29.587},{"word":"purposes","start":29.587,"end":31.025},{"word":"The","start":31.025,"end":31.162},{"word":"central","start":31.162,"end":31.537},{"word":"question","start":31.537,"end":32.162},{"word":"remains","start":32.162,"end":32.662},{"word":"whether","start":32.662,"end":32.912},{"word":"society","start":32.912,"end":33.462},{"word":"can","start":33.462,"end":33.612},{"word":"strike","start":33.612,"end":33.874},{"word":"a","start":33.874,"end":33.937},{"word":"balance","start":33.937,"end":34.387},{"word":"between","start":34.387,"end":34.737},{"word":"security","start":34.737,"end":35.312},{"word":"and","start":35.312,"end":35.437},{"word":"privacy","start":35.437,"end":36.337},{"word":"in","start":36.337,"end":36.449},{"word":"an","start":36.449,"end":36.537},{"word":"increasingly","start":36.537,"end":37.237},{"word":"digital","start":37.237,"end":37.637},{"word":"world","start":37.637,"end":38.687}];
+  let paceInterval = null;
+  let currentSpeed = 1;
+  let timerInterval = null, timerSeconds = 0;
+  let shadowingTS = [
+    {word:"The",start:0.35,end:0.425},{word:"proliferation",start:0.425,end:1.2},{word:"of",start:1.2,end:1.337},{word:"artificial",start:1.337,end:2},{word:"intelligence",start:2,end:2.7},{word:"in",start:2.7,end:2.85},{word:"public",start:2.85,end:3.25},{word:"spaces",start:3.25,end:4.162},{word:"has",start:4.162,end:4.35},{word:"ignited",start:4.35,end:4.787},{word:"a",start:4.787,end:4.912},{word:"fierce",start:4.912,end:5.375},{word:"debate",start:5.375,end:5.775},{word:"between",start:5.775,end:6.125},{word:"security",start:6.125,end:6.737},{word:"advocates",start:6.737,end:7.487},{word:"and",start:7.487,end:7.625},{word:"privacy",start:7.625,end:8.1},{word:"defenders",start:8.1,end:9.4},{word:"Governments",start:9.4,end:9.925},{word:"argue",start:9.925,end:10.325},{word:"that",start:10.325,end:10.537},{word:"AI-powered",start:10.537,end:11.325},{word:"surveillance",start:11.325,end:11.875},{word:"systems",start:11.875,end:12.812},{word:"-",start:12.812,end:12.9},{word:"equipped",start:12.9,end:13.325},{word:"with",start:13.325,end:13.512},{word:"facial",start:13.512,end:13.925},{word:"recognition",start:13.925,end:14.725},{word:"and",start:14.725,end:14.85},{word:"behavioral",start:14.85,end:15.5},{word:"analytics",start:15.5,end:16.538},{word:"-",start:16.538,end:16.637},{word:"are",start:16.637,end:16.8},{word:"essential",start:16.8,end:17.312},{word:"tools",start:17.312,end:17.85},{word:"for",start:17.85,end:17.975},{word:"preventing",start:17.975,end:18.488},{word:"crime",start:18.488,end:19.113},{word:"and",start:19.113,end:19.238},{word:"enhancing",start:19.238,end:19.85},{word:"public",start:19.85,end:20.25},{word:"safety",start:20.25,end:21.337},{word:"Critics",start:21.75,end:22.2},{word:"however",start:22.2,end:23.025},{word:"contend",start:23.025,end:23.5},{word:"that",start:23.5,end:23.713},{word:"such",start:23.713,end:23.963},{word:"systems",start:23.963,end:24.5},{word:"represent",start:24.5,end:25.05},{word:"an",start:25.05,end:25.188},{word:"unprecedented",start:25.188,end:26.05},{word:"encroachment",start:26.05,end:26.775},{word:"on",start:26.775,end:26.988},{word:"civil",start:26.988,end:27.3},{word:"liberties",start:27.3,end:28.363},{word:"creating",start:28.363,end:28.825},{word:"a",start:28.825,end:28.938},{word:"surveillance",start:28.938,end:29.6},{word:"infrastructure",start:29.6,end:30.6},{word:"that",start:30.6,end:30.75},{word:"could",start:30.75,end:30.863},{word:"be",start:30.863,end:31},{word:"exploited",start:31,end:31.625},{word:"for",start:31.625,end:31.8},{word:"authoritarian",start:31.8,end:32.65},{word:"purposes",start:32.65,end:34.013},{word:"The",start:34.013,end:34.163},{word:"central",start:34.163,end:34.575},{word:"question",start:34.575,end:35.337},{word:"remains",start:35.337,end:35.925},{word:"whether",start:35.925,end:36.225},{word:"society",start:36.225,end:36.9},{word:"can",start:36.9,end:37.075},{word:"strike",start:37.075,end:37.362},{word:"a",start:37.362,end:37.463},{word:"balance",start:37.463,end:37.95},{word:"between",start:37.95,end:38.312},{word:"security",start:38.312,end:38.95},{word:"and",start:38.95,end:39.075},{word:"privacy",start:39.075,end:40},{word:"in",start:40,end:40.112},{word:"an",start:40.112,end:40.2},{word:"increasingly",start:40.2,end:41.062},{word:"digital",start:41.062,end:41.475},{word:"world",start:41.475,end:42.4}
+  ];
 
   shadowingAudio.ontimeupdate = () => {
-    if (!shadowingTS) return;
+    if (!shadowingTS || !speaking) return;
     const t = shadowingAudio.currentTime;
     let lo = 0, hi = shadowingTS.length - 1;
-    while (lo < hi) { const mid = (lo + hi + 1) >> 1; if (shadowingTS[mid].start <= t) lo = mid; else hi = mid - 1; }
-    const allWords = document.querySelectorAll('.shadowing-word');
-    allWords.forEach(w => w.classList.remove('highlighted'));
-    if (lo < allWords.length) { allWords[lo].classList.add('highlighted'); allWords[lo].scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+    while (lo < hi) {
+      const mid = (lo + hi + 1) >> 1;
+      if (shadowingTS[mid].start <= t) lo = mid; else hi = mid - 1;
+    }
+    document.querySelectorAll('.shadowing-word').forEach(w => w.classList.remove('highlighted'));
+    const el = document.getElementById(`word-${lo}`);
+    if (el) { el.classList.add('highlighted'); el.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }
   };
-
-  shadowingAudio.onended = () => { speaking = false; document.querySelector('.listen-btn').textContent = '🔊 Listen'; };
+  shadowingAudio.onended = () => { speaking = false; document.querySelector('.listen-btn').textContent = '🔊 Listen'; document.querySelectorAll('.shadowing-word').forEach(w => w.classList.remove('highlighted')); stopSimulatedWaveform(); };
   shadowingAudio.onerror = () => { audioFallback = true; };
 
-  let speaking = false;
-  let paceInterval = null;
+  function toggleShadowingTimer() {
+    const btn = document.getElementById('btn-timer');
+    if (timerInterval) { clearInterval(timerInterval); timerInterval = null; btn.innerHTML = '▶ Resume'; }
+    else {
+      btn.innerHTML = '⏸ Pause';
+      timerInterval = setInterval(() => {
+        timerSeconds++;
+        const mins = String(Math.floor(timerSeconds / 60)).padStart(2, '0');
+        const secs = String(timerSeconds % 60).padStart(2, '0');
+        document.getElementById('shadowing-timer').textContent = `${mins}:${secs}`;
+      }, 1000);
+    }
+  }
+  function resetShadowingTimer() {
+    clearInterval(timerInterval); timerInterval = null; timerSeconds = 0;
+    document.getElementById('shadowing-timer').textContent = '00:00';
+    document.getElementById('btn-timer').innerHTML = '▶ Start Timer';
+    if (paceInterval) { clearInterval(paceInterval); paceInterval = null; }
+    document.querySelectorAll('.shadowing-word').forEach(w => w.classList.remove('highlighted'));
+  }
+
+  document.getElementById('speedSelect').addEventListener('change', function() {
+    currentSpeed = parseFloat(this.value);
+    if (speaking) shadowingAudio.playbackRate = currentSpeed;
+  });
 
   function ttsFallback() {
     const text = Array.from(document.querySelectorAll('.shadowing-word')).map(w => w.textContent).join(' ');
@@ -446,21 +478,50 @@
       speaking = false;
       document.querySelector('.listen-btn').textContent = '🔊 Listen';
       document.querySelectorAll('.shadowing-word').forEach(w => w.classList.remove('highlighted'));
+      stopSimulatedWaveform();
       return;
     }
-    if (!audioFallback) {
-      shadowingAudio.src = 'audio/shadowing.wav?' + Date.now();
-      shadowingAudio.play().then(() => {
-        speaking = true;
-        document.querySelector('.listen-btn').textContent = '■ Stop';
-        if (paceInterval) { clearInterval(paceInterval); paceInterval = null; }
-      }).catch(() => { audioFallback = true; ttsFallback(); });
-    } else {
-      ttsFallback();
-    }
+    audioFallback = false;
+    shadowingAudio.src = 'audio/shadowing.wav?' + Date.now();
+    shadowingAudio.playbackRate = currentSpeed;
+    speaking = true;
+    document.querySelector('.listen-btn').textContent = '■ Stop';
+    if (paceInterval) { clearInterval(paceInterval); paceInterval = null; }
+    startSimulatedWaveform(document.getElementById('waveCanvas'));
+    shadowingAudio.play().catch(() => { audioFallback = true; speaking = false; document.querySelector('.listen-btn').textContent = '🔊 Listen'; stopSimulatedWaveform(); ttsFallback(); });
   }
 
   initShadowing();
+
+    let guideOscId = null;
+    function startSimulatedWaveform(canvas) {
+      stopSimulatedWaveform();
+      const ctx = canvas.getContext('2d');
+      const width = canvas.width, height = canvas.height;
+      let phase = 0;
+      function draw() {
+        guideOscId = requestAnimationFrame(draw);
+        ctx.fillStyle = 'rgba(9, 13, 22, 0.3)';
+        ctx.fillRect(0, 0, width, height);
+        ctx.lineWidth = 3;
+        ctx.strokeStyle = 'var(--primary)';
+        ctx.shadowColor = 'var(--primary)';
+        ctx.shadowBlur = 8;
+        ctx.beginPath();
+        ctx.moveTo(0, height / 2);
+        for (let x = 0; x < width; x++) {
+          const y = height / 2 + Math.sin(x * 0.03 + phase) * 14 * Math.sin(x * 0.004) + Math.sin(x * 0.07 - phase * 1.3) * 4 * Math.cos(x * 0.008);
+          ctx.lineTo(x, y);
+        }
+        ctx.stroke();
+        ctx.shadowBlur = 0;
+        phase += 0.12;
+      }
+      draw();
+    }
+    function stopSimulatedWaveform() {
+      if (guideOscId) { cancelAnimationFrame(guideOscId); guideOscId = null; }
+    }
 
     function playBeep(freq = 800, dur = 150, count = 1) {
       try {
@@ -525,16 +586,10 @@
       }
     });
 
-    document.addEventListener('change', function(e) {
-      if (e.target.id === 'speedSelect') {
-        pacerSpeed = parseInt(e.target.value);
-      }
-    });
-
     function autoHighlightWords() {
       document.querySelectorAll('.shadowing-word').forEach(w => w.classList.remove('highlighted'));
       let currentWordIndex = 0;
-      const totalWords = text.split(' ').length;
+      const totalWords = (shadowingText.match(/\S+/g) || []).length;
       
       if (paceInterval) clearInterval(paceInterval);
       
@@ -550,7 +605,7 @@
           wordEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         }
         currentWordIndex++;
-      }, pacerSpeed);
+      }, 500);
     }
 
     let writeInterval = null;
