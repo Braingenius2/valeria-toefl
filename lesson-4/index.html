@@ -90,6 +90,34 @@
     .rec-btn:disabled { opacity: 0.3; cursor: not-allowed; }
     .rec-status { font-size: 0.75rem; color: var(--text-muted); }
     .disclaimer { background: rgba(239, 68, 68, 0.08); border: 1px solid rgba(239, 68, 68, 0.3); border-left: 4px solid var(--accent-red); border-radius: 8px; padding: 1rem; margin-bottom: 1.5rem; font-size: 0.9rem; color: #fca5a5; line-height: 1.6; }
+    .model-checkbox { display: none; }
+    .model-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.6rem 1.2rem;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: all 0.2s ease;
+      user-select: none;
+      color: var(--text-muted);
+    }
+    .model-toggle:hover { border-color: var(--primary); color: var(--primary); }
+    .model-content {
+      display: none;
+      margin-top: 1rem;
+      padding: 1.5rem;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.02);
+      line-height: 1.7;
+    }
+    .model-checkbox:checked ~ .model-content { display: block; }
+    .model-checkbox:checked ~ .model-toggle .toggle-show { display: none; }
+    .model-checkbox:checked ~ .model-toggle .toggle-hide { display: inline; }
+    .toggle-hide { display: none; }
     .disclaimer strong { color: var(--accent-red); }
     .disclaimer a { color: #fbbf24; }
     .practice-item { background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); border-radius: 8px; padding: 1rem; margin-bottom: 0.75rem; }
@@ -334,6 +362,32 @@
             Words: <span id="wordCount">0</span> / 130
           </div>
           <textarea class="notepad-area" placeholder="Valeria, type your Academic Discussion response here (100-130 words) — use a concession structure and a counter-argument frame..." style="height:350px; font-family: 'Outfit';"></textarea>
+
+          <div class="model-answer">
+            <input type="checkbox" class="model-checkbox" id="modelToggle">
+            <label class="model-toggle" for="modelToggle">
+              <span class="toggle-show">Show Model Answer</span>
+              <span class="toggle-hide">Hide Model Answer</span>
+            </label>
+            <div class="model-content">
+              <p style="margin-bottom:1rem;">
+                While social media platforms have a responsibility to moderate harmful content,
+                I believe blanket algorithmic censorship threatens free expression. Admittedly,
+                some moderation is necessary — hate speech and misinformation can cause real harm,
+                and platforms cannot simply abdicate this duty. However, the criteria for removal
+                are often opaque, and users deserve transparent appeals processes. A more balanced
+                approach would combine clear community guidelines with independent oversight boards,
+                ensuring that moderation serves public safety without becoming a tool for silencing
+                dissenting voices. Ultimately, accountability requires transparency, not secrecy.
+              </p>
+              <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">
+                <span style="padding:0.2rem 0.5rem;border:1px solid var(--border-color);border-radius:4px;font-size:0.75rem;color:var(--text-muted);">concession</span>
+                <span style="padding:0.2rem 0.5rem;border:1px solid var(--border-color);border-radius:4px;font-size:0.75rem;color:var(--text-muted);">counter-argument</span>
+                <span style="padding:0.2rem 0.5rem;border:1px solid var(--border-color);border-radius:4px;font-size:0.75rem;color:var(--text-muted);">academic register</span>
+                <span style="padding:0.2rem 0.5rem;border:1px solid var(--border-color);border-radius:4px;font-size:0.75rem;color:var(--text-muted);">120 words</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
