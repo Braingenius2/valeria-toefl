@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Valeria's Lesson: Synthetic Media & Deepfakes — TOEFL Speaking</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-dark: #090d16; --bg-card: #131a26; --border-color: #243042;
+      --text-main: #f1f5f9; --text-muted: #64748b;
+      --primary: #8b5cf6; --primary-hover: #7c3aed;
+      --accent-cyan: #06b6d4; --accent-green: #10b981; --accent-red: #ef4444; --accent-purple: #a855f7;
+      --glass-bg: rgba(19, 26, 38, 0.85); --glass-border: rgba(255, 255, 255, 0.03);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Outfit', sans-serif; background-color: var(--bg-dark); color: var(--text-main); min-height: 100vh; display: flex; flex-direction: column; overflow-x: hidden; }
+    
+    header { background: rgba(9, 13, 22, 0.9); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border-color); padding: 1rem 2rem; position: sticky; top: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; }
+    .logo-area { display: flex; align-items: center; gap: 0.75rem; }
+    .badge-exam { background: rgba(139, 92, 246, 0.15); border: 1px solid var(--primary); color: var(--primary); padding: 0.25rem 0.5rem; border-radius: 4px; font-family: 'Fira Code', monospace; font-size: 0.75rem; text-transform: uppercase; font-weight: bold; }
+    .back-link { color: var(--text-muted); text-decoration: none; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 0.3rem; transition: color 0.2s ease; }
+    .back-link:hover { color: var(--text-main); }
+    h1 { font-size: 1.25rem; font-weight: 700; letter-spacing: -0.025em; }
+    .lesson-meta { display: flex; gap: 1.5rem; font-size: 0.875rem; color: var(--text-muted); }
+    .meta-item strong { color: var(--text-main); }
+    
+    .main-container { display: flex; flex: 1; height: calc(100vh - 65px); }
+    .sidebar { width: 280px; border-right: 1px solid var(--border-color); padding: 1.5rem 1rem; display: flex; flex-direction: column; gap: 0.5rem; background: rgba(9, 13, 22, 0.5); }
+    .sidebar-btn { display: flex; align-items: center; gap: 0.75rem; width: 100%; padding: 0.75rem 1rem; background: transparent; border: 1px solid transparent; border-radius: 8px; color: var(--text-muted); font-size: 0.9rem; text-align: left; cursor: pointer; transition: all 0.2s ease; }
+    .sidebar-btn:hover { background: rgba(255, 255, 255, 0.02); color: var(--text-main); }
+    .sidebar-btn.active { background: var(--bg-card); border-color: var(--border-color); color: var(--primary); font-weight: 600; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); }
+    .sidebar-num { font-family: 'Fira Code', monospace; font-size: 0.8rem; opacity: 0.6; }
+    
+    .content-area { flex: 1; padding: 2.5rem; overflow-y: auto; background: radial-gradient(circle at top right, rgba(139, 92, 246, 0.04), transparent 900px); }
+    .slide { display: none; animation: fadeIn 0.3s ease-in-out forwards; max-width: 1000px; margin: 0 auto; }
+    .slide.active { display: block; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    
+    .card { background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 12px; padding: 1.75rem; margin-bottom: 1.5rem; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25); transition: border-color 0.3s ease, box-shadow 0.3s ease; }
+    .card:hover { border-color: rgba(139, 92, 246, 0.15); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25), 0 0 15px rgba(139, 92, 246, 0.02); }
+    .card-title { font-size: 1.15rem; font-weight: 600; margin-bottom: 1rem; color: var(--primary); display: flex; align-items: center; gap: 0.5rem; border-bottom: 1px solid rgba(255, 255, 255, 0.05); padding-bottom: 0.5rem; }
+    
+    .shadowing-box { border-left: 4px solid var(--accent-cyan); background: rgba(6, 182, 212, 0.03); }
+    .shadowing-text { font-size: 1.1rem; line-height: 1.8; color: var(--text-main); margin: 1.5rem 0; background: rgba(0, 0, 0, 0.25); padding: 1.5rem; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.02); }
+    .shadowing-word { display: inline-block; margin-right: 0.25rem; transition: all 0.15s ease; }
+    .shadowing-word.highlighted { background: rgba(6, 182, 212, 0.25); color: #fff; border-radius: 3px; padding: 0 2px; }
+    
+    .btn { padding: 0.6rem 1.2rem; border-radius: 6px; border: none; font-weight: 600; font-family: inherit; cursor: pointer; display: flex; align-items: center; gap: 0.5rem; transition: all 0.2s ease; }
+    .btn-primary { background: var(--primary); color: #fff; }
+    .btn-primary:hover { background: var(--primary-hover); }
+    .btn-secondary { background: rgba(255, 255, 255, 0.05); color: var(--text-main); border: 1px solid var(--border-color); }
+    
+    .timer-container { display: flex; gap: 1rem; margin: 1rem 0; }
+    .exam-timer { background: #000; border: 1px solid var(--border-color); border-radius: 8px; padding: 1rem; text-align: center; flex: 1; }
+    .timer-val { font-family: 'Fira Code', monospace; font-size: 2.25rem; font-weight: bold; color: var(--primary); }
+    .timer-label { font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); margin-top: 0.25rem; }
+    
+    .oreo-table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+    .oreo-table th, .oreo-table td { border: 1px solid var(--border-color); padding: 0.65rem 0.75rem; text-align: left; font-size: 0.9rem; }
+    .oreo-table th { background: rgba(139, 92, 246, 0.08); color: var(--primary); font-size: 0.8rem; text-transform: uppercase; }
+    .oreo-table td:first-child { font-family: 'Fira Code', monospace; font-weight: 600; color: var(--accent-cyan); }
+    .oreo-table td:nth-child(2) { text-align: center; font-family: 'Fira Code', monospace; color: var(--primary); }
+    
+    .vocab-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-top: 1rem; }
+    .vocab-item { background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); border-radius: 6px; padding: 0.5rem 0.75rem; font-size: 0.9rem; }
+    .vocab-item .vocab-word { font-weight: 600; color: var(--accent-cyan); font-family: 'Fira Code', monospace; }
+    .vocab-item .vocab-def { color: #cbd5e1; font-size: 0.85rem; }
+    
+    .practice-item { background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); border-radius: 8px; padding: 1rem; margin-bottom: 0.75rem; }
+    .practice-item .q { color: #cbd5e1; font-size: 0.95rem; }
+    .practice-item .a { color: var(--accent-green); font-size: 0.9rem; display: none; margin-top: 0.5rem; padding: 0.5rem; background: rgba(16,185,129,0.05); border-radius: 4px; }
+    .practice-item .reveal-btn { background: transparent; border: 1px solid var(--border-color); color: var(--text-muted); padding: 0.25rem 0.75rem; border-radius: 4px; cursor: pointer; font-size: 0.8rem; margin-top: 0.5rem; }
+    
+    .pacer-controls { display: flex; gap: 0.75rem; align-items: center; flex-wrap: wrap; margin-top: 0.75rem; }
+    .pacer-controls select { background: #000; border: 1px solid var(--border-color); color: var(--text-main); padding: 0.4rem 0.75rem; border-radius: 4px; font-family: 'Fira Code', monospace; font-size: 0.85rem; }
+    .speed-select { background:rgba(0,0,0,0.4); border:1px solid var(--border-color); border-radius:8px; color:var(--text-main); padding:0.45rem 0.8rem; font-family:inherit; font-size:0.85rem; font-weight:500; cursor:pointer; outline:none; transition:border-color 0.2s ease; }
+    .speed-select:focus { border-color:var(--primary); }
+    
+    .recorder-bar { display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap; margin-top: 0.75rem; padding-top: 0.75rem; border-top: 1px solid var(--border-color); }
+    .rec-btn { padding: 0.35rem 0.75rem; font-size: 0.8rem; border-radius: 20px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); color: var(--text-muted); font-family: inherit; cursor: pointer; transition: all 0.2s ease; display: inline-flex; align-items: center; gap: 0.3rem; }
+    .rec-btn:hover { background: rgba(255,255,255,0.1); }
+    .rec-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+    .rec-status { font-size: 0.75rem; color: var(--text-muted); }
+    
+    .prompt-box { background: #000; border-left: 4px solid var(--accent-purple); padding: 1.25rem; border-radius: 8px; margin-bottom: 1rem; }
+    .prompt-box .speaker-label { font-weight: 600; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.3rem; }
+    .prompt-box .speaker-label.prof { color: var(--accent-purple); }
+    .prompt-box .speaker-label.student { color: var(--accent-cyan); }
+    .prompt-box .speaker-label.student2 { color: var(--accent-green); }
+    .prompt-box p { color: #cbd5e1; font-size: 0.95rem; line-height: 1.65; }
+    .prompt-box + .prompt-box { margin-top: 0.5rem; }
+    
+    .notepad-area { width: 100%; height: 250px; background: #05070c; border: 1px solid var(--border-color); border-radius: 6px; color: var(--text-main); padding: 0.75rem; font-family: inherit; resize: vertical; font-size: 0.95rem; }
+    .speaking-prompts { counter-reset: q; }
+    .speaking-prompt { margin-bottom: 1.5rem; padding: 1rem; background: rgba(255,255,255,0.02); border-left: 4px solid var(--accent-purple); border-radius: 6px; }
+    .speaking-prompt::before { counter-increment: q; content: "Question " counter(q); display: block; font-size: 0.8rem; font-weight: 700; color: var(--accent-purple); text-transform: uppercase; margin-bottom: 0.25rem; }
+    .speaking-prompt .talking-pts { margin-top: 0.5rem; font-size: 0.85rem; color: var(--text-muted); }
+    
+    .error-box { background: rgba(239, 68, 68, 0.05); border: 1px solid rgba(239, 68, 68, 0.2); border-radius: 8px; padding: 1rem; margin-top: 1rem; }
+    .error-box h4 { color: var(--accent-red); font-size: 0.95rem; margin-bottom: 0.5rem; }
+    .error-item { font-size: 0.9rem; padding: 0.35rem 0; color: #cbd5e1; }
+    .error-item .wrong { color: var(--accent-red); }
+    .error-item .right { color: var(--accent-green); }
+    
+    .thread-card { background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.25rem; margin-bottom: 1rem; }
+    .thread-card .prof { color: var(--accent-purple); font-weight: 600; }
+    .thread-card .student1 { color: var(--accent-cyan); font-weight: 600; }
+    .thread-card .student2 { color: var(--accent-green); font-weight: 600; }
+    .thread-card p { color: #cbd5e1; font-size: 0.92rem; line-height: 1.6; margin-top: 0.3rem; }
+    
+    .drill-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem; }
+    .drill-card { background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); border-radius: 8px; padding: 1rem; }
+    .drill-card h4 { color: var(--accent-cyan); font-size: 0.9rem; margin-bottom: 0.5rem; text-transform: uppercase; font-weight: 600; }
+    .drill-card p, .drill-card li { color: #cbd5e1; font-size: 0.9rem; line-height: 1.6; }
+    .drill-card ul { padding-left: 1.25rem; }
+    
+    .word-counter { text-align:right; font-size:0.85rem; color:var(--text-muted); margin-top:0.5rem; font-family:'Fira Code',monospace; }
+    .accuracy-card { display: none; margin-top: 16px; padding: 20px; background: var(--glass-bg, rgba(18,16,38,0.45)); border: 1px solid var(--border-color, rgba(99,102,241,0.15)); border-radius: 16px; }
+    .accuracy-card.visible { display: block; }
+    .gauge-row { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+    .gauge-wrap { display: flex; flex-direction: column; align-items: center; gap: 6px; flex-shrink: 0; }
+    .gauge-pct { font-size: 28px; font-weight: 700; font-family: 'Fira Code', monospace; }
+    .gauge-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted, #94a3b8); }
+    .accuracy-words { flex: 1; min-width: 200px; line-height: 1.8; font-size: 14px; }
+    .accuracy-word { display: inline-block; margin: 0 2px; padding: 0 3px; border-radius: 4px; }
+    .accuracy-word.correct { color: var(--primary, #6366f1); background: rgba(99, 102, 241, 0.08); border-bottom: 2px solid var(--primary, #6366f1); }
+    .accuracy-word.missed { color: var(--accent-red, #f43f5e); background: rgba(244, 63, 94, 0.08); border-bottom: 2px solid var(--accent-red, #f43f5e); }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo-area">
+      <div class="badge-exam">TOEFL Speaking</div>
+      <a href="../index.html" class="back-link">← Portal</a>
+      <h1>Valeria: Synthetic Media & Deepfakes (2026 TOEFL)</h1>
+    </div>
+    <div class="lesson-meta">
+      <div class="meta-item">Student: <strong>Valeria (B2/C1)</strong></div>
+    </div>
+  </header>
+
+  <div class="main-container">
+    <div class="sidebar">
+      <button class="sidebar-btn active" onclick="switchSlide(0)"><span class="sidebar-num">01</span> Shadowing Pacer</button>
+      <button class="sidebar-btn" onclick="switchSlide(1)"><span class="sidebar-num">02</span> Input: Format & OREO</button>
+      <button class="sidebar-btn" onclick="switchSlide(2)"><span class="sidebar-num">03</span> Practice Drills</button>
+      <button class="sidebar-btn" onclick="switchSlide(3)"><span class="sidebar-num">04</span> Speaking Interview</button>
+      <button class="sidebar-btn" onclick="switchSlide(4)"><span class="sidebar-num">05</span> Academic Writing</button>
+      <button class="sidebar-btn" onclick="switchSlide(5)"><span class="sidebar-num">06</span> Homework</button>
+    </div>
+
+    <div class="content-area">
+      
+      <!-- Slide 0: Shadowing Pacer -->
+      <div class="slide active" id="slide-0">
+        <div class="card shadowing-box">
+          <div class="card-title">🔊 Shadowing Pacer: Synthetic Media & Deepfakes</div>
+          <p class="text-muted">Focus on stress in technical vocabulary: <em>synthetic, hyper-realistic, disinformation, fabrication</em>. Pay attention to smooth linking through complex clauses.</p>
+          <div id="shadowing-text" class="shadowing-text"></div>
+          <canvas id="waveCanvas" width="800" height="90" style="width:100%;height:90px;background:#05070c;border-radius:6px;border:1px solid var(--border-color);margin-bottom:1.25rem;"></canvas>
+          <div style="display:flex; gap:0.5rem; align-items:center;">
+            <button class="btn btn-primary" onclick="toggleShadowingTimer()" id="btn-timer">▶ Start Timer</button>
+            <div id="shadowing-timer" style="font-family:'Fira Code'; font-size:1.2rem; background:#000; padding:0.4rem 1rem; border-radius:4px;">00:00</div>
+            <button class="btn btn-secondary" onclick="resetShadowingTimer()">Reset</button>
+          </div>
+          <div class="pacer-controls">
+            <button class="btn btn-secondary listen-btn" onclick="toggleSpeaking()">🔊 Listen</button>
+            <select class="speed-select" id="speedSelect">
+              <option value="0.75">🐢 Slow</option>
+              <option value="1" selected>▶ Normal</option>
+              <option value="1.25">🐇 Fast</option>
+            </select>
+          </div>
+          <div class="recorder-bar">
+            <button class="rec-btn" id="startRecord">🎤 Record</button>
+            <button class="rec-btn" id="stopRecord" disabled>⏹ Stop</button>
+            <button class="rec-btn" id="playRecord" disabled>🎧 Play</button>
+            <span class="rec-status" id="recStatus">Record yourself, then compare with the model</span>
+          </div>
+          <div class="accuracy-card" id="accuracyCard">
+            <div class="gauge-row" id="accuracySection"></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">💬 Discussion Questions</div>
+          <ol style="padding-left: 1.25rem; color: #cbd5e1; line-height: 1.8; font-size: 0.95rem;">
+            <li>Have you ever encountered a deepfake video? How did it make you feel?</li>
+            <li>Should social media platforms be legally required to label AI-generated content?</li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- Slide 1: Input — Format + OREO + Vocabulary -->
+      <div class="slide" id="slide-1">
+        <div class="card">
+          <div class="card-title">📋 TOEFL "Take an Interview" Speaking Format</div>
+          <p style="color: #cbd5e1; font-size: 0.95rem; line-height: 1.7; margin-bottom: 1rem;">
+            The "Take an Interview" task simulates a short oral interview. You will answer <strong>3–5 questions</strong> on a given topic with <strong>45 seconds</strong> per response and <strong>zero prep time</strong> between questions.
+          </p>
+          <ol style="padding-left: 1.25rem; color: #cbd5e1; line-height: 2; font-size: 0.95rem; margin-bottom: 1rem;">
+            <li><strong>Listen</strong> to each question (played once only).</li>
+            <li><strong>Respond</strong> immediately in 45 seconds with a clear opinion + reasoning.</li>
+            <li><strong>Structure:</strong> Use OREO — Opinion, Reason, Example, Opinion restated.</li>
+          </ol>
+          <div style="background: rgba(139, 92, 246, 0.08); border-left: 4px solid var(--primary); padding: 0.75rem 1rem; border-radius: 4px; font-size: 0.9rem; color: #c4b5fd;">
+            <strong>Scoring Criteria (ETS):</strong> Delivery (fluency & clarity), Language Use (grammar & vocabulary), Topic Development (coherent structure, OREO).
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">🧱 OREO Structure for TOEFL Speaking</div>
+          <table class="oreo-table">
+            <thead><tr><th>Letter</th><th>Time</th><th>Function</th><th>Example Phrase</th></tr></thead>
+            <tbody>
+              <tr><td>O</td><td>~5s</td><td><strong>Opinion</strong> — State your position clearly</td><td>"I strongly believe that..." / "In my view..."</td></tr>
+              <tr><td>R</td><td>~15s</td><td><strong>Reason</strong> — Give your main rationale</td><td>"The main reason is that..." / "This is because..."</td></tr>
+              <tr><td>E</td><td>~15s</td><td><strong>Example</strong> — Support with a specific instance</td><td>"For example,..." / "Consider the case of..."</td></tr>
+              <tr><td>O</td><td>~10s</td><td><strong>Opinion Restated</strong> — Conclude with conviction</td><td>"That's why I believe..." / "Ultimately, ..."</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card">
+          <div class="card-title">📚 Target Vocabulary</div>
+          <div class="vocab-grid">
+            <div class="vocab-item"><span class="vocab-word">synthetic</span> <span class="vocab-def">artificially produced; not genuine</span></div>
+            <div class="vocab-item"><span class="vocab-word">fabrication</span> <span class="vocab-def">a false statement or invention</span></div>
+            <div class="vocab-item"><span class="vocab-word">hyper-realistic</span> <span class="vocab-def">so realistic it's indistinguishable from reality</span></div>
+            <div class="vocab-item"><span class="vocab-word">disinformation</span> <span class="vocab-def">false info spread deliberately to deceive</span></div>
+            <div class="vocab-item"><span class="vocab-word">identity theft</span> <span class="vocab-def">stealing personal info to impersonate someone</span></div>
+            <div class="vocab-item"><span class="vocab-word">erosion</span> <span class="vocab-def">gradual destruction or weakening</span></div>
+            <div class="vocab-item"><span class="vocab-word">detection</span> <span class="vocab-def">the process of discovering or identifying</span></div>
+            <div class="vocab-item"><span class="vocab-word">accountability</span> <span class="vocab-def">responsibility for actions and outcomes</span></div>
+            <div class="vocab-item"><span class="vocab-word">regulatory</span> <span class="vocab-def">relating to rules or laws controlling activity</span></div>
+            <div class="vocab-item"><span class="vocab-word">transparency</span> <span class="vocab-def">openness; making processes visible to the public</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 2: Practice Drills -->
+      <div class="slide" id="slide-2">
+        <div class="card">
+          <div class="card-title">🎯 Practice Drills (4 Rounds)</div>
+          <p class="text-muted" style="margin-bottom:1rem;">Complete each drill before moving to the next. Tap to reveal answers where available.</p>
+
+          <div class="drill-grid">
+            <div class="drill-card">
+              <h4>1. Quick Opinion (OREO Sprint)</h4>
+              <p><strong>Prompt:</strong> "Deepfakes should be completely banned." Do you agree or disagree? Deliver a <strong>30-second OREO response</strong> aloud.</p>
+              <p style="margin-top:0.5rem;font-size:0.85rem;color:var(--text-muted);">Record yourself. Aim for Opinion (5s) → Reason (10s) → Example (10s) → Restate (5s).</p>
+            </div>
+
+            <div class="drill-card">
+              <h4>2. Fillers Elimination</h4>
+              <p>Transform these filler-laden responses into fluent OREO:</p>
+              <ul>
+                <li>"Um, like, I think, uh, deepfakes are, you know, kind of dangerous, like, maybe?"</li>
+                <li>"Well, so, the thing is, like, we should, um, regulate them, I guess?"</li>
+              </ul>
+              <div class="practice-item" style="margin-top:0.5rem;padding:0.5rem;">
+                <button class="reveal-btn" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Reveal Model</button>
+                <div class="a" style="display:none;padding:0.5rem;background:rgba(16,185,129,0.05);border-radius:4px;margin-top:0.5rem;">
+                  <strong>Model 1:</strong> "I believe deepfakes pose a serious risk. The reason is that they can be used to spread political disinformation. For example, a fabricated video of a leader declaring war could trigger real conflict. That's why we need strict regulation."<br>
+                  <strong>Model 2:</strong> "In my view, regulation is essential. This is because synthetic media without accountability erodes public trust. Consider how easily a hyper-realistic fake can go viral before detection. Ultimately, transparency measures are our best defense."
+                </div>
+              </div>
+            </div>
+
+            <div class="drill-card">
+              <h4>3. Error Correction</h4>
+              <p>Fix these sentences (recycled targets):</p>
+              <ul>
+                <li>"Can you explain why do deepfakes spread so quickly?"</li>
+                <li>"Government need to create strong laws for AI content."</li>
+                <li>"The detection tool help identify fake videos."</li>
+              </ul>
+              <div class="practice-item" style="margin-top:0.5rem;padding:0.5rem;">
+                <button class="reveal-btn" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Reveal Corrections</button>
+                <div class="a" style="display:none;padding:0.5rem;background:rgba(16,185,129,0.05);border-radius:4px;margin-top:0.5rem;">
+                  ✅ "Can you explain <strong>why deepfakes spread</strong> so quickly?" <span style="color:var(--text-muted);font-size:0.8rem;">(Indirect question word order)</span><br>
+                  ✅ "<strong>The</strong> government need<strong>s</strong> to create strong laws for AI content." <span style="color:var(--text-muted);font-size:0.8rem;">(Article + 3rd person -s)</span><br>
+                  ✅ "The detection tool <strong>helps</strong> identify fake videos." <span style="color:var(--text-muted);font-size:0.8rem;">(3rd person -s)</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="drill-card">
+              <h4>4. Vocabulary Gap-Fill</h4>
+              <p>Complete with target vocabulary:</p>
+              <ul>
+                <li>Deepfakes are a form of _______ media that looks real.</li>
+                <li>Political _______ can spread rapidly through fake videos.</li>
+                <li>Without _______, no one is held responsible for harmful content.</li>
+                <li>The _______ of public trust is a long-term consequence.</li>
+                <li>_______ systems are still catching up with generation tools.</li>
+              </ul>
+              <div class="practice-item" style="margin-top:0.5rem;padding:0.5rem;">
+                <button class="reveal-btn" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Reveal Answers</button>
+                <div class="a" style="display:none;padding:0.5rem;background:rgba(16,185,129,0.05);border-radius:4px;margin-top:0.5rem;">
+                  1. <strong>synthetic</strong>  2. <strong>disinformation</strong>  3. <strong>accountability</strong>  4. <strong>erosion</strong>  5. <strong>Detection</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 3: Speaking Interview -->
+      <div class="slide" id="slide-3">
+        <div class="card">
+          <div class="card-title">🎤 Speaking Interview — Take an Interview Format</div>
+          <p class="text-muted" style="margin-bottom: 1.5rem;">You will hear <strong>4 questions</strong>. After each question, you have <strong>45 seconds</strong> to respond using OREO. Record each response. No prep time between questions.</p>
+          
+          <div style="display:flex; gap:0.75rem; align-items:center; flex-wrap:wrap; margin-bottom:1.5rem;">
+            <button class="btn btn-primary" onclick="startSpeakingTimer()">▶ Start 45s Timer</button>
+            <div id="speaking-timer" style="font-family:'Fira Code'; font-size:1.5rem; background:#000; padding:0.4rem 1rem; border-radius:4px; color:var(--primary);">00:00</div>
+            <button class="btn btn-secondary" onclick="resetSpeakingTimer()">Reset</button>
+            <span id="speakingStatus" style="font-size:0.85rem; color:var(--text-muted);">Timer ready</span>
+          </div>
+
+          <div class="speaking-prompts">
+            <div class="speaking-prompt">
+              <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.5rem;">
+                <button class="btn btn-secondary" onclick="playQuestion(1)">▶ Play Question</button>
+                <button class="reveal-btn" onclick="toggleQuestionText(1)" id="revealQ1">Show Text</button>
+              </div>
+              <div id="qText1" style="display:none;">
+                <p style="color:var(--text-main);font-size:0.95rem;margin-bottom:0.5rem;"><strong>Question 1:</strong> Do you think the benefits of synthetic media outweigh the risks? Why?</p>
+              </div>
+              <div class="talking-pts">Suggested talking points: Compare benefits vs. risks — entertainment/education vs. disinformation/fraud</div>
+            </div>
+            <div class="speaking-prompt">
+              <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.5rem;">
+                <button class="btn btn-secondary" onclick="playQuestion(2)">▶ Play Question</button>
+                <button class="reveal-btn" onclick="toggleQuestionText(2)" id="revealQ2">Show Text</button>
+              </div>
+              <div id="qText2" style="display:none;">
+                <p style="color:var(--text-main);font-size:0.95rem;margin-bottom:0.5rem;"><strong>Question 2:</strong> Should governments regulate deepfake technology, or would that limit free expression?</p>
+              </div>
+              <div class="talking-pts">Suggested talking points: Free expression vs. harm prevention — consider a middle-ground approach</div>
+            </div>
+            <div class="speaking-prompt">
+              <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.5rem;">
+                <button class="btn btn-secondary" onclick="playQuestion(3)">▶ Play Question</button>
+                <button class="reveal-btn" onclick="toggleQuestionText(3)" id="revealQ3">Show Text</button>
+              </div>
+              <div id="qText3" style="display:none;">
+                <p style="color:var(--text-main);font-size:0.95rem;margin-bottom:0.5rem;"><strong>Question 3:</strong> How can individuals protect themselves from being deceived by AI-generated content?</p>
+              </div>
+              <div class="talking-pts">Suggested talking points: Media literacy, cross-checking sources, using detection tools, skepticism</div>
+            </div>
+            <div class="speaking-prompt">
+              <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.5rem;">
+                <button class="btn btn-secondary" onclick="playQuestion(4)">▶ Play Question</button>
+                <button class="reveal-btn" onclick="toggleQuestionText(4)" id="revealQ4">Show Text</button>
+              </div>
+              <div id="qText4" style="display:none;">
+                <p style="color:var(--text-main);font-size:0.95rem;margin-bottom:0.5rem;"><strong>Question 4:</strong> Do you believe that seeing is no longer believing in the digital age?</p>
+              </div>
+              <div class="talking-pts">Suggested talking points: The shift from trust-in-images to trust-in-sources — verification culture</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 4: Writing — Academic Discussion -->
+      <div class="slide" id="slide-4">
+        <div class="card">
+          <div class="card-title">✍️ Academic Discussion — AI-Generated Content Regulation</div>
+          
+          <div class="prompt-box">
+            <div class="speaker-label prof">👨‍🏫 Professor's Prompt</div>
+            <p>"Let's discuss the regulation of AI-generated content online. Some argue that governments must step in to require labeling of all AI-generated media to prevent deception and protect democratic processes. Others contend that regulation would be ineffective, hard to enforce, and could stifle innovation. What's your perspective? Should governments mandate transparency labels for AI-generated content?"</p>
+          </div>
+          <div class="prompt-box">
+            <div class="speaker-label student">👩 Priya (classmate):</div>
+            <p>"I believe mandatory labeling is essential. Without regulation, people cannot distinguish real from fake, and that erodes trust in everything we see online. Just as food products list ingredients, AI-generated content should be clearly marked. Transparency is the only way to maintain accountability in the digital space."</p>
+          </div>
+          <div class="prompt-box">
+            <div class="speaker-label student2">👨 Leo (classmate):</div>
+            <p>"I disagree. Labeling requirements are impractical — who will enforce them? Bad actors will simply ignore the rules, while responsible creators bear the burden. Moreover, many AI tools are used for harmless creative purposes like art and entertainment. Heavy regulation could slow down innovation and punish legitimate users."</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">⏱️ Your Response — 10 Minutes</div>
+          <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1rem;">
+            Write 100+ words. Include a <strong>concession</strong> to one classmate's point followed by a <strong>counter-argument</strong>. Use at least <strong>2 target vocabulary words</strong>.
+          </p>
+          <div class="exam-timer" style="max-width:300px; margin:0 auto 1.5rem;">
+            <div class="timer-val" id="write-time">10:00</div>
+            <div class="timer-label">Writing Time remaining</div>
+          </div>
+          <div style="text-align:center; margin-bottom:1.5rem;">
+            <button class="btn btn-primary" style="display:inline-flex;" onclick="runWritingClock()">▶ Start Writing Timer</button>
+          </div>
+          <div class="word-counter">Words: <span id="wordCount">0</span> / 100</div>
+          <textarea class="notepad-area" placeholder='Valeria, write your Academic Discussion response here (100+ words). Use concession + counter-argument structure. Target vocab: synthetic, fabrication, hyper-realistic, disinformation, identity theft, erosion, detection, accountability, regulatory, transparency.' style="height:350px;"></textarea>
+        </div>
+      </div>
+
+      <!-- Slide 5: Homework -->
+      <div class="slide" id="slide-5">
+        <div class="card">
+          <div class="card-title">📋 Homework Assignments</div>
+          <p class="text-muted" style="margin-bottom: 1.5rem;">Complete these tasks before our next class. Submit via your usual chat channel.</p>
+
+          <div class="card" style="background: rgba(255,255,255,0.01); border-color: var(--border-color); margin-bottom: 1rem; padding: 1.25rem;">
+            <h3 style="font-size: 1.05rem; color: var(--accent-cyan); margin-bottom: 0.5rem;">Task 1: Record 3 Speaking Responses</h3>
+            <p style="font-size: 0.95rem; line-height: 1.6;">Record yourself answering each prompt using OREO (45s each):</p>
+            <ol style="padding-left: 1.25rem; font-size: 0.9rem; margin: 0.75rem 0; color: #cbd5e1;">
+              <li><strong>Prompt 1:</strong> "Should social media platforms ban deepfake videos entirely?"</li>
+              <li><strong>Prompt 2:</strong> "Is it possible to trust anything we see online anymore?"</li>
+              <li><strong>Prompt 3:</strong> "Who should be held accountable when a deepfake causes harm — the creator, the platform, or both?"</li>
+            </ol>
+          </div>
+
+          <div class="card" style="background: rgba(255,255,255,0.01); border-color: var(--border-color); margin-bottom: 1rem; padding: 1.25rem;">
+            <h3 style="font-size: 1.05rem; color: var(--accent-purple); margin-bottom: 0.5rem;">Task 2: Academic Discussion Response</h3>
+            <p style="font-size: 0.95rem; line-height: 1.6;">Write a <strong>100+ word response</strong> to this prompt:</p>
+            <div style="background: #000; border-left: 4px solid var(--accent-purple); padding: 1rem; border-radius: 6px; margin: 0.75rem 0; font-size: 0.9rem; color: #cbd5e1; line-height: 1.6;">
+              <strong style="color: var(--accent-purple);">Professor:</strong> "Some companies now use AI to screen job candidates by analyzing video interviews. Supporters say this removes human bias and speeds up hiring. Critics argue that AI can perpetuate existing biases and lacks the nuance to evaluate soft skills. What's your perspective?"<br><br>
+              <strong style="color: var(--accent-cyan);">Mei:</strong> "AI screening is more objective than human reviewers. Algorithms don't get tired or distracted, and they evaluate every candidate by the same criteria."<br><br>
+              <strong style="color: var(--accent-green);">David:</strong> "But algorithms learn from historical data, which contains human biases. An AI might reject qualified candidates simply because they don't fit a narrow pattern from past hires."
+            </div>
+          </div>
+
+          <div class="card" style="background: rgba(255,255,255,0.01); border-color: var(--border-color); margin-bottom: 0; padding: 1.25rem;">
+            <h3 style="font-size: 1.05rem; color: var(--accent-green); margin-bottom: 0.5rem;">Task 3: Vocabulary Journal</h3>
+            <p style="font-size: 0.95rem; line-height: 1.6;">
+              Write <strong>5 sentences</strong> using these target vocabulary words (one per sentence):
+            </p>
+            <ul style="padding-left: 1.25rem; font-size: 0.9rem; margin: 0.5rem 0; color: var(--text-muted);">
+              <li><em>synthetic</em> — "Synthetic media created by AI is becoming increasingly hard to identify."</li>
+              <li><em>disinformation</em> — "Deepfakes are a powerful tool for spreading political disinformation."</li>
+              <li><em>accountability</em> — "Without accountability, platforms have little incentive to remove harmful fakes."</li>
+              <li><em>erosion</em> — "The erosion of public trust is one of the most dangerous consequences."</li>
+              <li><em>transparency</em> — "Transparency in AI content labeling should be a legal requirement."</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <audio id="shadowingAudio" preload="none" style="display:none"></audio>
+  <audio id="qAudio1" preload="none" style="display:none"></audio>
+  <audio id="qAudio2" preload="none" style="display:none"></audio>
+  <audio id="qAudio3" preload="none" style="display:none"></audio>
+  <audio id="qAudio4" preload="none" style="display:none"></audio>
+
+  <script>
+    function switchSlide(index) {
+      document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('.sidebar-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById(`slide-${index}`).classList.add('active');
+      document.querySelectorAll('.sidebar-btn')[index].classList.add('active');
+      if (index === 3) resetSpeakingTimer();
+    }
+
+    const shadowingText = "The rise of synthetic media powered by artificial intelligence has blurred the line between reality and fabrication. Deepfake technology which can generate hyper-realistic video and audio of people saying things they never said has advanced at an alarming rate. While proponents highlight creative applications in entertainment and education, critics warn of unprecedented risks such as political disinformation, identity theft, and the erosion of public trust. As detection tools struggle to keep pace with generation techniques, the question becomes not whether we can spot fakes, but whether we will believe anything we see.";
+
+    function initShadowing() {
+      const container = document.getElementById('shadowing-text');
+      const words = shadowingText.match(/\S+/g) || [];
+      container.innerHTML = words.map((w, i) => `<span class="shadowing-word" id="word-${i}">${w}</span>`).join(' ');
+    }
+
+    const shadowingAudio = document.getElementById('shadowingAudio');
+    let speaking = false;
+    let audioFallback = false;
+    let currentSpeed = 1;
+    let timerInterval = null, timerSeconds = 0;
+    let shadowingTS = [{word:"The",start:0.275,end:0.388},{word:"rise",start:0.388,end:0.762},{word:"of",start:0.762,end:0.85},{word:"synthetic",start:0.85,end:1.375},{word:"media",start:1.375,end:1.788},{word:"powered",start:1.788,end:2.175},{word:"by",start:2.175,end:2.35},{word:"artificial",start:2.35,end:2.862},{word:"intelligence",start:2.862,end:3.812},{word:"has",start:3.812,end:4.037},{word:"blurred",start:4.037,end:4.338},{word:"the",start:4.338,end:4.425},{word:"line",start:4.425,end:4.775},{word:"between",start:4.775,end:5.1},{word:"reality",start:5.1,end:5.65},{word:"and",start:5.65,end:5.775},{word:"fabrication",start:5.775,end:7.225},{word:"Deepfake",start:7.225,end:7.675},{word:"technology",start:7.675,end:8.625},{word:"which",start:8.625,end:8.85},{word:"can",start:8.85,end:9.037},{word:"generate",start:9.037,end:9.537},{word:"hyper-realistic",start:9.537,end:10.375},{word:"video",start:10.375,end:11.037},{word:"and",start:11.037,end:11.188},{word:"audio",start:11.188,end:11.562},{word:"of",start:11.562,end:11.65},{word:"people",start:11.65,end:12.088},{word:"saying",start:12.088,end:12.45},{word:"things",start:12.45,end:12.988},{word:"they",start:12.988,end:13.162},{word:"never",start:13.162,end:13.512},{word:"said",start:13.512,end:13.8},{word:"has",start:13.8,end:13.938},{word:"advanced",start:13.938,end:14.475},{word:"at",start:14.475,end:14.562},{word:"an",start:14.562,end:14.65},{word:"alarming",start:14.65,end:15.125},{word:"rate",start:15.125,end:16.025},{word:"While",start:16.025,end:16.225},{word:"proponents",start:16.225,end:16.8},{word:"highlight",start:16.8,end:17.238},{word:"creative",start:17.238,end:17.675},{word:"applications",start:17.675,end:18.5},{word:"in",start:18.5,end:18.6},{word:"entertainment",start:18.6,end:19.3},{word:"and",start:19.3,end:19.413},{word:"education",start:19.413,end:20.587},{word:"critics",start:20.587,end:21.075},{word:"warn",start:21.075,end:21.475},{word:"of",start:21.475,end:21.637},{word:"unprecedented",start:21.637,end:22.425},{word:"risks",start:22.425,end:23.038},{word:"such",start:23.038,end:23.275},{word:"as",start:23.275,end:23.438},{word:"political",start:23.438,end:23.975},{word:"disinformation",start:23.975,end:25.262},{word:"identity",start:25.262,end:25.788},{word:"theft",start:25.788,end:26.512},{word:"and",start:26.512,end:26.637},{word:"the",start:26.637,end:26.75},{word:"erosion",start:26.75,end:27.275},{word:"of",start:27.275,end:27.375},{word:"public",start:27.375,end:27.75},{word:"trust",start:27.75,end:28.637},{word:"As",start:28.975,end:29.15},{word:"detection",start:29.15,end:29.713},{word:"tools",start:29.713,end:30.163},{word:"struggle",start:30.163,end:30.6},{word:"to",start:30.6,end:30.7},{word:"keep",start:30.7,end:30.963},{word:"pace",start:30.963,end:31.35},{word:"with",start:31.35,end:31.525},{word:"generation",start:31.525,end:32.075},{word:"techniques",start:32.075,end:33.075},{word:"the",start:33.075,end:33.175},{word:"question",start:33.175,end:33.6},{word:"becomes",start:33.6,end:34.05},{word:"not",start:34.05,end:34.325},{word:"whether",start:34.325,end:34.6},{word:"we",start:34.6,end:34.75},{word:"can",start:34.75,end:34.962},{word:"spot",start:34.962,end:35.325},{word:"fakes",start:35.325,end:36.125},{word:"but",start:36.125,end:36.275},{word:"whether",start:36.275,end:36.575},{word:"we",start:36.575,end:36.725},{word:"will",start:36.725,end:36.85},{word:"believe",start:36.85,end:37.263},{word:"anything",start:37.263,end:37.725},{word:"we",start:37.725,end:37.888},{word:"see",start:37.888,end:38.6}];
+
+    shadowingAudio.ontimeupdate = () => {
+      if (!shadowingTS || !speaking) return;
+      const t = shadowingAudio.currentTime;
+      let lo = 0, hi = shadowingTS.length - 1;
+      while (lo < hi) {
+        const mid = (lo + hi + 1) >> 1;
+        if (shadowingTS[mid].start <= t) lo = mid; else hi = mid - 1;
+      }
+      document.querySelectorAll('.shadowing-word').forEach(w => w.classList.remove('highlighted'));
+      const el = document.getElementById(`word-${lo}`);
+      if (el) { el.classList.add('highlighted'); el.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }
+    };
+    shadowingAudio.onended = () => { speaking = false; document.querySelector('.listen-btn').textContent = '🔊 Listen'; document.querySelectorAll('.shadowing-word').forEach(w => w.classList.remove('highlighted')); stopSimulatedWaveform(); if (timerInterval) { clearInterval(timerInterval); timerInterval = null; } };
+    shadowingAudio.onerror = () => { audioFallback = true; };
+
+    function toggleShadowingTimer() {
+      const btn = document.getElementById('btn-timer');
+      if (timerInterval) { clearInterval(timerInterval); timerInterval = null; btn.innerHTML = '▶ Resume'; }
+      else {
+        btn.innerHTML = '⏸ Pause';
+        timerInterval = setInterval(() => {
+          timerSeconds++;
+          const mins = String(Math.floor(timerSeconds / 60)).padStart(2, '0');
+          const secs = String(timerSeconds % 60).padStart(2, '0');
+          document.getElementById('shadowing-timer').textContent = `${mins}:${secs}`;
+        }, 1000);
+      }
+    }
+    function resetShadowingTimer() {
+      clearInterval(timerInterval); timerInterval = null; timerSeconds = 0;
+      document.getElementById('shadowing-timer').textContent = '00:00';
+      document.getElementById('btn-timer').innerHTML = '▶ Start Timer';
+      document.querySelectorAll('.shadowing-word').forEach(w => w.classList.remove('highlighted'));
+    }
+
+    document.getElementById('speedSelect').addEventListener('change', function() {
+      currentSpeed = parseFloat(this.value);
+      if (speaking) shadowingAudio.playbackRate = currentSpeed;
+    });
+
+    function ttsFallback() {
+      const text = Array.from(document.querySelectorAll('.shadowing-word')).map(w => w.textContent).join(' ');
+      if (!text.trim()) return;
+      const u = new SpeechSynthesisUtterance(text);
+      u.lang = 'en-US'; u.rate = 0.85;
+      u.onstart = () => { speaking = true; document.querySelector('.listen-btn').textContent = '■ Stop'; };
+      u.onend = u.onerror = () => { speaking = false; document.querySelector('.listen-btn').textContent = '🔊 Listen'; };
+      speechSynthesis.speak(u);
+    }
+
+    function toggleSpeaking() {
+      if (speaking) {
+        shadowingAudio.pause();
+        shadowingAudio.currentTime = 0;
+        speechSynthesis.cancel();
+        speaking = false;
+        document.querySelector('.listen-btn').textContent = '🔊 Listen';
+        document.querySelectorAll('.shadowing-word').forEach(w => w.classList.remove('highlighted'));
+        stopSimulatedWaveform();
+        if (timerInterval) { clearInterval(timerInterval); timerInterval = null; timerSeconds = 0; document.getElementById('shadowing-timer').textContent = '00:00'; document.getElementById('btn-timer').innerHTML = '▶ Start Timer'; }
+        return;
+      }
+      audioFallback = false;
+      shadowingAudio.src = 'audio/shadowing.wav?' + Date.now();
+      shadowingAudio.playbackRate = currentSpeed;
+      speaking = true;
+      document.querySelector('.listen-btn').textContent = '■ Stop';
+      startSimulatedWaveform(document.getElementById('waveCanvas'));
+      // Auto-start timer
+      if (timerInterval) { clearInterval(timerInterval); timerInterval = null; }
+      timerSeconds = 0; document.getElementById('shadowing-timer').textContent = '00:00';
+      document.getElementById('btn-timer').innerHTML = '⏸ Pause';
+      timerInterval = setInterval(() => {
+        timerSeconds++;
+        const mins = String(Math.floor(timerSeconds / 60)).padStart(2, '0');
+        const secs = String(timerSeconds % 60).padStart(2, '0');
+        document.getElementById('shadowing-timer').textContent = `${mins}:${secs}`;
+      }, 1000);
+      shadowingAudio.play().catch(() => { audioFallback = true; speaking = false; document.querySelector('.listen-btn').textContent = '🔊 Listen'; stopSimulatedWaveform(); if (timerInterval) { clearInterval(timerInterval); timerInterval = null; } ttsFallback(); });
+    }
+
+    initShadowing();
+
+    let guideOscId = null;
+    function startSimulatedWaveform(canvas) {
+      stopSimulatedWaveform();
+      const ctx = canvas.getContext('2d');
+      const width = canvas.width, height = canvas.height;
+      let phase = 0;
+      function draw() {
+        guideOscId = requestAnimationFrame(draw);
+        ctx.fillStyle = 'rgba(9, 13, 22, 0.3)';
+        ctx.fillRect(0, 0, width, height);
+        ctx.lineWidth = 3;
+        ctx.strokeStyle = 'var(--primary)';
+        ctx.shadowColor = 'var(--primary)';
+        ctx.shadowBlur = 8;
+        ctx.beginPath();
+        ctx.moveTo(0, height / 2);
+        for (let x = 0; x < width; x++) {
+          const y = height / 2 + Math.sin(x * 0.03 + phase) * 14 * Math.sin(x * 0.004) + Math.sin(x * 0.07 - phase * 1.3) * 4 * Math.cos(x * 0.008);
+          ctx.lineTo(x, y);
+        }
+        ctx.stroke();
+        ctx.shadowBlur = 0;
+        phase += 0.12;
+      }
+      draw();
+    }
+    function stopSimulatedWaveform() {
+      if (guideOscId) { cancelAnimationFrame(guideOscId); guideOscId = null; }
+    }
+
+    function playBeep(freq = 800, dur = 150, count = 1) {
+      try {
+        for (let i = 0; i < count; i++) {
+          setTimeout(() => {
+            const ctx = new (window.AudioContext || window.webkitAudioContext)();
+            const osc = ctx.createOscillator(); const gain = ctx.createGain();
+            osc.connect(gain); gain.connect(ctx.destination);
+            osc.frequency.value = freq; osc.type = 'sine';
+            gain.gain.setValueAtTime(0.2, ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + dur / 1000);
+            osc.start(); osc.stop(ctx.currentTime + dur / 1000);
+          }, i * 200);
+        }
+      } catch(e) {}
+    }
+
+    // Shadowing Recorder
+    let mediaRecorder = null;
+    let recordedChunks = [];
+    let audioBlobUrl = null;
+    let accuracyRecognition = null;
+    let accuracySpokenText = '';
+
+    document.getElementById('startRecord').addEventListener('click', async () => {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        mediaRecorder = new MediaRecorder(stream);
+        recordedChunks = [];
+        accuracySpokenText = '';
+        const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+        if (SR) {
+          accuracyRecognition = new SR();
+          accuracyRecognition.lang = 'en-US';
+          accuracyRecognition.continuous = true;
+          accuracyRecognition.interimResults = false;
+          accuracyRecognition.onresult = (e) => {
+            for (let i = e.resultIndex; i < e.results.length; i++)
+              if (e.results[i].isFinal) accuracySpokenText += e.results[i][0].transcript + ' ';
+          };
+          accuracyRecognition.onerror = () => {};
+          try { accuracyRecognition.start(); } catch(e) {}
+        }
+        mediaRecorder.ondataavailable = (e) => { if (e.data.size > 0) recordedChunks.push(e.data); };
+        mediaRecorder.onstop = () => {
+          const blob = new Blob(recordedChunks, { type: 'audio/webm' });
+          audioBlobUrl = URL.createObjectURL(blob);
+          document.getElementById('playRecord').disabled = false;
+          document.getElementById('recStatus').textContent = '✅ Recording saved — click Play to hear yourself, then Listen to compare with model';
+          document.getElementById('startRecord').textContent = '🎤 Record Again';
+          stream.getTracks().forEach(t => t.stop());
+        };
+        mediaRecorder.start();
+        document.getElementById('startRecord').disabled = true;
+        document.getElementById('stopRecord').disabled = false;
+        document.getElementById('recStatus').textContent = '🔴 Recording...';
+      } catch(e) {
+        document.getElementById('recStatus').textContent = '⚠️ Microphone access denied — allow mic access and try again';
+      }
+    });
+
+    document.getElementById('stopRecord').addEventListener('click', () => {
+      if (mediaRecorder && mediaRecorder.state === 'recording') {
+        mediaRecorder.stop();
+      }
+      if (accuracyRecognition) { try { accuracyRecognition.stop(); } catch(e){} accuracyRecognition = null; }
+      document.getElementById('startRecord').disabled = false;
+      document.getElementById('stopRecord').disabled = true;
+      setTimeout(() => {
+        if (accuracySpokenText.trim()) {
+          computeValeriaAccuracy(accuracySpokenText.trim());
+        }
+      }, 500);
+    });
+
+    document.getElementById('playRecord').addEventListener('click', () => {
+      if (audioBlobUrl) {
+        const audio = new Audio(audioBlobUrl);
+        audio.play();
+        document.getElementById('recStatus').textContent = '▶️ Playing your recording...';
+        audio.onended = () => {
+          document.getElementById('recStatus').textContent = '✅ Done — click Listen above to hear the model again';
+        };
+      }
+    });
+
+    function computeValeriaAccuracy(transcript) {
+      const targetNorm = (typeof shadowingText !== 'undefined' ? shadowingText : '').toLowerCase().replace(/[^a-z\s]/g,'').split(/\s+/).filter(Boolean);
+      const spokenNorm = transcript.toLowerCase().replace(/[^a-z\s]/g,'').split(/\s+/).filter(Boolean);
+      const aligned = lcsAlignValeria(targetNorm, spokenNorm);
+      const matched = aligned.filter(x => x.match).length;
+      const pct = targetNorm.length > 0 ? Math.round((matched / targetNorm.length) * 100) : 0;
+      showValeriaAccuracy(pct, aligned);
+    }
+
+    function lcsAlignValeria(target, spoken) {
+      const m = target.length, n = spoken.length;
+      const dp = Array.from({length: m + 1}, () => new Array(n + 1).fill(0));
+      for (let i = 1; i <= m; i++)
+        for (let j = 1; j <= n; j++)
+          dp[i][j] = target[i-1] === spoken[j-1] ? dp[i-1][j-1] + 1 : Math.max(dp[i-1][j], dp[i][j-1]);
+      let i = m, j = n; const result = [];
+      while (i > 0 && j > 0) {
+        if (target[i-1] === spoken[j-1]) { result.unshift({ word: target[i-1], match: true }); i--; j--; }
+        else if (dp[i-1][j] >= dp[i][j-1]) { result.unshift({ word: target[i-1], match: false }); i--; }
+        else j--;
+      }
+      while (i > 0) { result.unshift({ word: target[i-1], match: false }); i--; }
+      return result;
+    }
+
+    function showValeriaAccuracy(pct, aligned) {
+      const card = document.getElementById('accuracyCard');
+      const sec = document.getElementById('accuracySection');
+      if (!card || !sec) return;
+      card.style.display = 'block';
+      card.classList.add('visible');
+      const circumference = 220;
+      const offset = Math.round((1 - Math.min(pct, 100) / 100) * circumference);
+      const color = pct >= 80 ? 'var(--primary, #6366f1)' : pct >= 60 ? 'var(--accent-gold, #fbbf24)' : 'var(--accent-red, #f43f5e)';
+      let wordsHtml = '';
+      if (aligned && aligned.length > 0) {
+        wordsHtml = aligned.slice(0, 60).map(w =>
+          `<span class="accuracy-word ${w.match ? 'correct' : 'missed'}">${w.word}</span>`
+        ).join('');
+        if (aligned.length > 60) wordsHtml += `<span style="color:var(--text-muted, #94a3b8);font-size:12px;"> …+${aligned.length - 60} more</span>`;
+      }
+      sec.innerHTML = `
+        <div class="gauge-wrap">
+          <svg width="90" height="90" viewBox="0 0 90 90">
+            <circle cx="45" cy="45" r="35" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="8"/>
+            <circle cx="45" cy="45" r="35" fill="none" stroke="${color}" stroke-width="8"
+              stroke-dasharray="${circumference}" stroke-dashoffset="${circumference}"
+              stroke-linecap="round" transform="rotate(-90 45 45)"
+              style="transition:stroke-dashoffset 1.2s ease;" id="gaugeCircle"/>
+          </svg>
+          <div class="gauge-pct" style="color:${color};">${pct}%</div>
+          <div class="gauge-label">Accuracy</div>
+        </div>
+        <div class="accuracy-words">
+          ${wordsHtml || '<span style="color:var(--text-muted, #94a3b8)">Transcript not available.</span>'}
+        </div>`;
+      setTimeout(() => {
+        const c = document.getElementById('gaugeCircle');
+        if (c) c.style.strokeDashoffset = offset;
+      }, 80);
+    }
+
+    // Speaking Timer
+    let speakInterval = null;
+    let speakSeconds = 0;
+
+    function startSpeakingTimer() {
+      if (speakInterval) clearInterval(speakInterval);
+      playBeep(400, 100);
+      speakSeconds = 0;
+      const el = document.getElementById('speaking-timer');
+      el.style.color = 'var(--primary)';
+      document.getElementById('speakingStatus').textContent = '⏳ Speaking...';
+      speakInterval = setInterval(() => {
+        speakSeconds++;
+        const m = String(Math.floor(speakSeconds / 60)).padStart(2, '0');
+        const s = String(speakSeconds % 60).padStart(2, '0');
+        el.textContent = `${m}:${s}`;
+        if (speakSeconds >= 45) {
+          clearInterval(speakInterval);
+          speakInterval = null;
+          playBeep(800, 200, 2);
+          el.style.color = 'var(--accent-red)';
+          document.getElementById('speakingStatus').textContent = '⏹ Time is up!';
+        } else if (speakSeconds >= 35) {
+          el.style.color = 'var(--accent-red)';
+          document.getElementById('speakingStatus').textContent = '⚠️ 10 seconds remaining';
+        }
+      }, 1000);
+    }
+
+    function resetSpeakingTimer() {
+      clearInterval(speakInterval); speakInterval = null; speakSeconds = 0;
+      document.getElementById('speaking-timer').textContent = '00:00';
+      document.getElementById('speaking-timer').style.color = 'var(--primary)';
+      document.getElementById('speakingStatus').textContent = 'Timer ready';
+    }
+
+    // Writing Timer
+    let writeInterval = null;
+    function runWritingClock() {
+      if (writeInterval) clearInterval(writeInterval);
+      playBeep(400, 100);
+      let t = 600; const el = document.getElementById('write-time'); el.style.color = 'var(--primary)';
+      writeInterval = setInterval(() => {
+        t--;
+        const m = String(Math.floor(t / 60)).padStart(2, '0');
+        const s = String(t % 60).padStart(2, '0');
+        el.textContent = `${m}:${s}`;
+        if (t <= 120) el.style.color = 'var(--accent-red)';
+        if (t <= 0) { clearInterval(writeInterval); playBeep(800, 200, 2); }
+      }, 1000);
+    }
+
+    function playQuestion(n) {
+      const audio = document.getElementById('qAudio' + n);
+      audio.src = 'audio/q' + n + '.wav?' + Date.now();
+      audio.play();
+    }
+
+    function toggleQuestionText(n) {
+      const el = document.getElementById('qText' + n);
+      const btn = document.getElementById('revealQ' + n);
+      if (el.style.display === 'none' || !el.style.display) {
+        el.style.display = 'block';
+        btn.textContent = 'Hide Text';
+      } else {
+        el.style.display = 'none';
+        btn.textContent = 'Show Text';
+      }
+    }
+
+    // Word Counter
+    document.addEventListener('input', function(e) {
+      if (e.target.matches('.notepad-area')) {
+        const text = e.target.value.trim();
+        const words = text ? text.split(/\s+/).length : 0;
+        const counter = document.getElementById('wordCount');
+        if (counter) counter.textContent = words;
+      }
+    });
+  </script>
+</body>
+</html>
