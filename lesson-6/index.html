@@ -53,6 +53,7 @@
     .btn-primary { background: var(--primary); color: #fff; }
     .btn-primary:hover { background: var(--primary-hover); }
     .btn-secondary { background: rgba(255, 255, 255, 0.05); color: var(--text-main); border: 1px solid var(--border-color); }
+    .btn-sm { padding: 0.4rem 0.8rem; font-size: 0.8rem; }
     
     .timer-container { display: flex; gap: 1rem; margin: 1rem 0; }
     .exam-timer { background: #000; border: 1px solid var(--border-color); border-radius: 8px; padding: 1rem; text-align: center; flex: 1; }
@@ -400,6 +401,53 @@
           </div>
           <div class="word-counter">Words: <span id="wordCount">0</span> / 100</div>
           <textarea class="notepad-area" placeholder='Valeria, write your Academic Discussion response here (100+ words). Use concession + counter-argument structure. Target vocab: synthetic, fabrication, hyper-realistic, disinformation, identity theft, erosion, detection, accountability, regulatory, transparency.' style="height:350px;"></textarea>
+          <div style="margin-top:1.5rem;border-top:1px solid var(--border-color);padding-top:1.5rem;">
+            <p style="font-size:13px;color:var(--text-muted);margin-bottom:12px;text-align:center;">
+              Compare your response with three model answers — each uses a different rhetorical strategy.
+            </p>
+            <div class="btn-group" style="justify-content:center;">
+              <button class="btn btn-sm btn-secondary" onclick="showModel('m1')">A: Concession + Counter</button>
+              <button class="btn btn-sm btn-secondary" onclick="showModel('m2')">B: Agree + Extend</button>
+              <button class="btn btn-sm btn-secondary" onclick="showModel('m3')">C: Cautious Support</button>
+            </div>
+
+            <div class="model-response" id="m1" style="display:none;margin-top:1rem;background:rgba(0,0,0,0.3);border:1px solid var(--border-color);border-radius:8px;padding:1.25rem;text-align:left;">
+              <div style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.05em;color:var(--accent-green);margin-bottom:0.5rem;">Model A — Concession + Counter (Balanced) · ~115 words</div>
+              <p style="font-size:0.9rem;line-height:1.7;color:var(--text-main);">
+"While Leo raises a valid concern about the practical challenges of enforcement, I believe that mandating transparency labels for AI-generated content is a necessary first step toward maintaining public trust in digital media. Priya's comparison to food labelling is apt — regulation creates a norm even when compliance is imperfect. Nevertheless, the difficulty of enforcement does not justify inaction; it simply means we need a multi-layered approach that combines legal requirements with technological detection tools and media literacy education. In my view, establishing clear accountability frameworks for platforms that distribute undisclosed AI-generated content would incentivise responsible innovation while preserving the benefits of synthetic media for legitimate purposes."
+              </p>
+              <div style="margin-top:0.75rem;display:flex;gap:0.5rem;flex-wrap:wrap;">
+                <span style="font-size:0.75rem;background:rgba(16,185,129,0.1);color:var(--accent-green);padding:2px 8px;border-radius:4px;">concession: "While Leo raises... I believe"</span>
+                <span style="font-size:0.75rem;background:rgba(245,158,11,0.1);color:var(--accent-amber);padding:2px 8px;border-radius:4px;">counter: "Nevertheless"</span>
+                <span style="font-size:0.75rem;background:rgba(59,130,246,0.1);color:var(--blue);padding:2px 8px;border-radius:4px;">references: Priya + Leo</span>
+                <span style="font-size:0.75rem;background:rgba(139,92,246,0.1);color:var(--primary);padding:2px 8px;border-radius:4px;">target vocab: transparency, detection, accountability, synthetic</span>
+              </div>
+            </div>
+
+            <div class="model-response" id="m2" style="display:none;margin-top:1rem;background:rgba(0,0,0,0.3);border:1px solid var(--border-color);border-radius:8px;padding:1.25rem;text-align:left;">
+              <div style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.05em;color:var(--accent-cyan);margin-bottom:0.5rem;">Model B — Agree + Extend (Supports Priya) · ~110 words</div>
+              <p style="font-size:0.9rem;line-height:1.7;color:var(--text-main);">
+"I strongly agree with Priya that mandatory transparency labels are essential. The erosion of trust in digital content is an urgent problem that demands decisive regulatory action. Just as the food industry adapted to ingredient labelling requirements and the financial sector to disclosure rules, technology platforms can implement clear labelling systems for AI-generated content. Without such accountability measures, we risk a future where disinformation becomes indistinguishable from factual reporting. While I understand concerns about enforcement, historical precedent shows that regulation often drives innovation in compliance rather than stifling it."
+              </p>
+              <div style="margin-top:0.75rem;display:flex;gap:0.5rem;flex-wrap:wrap;">
+                <span style="font-size:0.75rem;background:rgba(16,185,129,0.1);color:var(--accent-green);padding:2px 8px;border-radius:4px;">strong agreement: "I strongly agree with Priya"</span>
+                <span style="font-size:0.75rem;background:rgba(59,130,246,0.1);color:var(--blue);padding:2px 8px;border-radius:4px;">reference: Priya</span>
+                <span style="font-size:0.75rem;background:rgba(139,92,246,0.1);color:var(--primary);padding:2px 8px;border-radius:4px;">target vocab: erosion, regulatory, accountability, disinformation</span>
+              </div>
+            </div>
+
+            <div class="model-response" id="m3" style="display:none;margin-top:1rem;background:rgba(0,0,0,0.3);border:1px solid var(--border-color);border-radius:8px;padding:1.25rem;text-align:left;">
+              <div style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.05em;color:var(--accent-amber);margin-bottom:0.5rem;">Model C — Cautious Support (Leans Leo) · ~115 words</div>
+              <p style="font-size:0.9rem;line-height:1.7;color:var(--text-main);">
+"While I appreciate Priya's call for transparency, I share Leo's concern that blanket labelling requirements may prove impractical and could unintentionally burden legitimate creators. The issue is not whether we want transparency — we do — but whether government mandates are the most effective path to achieve it. A more targeted approach could focus on high-risk domains such as political advertising and news media, where the potential for harm is greatest, while allowing flexibility for creative and educational uses of synthetic media. Ultimately, a combination of industry self-regulation, technological detection tools, and public education may prove more sustainable than broad government intervention."
+              </p>
+              <div style="margin-top:0.75rem;display:flex;gap:0.5rem;flex-wrap:wrap;">
+                <span style="font-size:0.75rem;background:rgba(16,185,129,0.1);color:var(--accent-green);padding:2px 8px;border-radius:4px;">concession: "While I appreciate... I share"</span>
+                <span style="font-size:0.75rem;background:rgba(59,130,246,0.1);color:var(--blue);padding:2px 8px;border-radius:4px;">references: Priya + Leo</span>
+                <span style="font-size:0.75rem;background:rgba(139,92,246,0.1);color:var(--primary);padding:2px 8px;border-radius:4px;">target vocab: transparency, detection, synthetic</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -806,6 +854,12 @@
         el.style.display = 'none';
         btn.textContent = 'Show Text';
       }
+    }
+
+    function showModel(id) {
+      document.querySelectorAll('.model-response').forEach(d => d.style.display = 'none');
+      const el = document.getElementById(id);
+      if (el) el.style.display = 'block';
     }
 
     // Word Counter
