@@ -18,7 +18,8 @@
       --glass-bg: rgba(19, 26, 38, 0.85); --glass-border: rgba(255, 255, 255, 0.03);
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Outfit', sans-serif; background-color: var(--bg-dark); color: var(--text-main); min-height: 100vh; display: flex; flex-direction: column; overflow-x: hidden; }
+    *:focus-visible { outline: 2px solid #3b82f6; outline-offset: 2px; border-radius: 4px; }
+    body { font-family: 'Outfit', sans-serif; background-color: var(--bg-dark); color: var(--text-main); min-height: 100vh; display: flex; flex-direction: column; overflow-x: hidden; overflow-wrap: break-word; word-break: break-word; }
     
     header { background: rgba(9, 13, 22, 0.9); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border-color); padding: 1rem 2rem; position: sticky; top: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; }
     .logo-area { display: flex; align-items: center; gap: 0.75rem; }
@@ -31,7 +32,7 @@
     
     .main-container { display: flex; flex: 1; height: calc(100vh - 65px); }
     .sidebar { width: 280px; border-right: 1px solid var(--border-color); padding: 1.5rem 1rem; display: flex; flex-direction: column; gap: 0.5rem; background: rgba(9, 13, 22, 0.5); }
-    .sidebar-btn { display: flex; align-items: center; gap: 0.75rem; width: 100%; padding: 0.75rem 1rem; background: transparent; border: 1px solid transparent; border-radius: 8px; color: var(--text-muted); font-size: 0.9rem; text-align: left; cursor: pointer; transition: all 0.2s ease; }
+    .sidebar-btn { display: flex; align-items: center; gap: 0.75rem; width: 100%; padding: 0.65rem 1rem; min-height: 44px; background: transparent; border: 1px solid transparent; border-radius: 8px; color: var(--text-muted); font-size: 0.9rem; text-align: left; cursor: pointer; transition: all 0.2s ease; }
     .sidebar-btn:hover { background: rgba(255, 255, 255, 0.02); color: var(--text-main); }
     .sidebar-btn.active { background: var(--bg-card); border-color: var(--border-color); color: var(--primary); font-weight: 600; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); }
     .sidebar-num { font-family: 'Fira Code', monospace; font-size: 0.8rem; opacity: 0.6; }
@@ -51,7 +52,7 @@
     .shadowing-word.highlighted { background: rgba(56, 189, 248, 0.25); color: #fff; border-radius: 3px; padding: 0 2px; }
     .shadowing-word.transition { color: var(--accent-amber); font-weight: 600; }
     
-    .btn { padding: 0.6rem 1.2rem; border-radius: 6px; border: none; font-weight: 600; font-family: inherit; cursor: pointer; display: flex; align-items: center; gap: 0.5rem; transition: all 0.2s ease; }
+    .btn { padding: 0.7rem 1.3rem; min-height: 44px; border-radius: 6px; border: none; font-weight: 600; font-family: inherit; cursor: pointer; display: flex; align-items: center; gap: 0.5rem; transition: all 0.2s ease; font-size: 0.9rem; }
     .btn-primary { background: var(--primary); color: #fff; }
     .btn-primary:hover { background: var(--primary-hover); }
     .btn-secondary { background: rgba(255, 255, 255, 0.05); color: var(--text-main); border: 1px solid var(--border-color); }
@@ -65,7 +66,7 @@
 
     .notepad-area { width: 100%; height: 250px; background: #05070c; border: 1px solid var(--border-color); border-radius: 6px; color: var(--text-main); padding: 0.75rem; font-family: inherit; resize: vertical; font-size: 0.95rem; }
     .recorder-bar { display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap; margin-top: 0.75rem; padding-top: 0.75rem; border-top: 1px solid var(--border-color); }
-    .rec-btn { padding: 0.35rem 0.75rem; font-size: 0.8rem; border-radius: 20px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); color: var(--text-muted); font-family: inherit; cursor: pointer; transition: all 0.2s ease; display: inline-flex; align-items: center; gap: 0.3rem; }
+    .rec-btn { padding: 0.6rem 1rem; min-height: 44px; font-size: 0.9rem; border-radius: 20px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); color: var(--text-muted); font-family: inherit; cursor: pointer; transition: all 0.2s ease; display: inline-flex; align-items: center; gap: 0.3rem; }
     .rec-btn:hover { background: rgba(255,255,255,0.1); }
     .rec-btn:disabled { opacity: 0.3; cursor: not-allowed; }
     .rec-status { font-size: 0.75rem; color: var(--text-muted); }
@@ -165,6 +166,34 @@
     .self-eval-box { background: rgba(245,158,11,0.05); border: 1px solid rgba(245,158,11,0.2); border-radius: 8px; padding: 1rem; margin-top: 0.75rem; }
     .self-eval-box h4 { color: var(--accent-amber); font-size: 0.95rem; margin-bottom: 0.5rem; }
     .self-eval-box p { color: #cbd5e1; font-size: 0.9rem; line-height: 1.6; }
+  .mobile-nav-toggle {
+    display: none; position: fixed; bottom: 20px; right: 20px; z-index: 200;
+    width: 48px; height: 48px; border-radius: 50%;
+    background: var(--primary); color: #000; border: none;
+    font-size: 20px; cursor: pointer; box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+    align-items: center; justify-content: center;
+    font-family: 'Outfit', sans-serif;
+  }
+  .sidebar-overlay {
+    display: none; position: fixed; inset: 0; z-index: 150;
+    background: rgba(0,0,0,0.6);
+  }
+  .sidebar-overlay.open { display: block; }
+  @media (max-width: 768px) {
+    .mobile-nav-toggle { display: flex; }
+    .main-container { height: auto; min-height: 100dvh; }
+    .sidebar {
+      position: fixed; left: 0; top: 0; z-index: 175;
+      height: 100vh; width: 280px;
+      transform: translateX(-100%); transition: transform 0.25s ease;
+    }
+    .sidebar.open { transform: translateX(0); }
+    .sidebar-overlay.open { display: block; }
+    .content-area { padding: 1rem; }
+    .card [style*="grid-template-columns:1fr 1fr"] { grid-template-columns: 1fr !important; }
+    .card [style*="grid-template-columns:1fr 220px"] { grid-template-columns: 1fr !important; }
+    .card [style*="grid-template-columns:1fr 200px"] { grid-template-columns: 1fr !important; }
+  }
   </style>
 </head>
 <body>
@@ -179,15 +208,15 @@
     </div>
   </header>
 
-  <div class="main-container">
-    <div class="sidebar">
+  <main class="main-container">
+    <nav class="sidebar">
       <button class="sidebar-btn active" onclick="switchSlide(0)"><span class="sidebar-num">01</span> Shadowing: Warm-up</button>
       <button class="sidebar-btn" onclick="switchSlide(1)"><span class="sidebar-num">02</span> Anatomy of a Response</button>
       <button class="sidebar-btn" onclick="switchSlide(2)"><span class="sidebar-num">03</span> Scaffold Builder</button>
       <button class="sidebar-btn" onclick="switchSlide(3)"><span class="sidebar-num">04</span> Timed Writing</button>
       <button class="sidebar-btn" onclick="switchSlide(4)"><span class="sidebar-num">05</span> Lexical Booster</button>
       <button class="sidebar-btn" onclick="switchSlide(5)"><span class="sidebar-num">06</span> Homework</button>
-    </div>
+    </nav>
 
     <div class="content-area">
       
@@ -206,16 +235,16 @@
           </div>
           <div class="pacer-controls">
             <button class="btn btn-secondary listen-btn" onclick="toggleSpeaking()">🔊 Listen</button>
-            <select class="speed-select" id="speedSelect">
+            <select class="speed-select" id="speedSelect" aria-label="Playback speed">
               <option value="0.75">🐢 Slow</option>
               <option value="1" selected>▶ Normal</option>
               <option value="1.25">🐇 Fast</option>
             </select>
           </div>
           <div class="recorder-bar">
-            <button class="rec-btn" id="startRecord">🎤 Record</button>
-            <button class="rec-btn" id="stopRecord" disabled>⏹ Stop</button>
-            <button class="rec-btn" id="playRecord" disabled>🎧 Play</button>
+            <button class="rec-btn" id="startRecord" aria-label="Start recording">🎤 Record</button>
+            <button class="rec-btn" id="stopRecord" disabled aria-label="Stop recording">⏹ Stop</button>
+            <button class="rec-btn" id="playRecord" disabled aria-label="Play recording">🎧 Play</button>
             <span class="rec-status" id="recStatus">Record yourself, then compare with the model</span>
           </div>
         </div>
@@ -407,7 +436,7 @@
               <div class="scaffold-body">
                 <div class="scaffold-label">Position — State your stance</div>
                 <div class="scaffold-hint">Pick an opener that matches how you feel about the topic</div>
-                <select id="s1-opener" onchange="updateScaffoldPreview()">
+                <select id="s1-opener" onchange="updateScaffoldPreview()" aria-label="Sentence 1 opener">
                   <option value="">— Choose an opener —</option>
                   <option value="While I understand Aisha's optimism about AI, I believe the risks of encoding historical bias into algorithms are too significant to ignore.">While I understand Aisha's optimism...</option>
                   <option value="I strongly agree with Aisha's point about consistency — algorithmic tools can indeed reduce human inconsistency in sentencing.">I strongly agree with Aisha's point...</option>
@@ -421,7 +450,7 @@
               <div class="scaffold-body">
                 <div class="scaffold-label">Acknowledge — Reference a classmate</div>
                 <div class="scaffold-hint">Name Aisha or Daniel. What specific point did they make? Restate it in your own words.</div>
-                <textarea id="s2-text" placeholder="e.g., Aisha raises a valid point about... / Daniel rightly observes that..." oninput="updateScaffoldPreview()"></textarea>
+                <textarea id="s2-text" aria-label="Sentence 2 counter-argument" placeholder="e.g., Aisha raises a valid point about... / Daniel rightly observes that..." oninput="updateScaffoldPreview()"></textarea>
               </div>
             </div>
 
@@ -430,7 +459,7 @@
               <div class="scaffold-body">
                 <div class="scaffold-label">Counter — Push the discussion forward</div>
                 <div class="scaffold-hint">Use a concession or counter-argument structure. "Nevertheless...", "However...", "That said..."</div>
-                <textarea id="s3-text" placeholder="e.g., Nevertheless, consistency is only valuable if the criteria are fair..." oninput="updateScaffoldPreview()"></textarea>
+                <textarea id="s3-text" aria-label="Sentence 3 elaboration" placeholder="e.g., Nevertheless, consistency is only valuable if the criteria are fair..." oninput="updateScaffoldPreview()"></textarea>
               </div>
             </div>
 
@@ -439,7 +468,7 @@
               <div class="scaffold-body">
                 <div class="scaffold-label">Evidence — Give a concrete example</div>
                 <div class="scaffold-hint">COMPAS, Amazon hiring, facial recognition bias — a specific case strengthens your argument.</div>
-                <textarea id="s4-text" placeholder="e.g., The COMPAS recidivism algorithm falsely flagged Black defendants as high-risk at nearly twice the rate of white defendants..." oninput="updateScaffoldPreview()"></textarea>
+                <textarea id="s4-text" aria-label="Sentence 4 example" placeholder="e.g., The COMPAS recidivism algorithm falsely flagged Black defendants as high-risk at nearly twice the rate of white defendants..." oninput="updateScaffoldPreview()"></textarea>
               </div>
             </div>
 
@@ -448,7 +477,7 @@
               <div class="scaffold-body">
                 <div class="scaffold-label">Tie-back — Connect to the professor's question</div>
                 <div class="scaffold-hint">Return to the big picture. "In conclusion...", "Ultimately...", "The real question is..."</div>
-                <textarea id="s5-text" placeholder="e.g., Ultimately, the question is not whether AI can be more consistent than humans, but whether we can trust the data it learns from..." oninput="updateScaffoldPreview()"></textarea>
+                <textarea id="s5-text" aria-label="Sentence 5 conclusion" placeholder="e.g., Ultimately, the question is not whether AI can be more consistent than humans, but whether we can trust the data it learns from..." oninput="updateScaffoldPreview()"></textarea>
               </div>
             </div>
           </div>
@@ -534,7 +563,7 @@
               <div class="word-counter" style="text-align:right;font-size:0.85rem;color:var(--text-muted);margin-bottom:0.5rem;font-family:'Fira Code',monospace;">
                 Words: <span id="wordCount">0</span> / 130
               </div>
-              <textarea class="notepad-area" id="writing-area" placeholder="Follow the 5-sentence progression: Position → Acknowledge → Counter → Evidence → Tie-back..." style="height:350px; font-family: 'Outfit';"></textarea>
+              <textarea class="notepad-area" id="writing-area" aria-label="Timed writing response" placeholder="Follow the 5-sentence progression: Position → Acknowledge → Counter → Evidence → Tie-back..." style="height:350px; font-family: 'Outfit';"></textarea>
             </div>
             <div class="ref-card" style="font-size:0.8rem; position:sticky; top:1rem;">
               <div style="font-weight:600; margin-bottom:0.5rem; color:var(--primary); font-size:0.85rem;">📌 5-Step Progression</div>
@@ -587,7 +616,7 @@
             <span class="lex-pill" data-word="reinforce" onclick="insertLexWord(this)">reinforce</span>
             <span class="lex-pill" data-word="systemic" onclick="insertLexWord(this)">systemic</span>
           </div>
-          <textarea id="lexNotepad" class="notepad-area" placeholder="Write sentences using the lexical items above. Click a word pill to insert it." style="height:150px;"></textarea>
+          <textarea id="lexNotepad" aria-label="Lexical booster sentences" class="notepad-area" placeholder="Write sentences using the lexical items above. Click a word pill to insert it." style="height:150px;"></textarea>
           <div class="lex-score" id="lexScore" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.5rem;">
             <span>Lexical Items Used: <span id="lexCount">0</span> / 10</span>
             <span style="font-size:0.85rem;color:var(--text-muted);font-family:'Fira Code',monospace;">Words: <span id="lexWordCount">0</span></span>
@@ -712,7 +741,7 @@
       </div>
 
     </div>
-  </div>
+  </main>
 
   <script>
     function switchSlide(index) {
@@ -720,6 +749,10 @@
       document.querySelectorAll('.sidebar-btn').forEach(b => b.classList.remove('active'));
       document.getElementById(`slide-${index}`).classList.add('active');
       document.querySelectorAll('.sidebar-btn')[index].classList.add('active');
+      if (window.innerWidth <= 768) {
+        document.querySelector('.sidebar').classList.remove('open');
+        document.getElementById('sidebarOverlay').classList.remove('open');
+      }
     }
 
     // ---- Shadowing ----
@@ -1107,5 +1140,17 @@
       document.getElementById('frame-score').textContent = `Score: ${frameScore} / 5`;
     }
   </script>
+<button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Open lesson navigation">☰</button>
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+<script>
+document.getElementById('mobileNavToggle').addEventListener('click', function() {
+  document.querySelector('.sidebar').classList.toggle('open');
+  document.getElementById('sidebarOverlay').classList.toggle('open');
+});
+document.getElementById('sidebarOverlay').addEventListener('click', function() {
+  document.querySelector('.sidebar').classList.remove('open');
+  document.getElementById('sidebarOverlay').classList.remove('open');
+});
+</script>
 </body>
 </html>
