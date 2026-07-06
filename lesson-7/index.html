@@ -209,7 +209,7 @@
   </header>
 
   <main class="main-container">
-    <nav class="sidebar">
+    <nav class="sidebar" role="tablist">
       <button class="sidebar-btn active" onclick="switchSlide(0)"><span class="sidebar-num">01</span> Shadowing: Warm-up</button>
       <button class="sidebar-btn" onclick="switchSlide(1)"><span class="sidebar-num">02</span> Anatomy of a Response</button>
       <button class="sidebar-btn" onclick="switchSlide(2)"><span class="sidebar-num">03</span> Scaffold Builder</button>
@@ -221,9 +221,9 @@
     <div class="content-area">
       
       <!-- Slide 0: Shadowing Pacer + Transition Focus -->
-      <div class="slide active" id="slide-0">
+      <div class="slide active" role="tabpanel" id="slide-0">
         <div class="card shadowing-box">
-          <div class="card-title">🔊 Shadowing Pacer: Algorithmic Governance</div>
+          <h2 class="card-title">🔊 Shadowing Pacer: Algorithmic Governance</h2>
           <p class="text-muted">Focus on stress in technical vocabulary and <strong style="color:var(--accent-amber);">transition phrases</strong> that signal rhetorical moves. These transitions are the same ones you'll use in your Academic Discussion response.</p>
           <div id="shadowing-text" class="shadowing-text"></div>
           <canvas id="waveCanvas" width="800" height="90" style="width:100%;height:90px;background:#05070c;border-radius:6px;border:1px solid var(--border-color);margin-bottom:1.25rem;"></canvas>
@@ -249,7 +249,7 @@
           </div>
         </div>
         <div class="card">
-          <div class="card-title">🔗 Transition Phrase Focus</div>
+          <h2 class="card-title">🔗 Transition Phrase Focus</h2>
           <p class="text-muted" style="margin-bottom:0.75rem;">The shadowing text uses these rhetorical transitions. Each one signals a specific move in the argument — the same moves you'll make in your Academic Discussion response.</p>
           <div style="display:grid; grid-template-columns: 1fr 1fr; gap:0.75rem;">
             <div style="background:rgba(245,158,11,0.05); border:1px solid rgba(245,158,11,0.15); border-radius:6px; padding:0.6rem 0.75rem;">
@@ -271,7 +271,7 @@
           </div>
         </div>
         <div class="card">
-          <div class="card-title">💬 Discussion Questions</div>
+          <h2 class="card-title">💬 Discussion Questions</h2>
           <ol style="padding-left: 1.25rem; color: #cbd5e1; line-height: 1.8; font-size: 0.95rem;">
             <li>Can a computer algorithm be truly fair? Why or why not?</li>
             <li>Would you trust an AI to make hiring decisions? Under what conditions?</li>
@@ -282,9 +282,9 @@
       <audio id="shadowingAudio" preload="none" style="display:none"></audio>
 
       <!-- Slide 1: Anatomy of a Response -->
-      <div class="slide" id="slide-1">
+      <div class="slide" role="tabpanel" id="slide-1">
         <div class="card">
-          <div class="card-title">📐 The 5-Sentence Progression</div>
+          <h2 class="card-title">📐 The 5-Sentence Progression</h2>
           <p style="color: #cbd5e1; font-size: 0.95rem; line-height: 1.7; margin-bottom: 1rem;">
             Forget the old "3 templates" approach. Every Academic Discussion response follows the same <strong>logical progression</strong> — not a rigid template, but a sequence of 5 rhetorical moves. Master this and you never get stuck after sentence 2.
           </p>
@@ -333,7 +333,7 @@
         </div>
 
         <div class="card">
-          <div class="card-title">👆 Interactive Model — Click Any Sentence</div>
+          <h2 class="card-title">👆 Interactive Model — Click Any Sentence</h2>
           <p class="text-muted" style="margin-bottom:1rem;">Click a sentence below to see its function highlighted. Click a function label to jump to the matching sentence.</p>
           <div style="display:grid; grid-template-columns: 1fr 220px; gap:1.5rem;">
             <div id="model-response">
@@ -394,7 +394,7 @@
         </div>
 
         <div class="card">
-          <div class="card-title">📌 The 5-Step Reference</div>
+          <h2 class="card-title">📌 The 5-Step Reference</h2>
           <p class="text-muted" style="margin-bottom:0.75rem;">Keep this skeleton in mind for EVERY Academic Discussion response. It will appear on your screen during the timed writing.</p>
           <div class="ref-card">
             <ol>
@@ -409,9 +409,9 @@
       </div>
 
       <!-- Slide 2: Scaffold Builder -->
-      <div class="slide" id="slide-2">
+      <div class="slide" role="tabpanel" id="slide-2">
         <div class="card">
-          <div class="card-title">💬 Academic Discussion Thread</div>
+          <h2 class="card-title">💬 Academic Discussion Thread</h2>
           <div class="prompt-box">
             <div class="speaker-label prof">👨‍🏫 Professor Chen:</div>
             <p>"Let's discuss the role of algorithms in criminal justice. Some argue that AI risk assessment tools can reduce bias in sentencing. Others warn that these systems may reinforce historical patterns of discrimination. What's your perspective?"</p>
@@ -427,7 +427,7 @@
         </div>
 
         <div class="card">
-          <div class="card-title">🧱 Build Your Response — Sentence by Sentence</div>
+          <h2 class="card-title">🧱 Build Your Response — Sentence by Sentence</h2>
           <p class="text-muted" style="margin-bottom:1rem;">Fill in each row below. Sentence 1 has a dropdown to start. Sentences 2-5 are free-text. When you're done, click <strong>Assemble</strong> to see your complete response.</p>
 
           <div id="scaffold-form">
@@ -502,9 +502,9 @@
       </div>
 
       <!-- Slide 3: Timed Writing with Pacing Guide -->
-      <div class="slide" id="slide-3">
+      <div class="slide" role="tabpanel" id="slide-3">
         <div class="card">
-          <div class="card-title">✍️ Timed Academic Discussion — AI in Hiring</div>
+          <h2 class="card-title">✍️ Timed Academic Discussion — AI in Hiring</h2>
           
           <div class="prompt-box">
             <div class="speaker-label prof">👨‍🏫 Professor's Prompt</div>
@@ -521,7 +521,7 @@
         </div>
 
         <div class="card">
-          <div class="card-title">⏱️ Timed Writing — 10 Minutes</div>
+          <h2 class="card-title">⏱️ Timed Writing — 10 Minutes</h2>
           <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1rem;">
             Write 100+ words. Reference Priya and/or David. Follow the <strong>5-sentence progression</strong>.
           </p>
@@ -564,6 +564,7 @@
                 Words: <span id="wordCount">0</span> / 130
               </div>
               <textarea class="notepad-area" id="writing-area" aria-label="Timed writing response" placeholder="Follow the 5-sentence progression: Position → Acknowledge → Counter → Evidence → Tie-back..." style="height:350px; font-family: 'Outfit';"></textarea>
+              <div id="checkWritingFeedback"></div>
             </div>
             <div class="ref-card" style="font-size:0.8rem; position:sticky; top:1rem;">
               <div style="font-weight:600; margin-bottom:0.5rem; color:var(--primary); font-size:0.85rem;">📌 5-Step Progression</div>
@@ -600,9 +601,9 @@
       </div>
 
       <!-- Slide 4: Lexical Booster + Frame Matching -->
-      <div class="slide" id="slide-4">
+      <div class="slide" role="tabpanel" id="slide-4">
         <div class="card">
-          <div class="card-title">📚 Lexical Booster: Algorithmic Governance</div>
+          <h2 class="card-title">📚 Lexical Booster: Algorithmic Governance</h2>
           <p class="text-muted" style="margin-bottom:1rem;">Use these words in your writing. Click a pill to insert it into the notepad. Used words turn green.</p>
           <div class="lex-grid" id="lexGrid">
             <span class="lex-pill" data-word="algorithmic" onclick="insertLexWord(this)">algorithmic</span>
@@ -624,7 +625,7 @@
         </div>
 
         <div class="card">
-          <div class="card-title">🔗 Sentence-Frame Matching</div>
+          <h2 class="card-title">🔗 Sentence-Frame Matching</h2>
           <p class="text-muted" style="margin-bottom:1rem;">Complete each scaffold frame by selecting the correct conjunction or opener. These are the same structures you used in the 5-sentence progression.</p>
           <div class="frame-match">
             <div class="frame-row">
@@ -688,9 +689,9 @@
       </div>
 
       <!-- Slide 5: Homework -->
-      <div class="slide" id="slide-5">
+      <div class="slide" role="tabpanel" id="slide-5">
         <div class="card">
-          <div class="card-title">📋 Homework Assignments</div>
+          <h2 class="card-title">📋 Homework Assignments</h2>
           <p class="text-muted" style="margin-bottom: 1.5rem;">Complete these tasks before our next class. Submit via your usual chat channel.</p>
 
           <div class="hw-card">
@@ -1032,6 +1033,7 @@
       document.getElementById('s5-text').value = '';
       document.getElementById('assembled-response').style.display = 'none';
       document.getElementById('model-scaffold').style.display = 'none';
+      ['s1-opener', 's2-text', 's3-text', 's4-text', 's5-text'].forEach(id => localStorage.removeItem('v7_' + id));
     }
 
     // ---- Timed Writing with Pacing Guide ----
@@ -1113,9 +1115,61 @@
         } else if (e.target.id === 'writing-area') {
           const counter = document.getElementById('wordCount');
           if (counter) counter.textContent = words;
+          checkWriting();
         }
       }
+      // localStorage save for scaffold + writing
+      if (e.target.id && e.target.id.startsWith('s') && e.target.id.endsWith('text')) {
+        localStorage.setItem('v7_' + e.target.id, e.target.value);
+      }
+      if (e.target.id === 'writing-area') {
+        localStorage.setItem('v7_writing', e.target.value);
+      }
     });
+
+    // ---- checkWriting() — auto-detect 5-sentence progression elements ----
+    function checkWriting() {
+      const ta = document.getElementById('writing-area');
+      const fb = document.getElementById('checkWritingFeedback');
+      if (!ta || !fb) return;
+      const text = ta.value.toLowerCase();
+      const wordCount = ta.value.trim() ? ta.value.trim().split(/\s+/).length : 0;
+
+      const checks = [
+        { label: 'References a classmate (Priya/David)', pass: /priya|david/.test(text) },
+        { label: 'Concession marker (however/nevertheless/that said)', pass: /however|nevertheless|that said|while i understand/.test(text) },
+        { label: 'Counter-argument (but I believe/on the other hand)', pass: /but i believe|however i argue|on the other hand|yet i would/.test(text) },
+        { label: 'Word count ≥ 100', pass: wordCount >= 100 },
+      ];
+
+      const passed = checks.filter(c => c.pass).length;
+      const html = checks.map(c => 
+        `<div style="font-size:12px;color:${c.pass ? 'var(--primary)' : 'var(--muted)'};">${c.pass ? '✅' : '⬜'} ${c.label}</div>`
+      ).join('');
+      fb.innerHTML = `<div style="margin-top:8px;padding:10px;background:rgba(16,185,129,0.06);border:1px solid rgba(16,185,129,0.2);border-radius:8px;">
+        <div style="font-size:11px;font-weight:700;color:var(--primary);margin-bottom:6px;">5-Sentence Progression Check (${passed}/${checks.length})</div>
+        ${html}
+      </div>`;
+    }
+
+    // ---- localStorage persistence ----
+    function saveScaffold() {
+      ['s1-opener', 's2-text', 's3-text', 's4-text', 's5-text'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) localStorage.setItem('v7_' + id, el.value);
+      });
+    }
+    function loadSaved() {
+      ['s1-opener', 's2-text', 's3-text', 's4-text', 's5-text'].forEach(id => {
+        const el = document.getElementById(id);
+        const val = localStorage.getItem('v7_' + id);
+        if (el && val !== null) { el.value = val; el.dispatchEvent(new Event('input')); el.dispatchEvent(new Event('change')); }
+      });
+      const wa = document.getElementById('writing-area');
+      const wv = localStorage.getItem('v7_writing');
+      if (wa && wv !== null) { wa.value = wv; wa.dispatchEvent(new Event('input')); }
+    }
+    setTimeout(loadSaved, 500);
 
     // ---- Frame Matching ----
     let frameScore = 0;
