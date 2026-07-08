@@ -127,6 +127,7 @@
     .reading-box { background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); border-left: 4px solid var(--accent-blue); border-radius: 8px; padding: 1rem; margin-bottom: 1rem; }
     .reading-box h4 { color: var(--accent-blue); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.4rem; }
     .reading-box p { color: #cbd5e1; font-size: 0.92rem; line-height: 1.65; }
+  .ico { display: inline-flex; vertical-align: middle; flex-shrink: 0; }
   </style>
 </head>
 <body>
@@ -326,7 +327,7 @@
 
           <!-- Interactive T-Chart Notepad -->
           <div class="card" style="margin:1rem 0;">
-            <div class="card-title">📝 T-Chart Notepad — Take Notes While Listening</div>
+            <div class="card-title"> <svg class="ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>  T-Chart Notepad — Take Notes While Listening</div>
             <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:0.75rem;">Left = Reading key points. Right = Lecture key points. Use symbols (↑↓→≠≈).</p>
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
               <div>
@@ -389,7 +390,7 @@
       <!-- Slide 4: Academic Discussion -->
       <div class="slide" id="slide-4">
         <div class="card">
-          <div class="card-title">🎭 Register Slider: Campus vs. Academic</div>
+          <div class="card-title"> <svg class="ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2z"/><path d="M7.5 8.5c0 1-1 1.5-1.5 1.5s-1.5-.5-1.5-1.5S5.5 7 6 7s1.5.5 1.5 1.5z"/><path d="M16.5 8.5c0 1 1 1.5 1.5 1.5s1.5-.5 1.5-1.5S18.5 7 18 7s-1.5.5-1.5 1.5z"/><path d="M12 17c-2 0-3-1-3-2h6c0 1-1 2-3 2z"/></svg>  Register Slider: Campus vs. Academic</div>
           <p class="text-muted" style="margin-bottom:0.75rem;">Practice choosing the right tone for the right context.</p>
           <div class="reg-btns" id="regBtns">
             <button class="reg-btn active-formal" onclick="setRegister('academic')">🎓 Academic</button>
@@ -403,7 +404,7 @@
         </div>
 
         <div class="card">
-          <div class="card-title">🎤 Speak & Check (STT)</div>
+          <div class="card-title"> <svg class="ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/></svg>  Speak & Check (STT)</div>
           <p class="text-muted">Say a sentence using one of the target academic words. If the STT catches it, the pill turns green.</p>
           <div class="lex-grid" id="sttCollocGrid"></div>
           <div style="margin-top:0.5rem;">
