@@ -194,6 +194,17 @@
     .card [style*="grid-template-columns:1fr 220px"] { grid-template-columns: 1fr !important; }
     .card [style*="grid-template-columns:1fr 200px"] { grid-template-columns: 1fr !important; }
   }
+
+  .accuracy-card { display: none; margin-top: 16px; padding: 20px; background: rgba(18,16,38,0.45); border: 1px solid var(--border-color); border-radius: 16px; }
+  .accuracy-card.visible { display: block; }
+  .gauge-row { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+  .gauge-wrap { display: flex; flex-direction: column; align-items: center; gap: 6px; flex-shrink: 0; }
+  .gauge-pct { font-size: 28px; font-weight: 700; font-family: 'Fira Code', monospace; }
+  .gauge-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); }
+  .accuracy-words { flex: 1; min-width: 200px; line-height: 1.8; font-size: 14px; }
+  .accuracy-word { display: inline-block; margin: 0 2px; padding: 0 3px; border-radius: 4px; }
+  .accuracy-word.correct { color: var(--primary); background: rgba(99, 102, 241, 0.08); border-bottom: 2px solid var(--primary); }
+  .accuracy-word.missed { color: var(--accent-red); background: rgba(244, 63, 94, 0.08); border-bottom: 2px solid var(--accent-red); }
   </style>
 </head>
 <body>
@@ -246,6 +257,9 @@
             <button class="rec-btn" id="stopRecord" disabled aria-label="Stop recording">⏹ Stop</button>
             <button class="rec-btn" id="playRecord" disabled aria-label="Play recording">🎧 Play</button>
             <span class="rec-status" id="recStatus">Record yourself, then compare with the model</span>
+          </div>
+          <div class="accuracy-card" id="accuracyCard">
+            <div class="gauge-row" id="accuracySection"></div>
           </div>
         </div>
         <div class="card">
@@ -496,7 +510,7 @@
             <div class="model-sentence"><span class="model-tag tag-acknowledge">Acknowledge</span> Aisha raises a valid point about consistency — she is right that human judges vary widely in their decisions.</div>
             <div class="model-sentence"><span class="model-tag tag-counter">Counter</span> Nevertheless, consistency is only valuable if the underlying criteria are fair to begin with, and this is where algorithms face a fundamental problem.</div>
             <div class="model-sentence"><span class="model-tag tag-evidence">Evidence</span> The COMPAS recidivism algorithm, for example, falsely flagged Black defendants as high-risk at nearly twice the rate of white defendants — it automated discrimination rather than eliminating it.</div>
-            <div class="model-sentence"><span class="model-tag tag-tieback">Tie-back</span> In short, the more pressing question is not whether AI can be more consistent, but whether we can trust its training data to be truly fair.</div>
+            <div class="model-sentence"><span class="model-tag tag-tieback">Tie-back</span> In short, the more pressing question is not whether AI can be more consistent, but whether we can trust the data it learns from to be truly fair.</div>
           </div>
         </div>
       </div>
@@ -825,7 +839,7 @@
       const text = Array.from(document.querySelectorAll('.shadowing-word')).map(w => w.textContent).join(' ');
       if (!text.trim()) return;
       const u = new SpeechSynthesisUtterance(text);
-      u.lang = 'en-US'; u.rate = 0.85;
+      u.lang = 'en-US'; u.rate = (currentSpeed || 1) * 0.85;
       u.onstart = () => { speaking = true; document.querySelector('.listen-btn').textContent = '■ Stop'; };
       u.onend = u.onerror = () => { speaking = false; document.querySelector('.listen-btn').textContent = '🔊 Listen'; };
       speechSynthesis.speak(u);
@@ -866,8 +880,8 @@
         ctx.fillStyle = 'rgba(9, 13, 22, 0.3)';
         ctx.fillRect(0, 0, width, height);
         ctx.lineWidth = 3;
-        ctx.strokeStyle = 'var(--primary)';
-        ctx.shadowColor = 'var(--primary)';
+        ctx.strokeStyle = '#8b5cf6';
+        ctx.shadowColor = '#8b5cf6';
         ctx.shadowBlur = 8;
         ctx.beginPath();
         ctx.moveTo(0, height / 2);
@@ -906,10 +920,30 @@
     let mediaRecorder = null;
     let recordedChunks = [];
     let audioBlobUrl = null;
+    let accuracyRecognition = null;
+    let accuracySpokenText = '';
 
     document.getElementById('startRecord').addEventListener('click', async () => {
       try {
         const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        accuracySpokenText = '';
+        document.getElementById('accuracyCard').classList.remove('visible');
+
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        if (SpeechRecognition) {
+          accuracyRecognition = new SpeechRecognition();
+          accuracyRecognition.lang = 'en-US';
+          accuracyRecognition.interimResults = true;
+          accuracyRecognition.continuous = true;
+          accuracyRecognition.maxAlternatives = 1;
+          accuracyRecognition.onresult = (e) => {
+            for (let i = e.resultIndex; i < e.results.length; i++) {
+              if (e.results[i].isFinal) accuracySpokenText += e.results[i][0].transcript + ' ';
+            }
+          };
+          accuracyRecognition.start();
+        }
+
         mediaRecorder = new MediaRecorder(stream);
         recordedChunks = [];
         mediaRecorder.ondataavailable = (e) => { if (e.data.size > 0) recordedChunks.push(e.data); };
@@ -920,6 +954,17 @@
           document.getElementById('recStatus').textContent = '✅ Recording saved — click Play to hear yourself, then Listen to compare with model';
           document.getElementById('startRecord').textContent = '🎤 Record Again';
           stream.getTracks().forEach(t => t.stop());
+
+          if (accuracyRecognition) {
+            try { accuracyRecognition.stop(); } catch(e) {}
+            accuracyRecognition = null;
+            setTimeout(() => {
+              const modelText = document.getElementById('modelText')?.textContent || '';
+              if (accuracySpokenText.trim() && modelText.trim()) {
+                showValeriaAccuracy(accuracySpokenText.trim(), modelText.trim());
+              }
+            }, 500);
+          }
         };
         mediaRecorder.start();
         document.getElementById('startRecord').disabled = true;
@@ -937,6 +982,47 @@
         document.getElementById('stopRecord').disabled = true;
       }
     });
+
+    // ---- Accuracy (STT-based) ----
+    function computeValeriaAccuracy(spoken, model) {
+      const normalize = (s) => s.toLowerCase().replace(/[^\w\s'-]/g, '').replace(/\s+/g, ' ').trim();
+      const sWords = normalize(spoken).split(' ');
+      const mWords = normalize(model).split(' ');
+      if (!sWords.length || !mWords.length) return { pct: 0, aligned: [] };
+      const align = lcsAlignValeria(sWords, mWords);
+      const correct = align.filter(a => a.match).length;
+      return { pct: Math.round((correct / mWords.length) * 100), aligned: align, total: mWords.length, correct };
+    }
+
+    function lcsAlignValeria(sWords, mWords) {
+      const dp = Array.from({ length: sWords.length + 1 }, () => Array(mWords.length + 1).fill(0));
+      for (let i = 1; i <= sWords.length; i++)
+        for (let j = 1; j <= mWords.length; j++)
+          dp[i][j] = sWords[i-1] === mWords[j-1] ? dp[i-1][j-1] + 1 : Math.max(dp[i-1][j], dp[i][j-1]);
+      const result = []; let i = sWords.length, j = mWords.length;
+      while (i > 0 && j > 0) {
+        if (sWords[i-1] === mWords[j-1]) { result.unshift({ word: sWords[i-1], match: true }); i--; j--; }
+        else if (dp[i-1][j] >= dp[i][j-1]) { result.unshift({ word: sWords[--i], match: false }); }
+        else { result.unshift({ word: mWords[--j], match: false }); }
+      }
+      while (i > 0) result.unshift({ word: sWords[--i], match: false });
+      while (j > 0) result.unshift({ word: mWords[--j], match: false });
+      return result;
+    }
+
+    function showValeriaAccuracy(spoken, model) {
+      const { pct, aligned } = computeValeriaAccuracy(spoken, model);
+      document.getElementById('accuracyCard').classList.add('visible');
+      const section = document.getElementById('accuracySection');
+      const color = pct >= 80 ? 'var(--primary)' : pct >= 50 ? 'var(--accent-amber)' : 'var(--accent-red)';
+      let gaugeHtml = '';
+      let ringSvg = '';
+      const r = 36, circ = 2 * Math.PI * r, offset = circ - (pct / 100) * circ;
+      ringSvg = `<svg width="86" height="86" viewBox="0 0 86 86"><circle cx="43" cy="43" r="${r}" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="8"/><circle cx="43" cy="43" r="${r}" fill="none" stroke="${color}" stroke-width="8" stroke-dasharray="${circ}" stroke-dashoffset="${offset}" stroke-linecap="round" transform="rotate(-90 43 43)"/></svg>`;
+      gaugeHtml = `<div class="gauge-wrap">${ringSvg}<span class="gauge-pct" style="color:${color}">${pct}%</span><span class="gauge-label">accuracy</span></div>`;
+      const wordHtml = aligned.map(a => `<span class="accuracy-word ${a.match ? 'correct' : 'missed'}">${a.word}</span>`).join(' ');
+      section.innerHTML = gaugeHtml + `<div class="accuracy-words">${wordHtml}</div>`;
+    }
 
     document.getElementById('playRecord').addEventListener('click', () => {
       if (audioBlobUrl) {
@@ -1064,6 +1150,7 @@
         if (t <= 0) {
           clearInterval(writeInterval);
           clearInterval(pacingInterval);
+          document.querySelectorAll('.pacing-segment').forEach(s => { s.classList.remove('active'); s.classList.add('done'); });
           playBeep(800, 200, 2);
           label.textContent = '⏰ Time is up!';
         }
@@ -1096,7 +1183,7 @@
       notepad.value = textBefore + word + ' ' + textAfter;
       notepad.focus();
       notepad.selectionStart = notepad.selectionEnd = cursorPos + word.length + 1;
-      el.classList.add('used');
+      el.classList.add('used'); el.style.pointerEvents = 'none';
       updateLexCount();
     }
 
@@ -1119,7 +1206,7 @@
         }
       }
       // localStorage save for scaffold + writing
-      if (e.target.id && e.target.id.startsWith('s') && e.target.id.endsWith('text')) {
+      if (e.target.id && e.target.id.startsWith('s') && (e.target.id.endsWith('text') || e.target.id.endsWith('opener'))) {
         localStorage.setItem('v7_' + e.target.id, e.target.value);
       }
       if (e.target.id === 'writing-area') {
@@ -1127,7 +1214,7 @@
       }
     });
 
-    // ---- checkWriting() — auto-detect 5-sentence progression elements ----
+    // ---- checkWriting() — auto-detect writing quality elements ----
     function checkWriting() {
       const ta = document.getElementById('writing-area');
       const fb = document.getElementById('checkWritingFeedback');
@@ -1137,28 +1224,22 @@
 
       const checks = [
         { label: 'References a classmate (Priya/David)', pass: /priya|david/.test(text) },
-        { label: 'Concession marker (however/nevertheless/that said)', pass: /however|nevertheless|that said|while i understand/.test(text) },
-        { label: 'Counter-argument (but I believe/on the other hand)', pass: /but i believe|however i argue|on the other hand|yet i would/.test(text) },
+        { label: 'Concession/acknowledgment (however/nevertheless/while/that said)', pass: /however|nevertheless|that said|while i understand|while i agree|as .* (rightly notes|points out|argues|suggests)/.test(text) },
+        { label: 'Counter-argument (but/nevertheless/on the other hand/as noted)', pass: /but i believe|however i argue|on the other hand|yet i would|nevertheless|as .* (rightly notes|points out|argues)|i would (argue|contend|push back)/.test(text) },
         { label: 'Word count ≥ 100', pass: wordCount >= 100 },
       ];
 
       const passed = checks.filter(c => c.pass).length;
       const html = checks.map(c => 
-        `<div style="font-size:12px;color:${c.pass ? 'var(--primary)' : 'var(--muted)'};">${c.pass ? '✅' : '⬜'} ${c.label}</div>`
+        `<div style="font-size:12px;color:${c.pass ? 'var(--primary)' : 'var(--text-muted)'};">${c.pass ? '✅' : '⬜'} ${c.label}</div>`
       ).join('');
       fb.innerHTML = `<div style="margin-top:8px;padding:10px;background:rgba(16,185,129,0.06);border:1px solid rgba(16,185,129,0.2);border-radius:8px;">
-        <div style="font-size:11px;font-weight:700;color:var(--primary);margin-bottom:6px;">5-Sentence Progression Check (${passed}/${checks.length})</div>
+        <div style="font-size:11px;font-weight:700;color:var(--primary);margin-bottom:6px;">Writing Quality Check (${passed}/${checks.length})</div>
         ${html}
       </div>`;
     }
 
     // ---- localStorage persistence ----
-    function saveScaffold() {
-      ['s1-opener', 's2-text', 's3-text', 's4-text', 's5-text'].forEach(id => {
-        const el = document.getElementById(id);
-        if (el) localStorage.setItem('v7_' + id, el.value);
-      });
-    }
     function loadSaved() {
       ['s1-opener', 's2-text', 's3-text', 's4-text', 's5-text'].forEach(id => {
         const el = document.getElementById(id);

@@ -1,0 +1,667 @@
+[
+  {
+    "word": "The",
+    "start": 0.35,
+    "end": 0.425
+  },
+  {
+    "word": "debate",
+    "start": 0.425,
+    "end": 0.838
+  },
+  {
+    "word": "over",
+    "start": 0.838,
+    "end": 1.087
+  },
+  {
+    "word": "gig",
+    "start": 1.087,
+    "end": 1.325
+  },
+  {
+    "word": "worker",
+    "start": 1.325,
+    "end": 1.65
+  },
+  {
+    "word": "classification",
+    "start": 1.65,
+    "end": 2.763
+  },
+  {
+    "word": "misses",
+    "start": 2.763,
+    "end": 3.062
+  },
+  {
+    "word": "a",
+    "start": 3.062,
+    "end": 3.138
+  },
+  {
+    "word": "crucial",
+    "start": 3.138,
+    "end": 3.55
+  },
+  {
+    "word": "point",
+    "start": 3.55,
+    "end": 4.487
+  },
+  {
+    "word": "Both",
+    "start": 4.487,
+    "end": 4.763
+  },
+  {
+    "word": "the",
+    "start": 4.763,
+    "end": 4.9
+  },
+  {
+    "word": "employee",
+    "start": 4.9,
+    "end": 5.775
+  },
+  {
+    "word": "and",
+    "start": 5.775,
+    "end": 5.95
+  },
+  {
+    "word": "independent",
+    "start": 5.95,
+    "end": 6.5
+  },
+  {
+    "word": "contractor",
+    "start": 6.5,
+    "end": 7.1
+  },
+  {
+    "word": "models",
+    "start": 7.1,
+    "end": 7.5
+  },
+  {
+    "word": "are",
+    "start": 7.5,
+    "end": 7.625
+  },
+  {
+    "word": "outdated",
+    "start": 7.625,
+    "end": 8.225
+  },
+  {
+    "word": "for",
+    "start": 8.225,
+    "end": 8.338
+  },
+  {
+    "word": "the",
+    "start": 8.338,
+    "end": 8.463
+  },
+  {
+    "word": "modern",
+    "start": 8.463,
+    "end": 8.875
+  },
+  {
+    "word": "economy",
+    "start": 8.875,
+    "end": 10.037
+  },
+  {
+    "word": "Instead",
+    "start": 10.037,
+    "end": 10.387
+  },
+  {
+    "word": "of",
+    "start": 10.387,
+    "end": 10.488
+  },
+  {
+    "word": "forcing",
+    "start": 10.488,
+    "end": 10.9
+  },
+  {
+    "word": "workers",
+    "start": 10.9,
+    "end": 11.262
+  },
+  {
+    "word": "into",
+    "start": 11.262,
+    "end": 11.5
+  },
+  {
+    "word": "one",
+    "start": 11.5,
+    "end": 11.725
+  },
+  {
+    "word": "category",
+    "start": 11.725,
+    "end": 12.725
+  },
+  {
+    "word": "we",
+    "start": 12.725,
+    "end": 12.85
+  },
+  {
+    "word": "need",
+    "start": 12.85,
+    "end": 13.037
+  },
+  {
+    "word": "a",
+    "start": 13.037,
+    "end": 13.15
+  },
+  {
+    "word": "third",
+    "start": 13.15,
+    "end": 13.475
+  },
+  {
+    "word": "classification",
+    "start": 13.475,
+    "end": 14.8
+  },
+  {
+    "word": "what",
+    "start": 14.8,
+    "end": 14.975
+  },
+  {
+    "word": "some",
+    "start": 14.975,
+    "end": 15.213
+  },
+  {
+    "word": "scholars",
+    "start": 15.213,
+    "end": 15.75
+  },
+  {
+    "word": "call",
+    "start": 15.75,
+    "end": 16.0
+  },
+  {
+    "word": "dependent",
+    "start": 16.0,
+    "end": 16.45
+  },
+  {
+    "word": "contractor",
+    "start": 16.45,
+    "end": 17.85
+  },
+  {
+    "word": "This",
+    "start": 17.85,
+    "end": 18.1
+  },
+  {
+    "word": "category",
+    "start": 18.1,
+    "end": 18.675
+  },
+  {
+    "word": "would",
+    "start": 18.675,
+    "end": 18.8
+  },
+  {
+    "word": "grant",
+    "start": 18.8,
+    "end": 19.137
+  },
+  {
+    "word": "gig",
+    "start": 19.137,
+    "end": 19.375
+  },
+  {
+    "word": "workers",
+    "start": 19.375,
+    "end": 19.762
+  },
+  {
+    "word": "access",
+    "start": 19.762,
+    "end": 20.25
+  },
+  {
+    "word": "to",
+    "start": 20.25,
+    "end": 20.375
+  },
+  {
+    "word": "pro-rated",
+    "start": 20.375,
+    "end": 20.925
+  },
+  {
+    "word": "benefits",
+    "start": 20.925,
+    "end": 21.475
+  },
+  {
+    "word": "like",
+    "start": 21.475,
+    "end": 21.675
+  },
+  {
+    "word": "health",
+    "start": 21.675,
+    "end": 21.938
+  },
+  {
+    "word": "insurance",
+    "start": 21.938,
+    "end": 22.575
+  },
+  {
+    "word": "and",
+    "start": 22.575,
+    "end": 22.712
+  },
+  {
+    "word": "paid",
+    "start": 22.712,
+    "end": 23.075
+  },
+  {
+    "word": "leave",
+    "start": 23.075,
+    "end": 23.738
+  },
+  {
+    "word": "while",
+    "start": 23.738,
+    "end": 23.9
+  },
+  {
+    "word": "preserving",
+    "start": 23.9,
+    "end": 24.425
+  },
+  {
+    "word": "their",
+    "start": 24.425,
+    "end": 24.637
+  },
+  {
+    "word": "flexibility",
+    "start": 24.637,
+    "end": 25.325
+  },
+  {
+    "word": "to",
+    "start": 25.325,
+    "end": 25.462
+  },
+  {
+    "word": "choose",
+    "start": 25.462,
+    "end": 25.8
+  },
+  {
+    "word": "when",
+    "start": 25.8,
+    "end": 26.4
+  },
+  {
+    "word": "and",
+    "start": 26.4,
+    "end": 26.55
+  },
+  {
+    "word": "how",
+    "start": 26.55,
+    "end": 26.725
+  },
+  {
+    "word": "much",
+    "start": 26.725,
+    "end": 27.0
+  },
+  {
+    "word": "they",
+    "start": 27.0,
+    "end": 27.15
+  },
+  {
+    "word": "work",
+    "start": 27.15,
+    "end": 28.038
+  },
+  {
+    "word": "Countries",
+    "start": 28.475,
+    "end": 28.925
+  },
+  {
+    "word": "like",
+    "start": 28.925,
+    "end": 29.163
+  },
+  {
+    "word": "Canada",
+    "start": 29.163,
+    "end": 29.625
+  },
+  {
+    "word": "and",
+    "start": 29.625,
+    "end": 29.762
+  },
+  {
+    "word": "Germany",
+    "start": 29.762,
+    "end": 30.325
+  },
+  {
+    "word": "have",
+    "start": 30.325,
+    "end": 30.475
+  },
+  {
+    "word": "adopted",
+    "start": 30.475,
+    "end": 30.975
+  },
+  {
+    "word": "hybrid",
+    "start": 30.975,
+    "end": 31.4
+  },
+  {
+    "word": "models",
+    "start": 31.4,
+    "end": 32.163
+  },
+  {
+    "word": "that",
+    "start": 32.163,
+    "end": 32.325
+  },
+  {
+    "word": "offer",
+    "start": 32.325,
+    "end": 32.663
+  },
+  {
+    "word": "partial",
+    "start": 32.663,
+    "end": 33.075
+  },
+  {
+    "word": "protections",
+    "start": 33.075,
+    "end": 33.737
+  },
+  {
+    "word": "without",
+    "start": 33.737,
+    "end": 34.1
+  },
+  {
+    "word": "full",
+    "start": 34.1,
+    "end": 34.45
+  },
+  {
+    "word": "employee",
+    "start": 34.45,
+    "end": 35.062
+  },
+  {
+    "word": "status",
+    "start": 35.062,
+    "end": 36.237
+  },
+  {
+    "word": "The",
+    "start": 36.237,
+    "end": 36.35
+  },
+  {
+    "word": "data",
+    "start": 36.35,
+    "end": 36.675
+  },
+  {
+    "word": "from",
+    "start": 36.675,
+    "end": 36.812
+  },
+  {
+    "word": "these",
+    "start": 36.812,
+    "end": 37.025
+  },
+  {
+    "word": "countries",
+    "start": 37.025,
+    "end": 37.913
+  },
+  {
+    "word": "shows",
+    "start": 37.913,
+    "end": 38.325
+  },
+  {
+    "word": "that",
+    "start": 38.325,
+    "end": 38.538
+  },
+  {
+    "word": "such",
+    "start": 38.538,
+    "end": 38.788
+  },
+  {
+    "word": "hybrid",
+    "start": 38.788,
+    "end": 39.2
+  },
+  {
+    "word": "approaches",
+    "start": 39.2,
+    "end": 39.75
+  },
+  {
+    "word": "reduce",
+    "start": 39.75,
+    "end": 40.2
+  },
+  {
+    "word": "worker",
+    "start": 40.2,
+    "end": 40.55
+  },
+  {
+    "word": "poverty",
+    "start": 40.55,
+    "end": 41.263
+  },
+  {
+    "word": "by",
+    "start": 41.263,
+    "end": 41.462
+  },
+  {
+    "word": "twenty-two",
+    "start": 41.462,
+    "end": 41.95
+  },
+  {
+    "word": "percent",
+    "start": 41.95,
+    "end": 42.737
+  },
+  {
+    "word": "without",
+    "start": 42.737,
+    "end": 43.112
+  },
+  {
+    "word": "significantly",
+    "start": 43.112,
+    "end": 43.875
+  },
+  {
+    "word": "increasing",
+    "start": 43.875,
+    "end": 44.438
+  },
+  {
+    "word": "costs",
+    "start": 44.438,
+    "end": 45.025
+  },
+  {
+    "word": "to",
+    "start": 45.025,
+    "end": 45.125
+  },
+  {
+    "word": "platforms",
+    "start": 45.125,
+    "end": 46.462
+  },
+  {
+    "word": "The",
+    "start": 46.462,
+    "end": 46.6
+  },
+  {
+    "word": "real",
+    "start": 46.6,
+    "end": 46.875
+  },
+  {
+    "word": "question",
+    "start": 46.875,
+    "end": 47.4
+  },
+  {
+    "word": "isn't",
+    "start": 47.4,
+    "end": 47.663
+  },
+  {
+    "word": "whether",
+    "start": 47.663,
+    "end": 47.913
+  },
+  {
+    "word": "gig",
+    "start": 47.913,
+    "end": 48.15
+  },
+  {
+    "word": "workers",
+    "start": 48.15,
+    "end": 48.575
+  },
+  {
+    "word": "should",
+    "start": 48.575,
+    "end": 48.712
+  },
+  {
+    "word": "be",
+    "start": 48.712,
+    "end": 48.837
+  },
+  {
+    "word": "employees",
+    "start": 48.837,
+    "end": 49.987
+  },
+  {
+    "word": "it's",
+    "start": 49.987,
+    "end": 50.138
+  },
+  {
+    "word": "whether",
+    "start": 50.138,
+    "end": 50.312
+  },
+  {
+    "word": "we",
+    "start": 50.312,
+    "end": 50.425
+  },
+  {
+    "word": "can",
+    "start": 50.425,
+    "end": 50.55
+  },
+  {
+    "word": "design",
+    "start": 50.55,
+    "end": 50.925
+  },
+  {
+    "word": "a",
+    "start": 50.925,
+    "end": 51.038
+  },
+  {
+    "word": "system",
+    "start": 51.038,
+    "end": 51.55
+  },
+  {
+    "word": "that",
+    "start": 51.55,
+    "end": 51.7
+  },
+  {
+    "word": "gives",
+    "start": 51.7,
+    "end": 51.962
+  },
+  {
+    "word": "them",
+    "start": 51.962,
+    "end": 52.138
+  },
+  {
+    "word": "the",
+    "start": 52.138,
+    "end": 52.237
+  },
+  {
+    "word": "best",
+    "start": 52.237,
+    "end": 52.612
+  },
+  {
+    "word": "of",
+    "start": 52.612,
+    "end": 52.737
+  },
+  {
+    "word": "both",
+    "start": 52.737,
+    "end": 53.038
+  },
+  {
+    "word": "worlds",
+    "start": 53.038,
+    "end": 54.05
+  }
+]

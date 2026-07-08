@@ -4,415 +4,309 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Valeria's TOEFL Prep Portal</title>
-  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-dark: #090d16;
-      --bg-card: #131a26;
-      --border-color: #243042;
-      --text-main: #f1f5f9;
-      --text-muted: #64748b;
-      --primary: #f59e0b;
-      --primary-hover: #d97706;
-      --accent-blue: #38bdf8;
-      --accent-green: #10b981;
-      --accent-purple: #a855f7;
-      --glass-bg: rgba(19, 26, 38, 0.85);
-      --glass-border: rgba(255, 255, 255, 0.03);
+      --bg: #f7f6f3;
+      --surface: #ffffff;
+      --border: #e5e3df;
+      --text: #1a1a2e;
+      --muted: #78768a;
+      --amber: #f59e0b;
+      --amber-light: #fffbeb;
+      --blue: #38bdf8;
+      --blue-light: #f0f9ff;
+      --emerald: #10b981;
+      --shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 16px rgba(0,0,0,0.04);
+      --shadow-hover: 0 4px 12px rgba(0,0,0,0.06), 0 12px 32px rgba(0,0,0,0.08);
     }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    *:focus-visible { outline: 2px solid var(--amber); outline-offset: 2px; border-radius: 4px; }
+    html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
     body {
-      font-family: 'Outfit', sans-serif;
-      background-color: var(--bg-dark);
-      color: var(--text-main);
+      font-family: "Outfit", sans-serif;
+      background: var(--bg);
+      color: var(--text);
       min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      background: radial-gradient(circle at top right, rgba(245, 158, 11, 0.03), transparent 800px),
-                  radial-gradient(circle at bottom left, rgba(56, 189, 248, 0.02), transparent 800px);
+      line-height: 1.5;
+      overflow-wrap: break-word;
+      word-break: break-word;
+      background-image: radial-gradient(circle at 10% 20%, rgba(56,189,248,0.03) 0%, transparent 50%),
+                        radial-gradient(circle at 90% 80%, rgba(245,158,11,0.03) 0%, transparent 50%);
     }
+    .icon { display: inline-block; vertical-align: middle; flex-shrink: 0; }
 
     header {
-      border-bottom: 1px solid var(--border-color);
-      padding: 1.5rem 2rem;
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: rgba(9, 13, 22, 0.7);
-      backdrop-filter: blur(12px);
-    }
-
-    .logo-area {
-      display: flex;
-      align-items: center;
+      flex-wrap: wrap;
       gap: 0.75rem;
     }
-
-    .badge-exam {
-      background: rgba(245, 158, 11, 0.1);
-      border: 1px solid var(--primary);
-      color: var(--primary);
-      padding: 0.25rem 0.6rem;
-      border-radius: 4px;
+    .logo-area { display: flex; align-items: center; gap: 0.75rem; }
+    .badge-main {
+      background: var(--amber-light);
+      border: 1px solid rgba(245,158,11,0.3);
+      color: var(--amber);
+      padding: 0.3rem 0.7rem;
+      border-radius: 6px;
       font-family: 'Fira Code', monospace;
-      font-size: 0.75rem;
-      font-weight: bold;
-      letter-spacing: 0.05em;
-    }
-
-    h1 {
-      font-size: 1.5rem;
+      font-size: 0.7rem;
       font-weight: 700;
-      letter-spacing: -0.02em;
+      letter-spacing: 0.08em;
     }
+    h1 { font-size: 1.3rem; font-weight: 700; color: var(--text); letter-spacing: -0.02em; }
+
+    .hero-wrap {
+      position: relative;
+      min-height: 320px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: linear-gradient(135deg, #78350f 0%, #b45309 50%, #92400e 100%);
+    }
+    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.5) 100%); }
+    .hero-content {
+      position: relative; z-index: 1;
+      text-align: center;
+      padding: 3rem 2rem;
+      max-width: 680px;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: #fff;
+      padding: 0.4rem 1rem;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      backdrop-filter: blur(4px);
+    }
+    .hero-content h2 {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.2;
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.03em;
+    }
+    .hero-content h2 span { color: #fde68a; }
+    .hero-content p { color: rgba(255,255,255,0.75); font-size: 1.05rem; line-height: 1.7; max-width: 520px; margin: 0 auto; }
 
     .container {
-      max-width: 1100px;
-      margin: 2rem auto;
-      padding: 0 1.5rem;
-      width: 100%;
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 2rem 2rem 3rem;
       display: grid;
       grid-template-columns: 2.2fr 1fr;
       gap: 2rem;
     }
+    @media (max-width: 960px) { .container { grid-template-columns: 1fr; } }
 
-    @media (max-width: 900px) {
-      .container {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    /* Cards */
     .card {
-      background: var(--glass-bg);
-      border: 1px solid var(--glass-border);
-      border-radius: 16px;
-      padding: 2rem;
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-      margin-bottom: 2rem;
-    }
-
-    .card-title {
-      font-size: 1.25rem;
-      font-weight: 600;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 1.75rem;
+      box-shadow: var(--shadow);
       margin-bottom: 1.5rem;
-      color: var(--primary);
+      transition: all 0.25s ease;
+    }
+    .card:hover { box-shadow: var(--shadow-hover); }
+    .card-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: var(--text);
       display: flex;
       align-items: center;
       gap: 0.5rem;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-      padding-bottom: 0.75rem;
-    }
-
-    /* Lesson Grid — Scrollable */
-    .lesson-grid {
     }
 
     .lesson-list {
       display: flex;
       flex-direction: column;
-      gap: 1rem;
-      max-height: 530px;
+      gap: 0.75rem;
+      max-height: 540px;
       overflow-y: auto;
       scrollbar-width: thin;
-      scrollbar-color: var(--border-color) transparent;
+      scrollbar-color: var(--border) transparent;
+      padding-right: 0.25rem;
     }
-
     .lesson-item {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: rgba(255, 255, 255, 0.01);
-      border: 1px solid var(--border-color);
-      border-radius: 12px;
-      padding: 1.25rem 1.5rem;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1rem 1.25rem;
       transition: all 0.2s ease;
       text-decoration: none;
       color: inherit;
+      border-left: 3px solid var(--blue);
     }
-
     .lesson-item:hover:not(.disabled) {
-      border-color: var(--primary);
-      background: rgba(245, 158, 11, 0.03);
+      border-color: var(--amber);
       transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(245,158,11,0.1);
     }
-
     .lesson-item.disabled {
-      opacity: 0.4;
+      opacity: 0.5;
       pointer-events: none;
       cursor: default;
+      border-left-color: var(--border);
     }
-
+    .lesson-info { display: flex; flex-direction: column; gap: 0.15rem; }
+    .lesson-number {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.75rem;
+      color: var(--blue);
+      font-weight: 600;
+      letter-spacing: 0.03em;
+    }
+    .lesson-name { font-weight: 600; font-size: 1rem; }
+    .lesson-date { font-size: 0.8rem; color: var(--muted); }
     .locked-badge {
       font-family: 'Fira Code', monospace;
       font-size: 0.6rem;
-      color: var(--text-muted);
-      border: 1px solid rgba(100, 116, 139, 0.25);
+      color: var(--muted);
+      border: 1px solid var(--border);
       border-radius: 4px;
       padding: 0.25rem 0.5rem;
       flex-shrink: 0;
       letter-spacing: 0.06em;
       text-transform: uppercase;
+      display: inline-flex;
+      align-items: center;
+      gap: 2px;
     }
-
-    .lesson-info {
-      display: flex;
-      flex-direction: column;
-      gap: 0.25rem;
-    }
-
-    .lesson-number {
-      font-family: 'Fira Code', monospace;
-      font-size: 0.8rem;
-      color: var(--accent-blue);
-      font-weight: 600;
-    }
-
-    .lesson-name {
-      font-weight: 600;
-      font-size: 1.1rem;
-    }
-
-    .lesson-date {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-    }
-
     .btn-go {
-      background: var(--primary);
-      color: #000;
-      width: 44px;
-      height: 44px;
+      background: var(--amber);
+      color: #fff;
+      width: 40px;
+      height: 40px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       font-weight: bold;
+      font-size: 1.1rem;
       transition: all 0.2s ease;
       flex-shrink: 0;
     }
+    .lesson-item:hover:not(.disabled) .btn-go { background: #d97706; transform: scale(1.05); }
 
-    .lesson-item:hover:not(.disabled) .btn-go {
-      background: #fff;
-      transform: scale(1.05);
-    }
-
-
-
-    /* Metrics Grid */
-    .metric-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1rem;
-    }
-
-    .metric-box {
-      background: rgba(0, 0, 0, 0.2);
-      border: 1px solid var(--border-color);
-      padding: 1rem;
-      border-radius: 8px;
-      text-align: center;
-    }
-
-    .metric-value {
-      font-size: 1.75rem;
-      font-weight: bold;
-      color: var(--accent-green);
-    }
-
-    .metric-label {
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-top: 0.25rem;
-    }
-
-    /* Homework List */
-    .hw-list {
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-    }
-
-    .hw-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 0.75rem;
-      font-size: 0.95rem;
-      background: rgba(255, 255, 255, 0.01);
-      padding: 0.75rem 1rem;
-      border-radius: 8px;
-      border: 1px solid rgba(255, 255, 255, 0.02);
-    }
-
-    .hw-checkbox { accent-color: var(--accent-green); width: 24px; height: 24px; cursor: pointer; vertical-align: middle; margin-right: 0.5rem; }
-    .hw-checkbox:checked + label { opacity: 0.6; text-decoration: line-through; }
-
-    /* Right column stats */
-    .profile-card {
-      position: sticky;
-      top: 100px;
-    }
-
-    .profile-avatar {
-      width: 70px;
-      height: 70px;
-      background: rgba(245, 158, 11, 0.15);
-      border: 2px solid var(--primary);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2rem;
-      margin: 0 auto 1rem;
-    }
-
-    .profile-name {
-      text-align: center;
-      font-size: 1.25rem;
-      font-weight: 600;
-      margin-bottom: 0.25rem;
-    }
-
-    .profile-detail {
-      text-align: center;
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      margin-bottom: 1.5rem;
-    }
-
-    .profile-info-row {
-      display: flex;
-      justify-content: space-between;
-      font-size: 0.9rem;
-      padding: 0.6rem 0;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.03);
-    }
-
-    .profile-info-row:last-child {
-      border-bottom: none;
-    }
-
-    .profile-info-label {
-      color: var(--text-muted);
-    }
-
-    /* Exam Structure Table */
     .exam-table {
       width: 100%;
       border-collapse: collapse;
-      margin: 1rem 0;
-      background: rgba(0,0,0,0.2);
-      border-radius: 8px;
+      margin: 0.75rem 0;
+      border-radius: 12px;
       overflow: hidden;
     }
     .exam-table th, .exam-table td {
-      border: 1px solid var(--border-color);
-      padding: 0.9rem 1rem;
+      border: 1px solid var(--border);
+      padding: 0.75rem 0.9rem;
       text-align: left;
-      font-size: 0.9rem;
+      font-size: 0.88rem;
     }
-    .exam-table td {
-      vertical-align: top;
-    }
+    .exam-table td { vertical-align: top; }
     .exam-table th {
-      background: rgba(245, 158, 11, 0.08);
-      color: var(--primary);
-      font-weight: 600;
-      font-size: 0.85rem;
+      background: var(--amber-light);
+      color: var(--amber);
+      font-weight: 700;
+      font-size: 0.8rem;
       text-transform: uppercase;
       letter-spacing: 0.05em;
     }
-    .exam-table td:first-child {
-      font-weight: 600;
-      color: #cbd5e1;
-    }
-    .exam-table tr:hover {
-      background: rgba(255,255,255,0.02);
-    }
-    .takeaway-list {
+    .exam-table td:first-child { font-weight: 600; color: var(--text); }
+    .exam-table tr:hover { background: var(--amber-light); }
+    .table-wrapper { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .takeaway-list { display: flex; flex-direction: column; gap: 0.6rem; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border); }
+    .takeaway-item { display: flex; align-items: flex-start; gap: 0.6rem; font-size: 0.92rem; line-height: 1.6; }
+    .takeaway-item strong { color: var(--amber); }
+
+    .hw-list { display: flex; flex-direction: column; gap: 0.75rem; }
+    .hw-item {
       display: flex;
       flex-direction: column;
-      gap: 0.75rem;
-      margin-top: 1.5rem;
-      padding-top: 1.25rem;
-      border-top: 1px solid var(--border-color);
+      gap: 0.4rem;
+      font-size: 0.92rem;
+      background: var(--bg);
+      padding: 0.85rem 1rem;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      line-height: 1.5;
     }
-    .takeaway-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 0.75rem;
-      font-size: 0.95rem;
-      line-height: 1.6;
-    }
-    .takeaway-bullet {
-      color: var(--primary);
-      font-size: 1.1rem;
-      flex-shrink: 0;
-      margin-top: 0.1rem;
-    }
-    .takeaway-item strong {
-      color: var(--primary);
-    }
-    .takeaway-meta {
-      font-size: 0.9rem;
-      color: var(--text-muted);
-      margin-bottom: 1rem;
-    }
-    .table-wrapper {
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
-    }
+    .hw-checkbox { accent-color: var(--amber); width: 22px; height: 22px; cursor: pointer; margin-top: 0.1rem; vertical-align: middle; margin-right: 0.5rem; }
+    .hw-checkbox:checked + label { opacity: 0.6; text-decoration: line-through; }
 
     .embed-container {
       position: relative;
       width: 100%;
       max-width: 560px;
-      border-radius: 8px;
+      border-radius: 10px;
       overflow: hidden;
-      border: 1px solid var(--border-color);
+      border: 1px solid var(--border);
     }
-    .embed-container iframe {
-      display: block;
-      width: 100%;
-      height: 315px;
-    }
+    .embed-container iframe { display: block; width: 100%; height: 315px; }
 
-    /* Mobile Responsiveness */
+    .profile-card { position: sticky; top: 90px; }
+    .profile-avatar {
+      width: 64px; height: 64px;
+      background: var(--amber-light);
+      border: 2px solid var(--amber);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 0.75rem;
+    }
+    .profile-name { text-align: center; font-size: 1.2rem; font-weight: 700; margin-bottom: 0.15rem; }
+    .profile-detail { text-align: center; font-size: 0.85rem; color: var(--muted); margin-bottom: 1.25rem; }
+    .profile-info-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.88rem;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .profile-info-row:last-child { border-bottom: none; }
+    .profile-info-label { color: var(--muted); }
+
+    .metric-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+    .metric-box {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      padding: 0.85rem;
+      border-radius: 10px;
+      text-align: center;
+    }
+    .metric-value { font-size: 1.6rem; font-weight: 800; color: var(--amber); }
+    .metric-label { font-size: 0.72rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-top: 0.15rem; }
+
     @media (max-width: 768px) {
-      header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.75rem;
-        padding: 1rem;
-      }
-
-      .container {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-        margin: 1rem auto;
-        padding: 0 1rem;
-      }
-
-      .card {
-        padding: 1.25rem;
-      }
-
-      .profile-card {
-        position: static;
-      }
-
+      header { padding: 0.75rem 1rem; }
+      .hero-wrap { min-height: 240px; }
+      .hero-content { padding: 2rem 1.25rem; }
+      .hero-content h2 { font-size: 1.4rem; }
+      .container { padding: 1rem; gap: 1rem; }
+      .card { padding: 1.25rem; }
+      .profile-card { position: static; }
+      .lesson-list { max-height: none; overflow-y: visible; }
     }
   </style>
 </head>
@@ -420,132 +314,159 @@
 
   <header>
     <div class="logo-area">
-      <div class="badge-exam">TOEFL STUDY ROOM</div>
+      <div class="badge-main">TOEFL STUDY ROOM</div>
       <h1>Valeria's Portal</h1>
     </div>
-
+    <span style="font-size:0.85rem;color:var(--muted);">Target: <strong style="color:var(--amber);">100+</strong></span>
   </header>
 
+  <div class="hero-wrap">
+    <div class="hero-overlay" aria-hidden="true"></div>
+    <div class="hero-content">
+      <div class="hero-badge">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        TOEFL iBT Prep · B2→C1
+      </div>
+      <h2>Your <span>TOEFL 100+</span> roadmap</h2>
+      <p>Interactive, audio-synced lessons targeting the new TOEFL iBT format. Build academic speaking and writing skills that last.</p>
+    </div>
+  </div>
+
   <div class="container">
-    
-    <!-- Main Board -->
+
     <div class="main-column">
-      
+
       <!-- Lesson Index -->
       <div class="card">
-        <div class="card-title">Interactive Lessons</div>
-        <div class="lesson-grid">
-          <div class="lesson-list">
+        <div class="card-title">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><line x1="8" y1="7" x2="16" y2="7"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+          Interactive Lessons
+        </div>
+        <div class="lesson-list">
 
-              <!-- Lesson 1 -->
-              <a href="lesson-1/index.html" class="lesson-item">
-                <div class="lesson-info">
-                  <span class="lesson-number">LESSON 01</span>
-                  <span class="lesson-name">Speaking Task 2: Synthesis & Advanced Structure</span>
-                  <span class="lesson-date">Class Date: June 10, 2026</span>
-                </div>
-                <div class="btn-go">→</div>
-              </a>
+            <a href="lesson-1/index.html" class="lesson-item">
+              <div class="lesson-info">
+                <span class="lesson-number">LESSON 01</span>
+                <span class="lesson-name">Speaking Task 2: Synthesis & Advanced Structure</span>
+                <span class="lesson-date">June 10, 2026</span>
+              </div>
+              <div class="btn-go">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </div>
+            </a>
 
-              <!-- Lesson 2 -->
-              <a href="lesson-2/index.html" class="lesson-item">
-                <div class="lesson-info">
-                  <span class="lesson-number">LESSON 02</span>
-                  <span class="lesson-name">Academic Speaking: Concept Synthesis</span>
-                  <span class="lesson-date">Class Date: June 12, 2026</span>
-                </div>
-                <div class="btn-go">→</div>
-              </a>
+            <a href="lesson-2/index.html" class="lesson-item">
+              <div class="lesson-info">
+                <span class="lesson-number">LESSON 02</span>
+                <span class="lesson-name">Academic Speaking: Concept Synthesis</span>
+                <span class="lesson-date">June 12, 2026</span>
+              </div>
+              <div class="btn-go">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </div>
+            </a>
 
-              <!-- Lesson 3 -->
-              <a href="lesson-3/index.html" class="lesson-item">
-                <div class="lesson-info">
-                  <span class="lesson-number">LESSON 03</span>
-                  <span class="lesson-name">TOEFL Speaking: Listen and Repeat</span>
-                  <span class="lesson-date">Class Date: June 16, 2026</span>
-                </div>
-                <div class="btn-go">→</div>
-              </a>
+            <a href="lesson-3/index.html" class="lesson-item">
+              <div class="lesson-info">
+                <span class="lesson-number">LESSON 03</span>
+                <span class="lesson-name">TOEFL Speaking: Listen and Repeat</span>
+                <span class="lesson-date">June 16, 2026</span>
+              </div>
+              <div class="btn-go">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </div>
+            </a>
 
-              <!-- Lesson 4 -->
-              <a href="lesson-4/index.html" class="lesson-item">
-                <div class="lesson-info">
-                  <span class="lesson-number">LESSON 04</span>
-                  <span class="lesson-name">Academic Discussion: AI, Privacy & Society</span>
-                  <span class="lesson-date">Class Date: June 23, 2026</span>
-                </div>
-                <div class="btn-go">→</div>
-              </a>
+            <a href="lesson-4/index.html" class="lesson-item">
+              <div class="lesson-info">
+                <span class="lesson-number">LESSON 04</span>
+                <span class="lesson-name">Academic Discussion: AI, Privacy & Society</span>
+                <span class="lesson-date">June 23, 2026</span>
+              </div>
+              <div class="btn-go">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </div>
+            </a>
 
-              <!-- Lesson 5 -->
-              <a href="lesson-5/index.html" class="lesson-item">
-                <div class="lesson-info">
-                  <span class="lesson-number">LESSON 05</span>
-                  <span class="lesson-name">Speaking Interview + Academic Discussion Review</span>
-                  <span class="lesson-date">Class Date: June 27, 2026</span>
-                </div>
-                <div class="btn-go">→</div>
-              </a>
+            <a href="lesson-5/index.html" class="lesson-item">
+              <div class="lesson-info">
+                <span class="lesson-number">LESSON 05</span>
+                <span class="lesson-name">Speaking Interview + Academic Discussion Review</span>
+                <span class="lesson-date">June 27, 2026</span>
+              </div>
+              <div class="btn-go">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </div>
+            </a>
 
-              <!-- Lesson 6 -->
-              <a href="lesson-6/index.html" class="lesson-item">
-                <div class="lesson-info">
-                  <span class="lesson-number">LESSON 06</span>
-                  <span class="lesson-name">Synthetic Media &amp; Deepfakes</span>
-                  <span class="lesson-date">Class Date: June 30, 2026</span>
-                </div>
-                <div class="btn-go">→</div>
-              </a>
+            <a href="lesson-6/index.html" class="lesson-item">
+              <div class="lesson-info">
+                <span class="lesson-number">LESSON 06</span>
+                <span class="lesson-name">Synthetic Media & Deepfakes</span>
+                <span class="lesson-date">June 30, 2026</span>
+              </div>
+              <div class="btn-go">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </div>
+            </a>
 
-              <!-- Lesson 7 -->
-              <a href="lesson-7/index.html" class="lesson-item">
-                <div class="lesson-info">
-                  <span class="lesson-number">LESSON 07</span>
-                  <span class="lesson-name">Algorithmic Governance</span>
-                  <span class="lesson-date">Class Date: July 3, 2026</span>
-                </div>
-                <div class="btn-go">→</div>
-              </a>
+            <a href="lesson-7/index.html" class="lesson-item">
+              <div class="lesson-info">
+                <span class="lesson-number">LESSON 07</span>
+                <span class="lesson-name">Algorithmic Governance</span>
+                <span class="lesson-date">July 3, 2026</span>
+              </div>
+              <div class="btn-go">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </div>
+            </a>
 
-              <!-- Lesson 8 -->
-              <a href="lesson-8/index.html" class="lesson-item disabled">
-                <div class="lesson-info">
-                  <span class="lesson-number">LESSON 08</span>
-                  <span class="lesson-name">Digital Labor &amp; the Gig Economy</span>
-                  <span class="lesson-date">Class Date: July 7, 2026</span>
-                </div>
-                <span class="locked-badge">Locked</span>
-              </a>
+            <a href="lesson-8/index.html" class="lesson-item">
+              <div class="lesson-info">
+                <span class="lesson-number">LESSON 08</span>
+                <span class="lesson-name">Digital Labor & the Gig Economy</span>
+                <span class="lesson-date">July 7, 2026</span>
+              </div>
+              <div class="btn-go">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </div>
+            </a>
 
-              <!-- Lesson 9 -->
-              <a href="lesson-9/index.html" class="lesson-item disabled">
-                <div class="lesson-info">
-                  <span class="lesson-number">LESSON 09</span>
-                  <span class="lesson-name">AI in Scientific Research</span>
-                  <span class="lesson-date">Class Date: July 10, 2026</span>
-                </div>
-                <span class="locked-badge">Locked</span>
-              </a>
+            <a href="lesson-9/index.html" class="lesson-item disabled">
+              <div class="lesson-info">
+                <span class="lesson-number">LESSON 09</span>
+                <span class="lesson-name">AI in Scientific Research</span>
+                <span class="lesson-date">July 10, 2026</span>
+              </div>
+              <span class="locked-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                Locked
+              </span>
+            </a>
 
-              <!-- Lesson 10 -->
-              <a href="lesson-10/index.html" class="lesson-item disabled">
-                <div class="lesson-info">
-                  <span class="lesson-number">LESSON 10</span>
-                  <span class="lesson-name">Full TOEFL Simulation</span>
-                  <span class="lesson-date">Class Date: July 14, 2026</span>
-                </div>
-                <span class="locked-badge">Locked</span>
-              </a>
+            <a href="lesson-10/index.html" class="lesson-item disabled">
+              <div class="lesson-info">
+                <span class="lesson-number">LESSON 10</span>
+                <span class="lesson-name">Full TOEFL Simulation</span>
+                <span class="lesson-date">July 14, 2026</span>
+              </div>
+              <span class="locked-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                Locked
+              </span>
+            </a>
 
-            </div>
           </div>
         </div>
 
       <!-- TOEFL Exam Structure -->
       <div class="card">
-        <div class="card-title">TOEFL iBT Exam Structure (2026)</div>
-        <p style="color: var(--text-muted); margin-bottom: 1rem; line-height: 1.6;">
-          The entire exam runs straight through in <strong style="color: var(--text-main);">under 1.5 hours</strong> with <strong style="color: var(--text-main);">no scheduled breaks</strong>.
+        <div class="card-title">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          TOEFL iBT Exam Structure (2026)
+        </div>
+        <p style="color: var(--muted); margin-bottom: 0.75rem; line-height: 1.6; font-size:0.92rem;">
+          The entire exam runs straight through in <strong style="color: var(--text);">under 1.5 hours</strong> with <strong style="color: var(--text);">no scheduled breaks</strong>.
         </p>
         <div class="table-wrapper">
           <table class="exam-table">
@@ -554,85 +475,96 @@
                 <th>Section</th>
                 <th>Estimated Time</th>
                 <th>Questions / Tasks</th>
-                <th>Task Types &amp; Description</th>
+                <th>Task Types & Description</th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td>Reading</td>
-                <td>~18-27 minutes</td>
+                <td>~18-27 min</td>
                 <td>35-48 items</td>
-                <td><strong>1. Complete the Words</strong> — fill in missing letters in a paragraph<br><br><strong>2. Read in Daily Life</strong> — emails, campus notices<br><br><strong>3. Read an Academic Passage</strong> — short academic texts</td>
+                <td><strong>1. Complete the Words</strong> — fill in missing letters<br><br><strong>2. Read in Daily Life</strong> — emails, campus notices<br><br><strong>3. Read an Academic Passage</strong></td>
               </tr>
               <tr>
                 <td>Listening</td>
-                <td>~18-27 minutes</td>
+                <td>~18-27 min</td>
                 <td>35-45 items</td>
-                <td><strong>1. Listen and Choose a Response</strong> — everyday responses<br><br><strong>2. Conversations</strong> — campus dialogue<br><br><strong>3. Announcements &amp; Academic Talks</strong></td>
+                <td><strong>1. Listen and Choose</strong> — everyday responses<br><br><strong>2. Conversations</strong> — campus dialogue<br><br><strong>3. Announcements & Academic Talks</strong></td>
               </tr>
               <tr>
                 <td>Speaking</td>
                 <td>~8 minutes</td>
                 <td>11 questions<br>(2 Task Types)</td>
-                <td><strong>1. Listen and Repeat</strong> — 7 prompts: copy a sentence exactly<br><br><strong>2. Take an Interview</strong> — 4 prompts: answer a virtual researcher's questions on a daily topic</td>
+                <td><strong>1. Listen and Repeat</strong> — 7 prompts<br><br><strong>2. Take an Interview</strong> — 4 prompts</td>
               </tr>
               <tr>
                 <td>Writing</td>
                 <td>~23 minutes</td>
                 <td>12 items<br>(3 Task Types)</td>
-                <td><strong>1. Build a Sentence</strong><br><br><strong>2. Write an Email</strong><br><br><strong>3. Writing for an Academic Discussion</strong> — classroom forum simulation</td>
+                <td><strong>1. Build a Sentence</strong><br><br><strong>2. Write an Email</strong><br><br><strong>3. Academic Discussion</strong> — classroom forum</td>
               </tr>
             </tbody>
           </table>
         </div>
-        <div class="card-title" style="margin-top: 1.5rem; font-size: 1.1rem;">Critical Notes</div>
+        <div class="card-title" style="margin-top: 1rem; font-size: 1rem;">Critical Notes</div>
         <div class="takeaway-list">
           <div class="takeaway-item">
-            <span class="takeaway-bullet">·</span>
-            <div><strong>Zero Prep Time for Speaking:</strong> There are no longer 15-30 second preparation timers. Speaking tasks require spontaneous, immediate responses.</div>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:0.2rem;"><polyline points="20 6 9 17 4 12"/></svg>
+            <div><strong>Zero Prep Time for Speaking:</strong> No more 15-30 second preparation timers. Spontaneous, immediate responses required.</div>
           </div>
           <div class="takeaway-item">
-            <span class="takeaway-bullet">·</span>
-            <div><strong>The "Adaptive" Feature:</strong> In Reading and Listening, the first set of questions is standard. The system adjusts the second set to be easier or harder based on how the student performed in the first stage.</div>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:0.2rem;"><polyline points="20 6 9 17 4 12"/></svg>
+            <div><strong>"Adaptive" Feature:</strong> In Reading and Listening, the first set is standard. The system adjusts the second set based on your performance in the first stage.</div>
           </div>
         </div>
-        <div style="margin-top: 1.5rem;">
-          <p style="color: var(--text-muted); margin-bottom: 0.75rem; font-size: 0.9rem;">For a complete breakdown and real-time audio examples of the new speaking format:</p>
+        <div style="margin-top: 1.25rem;">
+          <p style="color: var(--muted); margin-bottom: 0.75rem; font-size: 0.88rem;">For a complete breakdown and real-time audio examples of the new speaking format:</p>
           <div class="embed-container">
             <iframe width="560" height="315" src="https://www.youtube.com/embed/MQU6w-pINAM?si=--6XVOEVsfKb8cam" title="TOEFL Speaking 2026 Task Simulations" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
           </div>
         </div>
       </div>
 
-      <!-- Current Homework -->
+      <!-- Homework -->
       <div class="card">
-        <div class="card-title">Homework Assignments — Lesson 7</div>
+        <div class="card-title">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          Homework Assignments — Lesson 7
+        </div>
         <div class="hw-list">
           <div class="hw-item">
-            <input type="checkbox" class="hw-checkbox" data-hw="l7-academic" id="hw-l7-academic">
-            <label for="hw-l7-academic"><strong>Academic Discussion Writing (100-130 words)</strong></label>
-            <div style="margin-top:0.5rem;">
+            <div>
+              <input type="checkbox" class="hw-checkbox" data-hw="l7-academic" id="hw-l7-academic">
+              <label for="hw-l7-academic" style="cursor:pointer;font-weight:600;"><strong>Academic Discussion Writing (100-130 words)</strong></label>
+            </div>
+            <div style="font-size:0.88rem;color:var(--muted);">
               Write a full 5-sentence response (Position → Acknowledge → Counter → Evidence → Tie-back): <em>"Professor: Should social media platforms use AI to detect and remove misinformation? Some argue it's necessary to protect public health and democracy. Others warn that automated moderation can censor legitimate speech and is prone to errors, especially with minority languages."</em> Use the scaffold template from the lesson. Reference Maria's and Kenji's posts.
             </div>
           </div>
           <div class="hw-item">
-            <input type="checkbox" class="hw-checkbox" data-hw="l7-speaking" id="hw-l7-speaking">
-            <label for="hw-l7-speaking"><strong>Speaking Recording (45s each)</strong></label>
-            <div style="margin-top:0.5rem;">
+            <div>
+              <input type="checkbox" class="hw-checkbox" data-hw="l7-speaking" id="hw-l7-speaking">
+              <label for="hw-l7-speaking" style="cursor:pointer;font-weight:600;"><strong>Speaking Recording (45s each)</strong></label>
+            </div>
+            <div style="font-size:0.88rem;color:var(--muted);">
               Record 45-second responses: <em>(1) Should AI be used to detect misinformation on social media? Why or why not? (2) Can algorithms ever understand cultural context the way humans can?</em>
             </div>
           </div>
           <div class="hw-item">
-            <input type="checkbox" class="hw-checkbox" data-hw="l7-evaluation" id="hw-l7-evaluation">
-            <label for="hw-l7-evaluation"><strong>Self-Evaluation</strong></label>
-            <div style="margin-top:0.5rem;">
+            <div>
+              <input type="checkbox" class="hw-checkbox" data-hw="l7-evaluation" id="hw-l7-evaluation">
+              <label for="hw-l7-evaluation" style="cursor:pointer;font-weight:600;"><strong>Self-Evaluation</strong></label>
+            </div>
+            <div style="font-size:0.88rem;color:var(--muted);">
               Which of the 5 sentences did you find hardest to write? Why? Write 2-3 sentences reflecting on what you want to improve next lesson.
             </div>
           </div>
           <div class="hw-item">
-            <input type="checkbox" class="hw-checkbox" data-hw="l7-vocab" id="hw-l7-vocab">
-            <label for="hw-l7-vocab"><strong>Vocabulary Journal (Optional)</strong></label>
-            <div style="margin-top:0.5rem;">
+            <div>
+              <input type="checkbox" class="hw-checkbox" data-hw="l7-vocab" id="hw-l7-vocab">
+              <label for="hw-l7-vocab" style="cursor:pointer;font-weight:600;"><strong>Vocabulary Journal (Optional)</strong></label>
+            </div>
+            <div style="font-size:0.88rem;color:var(--muted);">
               Write 3 sentences using: <em>perpetuate, equitable, accountability</em>.
             </div>
           </div>
@@ -641,10 +573,11 @@
 
     </div>
 
-    <!-- Sidebar Profile -->
     <div class="profile-column">
       <div class="card profile-card">
-        <div class="profile-avatar">V</div>
+        <div class="profile-avatar">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div>
         <div class="profile-name">Valeria</div>
         <div class="profile-detail">Prepping for TOEFL Exam</div>
 
@@ -654,14 +587,16 @@
         </div>
         <div class="profile-info-row">
           <span class="profile-info-label">Target Score</span>
-          <span style="color: var(--primary);"><strong>100+</strong></span>
+          <span style="color: var(--amber); font-weight: 700;">100+</span>
         </div>
         <div class="profile-info-row">
           <span class="profile-info-label">Schedule</span>
-          <span>Tuesdays & Fridays, 2:00 PM MSK</span>
+          <span style="font-size:0.82rem;">Tuesdays & Fridays, 2:00 PM MSK</span>
         </div>
-        
-        <div class="card-title" style="margin-top: 2rem; font-size: 1rem; margin-bottom: 1rem; padding-bottom: 0.5rem;">Score Goals</div>
+
+        <div class="card-title" style="margin-top: 1.5rem; font-size: 0.95rem; margin-bottom: 0.75rem; padding-bottom: 0.5rem;">
+          Score Goals
+        </div>
         <div class="metric-grid">
           <div class="metric-box">
             <div class="metric-value">26+</div>
@@ -678,13 +613,13 @@
   </div>
 
 <script>
-  document.querySelectorAll('.hw-checkbox').forEach(cb => {
-    const key = 'valeria_hw_' + cb.dataset.hw;
-    cb.checked = localStorage.getItem(key) === 'true';
-    cb.addEventListener('change', () => {
-      localStorage.setItem(key, cb.checked);
-    });
+document.querySelectorAll('.hw-checkbox').forEach(cb => {
+  const key = 'valeria_hw_' + cb.dataset.hw;
+  cb.checked = localStorage.getItem(key) === 'true';
+  cb.addEventListener('change', () => {
+    localStorage.setItem(key, cb.checked);
   });
+});
 </script>
 </body>
 </html>

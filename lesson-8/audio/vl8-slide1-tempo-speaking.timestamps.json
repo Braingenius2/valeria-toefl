@@ -1,0 +1,387 @@
+[
+  {
+    "word": "The",
+    "start": 0.35,
+    "end": 0.425
+  },
+  {
+    "word": "gig",
+    "start": 0.425,
+    "end": 0.65
+  },
+  {
+    "word": "economy",
+    "start": 0.65,
+    "end": 1.2
+  },
+  {
+    "word": "has",
+    "start": 1.2,
+    "end": 1.375
+  },
+  {
+    "word": "completely",
+    "start": 1.375,
+    "end": 1.913
+  },
+  {
+    "word": "changed",
+    "start": 1.913,
+    "end": 2.375
+  },
+  {
+    "word": "how",
+    "start": 2.375,
+    "end": 2.513
+  },
+  {
+    "word": "we",
+    "start": 2.513,
+    "end": 2.625
+  },
+  {
+    "word": "work",
+    "start": 2.625,
+    "end": 2.875
+  },
+  {
+    "word": "today",
+    "start": 2.875,
+    "end": 3.812
+  },
+  {
+    "word": "Platforms",
+    "start": 3.812,
+    "end": 4.362
+  },
+  {
+    "word": "like",
+    "start": 4.362,
+    "end": 4.588
+  },
+  {
+    "word": "Uber",
+    "start": 4.588,
+    "end": 4.912
+  },
+  {
+    "word": "and",
+    "start": 4.912,
+    "end": 5.025
+  },
+  {
+    "word": "Upwork",
+    "start": 5.025,
+    "end": 5.475
+  },
+  {
+    "word": "give",
+    "start": 5.475,
+    "end": 5.675
+  },
+  {
+    "word": "people",
+    "start": 5.675,
+    "end": 5.975
+  },
+  {
+    "word": "way",
+    "start": 5.975,
+    "end": 6.175
+  },
+  {
+    "word": "more",
+    "start": 6.175,
+    "end": 6.4
+  },
+  {
+    "word": "flexibility",
+    "start": 6.4,
+    "end": 7.525
+  },
+  {
+    "word": "so",
+    "start": 7.525,
+    "end": 7.638
+  },
+  {
+    "word": "they",
+    "start": 7.638,
+    "end": 7.775
+  },
+  {
+    "word": "can",
+    "start": 7.775,
+    "end": 7.963
+  },
+  {
+    "word": "choose",
+    "start": 7.963,
+    "end": 8.312
+  },
+  {
+    "word": "when",
+    "start": 8.312,
+    "end": 8.65
+  },
+  {
+    "word": "and",
+    "start": 8.65,
+    "end": 8.775
+  },
+  {
+    "word": "where",
+    "start": 8.775,
+    "end": 8.925
+  },
+  {
+    "word": "they",
+    "start": 8.925,
+    "end": 9.075
+  },
+  {
+    "word": "work",
+    "start": 9.075,
+    "end": 9.95
+  },
+  {
+    "word": "But",
+    "start": 9.95,
+    "end": 10.1
+  },
+  {
+    "word": "this",
+    "start": 10.1,
+    "end": 10.338
+  },
+  {
+    "word": "freedom",
+    "start": 10.338,
+    "end": 10.725
+  },
+  {
+    "word": "comes",
+    "start": 10.725,
+    "end": 10.988
+  },
+  {
+    "word": "with",
+    "start": 10.988,
+    "end": 11.113
+  },
+  {
+    "word": "a",
+    "start": 11.113,
+    "end": 11.213
+  },
+  {
+    "word": "catch",
+    "start": 11.213,
+    "end": 11.95
+  },
+  {
+    "word": "—",
+    "start": 11.95,
+    "end": 12.05
+  },
+  {
+    "word": "gig",
+    "start": 12.05,
+    "end": 12.275
+  },
+  {
+    "word": "workers",
+    "start": 12.275,
+    "end": 12.925
+  },
+  {
+    "word": "don't",
+    "start": 12.925,
+    "end": 13.15
+  },
+  {
+    "word": "get",
+    "start": 13.15,
+    "end": 13.325
+  },
+  {
+    "word": "traditional",
+    "start": 13.325,
+    "end": 13.825
+  },
+  {
+    "word": "benefits",
+    "start": 13.825,
+    "end": 14.35
+  },
+  {
+    "word": "like",
+    "start": 14.35,
+    "end": 14.55
+  },
+  {
+    "word": "health",
+    "start": 14.55,
+    "end": 14.838
+  },
+  {
+    "word": "insurance",
+    "start": 14.838,
+    "end": 15.787
+  },
+  {
+    "word": "paid",
+    "start": 15.787,
+    "end": 16.125
+  },
+  {
+    "word": "time",
+    "start": 16.125,
+    "end": 16.4
+  },
+  {
+    "word": "off",
+    "start": 16.4,
+    "end": 17.075
+  },
+  {
+    "word": "or",
+    "start": 17.075,
+    "end": 17.225
+  },
+  {
+    "word": "retirement",
+    "start": 17.225,
+    "end": 17.825
+  },
+  {
+    "word": "plans",
+    "start": 17.825,
+    "end": 18.9
+  },
+  {
+    "word": "With",
+    "start": 18.9,
+    "end": 19.1
+  },
+  {
+    "word": "more",
+    "start": 19.1,
+    "end": 19.325
+  },
+  {
+    "word": "people",
+    "start": 19.325,
+    "end": 19.663
+  },
+  {
+    "word": "freelancing",
+    "start": 19.663,
+    "end": 20.275
+  },
+  {
+    "word": "now",
+    "start": 20.275,
+    "end": 20.938
+  },
+  {
+    "word": "lawmakers",
+    "start": 20.938,
+    "end": 21.587
+  },
+  {
+    "word": "really",
+    "start": 21.587,
+    "end": 21.9
+  },
+  {
+    "word": "need",
+    "start": 21.9,
+    "end": 22.1
+  },
+  {
+    "word": "to",
+    "start": 22.1,
+    "end": 22.2
+  },
+  {
+    "word": "figure",
+    "start": 22.2,
+    "end": 22.462
+  },
+  {
+    "word": "out",
+    "start": 22.462,
+    "end": 22.587
+  },
+  {
+    "word": "a",
+    "start": 22.587,
+    "end": 22.688
+  },
+  {
+    "word": "new",
+    "start": 22.688,
+    "end": 22.913
+  },
+  {
+    "word": "safety",
+    "start": 22.913,
+    "end": 23.35
+  },
+  {
+    "word": "net",
+    "start": 23.35,
+    "end": 23.55
+  },
+  {
+    "word": "to",
+    "start": 23.55,
+    "end": 23.637
+  },
+  {
+    "word": "protect",
+    "start": 23.637,
+    "end": 24.05
+  },
+  {
+    "word": "everyone",
+    "start": 24.05,
+    "end": 24.913
+  },
+  {
+    "word": "no",
+    "start": 24.913,
+    "end": 25.1
+  },
+  {
+    "word": "matter",
+    "start": 25.1,
+    "end": 25.363
+  },
+  {
+    "word": "what",
+    "start": 25.363,
+    "end": 25.5
+  },
+  {
+    "word": "you",
+    "start": 25.5,
+    "end": 25.6
+  },
+  {
+    "word": "call",
+    "start": 25.6,
+    "end": 25.812
+  },
+  {
+    "word": "their",
+    "start": 25.812,
+    "end": 25.988
+  },
+  {
+    "word": "job",
+    "start": 25.988,
+    "end": 26.975
+  }
+]
