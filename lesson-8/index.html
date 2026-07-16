@@ -14,7 +14,7 @@
       --bg-dark: #090d16; --bg-card: #131a26; --border-color: #243042;
       --text-main: #f1f5f9; --text-muted: #64748b;
       --primary: #8b5cf6; --primary-hover: #7c3aed;
-      --accent-blue: #22d3ee; --accent-green: #10b981; --accent-red: #ef4444; --accent-purple: #a855f7;
+      --accent-blue: #22d3ee; --accent-green: #10b981; --accent-red: #ef4444; --accent-purple: #a855f7; --accent-amber: #fbbf24;
       --glass-bg: rgba(19, 26, 38, 0.85); --glass-border: rgba(255, 255, 255, 0.03);
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -25,6 +25,7 @@
     .badge-exam { background: rgba(139, 92, 246, 0.15); border: 1px solid var(--primary); color: var(--primary); padding: 0.25rem 0.5rem; border-radius: 4px; font-family: 'Fira Code', monospace; font-size: 0.75rem; text-transform: uppercase; font-weight: bold; }
     .back-link { color: var(--text-muted); text-decoration: none; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 0.3rem; transition: color 0.2s ease; }
     .back-link:hover { color: var(--text-main); }
+    .text-muted { color: var(--text-muted); }
     h1 { font-size: 1.25rem; font-weight: 700; letter-spacing: -0.025em; }
     .lesson-meta { display: flex; gap: 1.5rem; font-size: 0.875rem; color: var(--text-muted); }
     .meta-item strong { color: var(--text-main); }
@@ -54,6 +55,7 @@
     .btn-primary { background: var(--primary); color: #000; }
     .btn-primary:hover { background: var(--primary-hover); }
     .btn-secondary { background: rgba(255, 255, 255, 0.05); color: var(--text-main); border: 1px solid var(--border-color); }
+    .btn-sm { padding: 6px 14px; font-size: 12px; }
     
     .timer-container { display: flex; gap: 1rem; margin: 1rem 0; }
     .exam-timer { background: #000; border: 1px solid var(--border-color); border-radius: 8px; padding: 1rem; text-align: center; flex: 1; }
@@ -69,10 +71,6 @@
     .concession-table td { color: #cbd5e1; }
     .concession-table td code { font-family: 'Fira Code', monospace; font-size: 0.85rem; color: var(--accent-green); }
     
-    .error-box { background: rgba(239, 68, 68, 0.05); border: 1px solid rgba(239, 68, 68, 0.2); border-radius: 8px; padding: 1rem; margin-top: 1rem; }
-    .error-box h4 { color: var(--accent-red); font-size: 0.95rem; margin-bottom: 0.5rem; }
-    .error-item { font-size: 0.9rem; padding: 0.35rem 0; color: #cbd5e1; }
-    .error-item .wrong { color: var(--accent-red); }
     .accuracy-word.missed { color: var(--accent-red, #f43f5e); background: rgba(244, 63, 94, 0.08); border-bottom: 2px solid var(--accent-red, #f43f5e); }
     .tempo-switch-wrap { display: flex; gap: 0.5rem; align-items: center; margin-bottom: 0.75rem; background: rgba(0,0,0,0.3); padding: 0.5rem; border-radius: 8px; border: 1px solid var(--border-color); }
     .tempo-badge { font-family: 'Fira Code', monospace; font-size: 0.75rem; padding: 0.25rem 0.6rem; border-radius: 4px; font-weight: 600; letter-spacing: 0.04em; }
@@ -116,11 +114,6 @@
     .pacer-controls select { background: #000; border: 1px solid var(--border-color); color: var(--text-main); padding: 0.4rem 0.75rem; border-radius: 4px; font-family: 'Fira Code', monospace; font-size: 0.85rem; }
     .speed-select { background:rgba(0,0,0,0.4); border:1px solid var(--border-color); border-radius:8px; color:var(--text-main); padding:0.45rem 0.8rem; font-family:inherit; font-size:0.85rem; font-weight:500; cursor:pointer; outline:none; transition:border-color 0.2s ease; }
     .speed-select:focus { border-color:var(--primary); }
-    .disclaimer { background: rgba(239, 68, 68, 0.08); border: 1px solid rgba(239, 68, 68, 0.3); border-left: 4px solid var(--accent-red); border-radius: 8px; padding: 1rem; margin-bottom: 1.5rem; font-size: 0.9rem; color: #fca5a5; line-height: 1.6; }
-    .disclaimer strong { color: var(--accent-red); }
-    .disclaimer a { color: #fbbf24; }
-    .strategy-list { padding-left: 1.25rem; color: #cbd5e1; line-height: 1.8; font-size: 0.95rem; }
-    .strategy-list li { margin-bottom: 0.3rem; }
     .step-card { background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); border-radius: 8px; padding: 1rem; margin-bottom: 0.75rem; }
     .step-card h4 { color: var(--accent-blue); margin-bottom: 0.4rem; font-size: 0.95rem; }
     .step-card p { color: #cbd5e1; font-size: 0.92rem; line-height: 1.6; }
@@ -158,7 +151,7 @@
       <div class="slide active" id="slide-0">
         <div class="card shadowing-box">
           <div class="card-title">Shadowing Pacer: Gig Economy</div>
-          <p class="text-muted">Focus on stress in key terms: <em>fundamentally transformed, unprecedented flexibility, employment classification</em>. Notice how the speaker pauses at commas and clause boundaries.</p>
+          <p class="text-muted">Focus on stress in key terms: <em>completely changed, way more flexibility, this freedom comes with a catch</em>. Notice how the speaker pauses at commas and clause boundaries.</p>
           <div class="tempo-switch-wrap" id="tempoSwitch">
             <span class="tempo-badge speaking" id="tempoBadge">Speaking Tempo</span>
             <button class="switch-btn active" data-tempo="speaking" onclick="SpeakingTempoEngine.setTempo('speaking')">🗣 Speaking</button>
@@ -514,7 +507,7 @@
     }
 
     const shadowingTextSpeaking = "The gig economy has completely changed how we work today. Platforms like Uber and Upwork give people way more flexibility, so they can choose when and where they work. But this freedom comes with a catch — gig workers don't get traditional benefits like health insurance, paid time off, or retirement plans. With more people freelancing now, lawmakers really need to figure out a new safety net to protect everyone, no matter what you call their job.";
-    const shadowingTextWriting = "The rise of the gig economy has fundamentally transformed the nature of work in the twenty-first century. Platforms like Uber, Upwork, and Fiverr have given workers unprecedented flexibility, allowing them to choose when, where, and how much they work. Yet this flexibility comes at a cost, the absence of traditional employment protections such as health insurance, paid leave, and retirement benefits. As more workers move from permanent positions to freelance arrangements, policymakers face the urgent task of creating a social safety net that protects all workers, regardless of employment classification.";
+    const shadowingTextWriting = "The rise of the gig economy has fundamentally transformed the nature of work in the twenty-first century. Platforms like Uber, Upwork, and Fiverr have given workers unprecedented flexibility, allowing them to choose when, where, and how much they work. Yet this flexibility comes at a cost — the absence of traditional employment protections such as health insurance, paid leave, and retirement benefits. As more workers move from permanent positions to freelance arrangements, policymakers face the urgent task of creating a social safety net that protects all workers, regardless of employment classification.";
     let shadowingText = shadowingTextSpeaking;
 
     // Speaking Tempo Engine
@@ -765,8 +758,8 @@
         ctx.fillStyle = 'rgba(9, 13, 22, 0.3)';
         ctx.fillRect(0, 0, width, height);
         ctx.lineWidth = 3;
-        ctx.strokeStyle = 'var(--primary)';
-        ctx.shadowColor = 'var(--primary)';
+        ctx.strokeStyle = '#8b5cf6';
+        ctx.shadowColor = '#8b5cf6';
         ctx.shadowBlur = 8;
         ctx.beginPath();
         ctx.moveTo(0, height / 2);
@@ -900,7 +893,7 @@
     }
 
     document.addEventListener('input', function(e) {
-      if (e.target.matches('.notepad-area:not(.integrated-area):not(.discussion-area)')) {
+      if (e.target.matches('.notepad-area, .card textarea')) {
         const text = e.target.value.trim();
         const words = text ? text.split(/\s+/).length : 0;
         const counter = document.getElementById('wordCount');

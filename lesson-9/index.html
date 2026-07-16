@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Valeria's Lesson: AI in Scientific Research</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-dark: #090d16; --bg-card: #131a26; --border-color: #243042;
+      --text-main: #f1f5f9; --text-muted: #64748b;
+      --primary: #8b5cf6; --primary-hover: #7c3aed;
+      --accent-cyan: #22d3ee; --accent-green: #10b981; --accent-red: #ef4444; --accent-purple: #a855f7;
+      --glass-bg: rgba(19, 26, 38, 0.85); --glass-border: rgba(255, 255, 255, 0.03);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Outfit', sans-serif; background-color: var(--bg-dark); color: var(--text-main); min-height: 100vh; display: flex; flex-direction: column; overflow-x: hidden; }
+    
+    header { background: rgba(9, 13, 22, 0.9); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border-color); padding: 1rem 2rem; position: sticky; top: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; }
+    .logo-area { display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; }
+    .badge-exam { background: rgba(139, 92, 246, 0.15); border: 1px solid var(--primary); color: var(--primary); padding: 0.25rem 0.5rem; border-radius: 4px; font-family: 'Fira Code', monospace; font-size: 0.75rem; text-transform: uppercase; font-weight: bold; }
+    .back-link { color: var(--text-muted); text-decoration: none; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 0.3rem; transition: color 0.2s ease; }
+    .back-link:hover { color: var(--text-main); }
+    h1 { font-size: 1.25rem; font-weight: 700; letter-spacing: -0.025em; }
+    .lesson-meta { display: flex; gap: 1.5rem; font-size: 0.875rem; color: var(--text-muted); }
+    .meta-item strong { color: var(--text-main); }
+    
+    .main-container { display: flex; flex: 1; height: calc(100vh - 65px); }
+    .sidebar { width: 280px; border-right: 1px solid var(--border-color); padding: 1.5rem 1rem; display: flex; flex-direction: column; gap: 0.5rem; background: rgba(9, 13, 22, 0.5); }
+    .sidebar-btn { display: flex; align-items: center; gap: 0.75rem; width: 100%; padding: 0.75rem 1rem; background: transparent; border: 1px solid transparent; border-radius: 8px; color: var(--text-muted); font-size: 0.9rem; text-align: left; cursor: pointer; transition: all 0.2s ease; }
+    .sidebar-btn:hover { background: rgba(255, 255, 255, 0.02); color: var(--text-main); }
+    .sidebar-btn.active { background: var(--bg-card); border-color: var(--border-color); color: var(--primary); font-weight: 600; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); }
+    .sidebar-num { font-family: 'Fira Code', monospace; font-size: 0.8rem; opacity: 0.6; }
+    
+    .content-area { flex: 1; padding: 2.5rem; overflow-y: auto; background: radial-gradient(circle at top right, rgba(139, 92, 246, 0.04), transparent 900px); }
+    .slide { display: none; animation: fadeIn 0.3s ease-in-out forwards; max-width: 1000px; margin: 0 auto; }
+    .slide.active { display: block; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    
+    .card { background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 12px; padding: 1.75rem; margin-bottom: 1.5rem; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25); transition: border-color 0.3s ease, box-shadow 0.3s ease; }
+    .card:hover { border-color: rgba(139, 92, 246, 0.15); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25), 0 0 15px rgba(139, 92, 246, 0.02); }
+    .card-title { font-size: 1.15rem; font-weight: 600; margin-bottom: 1rem; color: var(--primary); display: flex; align-items: center; gap: 0.5rem; border-bottom: 1px solid rgba(255, 255, 255, 0.05); padding-bottom: 0.5rem; }
+    
+    .shadowing-box { border-left: 4px solid var(--accent-cyan); background: rgba(34, 211, 238, 0.03); }
+    .shadowing-text { font-size: 1.1rem; line-height: 1.8; color: var(--text-main); margin: 1.5rem 0; background: rgba(0, 0, 0, 0.25); padding: 1.5rem; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.02); }
+    .shadowing-word { display: inline-block; margin-right: 0.25rem; transition: all 0.15s ease; }
+    .shadowing-word.highlighted { background: rgba(34, 211, 238, 0.25); color: #fff; border-radius: 3px; padding: 0 2px; }
+    
+    .btn { padding: 0.6rem 1.2rem; border-radius: 6px; border: none; font-weight: 600; font-family: inherit; cursor: pointer; display: flex; align-items: center; gap: 0.5rem; transition: all 0.2s ease; }
+    .btn-primary { background: var(--primary); color: #fff; }
+    .btn-primary:hover { background: var(--primary-hover); }
+    .btn-secondary { background: rgba(255, 255, 255, 0.05); color: var(--text-main); border: 1px solid var(--border-color); }
+    
+    .timer-container { display: flex; gap: 1rem; margin: 1rem 0; }
+    .exam-timer { background: #000; border: 1px solid var(--border-color); border-radius: 8px; padding: 1rem; text-align: center; flex: 1; }
+    .timer-val { font-family: 'Fira Code', monospace; font-size: 2.25rem; font-weight: bold; color: var(--primary); }
+    .timer-label { font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); margin-top: 0.25rem; }
+    
+    .collocation-table { width: 100%; border-collapse: collapse; margin-bottom: 1.25rem; }
+    .collocation-table th, .collocation-table td { border: 1px solid var(--border-color); padding: 0.65rem 0.75rem; text-align: left; font-size: 0.92rem; }
+    .collocation-table th { background: rgba(139, 92, 246, 0.08); color: var(--accent-cyan); text-transform: uppercase; font-size: 0.8rem; }
+    .collocation-table td { color: #cbd5e1; }
+    .collocation-table td code { font-family: 'Fira Code', monospace; font-size: 0.85rem; color: var(--accent-cyan); }
+    
+    .error-box { background: rgba(239, 68, 68, 0.05); border: 1px solid rgba(239, 68, 68, 0.2); border-radius: 8px; padding: 1rem; margin-top: 1rem; }
+    .error-box h4 { color: var(--accent-red); font-size: 0.95rem; margin-bottom: 0.5rem; }
+    .error-item { font-size: 0.9rem; padding: 0.35rem 0; color: #cbd5e1; }
+    .error-item .wrong { color: var(--accent-red); }
+    .error-item .right { color: var(--accent-green); }
+    
+    .thread-card { background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.25rem; margin-bottom: 1rem; }
+    .thread-card .prof { color: var(--accent-purple); font-weight: 600; }
+    .thread-card .student1 { color: var(--accent-cyan); font-weight: 600; }
+    .thread-card .student2 { color: var(--accent-green); font-weight: 600; }
+    .thread-card p { color: #cbd5e1; font-size: 0.92rem; line-height: 1.6; margin-top: 0.3rem; }
+    
+    .notepad-area { width: 100%; height: 250px; background: #05070c; border: 1px solid var(--border-color); border-radius: 6px; color: var(--text-main); padding: 0.75rem; font-family: inherit; resize: vertical; font-size: 0.95rem; }
+    .recorder-bar { display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap; margin-top: 0.75rem; padding-top: 0.75rem; border-top: 1px solid var(--border-color); }
+    .rec-btn { padding: 0.35rem 0.75rem; font-size: 0.8rem; border-radius: 20px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); color: var(--text-muted); font-family: inherit; cursor: pointer; transition: all 0.2s ease; display: inline-flex; align-items: center; gap: 0.3rem; }
+    .rec-btn:hover { background: rgba(255,255,255,0.1); }
+    .rec-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+    .rec-status { font-size: 0.75rem; color: var(--text-muted); }
+    .practice-item { background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); border-radius: 8px; padding: 1rem; margin-bottom: 0.75rem; }
+    .practice-item .q { color: #cbd5e1; font-size: 0.95rem; }
+    .practice-item .a { color: var(--accent-green); font-size: 0.9rem; display: none; margin-top: 0.5rem; padding: 0.5rem; background: rgba(16,185,129,0.05); border-radius: 4px; }
+    .practice-item .reveal-btn { background: transparent; border: 1px solid var(--border-color); color: var(--text-muted); padding: 0.25rem 0.75rem; border-radius: 4px; cursor: pointer; font-size: 0.8rem; margin-top: 0.5rem; }
+    .pacer-controls { display: flex; gap: 0.75rem; align-items: center; flex-wrap: wrap; margin-top: 0.75rem; }
+    .pacer-controls select { background: #000; border: 1px solid var(--border-color); color: var(--text-main); padding: 0.4rem 0.75rem; border-radius: 4px; font-family: 'Fira Code', monospace; font-size: 0.85rem; }
+    .prompt-box { background: #000; border-left: 4px solid var(--accent-purple); padding: 1.25rem; border-radius: 8px; margin-bottom: 1rem; }
+    .prompt-box .speaker-label { font-weight: 600; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.3rem; }
+    .prompt-box .speaker-label.prof { color: var(--accent-purple); }
+    .prompt-box .speaker-label.student { color: var(--accent-cyan); }
+    .prompt-box .speaker-label.student2 { color: var(--accent-green); }
+    .prompt-box p { color: #cbd5e1; font-size: 0.95rem; line-height: 1.65; }
+    .prompt-box + .prompt-box { margin-top: 0.5rem; }
+    .speed-select { background:rgba(0,0,0,0.4); border:1px solid var(--border-color); border-radius:8px; color:var(--text-main); padding:0.45rem 0.8rem; font-family:inherit; font-size:0.85rem; font-weight:500; cursor:pointer; outline:none; transition:border-color 0.2s ease; }
+    .speed-select:focus { border-color:var(--primary); }
+    .gap-input { background: #05070c; border: 1px solid var(--border-color); border-radius: 4px; color: var(--text-main); padding: 0.3rem 0.5rem; font-family: 'Fira Code', monospace; font-size: 0.9rem; width: 200px; }
+    .gap-input:focus { border-color: var(--accent-cyan); outline: none; }
+    .gap-fill-item { margin-bottom: 1rem; padding: 0.75rem; background: rgba(255,255,255,0.01); border-radius: 6px; }
+    .gap-fill-item .sentence { color: #cbd5e1; font-size: 0.95rem; margin-bottom: 0.4rem; }
+    .gap-check { color: var(--accent-cyan); font-size: 0.85rem; margin-top: 0.3rem; }
+    .drill-card { background: rgba(255,255,255,0.01); border: 1px solid var(--border-color); border-radius: 8px; padding: 1rem; margin-bottom: 1rem; }
+    .drill-card h4 { color: var(--accent-cyan); margin-bottom: 0.5rem; font-size: 0.95rem; }
+    .drill-card p { color: #cbd5e1; font-size: 0.92rem; line-height: 1.6; }
+    .sentence-edit { background: #05070c; border: 1px solid var(--border-color); border-radius: 4px; color: var(--text-main); padding: 0.5rem; font-family: inherit; font-size: 0.9rem; width: 100%; min-height: 60px; resize: vertical; margin-top: 0.3rem; }
+    .hw-card { background: rgba(255,255,255,0.01); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.25rem; margin-bottom: 1rem; }
+    .hw-card h3 { font-size: 1.05rem; color: var(--primary); margin-bottom: 0.5rem; }
+    .hw-card p, .hw-card li { font-size: 0.92rem; line-height: 1.6; color: #cbd5e1; }
+    .hw-card ul, .hw-card ol { padding-left: 1.25rem; margin: 0.5rem 0; }
+  .ico { display: inline-flex; vertical-align: middle; flex-shrink: 0; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo-area">
+      <div class="badge-exam">Vocabulary Depth</div>
+      <a href="../index.html" class="back-link">← Portal</a>
+      <h1>Valeria: AI in Scientific Research — Vocabulary & Collocations</h1>
+    </div>
+    <div class="lesson-meta">
+      <div class="meta-item">Student: <strong>Valeria (B2/C1)</strong></div>
+      <div class="meta-item">Focus: <strong style="color: var(--primary);">Academic Collocations</strong></div>
+    </div>
+  </header>
+
+  <div class="main-container">
+    <div class="sidebar">
+      <button class="sidebar-btn active" onclick="switchSlide(0)"><span class="sidebar-num">01</span> Shadowing Pacer</button>
+      <button class="sidebar-btn" onclick="switchSlide(1)"><span class="sidebar-num">02</span> Input: Collocations</button>
+      <button class="sidebar-btn" onclick="switchSlide(2)"><span class="sidebar-num">03</span> Practice Drills</button>
+      <button class="sidebar-btn" onclick="switchSlide(3)"><span class="sidebar-num">04</span> Academic Discussion</button>
+      <button class="sidebar-btn" onclick="switchSlide(4)"><span class="sidebar-num">05</span> Sentence Variation</button>
+      <button class="sidebar-btn" onclick="switchSlide(5)"><span class="sidebar-num">06</span> Task 4: Speaking</button>
+      <button class="sidebar-btn" onclick="switchSlide(6)"><span class="sidebar-num">07</span> Homework</button>
+    </div>
+
+    <div class="content-area">
+
+      <!-- Slide 0: Shadowing Pacer -->
+      <div class="slide active" id="slide-0">
+        <div class="card shadowing-box">
+          <div class="card-title"> <svg class="ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>  Shadowing Pacer: AI in Science</div>
+          <p class="text-muted">Focus on stress in technical vocabulary: <em>revolutionizing, computational, algorithms, exoplanets</em>. Pay attention to smooth linking through complex clauses.</p>
+          <div id="shadowing-text" class="shadowing-text"></div>
+          <canvas id="waveCanvas" width="800" height="90" style="width:100%;height:90px;background:#05070c;border-radius:6px;border:1px solid var(--border-color);margin-bottom:1.25rem;"></canvas>
+          <div style="display:flex; gap:0.5rem; align-items:center;">
+            <button class="btn btn-primary" onclick="toggleShadowingTimer()" id="btn-timer">▶ Start Timer</button>
+            <div id="shadowing-timer" style="font-family:'Fira Code'; font-size:1.2rem; background:#000; padding:0.4rem 1rem; border-radius:4px;">00:00</div>
+            <button class="btn btn-secondary" onclick="resetShadowingTimer()">Reset</button>
+            <button class="btn btn-secondary" onclick="autoHighlightWords()">Auto Pacer</button>
+          </div>
+          <div class="pacer-controls">
+            <button class="btn btn-secondary listen-btn" onclick="toggleSpeaking()">🔊 Listen</button>
+            <select class="speed-select" id="speedSelect">
+              <option value="0.75">🐢 Slow</option>
+              <option value="1" selected>▶ Normal</option>
+              <option value="1.25">🐇 Fast</option>
+            </select>
+          </div>
+          <div class="recorder-bar">
+            <button class="rec-btn" id="startRecord">🎤 Record</button>
+            <button class="rec-btn" id="stopRecord" disabled>⏹ Stop</button>
+            <button class="rec-btn" id="playRecord" disabled>🎧 Play</button>
+            <span class="rec-status" id="recStatus">Record yourself, then compare with the model</span>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title"> <svg class="ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>  Discussion Questions</div>
+          <ol style="padding-left: 1.25rem; color: #cbd5e1; line-height: 1.8; font-size: 0.95rem;">
+            <li>What scientific discovery would you most like to see AI help with?</li>
+            <li>Is there a risk we rely too much on AI in research?</li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- Slide 1: Input — Academic Collocations + Gap-fill -->
+      <div class="slide" id="slide-1">
+        <div class="card">
+          <div class="card-title">📊 Verb + Noun Collocations</div>
+          <table class="collocation-table">
+            <thead><tr><th>Verb</th><th>Noun</th><th>Example</th></tr></thead>
+            <tbody>
+              <tr><td><code>accelerate</code></td><td>a discovery, progress</td><td>AI can <strong>accelerate discoveries</strong> in medicine.</td></tr>
+              <tr><td><code>analyze</code></td><td>a dataset, patterns</td><td>Algorithms <strong>analyze vast datasets</strong> efficiently.</td></tr>
+              <tr><td><code>process</code></td><td>information, data</td><td>Systems <strong>process information</strong> at high speed.</td></tr>
+              <tr><td><code>leverage</code></td><td>computational power, expertise</td><td>We <strong>leverage computational power</strong> to model climate.</td></tr>
+              <tr><td><code>generate</code></td><td>insights, predictions</td><td>AI <strong>generates predictions</strong> about protein folding.</td></tr>
+              <tr><td><code>identify</code></td><td>patterns, exoplanets</td><td>Astronomers <strong>identify exoplanets</strong> using machine learning.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card">
+          <div class="card-title">📊 Adjective + Noun Collocations</div>
+          <table class="collocation-table">
+            <thead><tr><th>Adjective</th><th>Noun</th><th>Example</th></tr></thead>
+            <tbody>
+              <tr><td><code>groundbreaking</code></td><td>research, discovery</td><td>This is <strong>groundbreaking research</strong> in biology.</td></tr>
+              <tr><td><code>computational</code></td><td>model, approach, method</td><td>A <strong>computational model</strong> simulates climate change.</td></tr>
+              <tr><td><code>vast</code></td><td>dataset, amount of data</td><td>Machine learning requires <strong>vast datasets</strong>.</td></tr>
+              <tr><td><code>remarkable</code></td><td>accuracy, precision</td><td>The system achieves <strong>remarkable accuracy</strong>.</td></tr>
+              <tr><td><code>promising</code></td><td>approach, result, direction</td><td>This is a <strong>promising approach</strong> to drug discovery.</td></tr>
+              <tr><td><code>autonomous</code></td><td>system, research</td><td><strong>Autonomous systems</strong> conduct experiments without humans.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card">
+          <div class="card-title">📊 Adverb + Adjective Collocations</div>
+          <table class="collocation-table">
+            <thead><tr><th>Adverb</th><th>Adjective</th><th>Example</th></tr></thead>
+            <tbody>
+              <tr><td><code>remarkably</code></td><td>accurate, precise</td><td>The model is <strong>remarkably accurate</strong>.</td></tr>
+              <tr><td><code>widely</code></td><td>applicable, accepted</td><td>These methods are <strong>widely applicable</strong> across fields.</td></tr>
+              <tr><td><code>computationally</code></td><td>expensive, intensive</td><td>Deep learning is <strong>computationally intensive</strong>.</td></tr>
+              <tr><td><code>highly</code></td><td>effective, sophisticated</td><td>AI is a <strong>highly effective</strong> tool for analysis.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card">
+          <div class="card-title"> <svg class="ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>  Gap-Fill — Complete with Target Collocations</div>
+
+          <div class="gap-fill-item">
+            <div class="sentence"><strong>1.</strong> The new algorithm can <input class="gap-input" id="gap1" placeholder="verb + noun"> in hours instead of weeks.</div>
+            <button class="reveal-btn" onclick="document.getElementById('gap1-ans').style.display='block';this.style.display='none'">Reveal Answer</button>
+            <div id="gap1-ans" class="a"><strong>Answer:</strong> analyze vast datasets / process vast amounts of data</div>
+          </div>
+
+          <div class="gap-fill-item">
+            <div class="sentence"><strong>2.</strong> This is <input class="gap-input" id="gap2" placeholder="adj + noun"> that could change how we treat disease.</div>
+            <button class="reveal-btn" onclick="document.getElementById('gap2-ans').style.display='block';this.style.display='none'">Reveal Answer</button>
+            <div id="gap2-ans" class="a"><strong>Answer:</strong> groundbreaking research / a groundbreaking discovery</div>
+          </div>
+
+          <div class="gap-fill-item">
+            <div class="sentence"><strong>3.</strong> AlphaFold predicted protein structures with <input class="gap-input" id="gap3" placeholder="adv + adj">.</div>
+            <button class="reveal-btn" onclick="document.getElementById('gap3-ans').style.display='block';this.style.display='none'">Reveal Answer</button>
+            <div id="gap3-ans" class="a"><strong>Answer:</strong> remarkably accurate results / remarkable accuracy</div>
+          </div>
+
+          <div class="gap-fill-item">
+            <div class="sentence"><strong>4.</strong> We need to <input class="gap-input" id="gap4" placeholder="verb + noun"> to solve this problem.</div>
+            <button class="reveal-btn" onclick="document.getElementById('gap4-ans').style.display='block';this.style.display='none'">Reveal Answer</button>
+            <div id="gap4-ans" class="a"><strong>Answer:</strong> leverage computational power / combine human expertise with AI</div>
+          </div>
+
+          <div class="gap-fill-item">
+            <div class="sentence"><strong>5.</strong> Machine learning is <input class="gap-input" id="gap5" placeholder="adv + adj"> across scientific disciplines.</div>
+            <button class="reveal-btn" onclick="document.getElementById('gap5-ans').style.display='block';this.style.display='none'">Reveal Answer</button>
+            <div id="gap5-ans" class="a"><strong>Answer:</strong> widely applicable / highly effective</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title"> <svg class="ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>  Error Targets (from Valeria's Error Log)</div>
+          <div class="error-item"><span class="wrong">❌ "I will analyze the data and I will generate a report."</span> → <span class="right">✅ "I will analyze the data and generate a report."</span> <span style="color: var(--text-muted); font-size: 0.8rem;">(Unnecessary pronoun repetition)</span></div>
+          <div class="error-item"><span class="wrong">❌ "The scientist have made a groundbreaking research."</span> → <span class="right">✅ "The scientist has conducted groundbreaking research."</span> <span style="color: var(--text-muted); font-size: 0.8rem;">(Subject-verb agreement + undetermined noun)</span></div>
+          <div class="error-item"><span class="wrong">❌ "This is more better approach."</span> → <span class="right">✅ "This is a more promising approach."</span> <span style="color: var(--text-muted); font-size: 0.8rem;">(Double comparative + article)</span></div>
+          <div class="error-item"><span class="wrong">❌ "The algorithm can process informations very fast."</span> → <span class="right">✅ "The algorithm can process information very quickly."</span> <span style="color: var(--text-muted); font-size: 0.8rem;">(Uncountable noun + adverb form)</span></div>
+        </div>
+      </div>
+
+      <!-- Slide 2: Practice Drills -->
+      <div class="slide" id="slide-2">
+        <div class="card">
+          <div class="card-title"> <svg class="ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>  Practice Drills — Academic Collocations</div>
+          <p class="text-muted" style="margin-bottom:1rem;">Tap to reveal answers. Focus on academic register and collocation accuracy.</p>
+
+          <div class="drill-card">
+            <h4>Drill 1: Collocation Matching</h4>
+            <p>Match each verb with the correct noun partner:<br><br>
+            <strong>Verbs:</strong> accelerate · analyze · leverage · generate · identify<br>
+            <strong>Nouns:</strong> insights · a discovery · computational power · vast datasets · exoplanets</p>
+            <button class="reveal-btn" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Reveal Answer</button>
+            <div class="a"><strong>Answer:</strong> accelerate a discovery, analyze vast datasets, leverage computational power, generate insights, identify exoplanets</div>
+          </div>
+
+          <div class="drill-card">
+            <h4>Drill 2: Gap-Fill — Academic Collocations</h4>
+            <p>Complete: "While traditional methods are slow, AI can <input class="gap-input" id="drill2" placeholder="verb + noun" style="width:170px"> to produce results with <input class="gap-input" id="drill2b" placeholder="adj + noun" style="width:170px">."</p>
+            <button class="reveal-btn" onclick="document.getElementById('drill2-ans').style.display='block';this.style.display='none'">Reveal Answer</button>
+            <div class="a" id="drill2-ans"><strong>Answer:</strong> "While traditional methods are slow, AI can <strong>analyze vast datasets</strong> to produce results with <strong>remarkable accuracy</strong>."</div>
+          </div>
+
+          <div class="drill-card">
+            <h4>Drill 3: Rewrite with Academic Register</h4>
+            <p>Rewrite in academic register: "AI is really good at looking at lots of data and finding new planets."</p>
+            <div style="margin-top:0.5rem;">
+              <textarea class="sentence-edit" id="drill3-input" placeholder="Your academic rewrite..."></textarea>
+            </div>
+            <button class="reveal-btn" onclick="document.getElementById('drill3-ans').style.display='block';this.style.display='none'">Reveal Answer</button>
+            <div class="a" id="drill3-ans"><strong>Model Answer:</strong> "AI is a <strong>highly effective</strong> tool for <strong>analyzing vast datasets</strong> and <strong>identifying previously unknown exoplanets</strong>."</div>
+          </div>
+
+          <div class="drill-card">
+            <h4>Drill 4: Sentence Completion</h4>
+            <p>Complete using <strong>leverage computational power</strong> and <strong>widely applicable</strong>:<br><br>
+            "The most promising approach is to __________________________________ because machine learning is _______________________________ across scientific fields."</p>
+            <button class="reveal-btn" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Reveal Answer</button>
+            <div class="a"><strong>Answer:</strong> "The most promising approach is to <strong>leverage computational power</strong> because machine learning is <strong>widely applicable</strong> across scientific fields."</div>
+          </div>
+
+          <div class="drill-card">
+            <h4>Drill 5: Error Correction</h4>
+            <p><span class="wrong">❌</span> "The researchers has make a groundbreaking discovers using autonomously system."<br><br>
+            Identify and correct all errors.</p>
+            <button class="reveal-btn" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Reveal Answer</button>
+            <div class="a"><strong>Answer:</strong> "The researchers <strong>have made</strong> a <strong>groundbreaking discovery</strong> using an <strong>autonomous system</strong>."<br>
+            Errors: has→have (plural subject), make→made (past participle), discovers→discovery (noun form), autonomously→autonomous (adjective), system needs article</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 3: Academic Discussion (Writing, 10 min) -->
+      <div class="slide" id="slide-3">
+        <div class="card">
+          <div class="card-title"> <svg class="ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>  Academic Discussion — AI in Research</div>
+
+          <div class="prompt-box">
+            <div class="speaker-label prof">👨‍🏫 Professor's Prompt</div>
+            <p>"AI is transforming how research is conducted across all academic disciplines. Some argue that AI will accelerate scientific progress more than any other technology in history. Others worry that over-reliance on AI could narrow the types of questions researchers ask. What do you think?"</p>
+          </div>
+          <div class="prompt-box">
+            <div class="speaker-label student">👩 Dr. Elena Marchetti (classmate):</div>
+            <p>"AI is undoubtedly the most transformative research tool we have ever created. In my field of drug discovery, machine learning algorithms have accelerated the identification of candidate molecules from years to months. This is groundbreaking progress that would be impossible through traditional methods alone. I believe AI will unlock discoveries we cannot even imagine yet."</p>
+          </div>
+          <div class="prompt-box">
+            <div class="speaker-label student2">👨 Prof. James Okonkwo (classmate):</div>
+            <p>"I am more cautious. When researchers rely heavily on AI, they tend to frame their questions around what the algorithms can analyze — large datasets with clear patterns. This could marginalize qualitative research and theoretical work that does not fit neatly into a computational model. We risk narrowing science rather than expanding it."</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title"> <svg class="ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>  Timed Writing — 10 Minutes</div>
+          <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1rem;">
+            Write 100+ words. Reference Elena's and/or James's posts. Use at least <strong>three target collocations</strong> from today's lesson. Target: 100-130 words.
+          </p>
+          <div class="exam-timer" style="max-width:300px; margin:0 auto 1.5rem;">
+            <div class="timer-val" id="write-time">10:00</div>
+            <div class="timer-label">Writing Time Remaining</div>
+          </div>
+          <div style="text-align:center; margin-bottom:1.5rem;">
+            <button class="btn btn-primary" style="display:inline-flex;" onclick="runWritingClock()">▶ Start Writing Timer</button>
+          </div>
+          <div class="word-counter" style="text-align:right;font-size:0.85rem;color:var(--text-muted);margin-top:0.5rem;font-family:'Fira Code',monospace;">
+            Words: <span id="wordCount">0</span> / 130
+          </div>
+          <textarea class="notepad-area" placeholder="Valeria, type your Academic Discussion response here (100-130 words) — use at least three target collocations..." style="height:350px; font-family: 'Outfit';"></textarea>
+        </div>
+      </div>
+
+      <!-- Slide 4: Sentence Variation Exercise -->
+      <div class="slide" id="slide-4">
+        <div class="card">
+          <div class="card-title"> <svg class="ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>  Sentence Variation — Simple → Academic</div>
+          <p class="text-muted" style="margin-bottom:1rem;">Rewrite each simple sentence using academic collocations from today's lesson.</p>
+
+          <div class="drill-card">
+            <h4>1.</h4>
+            <p><em>Simple:</em> "AI is very good at finding patterns in data."<br>
+            <em>Academic:</em> <textarea class="sentence-edit" id="var1" placeholder="Rewrite using target collocations..."></textarea></p>
+            <button class="reveal-btn" onclick="document.getElementById('var1-ans').style.display='block';this.style.display='none'">Reveal Model Answer</button>
+            <div class="a" id="var1-ans"><strong>Model:</strong> "AI is a <strong>highly effective</strong> tool for <strong>analyzing vast datasets</strong> and <strong>identifying patterns</strong>."</div>
+          </div>
+
+          <div class="drill-card">
+            <h4>2.</h4>
+            <p><em>Simple:</em> "Scientists made a very important discovery about proteins."<br>
+            <em>Academic:</em> <textarea class="sentence-edit" id="var2" placeholder="Rewrite using target collocations..."></textarea></p>
+            <button class="reveal-btn" onclick="document.getElementById('var2-ans').style.display='block';this.style.display='none'">Reveal Model Answer</button>
+            <div class="a" id="var2-ans"><strong>Model:</strong> "Researchers <strong>accelerated a groundbreaking discovery</strong> about protein structures using <strong>computational models</strong>."</div>
+          </div>
+
+          <div class="drill-card">
+            <h4>3.</h4>
+            <p><em>Simple:</em> "Computers can do science experiments without people helping."<br>
+            <em>Academic:</em> <textarea class="sentence-edit" id="var3" placeholder="Rewrite using target collocations..."></textarea></p>
+            <button class="reveal-btn" onclick="document.getElementById('var3-ans').style.display='block';this.style.display='none'">Reveal Model Answer</button>
+            <div class="a" id="var3-ans"><strong>Model:</strong> "<strong>Autonomous systems</strong> can conduct experiments and <strong>generate insights</strong> without direct human intervention."</div>
+          </div>
+
+          <div class="drill-card">
+            <h4>4.</h4>
+            <p><em>Simple:</em> "This new way of doing research can be used in many different subjects."<br>
+            <em>Academic:</em> <textarea class="sentence-edit" id="var4" placeholder="Rewrite using target collocations..."></textarea></p>
+            <button class="reveal-btn" onclick="document.getElementById('var4-ans').style.display='block';this.style.display='none'">Reveal Model Answer</button>
+            <div class="a" id="var4-ans"><strong>Model:</strong> "This <strong>promising approach</strong> to research is <strong>widely applicable</strong> across multiple academic disciplines."</div>
+          </div>
+
+          <div class="drill-card">
+            <h4>5.</h4>
+            <p><em>Simple:</em> "AI looks at weather data and makes good predictions about climate change."<br>
+            <em>Academic:</em> <textarea class="sentence-edit" id="var5" placeholder="Rewrite using target collocations..."></textarea></p>
+            <button class="reveal-btn" onclick="document.getElementById('var5-ans').style.display='block';this.style.display='none'">Reveal Model Answer</button>
+            <div class="a" id="var5-ans"><strong>Model:</strong> "Climate scientists <strong>leverage computational power</strong> to <strong>process vast datasets</strong> and <strong>generate accurate predictions</strong> about climate change."</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title"> <svg class="ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>  Live Notepad — Your Rewrites</div>
+          <p class="text-muted" style="margin-bottom:0.5rem;">Paste your best rewrite here and see the word count:</p>
+          <div class="word-counter" style="text-align:right;font-size:0.85rem;color:var(--text-muted);margin-bottom:0.5rem;font-family:'Fira Code',monospace;">
+            Words: <span id="notepadWordCount">0</span>
+          </div>
+          <textarea class="notepad-area" id="live-notepad" placeholder="Paste your rewritten sentences here..." style="height:200px;"></textarea>
+        </div>
+      </div>
+
+      <!-- Slide 5: Task 4 Speaking (Lecture-only L+S — 2026 format) -->
+      <div class="slide" id="slide-5">
+        <div class="card">
+          <div class="card-title"> <svg class="ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>  TOEFL Speaking Task 4 — Lecture Summary (2026 format)</div>
+          <p class="text-muted" style="margin-bottom: 1rem;">Listen to the lecture, take notes using Cornell + symbols (from L8), then summarize in 60 seconds. <strong>This is a real 2026 TOEFL Speaking Task 4 format</strong> (lecture-only L+S: 20s prep / 60s speak).</p>
+
+          <div style="background:rgba(16,185,129,0.06);border:1px solid rgba(16,185,129,0.2);border-radius:12px;padding:14px;margin-bottom:1rem;">
+            <div style="font-size:0.85rem;font-weight:700;color:var(--primary);margin-bottom:8px;">🎧 Lecture Audio — AI &amp; Protein Folding</div>
+            <audio id="task4LectureAudio" preload="none" src="audio/alphafold-lecture.wav" controls style="width:100%;max-width:500px;"></audio>
+            <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:8px;">
+              <label style="font-size:0.75rem;color:var(--text-muted);">Speed:</label>
+              <select onchange="document.getElementById('task4LectureAudio').playbackRate=this.value" style="background:var(--bg-card);color:var(--text-main);border:1px solid var(--border-color);border-radius:6px;padding:3px 6px;font-size:0.75rem;">
+                <option value="0.75">0.75×</option>
+                <option value="1" selected>1.0×</option>
+              </select>
+            </div>
+          </div>
+
+          <div style="margin-bottom:1rem;">
+            <div style="font-size:0.85rem;font-weight:700;margin-bottom:6px;">📝 Cornell Notes — Take notes while listening</div>
+            <textarea id="task4Notes" placeholder="Use symbols: ↑↓→≠≈ e.g.  AI → protein fold ↑ | 200M structures | yrs → mins | still need human valid." style="width:100%;height:120px;background:rgba(9,13,22,0.6);color:var(--text-main);border:1px solid var(--border-color);border-radius:8px;padding:10px;font-size:0.85rem;font-family:'Fira Code',monospace;resize:vertical;"></textarea>
+            <button class="btn btn-secondary" style="margin-top:6px;font-size:0.8rem;" onclick="document.getElementById('task4ModelNotes').style.display='block'">Show Model Notes</button>
+            <div id="task4ModelNotes" style="display:none;margin-top:8px;padding:10px;background:rgba(16,185,129,0.06);border:1px solid rgba(16,185,129,0.2);border-radius:8px;font-size:0.8rem;font-family:'Fira Code',monospace;line-height:1.8;">
+              AlphaFold = DeepMind AI → solved protein folding (50yr challenge) | deep learning → predict 3D shape fm amino acid seq | 200M+ structures predicted (≈all known proteins) | ↑ drug dev, disease understanding, synth bio | yrs → mins | BUT: still need experimental valid + human expertise
+            </div>
+          </div>
+
+          <div style="background:var(--bg-card);border:1px solid var(--border-color);border-radius:12px;padding:16px;margin-bottom:1rem;">
+            <div style="font-weight:600;margin-bottom:0.5rem;">Task: Using information from the lecture, explain how AlphaFold changed protein folding research and what limitations the professor notes.</div>
+            <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-top:0.75rem;">
+              <div>
+                <button class="btn btn-primary" onclick="startTask4Prep()">▶ Start 20s Prep</button>
+                <span id="task4PrepTime" style="font-family:'Fira Code',monospace;font-size:0.9rem;color:var(--text-muted);margin-left:6px;">0:20</span>
+              </div>
+              <div>
+                <button class="btn btn-amber" id="task4SpeakBtn" onclick="startTask4Speak()" style="display:none;">▶ Start 60s Speak</button>
+                <span id="task4SpeakTime" style="font-family:'Fira Code',monospace;font-size:0.9rem;color:var(--text-muted);margin-left:6px;">1:00</span>
+              </div>
+            </div>
+          </div>
+
+          <button class="btn btn-secondary" onclick="document.getElementById('task4Model').style.display='block'">Reveal Model Response</button>
+          <div id="task4Model" style="display:none;margin-top:1rem;padding:14px;background:rgba(16,185,129,0.06);border:1px solid rgba(16,185,129,0.2);border-radius:8px;font-size:0.9rem;line-height:1.8;">
+            <strong style="color:var(--primary);">Model Response (60s):</strong> "The professor explains that AlphaFold, an AI system developed by DeepMind, solved the fifty-year-old protein folding challenge by using deep learning to predict protein shapes from amino acid sequences. This breakthrough has enabled the prediction of over two hundred million protein structures, dramatically accelerating research in drug development and disease understanding — reducing timelines from years to minutes. However, the professor emphasizes that these AI predictions still require experimental validation, and that human expertise remains essential for interpreting the results."
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 6: Homework -->
+      <div class="slide" id="slide-6">
+        <div class="card">
+          <div class="card-title"> <svg class="ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>  Homework Assignments</div>
+          <p class="text-muted" style="margin-bottom: 1.5rem;">Complete these tasks before our next class. Submit via your usual chat channel.</p>
+
+          <div class="hw-card">
+            <h3>Task 1: Academic Discussion Response</h3>
+            <p>Write a <strong>100-130 word</strong> response to this prompt:</p>
+            <div style="background: #000; border-left: 4px solid var(--accent-purple); padding: 1rem; border-radius: 6px; margin: 0.75rem 0; font-size: 0.9rem; color: #cbd5e1; line-height: 1.6;">
+              <strong style="color: var(--accent-purple);">Professor:</strong> "Some universities use AI to personalize student learning. Supporters say it helps students learn at their own pace. Critics argue it could widen the digital divide and reduce human interaction in education. What's your view?"<br><br>
+              <strong style="color: var(--accent-cyan);">Yuki:</strong> "Personalized AI tutors could revolutionize education, especially for students who need extra help outside class hours. Every student learns differently — AI can adapt to those differences."<br><br>
+              <strong style="color: var(--accent-green);">Carlos:</strong> "I worry that AI-driven education assumes all learning can be measured by algorithms. The best learning happens through discussion and mentorship, which AI cannot replicate."
+            </div>
+            <ul>
+              <li>Use at least <strong>three target collocations</strong> from today's lesson.</li>
+              <li>Reference Yuki's and/or Carlos's posts.</li>
+              <li>Aim for 100-130 words.</li>
+            </ul>
+          </div>
+
+          <div class="hw-card">
+            <h3>Task 2: Speaking Responses</h3>
+            <p>Record yourself answering these two questions. Aim for 45 seconds each.</p>
+            <ol style="padding-left: 1.25rem; margin: 0.5rem 0;">
+              <li><strong>Independent:</strong> "Do you agree or disagree that AI will eventually replace human researchers? Use specific reasons and examples."</li>
+              <li><strong>Integrated:</strong> "Summarize the main argument about AI in scientific research from today's shadowing passage. Do you find the argument convincing? Why or why not?"</li>
+            </ol>
+            <div class="recorder-bar" style="border-top: none; padding-top: 0;">
+              <button class="rec-btn" id="startRecord2">🎤 Record</button>
+              <button class="rec-btn" id="stopRecord2" disabled>⏹ Stop</button>
+              <button class="rec-btn" id="playRecord2" disabled>🎧 Play</button>
+              <span class="rec-status" id="recStatus2">Recording available in browser</span>
+            </div>
+          </div>
+
+          <div class="hw-card">
+            <h3>Task 3: Academic Collocations — 5 Sentences</h3>
+            <p>Write <strong>5 original sentences</strong> using these target collocations. Underline or bold the collocation in each sentence.</p>
+            <ul>
+              <li><em>accelerate a discovery</em></li>
+              <li><em>groundbreaking research</em></li>
+              <li><em>leverage computational power</em></li>
+              <li><em>remarkably accurate</em></li>
+              <li><em>widely applicable</em></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <audio id="shadowingAudio" preload="none" style="display:none"></audio>
+
+  <script>
+    function switchSlide(index) {
+      document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('.sidebar-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById(`slide-${index}`).classList.add('active');
+      document.querySelectorAll('.sidebar-btn')[index].classList.add('active');
+    }
+
+    const shadowingText = "Artificial intelligence is revolutionizing scientific research, accelerating discoveries in fields from drug development to climate modeling. Machine learning algorithms can analyze vast datasets in hours, a task that would take human researchers years to complete. In biology, AI has predicted protein structures with remarkable accuracy. In astronomy, it has identified previously unknown exoplanets. Despite these breakthroughs, researchers caution that AI systems are tools, not replacements for human intuition and creativity. The most promising approach combines computational power with human expertise, leveraging the strengths of both.";
+
+    function initShadowing() {
+      const container = document.getElementById('shadowing-text');
+      const words = shadowingText.match(/\S+/g) || [];
+      container.innerHTML = words.map((w, i) => `<span class="shadowing-word" id="word-${i}">${w}</span>`).join(' ');
+    }
+
+    const shadowingAudio = document.getElementById('shadowingAudio');
+    let speaking = false;
+    let audioFallback = false;
+    let paceInterval = null;
+    let currentSpeed = 1;
+    let timerInterval = null, timerSeconds = 0;
+    let shadowingTS = [{word:"Artificial",start:0.25,end:0.95},{word:"intelligence",start:0.95,end:2.388},{word:"is",start:2.388,end:2.612},{word:"revolutionizing",start:2.612,end:3.888},{word:"scientific",start:3.888,end:4.65},{word:"research",start:4.65,end:6.45},{word:"accelerating",start:6.45,end:7.3},{word:"discoveries",start:7.3,end:8.575},{word:"in",start:8.575,end:8.762},{word:"fields",start:8.762,end:9.35},{word:"from",start:9.35,end:9.588},{word:"drug",start:9.588,end:9.975},{word:"development",start:9.975,end:11.238},{word:"to",start:11.238,end:11.4},{word:"climate",start:11.4,end:11.85},{word:"modeling",start:11.85,end:13.85},{word:"Machine",start:13.85,end:14.425},{word:"learning",start:14.425,end:14.812},{word:"algorithms",start:14.812,end:16.1},{word:"can",start:16.1,end:16.35},{word:"analyze",start:16.35,end:17.05},{word:"vast",start:17.05,end:17.538},{word:"datasets",start:17.538,end:18.275},{word:"in",start:18.275,end:18.438},{word:"hours",start:18.438,end:20.012},{word:"a",start:20.012,end:20.137},{word:"task",start:20.137,end:20.812},{word:"that",start:20.812,end:20.975},{word:"would",start:20.975,end:21.163},{word:"take",start:21.163,end:21.462},{word:"human",start:21.462,end:21.85},{word:"researchers",start:21.85,end:22.863},{word:"years",start:22.863,end:23.35},{word:"to",start:23.35,end:23.45},{word:"complete",start:23.45,end:25.475},{word:"In",start:25.475,end:25.65},{word:"biology",start:25.65,end:27.225},{word:"AI",start:27.225,end:28.075},{word:"has",start:28.075,end:28.3},{word:"predicted",start:28.3,end:28.913},{word:"protein",start:28.913,end:29.45},{word:"structures",start:29.45,end:30.675},{word:"with",start:30.675,end:30.9},{word:"remarkable",start:30.9,end:31.55},{word:"accuracy",start:31.55,end:33.587},{word:"In",start:33.587,end:33.75},{word:"astronomy",start:33.75,end:35.438},{word:"it",start:35.438,end:35.562},{word:"has",start:35.562,end:35.737},{word:"identified",start:35.737,end:36.675},{word:"previously",start:36.675,end:37.6},{word:"unknown",start:37.6,end:38.312},{word:"exoplanets",start:38.312,end:39.962},{word:"Despite",start:40.3,end:40.8},{word:"these",start:40.8,end:41.025},{word:"breakthroughs",start:41.025,end:42.712},{word:"researchers",start:42.712,end:43.438},{word:"caution",start:43.438,end:44.262},{word:"that",start:44.262,end:44.525},{word:"AI",start:44.525,end:45.062},{word:"systems",start:45.062,end:45.688},{word:"are",start:45.688,end:45.862},{word:"tools",start:45.862,end:47.5},{word:"not",start:47.5,end:47.825},{word:"replacements",start:47.825,end:48.725},{word:"for",start:48.725,end:48.887},{word:"human",start:48.887,end:49.275},{word:"intuition",start:49.275,end:50.475},{word:"and",start:50.475,end:50.625},{word:"creativity",start:50.625,end:52.962},{word:"The",start:52.962,end:53.125},{word:"most",start:53.125,end:53.6},{word:"promising",start:53.6,end:54.2},{word:"approach",start:54.2,end:55.337},{word:"combines",start:55.337,end:56.1},{word:"computational",start:56.1,end:57.062},{word:"power",start:57.062,end:58.237},{word:"with",start:58.237,end:58.475},{word:"human",start:58.475,end:58.85},{word:"expertise",start:58.85,end:60.95},{word:"leveraging",start:60.95,end:61.65},{word:"the",start:61.65,end:61.787},{word:"strengths",start:61.787,end:62.475},{word:"of",start:62.475,end:62.625},{word:"both",start:62.625,end:63.75}];
+
+    shadowingAudio.ontimeupdate = () => {
+      if (!shadowingTS || !speaking) return;
+      const t = shadowingAudio.currentTime;
+      let lo = 0, hi = shadowingTS.length - 1;
+      while (lo < hi) {
+        const mid = (lo + hi + 1) >> 1;
+        if (shadowingTS[mid].start <= t) lo = mid; else hi = mid - 1;
+      }
+      document.querySelectorAll('.shadowing-word').forEach(w => w.classList.remove('highlighted'));
+      const el = document.getElementById(`word-${lo}`);
+      if (el) { el.classList.add('highlighted'); el.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }
+    };
+    shadowingAudio.onended = () => { speaking = false; document.querySelector('.listen-btn').textContent = '🔊 Listen'; document.querySelectorAll('.shadowing-word').forEach(w => w.classList.remove('highlighted')); stopSimulatedWaveform(); };
+    shadowingAudio.onerror = () => { audioFallback = true; };
+
+    function toggleShadowingTimer() {
+      const btn = document.getElementById('btn-timer');
+      if (timerInterval) { clearInterval(timerInterval); timerInterval = null; btn.innerHTML = '▶ Resume'; }
+      else {
+        btn.innerHTML = '⏸ Pause';
+        timerInterval = setInterval(() => {
+          timerSeconds++;
+          const mins = String(Math.floor(timerSeconds / 60)).padStart(2, '0');
+          const secs = String(timerSeconds % 60).padStart(2, '0');
+          document.getElementById('shadowing-timer').textContent = `${mins}:${secs}`;
+        }, 1000);
+      }
+    }
+    function resetShadowingTimer() {
+      clearInterval(timerInterval); timerInterval = null; timerSeconds = 0;
+      document.getElementById('shadowing-timer').textContent = '00:00';
+      document.getElementById('btn-timer').innerHTML = '▶ Start Timer';
+      if (paceInterval) { clearInterval(paceInterval); paceInterval = null; }
+      document.querySelectorAll('.shadowing-word').forEach(w => w.classList.remove('highlighted'));
+    }
+
+    document.getElementById('speedSelect').addEventListener('change', function() {
+      currentSpeed = parseFloat(this.value);
+      if (speaking) shadowingAudio.playbackRate = currentSpeed;
+    });
+
+    function ttsFallback() {
+      const text = Array.from(document.querySelectorAll('.shadowing-word')).map(w => w.textContent).join(' ');
+      if (!text.trim()) return;
+      const u = new SpeechSynthesisUtterance(text);
+      u.lang = 'en-US'; u.rate = 0.85;
+      u.onstart = () => { speaking = true; document.querySelector('.listen-btn').textContent = '■ Stop'; };
+      u.onend = u.onerror = () => { speaking = false; document.querySelector('.listen-btn').textContent = '🔊 Listen'; };
+      speechSynthesis.speak(u);
+    }
+
+    function toggleSpeaking() {
+      if (speaking) {
+        shadowingAudio.pause();
+        shadowingAudio.currentTime = 0;
+        speechSynthesis.cancel();
+        speaking = false;
+        document.querySelector('.listen-btn').textContent = '🔊 Listen';
+        document.querySelectorAll('.shadowing-word').forEach(w => w.classList.remove('highlighted'));
+        stopSimulatedWaveform();
+        return;
+      }
+      audioFallback = false;
+      shadowingAudio.src = 'audio/shadowing.wav?' + Date.now();
+      shadowingAudio.playbackRate = currentSpeed;
+      speaking = true;
+      document.querySelector('.listen-btn').textContent = '■ Stop';
+      if (paceInterval) { clearInterval(paceInterval); paceInterval = null; }
+      startSimulatedWaveform(document.getElementById('waveCanvas'));
+      shadowingAudio.play().catch(() => { audioFallback = true; speaking = false; document.querySelector('.listen-btn').textContent = '🔊 Listen'; stopSimulatedWaveform(); ttsFallback(); });
+    }
+
+    initShadowing();
+
+    let guideOscId = null;
+    function startSimulatedWaveform(canvas) {
+      stopSimulatedWaveform();
+      const ctx = canvas.getContext('2d');
+      const width = canvas.width, height = canvas.height;
+      let phase = 0;
+      function draw() {
+        guideOscId = requestAnimationFrame(draw);
+        ctx.fillStyle = 'rgba(9, 13, 22, 0.3)';
+        ctx.fillRect(0, 0, width, height);
+        ctx.lineWidth = 3;
+        ctx.strokeStyle = 'var(--primary)';
+        ctx.shadowColor = 'var(--primary)';
+        ctx.shadowBlur = 8;
+        ctx.beginPath();
+        ctx.moveTo(0, height / 2);
+        for (let x = 0; x < width; x++) {
+          const y = height / 2 + Math.sin(x * 0.03 + phase) * 14 * Math.sin(x * 0.004) + Math.sin(x * 0.07 - phase * 1.3) * 4 * Math.cos(x * 0.008);
+          ctx.lineTo(x, y);
+        }
+        ctx.stroke();
+        ctx.shadowBlur = 0;
+        phase += 0.12;
+      }
+      draw();
+    }
+    function stopSimulatedWaveform() {
+      if (guideOscId) { cancelAnimationFrame(guideOscId); guideOscId = null; }
+    }
+
+    function playBeep(freq = 800, dur = 150, count = 1) {
+      try {
+        for (let i = 0; i < count; i++) {
+          setTimeout(() => {
+            const ctx = new (window.AudioContext || window.webkitAudioContext)();
+            const osc = ctx.createOscillator(); const gain = ctx.createGain();
+            osc.connect(gain); gain.connect(ctx.destination);
+            osc.frequency.value = freq; osc.type = 'sine';
+            gain.gain.setValueAtTime(0.2, ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + dur / 1000);
+            osc.start(); osc.stop(ctx.currentTime + dur / 1000);
+          }, i * 200);
+        }
+      } catch(e) {}
+    }
+
+    let mediaRecorder = null;
+    let recordedChunks = [];
+    let audioBlobUrl = null;
+
+    document.getElementById('startRecord').addEventListener('click', async () => {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        mediaRecorder = new MediaRecorder(stream);
+        recordedChunks = [];
+        mediaRecorder.ondataavailable = (e) => { if (e.data.size > 0) recordedChunks.push(e.data); };
+        mediaRecorder.onstop = () => {
+          const blob = new Blob(recordedChunks, { type: 'audio/webm' });
+          audioBlobUrl = URL.createObjectURL(blob);
+          document.getElementById('playRecord').disabled = false;
+          document.getElementById('recStatus').textContent = '✅ Recording saved — click Play to hear yourself, then Listen to compare with model';
+          document.getElementById('startRecord').textContent = '🎤 Record Again';
+          stream.getTracks().forEach(t => t.stop());
+        };
+        mediaRecorder.start();
+        document.getElementById('startRecord').disabled = true;
+        document.getElementById('stopRecord').disabled = false;
+        document.getElementById('recStatus').textContent = '🔴 Recording...';
+      } catch(e) {
+        document.getElementById('recStatus').textContent = '⚠️ Microphone access denied — allow mic access and try again';
+      }
+    });
+
+    document.getElementById('stopRecord').addEventListener('click', () => {
+      if (mediaRecorder && mediaRecorder.state === 'recording') {
+        mediaRecorder.stop();
+        document.getElementById('startRecord').disabled = false;
+        document.getElementById('stopRecord').disabled = true;
+      }
+    });
+
+    document.getElementById('playRecord').addEventListener('click', () => {
+      if (audioBlobUrl) {
+        const audio = new Audio(audioBlobUrl);
+        audio.play();
+        document.getElementById('recStatus').textContent = '▶️ Playing your recording...';
+        audio.onended = () => {
+          document.getElementById('recStatus').textContent = '✅ Done — click Listen above to hear the model again';
+        };
+      }
+    });
+
+    let mediaRecorder2 = null;
+    let recordedChunks2 = [];
+    let audioBlobUrl2 = null;
+
+    document.getElementById('startRecord2').addEventListener('click', async () => {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        mediaRecorder2 = new MediaRecorder(stream);
+        recordedChunks2 = [];
+        mediaRecorder2.ondataavailable = (e) => { if (e.data.size > 0) recordedChunks2.push(e.data); };
+        mediaRecorder2.onstop = () => {
+          const blob = new Blob(recordedChunks2, { type: 'audio/webm' });
+          audioBlobUrl2 = URL.createObjectURL(blob);
+          document.getElementById('playRecord2').disabled = false;
+          document.getElementById('recStatus2').textContent = '✅ Recording saved — click Play';
+          document.getElementById('startRecord2').textContent = '🎤 Record Again';
+          stream.getTracks().forEach(t => t.stop());
+        };
+        mediaRecorder2.start();
+        document.getElementById('startRecord2').disabled = true;
+        document.getElementById('stopRecord2').disabled = false;
+        document.getElementById('recStatus2').textContent = '🔴 Recording...';
+      } catch(e) {
+        document.getElementById('recStatus2').textContent = '⚠️ Microphone access denied';
+      }
+    });
+
+    document.getElementById('stopRecord2').addEventListener('click', () => {
+      if (mediaRecorder2 && mediaRecorder2.state === 'recording') {
+        mediaRecorder2.stop();
+        document.getElementById('startRecord2').disabled = false;
+        document.getElementById('stopRecord2').disabled = true;
+      }
+    });
+
+    document.getElementById('playRecord2').addEventListener('click', () => {
+      if (audioBlobUrl2) {
+        const audio = new Audio(audioBlobUrl2);
+        audio.play();
+        document.getElementById('recStatus2').textContent = '▶️ Playing...';
+        audio.onended = () => {
+          document.getElementById('recStatus2').textContent = '✅ Done';
+        };
+      }
+    });
+
+    function autoHighlightWords() {
+      document.querySelectorAll('.shadowing-word').forEach(w => w.classList.remove('highlighted'));
+      let currentWordIndex = 0;
+      const totalWords = (shadowingText.match(/\S+/g) || []).length;
+      if (paceInterval) clearInterval(paceInterval);
+      paceInterval = setInterval(() => {
+        if (currentWordIndex >= totalWords) {
+          clearInterval(paceInterval);
+          return;
+        }
+        document.querySelectorAll('.shadowing-word').forEach(w => w.classList.remove('highlighted'));
+        const wordEl = document.getElementById(`word-${currentWordIndex}`);
+        if (wordEl) {
+          wordEl.classList.add('highlighted');
+          wordEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+        currentWordIndex++;
+      }, 500);
+    }
+
+    let writeInterval = null;
+    function runWritingClock() {
+      if (writeInterval) clearInterval(writeInterval);
+      playBeep(400, 100);
+      let t = 600; const el = document.getElementById('write-time'); el.style.color = 'var(--primary)';
+      writeInterval = setInterval(() => {
+        t--;
+        const m = String(Math.floor(t / 60)).padStart(2, '0');
+        const s = String(t % 60).padStart(2, '0');
+        el.textContent = `${m}:${s}`;
+        if (t <= 120) el.style.color = 'var(--accent-red)';
+        if (t <= 0) { clearInterval(writeInterval); playBeep(800, 200, 2); }
+      }, 1000);
+    }
+
+    document.addEventListener('input', function(e) {
+      if (e.target.matches('.notepad-area')) {
+        const text = e.target.value.trim();
+        const words = text ? text.split(/\s+/).length : 0;
+        const counter = e.target.closest('.card')?.querySelector('.word-counter span');
+        if (counter) counter.textContent = words;
+        const mainCounter = document.getElementById('wordCount');
+        if (mainCounter && e.target.closest('#slide-3')) mainCounter.textContent = words;
+      }
+    });
+
+    document.addEventListener('input', function(e) {
+      if (e.target.id === 'live-notepad') {
+        const text = e.target.value.trim();
+        const words = text ? text.split(/\s+/).length : 0;
+        document.getElementById('notepadWordCount').textContent = words;
+      }
+    });
+
+    // Task 4 Timers (20s prep + 60s speak)
+    let task4PrepInterval = null;
+    let task4SpeakInterval = null;
+    function startTask4Prep() {
+      let secs = 20;
+      const d = document.getElementById('task4PrepTime');
+      task4PrepInterval = setInterval(() => {
+        secs--;
+        d.textContent = '0:' + String(secs).padStart(2,'0');
+        if (secs <= 5) d.style.color = 'var(--accent-amber)';
+        if (secs <= 0) {
+          clearInterval(task4PrepInterval);
+          d.textContent = 'GO!';
+          document.getElementById('task4SpeakBtn').style.display = 'inline-flex';
+        }
+      }, 1000);
+    }
+    function startTask4Speak() {
+      let secs = 60;
+      const d = document.getElementById('task4SpeakTime');
+      task4SpeakInterval = setInterval(() => {
+        secs--;
+        const m = Math.floor(secs / 60);
+        const s = secs % 60;
+        d.textContent = m + ':' + String(s).padStart(2,'0');
+        if (secs <= 30) d.style.color = 'var(--accent-amber)';
+        if (secs <= 10) d.style.color = 'var(--accent-red)';
+        if (secs <= 0) {
+          clearInterval(task4SpeakInterval);
+          d.textContent = 'STOP!';
+          d.style.color = 'var(--accent-red)';
+        }
+      }, 1000);
+    }
+  </script>
+</body>
+</html>

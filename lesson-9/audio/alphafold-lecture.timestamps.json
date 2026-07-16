@@ -1,0 +1,542 @@
+[
+  {
+    "word": "In",
+    "start": 0.375,
+    "end": 0.475
+  },
+  {
+    "word": "twenty",
+    "start": 0.475,
+    "end": 0.775
+  },
+  {
+    "word": "twenty-one",
+    "start": 0.775,
+    "end": 1.712
+  },
+  {
+    "word": "DeepMind's",
+    "start": 1.712,
+    "end": 2.325
+  },
+  {
+    "word": "AlphaFold",
+    "start": 2.325,
+    "end": 2.987
+  },
+  {
+    "word": "AI",
+    "start": 2.987,
+    "end": 3.525
+  },
+  {
+    "word": "solved",
+    "start": 3.525,
+    "end": 3.913
+  },
+  {
+    "word": "the",
+    "start": 3.913,
+    "end": 4.0
+  },
+  {
+    "word": "protein",
+    "start": 4.0,
+    "end": 4.537
+  },
+  {
+    "word": "folding",
+    "start": 4.537,
+    "end": 4.95
+  },
+  {
+    "word": "problem",
+    "start": 4.95,
+    "end": 5.812
+  },
+  {
+    "word": "a",
+    "start": 5.812,
+    "end": 5.938
+  },
+  {
+    "word": "fifty-year",
+    "start": 5.938,
+    "end": 6.5
+  },
+  {
+    "word": "grand",
+    "start": 6.5,
+    "end": 6.888
+  },
+  {
+    "word": "challenge",
+    "start": 6.888,
+    "end": 7.338
+  },
+  {
+    "word": "in",
+    "start": 7.338,
+    "end": 7.45
+  },
+  {
+    "word": "biology",
+    "start": 7.45,
+    "end": 8.637
+  },
+  {
+    "word": "The",
+    "start": 8.637,
+    "end": 8.787
+  },
+  {
+    "word": "system",
+    "start": 8.787,
+    "end": 9.137
+  },
+  {
+    "word": "was",
+    "start": 9.137,
+    "end": 9.312
+  },
+  {
+    "word": "trained",
+    "start": 9.312,
+    "end": 9.738
+  },
+  {
+    "word": "on",
+    "start": 9.738,
+    "end": 9.838
+  },
+  {
+    "word": "the",
+    "start": 9.838,
+    "end": 9.925
+  },
+  {
+    "word": "entire",
+    "start": 9.925,
+    "end": 10.475
+  },
+  {
+    "word": "database",
+    "start": 10.475,
+    "end": 11.05
+  },
+  {
+    "word": "of",
+    "start": 11.05,
+    "end": 11.188
+  },
+  {
+    "word": "known",
+    "start": 11.188,
+    "end": 11.525
+  },
+  {
+    "word": "protein",
+    "start": 11.525,
+    "end": 11.975
+  },
+  {
+    "word": "structures",
+    "start": 11.975,
+    "end": 12.988
+  },
+  {
+    "word": "using",
+    "start": 12.988,
+    "end": 13.338
+  },
+  {
+    "word": "deep",
+    "start": 13.338,
+    "end": 13.625
+  },
+  {
+    "word": "learning",
+    "start": 13.625,
+    "end": 14.025
+  },
+  {
+    "word": "to",
+    "start": 14.025,
+    "end": 14.125
+  },
+  {
+    "word": "predict",
+    "start": 14.125,
+    "end": 14.525
+  },
+  {
+    "word": "the",
+    "start": 14.525,
+    "end": 14.675
+  },
+  {
+    "word": "three-dimensional",
+    "start": 14.675,
+    "end": 15.488
+  },
+  {
+    "word": "shape",
+    "start": 15.488,
+    "end": 15.762
+  },
+  {
+    "word": "of",
+    "start": 15.762,
+    "end": 15.85
+  },
+  {
+    "word": "proteins",
+    "start": 15.85,
+    "end": 16.575
+  },
+  {
+    "word": "from",
+    "start": 16.575,
+    "end": 16.738
+  },
+  {
+    "word": "their",
+    "start": 16.738,
+    "end": 16.925
+  },
+  {
+    "word": "amino",
+    "start": 16.925,
+    "end": 17.413
+  },
+  {
+    "word": "acid",
+    "start": 17.413,
+    "end": 17.825
+  },
+  {
+    "word": "sequences",
+    "start": 17.825,
+    "end": 18.45
+  },
+  {
+    "word": "alone",
+    "start": 18.45,
+    "end": 19.613
+  },
+  {
+    "word": "AlphaFold",
+    "start": 19.613,
+    "end": 20.288
+  },
+  {
+    "word": "has",
+    "start": 20.288,
+    "end": 20.425
+  },
+  {
+    "word": "since",
+    "start": 20.425,
+    "end": 20.65
+  },
+  {
+    "word": "predicted",
+    "start": 20.65,
+    "end": 21.062
+  },
+  {
+    "word": "over",
+    "start": 21.062,
+    "end": 21.312
+  },
+  {
+    "word": "two",
+    "start": 21.312,
+    "end": 21.525
+  },
+  {
+    "word": "hundred",
+    "start": 21.525,
+    "end": 21.875
+  },
+  {
+    "word": "million",
+    "start": 21.875,
+    "end": 22.25
+  },
+  {
+    "word": "protein",
+    "start": 22.25,
+    "end": 22.7
+  },
+  {
+    "word": "structures",
+    "start": 22.7,
+    "end": 23.7
+  },
+  {
+    "word": "covering",
+    "start": 23.7,
+    "end": 24.1
+  },
+  {
+    "word": "nearly",
+    "start": 24.1,
+    "end": 24.488
+  },
+  {
+    "word": "all",
+    "start": 24.488,
+    "end": 24.775
+  },
+  {
+    "word": "known",
+    "start": 24.775,
+    "end": 25.1
+  },
+  {
+    "word": "proteins",
+    "start": 25.1,
+    "end": 25.688
+  },
+  {
+    "word": "on",
+    "start": 25.688,
+    "end": 25.825
+  },
+  {
+    "word": "Earth",
+    "start": 25.825,
+    "end": 26.663
+  },
+  {
+    "word": "This",
+    "start": 27.125,
+    "end": 27.325
+  },
+  {
+    "word": "breakthrough",
+    "start": 27.325,
+    "end": 27.925
+  },
+  {
+    "word": "has",
+    "start": 27.925,
+    "end": 28.125
+  },
+  {
+    "word": "dramatically",
+    "start": 28.125,
+    "end": 28.9
+  },
+  {
+    "word": "accelerated",
+    "start": 28.9,
+    "end": 29.625
+  },
+  {
+    "word": "research",
+    "start": 29.625,
+    "end": 30.15
+  },
+  {
+    "word": "in",
+    "start": 30.15,
+    "end": 30.3
+  },
+  {
+    "word": "drug",
+    "start": 30.3,
+    "end": 30.575
+  },
+  {
+    "word": "development",
+    "start": 30.575,
+    "end": 31.55
+  },
+  {
+    "word": "disease",
+    "start": 31.55,
+    "end": 32.075
+  },
+  {
+    "word": "understanding",
+    "start": 32.075,
+    "end": 33.225
+  },
+  {
+    "word": "and",
+    "start": 33.225,
+    "end": 33.362
+  },
+  {
+    "word": "synthetic",
+    "start": 33.362,
+    "end": 33.925
+  },
+  {
+    "word": "biology",
+    "start": 33.925,
+    "end": 35.138
+  },
+  {
+    "word": "What",
+    "start": 35.138,
+    "end": 35.3
+  },
+  {
+    "word": "used",
+    "start": 35.3,
+    "end": 35.487
+  },
+  {
+    "word": "to",
+    "start": 35.487,
+    "end": 35.575
+  },
+  {
+    "word": "take",
+    "start": 35.575,
+    "end": 35.862
+  },
+  {
+    "word": "years",
+    "start": 35.862,
+    "end": 36.275
+  },
+  {
+    "word": "can",
+    "start": 36.275,
+    "end": 36.425
+  },
+  {
+    "word": "now",
+    "start": 36.425,
+    "end": 36.625
+  },
+  {
+    "word": "be",
+    "start": 36.625,
+    "end": 36.775
+  },
+  {
+    "word": "accomplished",
+    "start": 36.775,
+    "end": 37.525
+  },
+  {
+    "word": "in",
+    "start": 37.525,
+    "end": 37.65
+  },
+  {
+    "word": "minutes",
+    "start": 37.65,
+    "end": 38.638
+  },
+  {
+    "word": "However",
+    "start": 38.638,
+    "end": 39.425
+  },
+  {
+    "word": "the",
+    "start": 39.425,
+    "end": 39.525
+  },
+  {
+    "word": "professor",
+    "start": 39.525,
+    "end": 40.025
+  },
+  {
+    "word": "notes",
+    "start": 40.025,
+    "end": 40.35
+  },
+  {
+    "word": "that",
+    "start": 40.35,
+    "end": 40.538
+  },
+  {
+    "word": "AI",
+    "start": 40.538,
+    "end": 40.95
+  },
+  {
+    "word": "predictions",
+    "start": 40.95,
+    "end": 41.663
+  },
+  {
+    "word": "still",
+    "start": 41.663,
+    "end": 41.95
+  },
+  {
+    "word": "require",
+    "start": 41.95,
+    "end": 42.525
+  },
+  {
+    "word": "experimental",
+    "start": 42.525,
+    "end": 43.35
+  },
+  {
+    "word": "validation",
+    "start": 43.35,
+    "end": 44.475
+  },
+  {
+    "word": "and",
+    "start": 44.475,
+    "end": 44.612
+  },
+  {
+    "word": "that",
+    "start": 44.612,
+    "end": 44.763
+  },
+  {
+    "word": "human",
+    "start": 44.763,
+    "end": 45.15
+  },
+  {
+    "word": "expertise",
+    "start": 45.15,
+    "end": 45.95
+  },
+  {
+    "word": "remains",
+    "start": 45.95,
+    "end": 46.475
+  },
+  {
+    "word": "essential",
+    "start": 46.475,
+    "end": 47.125
+  },
+  {
+    "word": "for",
+    "start": 47.125,
+    "end": 47.3
+  },
+  {
+    "word": "interpreting",
+    "start": 47.3,
+    "end": 47.975
+  },
+  {
+    "word": "the",
+    "start": 47.975,
+    "end": 48.075
+  },
+  {
+    "word": "results",
+    "start": 48.075,
+    "end": 49.125
+  }
+]
