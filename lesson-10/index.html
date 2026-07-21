@@ -1,0 +1,1348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 10: Full TOEFL Mock — 2026 Format</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #090d16; --bg-card: #131a26; --border-color: #243042;
+      --text-main: #f1f5f9; --text-muted: #64748b;
+      --primary: #8b5cf6; --primary-hover: #7c3aed;
+      --accent-cyan: #06b6d4; --accent-green: #10b981; --accent-red: #ef4444; --accent-purple: #a855f7; --accent-amber: #f59e0b;
+      --glass-bg: rgba(19, 26, 38, 0.85); --glass-border: rgba(255, 255, 255, 0.03);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Outfit', sans-serif; background-color: var(--bg-dark); color: var(--text-main); min-height: 100vh; display: flex; flex-direction: column; overflow-x: hidden; }
+    header { background: rgba(9, 13, 22, 0.9); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border-color); padding: 1rem 2rem; position: sticky; top: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; }
+    .logo-area { display: flex; align-items: center; gap: 0.75rem; }
+    .badge-exam { background: rgba(139, 92, 246, 0.15); border: 1px solid var(--primary); color: var(--primary); padding: 0.25rem 0.5rem; border-radius: 4px; font-family: 'Fira Code', monospace; font-size: 0.75rem; text-transform: uppercase; font-weight: bold; letter-spacing: 0.05em; }
+    .back-link { color: var(--text-muted); text-decoration: none; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 0.3rem; transition: color 0.2s ease; }
+    .back-link:hover { color: var(--text-main); }
+    h1 { font-size: 1.25rem; font-weight: 700; letter-spacing: -0.025em; }
+    .lesson-meta { display: flex; gap: 1.5rem; font-size: 0.875rem; color: var(--text-muted); }
+    .meta-item strong { color: var(--text-main); }
+
+    .progress-bar-wrap { position: fixed; top: 65px; left: 0; right: 0; z-index: 99; height: 3px; background: var(--border-color); }
+    .progress-bar { height: 100%; background: linear-gradient(90deg, var(--primary), #3b82f6); transition: width 0.4s ease; width: 14.28%; }
+
+    .main-container { display: flex; flex: 1; margin-top: 3px; height: calc(100vh - 68px); }
+    .sidebar { width: 260px; border-right: 1px solid var(--border-color); padding: 1.25rem 0.75rem; display: flex; flex-direction: column; gap: 0.25rem; background: rgba(9, 13, 22, 0.5); overflow-y: auto; }
+    .sidebar-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); padding: 0.75rem 0.75rem 0.5rem; font-weight: 600; }
+    .sidebar-btn { display: flex; align-items: center; gap: 0.75rem; width: 100%; padding: 0.65rem 0.75rem; background: transparent; border: 1px solid transparent; border-radius: 8px; color: var(--text-muted); font-size: 0.85rem; text-align: left; cursor: pointer; transition: all 0.2s ease; font-family: inherit; }
+    .sidebar-btn:hover { background: rgba(255, 255, 255, 0.02); color: var(--text-main); }
+    .sidebar-btn.active { background: var(--bg-card); border-color: var(--border-color); color: var(--primary); font-weight: 600; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); }
+    .sidebar-num { font-family: 'Fira Code', monospace; font-size: 0.75rem; opacity: 0.5; min-width: 1.8em; }
+
+    .content-area { flex: 1; padding: 2rem 2.5rem; overflow-y: auto; background: radial-gradient(circle at top right, rgba(139, 92, 246, 0.04), transparent 900px); }
+    .slide { display: none; animation: fadeIn 0.3s ease-in-out forwards; max-width: 1000px; margin: 0 auto; }
+    .slide.active { display: block; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+    .slide-header { margin-bottom: 1.5rem; display: flex; align-items: flex-start; gap: 1rem; }
+    .slide-num { font-family: 'Fira Code', monospace; font-size: 2rem; font-weight: 700; color: var(--primary); line-height: 1; opacity: 0.5; margin-top: 0.1rem; }
+    .slide-title { font-size: 1.35rem; font-weight: 700; color: var(--text-main); margin-bottom: 0.2rem; }
+    .slide-subtitle { font-size: 0.85rem; color: var(--text-muted); line-height: 1.4; }
+
+    .card { background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 12px; padding: 1.5rem; margin-bottom: 1.25rem; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25); transition: border-color 0.3s ease, box-shadow 0.3s ease; }
+    .card:hover { border-color: rgba(139, 92, 246, 0.12); }
+    .card-title { font-size: 1rem; font-weight: 600; margin-bottom: 0.85rem; color: var(--primary); display: flex; align-items: center; gap: 0.5rem; border-bottom: 1px solid rgba(255, 255, 255, 0.05); padding-bottom: 0.5rem; }
+    .card .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+
+    .shadowing-box { border-left: 4px solid var(--accent-cyan); background: rgba(6, 182, 212, 0.03); }
+    .shadowing-text { font-size: 1.1rem; line-height: 1.8; color: var(--text-main); margin: 1.25rem 0; background: rgba(0, 0, 0, 0.25); padding: 1.25rem; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.02); }
+    .shadowing-word { display: inline-block; margin-right: 0.25rem; transition: all 0.15s ease; }
+    .shadowing-word.highlighted { background: rgba(6, 182, 212, 0.25); color: #fff; border-radius: 3px; padding: 0 2px; }
+
+    .btn { padding: 0.5rem 1.1rem; border-radius: 6px; border: none; font-weight: 600; font-family: inherit; cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem; transition: all 0.15s ease; font-size: 0.85rem; box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.15); }
+    .btn:hover { transform: translate(-1px, -1px); box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.2); }
+    .btn:active { transform: translate(1px, 1px); box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.1); }
+    .btn-primary { background: var(--primary); color: #fff; }
+    .btn-primary:hover { background: var(--primary-hover); }
+    .btn-secondary { background: rgba(255, 255, 255, 0.06); color: var(--text-main); border: 1px solid var(--border-color); }
+    .btn-cyan { background: var(--accent-cyan); color: #000; }
+    .btn-cyan:hover { background: #0891b2; }
+    .btn-sm { padding: 0.35rem 0.8rem; font-size: 0.8rem; }
+
+    .model-toggle { display: none; margin-top: 0.75rem; padding: 1rem; background: rgba(0, 0, 0, 0.3); border: 1px solid rgba(139, 92, 246, 0.15); border-radius: 8px; animation: fadeIn 0.25s ease; }
+    .model-toggle.open { display: block; }
+    .model-toggle p { color: #cbd5e1; font-size: 0.92rem; line-height: 1.7; margin-bottom: 0.5rem; }
+    .model-toggle p:last-child { margin-bottom: 0; }
+    .model-toggle .model-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent-green); margin-bottom: 0.4rem; font-weight: 600; }
+
+    .ann-em { color: var(--accent-green); font-weight: 600; }
+    .ann-pu { color: var(--accent-purple); font-weight: 600; }
+    .ann-bl { color: var(--accent-cyan); font-weight: 600; }
+    .ann-am { color: var(--primary); font-weight: 600; }
+
+    .timer-box { background: #000; border: 1px solid var(--border-color); border-radius: 8px; padding: 0.75rem 1.25rem; text-align: center; flex: 1; min-width: 140px; transition: all 0.3s; }
+    .timer-box.active-timer { border-color: var(--primary); border-width: 2px; background: rgba(139, 92, 246, 0.04); }
+    .timer-box.warning { border-color: var(--accent-red); }
+    .timer-val { font-family: 'Fira Code', monospace; font-size: 2rem; font-weight: 700; color: var(--primary); transition: color 0.3s; }
+    .timer-label { font-size: 0.7rem; text-transform: uppercase; color: var(--text-muted); margin-top: 0.2rem; letter-spacing: 0.05em; }
+    .timer-row { display: flex; gap: 0.75rem; margin: 0.75rem 0; flex-wrap: wrap; align-items: stretch; }
+
+    .passage-box { background: #000; border: 1px solid var(--border-color); border-radius: 8px; padding: 1.25rem; margin-bottom: 0.75rem; }
+    .passage-box p { color: #cbd5e1; font-size: 0.92rem; line-height: 1.75; margin-bottom: 0.75rem; }
+    .passage-box p:last-child { margin-bottom: 0; }
+
+    .q-item { background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-color); border-radius: 8px; padding: 1rem; margin-bottom: 0.75rem; }
+    .q-item .q-text { color: #cbd5e1; font-size: 0.93rem; margin-bottom: 0.5rem; line-height: 1.5; }
+    .q-item .q-text strong { color: var(--text-main); }
+    .q-item .q-type { display: inline-block; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent-amber); background: rgba(245, 158, 11, 0.1); padding: 0.15rem 0.5rem; border-radius: 4px; margin-bottom: 0.5rem; font-weight: 600; }
+    .q-item textarea { width: 100%; background: #05070c; border: 1px solid var(--border-color); border-radius: 4px; color: var(--text-main); padding: 0.5rem; font-family: inherit; font-size: 0.88rem; resize: vertical; min-height: 2.5rem; transition: border-color 0.2s; }
+    .q-item textarea:focus { border-color: var(--primary); outline: none; }
+
+    .q-options { display: flex; flex-direction: column; gap: 0.4rem; margin: 0.6rem 0; }
+    .q-option { display: flex; align-items: flex-start; gap: 0.6rem; padding: 0.5rem 0.75rem; border: 1px solid var(--border-color); border-radius: 6px; cursor: pointer; transition: all 0.2s; background: rgba(255,255,255,0.01); }
+    .q-option:hover { background: rgba(255,255,255,0.04); border-color: rgba(139, 92, 246, 0.3); }
+    .q-option.selected { border-color: var(--primary); background: rgba(139, 92, 246, 0.08); }
+    .q-option.correct { border-color: var(--accent-green); background: rgba(16, 185, 129, 0.08); }
+    .q-option.incorrect { border-color: var(--accent-red); background: rgba(239, 68, 68, 0.06); }
+    .q-option input[type="radio"] { accent-color: var(--primary); margin-top: 0.15rem; flex-shrink: 0; }
+    .q-option .opt-letter { font-family: 'Fira Code', monospace; font-weight: 700; color: var(--text-muted); min-width: 1.2em; }
+    .q-option .opt-text { color: #cbd5e1; font-size: 0.9rem; line-height: 1.5; }
+
+    .prompt-box { background: #000; border-left: 4px solid var(--accent-cyan); padding: 1.25rem; border-radius: 8px; margin-bottom: 0.75rem; }
+    .prompt-box .speaker-label { font-weight: 600; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.25rem; }
+    .prompt-box .speaker-label.prof { color: var(--accent-purple); }
+    .prompt-box .speaker-label.student { color: var(--accent-amber); }
+    .prompt-box p { color: #cbd5e1; font-size: 0.92rem; line-height: 1.6; }
+
+    .recorder-bar { display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap; margin-top: 0.6rem; padding-top: 0.6rem; border-top: 1px solid var(--border-color); }
+    .rec-btn { padding: 0.3rem 0.7rem; font-size: 0.78rem; border-radius: 20px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); color: var(--text-muted); font-family: inherit; cursor: pointer; transition: all 0.2s ease; display: inline-flex; align-items: center; gap: 0.3rem; }
+    .rec-btn:hover { background: rgba(255,255,255,0.1); }
+    .rec-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+    .rec-status { font-size: 0.75rem; color: var(--text-muted); }
+    .rec-btn.recording { background: rgba(239, 68, 68, 0.2); border-color: var(--accent-red); color: var(--accent-red); animation: recPulse 1.5s infinite; }
+    @keyframes recPulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
+
+    .rec-indicator { display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; border-radius: 20px; font-family: 'Fira Code', monospace; font-size: 11px; font-weight: 700; border: 1px solid var(--border-color); background: var(--bg-card); }
+    .rec-indicator .rec-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--text-muted); transition: all 0.3s; }
+    .rec-indicator.recording .rec-dot { background: var(--accent-red); animation: recPulse 1.5s infinite; }
+    .rec-indicator.recording { color: var(--accent-red); border-color: var(--accent-red); }
+    .rec-indicator.off { color: var(--text-muted); }
+
+    .notepad-area { width: 100%; min-height: 120px; background: #05070c; border: 1px solid var(--border-color); border-radius: 6px; color: var(--text-main); padding: 0.75rem; font-family: inherit; resize: vertical; font-size: 0.92rem; transition: border-color 0.2s; }
+    .notepad-area:focus { border-color: var(--primary); outline: none; }
+
+    .scoring-table { width: 100%; border-collapse: collapse; margin-top: 0.75rem; font-size: 0.85rem; }
+    .scoring-table th, .scoring-table td { border: 1px solid var(--border-color); padding: 0.6rem 0.75rem; text-align: left; }
+    .scoring-table th { background: rgba(139, 92, 246, 0.1); color: var(--primary); text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.05em; }
+    .scoring-table td { color: #cbd5e1; }
+    .scoring-table .score { font-family: 'Fira Code', monospace; font-weight: 700; color: var(--primary); }
+
+    .speaking-task { background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); border-radius: 10px; padding: 1.25rem; margin-bottom: 1rem; }
+    .speaking-task .task-header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; }
+    .speaking-task .task-badge { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 700; padding: 0.2rem 0.6rem; border-radius: 4px; }
+    .speaking-task .task-badge.lr { background: rgba(6, 182, 212, 0.15); color: var(--accent-cyan); }
+    .speaking-task .task-badge.int { background: rgba(245, 158, 11, 0.15); color: var(--accent-amber); }
+    .speaking-task .task-badge.t2 { background: rgba(139, 92, 246, 0.15); color: var(--primary); }
+    .speaking-task .task-badge.t4 { background: rgba(16, 185, 129, 0.15); color: var(--accent-green); }
+    .speaking-task .task-title { font-weight: 600; font-size: 0.95rem; }
+    .speaking-task .task-desc { color: #cbd5e1; font-size: 0.9rem; line-height: 1.6; margin-bottom: 0.5rem; }
+    .speaking-task .task-timer { font-family: 'Fira Code', monospace; font-size: 1.35rem; color: var(--accent-cyan); text-align: center; padding: 0.4rem; background: #000; border-radius: 6px; margin-bottom: 0.5rem; transition: color 0.3s; }
+    .speaking-task .prep-tip { font-size: 0.82rem; color: var(--text-muted); font-style: italic; margin-bottom: 0.4rem; }
+
+    .correction-table { width: 100%; border-collapse: collapse; margin-top: 0.75rem; }
+    .correction-table th, .correction-table td { border: 1px solid var(--border-color); padding: 0.65rem 0.75rem; text-align: left; font-size: 0.85rem; }
+    .correction-table th { background: rgba(255, 255, 255, 0.02); color: var(--text-muted); font-size: 0.78rem; text-transform: uppercase; }
+
+    .improve-area { background: rgba(139, 92, 246, 0.05); border: 1px solid rgba(139, 92, 246, 0.2); border-radius: 8px; padding: 1.25rem; margin-top: 0.75rem; }
+    .improve-area h4 { color: var(--primary); margin-bottom: 0.5rem; font-size: 0.95rem; }
+    .improve-area textarea { width: 100%; background: #05070c; border: 1px solid var(--border-color); border-radius: 6px; color: var(--text-main); padding: 0.65rem; font-family: inherit; font-size: 0.88rem; resize: vertical; }
+
+    .checklist-item { display: flex; align-items: flex-start; gap: 0.65rem; padding: 0.4rem 0; border-bottom: 1px solid rgba(255,255,255,0.03); }
+    .checklist-item label { color: #cbd5e1; font-size: 0.9rem; cursor: pointer; flex: 1; }
+    .checklist-item input[type="checkbox"] { margin-top: 0.2rem; accent-color: var(--primary); width: 1rem; height: 1rem; cursor: pointer; }
+    .checklist-item.done label { text-decoration: line-through; color: var(--text-muted); }
+
+    .hw-task { background: rgba(255,255,255,0.01); border: 1px solid var(--border-color); border-radius: 10px; padding: 1.25rem; margin-bottom: 0.85rem; }
+    .hw-task .hw-num { display: inline-flex; width: 26px; height: 26px; border-radius: 6px; background: var(--primary); color: #fff; font-weight: 800; font-size: 12px; align-items: center; justify-content: center; margin-bottom: 0.5rem; }
+    .hw-task h3 { font-size: 1rem; margin-bottom: 0.4rem; }
+    .hw-task p, .hw-task li { font-size: 0.9rem; line-height: 1.6; color: #cbd5e1; }
+    .hw-task ul, .hw-task ol { padding-left: 1.1rem; color: var(--text-muted); }
+
+    .word-counter { text-align: right; font-size: 0.82rem; color: var(--text-muted); margin-top: 0.4rem; font-family: 'Fira Code', monospace; }
+
+    .pacer-controls { display: flex; gap: 0.65rem; align-items: center; flex-wrap: wrap; margin-top: 0.65rem; }
+    .speed-select { background: rgba(0,0,0,0.4); border: 1px solid var(--border-color); border-radius: 6px; color: var(--text-main); padding: 0.4rem 0.7rem; font-family: inherit; font-size: 0.82rem; cursor: pointer; outline: none; transition: border-color 0.2s; }
+    .speed-select:focus { border-color: var(--primary); }
+
+    .accuracy-card { display: none; margin-top: 12px; padding: 16px; background: var(--glass-bg); border: 1px solid var(--border-color); border-radius: 12px; }
+    .accuracy-card.visible { display: block; }
+    .gauge-row { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+    .gauge-wrap { display: flex; flex-direction: column; align-items: center; gap: 4px; flex-shrink: 0; }
+    .gauge-pct { font-size: 24px; font-weight: 700; font-family: 'Fira Code', monospace; }
+    .gauge-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); }
+    .accuracy-words { flex: 1; min-width: 180px; line-height: 1.8; font-size: 13px; }
+    .accuracy-word { display: inline-block; margin: 0 2px; padding: 0 2px; border-radius: 3px; }
+    .accuracy-word.correct { color: var(--primary); background: rgba(99, 102, 241, 0.08); border-bottom: 2px solid var(--primary); }
+    .accuracy-word.missed { color: var(--accent-red); background: rgba(244, 63, 94, 0.08); border-bottom: 2px solid var(--accent-red); }
+
+    .score-badge { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.3rem 0.8rem; border-radius: 20px; font-family: 'Fira Code', monospace; font-size: 0.9rem; font-weight: 700; }
+    .score-badge.good { background: rgba(16, 185, 129, 0.15); color: var(--accent-green); border: 1px solid rgba(16, 185, 129, 0.3); }
+    .score-badge.ok { background: rgba(245, 158, 11, 0.15); color: var(--accent-amber); border: 1px solid rgba(245, 158, 11, 0.3); }
+    .score-badge.needs-work { background: rgba(239, 68, 68, 0.15); color: var(--accent-red); border: 1px solid rgba(239, 68, 68, 0.3); }
+
+    .phase-hidden { display: none !important; }
+    .phase-visible { display: block; animation: fadeIn 0.35s ease; }
+
+    .sentence-repeat { background: rgba(6, 182, 212, 0.05); border: 1px solid rgba(6, 182, 212, 0.15); border-radius: 8px; padding: 0.75rem 1rem; margin-bottom: 0.6rem; display: flex; justify-content: space-between; align-items: center; gap: 0.75rem; }
+    .sentence-repeat .sen-text { color: #e2e8f0; font-size: 0.92rem; line-height: 1.5; flex: 1; }
+    .sentence-repeat .sen-actions { display: flex; gap: 0.4rem; align-items: center; flex-shrink: 0; }
+
+    /* Listen & Repeat Sentence Cards */
+    .lr-sentence { background: rgba(6, 182, 212, 0.04); border: 1px solid rgba(6, 182, 212, 0.12); border-radius: 10px; padding: 1rem 1.15rem; margin-bottom: 0.65rem; transition: border-color 0.3s, box-shadow 0.3s; }
+    .lr-sentence:hover { border-color: rgba(6, 182, 212, 0.25); }
+    .lr-sentence.playing { border-color: var(--accent-cyan); box-shadow: 0 0 16px rgba(6, 182, 212, 0.15); }
+    .lr-header { display: flex; align-items: flex-start; gap: 0.75rem; margin-bottom: 0.6rem; }
+    .lr-num { font-family: 'Fira Code', monospace; font-size: 0.75rem; font-weight: 700; color: var(--accent-cyan); background: rgba(6, 182, 212, 0.12); width: 26px; height: 26px; border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
+    .lr-text { color: #e2e8f0; font-size: 0.95rem; line-height: 1.6; }
+    .lr-text .lr-word { display: inline-block; transition: all 0.15s ease; border-radius: 2px; padding: 0 1px; }
+    .lr-text .lr-word.highlight { background: rgba(6, 182, 212, 0.3); color: #fff; }
+    .lr-wave { height: 32px; margin-bottom: 0.5rem; border-radius: 4px; background: rgba(0,0,0,0.2); overflow: hidden; display: none; }
+    .lr-wave.active { display: block; }
+    .lr-wave canvas { width: 100%; height: 32px; }
+    .lr-actions { display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap; }
+    .lr-status { font-size: 0.78rem; color: var(--text-muted); font-family: 'Fira Code', monospace; }
+    .lr-status.recording { color: var(--accent-red); animation: recPulse 1.5s infinite; }
+    .lr-play-model { position: relative; }
+    .lr-play-model::after { content: ''; position: absolute; bottom: -2px; left: 50%; transform: translateX(-50%); width: 0; height: 2px; background: var(--accent-cyan); transition: width 0.3s; border-radius: 1px; }
+    .lr-play-model.active::after { width: 80%; }
+
+    .listening-lecture { background: rgba(16, 185, 129, 0.03); border: 1px solid rgba(16, 185, 129, 0.12); border-radius: 10px; padding: 1.5rem; }
+    .listening-lecture .lecture-heading { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent-green); margin-bottom: 0.5rem; font-weight: 600; }
+
+    .band-card { background: rgba(139, 92, 246, 0.06); border: 1px solid rgba(139, 92, 246, 0.2); border-radius: 12px; padding: 1.25rem; text-align: center; }
+    .band-card .band-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); }
+    .band-card .band-score { font-family: 'Fira Code', monospace; font-size: 2.5rem; font-weight: 700; color: var(--primary); margin: 0.25rem 0; }
+    .band-card .band-range { font-size: 0.85rem; color: var(--text-muted); }
+
+    .nav-actions { display: flex; justify-content: space-between; align-items: center; margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border-color); }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo-area">
+      <div class="badge-exam">TOEFL Mock 2026</div>
+      <a href="../index.html" class="back-link">← Portal</a>
+      <h1>Valeria: Full TOEFL Simulation</h1>
+    </div>
+    <div class="lesson-meta">
+      <div class="meta-item">Student: <strong>Valeria (B2/C1)</strong></div>
+      <div class="meta-item">Format: <strong>2026 Adaptive</strong></div>
+    </div>
+  </header>
+
+  <div class="progress-bar-wrap"><div class="progress-bar" id="progressBar"></div></div>
+
+  <div class="main-container">
+    <div class="sidebar">
+      <div class="sidebar-label">Mock Test Sections</div>
+      <button class="sidebar-btn active" onclick="switchSlide(0)"><span class="sidebar-num">00</span> Warm-up</button>
+      <button class="sidebar-btn" onclick="switchSlide(1)"><span class="sidebar-num">01</span> Reading</button>
+      <button class="sidebar-btn" onclick="switchSlide(2)"><span class="sidebar-num">02</span> Listening</button>
+      <button class="sidebar-btn" onclick="switchSlide(3)"><span class="sidebar-num">03</span> Speaking</button>
+      <button class="sidebar-btn" onclick="switchSlide(4)"><span class="sidebar-num">04</span> Writing</button>
+      <button class="sidebar-btn" onclick="switchSlide(5)"><span class="sidebar-num">05</span> Scoring &amp; Review</button>
+      <button class="sidebar-btn" onclick="switchSlide(6)"><span class="sidebar-num">06</span> Homework</button>
+    </div>
+
+    <div class="content-area">
+
+      <!-- ===== SLIDE 0: WARM-UP ===== -->
+      <div class="slide active" id="slide-0">
+        <div class="slide-header">
+          <span class="slide-num">00</span>
+          <div>
+            <div class="slide-title">⚡ Warm-up: Shadowing &amp; Focus</div>
+            <div class="slide-subtitle">Get into academic English mode before the mock test begins</div>
+          </div>
+        </div>
+        <div class="card shadowing-box">
+          <div class="card-title"><span class="dot" style="background:var(--accent-cyan)"></span>TOEFL Shadowing Pacer</div>
+          <p style="color:var(--text-muted);font-size:0.85rem;margin-bottom:0.75rem;">Listen to the model, then shadow along. Focus on rhythm, clarity, and natural intonation.</p>
+          <div id="shadowing-text" class="shadowing-text"></div>
+          <canvas id="waveCanvas" width="800" height="80" style="width:100%;height:80px;background:#05070c;border-radius:6px;border:1px solid var(--border-color);margin-bottom:1rem;"></canvas>
+          <div style="display:flex; gap:0.5rem; align-items:center;flex-wrap:wrap;">
+            <button class="btn btn-primary" onclick="toggleShadowingTimer()" id="btn-timer">▶ Start Timer</button>
+            <div id="shadowing-timer" style="font-family:'Fira Code'; font-size:1.1rem; background:#000; padding:0.35rem 0.9rem; border-radius:4px;">00:00</div>
+            <button class="btn btn-secondary btn-sm" onclick="resetShadowingTimer()">Reset</button>
+            <button class="btn btn-secondary btn-sm" onclick="autoHighlightWords()">Auto Pacer</button>
+            <button class="btn btn-secondary btn-sm listen-btn" onclick="toggleSpeaking()">🔊 Listen</button>
+            <select class="speed-select" id="speedSelect">
+              <option value="0.75">🐢 Slow</option>
+              <option value="1" selected>▶ Normal</option>
+              <option value="1.25">🐇 Fast</option>
+            </select>
+          </div>
+          <div class="recorder-bar">
+            <button class="rec-btn" id="startRecord">🎤 Record</button>
+            <button class="rec-btn" id="stopRecord" disabled>⏹ Stop</button>
+            <button class="rec-btn" id="playRecord" disabled>🎧 Play</button>
+            <span class="rec-status" id="recStatus">Record then compare with the model</span>
+          </div>
+          <div class="accuracy-card" id="accuracyCard">
+            <div class="gauge-row" id="accuracySection"></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title"><span class="dot" style="background:var(--accent-amber)"></span>Ready Check</div>
+          <p style="color:var(--text-muted);font-size:0.85rem;margin-bottom:0.75rem;">Before we begin, check in with yourself:</p>
+          <div class="checklist-item"><input type="checkbox" id="ci1"><label for="ci1">I know the TOEFL 2026 format (Reading → Listening → Speaking → Writing)</label></div>
+          <div class="checklist-item"><input type="checkbox" id="ci2"><label for="ci2">I have strategies for each section ready</label></div>
+          <div class="checklist-item"><input type="checkbox" id="ci3"><label for="ci3">I will manage my time and not get stuck on any one question</label></div>
+          <div class="checklist-item"><input type="checkbox" id="ci4"><label for="ci4">I will use natural intonation and keep speaking even if I make mistakes</label></div>
+        </div>
+      </div>
+
+      <!-- ===== SLIDE 1: READING ===== -->
+      <div class="slide" id="slide-1">
+        <div class="slide-header">
+          <span class="slide-num">01</span>
+          <div>
+            <div class="slide-title">📖 Reading Section</div>
+            <div class="slide-subtitle">Read the passage, then answer 10 TOEFL-style questions — 18 minutes</div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title"><span class="dot" style="background:var(--primary)"></span>Timer</div>
+          <div class="timer-row">
+            <div class="timer-box" id="readingTimerBox">
+              <div class="timer-val" id="reading-time">18:00</div>
+              <div class="timer-label">Time Remaining</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:0.5rem;">
+              <button class="btn btn-cyan" onclick="runReadingClock()">▶ Start</button>
+              <button class="btn btn-secondary btn-sm" onclick="resetReadingClock()">Reset</button>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title"><span class="dot" style="background:var(--accent-cyan)"></span>Passage: AI and the Future of Scientific Research</div>
+          <div class="passage-box">
+            <p>Artificial intelligence is transforming the landscape of scientific research at an extraordinary rate. Machine learning algorithms, which can process vast quantities of data far beyond human capability, are enabling breakthroughs in fields as diverse as medicine, climatology, and particle physics.</p>
+            <p>One of the most significant applications has been in drug discovery. Traditionally, identifying a single viable drug candidate could take over a decade and cost billions of dollars. AI systems can now screen millions of compounds in a matter of days, predicting which ones are most likely to be effective and safe. For example, an AI model developed at MIT identified a powerful new antibiotic — halicin — by analyzing over one hundred million molecular structures.</p>
+            <p>In climate science, AI is helping researchers build more accurate models of weather patterns and climate change. Deep learning systems can analyze satellite imagery and sensor data to predict extreme weather events with greater precision than ever before. These predictions enable earlier warnings and more effective disaster preparedness.</p>
+            <p>However, AI in science is not without limitations. Critics point out that AI models are only as good as the data they are trained on and that biased or incomplete data can lead to flawed conclusions. Moreover, the "black box" nature of many AI systems makes it difficult for researchers to understand exactly how a model arrived at its prediction — a significant problem in fields where understanding mechanism is as important as predicting outcome.</p>
+            <p>Despite these challenges, the trajectory is clear. AI will not replace scientists, but scientists who use AI will replace those who do not. The future of discovery lies not in human versus machine, but in human-machine collaboration.</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title"><span class="dot" style="background:var(--accent-amber)"></span>Questions</div>
+          <div class="q-item"><span class="q-type">Vocabulary</span><div class="q-text"><strong>1.</strong> The word <em>"viable"</em> in paragraph 2 is closest in meaning to:</div>
+            <div class="q-options" id="rq1-opts">
+              <label class="q-option" onclick="selectOption(this,'rq1','A')"><input type="radio" name="rq1" value="A"><span class="opt-letter">A.</span><span class="opt-text">profitable</span></label>
+              <label class="q-option" onclick="selectOption(this,'rq1','B')"><input type="radio" name="rq1" value="B"><span class="opt-letter">B.</span><span class="opt-text">feasible</span></label>
+              <label class="q-option" onclick="selectOption(this,'rq1','C')"><input type="radio" name="rq1" value="C"><span class="opt-letter">C.</span><span class="opt-text">popular</span></label>
+              <label class="q-option" onclick="selectOption(this,'rq1','D')"><input type="radio" name="rq1" value="D"><span class="opt-letter">D.</span><span class="opt-text">dangerous</span></label>
+            </div>
+            <button class="btn btn-secondary btn-sm" style="margin-top:0.5rem;" onclick="toggleModel('rq1')">Show Answer</button><div class="model-toggle" id="rq1"><div class="model-label">Answer</div><p><span class="ann-bl">B. feasible</span>. In context: "identifying a single <span class="ann-em">viable</span> drug candidate" — the passage is describing how AI speeds up the process of finding a drug that <span class="ann-em">can actually work</span>. Synonyms include <span class="ann-bl">practicable, achievable, realistic</span>.</p></div></div>
+
+          <div class="q-item"><span class="q-type">Detail</span><div class="q-text"><strong>2.</strong> According to the passage, what is one limitation of AI in scientific research?</div>
+            <div class="q-options" id="rq2-opts">
+              <label class="q-option" onclick="selectOption(this,'rq2','A')"><input type="radio" name="rq2" value="A"><span class="opt-letter">A.</span><span class="opt-text">AI cannot process large datasets</span></label>
+              <label class="q-option" onclick="selectOption(this,'rq2','B')"><input type="radio" name="rq2" value="B"><span class="opt-letter">B.</span><span class="opt-text">AI is too expensive for most researchers</span></label>
+              <label class="q-option" onclick="selectOption(this,'rq2','C')"><input type="radio" name="rq2" value="C"><span class="opt-letter">C.</span><span class="opt-text">AI models can produce flawed conclusions from biased data</span></label>
+              <label class="q-option" onclick="selectOption(this,'rq2','D')"><input type="radio" name="rq2" value="D"><span class="opt-letter">D.</span><span class="opt-text">AI replaces the need for human scientists</span></label>
+            </div>
+            <button class="btn btn-secondary btn-sm" style="margin-top:0.5rem;" onclick="toggleModel('rq2')">Show Answer</button><div class="model-toggle" id="rq2"><div class="model-label">Answer</div><p><span class="ann-bl">C.</span> AI models <span class="ann-am">can produce flawed conclusions</span> from <span class="ann-em">biased or incomplete data</span>. The passage states that AI is "only as good as the data it is trained on" — if the training data has <span class="ann-bl">systematic gaps or prejudices</span>, the model's output will <span class="ann-pu">necessarily</span> reflect those flaws.</p></div></div>
+
+          <div class="q-item"><span class="q-type">Negative Fact</span><div class="q-text"><strong>3.</strong> All of the following are mentioned as applications of AI in the passage EXCEPT:</div>
+            <div class="q-options" id="rq3-opts">
+              <label class="q-option" onclick="selectOption(this,'rq3','A')"><input type="radio" name="rq3" value="A"><span class="opt-letter">A.</span><span class="opt-text">Medicine (drug discovery)</span></label>
+              <label class="q-option" onclick="selectOption(this,'rq3','B')"><input type="radio" name="rq3" value="B"><span class="opt-letter">B.</span><span class="opt-text">Climatology (weather modeling)</span></label>
+              <label class="q-option" onclick="selectOption(this,'rq3','C')"><input type="radio" name="rq3" value="C"><span class="opt-letter">C.</span><span class="opt-text">Sociology (social behavior analysis)</span></label>
+              <label class="q-option" onclick="selectOption(this,'rq3','D')"><input type="radio" name="rq3" value="D"><span class="opt-letter">D.</span><span class="opt-text">Particle physics</span></label>
+            </div>
+            <button class="btn btn-secondary btn-sm" style="margin-top:0.5rem;" onclick="toggleModel('rq3')">Show Answer</button><div class="model-toggle" id="rq3"><div class="model-label">Answer</div><p><span class="ann-bl">C. Sociology</span>. The passage mentions <span class="ann-em">medicine</span> (drug discovery), <span class="ann-em">climatology</span> (weather/climate models), and <span class="ann-em">particle physics</span>. Sociology is <span class="ann-pu">nowhere mentioned</span> — this is a classic TOEFL negative fact question where three options appear in the text and the fourth is a <span class="ann-bl">distractor</span>.</p></div></div>
+
+          <div class="q-item"><span class="q-type">Inference</span><div class="q-text"><strong>4.</strong> What does the author imply about scientists who do not use AI?</div>
+            <div class="q-options" id="rq4-opts">
+              <label class="q-option" onclick="selectOption(this,'rq4','A')"><input type="radio" name="rq4" value="A"><span class="opt-letter">A.</span><span class="opt-text">They will eventually be replaced by AI entirely</span></label>
+              <label class="q-option" onclick="selectOption(this,'rq4','B')"><input type="radio" name="rq4" value="B"><span class="opt-letter">B.</span><span class="opt-text">They will be at a competitive disadvantage</span></label>
+              <label class="q-option" onclick="selectOption(this,'rq4','C')"><input type="radio" name="rq4" value="C"><span class="opt-letter">C.</span><span class="opt-text">They produce more accurate research</span></label>
+              <label class="q-option" onclick="selectOption(this,'rq4','D')"><input type="radio" name="rq4" value="D"><span class="opt-letter">D.</span><span class="opt-text">They refuse to adapt to new technology</span></label>
+            </div>
+            <button class="btn btn-secondary btn-sm" style="margin-top:0.5rem;" onclick="toggleModel('rq4')">Show Answer</button><div class="model-toggle" id="rq4"><div class="model-label">Answer</div><p><span class="ann-bl">B.</span> The author implies they <span class="ann-am">will be at a competitive disadvantage</span>. The final sentence states: "AI will not replace scientists, but scientists who use AI will replace those who do not." This <span class="ann-pu">strongly suggests</span> that <span class="ann-em">not adopting AI tools will lead to obsolescence</span> in the research field.</p></div></div>
+
+          <div class="q-item"><span class="q-type">Purpose</span><div class="q-text"><strong>5.</strong> Why does the author mention the MIT halicin discovery in paragraph 2?</div>
+            <div class="q-options" id="rq5-opts">
+              <label class="q-option" onclick="selectOption(this,'rq5','A')"><input type="radio" name="rq5" value="A"><span class="opt-letter">A.</span><span class="opt-text">To explain how antibiotics are traditionally discovered</span></label>
+              <label class="q-option" onclick="selectOption(this,'rq5','B')"><input type="radio" name="rq5" value="B"><span class="opt-letter">B.</span><span class="opt-text">To illustrate AI's impact on drug discovery</span></label>
+              <label class="q-option" onclick="selectOption(this,'rq5','C')"><input type="radio" name="rq5" value="C"><span class="opt-letter">C.</span><span class="opt-text">To critique MIT's research methodology</span></label>
+              <label class="q-option" onclick="selectOption(this,'rq5','D')"><input type="radio" name="rq5" value="D"><span class="opt-letter">D.</span><span class="opt-text">To argue that AI is overrated in medicine</span></label>
+            </div>
+            <button class="btn btn-secondary btn-sm" style="margin-top:0.5rem;" onclick="toggleModel('rq5')">Show Answer</button><div class="model-toggle" id="rq5"><div class="model-label">Answer</div><p><span class="ann-bl">B.</span> To <span class="ann-am">illustrate AI's impact on drug discovery</span>. The halicin example is a <span class="ann-em">concrete case study</span> showing how AI "can screen millions of compounds in a matter of days" — it <span class="ann-pu">serves as evidence</span> for the broader claim about AI accelerating pharmaceutical research.</p></div></div>
+
+          <div class="q-item"><span class="q-type">Sentence Insertion</span><div class="q-text"><strong>6.</strong> Where in paragraph 2 does this sentence best fit: <em>"This represents a dramatic acceleration of the traditional timeline."</em></div>
+            <div class="q-options" id="rq6-opts">
+              <label class="q-option" onclick="selectOption(this,'rq6','A')"><input type="radio" name="rq6" value="A"><span class="opt-letter">A.</span><span class="opt-text">Before the sentence about identifying a viable drug candidate</span></label>
+              <label class="q-option" onclick="selectOption(this,'rq6','B')"><input type="radio" name="rq6" value="B"><span class="opt-letter">B.</span><span class="opt-text">After the sentence about screening millions of compounds in days</span></label>
+              <label class="q-option" onclick="selectOption(this,'rq6','C')"><input type="radio" name="rq6" value="C"><span class="opt-letter">C.</span><span class="opt-text">After the sentence about the MIT halicin discovery</span></label>
+              <label class="q-option" onclick="selectOption(this,'rq6','D')"><input type="radio" name="rq6" value="D"><span class="opt-letter">D.</span><span class="opt-text">At the end of paragraph 2</span></label>
+            </div>
+            <button class="btn btn-secondary btn-sm" style="margin-top:0.5rem;" onclick="toggleModel('rq6')">Show Answer</button><div class="model-toggle" id="rq6"><div class="model-label">Answer</div><p><span class="ann-bl">B.</span> After the sentence about <span class="ann-bl">screening millions of compounds in a matter of days</span>. The word <span class="ann-em">"this"</span> refers back to the speed of AI screening, and "traditional timeline" connects to the earlier contrast — the <span class="ann-am">old method took over a decade</span>, AI does it in days.</p></div></div>
+
+          <div class="q-item"><span class="q-type">Pronoun Reference</span><div class="q-text"><strong>7.</strong> The phrase <em>"These predictions"</em> in paragraph 3 refers to:</div>
+            <div class="q-options" id="rq7-opts">
+              <label class="q-option" onclick="selectOption(this,'rq7','A')"><input type="radio" name="rq7" value="A"><span class="opt-letter">A.</span><span class="opt-text">The cost of AI drug discovery</span></label>
+              <label class="q-option" onclick="selectOption(this,'rq7','B')"><input type="radio" name="rq7" value="B"><span class="opt-letter">B.</span><span class="opt-text">Predictions of extreme weather events</span></label>
+              <label class="q-option" onclick="selectOption(this,'rq7','C')"><input type="radio" name="rq7" value="C"><span class="opt-letter">C.</span><span class="opt-text">The black box nature of AI systems</span></label>
+              <label class="q-option" onclick="selectOption(this,'rq7','D')"><input type="radio" name="rq7" value="D"><span class="opt-letter">D.</span><span class="opt-text">The future of scientific collaboration</span></label>
+            </div>
+            <button class="btn btn-secondary btn-sm" style="margin-top:0.5rem;" onclick="toggleModel('rq7')">Show Answer</button><div class="model-toggle" id="rq7"><div class="model-label">Answer</div><p><span class="ann-bl">B.</span> <span class="ann-bl">Predictions of extreme weather events</span>. The previous sentence says AI can "predict extreme weather events with greater precision" — <span class="ann-em">"these predictions"</span> directly points back to those <span class="ann-bl">weather forecasts</span>, and the next clause explains that they "enable earlier warnings."</p></div></div>
+
+          <div class="q-item"><span class="q-type">Paraphrase</span><div class="q-text"><strong>8.</strong> Which sentence best rephrases the main idea of the final paragraph?</div>
+            <div class="q-options" id="rq8-opts">
+              <label class="q-option" onclick="selectOption(this,'rq8','A')"><input type="radio" name="rq8" value="A"><span class="opt-letter">A.</span><span class="opt-text">AI will completely replace human scientists in the future</span></label>
+              <label class="q-option" onclick="selectOption(this,'rq8','B')"><input type="radio" name="rq8" value="B"><span class="opt-letter">B.</span><span class="opt-text">Scientists who use AI will outperform those who do not</span></label>
+              <label class="q-option" onclick="selectOption(this,'rq8','C')"><input type="radio" name="rq8" value="C"><span class="opt-letter">C.</span><span class="opt-text">AI has more limitations than benefits in research</span></label>
+              <label class="q-option" onclick="selectOption(this,'rq8','D')"><input type="radio" name="rq8" value="D"><span class="opt-letter">D.</span><span class="opt-text">Human-machine collaboration is unnecessary for discovery</span></label>
+            </div>
+            <button class="btn btn-secondary btn-sm" style="margin-top:0.5rem;" onclick="toggleModel('rq8')">Show Answer</button><div class="model-toggle" id="rq8"><div class="model-label">Answer</div><p><span class="ann-bl">B.</span> <span class="ann-am">Scientists who incorporate AI will outperform those who do not.</span> The passage states the future is "not human versus machine, but <span class="ann-em">human-machine collaboration</span>" — the <span class="ann-bl">core idea is that AI is a tool that enhances scientists</span>, not replaces them, and those who <span class="ann-pu">embrace it</span> will lead discovery.</p></div></div>
+
+          <div class="q-item"><span class="q-type">Attitude</span><div class="q-text"><strong>9.</strong> What is the author's attitude toward AI in scientific research?</div>
+            <div class="q-options" id="rq9-opts">
+              <label class="q-option" onclick="selectOption(this,'rq9','A')"><input type="radio" name="rq9" value="A"><span class="opt-letter">A.</span><span class="opt-text">Strongly critical and pessimistic</span></label>
+              <label class="q-option" onclick="selectOption(this,'rq9','B')"><input type="radio" name="rq9" value="B"><span class="opt-letter">B.</span><span class="opt-text">Neutral and uninterested</span></label>
+              <label class="q-option" onclick="selectOption(this,'rq9','C')"><input type="radio" name="rq9" value="C"><span class="opt-letter">C.</span><span class="opt-text">Cautiously optimistic</span></label>
+              <label class="q-option" onclick="selectOption(this,'rq9','D')"><input type="radio" name="rq9" value="D"><span class="opt-letter">D.</span><span class="opt-text">Unreservedly enthusiastic</span></label>
+            </div>
+            <button class="btn btn-secondary btn-sm" style="margin-top:0.5rem;" onclick="toggleModel('rq9')">Show Answer</button><div class="model-toggle" id="rq9"><div class="model-label">Answer</div><p><span class="ann-bl">C.</span> <span class="ann-bl">Cautiously optimistic</span>. The author <span class="ann-pu">acknowledges</span> limitations (biased data, black box problem) in paragraph 4, but <span class="ann-em">ultimately concludes</span> positively about human-AI collaboration. The tone is <span class="ann-am">balanced but forward-looking</span> — recognizing real challenges while <span class="ann-pu">still believing</span> in transformative potential.</p></div></div>
+
+          <div class="q-item"><span class="q-type">Summary</span><div class="q-text"><strong>10.</strong> Which THREE answer choices represent the three main ideas of the passage? Click on all three.</div>
+            <div class="q-options" id="rq10-opts">
+              <label class="q-option" onclick="selectOption(this,'rq10','A')"><input type="radio" name="rq10" value="A"><span class="opt-letter">A.</span><span class="opt-text">AI accelerates drug discovery through rapid compound screening</span></label>
+              <label class="q-option" onclick="selectOption(this,'rq10','B')"><input type="radio" name="rq10" value="B"><span class="opt-letter">B.</span><span class="opt-text">AI will fully replace human researchers within a decade</span></label>
+              <label class="q-option" onclick="selectOption(this,'rq10','C')"><input type="radio" name="rq10" value="C"><span class="opt-letter">C.</span><span class="opt-text">AI improves climate modeling and extreme weather prediction</span></label>
+              <label class="q-option" onclick="selectOption(this,'rq10','D')"><input type="radio" name="rq10" value="D"><span class="opt-letter">D.</span><span class="opt-text">AI has important limitations but the future lies in human-machine collaboration</span></label>
+            </div>
+            <button class="btn btn-secondary btn-sm" style="margin-top:0.5rem;" onclick="toggleModel('rq10')">Show Answer</button><div class="model-toggle" id="rq10"><div class="model-label">Answer</div><p>The three correct answers are: <span class="ann-bl">A, C, D</span>. The three main ideas are: <span class="ann-em">(1) AI accelerates drug discovery</span> through rapid compound screening; <span class="ann-em">(2) AI improves climate modeling</span> and extreme weather prediction; and <span class="ann-em">(3) AI has important limitations</span> (biased data, black box) but the future lies in <span class="ann-bl">human-machine collaboration</span> rather than replacement. Option B is incorrect — the passage explicitly states AI will NOT replace scientists.</p></div></div>
+        </div>
+      </div>
+
+      <!-- ===== SLIDE 2: LISTENING ===== -->
+      <div class="slide" id="slide-2">
+        <div class="slide-header">
+          <span class="slide-num">02</span>
+          <div>
+            <div class="slide-title">🎧 Listening Section</div>
+            <div class="slide-subtitle">Lecture on "Digital Platforms and Economic Opportunity" — teacher reads, then answer 6 questions</div>
+          </div>
+        </div>
+
+        <!-- Phase 1: Lecture visible -->
+        <div id="listening-phase-1" class="phase-visible">
+          <div class="card listening-lecture">
+            <div class="card-title"><span class="dot" style="background:var(--accent-green)"></span>Lecture: Digital Platforms and Economic Opportunity</div>
+            <p style="color:var(--text-muted);font-size:0.82rem;margin-bottom:0.75rem;">The teacher will read this lecture <strong>once</strong>. Take notes in the space below. After the lecture, click "Done" to proceed to questions.</p>
+            <div class="passage-box">
+              <p><strong>Digital Platforms and Economic Opportunity</strong></p>
+              <p>Today we'll examine how digital platforms are reshaping economic opportunity in both developed and developing economies.</p>
+              <p>First, let's consider the positive impact. Digital platforms like Etsy, Shopify, and Upwork have dramatically lowered barriers to entrepreneurship. In the past, starting a business required significant capital — you needed a physical storefront, inventory, and employees. Today, an artisan in rural Kenya can sell handmade goods to customers in New York without leaving their home. This democratization of commerce has created economic opportunities that simply didn't exist twenty years ago.</p>
+              <p>However, the picture is more complex than it first appears. While platforms lower entry barriers, they also capture a significant portion of the value created. Most platforms take fifteen to thirty percent commission on each transaction — a rate that critics argue is excessive. Furthermore, the algorithms that determine visibility on these platforms are often opaque, meaning sellers have little control over who sees their products.</p>
+              <p>In developing economies specifically, digital platforms have shown both promise and limitation. A study of ride-hailing platforms in Southeast Asia found that while drivers earned more than in alternative informal work, their income remained volatile and unpredictable. Additionally, the platforms' algorithmic management systems sometimes penalized drivers for factors beyond their control, such as traffic conditions.</p>
+              <p>To summarize, digital platforms are neither the savior of economic opportunity nor its destroyer. They represent a tool that can amplify existing inequalities or reduce them, depending on how they are designed and regulated.</p>
+            </div>
+            <textarea id="listening-notes" class="notepad-area" placeholder="Take notes here while the teacher reads..." style="min-height:100px;margin-top:0.75rem;"></textarea>
+            <div style="text-align:center;margin-top:1rem;">
+              <button class="btn btn-primary" onclick="revealListeningQuestions()">✓ Done — Hide Lecture & Start Questions</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Phase 2: Questions visible -->
+        <div id="listening-phase-2" class="phase-hidden">
+          <div class="card">
+            <div class="card-title"><span class="dot" style="background:var(--accent-amber)"></span>Questions (based on the lecture)</div>
+
+            <div class="q-item"><span class="q-type">Gist</span><div class="q-text"><strong>1.</strong> What is the main argument of the lecture?</div><textarea rows="2" placeholder="Type your answer..."></textarea><button class="btn btn-secondary btn-sm" style="margin-top:0.5rem;" onclick="toggleModel('lq1')">Show Answer</button><div class="model-toggle" id="lq1"><div class="model-label">Answer</div><p><span class="ann-am">Digital platforms create economic opportunities</span> but also <span class="ann-em">introduce new challenges</span>. The lecture presents a <span class="ann-bl">balanced perspective</span>: platforms lower barriers to entrepreneurship and democratize commerce, <span class="ann-pu">yet</span> they also capture significant value through commissions and use <span class="ann-bl">opaque algorithms</span> that disadvantage sellers and workers.</p></div></div>
+
+            <div class="q-item"><span class="q-type">Detail</span><div class="q-text"><strong>2.</strong> What commission rate do digital platforms typically take per transaction?</div><textarea rows="2" placeholder="Type your answer..."></textarea><button class="btn btn-secondary btn-sm" style="margin-top:0.5rem;" onclick="toggleModel('lq2')">Show Answer</button><div class="model-toggle" id="lq2"><div class="model-label">Answer</div><p><span class="ann-bl">15 to 30 percent</span>. The lecture states that most platforms take "fifteen to thirty percent commission on each transaction" — a rate that critics argue is <span class="ann-em">excessive</span>. This is a <span class="ann-am">key detail</span> supporting the lecturer's point that platforms <span class="ann-pu">also</span> capture a lot of the value they help create.</p></div></div>
+
+            <div class="q-item"><span class="q-type">Purpose</span><div class="q-text"><strong>3.</strong> Why does the professor mention the example of an artisan in rural Kenya?</div><textarea rows="2" placeholder="Type your answer..."></textarea><button class="btn btn-secondary btn-sm" style="margin-top:0.5rem;" onclick="toggleModel('lq3')">Show Answer</button><div class="model-toggle" id="lq3"><div class="model-label">Answer</div><p>To <span class="ann-am">illustrate the democratization of commerce</span>. The Kenyan artisan example shows how digital platforms <span class="ann-em">eliminate traditional barriers</span> to entrepreneurship — someone in a remote area can <span class="ann-pu">now</span> access a <span class="ann-bl">global marketplace</span> without needing a physical storefront or <span class="ann-bl">significant startup capital</span>.</p></div></div>
+
+            <div class="q-item"><span class="q-type">Detail</span><div class="q-text"><strong>4.</strong> What did the Southeast Asia study reveal about driver income on ride-hailing platforms?</div><textarea rows="2" placeholder="Type your answer..."></textarea><button class="btn btn-secondary btn-sm" style="margin-top:0.5rem;" onclick="toggleModel('lq4')">Show Answer</button><div class="model-toggle" id="lq4"><div class="model-label">Answer</div><p>Driver income was <span class="ann-em">volatile and unpredictable</span>, <span class="ann-pu">despite being</span> higher than in alternative informal work. The study shows the <span class="ann-bl">complex trade-off</span>: platform work pays better than the informal sector, <span class="ann-am">but</span> the algorithmic management creates <span class="ann-em">income instability</span> that workers cannot control.</p></div></div>
+
+            <div class="q-item"><span class="q-type">Inference</span><div class="q-text"><strong>5.</strong> What can be inferred about algorithmic management on digital platforms?</div><textarea rows="2" placeholder="Type your answer..."></textarea><button class="btn btn-secondary btn-sm" style="margin-top:0.5rem;" onclick="toggleModel('lq5')">Show Answer</button><div class="model-toggle" id="lq5"><div class="model-label">Answer</div><p>It <span class="ann-am">can be unfair to workers</span> in certain conditions. The lecture mentions that drivers were <span class="ann-em">penalized for factors beyond their control</span>, like traffic conditions — this <span class="ann-pu">implies</span> that algorithmic systems <span class="ann-bl">lack flexibility</span> and <span class="ann-em">cannot account for real-world circumstances</span> that human managers would consider.</p></div></div>
+
+            <div class="q-item"><span class="q-type">Attitude</span><div class="q-text"><strong>6.</strong> How would you describe the professor's conclusion about digital platforms?</div><textarea rows="2" placeholder="Type your answer..."></textarea><button class="btn btn-secondary btn-sm" style="margin-top:0.5rem;" onclick="toggleModel('lq6')">Show Answer</button><div class="model-toggle" id="lq6"><div class="model-label">Answer</div><p>The professor's conclusion is <span class="ann-bl">balanced and nuanced</span>. She states platforms are "neither the savior of economic opportunity nor its destroyer" — they are a <span class="ann-am">tool that can go either way</span>, depending on <span class="ann-em">design and regulation</span>. This is a <span class="ann-pu">characteristically academic</span> position: <span class="ann-bl">acknowledging complexity</span> rather than taking a simple side.</p></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== SLIDE 3: SPEAKING ===== -->
+      <div class="slide" id="slide-3">
+        <div class="slide-header">
+          <span class="slide-num">03</span>
+          <div>
+            <div class="slide-title">🎤 Speaking Section — TOEFL 2026 Format</div>
+            <div class="slide-subtitle">2 tasks: Listen &amp; Repeat (7 items) + Take an Interview (4 questions, 45s each)</div>
+          </div>
+        </div>
+
+        <!-- Task 1: Listen & Repeat -->
+        <div class="card">
+          <div class="card-title"><span class="dot" style="background:var(--accent-cyan)"></span>Task 1: Listen &amp; Repeat</div>
+          <p style="color:var(--text-muted);font-size:0.85rem;margin-bottom:0.75rem;">Listen to each sentence, then repeat it exactly. Focus on pronunciation, intonation, and rhythm. Click <strong>Play</strong> to hear the model, then <strong>Record</strong> to capture your response.</p>
+          <div class="speaking-task" style="border-color:rgba(6, 182, 212, 0.15);">
+            <div class="lr-sentence" data-n="1">
+              <div class="lr-header"><span class="lr-num">1</span><div class="lr-text" id="lr-text-1">The rapid advancement of artificial intelligence is reshaping global economic structures.</div></div>
+              <div class="lr-wave" id="lr-wave-1"></div>
+              <div class="lr-actions">
+                <button class="btn btn-cyan btn-sm lr-play-model" onclick="playLRModel(1)">🔊 Play</button>
+                <button class="rec-btn lr-rec" id="lr-rec-1">🎤 Record</button>
+                <button class="rec-btn lr-play-yours" id="lr-play-1" disabled>🎧 Play Yours</button>
+                <span class="lr-status" id="lr-status-1"></span>
+              </div>
+            </div>
+            <div class="lr-sentence" data-n="2">
+              <div class="lr-header"><span class="lr-num">2</span><div class="lr-text" id="lr-text-2">Researchers have developed new models that predict climate patterns with remarkable accuracy.</div></div>
+              <div class="lr-wave" id="lr-wave-2"></div>
+              <div class="lr-actions">
+                <button class="btn btn-cyan btn-sm lr-play-model" onclick="playLRModel(2)">🔊 Play</button>
+                <button class="rec-btn lr-rec" id="lr-rec-2">🎤 Record</button>
+                <button class="rec-btn lr-play-yours" id="lr-play-2" disabled>🎧 Play Yours</button>
+                <span class="lr-status" id="lr-status-2"></span>
+              </div>
+            </div>
+            <div class="lr-sentence" data-n="3">
+              <div class="lr-header"><span class="lr-num">3</span><div class="lr-text" id="lr-text-3">Universities around the world are adapting their curricula to meet the demands of a digital economy.</div></div>
+              <div class="lr-wave" id="lr-wave-3"></div>
+              <div class="lr-actions">
+                <button class="btn btn-cyan btn-sm lr-play-model" onclick="playLRModel(3)">🔊 Play</button>
+                <button class="rec-btn lr-rec" id="lr-rec-3">🎤 Record</button>
+                <button class="rec-btn lr-play-yours" id="lr-play-3" disabled>🎧 Play Yours</button>
+                <span class="lr-status" id="lr-status-3"></span>
+              </div>
+            </div>
+            <div class="lr-sentence" data-n="4">
+              <div class="lr-header"><span class="lr-num">4</span><div class="lr-text" id="lr-text-4">The experiment yielded surprising results that challenged the researchers' initial hypotheses.</div></div>
+              <div class="lr-wave" id="lr-wave-4"></div>
+              <div class="lr-actions">
+                <button class="btn btn-cyan btn-sm lr-play-model" onclick="playLRModel(4)">🔊 Play</button>
+                <button class="rec-btn lr-rec" id="lr-rec-4">🎤 Record</button>
+                <button class="rec-btn lr-play-yours" id="lr-play-4" disabled>🎧 Play Yours</button>
+                <span class="lr-status" id="lr-status-4"></span>
+              </div>
+            </div>
+            <div class="lr-sentence" data-n="5">
+              <div class="lr-header"><span class="lr-num">5</span><div class="lr-text" id="lr-text-5">Understanding the relationship between technology and society requires interdisciplinary collaboration.</div></div>
+              <div class="lr-wave" id="lr-wave-5"></div>
+              <div class="lr-actions">
+                <button class="btn btn-cyan btn-sm lr-play-model" onclick="playLRModel(5)">🔊 Play</button>
+                <button class="rec-btn lr-rec" id="lr-rec-5">🎤 Record</button>
+                <button class="rec-btn lr-play-yours" id="lr-play-5" disabled>🎧 Play Yours</button>
+                <span class="lr-status" id="lr-status-5"></span>
+              </div>
+            </div>
+            <div class="lr-sentence" data-n="6">
+              <div class="lr-header"><span class="lr-num">6</span><div class="lr-text" id="lr-text-6">The findings suggest that conventional approaches may be insufficient to address this complex issue.</div></div>
+              <div class="lr-wave" id="lr-wave-6"></div>
+              <div class="lr-actions">
+                <button class="btn btn-cyan btn-sm lr-play-model" onclick="playLRModel(6)">🔊 Play</button>
+                <button class="rec-btn lr-rec" id="lr-rec-6">🎤 Record</button>
+                <button class="rec-btn lr-play-yours" id="lr-play-6" disabled>🎧 Play Yours</button>
+                <span class="lr-status" id="lr-status-6"></span>
+              </div>
+            </div>
+            <div class="lr-sentence" data-n="7">
+              <div class="lr-header"><span class="lr-num">7</span><div class="lr-text" id="lr-text-7">Collaborative research across disciplines has become essential for solving today's most pressing challenges.</div></div>
+              <div class="lr-wave" id="lr-wave-7"></div>
+              <div class="lr-actions">
+                <button class="btn btn-cyan btn-sm lr-play-model" onclick="playLRModel(7)">🔊 Play</button>
+                <button class="rec-btn lr-rec" id="lr-rec-7">🎤 Record</button>
+                <button class="rec-btn lr-play-yours" id="lr-play-7" disabled>🎧 Play Yours</button>
+                <span class="lr-status" id="lr-status-7"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Task 2: Take an Interview -->
+        <div class="card">
+          <div class="card-title"><span class="dot" style="background:var(--accent-amber)"></span>Task 2: Take an Interview</div>
+          <p style="color:var(--text-muted);font-size:0.85rem;margin-bottom:0.75rem;">I'll ask 4 questions. You have 45 seconds each. No prep time — start speaking immediately. Keep going until the timer stops.</p>
+          <div class="speaking-task">
+            <div class="task-header"><span class="task-badge int">Q1</span><span class="task-title">Technology &amp; Communication</span></div>
+            <div class="task-desc">How has technology changed the way people communicate in your country? Give specific examples.</div>
+            <div class="task-timer" id="int-timer-1">00:45</div>
+            <div style="display:flex;gap:0.5rem;align-items:center;flex-wrap:wrap;margin-bottom:0.5rem;">
+              <button class="btn btn-cyan btn-sm" onclick="startInterviewTimer(1)">▶ Start</button>
+              <button class="btn btn-secondary btn-sm" onclick="resetInterviewTimer(1)">Reset</button>
+              <button class="rec-btn" id="int-rec-1">🎤 Record</button>
+              <button class="rec-btn" id="int-stop-1" disabled>⏹ Stop</button>
+              <button class="rec-btn" id="int-play-1" disabled>🎧 Play</button>
+              <span class="rec-indicator off" id="int-ind-1"><span class="rec-dot"></span> OFF</span>
+            </div>
+            <button class="btn btn-secondary btn-sm" onclick="toggleModel('int-m1')">Show Model Answer</button>
+            <div class="model-toggle" id="int-m1"><div class="model-label">Model Answer (45s)</div>
+            <p><span class="ann-pu">Well, </span>technology has <span class="ann-em">dramatically transformed</span> communication in my country. <span class="ann-pu">I mean, </span>fifteen years ago, people relied on phone calls and text messages, but <span class="ann-am">now</span> platforms like WhatsApp and Telegram are <span class="ann-em">ubiquitous</span>. <span class="ann-pu">For example, </span>my grandmother — who is seventy-five — uses video calls every day to talk to our relatives abroad. <span class="ann-pu">So I'd say </span>the biggest change is that communication has become <span class="ann-em">instant and visual</span>. <span class="ann-pu">Also, </span>social media has created new ways to share experiences publicly, which <span class="ann-bl">didn't exist a generation ago</span>.</p></div>
+          </div>
+          <div class="speaking-task">
+            <div class="task-header"><span class="task-badge int">Q2</span><span class="task-title">Most Important Innovation</span></div>
+            <div class="task-desc">What is the most important technological innovation of the last decade? Why do you think so?</div>
+            <div class="task-timer" id="int-timer-2">00:45</div>
+            <div style="display:flex;gap:0.5rem;align-items:center;flex-wrap:wrap;margin-bottom:0.5rem;">
+              <button class="btn btn-cyan btn-sm" onclick="startInterviewTimer(2)">▶ Start</button>
+              <button class="btn btn-secondary btn-sm" onclick="resetInterviewTimer(2)">Reset</button>
+              <button class="rec-btn" id="int-rec-2">🎤 Record</button>
+              <button class="rec-btn" id="int-stop-2" disabled>⏹ Stop</button>
+              <button class="rec-btn" id="int-play-2" disabled>🎧 Play</button>
+              <span class="rec-indicator off" id="int-ind-2"><span class="rec-dot"></span> OFF</span>
+            </div>
+            <button class="btn btn-secondary btn-sm" onclick="toggleModel('int-m2')">Show Model Answer</button>
+            <div class="model-toggle" id="int-m2"><div class="model-label">Model Answer (45s)</div>
+            <p><span class="ann-pu">In my opinion, </span>the most important innovation of the last decade is <span class="ann-bl">large language models</span> — AI systems that can understand and generate human language. <span class="ann-pu">I think </span>this is transformative because it <span class="ann-em">democratizes access to information</span> and <span class="ann-em">intelligence</span>. <span class="ann-pu">For instance, </span>a student in a rural area with limited educational resources can now use these tools to learn almost anything. <span class="ann-pu">Beyond that, </span>it's changing how we work — doctors use it for diagnosis, programmers for coding, writers for brainstorming. <span class="ann-pu">So I'd argue </span>its <span class="ann-am">breadth of impact</span> across so many fields makes it the <span class="ann-em">most significant</span>.</p></div>
+          </div>
+          <div class="speaking-task">
+            <div class="task-header"><span class="task-badge int">Q3</span><span class="task-title">Social Media &amp; Society</span></div>
+            <div class="task-desc">Do you think social media has a positive or negative impact on society? Explain your position.</div>
+            <div class="task-timer" id="int-timer-3">00:45</div>
+            <div style="display:flex;gap:0.5rem;align-items:center;flex-wrap:wrap;margin-bottom:0.5rem;">
+              <button class="btn btn-cyan btn-sm" onclick="startInterviewTimer(3)">▶ Start</button>
+              <button class="btn btn-secondary btn-sm" onclick="resetInterviewTimer(3)">Reset</button>
+              <button class="rec-btn" id="int-rec-3">🎤 Record</button>
+              <button class="rec-btn" id="int-stop-3" disabled>⏹ Stop</button>
+              <button class="rec-btn" id="int-play-3" disabled>🎧 Play</button>
+              <span class="rec-indicator off" id="int-ind-3"><span class="rec-dot"></span> OFF</span>
+            </div>
+            <button class="btn btn-secondary btn-sm" onclick="toggleModel('int-m3')">Show Model Answer</button>
+            <div class="model-toggle" id="int-m3"><div class="model-label">Model Answer (45s)</div>
+            <p><span class="ann-pu">That's a really interesting question. </span><span class="ann-am">Overall, </span>I'd say social media has <span class="ann-em">both positive and negative effects</span>, but I lean slightly toward it being <span class="ann-em">more positive than people give it credit for</span>. <span class="ann-pu">On the one hand, </span>it has given a voice to marginalized communities and enabled social movements to organize <span class="ann-em">at unprecedented scale</span>. <span class="ann-pu">However, </span>there are legitimate concerns about mental health, especially among teenagers, and the spread of misinformation. <span class="ann-pu">But I think </span>the <span class="ann-bl">key is how we use it</span> — <span class="ann-am">digital literacy education</span> can mitigate most of the negative aspects.</p></div>
+          </div>
+          <div class="speaking-task">
+            <div class="task-header"><span class="task-badge int">Q4</span><span class="task-title">AI &amp; Education</span></div>
+            <div class="task-desc">How do you think artificial intelligence will change education in the future?</div>
+            <div class="task-timer" id="int-timer-4">00:45</div>
+            <div style="display:flex;gap:0.5rem;align-items:center;flex-wrap:wrap;margin-bottom:0.5rem;">
+              <button class="btn btn-cyan btn-sm" onclick="startInterviewTimer(4)">▶ Start</button>
+              <button class="btn btn-secondary btn-sm" onclick="resetInterviewTimer(4)">Reset</button>
+              <button class="rec-btn" id="int-rec-4">🎤 Record</button>
+              <button class="rec-btn" id="int-stop-4" disabled>⏹ Stop</button>
+              <button class="rec-btn" id="int-play-4" disabled>🎧 Play</button>
+              <span class="rec-indicator off" id="int-ind-4"><span class="rec-dot"></span> OFF</span>
+            </div>
+            <button class="btn btn-secondary btn-sm" onclick="toggleModel('int-m4')">Show Model Answer</button>
+            <div class="model-toggle" id="int-m4"><div class="model-label">Model Answer (45s)</div>
+            <p><span class="ann-pu">I believe </span>AI will <span class="ann-em">fundamentally transform</span> education by making it <span class="ann-bl">personalized and adaptive</span>. <span class="ann-pu">Right now, </span>most classrooms use a <span class="ann-em">one-size-fits-all approach</span>, but AI can create customized learning paths for each student based on their strengths and weaknesses. <span class="ann-pu">For example, </span>if a student struggles with geometry, the AI could provide <span class="ann-em">targeted exercises</span> and <span class="ann-em">alternative explanations</span>. <span class="ann-pu">However, </span>I don't think AI will replace teachers — <span class="ann-am">the human element</span> of motivation, mentorship, and emotional support is <span class="ann-em">irreplaceable</span>. <span class="ann-pu">So I'd say </span>AI will be a <span class="ann-bl">powerful tool</span> that augments, rather than replaces, traditional teaching.</p></div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ===== SLIDE 4: WRITING ===== -->
+      <div class="slide" id="slide-4">
+        <div class="slide-header">
+          <span class="slide-num">04</span>
+          <div>
+            <div class="slide-title">✍️ Writing Section — Academic Discussion</div>
+            <div class="slide-subtitle">Professor prompt + 2 student posts — 10 minutes to write 100+ words</div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title"><span class="dot" style="background:var(--primary)"></span>Timer</div>
+          <div class="timer-row">
+            <div class="timer-box" id="writingTimerBox">
+              <div class="timer-val" id="writing-time">10:00</div>
+              <div class="timer-label">Minutes Remaining</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:0.5rem;">
+              <button class="btn btn-cyan" onclick="runWritingClock()">▶ Start</button>
+              <button class="btn btn-secondary btn-sm" onclick="resetWritingClock()">Reset</button>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title"><span class="dot" style="background:var(--accent-cyan)"></span>Discussion Prompt</div>
+          <div class="prompt-box">
+            <div class="speaker-label prof">Professor's Post</div>
+            <p>Let's discuss government priorities regarding artificial intelligence. Some argue that governments should prioritize investment in AI research and development to remain competitive globally. Others contend that regulation should be the priority to prevent harm from uncontrolled AI development. What's your perspective? Do you agree more with Sofia or Liam, or do you have a different view?</p>
+          </div>
+          <div class="prompt-box">
+            <div class="speaker-label student">Sofia's Post</div>
+            <p>Research should come first. If governments don't invest in AI research, they'll fall behind economically and militarily. Regulation can come later once we understand the technology better. Over-regulating now would just slow down innovation.</p>
+          </div>
+          <div class="prompt-box">
+            <div class="speaker-label student">Liam's Post</div>
+            <p>Regulation is urgent. AI is already causing harm — biased algorithms, job displacement, privacy violations. We can't afford to wait. Smart regulation doesn't prevent innovation — it creates trust that actually enables it.</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title"><span class="dot" style="background:var(--accent-amber)"></span>Your Response</div>
+          <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:0.75rem;">Write 100+ words expressing your perspective. Reference the student posts and develop your own argument.</p>
+          <div class="word-counter">Words: <span id="wordCount">0</span></div>
+          <textarea class="notepad-area" id="writing-area" placeholder="Type your response here..." style="min-height:250px;"></textarea>
+          <div style="margin-top:0.75rem;">
+            <button class="btn btn-secondary btn-sm" onclick="toggleModel('writing-model')">Show Model Answer</button>
+            <div class="model-toggle" id="writing-model">
+              <div class="model-label">Model Response (100-130 words)</div>
+              <p>I agree with <span class="ann-am">both Sofia and Liam to some extent</span>, though I lean closer to Liam's perspective. <span class="ann-pu">While</span> Sofia is correct that governments must invest in AI research to remain competitive, <span class="ann-am">I believe</span> this framing creates a <span class="ann-em">false dichotomy</span>. The most effective approach is to invest in <span class="ann-bl">both research and regulation simultaneously</span>, recognizing that they are <span class="ann-em">complementary rather than competing</span> priorities.</p>
+              <p><span class="ann-pu">What is often overlooked</span> is that thoughtful regulation can <span class="ann-am">actually accelerate innovation</span> by creating clear rules and building public trust. <span class="ann-pu">For instance, </span>Singapore's balanced approach to AI governance has made it a global hub for AI research while maintaining strong protections. <span class="ann-pu">Building on Liam's point, </span>regulation need not stifle discovery — it creates the <span class="ann-bl">framework within which responsible research can flourish</span>. The countries that will lead in AI are those that invest in both.</p>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title"><span class="dot" style="background:var(--text-muted)"></span>Scoring Rubric (1-5)</div>
+          <table class="scoring-table">
+            <thead><tr><th>Score</th><th>Content &amp; Development</th><th>Organization</th><th>Language Use</th></tr></thead>
+            <tbody>
+              <tr><td class="score">5</td><td>Clear position + compelling evidence</td><td>Logical flow + clear transitions</td><td>Precise vocab + varied structures</td></tr>
+              <tr><td class="score">4</td><td>Clear position + good support</td><td>Well-organized with transitions</td><td>Good range; minor errors</td></tr>
+              <tr><td class="score">3</td><td>Position stated + adequate support</td><td>Some organization; basic transitions</td><td>Adequate range; noticeable errors</td></tr>
+              <tr><td class="score">2</td><td>Position unclear + weak support</td><td>Poor organization</td><td>Limited range; frequent errors</td></tr>
+              <tr><td class="score">1</td><td>No clear position</td><td>Disorganized</td><td>Minimal range; pervasive errors</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ===== SLIDE 5: SCORING & REVIEW ===== -->
+      <div class="slide" id="slide-5">
+        <div class="slide-header">
+          <span class="slide-num">05</span>
+          <div>
+            <div class="slide-title">📊 Scoring &amp; Review</div>
+            <div class="slide-subtitle">Score summary, rubrics, error log, and priority improvement areas</div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title"><span class="dot" style="background:var(--primary)"></span>Score Summary</div>
+          <table class="scoring-table">
+            <thead><tr><th>Section</th><th>Your Score</th><th>Target</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr><td>Reading (10 questions)</td><td class="score">___ / 10</td><td>7+ / 10</td><td id="reading-status">—</td></tr>
+              <tr><td>Listening (6 questions)</td><td class="score">___ / 6</td><td>4+ / 6</td><td id="listening-status">—</td></tr>
+              <tr><td>Speaking Task 1 (Listen & Repeat)</td><td class="score">___ / 6</td><td>4+ / 6</td><td id="sp1-status">—</td></tr>
+              <tr><td>Speaking Task 2 (Interview)</td><td class="score">___ / 6</td><td>4+ / 6</td><td id="sp2-status">—</td></tr>
+              <tr><td>Writing (Academic Discussion)</td><td class="score">___ / 5</td><td>4+ / 5</td><td id="writing-status">—</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card">
+          <div class="card-title"><span class="dot" style="background:var(--accent-amber)"></span>Estimated TOEFL Score</div>
+          <div class="band-card">
+            <div class="band-label">Estimated Total Score</div>
+            <div class="band-score" id="bandEstimate">— / 6</div>
+            <div class="band-range">Estimated section average (1-6 CEFR scale)</div>
+            <p style="color:var(--text-muted);font-size:0.82rem;margin-top:0.5rem;">Reading: 1-6 · Listening: 1-6 · Speaking: 1-6 · Writing: 1-6</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title"><span class="dot" style="background:var(--accent-green)"></span>Speaking Rubric (1-6 per task)</div>
+          <table class="scoring-table">
+            <thead><tr><th>Score</th><th>Listen &amp; Repeat</th><th>Take an Interview</th></tr></thead>
+            <tbody>
+              <tr><td class="score">6</td><td>Fluent, accurate repetition with natural rhythm and stress</td><td>Fluent, well-organized response with precise vocabulary and complex grammar</td></tr>
+              <tr><td class="score">5</td><td>Mostly accurate; minor pronunciation or rhythm differences</td><td>Clear, organized response with good vocabulary and grammar range</td></tr>
+              <tr><td class="score">4</td><td>Generally accurate; some intonation or stress errors</td><td>Adequate response; some hesitation but generally coherent</td></tr>
+              <tr><td class="score">3</td><td>Recognizable but noticeable word or sound errors</td><td>Basic response; limited development, some disorganization</td></tr>
+              <tr><td class="score">2</td><td>Significant errors; meaning sometimes unclear</td><td>Fragmented response; limited vocabulary and frequent errors</td></tr>
+              <tr><td class="score">1</td><td>Cannot be understood; mostly incorrect</td><td>Barely developed; incoherent or very short</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card">
+          <div class="card-title"><span class="dot" style="background:var(--accent-red)"></span>Error Log</div>
+          <p style="color:var(--text-muted);font-size:0.85rem;margin-bottom:0.75rem;">Write down errors you noticed during the mock — grammar mistakes, weak arguments, timing issues, etc.</p>
+          <textarea class="notepad-area" id="live-notepad" placeholder="Describe each error..." style="min-height:120px;"></textarea>
+          <div style="display:flex;gap:0.75rem;margin-top:0.75rem;">
+            <button class="btn btn-primary btn-sm" onclick="addNoteToTable()">Add to Log</button>
+            <button class="btn btn-secondary btn-sm" onclick="clearNotepad()">Clear</button>
+          </div>
+          <table class="correction-table" id="correction-table" style="margin-top:0.75rem;">
+            <thead><tr><th>Error / Observation</th><th>Corrected Version</th><th>Source</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <div class="card">
+          <div class="card-title"><span class="dot" style="background:var(--accent-cyan)"></span>Top 3 Areas to Improve</div>
+          <div class="improve-area">
+            <h4>1. <input type="text" placeholder="e.g., Grammar: 3rd person -s" style="background:transparent;border:none;border-bottom:1px solid var(--border-color);color:var(--text-main);font-family:inherit;font-size:0.9rem;width:80%;outline:none;"></h4>
+            <textarea rows="2" placeholder="Specific action plan for this area..."></textarea>
+          </div>
+          <div class="improve-area">
+            <h4>2. <input type="text" placeholder="e.g., Speaking: filler words" style="background:transparent;border:none;border-bottom:1px solid var(--border-color);color:var(--text-main);font-family:inherit;font-size:0.9rem;width:80%;outline:none;"></h4>
+            <textarea rows="2" placeholder="Specific action plan for this area..."></textarea>
+          </div>
+          <div class="improve-area">
+            <h4>3. <input type="text" placeholder="e.g., Writing: time management" style="background:transparent;border:none;border-bottom:1px solid var(--border-color);color:var(--text-main);font-family:inherit;font-size:0.9rem;width:80%;outline:none;"></h4>
+            <textarea rows="2" placeholder="Specific action plan for this area..."></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== SLIDE 6: HOMEWORK ===== -->
+      <div class="slide" id="slide-6">
+        <div class="slide-header">
+          <span class="slide-num">06</span>
+          <div>
+            <div class="slide-title">📋 Homework</div>
+            <div class="slide-subtitle">3 tasks to reinforce what we covered today</div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title"><span class="dot" style="background:var(--accent-cyan)"></span>Assignments</div>
+
+          <div class="hw-task">
+            <div class="hw-num">1</div>
+            <h3 style="color:var(--accent-cyan)">Self-Recorded Speaking Review</h3>
+            <p>Listen to your recordings from Slide 3 (both tasks). Self-evaluate each one using the rubric (1-6 scale). Choose your <strong>best and weakest</strong> response and write a 2-3 sentence reflection on each:</p>
+            <ul>
+              <li>What did you do well? (be specific)</li>
+              <li>What needs the most improvement?</li>
+              <li>What will you do differently next time?</li>
+            </ul>
+          </div>
+
+          <div class="hw-task">
+            <div class="hw-num">2</div>
+            <h3 style="color:var(--primary)">Error Analysis</h3>
+            <p>Review your Error Log from Slide 5. Select <strong>3 specific mistakes</strong> you made during the mock. For each one:</p>
+            <ol>
+              <li>Describe the mistake</li>
+              <li>Write the corrected version</li>
+              <li>Explain <em>why</em> it was wrong (grammar rule, logic gap, timing issue, etc.)</li>
+              <li>Write one practice sentence using the correct form</li>
+            </ol>
+          </div>
+
+          <div class="hw-task">
+            <div class="hw-num">3</div>
+            <h3 style="color:var(--accent-green)">4-Week Study Plan</h3>
+            <p>Create a study plan leading up to your TOEFL exam. Include:</p>
+            <ul>
+              <li>Weekly focus areas (e.g., Week 1: Reading + vocabulary; Week 2: Speaking fluency)</li>
+              <li>Daily practice time commitment (e.g., 30 min/day)</li>
+              <li>Resources you will use (TPO tests, YouTube channels, apps)</li>
+              <li>Your target score and the sections you need to improve most</li>
+            </ul>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title"><span class="dot" style="background:var(--accent-amber)"></span>Session Complete</div>
+          <p style="color:#cbd5e1;font-size:0.9rem;">Great work today, Valeria! You completed a full TOEFL mock under timed conditions. Review your errors, practice your weak areas, and you'll be ready for test day. 🎯</p>
+        </div>
+      </div>
+
+      <audio id="shadowingAudio" preload="none" style="display:none"></audio>
+    </div>
+  </div>
+
+  <script>
+    function switchSlide(index) {
+      document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('.sidebar-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById(`slide-${index}`).classList.add('active');
+      document.querySelectorAll('.sidebar-btn')[index].classList.add('active');
+      const pct = ((index + 1) / 7) * 100;
+      document.getElementById('progressBar').style.width = pct + '%';
+    }
+
+    function selectOption(el, qId, letter) {
+      el.closest('.q-options').querySelectorAll('.q-option').forEach(o => o.classList.remove('selected'));
+      el.classList.add('selected');
+    }
+
+    const rqAnswers = { rq1:'B', rq2:'C', rq3:'C', rq4:'B', rq5:'B', rq6:'B', rq7:'B', rq8:'B', rq9:'C', rq10:'X' };
+
+    function toggleModel(id) {
+      const el = document.getElementById(id);
+      if (el) el.classList.toggle('open');
+      const optsEl = document.getElementById(id + '-opts');
+      if (optsEl && rqAnswers[id] && rqAnswers[id] !== 'X') {
+        const correct = rqAnswers[id];
+        optsEl.querySelectorAll('.q-option').forEach(o => {
+          o.classList.remove('selected');
+          const inp = o.querySelector('input');
+          if (inp.value === correct) o.classList.add('correct');
+          else if (inp.checked) o.classList.add('incorrect');
+        });
+      }
+    }
+
+    // Progress bar init
+    document.getElementById('progressBar').style.width = '14.28%';
+
+    // ========= SHADOWING =========
+    const shadowingText = "The twenty first century has ushered in an era of unprecedented change in the world of work. Automation, artificial intelligence, and globalization are reshaping industries at a pace that demands continuous adaptation. The concept of a single career for life has become obsolete, replaced by a reality in which workers must constantly acquire new skills to remain relevant. This shift places enormous responsibility on educational systems to prepare students not just for specific jobs but for lifelong learning itself. The question is no longer whether technology will change how we work but whether our education systems can evolve quickly enough to keep pace.";
+
+    function initShadowing() {
+      const container = document.getElementById('shadowing-text');
+      const words = shadowingText.match(/\S+/g) || [];
+      container.innerHTML = words.map((w, i) => `<span class="shadowing-word" id="word-${i}">${w}</span>`).join(' ');
+    }
+
+    const shadowingAudio = document.getElementById('shadowingAudio');
+    let speaking = false, audioFallback = false, paceInterval = null, currentSpeed = 1;
+    let timerInterval = null, timerSeconds = 0;
+    const shadowingTS = [
+      {word:"The",start:0.3,end:0.387},{word:"twenty",start:0.387,end:0.587},{word:"first",start:0.587,end:0.787},{word:"century",start:0.787,end:1.175},{word:"has",start:1.175,end:1.287},{word:"ushered",start:1.287,end:1.6},{word:"in",start:1.6,end:1.687},{word:"an",start:1.687,end:1.75},{word:"era",start:1.75,end:2.025},{word:"of",start:2.025,end:2.1},{word:"unprecedented",start:2.1,end:2.575},{word:"change",start:2.575,end:2.9},{word:"in",start:2.9,end:2.975},{word:"the",start:2.975,end:3.05},{word:"world",start:3.05,end:3.425},{word:"of",start:3.425,end:3.5},{word:"work",start:3.5,end:4.025},{word:"Automation",start:4.025,end:4.575},{word:"artificial",start:4.575,end:4.887},{word:"intelligence",start:4.887,end:5.475},{word:"and",start:5.475,end:5.575},{word:"globalization",start:5.575,end:6.175},{word:"are",start:6.175,end:6.275},{word:"reshaping",start:6.275,end:6.725},{word:"industries",start:6.725,end:7.225},{word:"at",start:7.225,end:7.3},{word:"a",start:7.3,end:7.35},{word:"pace",start:7.35,end:7.725},{word:"that",start:7.725,end:7.825},{word:"demands",start:7.825,end:8.175},{word:"continuous",start:8.175,end:8.575},{word:"adaptation",start:8.575,end:9.25},{word:"The",start:9.25,end:9.35},{word:"concept",start:9.35,end:9.75},{word:"of",start:9.75,end:9.825},{word:"a",start:9.825,end:9.875},{word:"single",start:9.875,end:10.25},{word:"career",start:10.25,end:10.65},{word:"for",start:10.65,end:10.75},{word:"life",start:10.75,end:11.125},{word:"has",start:11.125,end:11.225},{word:"become",start:11.225,end:11.575},{word:"obsolete",start:11.575,end:12.075},{word:"replaced",start:12.075,end:12.5},{word:"by",start:12.5,end:12.6},{word:"a",start:12.6,end:12.65},{word:"reality",start:12.65,end:13.125},{word:"in",start:13.125,end:13.2},{word:"which",start:13.2,end:13.475},{word:"workers",start:13.475,end:13.875},{word:"must",start:13.875,end:14.075},{word:"constantly",start:14.075,end:14.55},{word:"acquire",start:14.55,end:14.925},{word:"new",start:14.925,end:15.125},{word:"skills",start:15.125,end:15.5},{word:"to",start:15.5,end:15.6},{word:"remain",start:15.6,end:15.95},{word:"relevant",start:15.95,end:16.55},{word:"This",start:16.55,end:16.75},{word:"shift",start:16.75,end:17.075},{word:"places",start:17.075,end:17.425},{word:"enormous",start:17.425,end:17.9},{word:"responsibility",start:17.9,end:18.575},{word:"on",start:18.575,end:18.65},{word:"educational",start:18.65,end:19.15},{word:"systems",start:19.15,end:19.55},{word:"to",start:19.55,end:19.65},{word:"prepare",start:19.65,end:20.05},{word:"students",start:20.05,end:20.525},{word:"not",start:20.525,end:20.625},{word:"just",start:20.625,end:20.8},{word:"for",start:20.8,end:20.9},{word:"specific",start:20.9,end:21.325},{word:"jobs",start:21.325,end:21.7},{word:"but",start:21.7,end:21.8},{word:"for",start:21.8,end:21.9},{word:"lifelong",start:21.9,end:22.35},{word:"learning",start:22.35,end:22.75},{word:"itself",start:22.75,end:23.325},{word:"The",start:23.325,end:23.425},{word:"question",start:23.425,end:23.85},{word:"is",start:23.85,end:23.925},{word:"no",start:23.925,end:24.125},{word:"longer",start:24.125,end:24.525},{word:"whether",start:24.525,end:24.875},{word:"technology",start:24.875,end:25.35},{word:"will",start:25.35,end:25.475},{word:"change",start:25.475,end:25.85},{word:"how",start:25.85,end:26.025},{word:"we",start:26.025,end:26.1},{word:"work",start:26.1,end:26.55},{word:"but",start:26.55,end:26.675},{word:"whether",start:26.675,end:27.05},{word:"our",start:27.05,end:27.175},{word:"education",start:27.175,end:27.675},{word:"systems",start:27.675,end:28.075},{word:"can",start:28.075,end:28.175},{word:"evolve",start:28.175,end:28.575},{word:"quickly",start:28.575,end:28.975},{word:"enough",start:28.975,end:29.4},{word:"to",start:29.4,end:29.5},{word:"keep",start:29.5,end:29.85},{word:"pace",start:29.85,end:30.5}
+    ];
+
+    shadowingAudio.ontimeupdate = () => {
+      if (!shadowingTS || !speaking) return;
+      const t = shadowingAudio.currentTime;
+      let lo = 0, hi = shadowingTS.length - 1;
+      while (lo < hi) { const mid = (lo + hi + 1) >> 1; if (shadowingTS[mid].start <= t) lo = mid; else hi = mid - 1; }
+      document.querySelectorAll('.shadowing-word').forEach(w => w.classList.remove('highlighted'));
+      const el = document.getElementById(`word-${lo}`);
+      if (el) { el.classList.add('highlighted'); el.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }
+    };
+    shadowingAudio.onended = () => { speaking = false; document.querySelector('.listen-btn').textContent = '🔊 Listen'; document.querySelectorAll('.shadowing-word').forEach(w => w.classList.remove('highlighted')); stopSimulatedWaveform(); };
+    shadowingAudio.onerror = () => { audioFallback = true; };
+
+    function toggleShadowingTimer() {
+      const btn = document.getElementById('btn-timer');
+      if (timerInterval) { clearInterval(timerInterval); timerInterval = null; btn.innerHTML = '▶ Resume'; }
+      else {
+        btn.innerHTML = '⏸ Pause';
+        timerInterval = setInterval(() => {
+          timerSeconds++;
+          const mins = String(Math.floor(timerSeconds / 60)).padStart(2, '0');
+          const secs = String(timerSeconds % 60).padStart(2, '0');
+          document.getElementById('shadowing-timer').textContent = `${mins}:${secs}`;
+        }, 1000);
+      }
+    }
+    function resetShadowingTimer() {
+      clearInterval(timerInterval); timerInterval = null; timerSeconds = 0;
+      document.getElementById('shadowing-timer').textContent = '00:00';
+      document.getElementById('btn-timer').innerHTML = '▶ Start Timer';
+      if (paceInterval) { clearInterval(paceInterval); paceInterval = null; }
+      document.querySelectorAll('.shadowing-word').forEach(w => w.classList.remove('highlighted'));
+    }
+
+    document.getElementById('speedSelect').addEventListener('change', function() {
+      currentSpeed = parseFloat(this.value);
+      if (speaking) shadowingAudio.playbackRate = currentSpeed;
+    });
+
+    function ttsFallback() {
+      const text = Array.from(document.querySelectorAll('.shadowing-word')).map(w => w.textContent).join(' ');
+      if (!text.trim()) return;
+      const u = new SpeechSynthesisUtterance(text);
+      u.lang = 'en-US'; u.rate = 0.85;
+      u.onstart = () => { speaking = true; document.querySelector('.listen-btn').textContent = '■ Stop'; };
+      u.onend = u.onerror = () => { speaking = false; document.querySelector('.listen-btn').textContent = '🔊 Listen'; };
+      speechSynthesis.speak(u);
+    }
+
+    function toggleSpeaking() {
+      if (speaking) {
+        shadowingAudio.pause(); shadowingAudio.currentTime = 0; speechSynthesis.cancel();
+        speaking = false; document.querySelector('.listen-btn').textContent = '🔊 Listen';
+        document.querySelectorAll('.shadowing-word').forEach(w => w.classList.remove('highlighted'));
+        stopSimulatedWaveform(); return;
+      }
+      audioFallback = false;
+      shadowingAudio.src = 'audio/shadowing.wav?' + Date.now();
+      shadowingAudio.playbackRate = currentSpeed;
+      speaking = true;
+      document.querySelector('.listen-btn').textContent = '■ Stop';
+      if (paceInterval) { clearInterval(paceInterval); paceInterval = null; }
+      startSimulatedWaveform(document.getElementById('waveCanvas'));
+      shadowingAudio.play().catch(() => { audioFallback = true; speaking = false; document.querySelector('.listen-btn').textContent = '🔊 Listen'; stopSimulatedWaveform(); ttsFallback(); });
+    }
+
+    initShadowing();
+
+    let guideOscId = null;
+    function startSimulatedWaveform(canvas) {
+      stopSimulatedWaveform();
+      const ctx = canvas.getContext('2d');
+      const width = canvas.width, height = canvas.height;
+      let phase = 0;
+      function draw() {
+        guideOscId = requestAnimationFrame(draw);
+        ctx.fillStyle = 'rgba(9, 13, 22, 0.3)';
+        ctx.fillRect(0, 0, width, height);
+        ctx.lineWidth = 3; ctx.strokeStyle = '#8b5cf6'; ctx.shadowColor = '#8b5cf6'; ctx.shadowBlur = 8;
+        ctx.beginPath(); ctx.moveTo(0, height / 2);
+        for (let x = 0; x < width; x++) {
+          const y = height / 2 + Math.sin(x * 0.03 + phase) * 14 * Math.sin(x * 0.004) + Math.sin(x * 0.07 - phase * 1.3) * 4 * Math.cos(x * 0.008);
+          ctx.lineTo(x, y);
+        }
+        ctx.stroke(); ctx.shadowBlur = 0; phase += 0.12;
+      }
+      draw();
+    }
+    function stopSimulatedWaveform() { if (guideOscId) { cancelAnimationFrame(guideOscId); guideOscId = null; } }
+
+    function playBeep(freq = 800, dur = 150, count = 1) {
+      try {
+        for (let i = 0; i < count; i++) {
+          setTimeout(() => {
+            const ctx = new (window.AudioContext || window.webkitAudioContext)();
+            const osc = ctx.createOscillator(); const gain = ctx.createGain();
+            osc.connect(gain); gain.connect(ctx.destination);
+            osc.frequency.value = freq; osc.type = 'sine';
+            gain.gain.setValueAtTime(0.2, ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + dur / 1000);
+            osc.start(); osc.stop(ctx.currentTime + dur / 1000);
+          }, i * 200);
+        }
+      } catch(e) {}
+    }
+
+    // ========= SHADOWING RECORDER =========
+    let mediaRecorder = null, recordedChunks = [], audioBlobUrl = null, accuracyRecognition = null, accuracySpokenText = '';
+    document.getElementById('startRecord').addEventListener('click', async () => {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        mediaRecorder = new MediaRecorder(stream); recordedChunks = []; accuracySpokenText = '';
+        const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+        if (SR) {
+          accuracyRecognition = new SR(); accuracyRecognition.lang = 'en-US'; accuracyRecognition.continuous = true; accuracyRecognition.interimResults = false;
+          accuracyRecognition.onresult = (e) => { for (let i = e.resultIndex; i < e.results.length; i++) if (e.results[i].isFinal) accuracySpokenText += e.results[i][0].transcript + ' '; };
+          accuracyRecognition.onerror = () => {};
+          try { accuracyRecognition.start(); } catch(e) {}
+        }
+        mediaRecorder.ondataavailable = (e) => { if (e.data.size > 0) recordedChunks.push(e.data); };
+        mediaRecorder.onstop = () => {
+          const blob = new Blob(recordedChunks, { type: 'audio/webm' });
+          audioBlobUrl = URL.createObjectURL(blob);
+          document.getElementById('playRecord').disabled = false;
+          document.getElementById('recStatus').textContent = '✅ Saved';
+          document.getElementById('startRecord').textContent = '🎤 Record Again';
+          stream.getTracks().forEach(t => t.stop());
+        };
+        mediaRecorder.start();
+        document.getElementById('startRecord').disabled = true; document.getElementById('stopRecord').disabled = false;
+        document.getElementById('recStatus').textContent = '🔴 Recording...';
+      } catch(e) { document.getElementById('recStatus').textContent = '⚠️ Mic access denied'; }
+    });
+    document.getElementById('stopRecord').addEventListener('click', () => {
+      if (mediaRecorder && mediaRecorder.state === 'recording') mediaRecorder.stop();
+      if (accuracyRecognition) { try { accuracyRecognition.stop(); } catch(e){} accuracyRecognition = null; }
+      document.getElementById('startRecord').disabled = false; document.getElementById('stopRecord').disabled = true;
+      setTimeout(() => { if (accuracySpokenText.trim()) computeValeriaAccuracy(accuracySpokenText.trim()); }, 500);
+    });
+    document.getElementById('playRecord').addEventListener('click', () => {
+      if (audioBlobUrl) { const audio = new Audio(audioBlobUrl); audio.play(); document.getElementById('recStatus').textContent = '▶️ Playing...'; audio.onended = () => { document.getElementById('recStatus').textContent = '✅ Done'; }; }
+    });
+
+    function computeValeriaAccuracy(transcript) {
+      const targetNorm = (typeof shadowingText !== 'undefined' ? shadowingText : '').toLowerCase().replace(/[^a-z\s]/g,'').split(/\s+/).filter(Boolean);
+      const spokenNorm = transcript.toLowerCase().replace(/[^a-z\s]/g,'').split(/\s+/).filter(Boolean);
+      const aligned = lcsAlignValeria(targetNorm, spokenNorm);
+      const matched = aligned.filter(x => x.match).length;
+      const pct = targetNorm.length > 0 ? Math.round((matched / targetNorm.length) * 100) : 0;
+      showValeriaAccuracy(pct, aligned);
+    }
+    function lcsAlignValeria(target, spoken) {
+      const m = target.length, n = spoken.length;
+      const dp = Array.from({length: m + 1}, () => new Array(n + 1).fill(0));
+      for (let i = 1; i <= m; i++) for (let j = 1; j <= n; j++) dp[i][j] = target[i-1] === spoken[j-1] ? dp[i-1][j-1] + 1 : Math.max(dp[i-1][j], dp[i][j-1]);
+      let i = m, j = n; const result = [];
+      while (i > 0 && j > 0) {
+        if (target[i-1] === spoken[j-1]) { result.unshift({ word: target[i-1], match: true }); i--; j--; }
+        else if (dp[i-1][j] >= dp[i][j-1]) { result.unshift({ word: target[i-1], match: false }); i--; }
+        else j--;
+      }
+      while (i > 0) { result.unshift({ word: target[i-1], match: false }); i--; }
+      return result;
+    }
+    function showValeriaAccuracy(pct, aligned) {
+      const card = document.getElementById('accuracyCard'); const sec = document.getElementById('accuracySection');
+      if (!card || !sec) return;
+      card.style.display = 'block'; card.classList.add('visible');
+      const circumference = 220;
+      const offset = Math.round((1 - Math.min(pct, 100) / 100) * circumference);
+      const color = pct >= 80 ? 'var(--primary)' : pct >= 60 ? 'var(--accent-amber)' : 'var(--accent-red)';
+      let wordsHtml = '';
+      if (aligned && aligned.length > 0) {
+        wordsHtml = aligned.slice(0, 60).map(w => `<span class="accuracy-word ${w.match ? 'correct' : 'missed'}">${w.word}</span>`).join('');
+        if (aligned.length > 60) wordsHtml += `<span style="color:var(--text-muted);font-size:12px;"> …+${aligned.length - 60} more</span>`;
+      }
+      sec.innerHTML = `<div class="gauge-wrap"><svg width="90" height="90" viewBox="0 0 90 90"><circle cx="45" cy="45" r="35" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="8"/><circle cx="45" cy="45" r="35" fill="none" stroke="${color}" stroke-width="8" stroke-dasharray="${circumference}" stroke-dashoffset="${circumference}" stroke-linecap="round" transform="rotate(-90 45 45)" style="transition:stroke-dashoffset 1.2s ease;" id="gaugeCircle"/></svg><div class="gauge-pct" style="color:${color};">${pct}%</div><div class="gauge-label">Accuracy</div></div><div class="accuracy-words">${wordsHtml || '<span style="color:var(--text-muted)">Transcript not available.</span>'}</div>`;
+      setTimeout(() => { const c = document.getElementById('gaugeCircle'); if (c) c.style.strokeDashoffset = offset; }, 80);
+    }
+
+    function autoHighlightWords() {
+      document.querySelectorAll('.shadowing-word').forEach(w => w.classList.remove('highlighted'));
+      let currentWordIndex = 0;
+      const totalWords = (shadowingText.match(/\S+/g) || []).length;
+      if (paceInterval) clearInterval(paceInterval);
+      paceInterval = setInterval(() => {
+        if (currentWordIndex >= totalWords) { clearInterval(paceInterval); return; }
+        document.querySelectorAll('.shadowing-word').forEach(w => w.classList.remove('highlighted'));
+        const wordEl = document.getElementById(`word-${currentWordIndex}`);
+        if (wordEl) { wordEl.classList.add('highlighted'); wordEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }
+        currentWordIndex++;
+      }, 500);
+    }
+
+    // ========= READING TIMER =========
+    let readingInterval = null;
+    function runReadingClock() {
+      if (readingInterval) clearInterval(readingInterval);
+      playBeep(400, 100);
+      let t = 1080; const el = document.getElementById('reading-time'); const box = document.getElementById('readingTimerBox');
+      el.style.color = 'var(--primary)'; box.classList.add('active-timer'); box.classList.remove('warning');
+      readingInterval = setInterval(() => {
+        t--;
+        const m = String(Math.floor(t / 60)).padStart(2, '0');
+        const s = String(t % 60).padStart(2, '0');
+        el.textContent = `${m}:${s}`;
+        if (t <= 120) { el.style.color = 'var(--accent-red)'; box.classList.add('warning'); }
+        if (t <= 0) { clearInterval(readingInterval); playBeep(800, 200, 2); el.textContent = '00:00'; box.classList.remove('active-timer'); }
+      }, 1000);
+    }
+    function resetReadingClock() {
+      clearInterval(readingInterval); readingInterval = null;
+      document.getElementById('reading-time').textContent = '18:00';
+      const box = document.getElementById('readingTimerBox');
+      box.classList.remove('active-timer', 'warning');
+      document.getElementById('reading-time').style.color = 'var(--primary)';
+    }
+
+    // ========= LISTENING REVEAL =========
+    let savedListeningNotes = '';
+    function revealListeningQuestions() {
+      savedListeningNotes = document.getElementById('listening-notes').value;
+      document.getElementById('listening-phase-1').classList.remove('phase-visible');
+      document.getElementById('listening-phase-1').classList.add('phase-hidden');
+      document.getElementById('listening-phase-2').classList.remove('phase-hidden');
+      document.getElementById('listening-phase-2').classList.add('phase-visible');
+      if (savedListeningNotes.trim()) {
+        const notesDisplay = document.createElement('div');
+        notesDisplay.className = 'passage-box';
+        notesDisplay.style.marginBottom = '0.75rem';
+        notesDisplay.innerHTML = '<p style="color:var(--text-muted);font-size:0.82rem;font-weight:600;margin-bottom:0.5rem;">📝 Your Notes</p><p style="white-space:pre-wrap;">' + savedListeningNotes.replace(/</g, '&lt;').replace(/>/g, '&gt;') + '</p>';
+        document.getElementById('listening-phase-2').querySelector('.card').prepend(notesDisplay);
+      }
+    }
+
+    // ========= WRITING TIMER =========
+    let writeInterval = null;
+    function runWritingClock() {
+      if (writeInterval) clearInterval(writeInterval);
+      playBeep(400, 100);
+      let t = 600; const el = document.getElementById('writing-time'); const box = document.getElementById('writingTimerBox');
+      el.style.color = 'var(--primary)'; box.classList.add('active-timer'); box.classList.remove('warning');
+      writeInterval = setInterval(() => {
+        t--;
+        const m = String(Math.floor(t / 60)).padStart(2, '0');
+        const s = String(t % 60).padStart(2, '0');
+        el.textContent = `${m}:${s}`;
+        if (t <= 60) { el.style.color = 'var(--accent-red)'; box.classList.add('warning'); }
+        if (t <= 0) { clearInterval(writeInterval); playBeep(800, 200, 2); el.textContent = '00:00'; box.classList.remove('active-timer'); }
+      }, 1000);
+    }
+    function resetWritingClock() {
+      clearInterval(writeInterval); writeInterval = null;
+      document.getElementById('writing-time').textContent = '10:00';
+      const box = document.getElementById('writingTimerBox');
+      box.classList.remove('active-timer', 'warning');
+      document.getElementById('writing-time').style.color = 'var(--primary)';
+    }
+
+    // ========= INTERVIEW TIMERS =========
+    const intTimers = {};
+    function startInterviewTimer(num) {
+      if (intTimers[num]) clearInterval(intTimers[num]);
+      playBeep(400, 100);
+      let t = 45; const el = document.getElementById(`int-timer-${num}`);
+      el.style.color = 'var(--accent-cyan)'; el.textContent = '00:45';
+      const ind = document.getElementById(`int-ind-${num}`);
+      if (ind) { ind.classList.add('recording'); ind.classList.remove('off'); ind.innerHTML = '<span class="rec-dot"></span> ● REC'; }
+      intTimers[num] = setInterval(() => {
+        t--;
+        el.textContent = `00:${String(t).padStart(2, '0')}`;
+        if (t <= 10) el.style.color = 'var(--accent-red)';
+        if (t <= 0) {
+          clearInterval(intTimers[num]); playBeep(800, 200, 2);
+          el.textContent = '00:00'; el.style.color = 'var(--accent-red)';
+          if (ind) { ind.classList.remove('recording'); ind.classList.add('off'); ind.innerHTML = '<span class="rec-dot"></span> OFF'; }
+        }
+      }, 1000);
+    }
+    function resetInterviewTimer(num) {
+      if (intTimers[num]) { clearInterval(intTimers[num]); intTimers[num] = null; }
+      const el = document.getElementById(`int-timer-${num}`);
+      el.textContent = '00:45'; el.style.color = 'var(--accent-cyan)';
+      const ind = document.getElementById(`int-ind-${num}`);
+      if (ind) { ind.classList.remove('recording'); ind.classList.add('off'); ind.innerHTML = '<span class="rec-dot"></span> OFF'; }
+    }
+
+    // ========= CAMPUS TIMER (30s prep → 60s speak) — REMOVED (old TOEFL format) =========
+
+    // ========= LECTURE TIMER (20s prep → 60s speak) — REMOVED (old TOEFL format) =========
+
+    // ========= WRITING WORD COUNTER =========
+    document.addEventListener('input', function(e) {
+      if (e.target.matches('#writing-area')) {
+        const text = e.target.value.trim();
+        const words = text ? text.split(/\s+/).length : 0;
+        const counter = document.getElementById('wordCount');
+        if (counter) counter.textContent = words;
+      }
+    });
+
+    // ========= ERROR LOG =========
+    function addNoteToTable() {
+      const val = document.getElementById('live-notepad').value.trim(); if (!val) return;
+      const lines = val.split('\n');
+      const table = document.getElementById('correction-table').getElementsByTagName('tbody')[0];
+      const newRow = table.insertRow(0);
+      newRow.insertCell(0).textContent = lines[0] || "";
+      const cell2 = newRow.insertCell(1); cell2.textContent = lines[1] || "Pending review..."; cell2.style.color = "var(--accent-green)";
+      newRow.insertCell(2).innerHTML = `<span class="badge-exam">Mock</span>`;
+      document.getElementById('live-notepad').value = "";
+    }
+    function clearNotepad() { document.getElementById('live-notepad').value = ""; }
+
+    // ========= INTERVIEW RECORDERS =========
+    for (let q = 1; q <= 4; q++) {
+      (function(qNum) {
+        let rec = null, chunks = [], blobUrl = null;
+        const recBtn = document.getElementById(`int-rec-${qNum}`);
+        const stopBtn = document.getElementById(`int-stop-${qNum}`);
+        const playBtn = document.getElementById(`int-play-${qNum}`);
+        recBtn.addEventListener('click', async () => {
+          try {
+            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+            rec = new MediaRecorder(stream); chunks = [];
+            rec.ondataavailable = (e) => { if (e.data.size > 0) chunks.push(e.data); };
+            rec.onstop = () => {
+              const blob = new Blob(chunks, { type: 'audio/webm' });
+              blobUrl = URL.createObjectURL(blob);
+              playBtn.disabled = false;
+              recBtn.textContent = '🎤 Again';
+              stream.getTracks().forEach(t => t.stop());
+              recBtn.classList.remove('recording');
+            };
+            rec.start();
+            recBtn.disabled = true; stopBtn.disabled = false;
+            recBtn.classList.add('recording');
+          } catch(e) {}
+        });
+        stopBtn.addEventListener('click', () => {
+          if (rec && rec.state === 'recording') { rec.stop(); recBtn.disabled = false; stopBtn.disabled = true; }
+        });
+        playBtn.addEventListener('click', () => {
+          if (blobUrl) { const audio = new Audio(blobUrl); audio.play(); }
+        });
+      })(q);
+    }
+
+    // ========= CAMPUS + LECTURE RECORDERS — REMOVED (old TOEFL format) =========
+
+    // ========= LR (LISTEN & REPEAT) — MODEL PLAYBACK + RECORDERS =========
+    const lrTimestamps = {
+      1: [{w:"The",s:0.0,e:0.18},{w:"rapid",s:0.18,e:0.52},{w:"advancement",s:0.52,e:1.1},{w:"of",s:1.1,e:1.2},{w:"artificial",s:1.2,e:1.72},{w:"intelligence",s:1.72,e:2.28},{w:"is",s:2.28,e:2.38},{w:"reshaping",s:2.38,e:2.88},{w:"global",s:2.88,e:3.22},{w:"economic",s:3.22,e:3.7},{w:"structures",s:3.7,e:4.26}],
+      2: [{w:"Researchers",s:0.0,e:0.56},{w:"have",s:0.56,e:0.7},{w:"developed",s:0.7,e:1.18},{w:"new",s:1.18,e:1.36},{w:"models",s:1.36,e:1.76},{w:"that",s:1.76,e:1.88},{w:"predict",s:1.88,e:2.26},{w:"climate",s:2.26,e:2.7},{w:"patterns",s:2.7,e:3.16},{w:"with",s:3.16,e:3.3},{w:"remarkable",s:3.3,e:3.86},{w:"accuracy",s:3.86,e:4.4}],
+      3: [{w:"Universities",s:0.0,e:0.72},{w:"around",s:0.72,e:1.0},{w:"the",s:1.0,e:1.1},{w:"world",s:1.1,e:1.38},{w:"are",s:1.38,e:1.5},{w:"adapting",s:1.5,e:1.98},{w:"their",s:1.98,e:2.14},{w:"curricula",s:2.14,e:2.64},{w:"to",s:2.64,e:2.74},{w:"meet",s:2.74,e:2.96},{w:"the",s:2.96,e:3.06},{w:"demands",s:3.06,e:3.46},{w:"of",s:3.46,e:3.56},{w:"a",s:3.56,e:3.62},{w:"digital",s:3.62,e:4.02},{w:"economy",s:4.02,e:4.54}],
+      4: [{w:"The",s:0.0,e:0.12},{w:"experiment",s:0.12,e:0.72},{w:"yielded",s:0.72,e:1.12},{w:"surprising",s:1.12,e:1.66},{w:"results",s:1.66,e:2.08},{w:"that",s:2.08,e:2.2},{w:"challenged",s:2.2,e:2.72},{w:"the",s:2.72,e:2.82},{w:"researchers'",s:2.82,e:3.38},{w:"initial",s:3.38,e:3.82},{w:"hypotheses",s:3.82,e:4.44}],
+      5: [{w:"Understanding",s:0.0,e:0.72},{w:"the",s:0.72,e:0.82},{w:"relationship",s:0.82,e:1.42},{w:"between",s:1.42,e:1.74},{w:"technology",s:1.74,e:2.3},{w:"and",s:2.3,e:2.4},{w:"society",s:2.4,e:2.84},{w:"requires",s:2.84,e:3.26},{w:"interdisciplinary",s:3.26,e:4.1},{w:"collaboration",s:4.1,e:4.78}],
+      6: [{w:"The",s:0.0,e:0.12},{w:"findings",s:0.12,e:0.58},{w:"suggest",s:0.58,e:1.0},{w:"that",s:1.0,e:1.12},{w:"conventional",s:1.12,e:1.72},{w:"approaches",s:1.72,e:2.26},{w:"may",s:2.26,e:2.4},{w:"be",s:2.4,e:2.52},{w:"insufficient",s:2.52,e:3.14},{w:"to",s:3.14,e:3.24},{w:"address",s:3.24,e:3.66},{w:"this",s:3.66,e:3.8},{w:"complex",s:3.8,e:4.22},{w:"issue",s:4.22,e:4.62}],
+      7: [{w:"Collaborative",s:0.0,e:0.72},{w:"research",s:0.72,e:1.16},{w:"across",s:1.16,e:1.52},{w:"disciplines",s:1.52,e:2.1},{w:"has",s:2.1,e:2.22},{w:"become",s:2.22,e:2.56},{w:"essential",s:2.56,e:3.04},{w:"for",s:3.04,e:3.16},{w:"solving",s:3.16,e:3.56},{w:"today's",s:3.56,e:3.92},{w:"most",s:3.92,e:4.1},{w:"pressing",s:4.1,e:4.52},{w:"challenges",s:4.52,e:5.1}]
+    };
+
+    // Wrap each LR text in word spans for highlighting
+    for (let n = 1; n <= 7; n++) {
+      const el = document.getElementById(`lr-text-${n}`);
+      if (!el) continue;
+      const words = el.textContent.trim().split(/\s+/);
+      el.innerHTML = words.map((w, i) => `<span class="lr-word" data-i="${i}">${w}</span>`).join(' ');
+    }
+
+    let lrActiveAudio = null, lrActiveN = null, lrHighlightTimers = [];
+
+    function clearLRHighlight() {
+      lrHighlightTimers.forEach(t => clearTimeout(t));
+      lrHighlightTimers = [];
+      if (lrActiveN) {
+        const prev = document.getElementById(`lr-text-${lrActiveN}`);
+        if (prev) prev.querySelectorAll('.lr-word').forEach(s => s.classList.remove('highlight'));
+        const card = prev?.closest('.lr-sentence');
+        if (card) card.classList.remove('playing');
+        const btn = document.querySelector(`.lr-sentence[data-n="${lrActiveN}"] .lr-play-model`);
+        if (btn) btn.classList.remove('active');
+      }
+    }
+
+    function playLRModel(n) {
+      if (lrActiveAudio) { lrActiveAudio.pause(); lrActiveAudio = null; clearLRHighlight(); }
+      const ts = lrTimestamps[n];
+      if (!ts) return;
+      const card = document.querySelector(`.lr-sentence[data-n="${n}"]`);
+      const textEl = document.getElementById(`lr-text-${n}`);
+      const btn = card?.querySelector('.lr-play-model');
+      if (!textEl || !btn) return;
+
+      // Highlight on first word immediately
+      clearLRHighlight();
+      lrActiveN = n;
+      card?.classList.add('playing');
+      btn.classList.add('active');
+
+      // Schedule word highlights
+      const words = textEl.querySelectorAll('.lr-word');
+      ts.forEach((t, i) => {
+        const delay = t.s * 1000;
+        lrHighlightTimers.push(setTimeout(() => {
+          words.forEach(s => s.classList.remove('highlight'));
+          if (words[i]) words[i].classList.add('highlight');
+        }, delay));
+      });
+      // Clear highlight after last word ends
+      const lastEnd = ts[ts.length - 1].e;
+      lrHighlightTimers.push(setTimeout(() => {
+        words.forEach(s => s.classList.remove('highlight'));
+        card?.classList.remove('playing');
+        btn.classList.remove('active');
+        lrActiveN = null;
+      }, lastEnd * 1000 + 300));
+
+      // Play the WAV file
+      lrActiveAudio = new Audio(`audio/lr-${n}.wav`);
+      lrActiveAudio.play().catch(() => {});
+    }
+
+    // ========= LR RECORDERS =========
+    for (let q = 1; q <= 7; q++) {
+      (function(qNum) {
+        let rec = null, chunks = [], blobUrl = null;
+        const recBtn = document.getElementById(`lr-rec-${qNum}`);
+        const playBtn = document.getElementById(`lr-play-${qNum}`);
+        const statusEl = document.getElementById(`lr-status-${qNum}`);
+        if (!recBtn || !playBtn) return;
+        recBtn.addEventListener('click', async () => {
+          try {
+            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+            rec = new MediaRecorder(stream); chunks = [];
+            rec.ondataavailable = (e) => { if (e.data.size > 0) chunks.push(e.data); };
+            rec.onstop = () => {
+              const blob = new Blob(chunks, { type: 'audio/webm' });
+              blobUrl = URL.createObjectURL(blob);
+              playBtn.disabled = false;
+              recBtn.textContent = '🎤 Again';
+              if (statusEl) { statusEl.textContent = '✓ Recorded'; statusEl.className = 'lr-status'; }
+              stream.getTracks().forEach(t => t.stop());
+              recBtn.classList.remove('recording');
+            };
+            rec.start();
+            recBtn.disabled = true;
+            recBtn.classList.add('recording');
+            recBtn.textContent = '⏹ Stop';
+            if (statusEl) { statusEl.textContent = 'Recording...'; statusEl.className = 'lr-status recording'; }
+            setTimeout(() => {
+              if (rec && rec.state === 'recording') { rec.stop(); recBtn.disabled = false; recBtn.textContent = '🎤 Again'; }
+            }, 12000);
+          } catch(e) {}
+        });
+        playBtn.addEventListener('click', () => {
+          if (blobUrl) { const audio = new Audio(blobUrl); audio.play(); }
+        });
+      })(q);
+    }
+  </script>
+</body>
+</html>

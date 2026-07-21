@@ -1,0 +1,72 @@
+[
+  {
+    "word": "The",
+    "start": 0.25,
+    "end": 0.325
+  },
+  {
+    "word": "findings",
+    "start": 0.325,
+    "end": 0.85
+  },
+  {
+    "word": "suggest",
+    "start": 0.85,
+    "end": 1.337
+  },
+  {
+    "word": "that",
+    "start": 1.337,
+    "end": 1.475
+  },
+  {
+    "word": "conventional",
+    "start": 1.475,
+    "end": 2.087
+  },
+  {
+    "word": "approaches",
+    "start": 2.087,
+    "end": 2.987
+  },
+  {
+    "word": "may",
+    "start": 2.987,
+    "end": 3.163
+  },
+  {
+    "word": "be",
+    "start": 3.163,
+    "end": 3.3
+  },
+  {
+    "word": "insufficient",
+    "start": 3.3,
+    "end": 4.0
+  },
+  {
+    "word": "to",
+    "start": 4.0,
+    "end": 4.125
+  },
+  {
+    "word": "address",
+    "start": 4.125,
+    "end": 4.475
+  },
+  {
+    "word": "this",
+    "start": 4.475,
+    "end": 4.675
+  },
+  {
+    "word": "complex",
+    "start": 4.675,
+    "end": 5.2
+  },
+  {
+    "word": "issue",
+    "start": 5.2,
+    "end": 6.25
+  }
+]

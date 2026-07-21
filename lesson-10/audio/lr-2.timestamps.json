@@ -1,0 +1,62 @@
+[
+  {
+    "word": "Researchers",
+    "start": 0.25,
+    "end": 0.9
+  },
+  {
+    "word": "have",
+    "start": 0.9,
+    "end": 1.075
+  },
+  {
+    "word": "developed",
+    "start": 1.075,
+    "end": 1.562
+  },
+  {
+    "word": "new",
+    "start": 1.562,
+    "end": 1.75
+  },
+  {
+    "word": "models",
+    "start": 1.75,
+    "end": 2.375
+  },
+  {
+    "word": "that",
+    "start": 2.375,
+    "end": 2.525
+  },
+  {
+    "word": "predict",
+    "start": 2.525,
+    "end": 2.925
+  },
+  {
+    "word": "climate",
+    "start": 2.925,
+    "end": 3.275
+  },
+  {
+    "word": "patterns",
+    "start": 3.275,
+    "end": 3.9
+  },
+  {
+    "word": "with",
+    "start": 3.9,
+    "end": 4.05
+  },
+  {
+    "word": "remarkable",
+    "start": 4.05,
+    "end": 4.625
+  },
+  {
+    "word": "accuracy",
+    "start": 4.625,
+    "end": 5.875
+  }
+]

@@ -1,0 +1,479 @@
+[
+  {
+    "sentence": 1,
+    "text": "The rapid advancement of artificial intelligence is reshaping global economic structures.",
+    "timestamps": [
+      {
+        "word": "The",
+        "start": 0.25,
+        "end": 0.35
+      },
+      {
+        "word": "rapid",
+        "start": 0.35,
+        "end": 0.713
+      },
+      {
+        "word": "advancement",
+        "start": 0.713,
+        "end": 1.363
+      },
+      {
+        "word": "of",
+        "start": 1.363,
+        "end": 1.45
+      },
+      {
+        "word": "artificial",
+        "start": 1.45,
+        "end": 2.038
+      },
+      {
+        "word": "intelligence",
+        "start": 2.038,
+        "end": 3.05
+      },
+      {
+        "word": "is",
+        "start": 3.05,
+        "end": 3.225
+      },
+      {
+        "word": "reshaping",
+        "start": 3.225,
+        "end": 3.8
+      },
+      {
+        "word": "global",
+        "start": 3.8,
+        "end": 4.25
+      },
+      {
+        "word": "economic",
+        "start": 4.25,
+        "end": 4.75
+      },
+      {
+        "word": "structures",
+        "start": 4.75,
+        "end": 6.025
+      }
+    ]
+  },
+  {
+    "sentence": 2,
+    "text": "Researchers have developed new models that predict climate patterns with remarkable accuracy.",
+    "timestamps": [
+      {
+        "word": "Researchers",
+        "start": 0.25,
+        "end": 0.9
+      },
+      {
+        "word": "have",
+        "start": 0.9,
+        "end": 1.075
+      },
+      {
+        "word": "developed",
+        "start": 1.075,
+        "end": 1.562
+      },
+      {
+        "word": "new",
+        "start": 1.562,
+        "end": 1.75
+      },
+      {
+        "word": "models",
+        "start": 1.75,
+        "end": 2.375
+      },
+      {
+        "word": "that",
+        "start": 2.375,
+        "end": 2.525
+      },
+      {
+        "word": "predict",
+        "start": 2.525,
+        "end": 2.925
+      },
+      {
+        "word": "climate",
+        "start": 2.925,
+        "end": 3.275
+      },
+      {
+        "word": "patterns",
+        "start": 3.275,
+        "end": 3.9
+      },
+      {
+        "word": "with",
+        "start": 3.9,
+        "end": 4.05
+      },
+      {
+        "word": "remarkable",
+        "start": 4.05,
+        "end": 4.625
+      },
+      {
+        "word": "accuracy",
+        "start": 4.625,
+        "end": 5.875
+      }
+    ]
+  },
+  {
+    "sentence": 3,
+    "text": "Universities around the world are adapting their curricula to meet the demands of a digital economy.",
+    "timestamps": [
+      {
+        "word": "Universities",
+        "start": 0.275,
+        "end": 1.0
+      },
+      {
+        "word": "around",
+        "start": 1.0,
+        "end": 1.288
+      },
+      {
+        "word": "the",
+        "start": 1.288,
+        "end": 1.375
+      },
+      {
+        "word": "world",
+        "start": 1.375,
+        "end": 1.887
+      },
+      {
+        "word": "are",
+        "start": 1.887,
+        "end": 2.025
+      },
+      {
+        "word": "adapting",
+        "start": 2.025,
+        "end": 2.525
+      },
+      {
+        "word": "their",
+        "start": 2.525,
+        "end": 2.725
+      },
+      {
+        "word": "curricula",
+        "start": 2.725,
+        "end": 3.6
+      },
+      {
+        "word": "to",
+        "start": 3.6,
+        "end": 3.75
+      },
+      {
+        "word": "meet",
+        "start": 3.75,
+        "end": 3.938
+      },
+      {
+        "word": "the",
+        "start": 3.938,
+        "end": 4.025
+      },
+      {
+        "word": "demands",
+        "start": 4.025,
+        "end": 4.537
+      },
+      {
+        "word": "of",
+        "start": 4.537,
+        "end": 4.612
+      },
+      {
+        "word": "a",
+        "start": 4.612,
+        "end": 4.675
+      },
+      {
+        "word": "digital",
+        "start": 4.675,
+        "end": 5.075
+      },
+      {
+        "word": "economy",
+        "start": 5.075,
+        "end": 6.325
+      }
+    ]
+  },
+  {
+    "sentence": 4,
+    "text": "The experiment yielded surprising results that challenged the researchers' initial hypotheses.",
+    "timestamps": [
+      {
+        "word": "The",
+        "start": 0.25,
+        "end": 0.375
+      },
+      {
+        "word": "experiment",
+        "start": 0.375,
+        "end": 1.087
+      },
+      {
+        "word": "yielded",
+        "start": 1.087,
+        "end": 1.475
+      },
+      {
+        "word": "surprising",
+        "start": 1.475,
+        "end": 2.1
+      },
+      {
+        "word": "results",
+        "start": 2.1,
+        "end": 2.875
+      },
+      {
+        "word": "that",
+        "start": 2.875,
+        "end": 3.038
+      },
+      {
+        "word": "challenged",
+        "start": 3.038,
+        "end": 3.513
+      },
+      {
+        "word": "the",
+        "start": 3.513,
+        "end": 3.6
+      },
+      {
+        "word": "researchers'",
+        "start": 3.6,
+        "end": 4.275
+      },
+      {
+        "word": "initial",
+        "start": 4.275,
+        "end": 4.675
+      },
+      {
+        "word": "hypotheses",
+        "start": 4.675,
+        "end": 6.2
+      }
+    ]
+  },
+  {
+    "sentence": 5,
+    "text": "Understanding the relationship between technology and society requires interdisciplinary collaboration.",
+    "timestamps": [
+      {
+        "word": "Understanding",
+        "start": 0.25,
+        "end": 0.912
+      },
+      {
+        "word": "the",
+        "start": 0.912,
+        "end": 1.0
+      },
+      {
+        "word": "relationship",
+        "start": 1.0,
+        "end": 1.75
+      },
+      {
+        "word": "between",
+        "start": 1.75,
+        "end": 2.075
+      },
+      {
+        "word": "technology",
+        "start": 2.075,
+        "end": 2.75
+      },
+      {
+        "word": "and",
+        "start": 2.75,
+        "end": 2.875
+      },
+      {
+        "word": "society",
+        "start": 2.875,
+        "end": 3.85
+      },
+      {
+        "word": "requires",
+        "start": 3.85,
+        "end": 4.45
+      },
+      {
+        "word": "interdisciplinary",
+        "start": 4.45,
+        "end": 5.325
+      },
+      {
+        "word": "collaboration",
+        "start": 5.325,
+        "end": 6.825
+      }
+    ]
+  },
+  {
+    "sentence": 6,
+    "text": "The findings suggest that conventional approaches may be insufficient to address this complex issue.",
+    "timestamps": [
+      {
+        "word": "The",
+        "start": 0.25,
+        "end": 0.325
+      },
+      {
+        "word": "findings",
+        "start": 0.325,
+        "end": 0.85
+      },
+      {
+        "word": "suggest",
+        "start": 0.85,
+        "end": 1.337
+      },
+      {
+        "word": "that",
+        "start": 1.337,
+        "end": 1.475
+      },
+      {
+        "word": "conventional",
+        "start": 1.475,
+        "end": 2.087
+      },
+      {
+        "word": "approaches",
+        "start": 2.087,
+        "end": 2.987
+      },
+      {
+        "word": "may",
+        "start": 2.987,
+        "end": 3.163
+      },
+      {
+        "word": "be",
+        "start": 3.163,
+        "end": 3.3
+      },
+      {
+        "word": "insufficient",
+        "start": 3.3,
+        "end": 4.0
+      },
+      {
+        "word": "to",
+        "start": 4.0,
+        "end": 4.125
+      },
+      {
+        "word": "address",
+        "start": 4.125,
+        "end": 4.475
+      },
+      {
+        "word": "this",
+        "start": 4.475,
+        "end": 4.675
+      },
+      {
+        "word": "complex",
+        "start": 4.675,
+        "end": 5.2
+      },
+      {
+        "word": "issue",
+        "start": 5.2,
+        "end": 6.25
+      }
+    ]
+  },
+  {
+    "sentence": 7,
+    "text": "Collaborative research across disciplines has become essential for solving today's most pressing challenges.",
+    "timestamps": [
+      {
+        "word": "Collaborative",
+        "start": 0.25,
+        "end": 0.825
+      },
+      {
+        "word": "research",
+        "start": 0.825,
+        "end": 1.325
+      },
+      {
+        "word": "across",
+        "start": 1.325,
+        "end": 1.675
+      },
+      {
+        "word": "disciplines",
+        "start": 1.675,
+        "end": 2.663
+      },
+      {
+        "word": "has",
+        "start": 2.663,
+        "end": 2.85
+      },
+      {
+        "word": "become",
+        "start": 2.85,
+        "end": 3.138
+      },
+      {
+        "word": "essential",
+        "start": 3.138,
+        "end": 3.625
+      },
+      {
+        "word": "for",
+        "start": 3.625,
+        "end": 3.75
+      },
+      {
+        "word": "solving",
+        "start": 3.75,
+        "end": 4.15
+      },
+      {
+        "word": "today's",
+        "start": 4.15,
+        "end": 4.575
+      },
+      {
+        "word": "most",
+        "start": 4.575,
+        "end": 4.8
+      },
+      {
+        "word": "pressing",
+        "start": 4.8,
+        "end": 5.2
+      },
+      {
+        "word": "challenges",
+        "start": 5.2,
+        "end": 6.55
+      }
+    ]
+  }
+]

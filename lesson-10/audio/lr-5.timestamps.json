@@ -1,0 +1,52 @@
+[
+  {
+    "word": "Understanding",
+    "start": 0.25,
+    "end": 0.912
+  },
+  {
+    "word": "the",
+    "start": 0.912,
+    "end": 1.0
+  },
+  {
+    "word": "relationship",
+    "start": 1.0,
+    "end": 1.75
+  },
+  {
+    "word": "between",
+    "start": 1.75,
+    "end": 2.075
+  },
+  {
+    "word": "technology",
+    "start": 2.075,
+    "end": 2.75
+  },
+  {
+    "word": "and",
+    "start": 2.75,
+    "end": 2.875
+  },
+  {
+    "word": "society",
+    "start": 2.875,
+    "end": 3.85
+  },
+  {
+    "word": "requires",
+    "start": 3.85,
+    "end": 4.45
+  },
+  {
+    "word": "interdisciplinary",
+    "start": 4.45,
+    "end": 5.325
+  },
+  {
+    "word": "collaboration",
+    "start": 5.325,
+    "end": 6.825
+  }
+]

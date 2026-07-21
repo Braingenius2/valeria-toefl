@@ -1,0 +1,57 @@
+[
+  {
+    "word": "The",
+    "start": 0.25,
+    "end": 0.35
+  },
+  {
+    "word": "rapid",
+    "start": 0.35,
+    "end": 0.713
+  },
+  {
+    "word": "advancement",
+    "start": 0.713,
+    "end": 1.363
+  },
+  {
+    "word": "of",
+    "start": 1.363,
+    "end": 1.45
+  },
+  {
+    "word": "artificial",
+    "start": 1.45,
+    "end": 2.038
+  },
+  {
+    "word": "intelligence",
+    "start": 2.038,
+    "end": 3.05
+  },
+  {
+    "word": "is",
+    "start": 3.05,
+    "end": 3.225
+  },
+  {
+    "word": "reshaping",
+    "start": 3.225,
+    "end": 3.8
+  },
+  {
+    "word": "global",
+    "start": 3.8,
+    "end": 4.25
+  },
+  {
+    "word": "economic",
+    "start": 4.25,
+    "end": 4.75
+  },
+  {
+    "word": "structures",
+    "start": 4.75,
+    "end": 6.025
+  }
+]
