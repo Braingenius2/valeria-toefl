@@ -1,0 +1,1322 @@
+[
+  {
+    "word": "Today",
+    "start": 0.25,
+    "end": 0.55
+  },
+  {
+    "word": "we're",
+    "start": 0.55,
+    "end": 0.675
+  },
+  {
+    "word": "going",
+    "start": 0.675,
+    "end": 0.9
+  },
+  {
+    "word": "to",
+    "start": 0.9,
+    "end": 1.025
+  },
+  {
+    "word": "look",
+    "start": 1.025,
+    "end": 1.262
+  },
+  {
+    "word": "at",
+    "start": 1.262,
+    "end": 1.4
+  },
+  {
+    "word": "how",
+    "start": 1.4,
+    "end": 1.587
+  },
+  {
+    "word": "color",
+    "start": 1.587,
+    "end": 1.95
+  },
+  {
+    "word": "influences",
+    "start": 1.95,
+    "end": 2.6
+  },
+  {
+    "word": "consumer",
+    "start": 2.6,
+    "end": 3.1
+  },
+  {
+    "word": "behavior",
+    "start": 3.1,
+    "end": 4.025
+  },
+  {
+    "word": "a",
+    "start": 4.025,
+    "end": 4.138
+  },
+  {
+    "word": "field",
+    "start": 4.138,
+    "end": 4.45
+  },
+  {
+    "word": "known",
+    "start": 4.45,
+    "end": 4.713
+  },
+  {
+    "word": "as",
+    "start": 4.713,
+    "end": 4.888
+  },
+  {
+    "word": "color",
+    "start": 4.888,
+    "end": 5.25
+  },
+  {
+    "word": "psychology",
+    "start": 5.25,
+    "end": 6.375
+  },
+  {
+    "word": "While",
+    "start": 6.375,
+    "end": 6.562
+  },
+  {
+    "word": "the",
+    "start": 6.562,
+    "end": 6.7
+  },
+  {
+    "word": "effects",
+    "start": 6.7,
+    "end": 7.037
+  },
+  {
+    "word": "of",
+    "start": 7.037,
+    "end": 7.15
+  },
+  {
+    "word": "color",
+    "start": 7.15,
+    "end": 7.5
+  },
+  {
+    "word": "are",
+    "start": 7.5,
+    "end": 7.662
+  },
+  {
+    "word": "often",
+    "start": 7.662,
+    "end": 8.075
+  },
+  {
+    "word": "subtle",
+    "start": 8.075,
+    "end": 8.775
+  },
+  {
+    "word": "research",
+    "start": 8.775,
+    "end": 9.238
+  },
+  {
+    "word": "shows",
+    "start": 9.238,
+    "end": 9.912
+  },
+  {
+    "word": "that",
+    "start": 9.912,
+    "end": 10.062
+  },
+  {
+    "word": "up",
+    "start": 10.062,
+    "end": 10.225
+  },
+  {
+    "word": "to",
+    "start": 10.225,
+    "end": 10.35
+  },
+  {
+    "word": "ninety",
+    "start": 10.35,
+    "end": 10.725
+  },
+  {
+    "word": "percent",
+    "start": 10.725,
+    "end": 11.088
+  },
+  {
+    "word": "of",
+    "start": 11.088,
+    "end": 11.213
+  },
+  {
+    "word": "snap",
+    "start": 11.213,
+    "end": 11.588
+  },
+  {
+    "word": "judgments",
+    "start": 11.588,
+    "end": 12.05
+  },
+  {
+    "word": "about",
+    "start": 12.05,
+    "end": 12.325
+  },
+  {
+    "word": "products",
+    "start": 12.325,
+    "end": 13.113
+  },
+  {
+    "word": "can",
+    "start": 13.113,
+    "end": 13.287
+  },
+  {
+    "word": "be",
+    "start": 13.287,
+    "end": 13.425
+  },
+  {
+    "word": "based",
+    "start": 13.425,
+    "end": 13.75
+  },
+  {
+    "word": "on",
+    "start": 13.75,
+    "end": 13.963
+  },
+  {
+    "word": "color",
+    "start": 13.963,
+    "end": 14.3
+  },
+  {
+    "word": "alone",
+    "start": 14.3,
+    "end": 15.213
+  },
+  {
+    "word": "Different",
+    "start": 15.213,
+    "end": 15.525
+  },
+  {
+    "word": "colors",
+    "start": 15.525,
+    "end": 15.988
+  },
+  {
+    "word": "tend",
+    "start": 15.988,
+    "end": 16.275
+  },
+  {
+    "word": "to",
+    "start": 16.275,
+    "end": 16.4
+  },
+  {
+    "word": "evoke",
+    "start": 16.4,
+    "end": 16.788
+  },
+  {
+    "word": "different",
+    "start": 16.788,
+    "end": 17.125
+  },
+  {
+    "word": "psychological",
+    "start": 17.125,
+    "end": 17.85
+  },
+  {
+    "word": "responses",
+    "start": 17.85,
+    "end": 19.113
+  },
+  {
+    "word": "Red",
+    "start": 19.113,
+    "end": 19.55
+  },
+  {
+    "word": "for",
+    "start": 19.55,
+    "end": 19.675
+  },
+  {
+    "word": "instance",
+    "start": 19.675,
+    "end": 20.512
+  },
+  {
+    "word": "creates",
+    "start": 20.512,
+    "end": 20.887
+  },
+  {
+    "word": "a",
+    "start": 20.887,
+    "end": 20.988
+  },
+  {
+    "word": "sense",
+    "start": 20.988,
+    "end": 21.312
+  },
+  {
+    "word": "of",
+    "start": 21.312,
+    "end": 21.425
+  },
+  {
+    "word": "urgency",
+    "start": 21.425,
+    "end": 22.35
+  },
+  {
+    "word": "and",
+    "start": 22.35,
+    "end": 22.488
+  },
+  {
+    "word": "is",
+    "start": 22.488,
+    "end": 22.637
+  },
+  {
+    "word": "commonly",
+    "start": 22.637,
+    "end": 23.137
+  },
+  {
+    "word": "used",
+    "start": 23.137,
+    "end": 23.575
+  },
+  {
+    "word": "in",
+    "start": 23.575,
+    "end": 23.725
+  },
+  {
+    "word": "clearance",
+    "start": 23.725,
+    "end": 24.137
+  },
+  {
+    "word": "sales",
+    "start": 24.137,
+    "end": 25.188
+  },
+  {
+    "word": "It",
+    "start": 25.5,
+    "end": 25.587
+  },
+  {
+    "word": "also",
+    "start": 25.587,
+    "end": 25.95
+  },
+  {
+    "word": "increases",
+    "start": 25.95,
+    "end": 26.525
+  },
+  {
+    "word": "heart",
+    "start": 26.525,
+    "end": 26.8
+  },
+  {
+    "word": "rate",
+    "start": 26.8,
+    "end": 27.075
+  },
+  {
+    "word": "and",
+    "start": 27.075,
+    "end": 27.2
+  },
+  {
+    "word": "appetite",
+    "start": 27.2,
+    "end": 28.1
+  },
+  {
+    "word": "which",
+    "start": 28.1,
+    "end": 28.287
+  },
+  {
+    "word": "is",
+    "start": 28.287,
+    "end": 28.4
+  },
+  {
+    "word": "why",
+    "start": 28.4,
+    "end": 28.537
+  },
+  {
+    "word": "it",
+    "start": 28.537,
+    "end": 28.612
+  },
+  {
+    "word": "appears",
+    "start": 28.612,
+    "end": 29.05
+  },
+  {
+    "word": "in",
+    "start": 29.05,
+    "end": 29.212
+  },
+  {
+    "word": "so",
+    "start": 29.212,
+    "end": 29.425
+  },
+  {
+    "word": "many",
+    "start": 29.425,
+    "end": 29.65
+  },
+  {
+    "word": "restaurant",
+    "start": 29.65,
+    "end": 30.075
+  },
+  {
+    "word": "logos",
+    "start": 30.075,
+    "end": 31.037
+  },
+  {
+    "word": "Blue",
+    "start": 31.037,
+    "end": 31.4
+  },
+  {
+    "word": "in",
+    "start": 31.4,
+    "end": 31.55
+  },
+  {
+    "word": "contrast",
+    "start": 31.55,
+    "end": 32.4
+  },
+  {
+    "word": "is",
+    "start": 32.4,
+    "end": 32.525
+  },
+  {
+    "word": "associated",
+    "start": 32.525,
+    "end": 33.188
+  },
+  {
+    "word": "with",
+    "start": 33.188,
+    "end": 33.362
+  },
+  {
+    "word": "trust",
+    "start": 33.362,
+    "end": 33.875
+  },
+  {
+    "word": "security",
+    "start": 33.875,
+    "end": 34.438
+  },
+  {
+    "word": "and",
+    "start": 34.438,
+    "end": 34.55
+  },
+  {
+    "word": "professionalism",
+    "start": 34.55,
+    "end": 35.675
+  },
+  {
+    "word": "which",
+    "start": 35.675,
+    "end": 35.862
+  },
+  {
+    "word": "explains",
+    "start": 35.862,
+    "end": 36.337
+  },
+  {
+    "word": "its",
+    "start": 36.337,
+    "end": 36.525
+  },
+  {
+    "word": "dominance",
+    "start": 36.525,
+    "end": 37.037
+  },
+  {
+    "word": "in",
+    "start": 37.037,
+    "end": 37.112
+  },
+  {
+    "word": "the",
+    "start": 37.112,
+    "end": 37.2
+  },
+  {
+    "word": "banking",
+    "start": 37.2,
+    "end": 37.612
+  },
+  {
+    "word": "and",
+    "start": 37.612,
+    "end": 37.725
+  },
+  {
+    "word": "technology",
+    "start": 37.725,
+    "end": 38.325
+  },
+  {
+    "word": "sectors",
+    "start": 38.325,
+    "end": 39.225
+  },
+  {
+    "word": "However",
+    "start": 39.225,
+    "end": 39.7
+  },
+  {
+    "word": "color",
+    "start": 39.7,
+    "end": 40.013
+  },
+  {
+    "word": "associations",
+    "start": 40.013,
+    "end": 40.8
+  },
+  {
+    "word": "are",
+    "start": 40.8,
+    "end": 40.9
+  },
+  {
+    "word": "not",
+    "start": 40.9,
+    "end": 41.125
+  },
+  {
+    "word": "universal",
+    "start": 41.125,
+    "end": 42.1
+  },
+  {
+    "word": "They",
+    "start": 42.1,
+    "end": 42.275
+  },
+  {
+    "word": "vary",
+    "start": 42.275,
+    "end": 42.55
+  },
+  {
+    "word": "significantly",
+    "start": 42.55,
+    "end": 43.225
+  },
+  {
+    "word": "across",
+    "start": 43.225,
+    "end": 43.575
+  },
+  {
+    "word": "cultures",
+    "start": 43.575,
+    "end": 44.562
+  },
+  {
+    "word": "In",
+    "start": 44.562,
+    "end": 44.7
+  },
+  {
+    "word": "Western",
+    "start": 44.7,
+    "end": 45.125
+  },
+  {
+    "word": "countries",
+    "start": 45.125,
+    "end": 45.925
+  },
+  {
+    "word": "white",
+    "start": 45.925,
+    "end": 46.237
+  },
+  {
+    "word": "symbolizes",
+    "start": 46.237,
+    "end": 46.938
+  },
+  {
+    "word": "purity",
+    "start": 46.938,
+    "end": 47.65
+  },
+  {
+    "word": "and",
+    "start": 47.65,
+    "end": 47.787
+  },
+  {
+    "word": "is",
+    "start": 47.787,
+    "end": 47.925
+  },
+  {
+    "word": "commonly",
+    "start": 47.925,
+    "end": 48.35
+  },
+  {
+    "word": "used",
+    "start": 48.35,
+    "end": 48.7
+  },
+  {
+    "word": "in",
+    "start": 48.7,
+    "end": 48.85
+  },
+  {
+    "word": "weddings",
+    "start": 48.85,
+    "end": 49.812
+  },
+  {
+    "word": "In",
+    "start": 49.812,
+    "end": 49.95
+  },
+  {
+    "word": "parts",
+    "start": 49.95,
+    "end": 50.237
+  },
+  {
+    "word": "of",
+    "start": 50.237,
+    "end": 50.325
+  },
+  {
+    "word": "Asia",
+    "start": 50.325,
+    "end": 51.025
+  },
+  {
+    "word": "white",
+    "start": 51.025,
+    "end": 51.3
+  },
+  {
+    "word": "is",
+    "start": 51.3,
+    "end": 51.45
+  },
+  {
+    "word": "traditionally",
+    "start": 51.45,
+    "end": 52.075
+  },
+  {
+    "word": "associated",
+    "start": 52.075,
+    "end": 52.825
+  },
+  {
+    "word": "with",
+    "start": 52.825,
+    "end": 53.013
+  },
+  {
+    "word": "mourning",
+    "start": 53.013,
+    "end": 53.513
+  },
+  {
+    "word": "and",
+    "start": 53.513,
+    "end": 53.662
+  },
+  {
+    "word": "funerals",
+    "start": 53.662,
+    "end": 54.787
+  },
+  {
+    "word": "Similarly",
+    "start": 55.125,
+    "end": 55.8
+  },
+  {
+    "word": "green",
+    "start": 55.8,
+    "end": 56.125
+  },
+  {
+    "word": "may",
+    "start": 56.125,
+    "end": 56.275
+  },
+  {
+    "word": "represent",
+    "start": 56.275,
+    "end": 56.75
+  },
+  {
+    "word": "environmental",
+    "start": 56.75,
+    "end": 57.475
+  },
+  {
+    "word": "consciousness",
+    "start": 57.475,
+    "end": 58.337
+  },
+  {
+    "word": "in",
+    "start": 58.337,
+    "end": 58.5
+  },
+  {
+    "word": "one",
+    "start": 58.5,
+    "end": 58.725
+  },
+  {
+    "word": "context",
+    "start": 58.725,
+    "end": 59.513
+  },
+  {
+    "word": "but",
+    "start": 59.513,
+    "end": 59.675
+  },
+  {
+    "word": "wealth",
+    "start": 59.675,
+    "end": 59.975
+  },
+  {
+    "word": "and",
+    "start": 59.975,
+    "end": 60.112
+  },
+  {
+    "word": "status",
+    "start": 60.112,
+    "end": 60.638
+  },
+  {
+    "word": "in",
+    "start": 60.638,
+    "end": 60.775
+  },
+  {
+    "word": "another",
+    "start": 60.775,
+    "end": 61.7
+  },
+  {
+    "word": "The",
+    "start": 61.7,
+    "end": 61.8
+  },
+  {
+    "word": "strategic",
+    "start": 61.8,
+    "end": 62.275
+  },
+  {
+    "word": "use",
+    "start": 62.275,
+    "end": 62.487
+  },
+  {
+    "word": "of",
+    "start": 62.487,
+    "end": 62.575
+  },
+  {
+    "word": "color",
+    "start": 62.575,
+    "end": 63.013
+  },
+  {
+    "word": "extends",
+    "start": 63.013,
+    "end": 63.5
+  },
+  {
+    "word": "beyond",
+    "start": 63.5,
+    "end": 63.9
+  },
+  {
+    "word": "logos",
+    "start": 63.9,
+    "end": 64.4
+  },
+  {
+    "word": "to",
+    "start": 64.4,
+    "end": 64.487
+  },
+  {
+    "word": "the",
+    "start": 64.487,
+    "end": 64.625
+  },
+  {
+    "word": "entire",
+    "start": 64.625,
+    "end": 65.1
+  },
+  {
+    "word": "retail",
+    "start": 65.1,
+    "end": 65.463
+  },
+  {
+    "word": "environment",
+    "start": 65.463,
+    "end": 66.537
+  },
+  {
+    "word": "Studies",
+    "start": 66.537,
+    "end": 66.912
+  },
+  {
+    "word": "have",
+    "start": 66.912,
+    "end": 67.025
+  },
+  {
+    "word": "found",
+    "start": 67.025,
+    "end": 67.287
+  },
+  {
+    "word": "that",
+    "start": 67.287,
+    "end": 67.438
+  },
+  {
+    "word": "warm-colored",
+    "start": 67.438,
+    "end": 68.062
+  },
+  {
+    "word": "environments",
+    "start": 68.062,
+    "end": 69.025
+  },
+  {
+    "word": "those",
+    "start": 69.025,
+    "end": 69.3
+  },
+  {
+    "word": "with",
+    "start": 69.3,
+    "end": 69.487
+  },
+  {
+    "word": "reds",
+    "start": 69.487,
+    "end": 70.1
+  },
+  {
+    "word": "oranges",
+    "start": 70.1,
+    "end": 70.562
+  },
+  {
+    "word": "and",
+    "start": 70.562,
+    "end": 70.675
+  },
+  {
+    "word": "yellows",
+    "start": 70.675,
+    "end": 71.475
+  },
+  {
+    "word": "tend",
+    "start": 71.475,
+    "end": 71.688
+  },
+  {
+    "word": "to",
+    "start": 71.688,
+    "end": 71.8
+  },
+  {
+    "word": "encourage",
+    "start": 71.8,
+    "end": 72.3
+  },
+  {
+    "word": "impulse",
+    "start": 72.3,
+    "end": 72.75
+  },
+  {
+    "word": "buying",
+    "start": 72.75,
+    "end": 73.5
+  },
+  {
+    "word": "while",
+    "start": 73.5,
+    "end": 73.725
+  },
+  {
+    "word": "cool-colored",
+    "start": 73.725,
+    "end": 74.312
+  },
+  {
+    "word": "environments",
+    "start": 74.312,
+    "end": 74.9
+  },
+  {
+    "word": "with",
+    "start": 74.9,
+    "end": 75.088
+  },
+  {
+    "word": "blues",
+    "start": 75.088,
+    "end": 75.5
+  },
+  {
+    "word": "and",
+    "start": 75.5,
+    "end": 75.625
+  },
+  {
+    "word": "greens",
+    "start": 75.625,
+    "end": 76.425
+  },
+  {
+    "word": "encourage",
+    "start": 76.425,
+    "end": 76.987
+  },
+  {
+    "word": "more",
+    "start": 76.987,
+    "end": 77.25
+  },
+  {
+    "word": "thoughtful",
+    "start": 77.25,
+    "end": 77.825
+  },
+  {
+    "word": "deliberate",
+    "start": 77.825,
+    "end": 78.3
+  },
+  {
+    "word": "purchasing",
+    "start": 78.3,
+    "end": 78.825
+  },
+  {
+    "word": "decisions",
+    "start": 78.825,
+    "end": 79.912
+  },
+  {
+    "word": "Critics",
+    "start": 79.912,
+    "end": 80.325
+  },
+  {
+    "word": "of",
+    "start": 80.325,
+    "end": 80.45
+  },
+  {
+    "word": "color",
+    "start": 80.45,
+    "end": 80.812
+  },
+  {
+    "word": "psychology",
+    "start": 80.812,
+    "end": 81.45
+  },
+  {
+    "word": "caution",
+    "start": 81.45,
+    "end": 82.175
+  },
+  {
+    "word": "against",
+    "start": 82.175,
+    "end": 82.6
+  },
+  {
+    "word": "oversimplification",
+    "start": 82.6,
+    "end": 84.263
+  },
+  {
+    "word": "The",
+    "start": 84.575,
+    "end": 84.7
+  },
+  {
+    "word": "impact",
+    "start": 84.7,
+    "end": 85.137
+  },
+  {
+    "word": "of",
+    "start": 85.137,
+    "end": 85.25
+  },
+  {
+    "word": "any",
+    "start": 85.25,
+    "end": 85.45
+  },
+  {
+    "word": "given",
+    "start": 85.45,
+    "end": 85.75
+  },
+  {
+    "word": "color",
+    "start": 85.75,
+    "end": 86.312
+  },
+  {
+    "word": "depends",
+    "start": 86.312,
+    "end": 86.762
+  },
+  {
+    "word": "on",
+    "start": 86.762,
+    "end": 86.95
+  },
+  {
+    "word": "numerous",
+    "start": 86.95,
+    "end": 87.375
+  },
+  {
+    "word": "factors",
+    "start": 87.375,
+    "end": 87.912
+  },
+  {
+    "word": "including",
+    "start": 87.912,
+    "end": 88.387
+  },
+  {
+    "word": "the",
+    "start": 88.387,
+    "end": 88.475
+  },
+  {
+    "word": "specific",
+    "start": 88.475,
+    "end": 88.987
+  },
+  {
+    "word": "shade",
+    "start": 88.987,
+    "end": 89.725
+  },
+  {
+    "word": "the",
+    "start": 89.725,
+    "end": 89.825
+  },
+  {
+    "word": "product",
+    "start": 89.825,
+    "end": 90.2
+  },
+  {
+    "word": "category",
+    "start": 90.2,
+    "end": 91.15
+  },
+  {
+    "word": "the",
+    "start": 91.15,
+    "end": 91.25
+  },
+  {
+    "word": "target",
+    "start": 91.25,
+    "end": 91.625
+  },
+  {
+    "word": "demographic",
+    "start": 91.625,
+    "end": 92.675
+  },
+  {
+    "word": "and",
+    "start": 92.675,
+    "end": 92.787
+  },
+  {
+    "word": "the",
+    "start": 92.787,
+    "end": 92.875
+  },
+  {
+    "word": "broader",
+    "start": 92.875,
+    "end": 93.275
+  },
+  {
+    "word": "marketing",
+    "start": 93.275,
+    "end": 93.725
+  },
+  {
+    "word": "context",
+    "start": 93.725,
+    "end": 94.962
+  },
+  {
+    "word": "A",
+    "start": 94.962,
+    "end": 95.075
+  },
+  {
+    "word": "color",
+    "start": 95.075,
+    "end": 95.425
+  },
+  {
+    "word": "that",
+    "start": 95.425,
+    "end": 95.575
+  },
+  {
+    "word": "works",
+    "start": 95.575,
+    "end": 95.9
+  },
+  {
+    "word": "for",
+    "start": 95.9,
+    "end": 96.012
+  },
+  {
+    "word": "a",
+    "start": 96.012,
+    "end": 96.112
+  },
+  {
+    "word": "children's",
+    "start": 96.112,
+    "end": 96.6
+  },
+  {
+    "word": "toy",
+    "start": 96.6,
+    "end": 96.875
+  },
+  {
+    "word": "brand",
+    "start": 96.875,
+    "end": 97.575
+  },
+  {
+    "word": "may",
+    "start": 97.575,
+    "end": 97.75
+  },
+  {
+    "word": "be",
+    "start": 97.75,
+    "end": 97.9
+  },
+  {
+    "word": "entirely",
+    "start": 97.9,
+    "end": 98.5
+  },
+  {
+    "word": "inappropriate",
+    "start": 98.5,
+    "end": 99.262
+  },
+  {
+    "word": "for",
+    "start": 99.262,
+    "end": 99.4
+  },
+  {
+    "word": "a",
+    "start": 99.4,
+    "end": 99.5
+  },
+  {
+    "word": "luxury",
+    "start": 99.5,
+    "end": 100.012
+  },
+  {
+    "word": "automotive",
+    "start": 100.012,
+    "end": 100.6
+  },
+  {
+    "word": "brand",
+    "start": 100.6,
+    "end": 101.637
+  },
+  {
+    "word": "Nonetheless",
+    "start": 101.637,
+    "end": 102.55
+  },
+  {
+    "word": "understanding",
+    "start": 102.55,
+    "end": 103.225
+  },
+  {
+    "word": "the",
+    "start": 103.225,
+    "end": 103.337
+  },
+  {
+    "word": "basic",
+    "start": 103.337,
+    "end": 103.775
+  },
+  {
+    "word": "principles",
+    "start": 103.775,
+    "end": 104.337
+  },
+  {
+    "word": "of",
+    "start": 104.337,
+    "end": 104.45
+  },
+  {
+    "word": "color",
+    "start": 104.45,
+    "end": 104.8
+  },
+  {
+    "word": "psychology",
+    "start": 104.8,
+    "end": 105.775
+  },
+  {
+    "word": "provides",
+    "start": 105.775,
+    "end": 106.3
+  },
+  {
+    "word": "marketers",
+    "start": 106.3,
+    "end": 107.05
+  },
+  {
+    "word": "with",
+    "start": 107.05,
+    "end": 107.188
+  },
+  {
+    "word": "a",
+    "start": 107.188,
+    "end": 107.287
+  },
+  {
+    "word": "powerful",
+    "start": 107.287,
+    "end": 107.812
+  },
+  {
+    "word": "tool",
+    "start": 107.812,
+    "end": 108.462
+  },
+  {
+    "word": "for",
+    "start": 108.462,
+    "end": 108.625
+  },
+  {
+    "word": "influencing",
+    "start": 108.625,
+    "end": 109.325
+  },
+  {
+    "word": "consumer",
+    "start": 109.325,
+    "end": 109.9
+  },
+  {
+    "word": "perception",
+    "start": 109.9,
+    "end": 111.0
+  }
+]

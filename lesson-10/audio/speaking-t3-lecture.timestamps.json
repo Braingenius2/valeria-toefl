@@ -1,0 +1,597 @@
+[
+  {
+    "word": "A",
+    "start": 0.225,
+    "end": 0.3
+  },
+  {
+    "word": "classic",
+    "start": 0.3,
+    "end": 0.7
+  },
+  {
+    "word": "study",
+    "start": 0.7,
+    "end": 1.012
+  },
+  {
+    "word": "on",
+    "start": 1.012,
+    "end": 1.113
+  },
+  {
+    "word": "the",
+    "start": 1.113,
+    "end": 1.2
+  },
+  {
+    "word": "spotlight",
+    "start": 1.2,
+    "end": 1.688
+  },
+  {
+    "word": "effect",
+    "start": 1.688,
+    "end": 2.237
+  },
+  {
+    "word": "was",
+    "start": 2.237,
+    "end": 2.425
+  },
+  {
+    "word": "conducted",
+    "start": 2.425,
+    "end": 2.925
+  },
+  {
+    "word": "by",
+    "start": 2.925,
+    "end": 3.1
+  },
+  {
+    "word": "Thomas",
+    "start": 3.1,
+    "end": 3.475
+  },
+  {
+    "word": "Gilovich",
+    "start": 3.475,
+    "end": 4.35
+  },
+  {
+    "word": "and",
+    "start": 4.35,
+    "end": 4.487
+  },
+  {
+    "word": "his",
+    "start": 4.487,
+    "end": 4.65
+  },
+  {
+    "word": "colleagues",
+    "start": 4.65,
+    "end": 5.1
+  },
+  {
+    "word": "at",
+    "start": 5.1,
+    "end": 5.2
+  },
+  {
+    "word": "Cornell",
+    "start": 5.2,
+    "end": 5.6
+  },
+  {
+    "word": "University",
+    "start": 5.6,
+    "end": 6.812
+  },
+  {
+    "word": "In",
+    "start": 6.812,
+    "end": 6.95
+  },
+  {
+    "word": "this",
+    "start": 6.95,
+    "end": 7.125
+  },
+  {
+    "word": "study",
+    "start": 7.125,
+    "end": 7.8
+  },
+  {
+    "word": "individual",
+    "start": 7.8,
+    "end": 8.325
+  },
+  {
+    "word": "students",
+    "start": 8.325,
+    "end": 8.713
+  },
+  {
+    "word": "were",
+    "start": 8.713,
+    "end": 8.825
+  },
+  {
+    "word": "asked",
+    "start": 8.825,
+    "end": 9.088
+  },
+  {
+    "word": "to",
+    "start": 9.088,
+    "end": 9.175
+  },
+  {
+    "word": "put",
+    "start": 9.175,
+    "end": 9.338
+  },
+  {
+    "word": "on",
+    "start": 9.338,
+    "end": 9.438
+  },
+  {
+    "word": "a",
+    "start": 9.438,
+    "end": 9.5
+  },
+  {
+    "word": "Barry",
+    "start": 9.5,
+    "end": 9.825
+  },
+  {
+    "word": "Manilow",
+    "start": 9.825,
+    "end": 10.3
+  },
+  {
+    "word": "T-shirt",
+    "start": 10.3,
+    "end": 11.125
+  },
+  {
+    "word": "which",
+    "start": 11.125,
+    "end": 11.588
+  },
+  {
+    "word": "as",
+    "start": 11.588,
+    "end": 11.725
+  },
+  {
+    "word": "you",
+    "start": 11.725,
+    "end": 11.825
+  },
+  {
+    "word": "can",
+    "start": 11.825,
+    "end": 12.0
+  },
+  {
+    "word": "imagine",
+    "start": 12.0,
+    "end": 12.775
+  },
+  {
+    "word": "was",
+    "start": 12.775,
+    "end": 12.95
+  },
+  {
+    "word": "considered",
+    "start": 12.95,
+    "end": 13.475
+  },
+  {
+    "word": "quite",
+    "start": 13.475,
+    "end": 13.713
+  },
+  {
+    "word": "embarrassing",
+    "start": 13.713,
+    "end": 14.35
+  },
+  {
+    "word": "for",
+    "start": 14.35,
+    "end": 14.475
+  },
+  {
+    "word": "college",
+    "start": 14.475,
+    "end": 14.85
+  },
+  {
+    "word": "students",
+    "start": 14.85,
+    "end": 15.775
+  },
+  {
+    "word": "They",
+    "start": 15.775,
+    "end": 15.925
+  },
+  {
+    "word": "then",
+    "start": 15.925,
+    "end": 16.15
+  },
+  {
+    "word": "entered",
+    "start": 16.15,
+    "end": 16.488
+  },
+  {
+    "word": "a",
+    "start": 16.488,
+    "end": 16.575
+  },
+  {
+    "word": "room",
+    "start": 16.575,
+    "end": 16.875
+  },
+  {
+    "word": "with",
+    "start": 16.875,
+    "end": 17.062
+  },
+  {
+    "word": "several",
+    "start": 17.062,
+    "end": 17.425
+  },
+  {
+    "word": "other",
+    "start": 17.425,
+    "end": 17.7
+  },
+  {
+    "word": "students",
+    "start": 17.7,
+    "end": 18.712
+  },
+  {
+    "word": "After",
+    "start": 18.712,
+    "end": 18.988
+  },
+  {
+    "word": "a",
+    "start": 18.988,
+    "end": 19.05
+  },
+  {
+    "word": "few",
+    "start": 19.05,
+    "end": 19.25
+  },
+  {
+    "word": "minutes",
+    "start": 19.25,
+    "end": 19.975
+  },
+  {
+    "word": "the",
+    "start": 19.975,
+    "end": 20.1
+  },
+  {
+    "word": "student",
+    "start": 20.1,
+    "end": 20.5
+  },
+  {
+    "word": "wearing",
+    "start": 20.5,
+    "end": 20.788
+  },
+  {
+    "word": "the",
+    "start": 20.788,
+    "end": 20.887
+  },
+  {
+    "word": "T-shirt",
+    "start": 20.887,
+    "end": 21.6
+  },
+  {
+    "word": "was",
+    "start": 21.6,
+    "end": 21.788
+  },
+  {
+    "word": "asked",
+    "start": 21.788,
+    "end": 22.1
+  },
+  {
+    "word": "to",
+    "start": 22.1,
+    "end": 22.238
+  },
+  {
+    "word": "estimate",
+    "start": 22.238,
+    "end": 22.863
+  },
+  {
+    "word": "how",
+    "start": 22.863,
+    "end": 23.05
+  },
+  {
+    "word": "many",
+    "start": 23.05,
+    "end": 23.275
+  },
+  {
+    "word": "people",
+    "start": 23.275,
+    "end": 23.613
+  },
+  {
+    "word": "in",
+    "start": 23.613,
+    "end": 23.688
+  },
+  {
+    "word": "the",
+    "start": 23.688,
+    "end": 23.775
+  },
+  {
+    "word": "room",
+    "start": 23.775,
+    "end": 24.075
+  },
+  {
+    "word": "had",
+    "start": 24.075,
+    "end": 24.25
+  },
+  {
+    "word": "noticed",
+    "start": 24.25,
+    "end": 24.913
+  },
+  {
+    "word": "what",
+    "start": 24.913,
+    "end": 25.075
+  },
+  {
+    "word": "they",
+    "start": 25.075,
+    "end": 25.225
+  },
+  {
+    "word": "were",
+    "start": 25.225,
+    "end": 25.387
+  },
+  {
+    "word": "wearing",
+    "start": 25.387,
+    "end": 26.363
+  },
+  {
+    "word": "The",
+    "start": 26.675,
+    "end": 26.812
+  },
+  {
+    "word": "actual",
+    "start": 26.812,
+    "end": 27.25
+  },
+  {
+    "word": "number",
+    "start": 27.25,
+    "end": 27.537
+  },
+  {
+    "word": "of",
+    "start": 27.537,
+    "end": 27.65
+  },
+  {
+    "word": "people",
+    "start": 27.65,
+    "end": 28.025
+  },
+  {
+    "word": "who",
+    "start": 28.025,
+    "end": 28.175
+  },
+  {
+    "word": "noticed",
+    "start": 28.175,
+    "end": 28.95
+  },
+  {
+    "word": "was",
+    "start": 28.95,
+    "end": 29.212
+  },
+  {
+    "word": "far",
+    "start": 29.212,
+    "end": 29.5
+  },
+  {
+    "word": "lower",
+    "start": 29.5,
+    "end": 30.137
+  },
+  {
+    "word": "than",
+    "start": 30.137,
+    "end": 30.3
+  },
+  {
+    "word": "what",
+    "start": 30.3,
+    "end": 30.45
+  },
+  {
+    "word": "the",
+    "start": 30.45,
+    "end": 30.587
+  },
+  {
+    "word": "students",
+    "start": 30.587,
+    "end": 31.112
+  },
+  {
+    "word": "estimated",
+    "start": 31.112,
+    "end": 32.175
+  },
+  {
+    "word": "only",
+    "start": 32.175,
+    "end": 32.475
+  },
+  {
+    "word": "about",
+    "start": 32.475,
+    "end": 32.812
+  },
+  {
+    "word": "half",
+    "start": 32.812,
+    "end": 33.112
+  },
+  {
+    "word": "as",
+    "start": 33.112,
+    "end": 33.25
+  },
+  {
+    "word": "many",
+    "start": 33.25,
+    "end": 33.475
+  },
+  {
+    "word": "people",
+    "start": 33.475,
+    "end": 33.862
+  },
+  {
+    "word": "noticed",
+    "start": 33.862,
+    "end": 34.688
+  },
+  {
+    "word": "as",
+    "start": 34.688,
+    "end": 34.9
+  },
+  {
+    "word": "the",
+    "start": 34.9,
+    "end": 35.038
+  },
+  {
+    "word": "students",
+    "start": 35.038,
+    "end": 35.612
+  },
+  {
+    "word": "thought",
+    "start": 35.612,
+    "end": 36.612
+  },
+  {
+    "word": "This",
+    "start": 36.612,
+    "end": 36.888
+  },
+  {
+    "word": "demonstrates",
+    "start": 36.888,
+    "end": 37.888
+  },
+  {
+    "word": "that",
+    "start": 37.888,
+    "end": 38.05
+  },
+  {
+    "word": "we",
+    "start": 38.05,
+    "end": 38.2
+  },
+  {
+    "word": "are",
+    "start": 38.2,
+    "end": 38.3
+  },
+  {
+    "word": "not",
+    "start": 38.3,
+    "end": 38.55
+  },
+  {
+    "word": "nearly",
+    "start": 38.55,
+    "end": 38.95
+  },
+  {
+    "word": "as",
+    "start": 38.95,
+    "end": 39.1
+  },
+  {
+    "word": "conspicuous",
+    "start": 39.1,
+    "end": 40.25
+  },
+  {
+    "word": "as",
+    "start": 40.25,
+    "end": 40.425
+  },
+  {
+    "word": "we",
+    "start": 40.425,
+    "end": 40.575
+  },
+  {
+    "word": "believe",
+    "start": 40.575,
+    "end": 40.975
+  },
+  {
+    "word": "ourselves",
+    "start": 40.975,
+    "end": 41.55
+  },
+  {
+    "word": "to",
+    "start": 41.55,
+    "end": 41.675
+  },
+  {
+    "word": "be",
+    "start": 41.675,
+    "end": 42.45
+  }
+]

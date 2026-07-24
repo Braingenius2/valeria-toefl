@@ -1,0 +1,477 @@
+[
+  {
+    "word": "Did",
+    "start": 0.225,
+    "end": 0.35
+  },
+  {
+    "word": "you",
+    "start": 0.35,
+    "end": 0.475
+  },
+  {
+    "word": "see",
+    "start": 0.475,
+    "end": 0.662
+  },
+  {
+    "word": "the",
+    "start": 0.662,
+    "end": 0.812
+  },
+  {
+    "word": "email",
+    "start": 0.812,
+    "end": 1.262
+  },
+  {
+    "word": "about",
+    "start": 1.262,
+    "end": 1.512
+  },
+  {
+    "word": "the",
+    "start": 1.512,
+    "end": 1.6
+  },
+  {
+    "word": "library",
+    "start": 1.6,
+    "end": 2.087
+  },
+  {
+    "word": "hours",
+    "start": 2.087,
+    "end": 2.925
+  },
+  {
+    "word": "Yeah",
+    "start": 2.925,
+    "end": 3.163
+  },
+  {
+    "word": "I",
+    "start": 3.163,
+    "end": 3.3
+  },
+  {
+    "word": "can't",
+    "start": 3.3,
+    "end": 3.525
+  },
+  {
+    "word": "believe",
+    "start": 3.525,
+    "end": 3.812
+  },
+  {
+    "word": "they're",
+    "start": 3.812,
+    "end": 3.95
+  },
+  {
+    "word": "closing",
+    "start": 3.95,
+    "end": 4.338
+  },
+  {
+    "word": "at",
+    "start": 4.338,
+    "end": 4.425
+  },
+  {
+    "word": "9",
+    "start": 4.425,
+    "end": 4.725
+  },
+  {
+    "word": "now",
+    "start": 4.725,
+    "end": 5.3
+  },
+  {
+    "word": "I",
+    "start": 5.3,
+    "end": 5.425
+  },
+  {
+    "word": "always",
+    "start": 5.425,
+    "end": 5.763
+  },
+  {
+    "word": "study",
+    "start": 5.763,
+    "end": 6.05
+  },
+  {
+    "word": "there",
+    "start": 6.05,
+    "end": 6.213
+  },
+  {
+    "word": "until",
+    "start": 6.213,
+    "end": 6.55
+  },
+  {
+    "word": "late",
+    "start": 6.55,
+    "end": 7.162
+  },
+  {
+    "word": "Same",
+    "start": 7.162,
+    "end": 7.475
+  },
+  {
+    "word": "here",
+    "start": 7.475,
+    "end": 8.1
+  },
+  {
+    "word": "The",
+    "start": 8.1,
+    "end": 8.2
+  },
+  {
+    "word": "library",
+    "start": 8.2,
+    "end": 8.675
+  },
+  {
+    "word": "is",
+    "start": 8.675,
+    "end": 8.787
+  },
+  {
+    "word": "the",
+    "start": 8.787,
+    "end": 8.9
+  },
+  {
+    "word": "only",
+    "start": 8.9,
+    "end": 9.2
+  },
+  {
+    "word": "quiet",
+    "start": 9.2,
+    "end": 9.55
+  },
+  {
+    "word": "place",
+    "start": 9.55,
+    "end": 9.863
+  },
+  {
+    "word": "on",
+    "start": 9.863,
+    "end": 10.05
+  },
+  {
+    "word": "campus",
+    "start": 10.05,
+    "end": 10.525
+  },
+  {
+    "word": "after",
+    "start": 10.525,
+    "end": 10.762
+  },
+  {
+    "word": "my",
+    "start": 10.762,
+    "end": 10.925
+  },
+  {
+    "word": "roommate",
+    "start": 10.925,
+    "end": 11.35
+  },
+  {
+    "word": "goes",
+    "start": 11.35,
+    "end": 11.625
+  },
+  {
+    "word": "to",
+    "start": 11.625,
+    "end": 11.762
+  },
+  {
+    "word": "sleep",
+    "start": 11.762,
+    "end": 12.525
+  },
+  {
+    "word": "And",
+    "start": 12.525,
+    "end": 12.662
+  },
+  {
+    "word": "the",
+    "start": 12.662,
+    "end": 12.775
+  },
+  {
+    "word": "online",
+    "start": 12.775,
+    "end": 13.25
+  },
+  {
+    "word": "booking",
+    "start": 13.25,
+    "end": 13.6
+  },
+  {
+    "word": "system",
+    "start": 13.6,
+    "end": 14.012
+  },
+  {
+    "word": "sounds",
+    "start": 14.012,
+    "end": 14.375
+  },
+  {
+    "word": "complicated",
+    "start": 14.375,
+    "end": 15.5
+  },
+  {
+    "word": "What",
+    "start": 15.5,
+    "end": 15.637
+  },
+  {
+    "word": "if",
+    "start": 15.637,
+    "end": 15.775
+  },
+  {
+    "word": "someone",
+    "start": 15.775,
+    "end": 16.1
+  },
+  {
+    "word": "doesn't",
+    "start": 16.1,
+    "end": 16.375
+  },
+  {
+    "word": "have",
+    "start": 16.375,
+    "end": 16.6
+  },
+  {
+    "word": "reliable",
+    "start": 16.6,
+    "end": 17.2
+  },
+  {
+    "word": "internet",
+    "start": 17.2,
+    "end": 17.613
+  },
+  {
+    "word": "access",
+    "start": 17.613,
+    "end": 18.075
+  },
+  {
+    "word": "at",
+    "start": 18.075,
+    "end": 18.2
+  },
+  {
+    "word": "home",
+    "start": 18.2,
+    "end": 18.913
+  },
+  {
+    "word": "Exactly",
+    "start": 18.913,
+    "end": 19.95
+  },
+  {
+    "word": "They",
+    "start": 19.95,
+    "end": 20.137
+  },
+  {
+    "word": "say",
+    "start": 20.137,
+    "end": 20.375
+  },
+  {
+    "word": "it's",
+    "start": 20.375,
+    "end": 20.575
+  },
+  {
+    "word": "because",
+    "start": 20.575,
+    "end": 20.975
+  },
+  {
+    "word": "of",
+    "start": 20.975,
+    "end": 21.137
+  },
+  {
+    "word": "budget",
+    "start": 21.137,
+    "end": 21.512
+  },
+  {
+    "word": "cuts",
+    "start": 21.512,
+    "end": 22.175
+  },
+  {
+    "word": "but",
+    "start": 22.175,
+    "end": 22.312
+  },
+  {
+    "word": "I",
+    "start": 22.312,
+    "end": 22.4
+  },
+  {
+    "word": "think",
+    "start": 22.4,
+    "end": 22.575
+  },
+  {
+    "word": "they",
+    "start": 22.575,
+    "end": 22.725
+  },
+  {
+    "word": "should",
+    "start": 22.725,
+    "end": 22.863
+  },
+  {
+    "word": "have",
+    "start": 22.863,
+    "end": 23.012
+  },
+  {
+    "word": "asked",
+    "start": 23.012,
+    "end": 23.325
+  },
+  {
+    "word": "students",
+    "start": 23.325,
+    "end": 23.775
+  },
+  {
+    "word": "before",
+    "start": 23.775,
+    "end": 24.175
+  },
+  {
+    "word": "making",
+    "start": 24.175,
+    "end": 24.55
+  },
+  {
+    "word": "this",
+    "start": 24.55,
+    "end": 24.75
+  },
+  {
+    "word": "decision",
+    "start": 24.75,
+    "end": 25.812
+  },
+  {
+    "word": "I'm",
+    "start": 26.125,
+    "end": 26.275
+  },
+  {
+    "word": "going",
+    "start": 26.275,
+    "end": 26.5
+  },
+  {
+    "word": "to",
+    "start": 26.5,
+    "end": 26.625
+  },
+  {
+    "word": "write",
+    "start": 26.625,
+    "end": 26.925
+  },
+  {
+    "word": "to",
+    "start": 26.925,
+    "end": 27.025
+  },
+  {
+    "word": "the",
+    "start": 27.025,
+    "end": 27.15
+  },
+  {
+    "word": "student",
+    "start": 27.15,
+    "end": 27.587
+  },
+  {
+    "word": "council",
+    "start": 27.587,
+    "end": 28.075
+  },
+  {
+    "word": "about",
+    "start": 28.075,
+    "end": 28.412
+  },
+  {
+    "word": "it",
+    "start": 28.412,
+    "end": 28.962
+  },
+  {
+    "word": "Maybe",
+    "start": 28.962,
+    "end": 29.3
+  },
+  {
+    "word": "we",
+    "start": 29.3,
+    "end": 29.45
+  },
+  {
+    "word": "can",
+    "start": 29.45,
+    "end": 29.65
+  },
+  {
+    "word": "get",
+    "start": 29.65,
+    "end": 29.85
+  },
+  {
+    "word": "them",
+    "start": 29.85,
+    "end": 30.188
+  },
+  {
+    "word": "to",
+    "start": 30.188,
+    "end": 30.325
+  },
+  {
+    "word": "reconsider",
+    "start": 30.325,
+    "end": 31.55
+  }
+]
