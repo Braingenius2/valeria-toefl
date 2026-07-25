@@ -9,7 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg-dark:#090d16; --bg-card:#131a26; --border-color:#243042;
+  --bg-dark:#090d16; --border-color:#243042;
   --text-main:#f1f5f9; --text-muted:#64748b;
   --primary:#8b5cf6; --primary-hover:#7c3aed;
   --accent-cyan:#06b6d4; --accent-green:#10b981; --accent-red:#ef4444; --accent-purple:#a855f7; --accent-amber:#f59e0b;
@@ -66,8 +66,6 @@ header{position:fixed;top:0;left:0;right:0;z-index:100;height:var(--header-h);ba
 .btn-secondary:hover{background:rgba(255,255,255,0.1)}
 .btn-cyan{background:var(--accent-cyan);color:#000}
 .btn-cyan:hover{background:#0891b2}
-.btn-red{background:var(--accent-red);color:#fff}
-.btn-green{background:var(--accent-green);color:#fff}
 .btn-sm{padding:6px 12px;font-size:12px}
 
 .timer-row{display:flex;gap:12px;margin:16px 0;flex-wrap:wrap}
@@ -100,7 +98,7 @@ header{position:fixed;top:0;left:0;right:0;z-index:100;height:var(--header-h);ba
 .q-option{display:flex;align-items:flex-start;gap:0.6rem;padding:0.5rem 0.75rem;border:1px solid var(--border-color);border-radius:6px;cursor:pointer;transition:all 0.2s;background:rgba(255,255,255,0.01)}
 .q-option:hover{background:rgba(255,255,255,0.04);border-color:rgba(139,92,246,0.3)}
 .q-option.selected{border-color:var(--primary);background:rgba(139,92,246,0.08)}
-.q-option input[type="radio"]{accent-color:var(--primary);margin-top:0.15rem;flex-shrink:0}
+.q-option input[type="radio"],.q-option input[type="checkbox"]{accent-color:var(--primary);margin-top:0.15rem;flex-shrink:0}
 .q-option .opt-letter{font-family:'Fira Code',monospace;font-weight:700;color:var(--text-muted);min-width:1.2em}
 .q-option .opt-text{color:#cbd5e1;font-size:0.9rem;line-height:1.5}
 .q-item textarea{width:100%;background:#05070c;border:1px solid var(--border-color);border-radius:6px;color:var(--text-main);padding:0.5rem;font-family:inherit;font-size:0.88rem;resize:vertical;min-height:2.5rem;outline:none;transition:border-color 0.2s}
@@ -127,7 +125,6 @@ header{position:fixed;top:0;left:0;right:0;z-index:100;height:var(--header-h);ba
 .prompt-box .speaker-label{font-weight:600;font-size:0.8rem;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.25rem}
 .prompt-box .speaker-label.prof{color:var(--accent-purple)}
 .prompt-box .speaker-label.student{color:var(--accent-amber)}
-.prompt-box .speaker-label.reg{color:var(--accent-green)}
 .prompt-box p{color:#cbd5e1;font-size:0.92rem;line-height:1.6}
 
 .notepad-area{width:100%;min-height:100px;background:#05070c;border:1px solid var(--border-color);border-radius:8px;color:var(--text-main);padding:0.75rem;font-family:inherit;resize:vertical;font-size:0.92rem;outline:none;transition:border-color 0.2s}
@@ -153,7 +150,6 @@ header{position:fixed;top:0;left:0;right:0;z-index:100;height:var(--header-h);ba
 .speaking-task .task-badge.lecture{background:rgba(16,185,129,0.15);color:var(--accent-green)}
 .speaking-task .task-title{font-weight:600;font-size:0.95rem}
 .speaking-task .task-desc{color:#cbd5e1;font-size:0.9rem;line-height:1.6;margin-bottom:0.5rem}
-.speaking-task .prep-tip{font-size:0.82rem;color:var(--text-muted);font-style:italic;margin-bottom:0.4rem}
 
 .hw-task{background:rgba(255,255,255,0.01);border:1px solid var(--border-color);border-radius:10px;padding:1.25rem;margin-bottom:0.85rem}
 .hw-task .hw-num{display:inline-flex;width:28px;height:28px;border-radius:8px;background:var(--primary);color:#fff;font-weight:800;font-size:13px;align-items:center;justify-content:center;margin-bottom:0.5rem}
@@ -162,18 +158,6 @@ header{position:fixed;top:0;left:0;right:0;z-index:100;height:var(--header-h);ba
 .hw-task ul,.hw-task ol{padding-left:1.1rem;color:var(--text-muted)}
 
 .word-counter{text-align:right;font-size:0.82rem;color:var(--text-muted);margin-top:0.4rem;font-family:'Fira Code',monospace}
-
-.listening-lecture{background:rgba(16,185,129,0.03);border:1px solid rgba(16,185,129,0.12);border-radius:10px;padding:1.5rem}
-.listening-lecture .lecture-heading{font-size:0.75rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--accent-green);margin-bottom:0.5rem;font-weight:600}
-
-.phase-hidden{display:none!important}
-.phase-visible{display:block;animation:fadeIn 0.35s ease}
-
-.nav-actions{display:flex;justify-content:space-between;align-items:center;margin-top:1.5rem;padding-top:1rem;border-top:1px solid var(--border-color)}
-.score-badge{display:inline-flex;align-items:center;gap:0.4rem;padding:0.3rem 0.8rem;border-radius:20px;font-family:'Fira Code',monospace;font-size:0.9rem;font-weight:700}
-.score-badge.good{background:rgba(16,185,129,0.15);color:var(--accent-green);border:1px solid rgba(16,185,129,0.3)}
-.score-badge.ok{background:rgba(245,158,11,0.15);color:var(--accent-amber);border:1px solid rgba(245,158,11,0.3)}
-.score-badge.needs-work{background:rgba(239,68,68,0.15);color:var(--accent-red);border:1px solid rgba(239,68,68,0.3)}
 
 .colloc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px}
 .colloc-card{background:rgba(0,0,0,0.3);border-radius:12px;padding:14px 16px;border-left:3px solid;transition:transform 0.2s}
@@ -200,15 +184,10 @@ header{position:fixed;top:0;left:0;right:0;z-index:100;height:var(--header-h);ba
 .improve-area textarea:focus{border-color:var(--primary)}
 .improve-area input{background:transparent;border:none;border-bottom:1px solid var(--border-color);color:var(--text-main);font-family:inherit;font-size:0.9rem;width:80%;outline:none}
 
-.ann-em{color:var(--accent-green);font-weight:600}
-.ann-pu{color:var(--accent-purple);font-weight:600}
-.ann-bl{color:var(--accent-cyan);font-weight:600}
-.ann-am{color:var(--primary);font-weight:600}
 .model-toggle{display:none;margin-top:10px;padding:16px;background:rgba(0,0,0,0.3);border:1px solid rgba(139,92,246,0.15);border-radius:12px;animation:fadeIn 0.3s ease}
 .model-toggle.open{display:block}
 .model-toggle p{color:#cbd5e1;font-size:0.92rem;line-height:1.7;margin-bottom:0.5rem}
 .model-toggle p:last-child{margin-bottom:0}
-.model-label{font-size:0.7rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--accent-green);margin-bottom:0.4rem;font-weight:600}
 
 .accuracy-card{display:none;margin-top:12px;padding:16px;background:var(--glass-bg);border:1px solid var(--border-color);border-radius:12px}
 .accuracy-card.visible{display:block}
@@ -221,23 +200,102 @@ header{position:fixed;top:0;left:0;right:0;z-index:100;height:var(--header-h);ba
 .accuracy-word.correct{color:var(--primary);background:rgba(99,102,241,0.08);border-bottom:2px solid var(--primary)}
 .accuracy-word.missed{color:var(--accent-red);background:rgba(244,63,94,0.08);border-bottom:2px solid var(--accent-red)}
 
-.checklist-item{display:flex;align-items:flex-start;gap:0.65rem;padding:0.4rem 0;border-bottom:1px solid rgba(255,255,255,0.03)}
-.checklist-item label{color:#cbd5e1;font-size:0.9rem;cursor:pointer;flex:1}
-.checklist-item input[type="checkbox"]{margin-top:0.2rem;accent-color:var(--primary);width:1rem;height:1rem;cursor:pointer}
-
 .speed-select{background:rgba(0,0,0,0.4);border:1px solid var(--border-color);border-radius:6px;color:var(--text-main);padding:0.4rem 0.7rem;font-family:inherit;font-size:0.82rem;cursor:pointer;outline:none}
 .speed-select:focus{border-color:var(--primary)}
 
+.hamburger{display:none;background:none;border:none;color:var(--text-main);font-size:22px;cursor:pointer;padding:4px 8px;border-radius:6px;transition:background 0.2s;flex-shrink:0;line-height:1}
+.hamburger:hover{background:rgba(255,255,255,0.06)}
+.sidebar-overlay{display:none;position:fixed;inset:0;z-index:150;background:rgba(0,0,0,0.5);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
+
 @media(max-width:768px){
-  .sidebar{position:fixed;left:0;top:var(--header-h);z-index:175;height:calc(100vh-var(--header-h));transform:translateX(-100%);transition:transform 0.25s ease}
+  .hamburger{display:inline-flex;align-items:center;justify-content:center}
+  .sidebar{position:fixed;left:0;top:var(--header-h);z-index:175;height:calc(100vh-var(--header-h));transform:translateX(-100%);transition:transform 0.25s ease;background:var(--bg-dark);border-right:1px solid var(--border-color)}
   .sidebar.open{transform:translateX(0)}
-  .main{padding:0 16px 80px}
+  .sidebar-overlay.open{display:block}
+  .main{padding:0 16px 80px;max-width:100%}
   .timer-row{flex-direction:column}
+  header{gap:8px;padding:0 12px}
+  .header-meta{display:none}
+  .back-link{font-size:12px}
+  .header-logo{font-size:11px;padding:3px 8px}
+  .header-title{font-size:13px}
+  .slide-title{font-size:20px}
+  .slide-subtitle{font-size:13px}
+  .timer-display{font-size:22px}
+  .timer-box{padding:10px 14px;min-width:100%}
+  .passage-box{padding:0.9rem}
+  .passage-box p{font-size:0.88rem}
+  .card{padding:14px}
+  .q-option{padding:0.55rem 0.65rem}
+  .q-option .opt-text{font-size:0.85rem}
+  .scoring-table{font-size:0.75rem}
+  .scoring-table th,.scoring-table td{padding:0.4rem 0.5rem}
+  .speaking-task{padding:1rem}
+  .prompt-box{padding:1rem}
+  .prompt-box p{font-size:0.88rem}
+  .listening-player{flex-wrap:wrap;gap:8px}
+  .nav-actions{flex-direction:column;gap:8px;align-items:stretch}
+  .gauge-row{flex-direction:column;align-items:center}
+  .accuracy-words{min-width:auto;width:100%}
+  #listening-player{flex-wrap:wrap}
+  .shadowing-text{padding:1rem;font-size:1rem}
+  .colloc-grid{grid-template-columns:1fr}
+  .improve-area input{width:100%}
+  .lr-header{flex-wrap:wrap}
+  .band-card .band-score{font-size:2rem}
+  .sidebar-label{display:none}
+  .nav-btn{padding:8px 10px;font-size:12px}
+}
+
+@media(max-width:480px){
+  .header-title{font-size:11px;max-width:100px}
+  .slide-title{font-size:18px}
+  .slide-subtitle{font-size:12px}
+  .slide-num{font-size:10px}
+  .timer-display{font-size:18px}
+  .timer-box{padding:8px 12px}
+  .timer-label{font-size:10px}
+  .passage-box{padding:0.7rem}
+  .passage-box p{font-size:0.82rem;line-height:1.6;margin-bottom:0.5rem}
+  .q-item{padding:0.75rem}
+  .q-option{padding:0.5rem 0.55rem;gap:0.4rem}
+  .q-option .opt-text{font-size:0.82rem}
+  .card{padding:10px;border-radius:10px}
+  .card-title{font-size:12px;margin-bottom:8px}
+  .btn{padding:8px 14px;font-size:12px}
+  .btn-sm{padding:5px 10px;font-size:11px}
+  .speaking-task{padding:0.85rem}
+  .speaking-task .task-title{font-size:0.85rem}
+  .prompt-box{padding:0.8rem}
+  .prompt-box p{font-size:0.82rem}
+  .scoring-table{font-size:0.7rem}
+  .scoring-table th,.scoring-table td{padding:0.3rem 0.4rem}
+  .slide-header{margin-bottom:16px}
+  .back-link{font-size:11px}
+  .header-logo{font-size:10px;padding:2px 6px;letter-spacing:1px}
+  .hamburger{font-size:20px;padding:2px 6px}
+  .listening-track-btn{padding:5px 10px;font-size:11px}
+  .rec-indicator{padding:4px 10px;font-size:10px}
+  .band-card .band-score{font-size:1.6rem}
+  .band-card{padding:1rem}
+  .improve-area{padding:1rem}
+  .improve-area textarea{font-size:0.82rem}
+  .shadowing-text{font-size:0.92rem;padding:0.8rem}
+  .lr-text{font-size:0.85rem}
+  .lr-sentence{padding:0.75rem}
+  .colloc-card{padding:10px 12px}
+  .colloc-card .phrase{font-size:12px}
+  .colloc-card .example{font-size:11px}
+  .hw-task{padding:1rem}
+  .hw-task p,.hw-task li{font-size:0.82rem}
+  .notepad-area{font-size:0.85rem}
+  .word-counter{font-size:0.75rem}
 }
 </style>
 </head>
 <body>
 <header>
+  <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation">☰</button>
   <a href="../index.html" class="back-link">← Portal</a>
   <span class="header-logo">TOEFL MOCK</span>
   <span class="header-title">Full TOEFL iBT Simulation — 2026 Format</span>
@@ -246,6 +304,7 @@ header{position:fixed;top:0;left:0;right:0;z-index:100;height:var(--header-h);ba
 <div class="progress-bar-wrap"><div class="progress-bar" id="progressBar"></div></div>
 
 <div class="layout">
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
   <nav class="sidebar">
     <div class="sidebar-label">Test Sections</div>
     <button class="nav-btn active" onclick="showSlide(0)"><span class="nav-num">00</span><span>Warm-up</span></button>
@@ -319,7 +378,7 @@ header{position:fixed;top:0;left:0;right:0;z-index:100;height:var(--header-h);ba
             <div class="timer-display" id="reading-time">35:00</div>
           </div>
           <div style="display:flex;align-items:center;gap:0.5rem;">
-            <button class="btn btn-cyan" onclick="runReadingClock()">Start</button>
+            <button class="btn btn-cyan" id="btn-reading-start" onclick="runReadingClock()">Start</button>
             <button class="btn btn-secondary btn-sm" onclick="resetReadingClock()">Reset</button>
           </div>
         </div>
@@ -423,12 +482,12 @@ header{position:fixed;top:0;left:0;right:0;z-index:100;height:var(--header-h);ba
             <label class="q-option" onclick="selectOption(this,'rq9','D')"><input type="radio" name="rq9" value="D"><span class="opt-letter">D.</span><span class="opt-text">Unreservedly enthusiastic</span></label>
           </div></div>
 
-        <div class="q-item"><span class="q-type">Summary</span><div class="q-text"><strong>10.</strong> Which THREE of the following represent the main ideas of the passage?</div>
+        <div class="q-item"><span class="q-type">Summary</span><div class="q-text"><strong>10.</strong> Which THREE of the following represent the main ideas of the passage? <span id="rq10-count" style="color:var(--accent-amber);font-size:0.82rem;font-weight:600;">0 of 3 selected</span></div>
           <div class="q-options" id="rq10-opts">
-            <label class="q-option" onclick="selectOption(this,'rq10','A')"><input type="radio" name="rq10" value="A"><span class="opt-letter">A.</span><span class="opt-text">AI accelerates drug discovery through rapid compound screening</span></label>
-            <label class="q-option" onclick="selectOption(this,'rq10','B')"><input type="radio" name="rq10" value="B"><span class="opt-letter">B.</span><span class="opt-text">AI will fully replace human researchers within a decade</span></label>
-            <label class="q-option" onclick="selectOption(this,'rq10','C')"><input type="radio" name="rq10" value="C"><span class="opt-letter">C.</span><span class="opt-text">AI improves climate modeling and extreme weather prediction</span></label>
-            <label class="q-option" onclick="selectOption(this,'rq10','D')"><input type="radio" name="rq10" value="D"><span class="opt-letter">D.</span><span class="opt-text">AI has important limitations but the future lies in human-machine collaboration</span></label>
+            <label class="q-option" onclick="selectMultiple(this,'rq10','A')"><input type="checkbox"><span class="opt-letter">A.</span><span class="opt-text">AI accelerates drug discovery through rapid compound screening</span></label>
+            <label class="q-option" onclick="selectMultiple(this,'rq10','B')"><input type="checkbox"><span class="opt-letter">B.</span><span class="opt-text">AI will fully replace human researchers within a decade</span></label>
+            <label class="q-option" onclick="selectMultiple(this,'rq10','C')"><input type="checkbox"><span class="opt-letter">C.</span><span class="opt-text">AI improves climate modeling and extreme weather prediction</span></label>
+            <label class="q-option" onclick="selectMultiple(this,'rq10','D')"><input type="checkbox"><span class="opt-letter">D.</span><span class="opt-text">AI has important limitations but the future lies in human-machine collaboration</span></label>
           </div></div>
       </div>
 
@@ -508,12 +567,12 @@ header{position:fixed;top:0;left:0;right:0;z-index:100;height:var(--header-h);ba
             <label class="q-option" onclick="selectOption(this,'rq19','D')"><input type="radio" name="rq19" value="D"><span class="opt-letter">D.</span><span class="opt-text">Cautiously skeptical</span></label>
           </div></div>
 
-        <div class="q-item"><span class="q-type">Summary</span><div class="q-text"><strong>20.</strong> Which THREE of the following represent the main ideas of the passage?</div>
+        <div class="q-item"><span class="q-type">Summary</span><div class="q-text"><strong>20.</strong> Which THREE of the following represent the main ideas of the passage? <span id="rq20-count" style="color:var(--accent-amber);font-size:0.82rem;font-weight:600;">0 of 3 selected</span></div>
           <div class="q-options" id="rq20-opts">
-            <label class="q-option" onclick="selectOption(this,'rq20','A')"><input type="radio" name="rq20" value="A"><span class="opt-letter">A.</span><span class="opt-text">Urban design influences social capital in communities</span></label>
-            <label class="q-option" onclick="selectOption(this,'rq20','B')"><input type="radio" name="rq20" value="B"><span class="opt-letter">B.</span><span class="opt-text">Commute time affects community involvement</span></label>
-            <label class="q-option" onclick="selectOption(this,'rq20','C')"><input type="radio" name="rq20" value="C"><span class="opt-letter">C.</span><span class="opt-text">Public parks are the most important urban feature</span></label>
-            <label class="q-option" onclick="selectOption(this,'rq20','D')"><input type="radio" name="rq20" value="D"><span class="opt-letter">D.</span><span class="opt-text">Zoning reform and mixed-use development strengthen communities</span></label>
+            <label class="q-option" onclick="selectMultiple(this,'rq20','A')"><input type="checkbox"><span class="opt-letter">A.</span><span class="opt-text">Urban design influences social capital in communities</span></label>
+            <label class="q-option" onclick="selectMultiple(this,'rq20','B')"><input type="checkbox"><span class="opt-letter">B.</span><span class="opt-text">Commute time affects community involvement</span></label>
+            <label class="q-option" onclick="selectMultiple(this,'rq20','C')"><input type="checkbox"><span class="opt-letter">C.</span><span class="opt-text">Public parks are the most important urban feature</span></label>
+            <label class="q-option" onclick="selectMultiple(this,'rq20','D')"><input type="checkbox"><span class="opt-letter">D.</span><span class="opt-text">Zoning reform and mixed-use development strengthen communities</span></label>
           </div></div>
       </div>
     </div>
@@ -693,7 +752,7 @@ header{position:fixed;top:0;left:0;right:0;z-index:100;height:var(--header-h);ba
             <div class="timer-display" id="wt1-time">20:00</div>
           </div>
           <div style="display:flex;align-items:center;gap:0.5rem;">
-            <button class="btn btn-cyan" onclick="runWT1Clock()">Start</button>
+            <button class="btn btn-cyan" id="btn-wt1-start" onclick="runWT1Clock()">Start</button>
             <button class="btn btn-secondary btn-sm" onclick="resetWT1Clock()">Reset</button>
           </div>
         </div>
@@ -739,7 +798,7 @@ header{position:fixed;top:0;left:0;right:0;z-index:100;height:var(--header-h);ba
             <div class="timer-display" id="wt2-time">10:00</div>
           </div>
           <div style="display:flex;align-items:center;gap:0.5rem;">
-            <button class="btn btn-cyan" onclick="runWT2Clock()">Start</button>
+            <button class="btn btn-cyan" id="btn-wt2-start" onclick="runWT2Clock()">Start</button>
             <button class="btn btn-secondary btn-sm" onclick="resetWT2Clock()">Reset</button>
           </div>
         </div>
@@ -776,7 +835,7 @@ header{position:fixed;top:0;left:0;right:0;z-index:100;height:var(--header-h);ba
       </div>
       <div class="card">
         <div class="card-title"><span class="dot" style="background:var(--primary)"></span>Score Summary</div>
-        <table class="scoring-table">
+        <div style="overflow-x:auto"><table class="scoring-table">
           <thead><tr><th>Section</th><th>Score (1-6)</th><th>Target</th></tr></thead>
           <tbody>
             <tr><td>Reading</td><td><input type="number" min="1" max="6" class="score-input" id="score-reading" oninput="calcBand()"></td><td>4+</td></tr>
@@ -784,7 +843,7 @@ header{position:fixed;top:0;left:0;right:0;z-index:100;height:var(--header-h);ba
             <tr><td>Speaking (avg of 4 tasks)</td><td><input type="number" min="1" max="6" class="score-input" id="score-speaking" oninput="calcBand()"></td><td>4+</td></tr>
             <tr><td>Writing (avg of 2 tasks)</td><td><input type="number" min="1" max="6" class="score-input" id="score-writing" oninput="calcBand()"></td><td>4+</td></tr>
           </tbody>
-        </table>
+        </table></div>
       </div>
       <div class="card">
         <div class="card-title"><span class="dot" style="background:var(--accent-amber)"></span>Estimated TOEFL iBT Score</div>
@@ -796,17 +855,17 @@ header{position:fixed;top:0;left:0;right:0;z-index:100;height:var(--header-h);ba
       </div>
       <div class="card">
         <div class="card-title"><span class="dot" style="background:var(--accent-green)"></span>Rubrics</div>
-        <table class="scoring-table">
+        <div style="overflow-x:auto"><table class="scoring-table">
           <thead><tr><th>Score</th><th>Reading / Listening</th><th>Speaking</th><th>Writing</th></tr></thead>
           <tbody>
             <tr><td class="score">6</td><td>Excellent — near-perfect comprehension</td><td>Fluent, accurate, natural delivery</td><td>Clear position, compelling evidence, precise language</td></tr>
             <tr><td class="score">5</td><td>Good — minor errors, strong understanding</td><td>Mostly fluent, minor errors, clear organization</td><td>Clear position, good support, minor errors</td></tr>
             <tr><td class="score">4</td><td>Adequate — general understanding, some gaps</td><td>Adequate, some hesitation, generally coherent</td><td>Adequate, basic support, noticeable errors</td></tr>
             <tr><td class="score">3</td><td>Limited — partial understanding, significant gaps</td><td>Limited, noticeable errors, some incoherence</td><td>Weak position, limited support, frequent errors</td></tr>
-            <tr><td class="score">2</td><td>Poor — little comprehension</td><td>Poor, fragmented, frequent errors</td><td>Weak position, limited support, frequent errors</td></tr>
+            <tr><td class="score">2</td><td>Poor — little comprehension</td><td>Poor, fragmented, frequent errors</td><td>Unclear position, minimal support, many errors</td></tr>
             <tr><td class="score">1</td><td>Minimal — unable to understand</td><td>Minimal, unable to communicate</td><td>No clear position, disorganized</td></tr>
           </tbody>
-        </table>
+        </table></div>
       </div>
       <div class="card">
         <div class="card-title"><span class="dot" style="background:var(--accent-red)"></span>Error Log</div>
@@ -815,10 +874,10 @@ header{position:fixed;top:0;left:0;right:0;z-index:100;height:var(--header-h);ba
           <button class="btn btn-primary btn-sm" onclick="addNoteToTable()">Add to Log</button>
           <button class="btn btn-secondary btn-sm" onclick="clearNotepad()">Clear</button>
         </div>
-        <table class="correction-table" id="correction-table">
+        <div style="overflow-x:auto"><table class="correction-table" id="correction-table">
           <thead><tr><th>Error / Observation</th><th>Corrected Version</th><th>Source</th></tr></thead>
           <tbody></tbody>
-        </table>
+        </table></div>
       </div>
       <div class="card">
         <div class="card-title"><span class="dot" style="background:var(--accent-cyan)"></span>Top 3 Areas to Improve</div>
@@ -914,6 +973,7 @@ header{position:fixed;top:0;left:0;right:0;z-index:100;height:var(--header-h);ba
 .rec-btn{padding:0.3rem 0.7rem;font-size:0.78rem;border-radius:20px;background:rgba(255,255,255,0.05);border:1px solid var(--border-color);color:var(--text-muted);font-family:inherit;cursor:pointer;transition:all 0.2s ease;display:inline-flex;align-items:center;gap:0.3rem}
 .rec-btn:hover{background:rgba(255,255,255,0.1)}
 .rec-btn:disabled{opacity:0.3;cursor:not-allowed}
+.rec-btn.recording{background:rgba(239,68,68,0.2);border-color:var(--accent-red);color:var(--accent-red);animation:pulse 1.5s infinite}
 .rec-status{font-size:0.75rem;color:var(--text-muted)}
 .listening-track-btn{padding:6px 14px;border-radius:8px;font-size:12px;font-weight:600;font-family:inherit;border:1px solid var(--border-color);background:rgba(255,255,255,0.03);color:var(--text-muted);cursor:pointer;transition:all 0.2s}
 .listening-track-btn:hover{background:rgba(139,92,246,0.1);border-color:rgba(139,92,246,0.3)}
@@ -923,17 +983,54 @@ header{position:fixed;top:0;left:0;right:0;z-index:100;height:var(--header-h);ba
 <script>
 // ========= NAVIGATION =========
 function showSlide(n) {
-  document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
-  document.getElementById('slide' + n).classList.add('active');
+  const slides = document.querySelectorAll('.slide');
+  if (n < 0 || n >= slides.length) return;
+  slides.forEach(s => s.classList.remove('active'));
+  slides[n].classList.add('active');
   document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
   document.querySelectorAll('.nav-btn')[n].classList.add('active');
-  document.getElementById('progressBar').style.width = ((n+1)/12*100) + '%';
+  document.getElementById('progressBar').style.width = ((n+1)/slides.length*100) + '%';
+  if (window.innerWidth <= 768) {
+    document.querySelector('.sidebar')?.classList.remove('open');
+    document.getElementById('sidebarOverlay')?.classList.remove('open');
+  }
 }
 
-function selectOption(el, qId, letter) {
+function selectOption(el) {
   el.closest('.q-options').querySelectorAll('.q-option').forEach(o => o.classList.remove('selected'));
   el.classList.add('selected');
 }
+
+function selectMultiple(el, qId) {
+  const cb = el.querySelector('input[type="checkbox"]');
+  const parent = el.closest('.q-item');
+  const checked = parent.querySelectorAll('.q-option.selected').length;
+  if (checked >= 3 && !el.classList.contains('selected')) {
+    if (cb) cb.checked = false;
+    return;
+  }
+  if (cb) cb.checked = !cb.checked;
+  el.classList.toggle('selected', cb ? cb.checked : false);
+  const newChecked = parent.querySelectorAll('.q-option.selected').length;
+  const countEl = document.getElementById(qId + '-count');
+  if (countEl) countEl.textContent = newChecked + ' of 3 selected';
+}
+
+// ========= SIDEBAR TOGGLE =========
+document.getElementById('hamburgerBtn').addEventListener('click', function() {
+  document.querySelector('.sidebar').classList.toggle('open');
+  document.getElementById('sidebarOverlay').classList.toggle('open');
+});
+document.getElementById('sidebarOverlay').addEventListener('click', function() {
+  document.querySelector('.sidebar').classList.remove('open');
+  this.classList.remove('open');
+});
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    document.querySelector('.sidebar').classList.remove('open');
+    document.getElementById('sidebarOverlay').classList.remove('open');
+  }
+});
 
 // ========= SHADOWING =========
 const shadowingText = "The twenty-first century has ushered in an era of unprecedented change in the world of work Automation artificial intelligence and globalization are reshaping industries at a pace that demands continuous adaptation The concept of a single career for life has become obsolete replaced by a reality in which workers must constantly acquire new skills to remain relevant This shift places enormous responsibility on educational systems to prepare students not just for specific jobs but for lifelong learning itself The question is no longer whether technology will change how we work but whether our education systems can evolve quickly enough to keep pace";
@@ -1058,6 +1155,7 @@ document.getElementById('startRecord').addEventListener('click', async () => {
     mediaRecorder.ondataavailable = (e) => { if (e.data.size > 0) recordedChunks.push(e.data); };
     mediaRecorder.onstop = () => {
       const blob = new Blob(recordedChunks, { type: 'audio/webm' });
+      if (audioBlobUrl) URL.revokeObjectURL(audioBlobUrl);
       audioBlobUrl = URL.createObjectURL(blob);
       document.getElementById('playRecord').disabled = false;
       document.getElementById('recStatus').textContent = 'Saved';
@@ -1221,6 +1319,7 @@ for (let q = 1; q <= 7; q++) {
         rec.ondataavailable = (e) => { if (e.data.size > 0) chunks.push(e.data); };
         rec.onstop = () => {
           const blob = new Blob(chunks, { type: 'audio/webm' });
+          if (blobUrl) URL.revokeObjectURL(blobUrl);
           blobUrl = URL.createObjectURL(blob);
           playBtn.disabled = false;
           recBtn.textContent = 'Again';
@@ -1236,7 +1335,7 @@ for (let q = 1; q <= 7; q++) {
         setTimeout(() => {
           if (rec && rec.state === 'recording') { rec.stop(); recBtn.disabled = false; recBtn.textContent = 'Again'; }
         }, 12000);
-      } catch(e) {}
+      } catch(e) { if (statusEl) statusEl.textContent = 'Mic denied'; }
     });
     playBtn.addEventListener('click', () => {
       if (blobUrl) { const audio = new Audio(blobUrl); audio.play(); }
@@ -1246,9 +1345,12 @@ for (let q = 1; q <= 7; q++) {
 
 // ========= READING TIMER =========
 let readingInterval = null;
+let readingRunning = false;
 
 function runReadingClock() {
-  if (readingInterval) clearInterval(readingInterval);
+  if (readingRunning) return;
+  readingRunning = true;
+  document.getElementById('btn-reading-start').disabled = true;
   let t = 2100; const el = document.getElementById('reading-time'); const box = document.getElementById('readingTimerBox');
   el.style.color = 'var(--primary)'; box.classList.add('active-timer'); box.classList.remove('warning');
   readingInterval = setInterval(() => {
@@ -1257,15 +1359,16 @@ function runReadingClock() {
     const s = String(t % 60).padStart(2, '0');
     el.textContent = m + ':' + s;
     if (t <= 300) { el.style.color = 'var(--accent-red)'; box.classList.add('warning'); }
-    if (t <= 0) { clearInterval(readingInterval); el.textContent = '00:00'; box.classList.remove('active-timer'); }
+    if (t <= 0) { clearInterval(readingInterval); readingInterval = null; readingRunning = false; el.textContent = '00:00'; box.classList.remove('active-timer'); document.getElementById('btn-reading-start').disabled = false; }
   }, 1000);
 }
 function resetReadingClock() {
-  clearInterval(readingInterval); readingInterval = null;
+  clearInterval(readingInterval); readingInterval = null; readingRunning = false;
   document.getElementById('reading-time').textContent = '35:00';
   const box = document.getElementById('readingTimerBox');
   box.classList.remove('active-timer', 'warning');
   document.getElementById('reading-time').style.color = 'var(--primary)';
+  document.getElementById('btn-reading-start').disabled = false;
 }
 
 // ========= LISTENING =========
@@ -1298,6 +1401,7 @@ function selectTrack(idx) {
   document.getElementById('play-listening-btn').textContent = 'Play';
   document.getElementById('listening-progress').textContent = '0:00 / 0:00';
   document.getElementById('show-listening-qs-btn').style.display = 'none';
+  document.getElementById('listening-questions-area').innerHTML = '';
   genAudio.pause();
   genAudio.currentTime = 0;
 }
@@ -1306,8 +1410,7 @@ document.getElementById('play-listening-btn').addEventListener('click', function
   if (!currentTrack) return;
   if (!genAudio.paused) { genAudio.pause(); this.textContent = 'Play'; return; }
   genAudio.src = 'audio/' + currentTrack.id + '.wav';
-  genAudio.play();
-  this.textContent = 'Pause';
+  genAudio.play().then(() => { this.textContent = 'Pause'; }).catch(() => { this.textContent = '▶ Play'; });
   document.getElementById('show-listening-qs-btn').style.display = 'none';
 });
 
@@ -1397,6 +1500,8 @@ function showListeningQuestions() {
 
 // ========= SPEAKING TASKS =========
 const speakingTimers = {};
+const speakingRecs = {};
+function formatTime(s) { return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); }
 
 function startSpeakingTask(id, prepSec, speakSec) {
   if (speakingTimers[id]) {
@@ -1408,8 +1513,8 @@ function startSpeakingTask(id, prepSec, speakSec) {
   const speakBox = document.getElementById(id + 'Speak');
   if (!prepEl || !speakEl) return;
 
-  prepEl.textContent = '0:' + String(prepSec).padStart(2,'0');
-  speakEl.textContent = '0:' + String(speakSec).padStart(2,'0');
+  prepEl.textContent = formatTime(prepSec);
+  speakEl.textContent = formatTime(speakSec);
   prepBox.classList.add('active-timer');
   speakBox.classList.remove('active-timer');
 
@@ -1418,14 +1523,14 @@ function startSpeakingTask(id, prepSec, speakSec) {
 
   speakingTimers[id].prep = setInterval(() => {
     prepRem--;
-    prepEl.textContent = '0:' + String(prepRem).padStart(2,'0');
+    prepEl.textContent = formatTime(prepRem);
     if (prepRem <= 0) {
       clearInterval(speakingTimers[id].prep);
       prepBox.classList.remove('active-timer');
       speakBox.classList.add('active-timer');
       speakingTimers[id].speak = setInterval(() => {
         speakRem--;
-        speakEl.textContent = '0:' + String(speakRem).padStart(2,'0');
+        speakEl.textContent = formatTime(speakRem);
         if (speakRem <= 10) speakEl.style.color = 'var(--accent-red)';
         if (speakRem <= 0) {
           clearInterval(speakingTimers[id].speak);
@@ -1438,13 +1543,16 @@ function startSpeakingTask(id, prepSec, speakSec) {
 }
 
 function resetSpeakingTask(id, prepSec, speakSec) {
+  if (speakingRecs[id] && speakingRecs[id].state === 'recording') {
+    speakingRecs[id].stop();
+  }
   if (speakingTimers[id]) {
     Object.values(speakingTimers[id]).forEach(t => clearInterval(t));
   }
   const prepEl = document.getElementById(id + 'PrepDisp');
   const speakEl = document.getElementById(id + 'SpeakDisp');
-  if (prepEl) prepEl.textContent = '0:' + String(prepSec).padStart(2,'0');
-  if (speakEl) { speakEl.textContent = '0:' + String(speakSec).padStart(2,'0'); speakEl.style.color = ''; }
+  if (prepEl) prepEl.textContent = formatTime(prepSec);
+  if (speakEl) { speakEl.textContent = formatTime(speakSec); speakEl.style.color = ''; }
   const prepBox = document.getElementById(id + 'Prep');
   const speakBox = document.getElementById(id + 'Speak');
   if (prepBox) prepBox.classList.remove('active-timer');
@@ -1464,9 +1572,11 @@ for (let t = 1; t <= 4; t++) {
       try {
         const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
         rec = new MediaRecorder(stream); chunks = [];
+        speakingRecs['t' + tNum] = rec;
         rec.ondataavailable = (e) => { if (e.data.size > 0) chunks.push(e.data); };
         rec.onstop = () => {
           const blob = new Blob(chunks, { type: 'audio/webm' });
+          if (blobUrl) URL.revokeObjectURL(blobUrl);
           blobUrl = URL.createObjectURL(blob);
           recBtn.textContent = 'Again';
           stream.getTracks().forEach(t => t.stop());
@@ -1477,7 +1587,7 @@ for (let t = 1; t <= 4; t++) {
         recBtn.disabled = true; stopBtn.disabled = false;
         if (ind) { ind.classList.remove('off'); ind.classList.add('recording'); }
         if (statusEl) statusEl.textContent = 'REC';
-      } catch(e) {}
+      } catch(e) { if (statusEl) statusEl.textContent = 'Mic denied'; }
     });
     stopBtn.addEventListener('click', () => {
       if (rec && rec.state === 'recording') { rec.stop(); recBtn.disabled = false; stopBtn.disabled = true; }
@@ -1490,9 +1600,8 @@ function playAudio(src, btnId) {
   const spAudio = document.getElementById('speechAudio');
   if (!spAudio.paused) { spAudio.pause(); spAudio.currentTime = 0; }
   spAudio.src = src + '?' + Date.now();
-  spAudio.play();
   const statusEl = document.getElementById(btnId ? btnId.replace('Btn','Status') : null);
-  if (statusEl) statusEl.textContent = 'Playing...';
+  spAudio.play().then(() => { if (statusEl) statusEl.textContent = 'Playing...'; }).catch(() => { if (statusEl) statusEl.textContent = 'Audio unavailable'; });
   spAudio.onended = function() {
     if (statusEl) statusEl.textContent = 'Done';
   };
@@ -1500,9 +1609,12 @@ function playAudio(src, btnId) {
 
 // ========= WRITING TIMERS =========
 let wt1Interval = null, wt2Interval = null;
+let wt1Running = false, wt2Running = false;
 
 function runWT1Clock() {
-  if (wt1Interval) clearInterval(wt1Interval);
+  if (wt1Running) return;
+  wt1Running = true;
+  document.getElementById('btn-wt1-start').disabled = true;
   let t = 1200; const el = document.getElementById('wt1-time'); const box = document.getElementById('wt1TimerBox');
   el.style.color = 'var(--primary)'; box.classList.add('active-timer'); box.classList.remove('warning');
   wt1Interval = setInterval(() => {
@@ -1511,18 +1623,21 @@ function runWT1Clock() {
     const s = String(t % 60).padStart(2, '0');
     el.textContent = m + ':' + s;
     if (t <= 120) { el.style.color = 'var(--accent-red)'; box.classList.add('warning'); }
-    if (t <= 0) { clearInterval(wt1Interval); el.textContent = '00:00'; box.classList.remove('active-timer'); }
+    if (t <= 0) { clearInterval(wt1Interval); wt1Interval = null; wt1Running = false; el.textContent = '00:00'; box.classList.remove('active-timer'); document.getElementById('btn-wt1-start').disabled = false; }
   }, 1000);
 }
 function resetWT1Clock() {
-  clearInterval(wt1Interval); wt1Interval = null;
+  clearInterval(wt1Interval); wt1Interval = null; wt1Running = false;
   document.getElementById('wt1-time').textContent = '20:00';
   const box = document.getElementById('wt1TimerBox');
   box.classList.remove('active-timer', 'warning');
   document.getElementById('wt1-time').style.color = 'var(--primary)';
+  document.getElementById('btn-wt1-start').disabled = false;
 }
 function runWT2Clock() {
-  if (wt2Interval) clearInterval(wt2Interval);
+  if (wt2Running) return;
+  wt2Running = true;
+  document.getElementById('btn-wt2-start').disabled = true;
   let t = 600; const el = document.getElementById('wt2-time'); const box = document.getElementById('wt2TimerBox');
   el.style.color = 'var(--primary)'; box.classList.add('active-timer'); box.classList.remove('warning');
   wt2Interval = setInterval(() => {
@@ -1531,15 +1646,16 @@ function runWT2Clock() {
     const s = String(t % 60).padStart(2, '0');
     el.textContent = m + ':' + s;
     if (t <= 60) { el.style.color = 'var(--accent-red)'; box.classList.add('warning'); }
-    if (t <= 0) { clearInterval(wt2Interval); el.textContent = '00:00'; box.classList.remove('active-timer'); }
+    if (t <= 0) { clearInterval(wt2Interval); wt2Interval = null; wt2Running = false; el.textContent = '00:00'; box.classList.remove('active-timer'); document.getElementById('btn-wt2-start').disabled = false; }
   }, 1000);
 }
 function resetWT2Clock() {
-  clearInterval(wt2Interval); wt2Interval = null;
+  clearInterval(wt2Interval); wt2Interval = null; wt2Running = false;
   document.getElementById('wt2-time').textContent = '10:00';
   const box = document.getElementById('wt2TimerBox');
   box.classList.remove('active-timer', 'warning');
   document.getElementById('wt2-time').style.color = 'var(--primary)';
+  document.getElementById('btn-wt2-start').disabled = false;
 }
 
 // ========= WORD COUNTERS =========
