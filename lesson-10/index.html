@@ -310,15 +310,14 @@ header{position:fixed;top:0;left:0;right:0;z-index:100;height:var(--header-h);ba
     <button class="nav-btn active" onclick="showSlide(0)"><span class="nav-num">00</span><span>Warm-up</span></button>
     <button class="nav-btn" onclick="showSlide(1)"><span class="nav-num">01</span><span>Reading</span></button>
     <button class="nav-btn" onclick="showSlide(2)"><span class="nav-num">02</span><span>Listening</span></button>
-    <button class="nav-btn" onclick="showSlide(3)"><span class="nav-num">03</span><span>Speaking T1</span></button>
-    <button class="nav-btn" onclick="showSlide(4)"><span class="nav-num">04</span><span>Speaking T2</span></button>
-    <button class="nav-btn" onclick="showSlide(5)"><span class="nav-num">05</span><span>Speaking T3</span></button>
-    <button class="nav-btn" onclick="showSlide(6)"><span class="nav-num">06</span><span>Speaking T4</span></button>
-    <button class="nav-btn" onclick="showSlide(7)"><span class="nav-num">07</span><span>Writing T1</span></button>
-    <button class="nav-btn" onclick="showSlide(8)"><span class="nav-num">08</span><span>Writing T2</span></button>
-    <button class="nav-btn" onclick="showSlide(9)"><span class="nav-num">09</span><span>Scoring</span></button>
-    <button class="nav-btn" onclick="showSlide(10)"><span class="nav-num">10</span><span>Harvest</span></button>
-    <button class="nav-btn" onclick="showSlide(11)"><span class="nav-num">11</span><span>Homework</span></button>
+    <button class="nav-btn" onclick="showSlide(3)"><span class="nav-num">03</span><span>Speaking: L&R</span></button>
+    <button class="nav-btn" onclick="showSlide(4)"><span class="nav-num">04</span><span>Speaking: Interview</span></button>
+    <button class="nav-btn" onclick="showSlide(5)"><span class="nav-num">05</span><span>Writing: Sentences</span></button>
+    <button class="nav-btn" onclick="showSlide(6)"><span class="nav-num">06</span><span>Writing: Email</span></button>
+    <button class="nav-btn" onclick="showSlide(7)"><span class="nav-num">07</span><span>Writing: Discussion</span></button>
+    <button class="nav-btn" onclick="showSlide(8)"><span class="nav-num">08</span><span>Scoring</span></button>
+    <button class="nav-btn" onclick="showSlide(9)"><span class="nav-num">09</span><span>Harvest</span></button>
+    <button class="nav-btn" onclick="showSlide(10)"><span class="nav-num">10</span><span>Homework</span></button>
   </nav>
 
   <main class="main">
@@ -601,212 +600,217 @@ header{position:fixed;top:0;left:0;right:0;z-index:100;height:var(--header-h);ba
       <div id="listening-questions-area"></div>
     </div>
 
-    <!-- ===== SLIDE 3: SPEAKING T1 ===== -->
+    <!-- ===== SLIDE 3: SPEAKING — LISTEN & REPEAT (2026 Format) ===== -->
     <div class="slide" id="slide3">
       <div class="slide-header">
         <span class="slide-num">03</span>
-        <div class="slide-title">Speaking Task 1: Independent</div>
-        <div class="slide-subtitle">15s prep · 45s speak</div>
+        <div class="slide-title">Speaking: Listen &amp; Repeat</div>
+        <div class="slide-subtitle">7 sentences · 8-12s each · No prep time · 0-5 points per item</div>
       </div>
-      <div class="speaking-task">
-        <div class="task-header"><span class="task-badge ind">Independent</span><span class="task-title">Personal Preference</span></div>
-        <div class="task-desc">"Some people believe it is better to learn from personal experience. Others believe it is better to learn from the advice of others. Which approach do you think is more effective and why?"</div>
+      <div class="card" style="border:1px solid rgba(245,158,11,0.2);background:rgba(245,158,11,0.04);">
+        <div class="card-title"><span class="dot" style="background:var(--accent-amber)"></span>2026 TOEFL Format Note</div>
+        <p style="font-size:0.85rem;color:var(--text-muted);line-height:1.6;">This task replaced the old Independent/Integrated speaking tasks in January 2026. You will hear 7 sentences one at a time. Repeat each sentence exactly as you hear it. Each sentence is scored 0-5 for accuracy and intelligibility.</p>
       </div>
-      <div class="timer-row">
-        <div class="timer-box" id="t1Prep"><div class="timer-label">Preparation</div><div class="timer-display" id="t1PrepDisp">0:15</div></div>
-        <div class="timer-box" id="t1Speak"><div class="timer-label">Speaking</div><div class="timer-display" id="t1SpeakDisp">0:45</div></div>
-      </div>
-      <div class="btn-group">
-        <button class="btn btn-primary" onclick="startSpeakingTask('t1',15,45)">Start Task</button>
-        <button class="btn btn-secondary btn-sm" onclick="resetSpeakingTask('t1',15,45)">Reset</button>
+      <div id="lrSentences"></div>
+      <div class="timer-row" style="margin-top:1rem;">
+        <div class="timer-box" id="lrTimerBox">
+          <div class="timer-label">Sentence Timer</div>
+          <div class="timer-display" id="lrTimerDisp">0:10</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:0.5rem;">
+          <button class="btn btn-primary" onclick="startLRSentence()">Play Sentence</button>
+          <button class="btn btn-secondary btn-sm" onclick="nextLRSentence()">Next →</button>
+        </div>
       </div>
       <div style="display:flex;align-items:center;gap:12px;margin-top:12px;">
-        <div class="rec-indicator off" id="t1Rec"><span class="rec-dot"></span><span id="t1RecStatus">REC OFF</span></div>
-        <button class="btn btn-secondary btn-sm" id="t1RecBtn">Record</button>
-        <button class="btn btn-secondary btn-sm" id="t1StopBtn" disabled>Stop</button>
+        <div class="rec-indicator off" id="lrRec"><span class="rec-dot"></span><span id="lrRecStatus">REC OFF</span></div>
+        <button class="btn btn-secondary btn-sm" id="lrRecBtn">Record</button>
+        <button class="btn btn-secondary btn-sm" id="lrStopBtn" disabled>Stop</button>
+        <span style="font-size:0.8rem;color:var(--text-muted);margin-left:auto;" id="lrProgress">Sentence 1 / 7</span>
       </div>
+      <div class="model-toggle" id="lrModelAnswer">
+        <p><strong>Model Answers (for self-check):</strong></p>
+        <p>1. The rapid advancement of artificial intelligence is reshaping global economic structures.</p>
+        <p>2. Researchers have developed new models that predict climate patterns with remarkable accuracy.</p>
+        <p>3. Universities around the world are adapting their curricula to meet the demands of a digital economy.</p>
+        <p>4. The experiment yielded surprising results that challenged the researchers' initial hypotheses.</p>
+        <p>5. Understanding the relationship between technology and society requires interdisciplinary collaboration.</p>
+        <p>6. The findings suggest that conventional approaches may be insufficient to address this complex issue.</p>
+        <p>7. Collaborative research across disciplines has become essential for solving today's most pressing challenges.</p>
+      </div>
+      <button class="btn btn-secondary btn-sm" style="margin-top:0.75rem;" onclick="toggleReveal('lrModelAnswer')">👁️ Show Model Answers</button>
     </div>
 
-    <!-- ===== SLIDE 4: SPEAKING T2 ===== -->
+    <!-- ===== SLIDE 4: SPEAKING — TAKE AN INTERVIEW (2026 Format) ===== -->
     <div class="slide" id="slide4">
       <div class="slide-header">
         <span class="slide-num">04</span>
-        <div class="slide-title">Speaking Task 2: Campus R+L+S</div>
-        <div class="slide-subtitle">30s prep · 60s speak</div>
+        <div class="slide-title">Speaking: Take an Interview</div>
+        <div class="slide-subtitle">4 questions · up to 45s each · No prep time · 0-5 points per item</div>
       </div>
-      <div class="speaking-task">
-        <div class="task-header"><span class="task-badge campus">Campus</span><span class="task-title">Library Hours Announcement</span></div>
-        <div class="task-desc"><strong>Announcement:</strong> The university library will be implementing new operating hours beginning next semester. Starting January 15, the main library will close at 9 PM on weekdays instead of midnight. Weekend hours will remain unchanged. The administration states that this change is necessary due to budget constraints and low student usage after 9 PM. Additionally, the library will introduce a new online booking system for study rooms, replacing the current first-come, first-served policy.</div>
+      <div class="card" style="border:1px solid rgba(245,158,11,0.2);background:rgba(245,158,11,0.04);">
+        <div class="card-title"><span class="dot" style="background:var(--accent-amber)"></span>2026 TOEFL Format Note</div>
+        <p style="font-size:0.85rem;color:var(--text-muted);line-height:1.6;">Answer each question in a complete, organized response. You have up to 45 seconds per question. Focus on clear structure: state your point, give a reason or example, and conclude.</p>
       </div>
-      <div class="card" style="border-color:rgba(139,92,246,0.15);">
-        <div class="card-title"><span class="dot" style="background:var(--primary)"></span>Conversation</div>
-        <p style="color:var(--text-muted);font-size:0.85rem;margin-bottom:0.5rem;">Play the conversation, then prepare and speak.</p>
-        <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
-          <button class="btn btn-cyan btn-sm" onclick="playAudio('audio/speaking-t2-conv.wav','t2PlayBtn')" id="t2PlayBtn">Play Conversation</button>
-          <span id="t2PlayStatus" style="color:var(--text-muted);font-size:12px;"></span>
+
+      <div class="speaking-task" id="intQ1">
+        <div class="task-header"><span class="task-badge ind">Q1 · Personal Experience</span></div>
+        <div class="task-desc">"Some people believe it is better to learn from personal experience. Others believe it is better to learn from the advice of others. Which approach do you think is more effective and why?"</div>
+        <div class="timer-row">
+          <div class="timer-box" id="iq1Timer"><div class="timer-label">Speaking</div><div class="timer-display" id="iq1Disp">0:45</div></div>
+        </div>
+        <div class="btn-group">
+          <button class="btn btn-primary" onclick="startInterviewQ('iq1',45)">Start Q1</button>
+          <button class="btn btn-secondary btn-sm" onclick="resetInterviewQ('iq1',45)">Reset</button>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;margin-top:12px;">
+          <div class="rec-indicator off" id="iq1Rec"><span class="rec-dot"></span><span id="iq1RecStatus">REC OFF</span></div>
+          <button class="btn btn-secondary btn-sm" id="iq1RecBtn">Record</button>
+          <button class="btn btn-secondary btn-sm" id="iq1StopBtn" disabled>Stop</button>
         </div>
       </div>
-      <div class="speaking-task" style="border-color:rgba(139,92,246,0.2);">
-        <div class="task-header"><span class="task-badge campus">Question</span><span class="task-title">State the woman's opinion</span></div>
-        <div class="task-desc">"The woman expresses her opinion about the library's new policy. State her opinion and explain how she supports it."</div>
+
+      <div class="speaking-task" id="intQ2">
+        <div class="task-header"><span class="task-badge campus">Q2 · Campus Situation</span></div>
+        <div class="task-desc">"The university library is cutting hours due to budget constraints. A student suggests writing to the student council. Do you think this is a good idea? Why or why not?"</div>
+        <div class="timer-row">
+          <div class="timer-box" id="iq2Timer"><div class="timer-label">Speaking</div><div class="timer-display" id="iq2Disp">0:45</div></div>
+        </div>
+        <div class="btn-group">
+          <button class="btn btn-primary" onclick="startInterviewQ('iq2',45)">Start Q2</button>
+          <button class="btn btn-secondary btn-sm" onclick="resetInterviewQ('iq2',45)">Reset</button>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;margin-top:12px;">
+          <div class="rec-indicator off" id="iq2Rec"><span class="rec-dot"></span><span id="iq2RecStatus">REC OFF</span></div>
+          <button class="btn btn-secondary btn-sm" id="iq2RecBtn">Record</button>
+          <button class="btn btn-secondary btn-sm" id="iq2StopBtn" disabled>Stop</button>
+        </div>
       </div>
-      <div class="timer-row">
-        <div class="timer-box" id="t2Prep"><div class="timer-label">Preparation</div><div class="timer-display" id="t2PrepDisp">0:30</div></div>
-        <div class="timer-box" id="t2Speak"><div class="timer-label">Speaking</div><div class="timer-display" id="t2SpeakDisp">1:00</div></div>
+
+      <div class="speaking-task" id="intQ3">
+        <div class="task-header"><span class="task-badge academic">Q3 · Academic Opinion</span></div>
+        <div class="task-desc">"Some people argue that universities should focus on practical skills that lead to employment. Others believe the primary purpose of university is to develop critical thinking. What is your view?"</div>
+        <div class="timer-row">
+          <div class="timer-box" id="iq3Timer"><div class="timer-label">Speaking</div><div class="timer-display" id="iq3Disp">0:45</div></div>
+        </div>
+        <div class="btn-group">
+          <button class="btn btn-primary" onclick="startInterviewQ('iq3',45)">Start Q3</button>
+          <button class="btn btn-secondary btn-sm" onclick="resetInterviewQ('iq3',45)">Reset</button>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;margin-top:12px;">
+          <div class="rec-indicator off" id="iq3Rec"><span class="rec-dot"></span><span id="iq3RecStatus">REC OFF</span></div>
+          <button class="btn btn-secondary btn-sm" id="iq3RecBtn">Record</button>
+          <button class="btn btn-secondary btn-sm" id="iq3StopBtn" disabled>Stop</button>
+        </div>
       </div>
-      <div class="btn-group">
-        <button class="btn btn-primary" onclick="startSpeakingTask('t2',30,60)">Start Task</button>
-        <button class="btn btn-secondary btn-sm" onclick="resetSpeakingTask('t2',30,60)">Reset</button>
+
+      <div class="speaking-task" id="intQ4">
+        <div class="task-header"><span class="task-badge lecture">Q4 · Abstract Topic</span></div>
+        <div class="task-desc">"Do you agree or disagree that people are happier when they have fewer choices? Explain with reasons and examples."</div>
+        <div class="timer-row">
+          <div class="timer-box" id="iq4Timer"><div class="timer-label">Speaking</div><div class="timer-display" id="iq4Disp">0:45</div></div>
+        </div>
+        <div class="btn-group">
+          <button class="btn btn-primary" onclick="startInterviewQ('iq4',45)">Start Q4</button>
+          <button class="btn btn-secondary btn-sm" onclick="resetInterviewQ('iq4',45)">Reset</button>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;margin-top:12px;">
+          <div class="rec-indicator off" id="iq4Rec"><span class="rec-dot"></span><span id="iq4RecStatus">REC OFF</span></div>
+          <button class="btn btn-secondary btn-sm" id="iq4RecBtn">Record</button>
+          <button class="btn btn-secondary btn-sm" id="iq4StopBtn" disabled>Stop</button>
+        </div>
       </div>
-      <div style="display:flex;align-items:center;gap:12px;margin-top:12px;">
-        <div class="rec-indicator off" id="t2Rec"><span class="rec-dot"></span><span id="t2RecStatus">REC OFF</span></div>
-        <button class="btn btn-secondary btn-sm" id="t2RecBtn">Record</button>
-        <button class="btn btn-secondary btn-sm" id="t2StopBtn" disabled>Stop</button>
+
+      <div class="model-toggle" id="intModelAnswers">
+        <p><strong>Model Answers (Band 4+):</strong></p>
+        <p><strong>Q1:</strong> "I think both approaches have value, but learning from personal experience tends to be more effective because the emotional impact makes the lesson stick. For example, when I failed an exam because I didn't prepare, I never made that mistake again. However, combining both — listening to advice and learning from experience — is probably the best approach."</p>
+        <p><strong>Q2:</strong> "Yes, I think writing to the student council is a good idea because students are the primary users of the library and their opinions matter. The council can present a united voice to the administration. For instance, at my previous school, a petition helped restore weekend library hours."</p>
+        <p><strong>Q3:</strong> "I believe both are important, but critical thinking should be the primary focus because practical skills can be learned on the job, while critical thinking takes years to develop. University is the best environment for developing analytical skills through research and debate."</p>
+        <p><strong>Q4:</strong> "I agree that fewer choices can lead to more happiness because too many options create decision fatigue. For example, when I'm choosing a restaurant and there are fifty options, I often feel stressed and unsatisfied. But when a friend recommends one place, I enjoy it more because I'm not second-guessing my choice."</p>
       </div>
+      <button class="btn btn-secondary btn-sm" style="margin-top:0.75rem;" onclick="toggleReveal('intModelAnswers')">👁️ Show Model Answers</button>
     </div>
 
-    <!-- ===== SLIDE 5: SPEAKING T3 ===== -->
+    <!-- ===== SLIDE 5: WRITING — BUILD A SENTENCE (2026 Format) ===== -->
     <div class="slide" id="slide5">
       <div class="slide-header">
         <span class="slide-num">05</span>
-        <div class="slide-title">Speaking Task 3: Academic R+L+S</div>
-        <div class="slide-subtitle">30s prep · 60s speak</div>
+        <div class="slide-title">Writing: Build a Sentence</div>
+        <div class="slide-subtitle">10 sentences · Rearrange words into correct sentences · 0-1 points each</div>
       </div>
-      <div class="speaking-task">
-        <div class="task-header"><span class="task-badge academic">Academic</span><span class="task-title">Spotlight Effect</span></div>
-        <div class="task-desc"><strong>Reading:</strong> "The spotlight effect is a psychological concept referring to people's tendency to overestimate how much others notice and remember about them. Research shows that individuals consistently believe they are being observed and evaluated more closely than they actually are. For example, a person who spills coffee at a party may feel that everyone noticed and will remember the incident for days, when in reality most people barely registered it. The spotlight effect explains why people often feel self-conscious in public situations more than is warranted."</div>
+      <div class="card" style="border:1px solid rgba(245,158,11,0.2);background:rgba(245,158,11,0.04);">
+        <div class="card-title"><span class="dot" style="background:var(--accent-amber)"></span>2026 TOEFL Format Note</div>
+        <p style="font-size:0.85rem;color:var(--text-muted);line-height:1.6;">Rearrange the words to form a correct, complete sentence. Each correct sentence earns 1 point. Grammar and word order matter.</p>
       </div>
-      <div class="card" style="border-color:rgba(6,182,212,0.15);">
-        <div class="card-title"><span class="dot" style="background:var(--accent-cyan)"></span>Lecture</div>
-        <p style="color:var(--text-muted);font-size:0.85rem;margin-bottom:0.5rem;">Play the lecture, then prepare and speak.</p>
-        <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
-          <button class="btn btn-cyan btn-sm" onclick="playAudio('audio/speaking-t3-lecture.wav','t3PlayBtn')" id="t3PlayBtn">Play Lecture</button>
-          <span id="t3PlayStatus" style="color:var(--text-muted);font-size:12px;"></span>
-        </div>
+      <div id="buildSentenceItems"></div>
+      <div class="model-toggle" id="bsModelAnswers">
+        <p><strong>Correct Sentences:</strong></p>
+        <p>1. Artificial intelligence is transforming the landscape of scientific research.</p>
+        <p>2. Universities around the world are adapting their curricula to digital demands.</p>
+        <p>3. The experiment yielded results that challenged the researchers' initial hypotheses.</p>
+        <p>4. Remote workers experience fewer interruptions than office workers.</p>
+        <p>5. Understanding the relationship between technology and society requires collaboration.</p>
+        <p>6. The findings suggest that conventional approaches may be insufficient.</p>
+        <p>7. Collaborative research across disciplines has become essential for solving today's challenges.</p>
+        <p>8. Digital platforms have dramatically lowered barriers to entrepreneurship.</p>
+        <p>9. Coral reefs support approximately twenty-five percent of all marine species.</p>
+        <p>10. The strategic use of color extends beyond logos to the entire retail environment.</p>
       </div>
-      <div class="speaking-task" style="border-color:rgba(6,182,212,0.2);">
-        <div class="task-header"><span class="task-badge academic">Question</span><span class="task-title">Explain the study</span></div>
-        <div class="task-desc">"Explain how the study described in the lecture illustrates the concept of the spotlight effect."</div>
-      </div>
-      <div class="timer-row">
-        <div class="timer-box" id="t3Prep"><div class="timer-label">Preparation</div><div class="timer-display" id="t3PrepDisp">0:30</div></div>
-        <div class="timer-box" id="t3Speak"><div class="timer-label">Speaking</div><div class="timer-display" id="t3SpeakDisp">1:00</div></div>
-      </div>
-      <div class="btn-group">
-        <button class="btn btn-primary" onclick="startSpeakingTask('t3',30,60)">Start Task</button>
-        <button class="btn btn-secondary btn-sm" onclick="resetSpeakingTask('t3',30,60)">Reset</button>
-      </div>
-      <div style="display:flex;align-items:center;gap:12px;margin-top:12px;">
-        <div class="rec-indicator off" id="t3Rec"><span class="rec-dot"></span><span id="t3RecStatus">REC OFF</span></div>
-        <button class="btn btn-secondary btn-sm" id="t3RecBtn">Record</button>
-        <button class="btn btn-secondary btn-sm" id="t3StopBtn" disabled>Stop</button>
-      </div>
+      <button class="btn btn-secondary btn-sm" style="margin-top:0.75rem;" onclick="toggleReveal('bsModelAnswers')">👁️ Show Correct Sentences</button>
     </div>
 
-    <!-- ===== SLIDE 6: SPEAKING T4 ===== -->
+    <!-- ===== SLIDE 6: WRITING — WRITE AN EMAIL (2026 Format) ===== -->
     <div class="slide" id="slide6">
       <div class="slide-header">
         <span class="slide-num">06</span>
-        <div class="slide-title">Speaking Task 4: Academic L+S</div>
-        <div class="slide-subtitle">20s prep · 60s speak</div>
+        <div class="slide-title">Writing: Write an Email</div>
+        <div class="slide-subtitle">Academic scenario · 0-5 points · Target: 100-150 words</div>
       </div>
-      <div class="card" style="border-color:rgba(16,185,129,0.15);">
-        <div class="card-title"><span class="dot" style="background:var(--accent-green)"></span>Lecture: Mere Exposure Effect</div>
-        <p style="color:var(--text-muted);font-size:0.85rem;margin-bottom:0.5rem;">Play the lecture, then prepare and speak.</p>
-        <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
-          <button class="btn btn-cyan btn-sm" onclick="playAudio('audio/speaking-t4-lecture.wav','t4PlayBtn')" id="t4PlayBtn">Play Lecture</button>
-          <span id="t4PlayStatus" style="color:var(--text-muted);font-size:12px;"></span>
-        </div>
-      </div>
-      <div class="speaking-task">
-        <div class="task-header"><span class="task-badge lecture">Question</span><span class="task-title">Explain the mere exposure effect</span></div>
-        <div class="task-desc">"Using the examples from the lecture, explain what the mere exposure effect is and how it influences preferences."</div>
-      </div>
-      <div class="timer-row">
-        <div class="timer-box" id="t4Prep"><div class="timer-label">Preparation</div><div class="timer-display" id="t4PrepDisp">0:20</div></div>
-        <div class="timer-box" id="t4Speak"><div class="timer-label">Speaking</div><div class="timer-display" id="t4SpeakDisp">1:00</div></div>
-      </div>
-      <div class="btn-group">
-        <button class="btn btn-primary" onclick="startSpeakingTask('t4',20,60)">Start Task</button>
-        <button class="btn btn-secondary btn-sm" onclick="resetSpeakingTask('t4',20,60)">Reset</button>
-      </div>
-      <div style="display:flex;align-items:center;gap:12px;margin-top:12px;">
-        <div class="rec-indicator off" id="t4Rec"><span class="rec-dot"></span><span id="t4RecStatus">REC OFF</span></div>
-        <button class="btn btn-secondary btn-sm" id="t4RecBtn">Record</button>
-        <button class="btn btn-secondary btn-sm" id="t4StopBtn" disabled>Stop</button>
-      </div>
-    </div>
-
-    <!-- ===== SLIDE 7: WRITING T1 ===== -->
-    <div class="slide" id="slide7">
-      <div class="slide-header">
-        <span class="slide-num">07</span>
-        <div class="slide-title">Writing Task 1: Integrated</div>
-        <div class="slide-subtitle">Read · Listen · Write — 20 minutes</div>
+      <div class="card" style="border:1px solid rgba(245,158,11,0.2);background:rgba(245,158,11,0.04);">
+        <div class="card-title"><span class="dot" style="background:var(--accent-amber)"></span>2026 TOEFL Format Note</div>
+        <p style="font-size:0.85rem;color:var(--text-muted);line-height:1.6;">Write a complete, well-organized email responding to the scenario. Focus on clear structure, appropriate tone, and specific details.</p>
       </div>
       <div class="card">
-        <div class="card-title"><span class="dot" style="background:var(--primary)"></span>Timer</div>
-        <div class="timer-row">
-          <div class="timer-box" id="wt1TimerBox">
-            <div class="timer-label">Time Remaining</div>
-            <div class="timer-display" id="wt1-time">20:00</div>
-          </div>
-          <div style="display:flex;align-items:center;gap:0.5rem;">
-            <button class="btn btn-cyan" id="btn-wt1-start" onclick="runWT1Clock()">Start</button>
-            <button class="btn btn-secondary btn-sm" onclick="resetWT1Clock()">Reset</button>
-          </div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-title"><span class="dot" style="background:var(--accent-cyan)"></span>Reading Passage</div>
-        <div class="passage-box">
-          <p><strong>Remote Work Improves Productivity</strong></p>
-          <p>Many companies are discovering that allowing employees to work remotely leads to significant increases in productivity. Several factors account for this improvement.</p>
-          <p>First, remote workers experience fewer interruptions. In a traditional office environment, colleagues frequently interrupt each other with questions, impromptu meetings, and casual conversations. A study by the University of California found that office workers are interrupted an average of once every three minutes, and it takes approximately twenty-three minutes to fully refocus after each interruption. Remote workers, by contrast, control their environment and can structure their day around focused work.</p>
-          <p>Second, remote work eliminates commuting time. The average American commuter spends over two hundred hours per year traveling to and from work. When this time is reclaimed, employees can invest it in additional work, exercise, or family, leading to better work-life balance and reduced burnout.</p>
-          <p>Third, remote work allows employees to design their schedules around their peak productivity hours. Some people work best early in the morning, while others are more productive late at night. Traditional office hours force everyone into the same schedule, regardless of their natural rhythms.</p>
-        </div>
-      </div>
-      <div class="card" style="border-color:rgba(16,185,129,0.15);">
-        <div class="card-title"><span class="dot" style="background:var(--accent-green)"></span>Lecture</div>
-        <p style="color:var(--text-muted);font-size:0.85rem;margin-bottom:0.5rem;">Play the lecture once, then write your response.</p>
-        <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
-          <button class="btn btn-cyan btn-sm" onclick="playAudio('audio/writing-t1-lecture.wav','wt1PlayBtn')" id="wt1PlayBtn">Play Lecture</button>
-          <span id="wt1PlayStatus" style="color:var(--text-muted);font-size:12px;"></span>
+        <div class="card-title"><span class="dot" style="background:var(--accent-cyan)"></span>Email Scenario</div>
+        <div class="prompt-box">
+          <p style="font-size:0.9rem;line-height:1.6;">You are a university student. Your professor has announced that the final exam will be moved from Thursday to Monday, giving students one less day to prepare. Write an email to your professor expressing your concern and suggesting an alternative solution. Be specific about why the change is problematic and propose a reasonable compromise.</p>
         </div>
       </div>
       <div class="card">
         <div class="card-title"><span class="dot" style="background:var(--accent-amber)"></span>Your Response</div>
-        <p style="color:var(--text-muted);font-size:0.85rem;margin-bottom:0.75rem;">Summarize the points made in the lecture, explaining how they challenge the specific arguments in the reading passage. Aim for 150-225 words.</p>
-        <div class="word-counter">Words: <span id="wt1WordCount">0</span></div>
-        <textarea class="notepad-area" id="wt1-area" style="min-height:250px;" placeholder="Type your response here..."></textarea>
+        <div class="word-counter">Words: <span id="emailWordCount">0</span> (Target: 100-150)</div>
+        <textarea class="notepad-area" id="email-area" style="min-height:250px;" placeholder="Dear Professor [Name],
+
+I am writing to express my concern about..."></textarea>
+        <button class="btn btn-secondary btn-sm" style="margin-top:0.5rem;" onclick="saveToStorage('email-area','email-draft')">Save Draft</button>
       </div>
+      <div class="model-toggle" id="emailModelAnswer">
+        <p><strong>Model Answer (Band 4+):</strong></p>
+        <p>Dear Professor Johnson,</p>
+        <p>I am writing to respectfully express my concern about the exam being moved from Thursday to Monday. While I understand that scheduling changes are sometimes necessary, this shift gives us one less day to prepare for what is one of the most important assessments of the semester.</p>
+        <p>Many students, including myself, have arranged study groups and review sessions around the original Thursday date. Additionally, some students work part-time on weekends and rely on the extra day between Friday and Thursday to study. Moving the exam to Monday means we would need to compress our preparation into a single weekend.</p>
+        <p>I would like to suggest an alternative: perhaps the exam could remain on Thursday but start 30 minutes earlier, or we could receive an extension on the next assignment to compensate for the lost preparation time. I believe either solution would address the scheduling concern while still giving students a fair chance to demonstrate their knowledge.</p>
+        <p>Thank you for considering this request. I look forward to hearing your thoughts.</p>
+        <p>Best regards,<br>[Student Name]</p>
+      </div>
+      <button class="btn btn-secondary btn-sm" style="margin-top:0.75rem;" onclick="toggleReveal('emailModelAnswer')">👁️ Show Model Answer</button>
     </div>
 
-    <!-- ===== SLIDE 8: WRITING T2 ===== -->
-    <div class="slide" id="slide8">
+    <!-- ===== SLIDE 7: WRITING — WRITE FOR AN ACADEMIC DISCUSSION (2026 Format) ===== -->
+    <div class="slide" id="slide7">
       <div class="slide-header">
-        <span class="slide-num">08</span>
-        <div class="slide-title">Writing Task 2: Academic Discussion</div>
-        <div class="slide-subtitle">Read · Respond — 10 minutes</div>
+        <span class="slide-num">07</span>
+        <div class="slide-title">Writing: Academic Discussion</div>
+        <div class="slide-subtitle">Read posts · Contribute · 0-5 points · Target: 100+ words</div>
+      </div>
+      <div class="card" style="border:1px solid rgba(245,158,11,0.2);background:rgba(245,158,11,0.04);">
+        <div class="card-title"><span class="dot" style="background:var(--accent-amber)"></span>2026 TOEFL Format Note</div>
+        <p style="font-size:0.85rem;color:var(--text-muted);line-height:1.6;">Read the professor's question and student posts. Write your own contribution that adds to the discussion. Reference the other students' ideas and develop your own argument.</p>
       </div>
       <div class="card">
-        <div class="card-title"><span class="dot" style="background:var(--primary)"></span>Timer</div>
-        <div class="timer-row">
-          <div class="timer-box" id="wt2TimerBox">
-            <div class="timer-label">Time Remaining</div>
-            <div class="timer-display" id="wt2-time">10:00</div>
-          </div>
-          <div style="display:flex;align-items:center;gap:0.5rem;">
-            <button class="btn btn-cyan" id="btn-wt2-start" onclick="runWT2Clock()">Start</button>
-            <button class="btn btn-secondary btn-sm" onclick="resetWT2Clock()">Reset</button>
-          </div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-title"><span class="dot" style="background:var(--accent-cyan)"></span>Discussion Prompt</div>
+        <div class="card-title"><span class="dot" style="background:var(--accent-cyan)"></span>Discussion Thread</div>
         <div class="prompt-box">
-          <div class="speaker-label prof">Professor's Post</div>
+          <div class="speaker-label prof">Professor's Question</div>
           <p>Let's discuss government priorities regarding artificial intelligence. Some argue that governments should prioritize investment in AI research and development to remain competitive globally. Others contend that regulation should be the priority to prevent harm from uncontrolled AI development. What's your perspective? Do you agree more with Sofia or Liam, or do you have a different view?</p>
         </div>
         <div class="prompt-box">
@@ -820,10 +824,16 @@ header{position:fixed;top:0;left:0;right:0;z-index:100;height:var(--header-h);ba
       </div>
       <div class="card">
         <div class="card-title"><span class="dot" style="background:var(--accent-amber)"></span>Your Response</div>
-        <p style="color:var(--text-muted);font-size:0.85rem;margin-bottom:0.75rem;">Write 100+ words expressing your perspective. Reference the student posts and develop your own argument.</p>
-        <div class="word-counter">Words: <span id="wt2WordCount">0</span></div>
-        <textarea class="notepad-area" id="wt2-area" style="min-height:200px;" placeholder="Type your response here..."></textarea>
+        <div class="word-counter">Words: <span id="discWordCount">0</span> (Target: 100+)</div>
+        <textarea class="notepad-area" id="disc-area" style="min-height:200px;" placeholder="I agree with [student] that... However, I would also add that..."></textarea>
+        <button class="btn btn-secondary btn-sm" style="margin-top:0.5rem;" onclick="saveToStorage('disc-area','disc-draft')">Save Draft</button>
       </div>
+      <div class="model-toggle" id="discModelAnswer">
+        <p><strong>Model Answer (Band 4+):</strong></p>
+        <p>I agree with both Sofia and Liam to some extent, though I lean closer to Liam's perspective. While Sofia is correct that governments must invest in AI research to remain competitive, I believe this creates a false dichotomy. The most effective approach is to invest in both simultaneously.</p>
+        <p>What is often overlooked is that thoughtful regulation can actually accelerate innovation by creating clear rules and building public trust. Singapore's balanced approach to AI governance has made it a global hub for AI research while maintaining strong protections. Regulation need not stifle discovery — it creates the framework within which responsible research can flourish.</p>
+      </div>
+      <button class="btn btn-secondary btn-sm" style="margin-top:0.75rem;" onclick="toggleReveal('discModelAnswer')">👁️ Show Model Answer</button>
     </div>
 
     <!-- ===== SLIDE 9: SCORING ===== -->
@@ -840,8 +850,8 @@ header{position:fixed;top:0;left:0;right:0;z-index:100;height:var(--header-h);ba
           <tbody>
             <tr><td>Reading</td><td><input type="number" min="1" max="6" class="score-input" id="score-reading" oninput="calcBand()"></td><td>4+</td></tr>
             <tr><td>Listening</td><td><input type="number" min="1" max="6" class="score-input" id="score-listening" oninput="calcBand()"></td><td>4+</td></tr>
-            <tr><td>Speaking (avg of 4 tasks)</td><td><input type="number" min="1" max="6" class="score-input" id="score-speaking" oninput="calcBand()"></td><td>4+</td></tr>
-            <tr><td>Writing (avg of 2 tasks)</td><td><input type="number" min="1" max="6" class="score-input" id="score-writing" oninput="calcBand()"></td><td>4+</td></tr>
+            <tr><td>Speaking (11 items)</td><td><input type="number" min="1" max="6" class="score-input" id="score-speaking" oninput="calcBand()"></td><td>4+</td></tr>
+            <tr><td>Writing (3 task types)</td><td><input type="number" min="1" max="6" class="score-input" id="score-writing" oninput="calcBand()"></td><td>4+</td></tr>
           </tbody>
         </table></div>
       </div>
@@ -1559,20 +1569,19 @@ function resetSpeakingTask(id, prepSec, speakSec) {
   if (speakBox) speakBox.classList.remove('active-timer');
 }
 
-// ========= SPEAKING RECORDERS =========
+// ========= SPEAKING RECORDERS (Interview Questions) =========
 for (let t = 1; t <= 4; t++) {
   (function(tNum) {
     let rec = null, chunks = [], blobUrl = null;
-    const recBtn = document.getElementById('t' + tNum + 'RecBtn');
-    const stopBtn = document.getElementById('t' + tNum + 'StopBtn');
-    const ind = document.getElementById('t' + tNum + 'Rec');
-    const statusEl = document.getElementById('t' + tNum + 'RecStatus');
+    const recBtn = document.getElementById('iq' + tNum + 'RecBtn');
+    const stopBtn = document.getElementById('iq' + tNum + 'StopBtn');
+    const ind = document.getElementById('iq' + tNum + 'Rec');
+    const statusEl = document.getElementById('iq' + tNum + 'RecStatus');
     if (!recBtn || !stopBtn) return;
     recBtn.addEventListener('click', async () => {
       try {
         const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
         rec = new MediaRecorder(stream); chunks = [];
-        speakingRecs['t' + tNum] = rec;
         rec.ondataavailable = (e) => { if (e.data.size > 0) chunks.push(e.data); };
         rec.onstop = () => {
           const blob = new Blob(chunks, { type: 'audio/webm' });
@@ -1595,6 +1604,181 @@ for (let t = 1; t <= 4; t++) {
   })(t);
 }
 
+// ========= LISTEN & REPEAT (2026 Speaking Task 1) =========
+const lrSentenceData = [
+  "The rapid advancement of artificial intelligence is reshaping global economic structures.",
+  "Researchers have developed new models that predict climate patterns with remarkable accuracy.",
+  "Universities around the world are adapting their curricula to meet the demands of a digital economy.",
+  "The experiment yielded surprising results that challenged the researchers' initial hypotheses.",
+  "Understanding the relationship between technology and society requires interdisciplinary collaboration.",
+  "The findings suggest that conventional approaches may be insufficient to address this complex issue.",
+  "Collaborative research across disciplines has become essential for solving today's most pressing challenges."
+];
+let lrCurrentIdx = 0, lrTimerInterval = null;
+function initLRSentences() {
+  const el = document.getElementById('lrSentences');
+  if (!el) return;
+  el.innerHTML = lrSentenceData.map((s, i) => '<div class="speaking-task" style="opacity:' + (i === 0 ? '1' : '0.5') + ';" id="lr-sent-' + i + '"><div class="task-header"><span class="task-badge ind">Sentence ' + (i+1) + '</span></div><div class="task-desc" style="font-size:1rem;line-height:1.6;">' + s + '</div></div>').join('');
+}
+initLRSentences();
+function startLRSentence() {
+  if (lrTimerInterval) clearInterval(lrTimerInterval);
+  let rem = 10;
+  const disp = document.getElementById('lrTimerDisp');
+  const box = document.getElementById('lrTimerBox');
+  disp.textContent = '0:10'; box.classList.add('active-timer');
+  lrTimerInterval = setInterval(() => {
+    rem--;
+    disp.textContent = '0:' + String(rem).padStart(2, '0');
+    if (rem <= 3) disp.style.color = 'var(--accent-red)';
+    if (rem <= 0) {
+      clearInterval(lrTimerInterval); lrTimerInterval = null;
+      disp.textContent = '0:00'; box.classList.remove('active-timer'); disp.style.color = '';
+    }
+  }, 1000);
+}
+function nextLRSentence() {
+  if (lrTimerInterval) { clearInterval(lrTimerInterval); lrTimerInterval = null; }
+  document.getElementById('lrTimerDisp').textContent = '0:10';
+  document.getElementById('lrTimerBox').classList.remove('active-timer');
+  document.getElementById('lrTimerDisp').style.color = '';
+  if (lrCurrentIdx < lrSentenceData.length - 1) {
+    document.getElementById('lr-sent-' + lrCurrentIdx).style.opacity = '0.5';
+    lrCurrentIdx++;
+    document.getElementById('lr-sent-' + lrCurrentIdx).style.opacity = '1';
+    document.getElementById('lrProgress').textContent = 'Sentence ' + (lrCurrentIdx + 1) + ' / 7';
+  } else {
+    document.getElementById('lrProgress').textContent = 'Complete!';
+  }
+}
+
+// ========= LR RECORDER (2026 Speaking Task 1) =========
+(function() {
+  let rec = null, chunks = [], blobUrl = null;
+  const recBtn = document.getElementById('lrRecBtn');
+  const stopBtn = document.getElementById('lrStopBtn');
+  const ind = document.getElementById('lrRec');
+  const statusEl = document.getElementById('lrRecStatus');
+  if (!recBtn || !stopBtn) return;
+  recBtn.addEventListener('click', async () => {
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      rec = new MediaRecorder(stream); chunks = [];
+      rec.ondataavailable = (e) => { if (e.data.size > 0) chunks.push(e.data); };
+      rec.onstop = () => {
+        const blob = new Blob(chunks, { type: 'audio/webm' });
+        if (blobUrl) URL.revokeObjectURL(blobUrl);
+        blobUrl = URL.createObjectURL(blob);
+        recBtn.textContent = 'Again';
+        stream.getTracks().forEach(t => t.stop());
+        if (ind) { ind.classList.remove('recording'); ind.classList.add('off'); }
+        if (statusEl) statusEl.textContent = 'REC OFF';
+      };
+      rec.start();
+      recBtn.disabled = true; stopBtn.disabled = false;
+      if (ind) { ind.classList.remove('off'); ind.classList.add('recording'); }
+      if (statusEl) statusEl.textContent = 'REC';
+    } catch(e) { if (statusEl) statusEl.textContent = 'Mic denied'; }
+  });
+  stopBtn.addEventListener('click', () => {
+    if (rec && rec.state === 'recording') { rec.stop(); recBtn.disabled = false; stopBtn.disabled = true; }
+  });
+})();
+
+// ========= INTERVIEW Q TIMERS (2026 Speaking Task 2) =========
+const interviewTimers = {};
+function startInterviewQ(id, sec) {
+  if (interviewTimers[id]) clearInterval(interviewTimers[id]);
+  let rem = sec;
+  const disp = document.getElementById(id + 'Disp');
+  const box = document.getElementById(id + 'Timer');
+  if (!disp) return;
+  disp.textContent = formatTime(rem); box.classList.add('active-timer');
+  interviewTimers[id] = setInterval(() => {
+    rem--;
+    disp.textContent = formatTime(rem);
+    if (rem <= 10) disp.style.color = 'var(--accent-red)';
+    if (rem <= 0) {
+      clearInterval(interviewTimers[id]); interviewTimers[id] = null;
+      disp.textContent = '0:00'; box.classList.remove('active-timer'); disp.style.color = '';
+    }
+  }, 1000);
+}
+function resetInterviewQ(id, sec) {
+  if (interviewTimers[id]) { clearInterval(interviewTimers[id]); interviewTimers[id] = null; }
+  const disp = document.getElementById(id + 'Disp');
+  const box = document.getElementById(id + 'Timer');
+  if (disp) { disp.textContent = formatTime(sec); disp.style.color = ''; }
+  if (box) box.classList.remove('active-timer');
+}
+
+// ========= BUILD A SENTENCE (2026 Writing Task 1) =========
+const buildSentenceData = [
+  { words: ["artificial", "intelligence", "is", "transforming", "the", "landscape", "of", "scientific", "research"], answer: "Artificial intelligence is transforming the landscape of scientific research." },
+  { words: ["universities", "around", "the", "world", "are", "adapting", "their", "curricula", "to", "digital", "demands"], answer: "Universities around the world are adapting their curricula to digital demands." },
+  { words: ["the", "experiment", "yielded", "results", "that", "challenged", "the", "researchers'", "initial", "hypotheses"], answer: "The experiment yielded results that challenged the researchers' initial hypotheses." },
+  { words: ["remote", "workers", "experience", "fewer", "interruptions", "than", "office", "workers"], answer: "Remote workers experience fewer interruptions than office workers." },
+  { words: ["understanding", "the", "relationship", "between", "technology", "and", "society", "requires", "collaboration"], answer: "Understanding the relationship between technology and society requires collaboration." },
+  { words: ["the", "findings", "suggest", "that", "conventional", "approaches", "may", "be", "insufficient"], answer: "The findings suggest that conventional approaches may be insufficient." },
+  { words: ["collaborative", "research", "across", "disciplines", "has", "become", "essential", "for", "solving", "today's", "challenges"], answer: "Collaborative research across disciplines has become essential for solving today's challenges." },
+  { words: ["digital", "platforms", "have", "dramatically", "lowered", "barriers", "to", "entrepreneurship"], answer: "Digital platforms have dramatically lowered barriers to entrepreneurship." },
+  { words: ["coral", "reefs", "support", "approximately", "twenty-five", "percent", "of", "all", "marine", "species"], answer: "Coral reefs support approximately twenty-five percent of all marine species." },
+  { words: ["the", "strategic", "use", "of", "color", "extends", "beyond", "logos", "to", "the", "entire", "retail", "environment"], answer: "The strategic use of color extends beyond logos to the entire retail environment." }
+];
+function initBuildSentences() {
+  const el = document.getElementById('buildSentenceItems');
+  if (!el) return;
+  el.innerHTML = buildSentenceData.map((item, i) => {
+    const shuffled = [...item.words].sort(() => Math.random() - 0.5);
+    return '<div class="speaking-task"><div class="task-header"><span class="task-badge ind">' + (i+1) + '</span><span class="task-title">Rearrange:</span></div><div class="task-desc" style="font-size:0.95rem;letter-spacing:0.5px;color:var(--accent-cyan);">' + shuffled.join(' &nbsp; ') + '</div></div>';
+  }).join('');
+}
+initBuildSentences();
+
+// ========= WORD COUNTERS (2026 Format) =========
+document.addEventListener('input', function(e) {
+  if (e.target.matches('#email-area')) {
+    const text = e.target.value.trim();
+    document.getElementById('emailWordCount').textContent = text ? text.split(/\s+/).length : 0;
+  }
+  if (e.target.matches('#disc-area')) {
+    const text = e.target.value.trim();
+    document.getElementById('discWordCount').textContent = text ? text.split(/\s+/).length : 0;
+  }
+});
+
+// ========= LOCAL STORAGE SAVE/LOAD =========
+function saveToStorage(areaId, key) {
+  const val = document.getElementById(areaId)?.value;
+  if (val) localStorage.setItem('toefl-l10-' + key, val);
+}
+function loadFromStorage(areaId, key) {
+  const val = localStorage.getItem('toefl-l10-' + key);
+  if (val && document.getElementById(areaId)) document.getElementById(areaId).value = val;
+}
+
+// ========= REVEAL TOGGLE =========
+function toggleReveal(id) {
+  const el = document.getElementById(id);
+  if (el) el.classList.toggle('open');
+}
+
+// ========= LOCAL STORAGE SAVE/LOAD =========
+function saveToStorage(areaId, key) {
+  const val = document.getElementById(areaId)?.value;
+  if (val) localStorage.setItem('toefl-l10-' + key, val);
+}
+function loadFromStorage(areaId, key) {
+  const val = localStorage.getItem('toefl-l10-' + key);
+  if (val && document.getElementById(areaId)) document.getElementById(areaId).value = val;
+}
+
+// ========= REVEAL TOGGLE =========
+function toggleReveal(id) {
+  const el = document.getElementById(id);
+  if (el) el.classList.toggle('open');
+}
+
 // ========= GENERIC AUDIO PLAYER for Speaking/Writing =========
 function playAudio(src, btnId) {
   const spAudio = document.getElementById('speechAudio');
@@ -1607,7 +1791,7 @@ function playAudio(src, btnId) {
   };
 }
 
-// ========= WRITING TIMERS =========
+// ========= WRITING TIMERS (2026 Format) =========
 let wt1Interval = null, wt2Interval = null;
 let wt1Running = false, wt2Running = false;
 
@@ -1615,7 +1799,7 @@ function runWT1Clock() {
   if (wt1Running) return;
   wt1Running = true;
   document.getElementById('btn-wt1-start').disabled = true;
-  let t = 1200; const el = document.getElementById('wt1-time'); const box = document.getElementById('wt1TimerBox');
+  let t = 900; const el = document.getElementById('wt1-time'); const box = document.getElementById('wt1TimerBox');
   el.style.color = 'var(--primary)'; box.classList.add('active-timer'); box.classList.remove('warning');
   wt1Interval = setInterval(() => {
     t--;
@@ -1628,7 +1812,7 @@ function runWT1Clock() {
 }
 function resetWT1Clock() {
   clearInterval(wt1Interval); wt1Interval = null; wt1Running = false;
-  document.getElementById('wt1-time').textContent = '20:00';
+  document.getElementById('wt1-time').textContent = '15:00';
   const box = document.getElementById('wt1TimerBox');
   box.classList.remove('active-timer', 'warning');
   document.getElementById('wt1-time').style.color = 'var(--primary)';
@@ -1638,24 +1822,47 @@ function runWT2Clock() {
   if (wt2Running) return;
   wt2Running = true;
   document.getElementById('btn-wt2-start').disabled = true;
-  let t = 600; const el = document.getElementById('wt2-time'); const box = document.getElementById('wt2TimerBox');
+  let t = 900; const el = document.getElementById('wt2-time'); const box = document.getElementById('wt2TimerBox');
   el.style.color = 'var(--primary)'; box.classList.add('active-timer'); box.classList.remove('warning');
   wt2Interval = setInterval(() => {
     t--;
     const m = String(Math.floor(t / 60)).padStart(2, '0');
     const s = String(t % 60).padStart(2, '0');
     el.textContent = m + ':' + s;
-    if (t <= 60) { el.style.color = 'var(--accent-red)'; box.classList.add('warning'); }
+    if (t <= 120) { el.style.color = 'var(--accent-red)'; box.classList.add('warning'); }
     if (t <= 0) { clearInterval(wt2Interval); wt2Interval = null; wt2Running = false; el.textContent = '00:00'; box.classList.remove('active-timer'); document.getElementById('btn-wt2-start').disabled = false; }
   }, 1000);
 }
 function resetWT2Clock() {
   clearInterval(wt2Interval); wt2Interval = null; wt2Running = false;
-  document.getElementById('wt2-time').textContent = '10:00';
+  document.getElementById('wt2-time').textContent = '15:00';
   const box = document.getElementById('wt2TimerBox');
   box.classList.remove('active-timer', 'warning');
   document.getElementById('wt2-time').style.color = 'var(--primary)';
   document.getElementById('btn-wt2-start').disabled = false;
+}
+function runWT3Clock() {
+  if (wt2Running) return;
+  wt2Running = true;
+  document.getElementById('btn-wt3-start').disabled = true;
+  let t = 600; const el = document.getElementById('wt3-time'); const box = document.getElementById('wt3TimerBox');
+  el.style.color = 'var(--primary)'; box.classList.add('active-timer'); box.classList.remove('warning');
+  wt2Interval = setInterval(() => {
+    t--;
+    const m = String(Math.floor(t / 60)).padStart(2, '0');
+    const s = String(t % 60).padStart(2, '0');
+    el.textContent = m + ':' + s;
+    if (t <= 120) { el.style.color = 'var(--accent-red)'; box.classList.add('warning'); }
+    if (t <= 0) { clearInterval(wt2Interval); wt2Interval = null; wt2Running = false; el.textContent = '00:00'; box.classList.remove('active-timer'); document.getElementById('btn-wt3-start').disabled = false; }
+  }, 1000);
+}
+function resetWT3Clock() {
+  clearInterval(wt2Interval); wt2Interval = null; wt2Running = false;
+  document.getElementById('wt3-time').textContent = '10:00';
+  const box = document.getElementById('wt3TimerBox');
+  box.classList.remove('active-timer', 'warning');
+  document.getElementById('wt3-time').style.color = 'var(--primary)';
+  document.getElementById('btn-wt3-start').disabled = false;
 }
 
 // ========= WORD COUNTERS =========
@@ -1739,6 +1946,8 @@ function upgradeHarvest() {
 
 // ========= INIT =========
 document.getElementById('progressBar').style.width = '8.33%';
+loadFromStorage('email-area', 'email');
+loadFromStorage('disc-area', 'disc');
 </script>
 </body>
 </html>

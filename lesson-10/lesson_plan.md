@@ -263,140 +263,108 @@ Five passages total (3 lectures + 2 conversations). Play each recording once. St
 
 ---
 
-## 4. Speaking Section (16 min)
+## 4. Speaking Section (~8 min)
 
-### Task 1: Independent (15s prep, 45s speak)
+### Task 1: Listen & Repeat (7 sentences)
+Play each audio file once. Student repeats each sentence exactly. 10 seconds per sentence.
 
-**Prompt:** "Some people believe it is better to learn from personal experience. Others believe it is better to learn from the advice of others. Which approach do you think is more effective and why?"
+**Sentences:**
+1. The rapid advancement of artificial intelligence is reshaping global economic structures.
+2. Researchers have developed new models that predict climate patterns with remarkable accuracy.
+3. Universities around the world are adapting their curricula to meet the demands of a digital economy.
+4. The experiment yielded surprising results that challenged the researchers' initial hypotheses.
+5. Understanding the relationship between technology and society requires interdisciplinary collaboration.
+6. The findings suggest that conventional approaches may be insufficient to address this complex issue.
+7. Collaborative research across disciplines has become essential for solving today's most pressing challenges.
 
-**Teacher:** Read the prompt aloud. Start the 15-second prep timer. When prep ends, start the 45-second speak timer.
+**Teacher:** Play each audio file. Start the 10-second timer. Student repeats.
+
+---
+
+### Task 2: Take an Interview (4 questions)
+Answer each question. Up to 45 seconds per answer.
+
+**Questions:**
+1. "Describe a time when you had to adapt to an unexpected change. What happened and how did you handle it?"
+2. "Some people prefer to work independently, while others prefer to work in teams. Which do you prefer and why?"
+3. "Explain a concept or skill you've learned recently. How did you go about learning it?"
+4. "If you could change one thing about your educational experience, what would it be and why?"
+
+**Teacher:** Read each question. Start the 45-second timer. Student speaks.
+
+**Model Answers (Band 4+):**
+
+**Q1:** "Last semester, our group project partner dropped out two weeks before the deadline. We had to redistribute all the work. I took on the data analysis portion, which I wasn't originally assigned. I spent extra hours at the library learning the software we needed. In the end, we submitted on time and got a good grade. The experience taught me to be flexible and to step up when things don't go as planned."
+
+**Q2:** "I prefer working in teams because I think collaboration leads to better ideas. When I worked on a research project with three classmates, we each brought different strengths. One was great at organizing data, another at writing, and I was good at presenting. The final product was much stronger than anything any of us could have done alone. That said, I think clear roles and deadlines are important to make teamwork effective."
+
+**Q3:** "I recently learned how to use Python for data analysis. I started with online tutorials, then practiced by analyzing real datasets from my economics course. The hardest part was understanding how to clean messy data. I found that the best way to learn was to work on a specific project rather than just following generic tutorials. Now I can automate tasks that used to take me hours."
+
+**Q4:** "I would change the way group presentations are graded. Often, one person does most of the work while everyone gets the same grade. I think professors should use peer evaluations or individual reflections to assess each person's contribution. This would make group work feel more fair and motivate everyone to participate equally."
+
+---
+
+## 5. Writing Section (~23 min)
+
+### Task 1: Build a Sentence (10 items)
+Rearrange the words to form correct academic sentences. 0-1 points each (raw 0-10).
+
+**Items:**
+1. artificial intelligence is transforming the landscape of scientific research
+2. universities around the world are adapting their curricula to digital demands
+3. the experiment yielded results that challenged the researchers' initial hypotheses
+4. remote workers experience fewer interruptions than office workers
+5. understanding the relationship between technology and society requires collaboration
+6. the findings suggest that conventional approaches may be insufficient
+7. collaborative research across disciplines has become essential for solving today's challenges
+8. digital platforms have dramatically lowered barriers to entrepreneurship
+9. coral reefs support approximately twenty-five percent of all marine species
+10. the strategic use of color extends beyond logos to the entire retail environment
+
+**Teacher:** Display the words. Start the 10-minute timer. Student rearranges into correct sentences.
+
+---
+
+### Task 2: Write an Email (15 min)
+Write a complete email responding to the scenario. 0-5 points.
+
+**Scenario:** You are a university student. Your professor has announced that the final exam will be moved from Thursday to Monday, giving students one less day to prepare. Write an email to your professor expressing your concern and suggesting an alternative solution.
+
+**Teacher:** Display the scenario. Start the 15-minute timer. Student writes 100-150 words.
 
 **Model Answer (Band 4+):**
-> "I think both approaches are valuable, but I lean toward learning from personal experience being more effective. When you experience something yourself, the lesson stays with you much longer. For example, when I failed my first university exam because I didn't prepare properly, I never made that mistake again. A friend could have told me to study harder, but actually experiencing the failure taught me in a way that advice never could. However, I think the best approach is to combine both — listen to advice, but also be willing to learn from your own experiences."
+> Dear Professor Johnson,
+>
+> I am writing to respectfully express my concern about the exam being moved from Thursday to Monday. While I understand that scheduling changes are sometimes necessary, this shift gives us one less day to prepare for what is one of the most important assessments of the semester.
+>
+> Many students, including myself, have arranged study groups and review sessions around the original Thursday date. Additionally, some students work part-time on weekends and rely on the extra day between Friday and Thursday to study. Moving the exam to Monday means we would need to compress our preparation into a single weekend.
+>
+> I would like to suggest an alternative: perhaps the exam could remain on Thursday but start 30 minutes earlier, or we could receive an extension on the next assignment to compensate for the lost preparation time. I believe either solution would address the scheduling concern while still giving students a fair chance to demonstrate their knowledge.
+>
+> Thank you for considering this request. I look forward to hearing your thoughts.
+>
+> Best regards,
+> [Student Name]
 
 ---
 
-### Task 2: Campus R+L+S (30s prep, 60s speak)
+### Task 3: Write for an Academic Discussion (10 min)
+Read the professor's question and student posts. Write your own contribution. 0-5 points. Target: 100+ words.
 
-**Campus Announcement (teacher reads aloud):**
-> "The university library will be implementing new operating hours beginning next semester. Starting January 15, the main library will close at 9 PM on weekdays instead of midnight. Weekend hours will remain unchanged. The administration states that this change is necessary due to budget constraints and low student usage after 9 PM. Additionally, the library will introduce a new online booking system for study rooms, replacing the current first-come, first-served policy."
+**Discussion Thread:**
 
-**Conversation (play `audio/speaking-t2-conv.wav` or read aloud):**
-
-> **Student A:** Did you see the email about the library hours?
->
-> **Student B:** Yeah, I can't believe they're closing at 9 now. I always study there until late.
->
-> **Student A:** Same here. The library is the only quiet place on campus after my roommate goes to sleep.
->
-> **Student B:** And the online booking system sounds complicated. What if someone doesn't have reliable internet access at home?
->
-> **Student A:** Exactly. They say it's because of budget cuts, but I think they should have asked students before making this decision.
->
-> **Student B:** I'm going to write to the student council about it. Maybe we can get them to reconsider.
-
-**Question:** "The woman expresses her opinion about the library's new policy. State her opinion and explain how she supports it."
-
-**Teacher:** Read the announcement aloud. Play the conversation. Then start 30s prep + 60s speak timers.
-
-**Model Answer (Band 4+):**
-> "The woman disagrees with the new library policy. She gives two main reasons. First, she says the library is the only quiet place on campus where she can study late at night. Without access until midnight, she would struggle to find a suitable study environment. Second, she points out that requiring students to use an online booking system could be unfair to students who don't have reliable internet access at home. She believes the university should have consulted students before making these changes and plans to contact the student council about it."
-
----
-
-### Task 3: Academic R+L+S (30s prep, 60s speak)
-
-**Short Reading (teacher reads aloud):**
-> "The spotlight effect is a psychological concept referring to people's tendency to overestimate how much others notice and remember about them. Research shows that individuals consistently believe they are being observed and evaluated more closely than they actually are. For example, a person who spills coffee at a party may feel that everyone noticed and will remember the incident for days, when in reality most people barely registered it. The spotlight effect explains why people often feel self-conscious in public situations more than is warranted."
-
-**Lecture (play `audio/speaking-t3-lecture.wav` or read aloud):**
-
-> "A classic study on the spotlight effect was conducted by Thomas Gilovich and his colleagues at Cornell University. In this study, individual students were asked to put on a Barry Manilow T-shirt — which, as you can imagine, was considered quite embarrassing for college students. They then entered a room with several other students. After a few minutes, the student wearing the T-shirt was asked to estimate how many people in the room had noticed what they were wearing. The actual number of people who noticed was far lower than what the students estimated — only about half as many people noticed as the students thought. This demonstrates that we are not nearly as conspicuous as we believe ourselves to be."
-
-**Question:** "Explain how the study described in the lecture illustrates the concept of the spotlight effect."
-
-**Teacher:** Read the short text aloud. Play the lecture. Then start timers.
-
-**Model Answer (Band 4+):**
-> "The lecture describes a study that illustrates the spotlight effect — our tendency to overestimate how much others notice us. In the study, students wore an embarrassing Barry Manilow T-shirt and entered a room. The students estimated that many people noticed their shirt, but actually only about half as many people noticed as they thought. This demonstrates the spotlight effect because the students believed they were more conspicuous and more closely observed than they actually were. The study shows how our perception of being noticed is often exaggerated."
-
----
-
-### Task 4: Academic L+S (20s prep, 60s speak)
-
-**Lecture (play `audio/speaking-t4-lecture.wav` or read aloud):**
-
-> "Today we'll talk about the mere exposure effect — a psychological phenomenon where people develop a preference for things simply because they are familiar with them. The more we are exposed to something, the more we tend to like it, even if we aren't consciously aware of the repeated exposure.
->
-> A classic example is a study where researchers showed participants a series of geometric shapes on a screen so quickly that the participants couldn't consciously see them. Some shapes were shown many times, while others were shown only once. Later, when participants were shown all the shapes at a normal speed and asked which ones they liked more, they consistently preferred the shapes they had been exposed to more frequently — even though they had no conscious memory of seeing them before.
->
-> This effect has important real-world applications. It helps explain why advertising works — even if we don't consciously pay attention to an advertisement, repeated exposure makes us more favorably disposed toward the product. It also explains why we tend to prefer familiar music, familiar faces, and familiar places. The mere exposure effect operates below the level of conscious awareness, subtly shaping our preferences every day."
-
-**Question:** "Using the examples from the lecture, explain what the mere exposure effect is and how it influences preferences."
-
-**Teacher:** Play the lecture. Then start timers.
-
-**Model Answer (Band 4+):**
-> "The mere exposure effect is the psychological phenomenon where people develop a preference for things they are familiar with, even without conscious awareness. The lecture gives an example of a study where participants were shown geometric shapes too quickly to see consciously. Shapes shown more frequently were later preferred over shapes shown less often, even though participants didn't remember seeing them. The professor explains this applies to advertising — repeated exposure to an ad makes us more likely to like a product, even if we don't consciously notice the advertisement. It also explains why we prefer familiar music and faces. The key point is that this effect happens below conscious awareness."
-
----
-
-## 5. Writing Section (29 min)
-
-### Task 1: Integrated Writing (20 min)
-
-**Reading Passage (displayed on screen):**
-
-**Remote Work Improves Productivity**
-
-> Many companies are discovering that allowing employees to work remotely leads to significant increases in productivity. Several factors account for this improvement.
->
-> First, remote workers experience fewer interruptions. In a traditional office environment, colleagues frequently interrupt each other with questions, impromptu meetings, and casual conversations. A study by the University of California found that office workers are interrupted an average of once every three minutes, and it takes approximately twenty-three minutes to fully refocus after each interruption. Remote workers, by contrast, control their environment and can structure their day around focused work.
->
-> Second, remote work eliminates commuting time. The average American commuter spends over two hundred hours per year traveling to and from work. When this time is reclaimed, employees can invest it in additional work, exercise, or family, leading to better work-life balance and reduced burnout.
->
-> Third, remote work allows employees to design their schedules around their peak productivity hours. Some people work best early in the morning, while others are more productive late at night. Traditional office hours force everyone into the same schedule, regardless of their natural rhythms.
-
-**Lecture (play `audio/writing-t1-lecture.wav` or read aloud):**
-
-> "The argument that remote work universally improves productivity is overly simplistic. Let's look at the evidence more carefully.
->
-> Regarding interruptions, while it's true that office environments have distractions, remote workers face their own set of interruptions that are often overlooked. Family members, household responsibilities, and the blurring of boundaries between work and personal life can be equally disruptive. A Microsoft study actually found that remote workers experienced longer workdays, not more productive ones.
->
-> As for commuting, the time saved is often offset by what researchers call 'productivity leakage' — the informal learning and problem-solving that happens in the hallway conversations and chance encounters that simply don't occur when everyone works from home. Many breakthrough ideas in companies have emerged from these unplanned interactions.
->
-> Finally, the flexibility argument assumes that all employees have the self-discipline and home environment to work effectively remotely. This is not always the case. Junior employees, in particular, lose the mentorship and on-the-job learning that occurs naturally in an office setting. The data suggests that while remote work can benefit some employees in some roles, it is not a universal solution for productivity."
-
-**Question:** "Summarize the points made in the lecture, explaining how they challenge the specific arguments made in the reading passage."
-
-**Teacher:** Make sure the reading passage is displayed. Play the lecture. Start the 20-minute timer.
-
-**Model Answer:**
-> "The reading passage argues that remote work improves productivity by reducing interruptions, eliminating commuting time, and allowing flexible schedules. However, the lecture challenges each of these points.
->
-> First, while the reading claims remote workers face fewer interruptions, the lecture points out that remote workers deal with different distractions such as family members and household responsibilities. A Microsoft study found that remote workers actually worked longer days, not more productive ones.
->
-> Second, regarding commuting, the lecture argues that the time saved is offset by 'productivity leakage' — the loss of informal learning and spontaneous collaboration that happens in office environments. Breakthrough ideas often come from unplanned conversations that don't happen when people work from home.
->
-> Finally, the lecture challenges the flexibility argument by noting that not all employees have the self-discipline or home environment to work effectively remotely. Junior employees, in particular, lose valuable mentorship opportunities that occur naturally in offices. The lecture concludes that remote work benefits some but is not a universal solution."
-
----
-
-### Task 2: Academic Discussion (10 min)
-
-**Prompt (displayed on screen):**
-> "Let's discuss government priorities regarding artificial intelligence. Some argue that governments should prioritize investment in AI research and development to remain competitive globally. Others contend that regulation should be the priority to prevent harm from uncontrolled AI development. What's your perspective? Do you agree more with Sofia or Liam, or do you have a different view?"
+**Professor's Question:** "Let's discuss government priorities regarding artificial intelligence. Some argue that governments should prioritize investment in AI research and development to remain competitive globally. Others contend that regulation should be the priority to prevent harm from uncontrolled AI development. What's your perspective? Do you agree more with Sofia or Liam, or do you have a different view?"
 
 **Sofia's Post:** "Research should come first. If governments don't invest in AI research, they'll fall behind economically and militarily. Regulation can come later once we understand the technology better."
 
 **Liam's Post:** "Regulation is urgent. AI is already causing harm — biased algorithms, job displacement, privacy violations. Smart regulation doesn't prevent innovation — it creates trust that actually enables it."
 
-**Teacher:** Read the prompt. Start the 10-minute timer.
+**Teacher:** Display the thread. Start the 10-minute timer. Student writes 100+ words.
 
-**Model Answer:**
-> "I agree with both Sofia and Liam to some extent, though I lean closer to Liam's perspective. While Sofia is correct that governments must invest in AI research to remain competitive, I believe this creates a false dichotomy. The most effective approach is to invest in both simultaneously.
+**Model Answer (Band 4+):**
+> I agree with both Sofia and Liam to some extent, though I lean closer to Liam's perspective. While Sofia is correct that governments must invest in AI research to remain competitive, I believe this creates a false dichotomy. The most effective approach is to invest in both simultaneously.
 >
-> What is often overlooked is that thoughtful regulation can actually accelerate innovation by creating clear rules and building public trust. Singapore's balanced approach to AI governance has made it a global hub for AI research while maintaining strong protections. Regulation need not stifle discovery — it creates the framework within which responsible research can flourish."
+> What is often overlooked is that thoughtful regulation can actually accelerate innovation by creating clear rules and building public trust. Singapore's balanced approach to AI governance has made it a global hub for AI research while maintaining strong protections. Regulation need not stifle discovery — it creates the framework within which responsible research can flourish.
 
 ---
 
@@ -412,17 +380,16 @@ Five passages total (3 lectures + 2 conversations). Play each recording once. St
 | 2 | Poor — little comprehension |
 | 1 | Minimal — unable to understand |
 
-### Speaking (1-6 per task)
+### Speaking (0-5 per item, averaged across 11 items)
 | Score | Description |
 |---|---|
-| 6 | Fluent, accurate, well-organized, natural delivery |
-| 5 | Mostly fluent, minor errors, clear organization |
-| 4 | Adequate, some hesitation, generally coherent |
-| 3 | Limited, noticeable errors, some incoherence |
-| 2 | Poor, fragmented, frequent errors |
+| 5 | Complete, accurate, natural delivery |
+| 4 | Mostly complete, minor hesitations |
+| 3 | Partial, noticeable errors or omissions |
+| 2 | Significant errors, incomplete |
 | 1 | Minimal, unable to communicate |
 
-### Writing (1-5 per task)
+### Writing (0-5 per task type, averaged across 3 tasks)
 | Score | Description |
 |---|---|
 | 5 | Clear position, compelling evidence, precise language |
@@ -458,23 +425,20 @@ Five passages total (3 lectures + 2 conversations). Play each recording once. St
 ### Listening
 > "Now the Listening section. You'll hear three lectures and two conversations. You can take notes while you listen. After each one, you'll answer questions. I'll play each recording once, just like the real test."
 
-### Speaking Task 1
-> "Speaking section, Task 1. I'll give you a question. You'll have 15 seconds to prepare and 45 seconds to speak. Start speaking when the timer begins."
+### Speaking Task 1 (Listen & Repeat)
+> "Speaking section, Task 1: Listen & Repeat. You'll hear 7 sentences. Play each audio once, then repeat exactly. You have 10 seconds per sentence."
 
-### Speaking Task 2
-> "Task 2. First, I'll read a short announcement. Then you'll hear a conversation about it. You'll have 30 seconds to prepare and 60 seconds to speak."
+### Speaking Task 2 (Take an Interview)
+> "Task 2: Take an Interview. I'll ask you 4 questions. You have up to 45 seconds for each answer. Think before you speak, but there's no prep time."
 
-### Speaking Task 3
-> "Task 3. First, I'll read a short academic text. Then you'll hear part of a lecture. You'll have 30 seconds to prepare and 60 seconds to speak."
+### Writing Task 1 (Build a Sentence)
+> "Writing section, Task 1: Build a Sentence. You have 10 minutes. Rearrange the words to form correct academic sentences."
 
-### Speaking Task 4
-> "Task 4. You'll hear part of a lecture. You'll have 20 seconds to prepare and 60 seconds to speak."
+### Writing Task 2 (Write an Email)
+> "Task 2: Write an Email. You have 15 minutes. Read the scenario, then write a complete email. Aim for 100-150 words."
 
-### Writing Task 1
-> "Writing section, Task 1. You have 20 minutes. Read the passage, listen to the lecture, then write how the lecture challenges the reading. Aim for 150 to 225 words."
-
-### Writing Task 2
-> "Final task. You have 10 minutes to write an academic discussion post. Read the professor's prompt and the two student responses, then write your own. Aim for 100 or more words."
+### Writing Task 3 (Academic Discussion)
+> "Final task: Write for an Academic Discussion. You have 10 minutes. Read the professor's question and the two student responses, then write your own. Aim for 100 or more words."
 
 ---
 
@@ -489,7 +453,3 @@ Five passages total (3 lectures + 2 conversations). Play each recording once. St
 | `audio/listening-lecture-3.wav` | Color Psychology in Marketing | ~3:00 |
 | `audio/listening-conv-1.wav` | Office hours — research paper | ~2:00 |
 | `audio/listening-conv-2.wav` | Service encounter — registration | ~2:00 |
-| `audio/speaking-t2-conv.wav` | Campus conversation (Task 2) | ~1:30 |
-| `audio/speaking-t3-lecture.wav` | Spotlight effect lecture (Task 3) | ~1:00 |
-| `audio/speaking-t4-lecture.wav` | Mere exposure effect lecture (Task 4) | ~1:30 |
-| `audio/writing-t1-lecture.wav` | Remote work critique lecture | ~2:00 |
