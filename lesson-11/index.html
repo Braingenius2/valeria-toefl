@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Valeria — Lesson 11: TOEFL Reading & Writing Recovery (Private Deck)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #090d16;
+      --bg-card: #131a26;
+      --border-color: #243042;
+      --text-main: #f1f5f9;
+      --text-muted: #64748b;
+      --primary: #f59e0b;
+      --primary-hover: #d97706;
+      --primary-dim: rgba(245, 158, 11, 0.12);
+      --accent-blue: #38bdf8;
+      --accent-green: #10b981;
+      --accent-red: #ef4444;
+      --accent-purple: #a855f7;
+      --glass-bg: rgba(19, 26, 38, 0.85);
+      --glass-border: rgba(255, 255, 255, 0.05);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      display: flex;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    .sidebar {
+      width: 260px;
+      background: var(--bg-card);
+      border-right: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      padding: 1.5rem 1rem;
+      position: fixed;
+      height: 100vh;
+      z-index: 100;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 2rem;
+      padding: 0 0.5rem;
+    }
+    .brand-badge {
+      background: var(--primary);
+      color: #000;
+      font-weight: 700;
+      font-size: 0.75rem;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      text-transform: uppercase;
+    }
+    .brand-title { font-weight: 600; font-size: 1.1rem; color: var(--text-main); }
+    .nav-btn {
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--text-muted);
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      text-align: left;
+      font-size: 0.9rem;
+      font-family: inherit;
+      cursor: pointer;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      transition: all 0.2s ease;
+    }
+    .nav-btn:hover { background: rgba(255, 255, 255, 0.03); color: var(--text-main); }
+    .nav-btn.active {
+      background: var(--primary-dim);
+      border-color: rgba(245, 158, 11, 0.3);
+      color: var(--primary);
+      font-weight: 600;
+    }
+    .nav-num {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.8rem;
+      opacity: 0.7;
+    }
+    .main-content {
+      margin-left: 260px;
+      flex: 1;
+      padding: 2rem 3rem;
+      max-width: 1200px;
+    }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .page-title { font-size: 1.5rem; font-weight: 700; color: var(--text-main); }
+    .tag {
+      background: rgba(56, 189, 248, 0.1);
+      color: var(--accent-blue);
+      border: 1px solid rgba(56, 189, 248, 0.2);
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-family: 'Fira Code', monospace;
+    }
+    .slide { display: none; animation: fadeIn 0.3s ease; }
+    .slide.active { display: block; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+    
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .card-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .shadowing-text {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: #cbd5e1;
+      margin-bottom: 1.5rem;
+      background: rgba(0, 0, 0, 0.2);
+      padding: 1.25rem;
+      border-radius: 8px;
+      border-left: 3px solid var(--primary);
+    }
+    .shadowing-word { transition: background 0.15s ease, color 0.15s ease; border-radius: 3px; padding: 0 2px; }
+    .shadowing-word.active { background: var(--primary); color: #000; font-weight: 600; }
+    
+    .controls { display: flex; gap: 0.75rem; align-items: center; flex-wrap: wrap; margin-bottom: 1rem; }
+    .btn {
+      background: var(--primary);
+      color: #000;
+      border: none;
+      padding: 0.6rem 1.2rem;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      font-family: inherit;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: background 0.2s ease;
+    }
+    .btn:hover { background: var(--primary-hover); }
+    .btn-secondary {
+      background: transparent;
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+    }
+    .btn-secondary:hover { background: rgba(255, 255, 255, 0.05); }
+    .btn-danger { background: var(--accent-red); color: #fff; }
+    
+    .timer-display {
+      font-family: 'Fira Code', monospace;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--primary);
+      background: #000;
+      padding: 0.5rem 1.2rem;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      display: inline-block;
+    }
+    
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
+    
+    .vocab-card {
+      background: rgba(0, 0, 0, 0.25);
+      border: 1px solid var(--border-color);
+      padding: 1rem;
+      border-radius: 8px;
+    }
+    .vocab-word { font-weight: 700; color: var(--accent-blue); font-size: 1rem; }
+    .vocab-ipa { font-family: 'Fira Code', monospace; font-size: 0.8rem; color: var(--text-muted); margin: 0.2rem 0 0.5rem 0; }
+    .vocab-note { font-size: 0.85rem; color: #e2e8f0; line-height: 1.4; }
+    
+    .scaffold-step {
+      background: rgba(245, 158, 11, 0.04);
+      border-left: 3px solid var(--primary);
+      padding: 1rem;
+      margin-bottom: 0.75rem;
+      border-radius: 0 8px 8px 0;
+    }
+    .step-num { font-family: 'Fira Code', monospace; font-size: 0.8rem; color: var(--primary); font-weight: 700; }
+    .step-title { font-weight: 600; font-size: 0.95rem; margin-bottom: 0.3rem; }
+    .step-frame { font-size: 0.85rem; color: var(--accent-blue); font-style: italic; }
+    
+    .error-table { width: 100%; border-collapse: collapse; margin-top: 1rem; font-size: 0.9rem; }
+    .error-table th, .error-table td { padding: 0.75rem 1rem; border: 1px solid var(--border-color); text-align: left; }
+    .error-table th { background: rgba(0, 0, 0, 0.4); color: var(--primary); font-weight: 600; }
+    .text-red { color: var(--accent-red); }
+    .text-green { color: var(--accent-green); }
+    
+    textarea, input[type="text"] {
+      width: 100%;
+      background: rgba(0,0,0,0.4);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 0.75rem;
+      border-radius: 6px;
+      font-family: inherit;
+      font-size: 0.9rem;
+      resize: vertical;
+    }
+    textarea:focus, input[type="text"]:focus { outline: none; border-color: var(--primary); }
+    .word-count-badge { font-family: 'Fira Code', monospace; font-size: 0.85rem; color: var(--accent-green); margin-top: 0.5rem; }
+
+    .reveal-box {
+      display: none;
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.2);
+      padding: 1rem;
+      border-radius: 8px;
+      margin-top: 0.75rem;
+      font-size: 0.9rem;
+    }
+    .reveal-box.show { display: block; }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="brand">
+      <span class="brand-badge">TOEFL</span>
+      <span class="brand-title">Valeria L11</span>
+    </div>
+    <button class="nav-btn active" onclick="switchSlide(0)">
+      <span class="nav-num">01</span> Shadowing & Pron
+    </button>
+    <button class="nav-btn" onclick="switchSlide(1)">
+      <span class="nav-num">02</span> Reading Strategy
+    </button>
+    <button class="nav-btn" onclick="switchSlide(2)">
+      <span class="nav-num">03</span> Controlled Drills
+    </button>
+    <button class="nav-btn" onclick="switchSlide(3)">
+      <span class="nav-num">04</span> Reading Practice
+    </button>
+    <button class="nav-btn" onclick="switchSlide(4)">
+      <span class="nav-num">05</span> 8-Min Writing
+    </button>
+    <button class="nav-btn" onclick="switchSlide(5)">
+      <span class="nav-num">06</span> Live Feedback
+    </button>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="main-content">
+    <header class="header">
+      <div>
+        <h1 class="page-title">Reading &amp; Writing Recovery</h1>
+        <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 0.2rem;">Diagnostic Target: Reading 3.0→4.5 | Writing 3.0→4.5</p>
+      </div>
+      <span class="tag">PRIVATE ZOOM DECK</span>
+    </header>
+
+    <!-- SLIDE 1: SHADOWING & PRONUNCIATION -->
+    <div class="slide active" id="slide-0">
+      <div class="card">
+        <div class="card-title">🎙️ Warm-up Shadowing: Academic Mobility</div>
+        <div class="shadowing-text" id="shadowingTextDisplay">
+          So international academic mobility has really transformed higher education. It fosters unprecedented cross-cultural collaboration — but at the same time it creates complex administrative and linguistic challenges. As universities compete globally for research talent, students have to adapt fast to rigorous academic standards and diverse pedagogical approaches. To achieve fluency in academic discourse, you don't just need lexical breadth. You also need to synthesize abstract concepts under strict time constraints. Ultimately, success in international academia hinges on bridging cultural differences with precise communication.
+        </div>
+        <div class="controls">
+          <button class="btn" onclick="toggleShadowingPacer()">▶ Start Pacer</button>
+          <button class="btn btn-secondary" onclick="resetShadowingPacer()">↺ Reset</button>
+          <audio id="shadowingAudio" src="audio/shadowing.wav" preload="auto" style="display:none;"></audio>
+          <button class="btn btn-secondary" onclick="document.getElementById('shadowingAudio').play()">🔊 Play Audio</button>
+          <span style="font-size: 0.85rem; color: var(--text-muted); margin-left: 0.5rem;">Speed:</span>
+          <select id="pacerSpeed" style="background:#000; color:#fff; padding:0.4rem; border-radius:4px; border:1px solid var(--border-color);">
+            <option value="450">130 WPM (Slow)</option>
+            <option value="380" selected>150 WPM (Target)</option>
+            <option value="320">175 WPM (Fast)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">🎯 Re-Activating 8 Pronunciation Flags (from L2)</div>
+        <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1rem;">Click cards to hear stress placement or drill with student:</p>
+        <div class="grid-4">
+          <div class="vocab-card">
+            <div class="vocab-word">psychology</div>
+            <div class="vocab-ipa">/saɪˈkɒl.ə.dʒi/</div>
+            <div class="vocab-note">Stress on 2nd syllable <strong>-CHO-</strong></div>
+          </div>
+          <div class="vocab-card">
+            <div class="vocab-word">counterintuitive</div>
+            <div class="vocab-ipa">/ˌkaʊn.tər.ɪnˈtjuː.ɪ.tɪv/</div>
+            <div class="vocab-note">Primary stress on <strong>-TU-</strong></div>
+          </div>
+          <div class="vocab-card">
+            <div class="vocab-word">fundamentally</div>
+            <div class="vocab-ipa">/ˌfʌn.dəˈmen.təl.i/</div>
+            <div class="vocab-note">Primary stress on <strong>-MEN-</strong></div>
+          </div>
+          <div class="vocab-card">
+            <div class="vocab-word">contradict</div>
+            <div class="vocab-ipa">/ˌkɒn.trəˈdɪkt/</div>
+            <div class="vocab-note">Final syllable stress <strong>-DICT</strong></div>
+          </div>
+          <div class="vocab-card">
+            <div class="vocab-word">landmark study</div>
+            <div class="vocab-ipa">/ˈlænd.mɑːk ˈstʌd.i/</div>
+            <div class="vocab-note">Compound noun stress on <strong>LAND-</strong></div>
+          </div>
+          <div class="vocab-card">
+            <div class="vocab-word">tedious task</div>
+            <div class="vocab-ipa">/ˈtiː.di.əs tɑːsk/</div>
+            <div class="vocab-note">Long /iː/ in <strong>TE-dious</strong></div>
+          </div>
+          <div class="vocab-card">
+            <div class="vocab-word">subsequently</div>
+            <div class="vocab-ipa">/ˈsʌb.sɪ.kwənt.li/</div>
+            <div class="vocab-note">First syllable stress <strong>SUB-</strong></div>
+          </div>
+          <div class="vocab-card">
+            <div class="vocab-word">unconsciously</div>
+            <div class="vocab-ipa">/ʌnˈkɒn.ʃəs.li/</div>
+            <div class="vocab-note">Prefix contrast vs <i>subconsciously</i></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">🎙️ Pronunciation Recording (Homework)</div>
+        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:1rem;">Record the 8 pronunciation flag words in full sentences. Click Start, speak clearly, then Stop. Your recording appears below for playback.</p>
+        <div style="display:flex;gap:0.5rem;align-items:center;margin-bottom:0.75rem;">
+          <button class="btn" id="recStartBtn" onclick="startRec()">🎙️ Start</button>
+          <button class="btn" id="recStopBtn" onclick="stopRec()" disabled>⏹️ Stop</button>
+          <span id="recStatus" style="font-size:0.85rem;color:var(--text-muted);"></span>
+        </div>
+        <audio id="recAudio" controls style="display:none;width:100%;margin-top:0.5rem;"></audio>
+      </div>
+    </div>
+
+    <!-- SLIDE 2: READING & WRITING STRATEGY -->
+    <div class="slide" id="slide-1">
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-title">📖 Reading Recovery: Inference Chains</div>
+          <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1rem;">Why Valeria scored 3.0 in L10 Reading &amp; how to fix it:</p>
+          <div style="background: rgba(239, 68, 68, 0.08); border-left: 3px solid var(--accent-red); padding: 0.8rem; margin-bottom: 1rem; font-size: 0.85rem;">
+            <strong>The Outside Knowledge Trap:</strong> Picking an option that is a real-world fact but <em>not strictly supported</em> by the text lines.
+          </div>
+          <div style="background: rgba(16, 185, 129, 0.08); border-left: 3px solid var(--accent-green); padding: 0.8rem; font-size: 0.85rem;">
+            <strong>Golden Rule of TOEFL Inference:</strong> The correct option must be a 100% direct logical extension of 1–2 lines. If it requires 2 steps of guessing, it is incorrect!
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">✍️ Writing Recovery: 8-Min 5-Sentence Formula</div>
+          <div class="scaffold-step">
+            <div class="step-num">SENTENCE 1</div>
+            <div class="step-title">Position &amp; Concession</div>
+            <div class="step-frame">"While I acknowledge Sofia's point that [X], I strongly maintain that [Position]."</div>
+          </div>
+          <div class="scaffold-step">
+            <div class="step-num">SENTENCE 2</div>
+            <div class="step-title">Core Rationale</div>
+            <div class="step-frame">"This is primarily because [Key Reason], which directly impacts [Context]."</div>
+          </div>
+          <div class="scaffold-step">
+            <div class="step-num">SENTENCE 3</div>
+            <div class="step-title">Counter-Argument Anchor</div>
+            <div class="step-frame">"Critics often argue that [Counterpoint], yet this perspective overlooks [Rebuttal]."</div>
+          </div>
+          <div class="scaffold-step">
+            <div class="step-num">SENTENCE 4</div>
+            <div class="step-title">Concrete Illustration</div>
+            <div class="step-frame">"For instance, in recent studies regarding [Topic], researchers observed that [Example]."</div>
+          </div>
+          <div class="scaffold-step">
+            <div class="step-num">SENTENCE 5</div>
+            <div class="step-title">Synthesis &amp; Conclusion</div>
+            <div class="step-frame">"Therefore, balancing [Factor A] with [Factor B] is essential for long-term [Outcome]."</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 3: CONTROLLED DRILLS -->
+    <div class="slide" id="slide-2">
+      <div class="card">
+        <div class="card-title">🧠 Exercise 1: Inference Discrimination</div>
+        <p style="font-size: 0.9rem; color: #cbd5e1; margin-bottom: 0.75rem;">
+          <strong>Passage Excerpt:</strong> "The implementation of automated grading systems in higher education has significantly reduced turnaround time for student assessment. However, pedagogical experts emphasize that while algorithms excel at evaluating multiple-choice and standardized computational problems, they struggle to evaluate qualitative arguments, nuanced critical thinking, and stylistic creativity in humanities essays."
+        </p>
+        <div style="font-size: 0.9rem; margin-bottom: 0.5rem;"><strong>Question:</strong> What can be inferred about automated grading systems?</div>
+        <div style="display: grid; gap: 0.5rem; font-size: 0.85rem;">
+          <label style="background: rgba(0,0,0,0.2); padding: 0.5rem; border-radius: 4px; display: block;">(A) Automated grading systems will eventually replace human professors in humanities departments.</label>
+          <label style="background: rgba(0,0,0,0.2); padding: 0.5rem; border-radius: 4px; display: block;">(B) Automated grading is more suitable for STEM fields than for qualitative humanities evaluations.</label>
+          <label style="background: rgba(0,0,0,0.2); padding: 0.5rem; border-radius: 4px; display: block;">(C) Students prefer receiving quick feedback from automated systems rather than waiting for comments.</label>
+          <label style="background: rgba(0,0,0,0.2); padding: 0.5rem; border-radius: 4px; display: block;">(D) Humanities essays cannot be graded fairly by any existing computational tool.</label>
+        </div>
+        <button class="btn btn-secondary" style="margin-top: 0.75rem;" onclick="toggleReveal('revealEx1')">👁️ Show Answer &amp; Teacher Notes</button>
+        <div class="reveal-box" id="revealEx1">
+          <strong style="color: var(--accent-green);">Correct Answer: (B)</strong><br>
+          <em>Rationale:</em> The passage states algorithms excel at computational tasks but struggle with qualitative humanities essays. Thus, STEM/computational tasks are logically more suitable. Options A &amp; C introduce unstated outside facts (Outside Knowledge Trap). Option D uses overly absolute language ("cannot be graded fairly by any").
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">⚠️ Exercise 2: Predictive Error Targets (Grammar &amp; Concession)</div>
+        <table class="error-table">
+          <thead>
+            <tr><th>Incorrect Sentence (Predictive Error)</th><th>Correction Target</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="text-red">"Despite higher education is costly, but many students pursue degrees."</span></td>
+              <td><span class="text-green">"Although higher education is costly, many students..."</span> (Remove 'but')</td>
+            </tr>
+            <tr>
+              <td><span class="text-red">"The study shows why are inference questions difficult."</span></td>
+              <td><span class="text-green">"The study shows why inference questions are difficult."</span> (Word order)</td>
+            </tr>
+            <tr>
+              <td><span class="text-red">"The student's success depends from his preparation."</span></td>
+              <td><span class="text-green">"The student's success depends on his preparation."</span> (Preposition)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- SLIDE 4: TIMED READING PRACTICE -->
+    <div class="slide" id="slide-3">
+      <div class="card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+          <div class="card-title" style="margin-bottom:0;">⏱️ Applied Timed Reading (5-Minute Timer)</div>
+          <div>
+            <span class="timer-display" id="readTimer">05:00</span>
+            <button class="btn" style="margin-left: 0.5rem;" onclick="startTimer('readTimer', 300)">Start Timer</button>
+          </div>
+        </div>
+
+        <div style="background: rgba(0,0,0,0.25); padding: 1.25rem; border-radius: 8px; border: 1px solid var(--border-color); max-height: 250px; overflow-y: auto; font-size: 0.9rem; line-height: 1.7; margin-bottom: 1rem;">
+          <h4 style="color: var(--primary); margin-bottom: 0.5rem;">Digital Archives and Historical Preservation</h4>
+          <p style="margin-bottom: 0.75rem;">
+            The shift from physical paper archives to digital repositories has fundamentally altered how historians conduct primary research. Digitization initiatives allow scholars to access rare manuscripts remotely, democratizing research that was previously restricted to funded institutions. However, digital preservation presents unique technical vulnerabilities. Unlike acid-free paper, which can endure for centuries under stable environmental conditions, digital data is susceptible to bit rot, hardware obsolescence, and proprietary file format degradation.
+          </p>
+          <p>
+            Consequently, modern archivists must engage in continuous migration—the practice of periodically transferring data from legacy systems to contemporary file formats. This ongoing maintenance requires sustained financial commitment from universities and governments. Without proactive digital stewardship, large swathes of twenty-first-century electronic correspondence and administrative records risk becoming completely inaccessible to future generations of researchers.
+          </p>
+        </div>
+
+        <div style="font-size: 0.9rem;">
+          <div style="margin-bottom: 0.75rem;">
+            <strong>Q1 (Inference):</strong> What can be inferred about digital data preservation compared to paper archives?
+            <br><span style="color: var(--text-muted); font-size: 0.85rem;">(A) Digital preservation requires continuous ongoing financial maintenance, whereas paper archives require less frequent technical migration.</span>
+            <br><span style="color: var(--text-muted); font-size: 0.85rem;">(B) Paper archives are more susceptible to environmental damage than digital data repositories.</span>
+            <br><span style="color: var(--text-muted); font-size: 0.85rem;">(C) Digital repositories have completely replaced physical archives in modern universities.</span>
+            <br><span style="color: var(--text-muted); font-size: 0.85rem;">(D) Both paper and digital archives face identical preservation challenges over time.</span>
+          </div>
+          <div style="margin-bottom: 0.75rem;">
+            <strong>Q2 (Vocabulary in Context):</strong> The word <em>democratizing</em> in paragraph 1 is closest in meaning to:
+            <br><span style="color: var(--text-muted); font-size: 0.85rem;">(A) Making accessible to a broader population</span>
+            <br><span style="color: var(--text-muted); font-size: 0.85rem;">(B) Converting to a democratic system of governance</span>
+            <br><span style="color: var(--text-muted); font-size: 0.85rem;">(C) Reducing the cost of academic research</span>
+            <br><span style="color: var(--text-muted); font-size: 0.85rem;">(D) Eliminating the need for physical libraries</span>
+          </div>
+          <button class="btn btn-secondary" style="margin-top: 0.5rem;" onclick="toggleReveal('readingReveal')">👁️ Show Answers &amp; Rationale</button>
+          <div class="reveal-box" id="readingReveal">
+            <strong style="color: var(--accent-green);">Q1 Answer: (A)</strong><br>
+            <em>Rationale:</em> The passage states that digital data is susceptible to bit rot and format degradation, requiring "continuous migration" and "sustained financial commitment." Paper archives under stable conditions "can endure for centuries." This directly supports A. Options B, C, and D are either contradicted by the text or go beyond what is stated.<br><br>
+            <strong style="color: var(--accent-green);">Q2 Answer: (A)</strong><br>
+            <em>Rationale:</em> The text says digitization "democratizing research that was previously restricted to funded institutions." This means making it accessible to more people. Option A is the closest meaning. Option B is a political meaning not relevant here. C and D are not supported by the text.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 5: TIMED WRITING PRACTICE -->
+    <div class="slide" id="slide-4">
+      <div class="card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+          <div class="card-title" style="margin-bottom:0;">✍️ Academic Discussion 8-Minute Sprint</div>
+          <div>
+            <span class="timer-display" id="writeTimer">08:00</span>
+            <button class="btn" style="margin-left: 0.5rem;" onclick="startTimer('writeTimer', 480)">Start Sprint</button>
+          </div>
+        </div>
+
+        <div style="background: rgba(0,0,0,0.25); padding: 1rem; border-radius: 8px; font-size: 0.85rem; line-height: 1.6; margin-bottom: 1rem;">
+          <strong>Professor:</strong> "This week we are discussing higher education funding. Some argue that governments should make university tuition completely free for all citizens to promote equality. Others believe students should pay for their education because personal investment increases academic commitment. What is your view?"<br><br>
+          <strong>Elena:</strong> "Free tuition is essential. Education is a public good, and financial barriers prevent talented low-income students from reaching their potential."<br>
+          <strong>Mark:</strong> "Free tuition places an unsustainable burden on taxpayers. Income-contingent loans or targeted scholarships are much more fiscally responsible."
+        </div>
+
+        <textarea id="writingInput" rows="7" placeholder="Type response here (Target: 120+ words using 5-sentence formula)..." oninput="updateWordCount()"></textarea>
+        <div class="word-count-badge" id="wordCountDisplay">Word count: 0 words (Goal: 120+)</div>
+        <button class="btn btn-secondary" style="margin-top: 0.75rem;" onclick="toggleReveal('writingReveal')">👁️ Model A (For Loans)</button>
+        <div class="reveal-box" id="writingReveal">
+          <strong style="color: var(--accent-green);">Model A — Position: Income-contingent loans over free tuition</strong>
+          <p style="margin-top:0.5rem; line-height:1.7;">While I acknowledge Elena's point that free tuition promotes equality, I strongly maintain that an income-contingent loan system is more fiscally sustainable. This is primarily because universal free tuition places an enormous burden on taxpayers, many of whom did not attend university themselves, which directly impacts public budget allocation for healthcare and infrastructure. Critics often argue that loans discourage students from low-income backgrounds, yet this perspective overlooks the fact that income-contingent models only require repayment once graduates earn above a threshold, making them accessible to all. For instance, Australia's HECS-HELP system has successfully increased university access while maintaining fiscal responsibility, with repayment rates exceeding 80%. Therefore, balancing accessibility with financial sustainability is essential for long-term higher education funding.</p>
+        </div>
+
+        <button class="btn btn-secondary" style="margin-top: 0.5rem;" onclick="toggleReveal('writingRevealB')">👁️ Model B (For Free Tuition)</button>
+        <div class="reveal-box" id="writingRevealB">
+          <strong style="color: var(--accent-green);">Model B — Position: Free tuition is a worthwhile investment</strong>
+          <p style="margin-top:0.5rem; line-height:1.7;">I actually see things differently from Mark on this one. The main reason I support free tuition is simple: education is a public good, just like healthcare. When a country invests in educating its population, everyone benefits from higher productivity and long-term economic growth. Some people argue that free tuition lowers quality, but that really depends on how universities are managed, not whether tuition is free. Germany and Norway have had tuition-free systems for years without sacrificing academic standards. So I think the real question isn't whether we can afford free tuition, but whether we can afford not to invest in education.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 6: LIVE FEEDBACK BOARD -->
+    <div class="slide" id="slide-5">
+      <div class="card">
+        <div class="card-title">📝 Live Teacher Notepad &amp; Feedback Board</div>
+        <textarea id="liveNotepad" rows="5" placeholder="Type live observations during class..."></textarea>
+      </div>
+
+      <div class="card">
+        <div class="card-title">📊 Live Correction Table</div>
+        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+          <input type="text" id="errorInput" placeholder="Valeria's sentence..." style="flex:2;">
+          <input type="text" id="corrInput" placeholder="Upgraded sentence..." style="flex:2;">
+          <button class="btn" onclick="addCorrectionRow()">Add</button>
+        </div>
+        <table class="error-table" id="corrTable">
+          <thead>
+            <tr><th>Valeria's Output</th><th>Upgraded Target</th></tr>
+          </thead>
+          <tbody id="corrTableBody">
+            <!-- Dynamic rows -->
+          </tbody>
+        </table>
+      </div>
+
+      <div class="card">
+        <div class="card-title">📋 Homework</div>
+        <ol style="font-size:0.9rem;color:#cbd5e1;line-height:1.8;padding-left:1.2rem;">
+          <li><strong>Inference Applied:</strong> Using the shadowing text (Academic Mobility), write 2 TOEFL-style inference questions. For each: mark the correct answer + create one "outside knowledge trap" distractor.</li>
+          <li><strong>Position Rewrite:</strong> Take Model B (free tuition position) and rewrite it in your own words using the 5-sentence formula. Submit alongside your in-class draft.</li>
+          <li><strong>Predictive Error Journal:</strong> Write 3 sentences — one with a double concession, one with a wrong preposition, one with inverted word order. Self-correct each with the rule.</li>
+        </ol>
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    // Slide Navigation
+    function switchSlide(index) {
+      document.querySelectorAll('.slide').forEach((s, i) => {
+        s.classList.toggle('active', i === index);
+      });
+      document.querySelectorAll('.nav-btn').forEach((b, i) => {
+        b.classList.toggle('active', i === index);
+      });
+    }
+
+    // Hash-based slide navigation
+    window.addEventListener('hashchange', function() {
+      var m = location.hash.match(/^#slide-(\d+)$/);
+      if (m) switchSlide(parseInt(m[1]));
+    });
+    !function(){var m=location.hash.match(/^#slide-(\d+)$/);if(m)switchSlide(parseInt(m[1]))}();
+
+    // Shadowing Pacer
+    let pacerInterval = null;
+    let currentWordIndex = 0;
+    function toggleShadowingPacer() {
+      if (pacerInterval) { clearInterval(pacerInterval); pacerInterval = null; return; }
+      const container = document.getElementById('shadowingTextDisplay');
+      if (!container.dataset.wrapped) {
+        const text = container.innerText;
+        const words = text.split(/\s+/);
+        container.innerHTML = words.map(w => `<span class="shadowing-word">${w}</span>`).join(' ');
+        container.dataset.wrapped = "true";
+      }
+      const spanWords = container.querySelectorAll('.shadowing-word');
+      const speed = parseInt(document.getElementById('pacerSpeed').value) || 380;
+      
+      pacerInterval = setInterval(() => {
+        spanWords.forEach(w => w.classList.remove('active'));
+        if (currentWordIndex < spanWords.length) {
+          spanWords[currentWordIndex].classList.add('active');
+          currentWordIndex++;
+        } else {
+          clearInterval(pacerInterval);
+          pacerInterval = null;
+          currentWordIndex = 0;
+        }
+      }, speed);
+    }
+
+    function resetShadowingPacer() {
+      if (pacerInterval) clearInterval(pacerInterval);
+      pacerInterval = null;
+      currentWordIndex = 0;
+      const spanWords = document.querySelectorAll('.shadowing-word');
+      spanWords.forEach(w => w.classList.remove('active'));
+    }
+
+    // Timers (separate for reading/writing)
+    let readTimerInterval = null;
+    let writeTimerInterval = null;
+    function startTimer(id, seconds) {
+      const disp = document.getElementById(id);
+      if (id === 'readTimer') {
+        if (readTimerInterval) clearInterval(readTimerInterval);
+        let rem = seconds;
+        readTimerInterval = setInterval(() => {
+          const m = Math.floor(rem / 60);
+          const s = rem % 60;
+          disp.textContent = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+          if (rem <= 0) {
+            clearInterval(readTimerInterval);
+            readTimerInterval = null;
+            disp.textContent = '00:00';
+            disp.style.color = 'var(--accent-red)';
+            disp.style.animation = 'pulse 0.5s ease 3';
+            setTimeout(() => { disp.style.animation = ''; }, 2000);
+          }
+          rem--;
+        }, 1000);
+      } else {
+        if (writeTimerInterval) clearInterval(writeTimerInterval);
+        let rem = seconds;
+        writeTimerInterval = setInterval(() => {
+          const m = Math.floor(rem / 60);
+          const s = rem % 60;
+          disp.textContent = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+          if (rem <= 0) {
+            clearInterval(writeTimerInterval);
+            writeTimerInterval = null;
+            disp.textContent = '00:00';
+            disp.style.color = 'var(--accent-red)';
+            disp.style.animation = 'pulse 0.5s ease 3';
+            setTimeout(() => { disp.style.animation = ''; }, 2000);
+          }
+          rem--;
+        }, 1000);
+      }
+    }
+
+    // Word Counter
+    function updateWordCount() {
+      const val = document.getElementById('writingInput').value.trim();
+      const count = val ? val.split(/\s+/).length : 0;
+      const badge = document.getElementById('wordCountDisplay');
+      badge.textContent = `Word count: ${count} words (Goal: 120+)`;
+      badge.style.color = count >= 120 ? 'var(--accent-green)' : 'var(--primary)';
+      localStorage.setItem('valeria-l11-writing', val);
+    }
+
+    // localStorage load
+    function loadWritingDraft() {
+      const val = localStorage.getItem('valeria-l11-writing');
+      if (val) {
+        document.getElementById('writingInput').value = val;
+        updateWordCount();
+      }
+    }
+    loadWritingDraft();
+
+    // Reveal Box
+    function toggleReveal(id) {
+      const box = document.getElementById(id);
+      box.classList.toggle('show');
+    }
+
+    // Live Correction Rows
+    function addCorrectionRow() {
+      const err = document.getElementById('errorInput').value.trim();
+      const corr = document.getElementById('corrInput').value.trim();
+      if (!err || !corr) return;
+      const tbody = document.getElementById('corrTableBody');
+      const tr = document.createElement('tr');
+      tr.innerHTML = `<td><span class="text-red">${err}</span></td><td><span class="text-green">${corr}</span></td>`;
+      tbody.appendChild(tr);
+      document.getElementById('errorInput').value = '';
+      document.getElementById('corrInput').value = '';
+    }
+
+    // Recording (Homework Pronunciation)
+    let recStream = null, recRecorder = null, recChunks = [], recBlobUrl = null;
+    function startRec() {
+      navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
+        recStream = stream;
+        recRecorder = new MediaRecorder(stream);
+        recChunks = [];
+        recRecorder.ondataavailable = e => { if (e.data.size > 0) recChunks.push(e.data); };
+        recRecorder.onstop = () => {
+          const blob = new Blob(recChunks, { type: 'audio/webm' });
+          if (recBlobUrl) URL.revokeObjectURL(recBlobUrl);
+          recBlobUrl = URL.createObjectURL(blob);
+          document.getElementById('recAudio').src = recBlobUrl;
+          document.getElementById('recAudio').style.display = 'block';
+          document.getElementById('recStatus').textContent = 'Recording saved. Listen above.';
+          document.getElementById('recStatus').style.color = 'var(--accent-green)';
+          stream.getTracks().forEach(t => t.stop());
+        };
+        recRecorder.start();
+        document.getElementById('recStartBtn').disabled = true;
+        document.getElementById('recStopBtn').disabled = false;
+        document.getElementById('recStatus').textContent = 'Recording...';
+        document.getElementById('recStatus').style.color = 'var(--accent-red)';
+      }).catch(() => {
+        document.getElementById('recStatus').textContent = 'Mic access denied';
+        document.getElementById('recStatus').style.color = 'var(--accent-red)';
+      });
+    }
+    function stopRec() {
+      if (recRecorder && recRecorder.state === 'recording') {
+        recRecorder.stop();
+        document.getElementById('recStartBtn').disabled = false;
+        document.getElementById('recStopBtn').disabled = true;
+      }
+    }
+  </script>
+</body>
+</html>
