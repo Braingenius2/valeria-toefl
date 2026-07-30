@@ -268,7 +268,7 @@
       <span class="nav-num">05</span> 8-Min Writing
     </button>
     <button class="nav-btn" onclick="switchSlide(5)">
-      <span class="nav-num">06</span> Live Feedback
+      <span class="nav-num">06</span> Homework
     </button>
   </aside>
 
@@ -279,7 +279,7 @@
         <h1 class="page-title">Reading &amp; Writing Recovery</h1>
         <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 0.2rem;">Diagnostic Target: Reading 3.0→4.5 | Writing 3.0→4.5</p>
       </div>
-      <span class="tag">PRIVATE ZOOM DECK</span>
+      <span style="font-size:0.8rem;color:var(--text-muted);">Reading 3.0→4.5 · Writing 3.0→4.5</span>
     </header>
 
     <!-- SLIDE 1: SHADOWING & PRONUNCIATION -->
@@ -532,30 +532,8 @@
       </div>
     </div>
 
-    <!-- SLIDE 6: LIVE FEEDBACK BOARD -->
+    <!-- SLIDE 6: HOMEWORK -->
     <div class="slide" id="slide-5">
-      <div class="card">
-        <div class="card-title">📝 Live Teacher Notepad &amp; Feedback Board</div>
-        <textarea id="liveNotepad" rows="5" placeholder="Type live observations during class..."></textarea>
-      </div>
-
-      <div class="card">
-        <div class="card-title">📊 Live Correction Table</div>
-        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
-          <input type="text" id="errorInput" placeholder="Valeria's sentence..." style="flex:2;">
-          <input type="text" id="corrInput" placeholder="Upgraded sentence..." style="flex:2;">
-          <button class="btn" onclick="addCorrectionRow()">Add</button>
-        </div>
-        <table class="error-table" id="corrTable">
-          <thead>
-            <tr><th>Valeria's Output</th><th>Upgraded Target</th></tr>
-          </thead>
-          <tbody id="corrTableBody">
-            <!-- Dynamic rows -->
-          </tbody>
-        </table>
-      </div>
-
       <div class="card">
         <div class="card-title">📋 Homework</div>
         <ol style="font-size:0.9rem;color:#cbd5e1;line-height:1.8;padding-left:1.2rem;">
@@ -690,20 +668,7 @@
       box.classList.toggle('show');
     }
 
-    // Live Correction Rows
-    function addCorrectionRow() {
-      const err = document.getElementById('errorInput').value.trim();
-      const corr = document.getElementById('corrInput').value.trim();
-      if (!err || !corr) return;
-      const tbody = document.getElementById('corrTableBody');
-      const tr = document.createElement('tr');
-      tr.innerHTML = `<td><span class="text-red">${err}</span></td><td><span class="text-green">${corr}</span></td>`;
-      tbody.appendChild(tr);
-      document.getElementById('errorInput').value = '';
-      document.getElementById('corrInput').value = '';
-    }
-
-    // Recording (Homework Pronunciation)
+    // Reveal Box
     let recStream = null, recRecorder = null, recChunks = [], recBlobUrl = null;
     function startRec() {
       navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
