@@ -242,6 +242,9 @@
       0%, 100% { opacity: 1; }
       50% { opacity: 0.3; }
     }
+
+    .hw-task { background: rgba(255,255,255,0.01); border: 1px solid var(--border-color); border-radius: 10px; padding: 1.25rem; margin-bottom: 0.85rem; position: relative; }
+    .hw-num { position: absolute; top: -0.5rem; left: -0.5rem; width: 28px; height: 28px; background: var(--accent-purple); color: #fff; font-weight: 700; font-size: 0.85rem; display: flex; align-items: center; justify-content: center; border-radius: 6px; font-family: 'Fira Code', monospace; }
   </style>
 </head>
 <body>
@@ -535,12 +538,88 @@
     <!-- SLIDE 6: HOMEWORK -->
     <div class="slide" id="slide-5">
       <div class="card">
-        <div class="card-title">📋 Homework</div>
-        <ol style="font-size:0.9rem;color:#cbd5e1;line-height:1.8;padding-left:1.2rem;">
-          <li><strong>Inference Applied:</strong> Using the shadowing text (Academic Mobility), write 2 TOEFL-style inference questions. For each: mark the correct answer + create one "outside knowledge trap" distractor.</li>
-          <li><strong>Position Rewrite:</strong> Take Model B (free tuition position) and rewrite it in your own words using the 5-sentence formula. Submit alongside your in-class draft.</li>
-          <li><strong>Predictive Error Journal:</strong> Write 3 sentences — one with a double concession, one with a wrong preposition, one with inverted word order. Self-correct each with the rule.</li>
-        </ol>
+        <div class="card-title">📋 Homework: 3 Tasks</div>
+        <p style="font-size:0.9rem;color:var(--text-muted);margin-bottom:0.5rem;">Complete these before our next session. Submit via chat.</p>
+
+        <div class="hw-task">
+          <div class="hw-num">1</div>
+          <h3 style="color:var(--accent-green);">Reading — Inference Drill (5 min)</h3>
+          <p style="font-size:0.9rem;">Re-read the <strong>Digital Archives</strong> passage from class. Answer these 2 inference questions using the <strong>3-Step Method</strong>. Write out each step.</p>
+
+          <div style="background:rgba(0,0,0,0.25);padding:0.75rem;border-radius:6px;margin:0.75rem 0;font-size:0.85rem;line-height:1.6;border-left:3px solid var(--accent-blue);">
+            <p style="margin-bottom:0.5rem;"><strong>Passage reminder:</strong> The shift from physical paper archives to digital repositories has fundamentally altered how historians conduct primary research. Digitization initiatives allow scholars to access rare manuscripts remotely, democratizing research that was previously restricted to funded institutions. However, digital preservation presents unique technical vulnerabilities. Unlike acid-free paper, which can endure for centuries under stable environmental conditions, digital data is susceptible to bit rot, hardware obsolescence, and proprietary file format degradation.</p>
+            <p style="margin-bottom:0.5rem;">Consequently, modern archivists must engage in continuous migration — the practice of periodically transferring data from legacy systems to contemporary file formats. This ongoing maintenance requires sustained financial commitment from universities and governments. Without proactive digital stewardship, large swathes of twenty-first-century electronic correspondence and administrative records risk becoming completely inaccessible to future generations of researchers.</p>
+          </div>
+
+          <div style="margin-bottom:0.75rem;">
+            <p style="font-size:0.9rem;margin-bottom:0.3rem;"><strong>Q1 (Inference):</strong> What can be inferred about the long-term costs of digital preservation?</p>
+            <p style="font-size:0.85rem;color:var(--text-muted);">(A) Digital preservation is ultimately cheaper than maintaining physical archives over time.</p>
+            <p style="font-size:0.85rem;color:var(--text-muted);">(B) The cost of continuous data migration makes digital preservation an ongoing financial obligation.</p>
+            <p style="font-size:0.85rem;color:var(--text-muted);">(C) Universities have already allocated sufficient funding for long-term digital stewardship.</p>
+            <p style="font-size:0.85rem;color:var(--text-muted);">(D) Paper archives require more financial maintenance than digital repositories.</p>
+          </div>
+
+          <div style="margin-bottom:0.75rem;">
+            <p style="font-size:0.9rem;margin-bottom:0.3rem;"><strong>Q2 (Inference):</strong> What does the author imply about twenty-first-century electronic records?</p>
+            <p style="font-size:0.85rem;color:var(--text-muted);">(A) They are more valuable than paper records from previous centuries.</p>
+            <p style="font-size:0.85rem;color:var(--text-muted);">(B) They are at risk of being lost if preservation efforts are not maintained.</p>
+            <p style="font-size:0.85rem;color:var(--text-muted);">(C) They are currently stored in more stable formats than older digital files.</p>
+            <p style="font-size:0.85rem;color:var(--text-muted);">(D) They will eventually be converted back to paper for long-term storage.</p>
+          </div>
+
+          <div style="background:rgba(0,0,0,0.3);padding:0.75rem;border-radius:6px;font-size:0.85rem;">
+            <p style="margin-bottom:0.3rem;"><strong>✏️ Write your 3-Step reasoning for each question:</strong></p>
+            <p style="margin-bottom:0.25rem;color:var(--text-muted);">Step 1 — Keywords in prompt: _________________________________</p>
+            <p style="margin-bottom:0.25rem;color:var(--text-muted);">Step 2 — Target sentence + 1 surrounding: _________________________________</p>
+            <p style="margin-bottom:0.25rem;color:var(--text-muted);">Step 3 — If text is true, then ___ must be true because: _________________________________</p>
+            <p style="color:var(--text-muted);">Outside knowledge trap in option ___ : _________________________________</p>
+          </div>
+
+          <button class="btn btn-secondary" style="margin-top:0.75rem;" onclick="toggleReveal('inferenceAnswers')">👁️ Check Answers</button>
+          <div class="reveal-box" id="inferenceAnswers">
+            <strong style="color:var(--accent-green);">Q1 Answer: (B)</strong><br>
+            <em>Rationale:</em> The passage states "modern archivists must engage in continuous migration" requiring "sustained financial commitment." This directly implies ongoing cost. (A) is not stated — no cost comparison is made. (C) is contradicted — the text says financial commitment is needed, not that it's already allocated. (D) is the opposite of what the text implies (paper needs less maintenance).<br><br>
+            <strong style="color:var(--accent-green);">Q2 Answer: (B)</strong><br>
+            <em>Rationale:</em> The passage warns that without "proactive digital stewardship," records risk "becoming completely inaccessible." This implies records will be lost if preservation stops. (A) introduces an unstated value judgment. (C) is not discussed. (D) contradicts the passage's direction (digital is replacing paper, not the reverse).
+          </div>
+        </div>
+
+        <div class="hw-task">
+          <div class="hw-num">2</div>
+          <h3 style="color:var(--accent-purple);">Writing — Academic Discussion (10 min)</h3>
+          <div style="background:rgba(0,0,0,0.25);padding:0.75rem;border-radius:6px;margin-bottom:0.75rem;font-size:0.85rem;line-height:1.6;">
+            <p style="margin-bottom:0.3rem;"><strong>Professor:</strong> "This week we are discussing higher education funding. Some argue that governments should make university tuition completely free for all citizens to promote equality. Others believe students should pay for their education because personal investment increases academic commitment. What is your view?"</p>
+            <p style="margin-bottom:0.3rem;"><strong>Elena:</strong> "Free tuition is essential. Education is a public good, and financial barriers prevent talented low-income students from reaching their potential."</p>
+            <p><strong>Mark:</strong> "Free tuition places an unsustainable burden on taxpayers. Income-contingent loans or targeted scholarships are much more fiscally responsible."</p>
+          </div>
+          <p style="font-size:0.9rem;">Write a <strong>120+ word</strong> response using the <strong>5-sentence formula</strong> (Position → Rationale → Counter-Argument → Example → Synthesis).</p>
+          <div style="background:rgba(0,0,0,0.3);padding:0.75rem;border-radius:6px;margin-top:0.5rem;font-size:0.85rem;">
+            <p style="margin-bottom:0.3rem;"><strong>✅ Self-check:</strong></p>
+            <p style="color:var(--text-muted);">☐ Sentence 1: Position + concession ("While I acknowledge...")</p>
+            <p style="color:var(--text-muted);">☐ Sentence 2: Core rationale with "because"</p>
+            <p style="color:var(--text-muted);">☐ Sentence 3: Counter-argument ("Critics argue... yet...")</p>
+            <p style="color:var(--text-muted);">☐ Sentence 4: Concrete example ("For instance...")</p>
+            <p style="color:var(--text-muted);">☐ Sentence 5: Synthesis ("Therefore...")</p>
+            <p style="color:var(--text-muted);">☐ Word count: 120+ words</p>
+          </div>
+        </div>
+
+        <div class="hw-task">
+          <div class="hw-num">3</div>
+          <h3 style="color:var(--accent-green);">Vocabulary — 5 Sentences</h3>
+          <p style="font-size:0.9rem;">Write <strong>5 academic sentences</strong> using the following words. Each sentence must demonstrate the word in an academic context related to education, technology, or society.</p>
+          <div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin:0.75rem 0;">
+            <span style="background:var(--accent-blue);color:#000;padding:0.3rem 0.8rem;border-radius:20px;font-size:0.85rem;font-weight:600;">unprecedented</span>
+            <span style="background:var(--accent-purple);color:#fff;padding:0.3rem 0.8rem;border-radius:20px;font-size:0.85rem;font-weight:600;">pedagogical</span>
+            <span style="background:var(--primary);color:#000;padding:0.3rem 0.8rem;border-radius:20px;font-size:0.85rem;font-weight:600;">synthesize</span>
+            <span style="background:var(--accent-green);color:#000;padding:0.3rem 0.8rem;border-radius:20px;font-size:0.85rem;font-weight:600;">hinges on</span>
+            <span style="background:var(--accent-red);color:#fff;padding:0.3rem 0.8rem;border-radius:20px;font-size:0.85rem;font-weight:600;">imperative</span>
+          </div>
+        </div>
+
+        <div style="margin-top:1rem;padding:0.75rem;background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.2);border-radius:8px;font-size:0.85rem;color:var(--text-muted);">
+          <strong style="color:var(--primary);">📤 Submit</strong> — Send your writing response and 5 vocabulary sentences via chat before the next session.
+        </div>
       </div>
     </div>
 
