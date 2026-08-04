@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Valeria — Lesson 12: TOEFL Reading Intensive (Private Deck)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #090d16;
+      --bg-card: #131a26;
+      --border-color: #243042;
+      --text-main: #f1f5f9;
+      --text-muted: #64748b;
+      --primary: #f59e0b;
+      --primary-hover: #d97706;
+      --primary-dim: rgba(245, 158, 11, 0.12);
+      --accent-blue: #38bdf8;
+      --accent-green: #10b981;
+      --accent-red: #ef4444;
+      --accent-purple: #a855f7;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', sans-serif; background-color: var(--bg-dark); color: var(--text-main); display: flex; min-height: 100vh; overflow-x: hidden; }
+    .sidebar { width: 260px; background: var(--bg-card); border-right: 1px solid var(--border-color); display: flex; flex-direction: column; padding: 1.5rem 1rem; position: fixed; height: 100vh; z-index: 100; }
+    .brand { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 2rem; padding: 0 0.5rem; }
+    .brand-badge { background: var(--primary); color: #000; font-weight: 700; font-size: 0.75rem; padding: 0.2rem 0.5rem; border-radius: 4px; text-transform: uppercase; }
+    .brand-title { font-weight: 600; font-size: 1.1rem; color: var(--text-main); }
+    .nav-btn { background: transparent; border: 1px solid transparent; color: var(--text-muted); padding: 0.75rem 1rem; border-radius: 8px; text-align: left; font-size: 0.9rem; font-family: inherit; cursor: pointer; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.75rem; transition: all 0.2s ease; }
+    .nav-btn:hover { background: rgba(255,255,255,0.03); color: var(--text-main); }
+    .nav-btn.active { background: var(--primary-dim); border-color: rgba(245,158,11,0.3); color: var(--primary); font-weight: 600; }
+    .nav-num { font-family: 'Fira Code', monospace; font-size: 0.8rem; opacity: 0.7; }
+    .main-content { margin-left: 260px; flex: 1; padding: 2rem 3rem; max-width: 1200px; }
+    .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border-color); }
+    .page-title { font-size: 1.5rem; font-weight: 700; color: var(--text-main); }
+    .tag { background: rgba(56,189,248,0.1); color: var(--accent-blue); border: 1px solid rgba(56,189,248,0.2); padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.8rem; font-family: 'Fira Code', monospace; }
+    .slide { display: none; animation: fadeIn 0.3s ease; }
+    .slide.active { display: block; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:0.3; } }
+    .card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem; }
+    .card-title { font-size: 1.1rem; font-weight: 600; color: var(--primary); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+    .shadowing-text { font-size: 1.05rem; line-height: 1.8; color: #cbd5e1; margin-bottom: 1.5rem; background: rgba(0,0,0,0.2); padding: 1.25rem; border-radius: 8px; border-left: 3px solid var(--primary); }
+    .shadowing-word { transition: background 0.15s ease, color 0.15s ease; border-radius: 3px; padding: 0 2px; }
+    .shadowing-word.active { background: var(--primary); color: #000; font-weight: 600; }
+    .controls { display: flex; gap: 0.75rem; align-items: center; flex-wrap: wrap; margin-bottom: 1rem; }
+    .btn { background: var(--primary); color: #000; border: none; padding: 0.6rem 1.2rem; border-radius: 6px; font-weight: 600; font-size: 0.85rem; font-family: inherit; cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem; transition: background 0.2s ease; }
+    .btn:hover { background: var(--primary-hover); }
+    .btn-secondary { background: transparent; border: 1px solid var(--border-color); color: var(--text-main); }
+    .btn-secondary:hover { background: rgba(255,255,255,0.05); }
+    .timer-display { font-family: 'Fira Code', monospace; font-size: 2rem; font-weight: 700; color: var(--primary); background: #000; padding: 0.5rem 1.2rem; border-radius: 8px; border: 1px solid var(--border-color); display: inline-block; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .distractor-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .dist-box { background: rgba(0,0,0,0.3); border-left: 3px solid var(--accent-blue); padding: 1rem; border-radius: 0 8px 8px 0; font-size: 0.85rem; }
+    .passage-box { background: rgba(0,0,0,0.25); padding: 1.25rem; border-radius: 8px; border: 1px solid var(--border-color); max-height: 300px; overflow-y: auto; font-size: 0.9rem; line-height: 1.7; margin-bottom: 1rem; }
+    .passage-box p { margin-bottom: 0.75rem; }
+    .ins-pt { color: var(--accent-blue); font-weight: 700; }
+    .text-red { color: var(--accent-red); }
+    .text-green { color: var(--accent-green); }
+    textarea, input[type="text"] { width: 100%; background: rgba(0,0,0,0.4); border: 1px solid var(--border-color); color: var(--text-main); padding: 0.75rem; border-radius: 6px; font-family: inherit; font-size: 0.9rem; resize: vertical; }
+    textarea:focus, input[type="text"]:focus { outline: none; border-color: var(--primary); }
+    .reveal-box { display: none; background: rgba(16,185,129,0.08); border: 1px solid rgba(16,185,129,0.2); padding: 1rem; border-radius: 8px; margin-top: 0.75rem; font-size: 0.9rem; line-height: 1.6; }
+    .reveal-box.show { display: block; }
+    .vocab-card { background: rgba(0,0,0,0.25); border: 1px solid var(--border-color); padding: 1rem; border-radius: 8px; }
+    .vocab-word { font-weight: 700; color: var(--accent-blue); font-size: 1rem; }
+    .vocab-ipa { font-family: 'Fira Code', monospace; font-size: 0.8rem; color: var(--text-muted); margin: 0.2rem 0 0.5rem 0; }
+    .vocab-note { font-size: 0.85rem; color: #e2e8f0; line-height: 1.4; }
+    .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
+    .hw-task { background: rgba(255,255,255,0.01); border: 1px solid var(--border-color); border-radius: 10px; padding: 1.25rem; margin-bottom: 0.85rem; position: relative; }
+    .hw-num { position: absolute; top: -0.5rem; left: -0.5rem; width: 28px; height: 28px; background: var(--accent-purple); color: #fff; font-weight: 700; font-size: 0.85rem; display: flex; align-items: center; justify-content: center; border-radius: 6px; font-family: 'Fira Code', monospace; }
+    .hw-blank { width: 120px; display: inline-block; background: rgba(0,0,0,0.4); border: 1px solid var(--border-color); color: var(--text-main); padding: 0.3rem 0.5rem; border-radius: 4px; font-family: inherit; font-size: 0.85rem; }
+    .hw-blank:focus { outline: none; border-color: var(--primary); }
+    .hw-blank.correct { border-color: var(--accent-green); background: rgba(16,185,129,0.1); }
+    .hw-blank.incorrect { border-color: var(--accent-red); background: rgba(239,68,68,0.1); }
+    .hw-option { display: block; margin-bottom: 0.4rem; cursor: pointer; padding: 0.5rem 0.7rem; border-radius: 6px; border: 1px solid transparent; transition: all 0.2s; font-size: 0.9rem; }
+    .hw-option:hover { background: rgba(255,255,255,0.03); border-color: var(--border-color); }
+    .hw-option.selected { background: var(--primary-dim); border-color: rgba(245,158,11,0.3); }
+    .hw-option.correct { background: rgba(16,185,129,0.1); border-color: rgba(16,185,129,0.3); }
+    .hw-option.incorrect { background: rgba(239,68,68,0.1); border-color: rgba(239,68,68,0.3); }
+    .hw-score-big { font-size: 3rem; font-weight: 700; color: var(--primary); font-family: 'Fira Code', monospace; }
+    .hw-path-badge { display: inline-block; padding: 0.5rem 1.5rem; border-radius: 8px; font-weight: 700; font-size: 1.1rem; }
+    .hw-stage-label { font-family: 'Fira Code', monospace; font-size: 0.75rem; font-weight: 700; color: var(--accent-blue); background: rgba(56,189,248,0.1); border: 1px solid rgba(56,189,248,0.2); padding: 0.2rem 0.6rem; border-radius: 20px; margin-bottom: 0.5rem; display: inline-block; }
+  </style>
+<!-- FE:CSS-MOBILE --><style>.mobile-nav-toggle{display:none;position:fixed;bottom:20px;right:20px;z-index:200;width:48px;height:48px;border-radius:50%;background:var(--primary);color:#000;border:none;font-size:20px;cursor:pointer;align-items:center;justify-content:center;box-shadow:3px 3px 0 rgba(0,0,0,0.12)}
+.sidebar-overlay{display:none;position:fixed;inset:0;z-index:150;background:rgba(0,0,0,0.4)}
+.sidebar-overlay.open{display:block}@media(max-width:768px){
+  .mobile-nav-toggle{display:flex}
+  .sidebar{position:fixed;left:0;top:0;z-index:175;height:100vh;transform:translateX(-100%);transition:transform .25s ease;width:260px;display:flex!important}
+  .sidebar.open{transform:translateX(0)}
+  .main-content{margin-left:0;padding:1rem 1rem 84px;max-width:100%}
+  .header{flex-wrap:wrap;gap:0.5rem}
+  .grid-2{grid-template-columns:1fr}
+  .controls{flex-direction:column;align-items:stretch}
+  .timer-display{font-size:1.5rem}
+}</style>
+<!-- FE:CSS-CHIP --><style>.slide-chip{font-family:'Fira Code',monospace;font-size:0.72rem;font-weight:700;color:var(--primary);background:var(--bg-card,rgba(0,0,0,0.4));border:1px solid var(--border-color,rgba(255,255,255,0.15));padding:0.25rem 0.65rem;border-radius:20px;white-space:nowrap;margin-left:auto}</style>
+</head>
+<body>
+
+  <aside class="sidebar">
+    <div class="brand">
+      <span class="brand-badge">TOEFL</span>
+      <span class="brand-title">Valeria L12</span>
+    </div>
+    <button class="nav-btn active" onclick="switchSlide(0)"><span class="nav-num">01</span> Warm-up Shadowing</button>
+    <button class="nav-btn" onclick="switchSlide(1)"><span class="nav-num">02</span> Distractor Taxonomy</button>
+    <button class="nav-btn" onclick="switchSlide(2)"><span class="nav-num">03</span> SRM Geoengineering</button>
+    <button class="nav-btn" onclick="switchSlide(3)"><span class="nav-num">04</span> Green Hydrogen Drill</button>
+    <button class="nav-btn" onclick="switchSlide(4)"><span class="nav-num">05</span> Homework</button>
+  </aside>
+
+  <main class="main-content">
+    <header class="header">
+      <div>
+        <h1 class="page-title">TOEFL Reading Intensive</h1>
+        <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 0.2rem;">Complex Inferences, Distractor Elimination &amp; Pacing</p>
+      </div>
+      <span style="font-size:0.8rem;color:var(--text-muted);">Reading 3.0→4.5 · Inferences + Pacing</span>
+    <!-- FE:CHIP --><span class="slide-chip" id="slideChip">1 / N</span>
+        </header>
+
+    <!-- SLIDE 1: SHADOWING -->
+    <div class="slide active" id="slide-0">
+      <div class="card">
+        <div class="card-title">🎙️ Warm-up — Shadowing (Fluency Only): Climate Adaptation &amp; Geoengineering</div>
+        <div class="shadowing-text" id="shadowingTextDisplay">
+          So, here's a big topic in climate science right now — solar radiation management. It's a form of climate engineering that keeps coming up as a way to mitigate global warming. The basic idea is simple: we inject reflective sulfate aerosols into the stratosphere, and they bounce some of the sun's energy back into space, which could rapidly offset rising temperatures. But here's the catch — geoengineering doesn't actually reduce greenhouse gas concentrations. And scientists warn that it could seriously disrupt global precipitation patterns and hurt agricultural yields. So climate policy experts keep saying the same thing: treat geoengineering as an emergency risk-management measure, not as a substitute for decarbonization.
+        </div>
+        <div class="controls">
+          <button class="btn" onclick="toggleShadowingPacer()">▶ Start Pacer</button>
+          <button class="btn btn-secondary" onclick="resetShadowingPacer()">↺ Reset</button>
+          <audio id="shadowingAudio" src="audio/shadowing.wav" preload="auto" style="display:none;"></audio>
+          <button class="btn btn-secondary" onclick="document.getElementById('shadowingAudio').play()">🔊 Play Audio</button>
+          <span style="font-size: 0.85rem; color: var(--text-muted); margin-left: 0.5rem;">Speed:</span>
+          <select id="pacerSpeed" style="background:#000; color:#fff; padding:0.4rem; border-radius:4px; border:1px solid var(--border-color);">
+            <option value="450">130 WPM (Slow)</option>
+            <option value="380" selected>150 WPM (Target)</option>
+            <option value="320">175 WPM (Fast)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">🎯 Predictive Error Targets</div>
+        <div class="grid-2">
+          <div style="background:rgba(239,68,68,0.08); border-left:3px solid var(--accent-red); padding:0.8rem; border-radius:0 8px 8px 0; font-size:0.85rem;">
+            <strong>Negative Fact Traps (EXCEPT questions):</strong> Distinguishing options mentioned in the text from true assertions that are <em>not</em> directly stated as answers to the negative prompt.
+          </div>
+          <div style="background:rgba(16,185,129,0.08); border-left:3px solid var(--accent-green); padding:0.8rem; border-radius:0 8px 8px 0; font-size:0.85rem;">
+            <strong>Modifiers in Inferences:</strong> Watch for scope-changing adverbs (<em>solely, invariably, exclusively</em>). If the text says "often", options with "always" are incorrect distractors.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 2: DISTRACTOR TAXONOMY -->
+    <div class="slide" id="slide-1">
+      <div class="card">
+        <div class="card-title">🎯 The 4 Distractor Types in TOEFL Reading</div>
+        <div class="distractor-grid">
+          <div class="dist-box" style="border-color: var(--accent-red);">
+            <strong style="color: var(--accent-red);">1. Outside Knowledge Trap</strong>
+            <p style="margin-top:0.4rem; color:var(--text-muted);">States a real-world fact that is NOT mentioned in the text. Highly dangerous for knowledgeable students!</p>
+          </div>
+          <div class="dist-box" style="border-color: var(--primary);">
+            <strong style="color: var(--primary);">2. Scope Exaggerator</strong>
+            <p style="margin-top:0.4rem; color:var(--text-muted);">Replaces qualified words (<i>likely, partially</i>) with absolute words (<i>always, completely, impossible</i>).</p>
+          </div>
+          <div class="dist-box" style="border-color: var(--accent-blue);">
+            <strong style="color: var(--accent-blue);">3. Opposite Direction</strong>
+            <p style="margin-top:0.4rem; color:var(--text-muted);">Reverses cause and effect (e.g. states X caused Y when text states Y caused X).</p>
+          </div>
+          <div class="dist-box" style="border-color: var(--accent-purple);">
+            <strong style="color: var(--accent-purple);">4. False Detail Combo</strong>
+            <p style="margin-top:0.4rem; color:var(--text-muted);">Combines keywords from Paragraph 1 and Paragraph 3 into a single misleading statement.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">⏱️ Pacing Strategy</div>
+        <div style="font-size:0.9rem; line-height:1.7;">
+          <p><strong style="color:var(--accent-cyan);">1.8 Minutes Per Question Rule:</strong> Never spend more than 2 minutes on any single question.</p>
+          <p style="margin-top:0.75rem;"><strong style="color:var(--accent-cyan);">Passage Navigation Order:</strong></p>
+          <ol style="margin-left:1.5rem; margin-top:0.5rem; color:var(--text-muted);">
+            <li>Skim paragraph 1 for thesis &amp; domain (30 seconds)</li>
+            <li>Answer detail/vocabulary/inference questions paragraph-by-paragraph</li>
+            <li>Save sentence insertion and summary questions for the end</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 3: SRM CONTROLLED PRACTICE -->
+    <div class="slide" id="slide-2">
+      <div class="card">
+        <div class="card-title">📖 Controlled Practice: Solar Radiation Management</div>
+        <div class="passage-box">
+          <p>Solar Radiation Management (SRM) strategies aim to reduce the amount of solar energy absorbed by Earth's climate system. The most widely discussed method involves injecting sulfur dioxide into the upper atmosphere, mimicking the cooling effect observed after major volcanic eruptions, such as the 1991 eruption of Mount Pinatubo. While computer simulations indicate that SRM could lower global mean temperatures within months, it fails to address ocean acidification caused by elevated carbon dioxide levels. Furthermore, if an SRM intervention were suddenly terminated due to geopolitical instability or technical failure, Earth could experience rapid, severe warming—a phenomenon known as 'termination shock'—giving ecosystems little time to adapt.</p>
+        </div>
+
+        <div style="font-size: 0.9rem;">
+          <div style="margin-bottom: 1rem;">
+            <strong>Q1 (Inference):</strong> What can be inferred about the Mount Pinatubo eruption from paragraph 1?
+            <br><span style="color: var(--text-muted); font-size: 0.85rem;">(A) It caused permanent damage to Earth's ozone layer.</span>
+            <br><span style="color: var(--text-muted); font-size: 0.85rem;">(B) It resulted in a temporary reduction in global temperatures.</span>
+            <br><span style="color: var(--text-muted); font-size: 0.85rem;">(C) It was the first human-engineered solar radiation experiment.</span>
+            <br><span style="color: var(--text-muted); font-size: 0.85rem;">(D) It eliminated carbon dioxide from the upper atmosphere.</span>
+          </div>
+          <div style="margin-bottom: 1rem;">
+            <strong>Q2 (Negative Fact):</strong> All of the following are mentioned as potential risks of SRM EXCEPT:
+            <br><span style="color: var(--text-muted); font-size: 0.85rem;">(A) Inability to stop ocean acidification</span>
+            <br><span style="color: var(--text-muted); font-size: 0.85rem;">(B) Sudden rapid warming if terminated abruptly</span>
+            <br><span style="color: var(--text-muted); font-size: 0.85rem;">(C) Immediate destruction of solar power grids</span>
+            <br><span style="color: var(--text-muted); font-size: 0.85rem;">(D) Unintended ecological disruption</span>
+          </div>
+          <button class="btn btn-secondary" onclick="toggleReveal('srmReveal')">👁️ Show Answers &amp; Rationale</button>
+          <div class="reveal-box" id="srmReveal">
+            <strong style="color: var(--accent-green);">Q1 Answer: (B)</strong><br>
+            <em>Rationale:</em> The text states SRM mimics the cooling effect observed after Mount Pinatubo. Therefore, Pinatubo must have caused cooling/temperature reduction. Option A is outside knowledge (Pinatubo did affect ozone, but the text doesn't mention this). Option C is false — Pinatubo was natural, not human-engineered. Option D is not supported by the text.<br><br>
+            <strong style="color: var(--accent-green);">Q2 Answer: (C)</strong><br>
+            <em>Rationale:</em> Solar power grid destruction is not mentioned anywhere in the passage. Option A is directly stated (SRM "fails to address ocean acidification"), B is stated (termination shock), and D is the closest paraphrase of the passage's listed risks — ocean acidification, rapid severe warming, and ecosystems given little time to adapt. Only C has zero support in the text.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 4: GREEN HYDROGEN TIMED PRACTICE -->
+    <div class="slide" id="slide-3">
+      <div class="card">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+          <div class="card-title" style="margin-bottom:0;">⏱️ Timed Simulation: Green Hydrogen Economy — 6 Qs · 10 min (compressed)</div>
+          <div>
+            <span class="timer-display" id="hydroTimer">10:00</span>
+            <button class="btn" style="margin-left:0.5rem;" onclick="startTimer('hydroTimer', 600)">Start 10-Min</button>
+            <button class="btn btn-secondary" style="margin-left:0.3rem;" onclick="resetTimer('hydroTimer', 600)">Reset</button>
+          </div>
+        </div>
+
+        <div class="passage-box">
+          <h4 style="color:var(--primary); margin-bottom:0.5rem;">The Green Hydrogen Economy</h4>
+          <p>Green hydrogen, produced via the electrolysis of water using renewable electricity, is increasingly recognized as an essential energy carrier for decarbonizing heavy industries such as steelmaking and maritime transport. Unlike blue hydrogen, which relies on natural gas coupled with carbon capture storage, green hydrogen emits zero greenhouse gases during production. However, widespread adoption faces immense logistical hurdles, including high capital costs for electrolyzers and the transport challenges of storing hydrogen at high pressures or cryogenic temperatures.</p>
+          <p>The fundamental advantage of green hydrogen lies in its versatility as an energy storage medium. When solar and wind generation exceed grid demand, the surplus electricity can power electrolyzers to produce hydrogen, which is then stored for later use. This addresses the intermittency problem that has long plagued renewable energy adoption. Furthermore, hydrogen fuel cells can power heavy-duty vehicles, ships, and potentially aircraft—sectors where direct electrification remains technically impractical due to energy density requirements.</p>
+          <p>Despite these advantages, the economics of green hydrogen remain challenging. <span class="ins-pt">[A]</span>Current production costs range from four to six dollars per kilogram, compared to one to two dollars for grey hydrogen produced from natural gas without carbon capture.<span class="ins-pt">[B]</span> Industry analysts project that costs could fall to two dollars per kilogram by 2030 through economies of scale and electrolyzer efficiency improvements.<span class="ins-pt">[C]</span> Government subsidies, particularly the European Union's Hydrogen Strategy and the United States' Inflation Reduction Act, are accelerating deployment by reducing the cost gap between green and grey hydrogen.<span class="ins-pt">[D]</span></p>
+          <p>Critics argue that investing heavily in hydrogen infrastructure represents a strategic misallocation of resources. They contend that direct electrification through heat pumps and battery electric vehicles is more energy-efficient for most applications, and that hydrogen should be reserved only for sectors where no viable electric alternative exists. Nevertheless, proponents maintain that a diversified decarbonization portfolio including hydrogen is essential for achieving net-zero emissions by mid-century.</p>
+        </div>
+
+        <div style="font-size:0.9rem;">
+          <div style="margin-bottom:1rem;">
+            <strong>Q1 (Vocabulary):</strong> The word <em>intermittency</em> in paragraph 2 is closest in meaning to:
+            <br><span style="color:var(--text-muted); font-size:0.85rem;">(A) Predictability</span>
+            <br><span style="color:var(--text-muted); font-size:0.85rem;">(B) Irregularity in occurrence</span>
+            <br><span style="color:var(--text-muted); font-size:0.85rem;">(C) Excessive intensity</span>
+            <br><span style="color:var(--text-muted); font-size:0.85rem;">(D) Complete absence</span>
+          </div>
+          <div style="margin-bottom:1rem;">
+            <strong>Q2 (Detail):</strong> According to the passage, what is the primary reason green hydrogen is considered useful for renewable energy?
+            <br><span style="color:var(--text-muted); font-size:0.85rem;">(A) It is cheaper than grey hydrogen.</span>
+            <br><span style="color:var(--text-muted); font-size:0.85rem;">(B) It can store surplus electricity for later use.</span>
+            <br><span style="color:var(--text-muted); font-size:0.85rem;">(C) It eliminates the need for battery electric vehicles.</span>
+            <br><span style="color:var(--text-muted); font-size:0.85rem;">(D) It produces zero emissions during transport.</span>
+          </div>
+          <div style="margin-bottom:1rem;">
+            <strong>Q3 (Inference):</strong> What can be inferred about the relationship between government subsidies and hydrogen costs?
+            <br><span style="color:var(--text-muted); font-size:0.85rem;">(A) Subsidies have already made green hydrogen cheaper than grey hydrogen.</span>
+            <br><span style="color:var(--text-muted); font-size:0.85rem;">(B) Without subsidies, green hydrogen adoption would slow significantly.</span>
+            <br><span style="color:var(--text-muted); font-size:0.85rem;">(C) Government subsidies are the only factor reducing production costs.</span>
+            <br><span style="color:var(--text-muted); font-size:0.85rem;">(D) Subsidies are primarily benefiting grey hydrogen producers.</span>
+          </div>
+          <div style="margin-bottom:1rem;">
+            <strong>Q4 (Negative Fact):</strong> All of the following are mentioned as challenges for green hydrogen EXCEPT:
+            <br><span style="color:var(--text-muted); font-size:0.85rem;">(A) High production costs</span>
+            <br><span style="color:var(--text-muted); font-size:0.85rem;">(B) Storage and transport difficulties</span>
+            <br><span style="color:var(--text-muted); font-size:0.85rem;">(C) Lack of government support</span>
+            <br><span style="color:var(--text-muted); font-size:0.85rem;">(D) Competition from direct electrification</span>
+          </div>
+          <div style="margin-bottom:1rem;">
+            <strong>Q5 (Sentence Insertion):</strong> Look at the four squares <span class="ins-pt">[A]</span> <span class="ins-pt">[B]</span> <span class="ins-pt">[C]</span> <span class="ins-pt">[D]</span> in paragraph 3 that show where the following sentence could be added.<br>
+            <em style="color:var(--accent-blue);">"This cost differential partly explains why government subsidies have targeted electrolyzer production."</em><br>
+            <span style="color:var(--text-muted); font-size:0.85rem;">Where would the sentence best fit?</span>
+          </div>
+          <div style="margin-bottom:1rem;">
+            <strong>Q6 (Summary):</strong> An introductory sentence for a brief summary of the passage is provided below. Complete the summary by selecting the <strong>THREE</strong> answer choices that express the most important ideas. Some sentences do not belong in the summary because they express ideas that are not presented in the passage or are minor ideas.<br>
+            <em style="color:var(--text-muted);">"The green hydrogen economy offers a promising but challenging pathway to decarbonization."</em>
+            <br><span style="color:var(--text-muted); font-size:0.85rem;">(A) Green hydrogen is produced from natural gas with carbon capture and storage.</span>
+            <br><span style="color:var(--text-muted); font-size:0.85rem;">(B) Hydrogen fuel cells can power heavy-duty vehicles and ships where direct electrification is impractical.</span>
+            <br><span style="color:var(--text-muted); font-size:0.85rem;">(C) Hydrogen currently costs less than grey hydrogen in most industrial markets.</span>
+            <br><span style="color:var(--text-muted); font-size:0.85rem;">(D) Surplus renewable electricity can be stored as hydrogen for later use, addressing intermittency.</span>
+            <br><span style="color:var(--text-muted); font-size:0.85rem;">(E) Critics argue that hydrogen investment may divert resources from more efficient direct electrification.</span>
+            <br><span style="color:var(--text-muted); font-size:0.85rem;">(F) Blue hydrogen emits no greenhouse gases during production.</span>
+          </div>
+          <button class="btn btn-secondary" onclick="toggleReveal('hydroReveal')">👁️ Show Answers &amp; Rationale</button>
+          <div class="reveal-box" id="hydroReveal">
+            <strong style="color:var(--accent-green);">Q1: (B)</strong> — "Intermittency" means occurring at irregular intervals. The text discusses storing surplus energy "for later use," confirming the irregularity of renewable generation.<br><br>
+            <strong style="color:var(--accent-green);">Q2: (B)</strong> — Paragraph 2 explicitly states hydrogen addresses "the intermittency problem" by storing surplus electricity. A is contradicted (green is more expensive). C and D are not the primary reason given.<br><br>
+            <strong style="color:var(--accent-green);">Q3: (B)</strong> — The text says subsidies are "accelerating deployment by reducing the cost gap." Without them, the gap would widen, slowing adoption. A is false (green still costs more). C is an overstatement. D is not supported.<br><br>
+            <strong style="color:var(--accent-green);">Q4: (C)</strong> — The text actually mentions strong government support (EU Hydrogen Strategy, US Inflation Reduction Act). A, B, and D are all explicitly mentioned as challenges.<br><br>
+            <strong style="color:var(--accent-green);">Q5: [C]</strong> — The inserted sentence says "this cost differential," so it must follow the green-vs-grey cost comparison ($4–6/kg vs $1–2/kg). Placing it at [C] keeps it immediately before the government-subsidies sentence, completing the causal chain.<br><br>
+            <strong style="color:var(--accent-green);">Q6: (B), (D), (E)</strong> — (B) is a main advantage from paragraph 2; (D) is the core intermittency argument from paragraph 2; (E) is the critics' central claim from paragraph 4. (A) describes blue hydrogen, not green. (C) is contradicted. (F) is false.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 5: HOMEWORK — 2026 TOEFL Adaptive -->
+    <div class="slide" id="slide-4">
+      <div class="card">
+        <div class="card-title">📋 Homework: 2026 TOEFL Reading — Adaptive Simulation</div>
+        <p style="font-size:0.9rem;color:var(--text-muted);margin-bottom:0.5rem;">This homework simulates the 2026 TOEFL Reading section: 2-stage adaptive format with 3 task types. Complete both stages. Your score on Stage 1 determines which Stage 2 path you take.</p>
+        <div style="background:rgba(0,0,0,0.25);padding:0.75rem;border-radius:6px;margin-bottom:1rem;font-size:0.85rem;line-height:1.7;border-left:3px solid var(--accent-blue);">
+          <p style="margin-bottom:0.4rem;"><strong>2026 Format:</strong></p>
+          <p style="color:var(--text-muted);">☐ <strong>Stage 1 (Router):</strong> Complete the Words + Daily Life — ~10 min</p>
+          <p style="color:var(--text-muted);">☐ <strong>Routing:</strong> Score ≥60% → Hard path | &lt;60% → Easy path</p>
+          <p style="color:var(--text-muted);">☐ <strong>Stage 2:</strong> Hard or Easy module — ~15 min</p>
+          <p style="color:var(--text-muted);">☐ <strong>Task types:</strong> Complete the Words, Read in Daily Life, Read an Academic Passage</p>
+        </div>
+      </div>
+
+      <!-- ===================== STAGE 1: ROUTER ===================== -->
+      <div id="hw-router">
+        <!-- Complete the Words: Dopamine & Reward -->
+        <div class="card">
+          <span class="hw-stage-label">Stage 1 · Router</span>
+          <div class="card-title">📝 Complete the Words — Dopamine &amp; Reward Circuits</div>
+          <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:0.75rem;">Read the paragraph. Each blank represents a missing word. Type the full word that fits.</p>
+          <div class="passage-box" style="max-height:none;">
+            <p>The mesolimbic dopamine pathway is a critical neural circuit involved in reward processing and motivation. This <input type="text" class="hw-blank" data-answer="pathway" placeholder="____" style="width:90px;"> originates in the ventral tegmental area and <input type="text" class="hw-blank" data-answer="projects" placeholder="____" style="width:90px;"> to the nucleus accumbens, where dopamine release <input type="text" class="hw-blank" data-answer="reinforces" placeholder="____" style="width:100px;"> behaviors essential for survival. While dopamine is commonly <input type="text" class="hw-blank" data-answer="associated" placeholder="____" style="width:100px;"> with pleasure, contemporary neuroscience suggests its primary function relates more to <input type="text" class="hw-blank" data-answer="anticipation" placeholder="____" style="width:110px;"> and incentive salience — the process by which stimuli become attractive and <input type="text" class="hw-blank" data-answer="motivationally" placeholder="____" style="width:130px;"> significant. Dysregulation of this system has been <input type="text" class="hw-blank" data-answer="implicated" placeholder="____" style="width:100px;"> in addiction, as substances that trigger excessive dopamine release can effectively <input type="text" class="hw-blank" data-answer="hijack" placeholder="____" style="width:90px;"> the reward circuitry, leading to <input type="text" class="hw-blank" data-answer="compulsive" placeholder="____" style="width:100px;"> drug-seeking behavior despite negative <input type="text" class="hw-blank" data-answer="consequences" placeholder="____" style="width:110px;">.</p>
+          </div>
+        </div>
+
+        <!-- Daily Life: Library Email -->
+        <div class="card">
+          <span class="hw-stage-label">Stage 1 · Router</span>
+          <div class="card-title">📧 Read in Daily Life — Library Fine Amnesty</div>
+          <div class="passage-box" style="max-height:none;">
+            <p><strong>From:</strong> library@university.edu<br>
+            <strong>To:</strong> all-students@university.edu<br>
+            <strong>Subject:</strong> Library Fine Amnesty — Extended Through Friday</p>
+            <p>Dear students,</p>
+            <p>We are pleased to announce that the library fine amnesty program has been extended through this Friday, August 8th. All outstanding fines for overdue books can be waived if you return the items to the circulation desk during regular hours. Please note that this amnesty applies only to overdue fines — replacement fees for lost or damaged items are not included.</p>
+            <p>If you have any questions, please contact the front desk or reply to this email.</p>
+            <p>Best regards,<br>University Library Services</p>
+          </div>
+
+          <div style="font-size:0.9rem;">
+            <div style="margin-bottom:1rem;">
+              <strong>Q1:</strong> What is the main purpose of this email?
+              <label class="hw-option" onclick="HW.selectRadio(this,'hw-r-q1','A')"><input type="radio" name="hw-r-q1" value="A" style="margin-right:0.5rem;"> (A) To announce new library hours</label>
+              <label class="hw-option" onclick="HW.selectRadio(this,'hw-r-q1','B')"><input type="radio" name="hw-r-q1" value="B" style="margin-right:0.5rem;"> (B) To inform students about a fine waiver extension</label>
+              <label class="hw-option" onclick="HW.selectRadio(this,'hw-r-q1','C')"><input type="radio" name="hw-r-q1" value="C" style="margin-right:0.5rem;"> (C) To remind students about book due dates</label>
+              <label class="hw-option" onclick="HW.selectRadio(this,'hw-r-q1','D')"><input type="radio" name="hw-r-q1" value="D" style="margin-right:0.5rem;"> (D) To introduce a new borrowing policy</label>
+            </div>
+            <div style="margin-bottom:1rem;">
+              <strong>Q2:</strong> Which type of fee is NOT covered by the amnesty program?
+              <label class="hw-option" onclick="HW.selectRadio(this,'hw-r-q2','A')"><input type="radio" name="hw-r-q2" value="A" style="margin-right:0.5rem;"> (A) Fines for returning books late</label>
+              <label class="hw-option" onclick="HW.selectRadio(this,'hw-r-q2','B')"><input type="radio" name="hw-r-q2" value="B" style="margin-right:0.5rem;"> (B) Fines for overdue materials</label>
+              <label class="hw-option" onclick="HW.selectRadio(this,'hw-r-q2','C')"><input type="radio" name="hw-r-q2" value="C" style="margin-right:0.5rem;"> (C) Charges for lost items</label>
+              <label class="hw-option" onclick="HW.selectRadio(this,'hw-r-q2','D')"><input type="radio" name="hw-r-q2" value="D" style="margin-right:0.5rem;"> (D) Penalties for damaged books</label>
+            </div>
+            <div style="margin-bottom:1rem;">
+              <strong>Q3:</strong> What must students do to have their fines waived?
+              <label class="hw-option" onclick="HW.selectRadio(this,'hw-r-q3','A')"><input type="radio" name="hw-r-q3" value="A" style="margin-right:0.5rem;"> (A) Pay a reduced fine online</label>
+              <label class="hw-option" onclick="HW.selectRadio(this,'hw-r-q3','B')"><input type="radio" name="hw-r-q3" value="B" style="margin-right:0.5rem;"> (B) Return the overdue items to the circulation desk</label>
+              <label class="hw-option" onclick="HW.selectRadio(this,'hw-r-q3','C')"><input type="radio" name="hw-r-q3" value="C" style="margin-right:0.5rem;"> (C) Visit the library before Friday morning</label>
+              <label class="hw-option" onclick="HW.selectRadio(this,'hw-r-q3','D')"><input type="radio" name="hw-r-q3" value="D" style="margin-right:0.5rem;"> (D) Send an email to library services</label>
+            </div>
+          </div>
+        </div>
+
+        <button class="btn" onclick="HW.checkRouter()" style="font-size:1rem;padding:0.8rem 2rem;">Submit Stage 1 →</button>
+      </div>
+
+      <!-- ===================== ROUTING SCREEN ===================== -->
+      <div id="hw-routing" style="display:none;">
+        <div class="card" style="text-align:center;padding:3rem;">
+          <div class="hw-stage-label">Routing Result</div>
+          <div class="hw-score-big" id="routing-score">0%</div>
+          <p style="font-size:1.1rem;margin:1rem 0;color:var(--text-muted);">Router Score: <strong id="routing-detail"></strong></p>
+          <div id="routing-path-container" style="margin:1.5rem 0;">
+            <span class="hw-path-badge" id="routing-path-badge" style="background:rgba(16,185,129,0.15);color:var(--accent-green);border:2px solid var(--accent-green);">HARD MODULE</span>
+          </div>
+          <p style="font-size:0.9rem;color:var(--text-muted);margin-bottom:1.5rem;" id="routing-msg"></p>
+          <button class="btn" onclick="HW.startModule()" style="font-size:1rem;padding:0.8rem 2rem;">Continue to Stage 2 →</button>
+        </div>
+      </div>
+
+      <!-- ===================== STAGE 2: HARD MODULE ===================== -->
+      <div id="hw-hard" style="display:none;">
+        <!-- Complete the Words: Bioluminescence -->
+        <div class="card">
+          <span class="hw-stage-label">Stage 2 · Hard</span>
+          <div class="card-title">📝 Complete the Words — Bioluminescence</div>
+          <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:0.75rem;">Read the paragraph. Each blank represents a missing word. Type the full word that fits.</p>
+          <div class="passage-box" style="max-height:none;">
+            <p>Bioluminescence, the production and emission of light by living organisms, represents one of nature's most remarkable adaptations. This <input type="text" class="hw-blank" data-answer="phenomenon" placeholder="____" style="width:110px;"> occurs through a chemical reaction involving a light-emitting molecule called <input type="text" class="hw-blank" data-answer="luciferin" placeholder="____" style="width:100px;"> and an enzyme known as <input type="text" class="hw-blank" data-answer="luciferase" placeholder="____" style="width:100px;">. Marine organisms, <input type="text" class="hw-blank" data-answer="particularly" placeholder="____" style="width:110px;"> deep-sea fish and jellyfish, have evolved bioluminescence for multiple purposes, including attracting prey, <input type="text" class="hw-blank" data-answer="communicating" placeholder="____" style="width:120px;"> with potential mates, and <input type="text" class="hw-blank" data-answer="deterring" placeholder="____" style="width:100px;"> predators. The anglerfish, for instance, possesses a luminous <input type="text" class="hw-blank" data-answer="appendage" placeholder="____" style="width:100px;"> that dangles above its mouth, attracting smaller fish directly into its jaws. In the <input type="text" class="hw-blank" data-answer="aphotic" placeholder="____" style="width:90px;"> zone — the ocean layer below 200 meters where sunlight cannot <input type="text" class="hw-blank" data-answer="penetrate" placeholder="____" style="width:100px;"> — bioluminescence serves as the primary source of illumination, creating an <input type="text" class="hw-blank" data-answer="intricate" placeholder="____" style="width:100px;"> ecosystem of light-based interactions that scientists are only beginning to understand.</p>
+          </div>
+        </div>
+
+        <!-- Academic Passage: Coral Reef Symbiosis -->
+        <div class="card">
+          <span class="hw-stage-label">Stage 2 · Hard</span>
+          <div class="card-title">📖 Read an Academic Passage — Coral Reef Symbiosis</div>
+          <div class="passage-box" style="max-height:none;">
+            <p>Coral reefs are often called the rainforests of the sea, and for good reason. Though they cover less than one percent of the ocean floor, they support approximately twenty-five percent of all marine species. The foundation of this extraordinary biodiversity lies in a symbiotic relationship between coral polyps and microscopic algae called zooxanthellae. The algae live within coral tissue, photosynthesizing and providing the coral with up to ninety percent of its energy. In return, the coral supplies the algae with carbon dioxide and a protected environment.</p>
+            <p>This delicate partnership is now under severe threat from rising ocean temperatures. When water temperatures exceed the coral's thermal tolerance by just one to two degrees Celsius, the symbiotic relationship breaks down. The zooxanthellae begin producing toxic reactive oxygen species, prompting the coral to expel them. Without these algae, the coral turns white — a process known as bleaching — and begins to starve. If temperatures normalize within weeks, corals can gradually recover. However, prolonged thermal stress leads to mass mortality, with devastating consequences for marine ecosystems and coastal communities worldwide.</p>
+            <p>Conservation efforts currently focus on reducing local stressors such as overfishing and pollution, which diminish coral resilience. Marine protected areas have shown success in maintaining reef health by limiting destructive human activities. Researchers are also developing active interventions, including coral gardening — growing heat-resistant fragments in nurseries and transplanting them onto degraded reefs. Some scientists advocate for assisted gene flow, breeding corals from warmer regions with those from cooler areas to enhance thermal tolerance. Despite these efforts, the long-term survival of coral reefs ultimately depends on meaningful global reductions in greenhouse gas emissions.</p>
+          </div>
+
+          <div style="font-size:0.9rem;">
+            <div style="margin-bottom:1rem;">
+              <strong>Q1 (Vocabulary):</strong> The word <em>diminish</em> in paragraph 3 is closest in meaning to:
+              <label class="hw-option" onclick="HW.selectRadio(this,'hw-h-q1','A')"><input type="radio" name="hw-h-q1" value="A" style="margin-right:0.5rem;"> (A) Strengthen</label>
+              <label class="hw-option" onclick="HW.selectRadio(this,'hw-h-q1','B')"><input type="radio" name="hw-h-q1" value="B" style="margin-right:0.5rem;"> (B) Reduce</label>
+              <label class="hw-option" onclick="HW.selectRadio(this,'hw-h-q1','C')"><input type="radio" name="hw-h-q1" value="C" style="margin-right:0.5rem;"> (C) Eliminate</label>
+              <label class="hw-option" onclick="HW.selectRadio(this,'hw-h-q1','D')"><input type="radio" name="hw-h-q1" value="D" style="margin-right:0.5rem;"> (D) Measure</label>
+            </div>
+            <div style="margin-bottom:1rem;">
+              <strong>Q2 (Detail):</strong> According to the passage, what provides coral with most of its energy?
+              <label class="hw-option" onclick="HW.selectRadio(this,'hw-h-q2','A')"><input type="radio" name="hw-h-q2" value="A" style="margin-right:0.5rem;"> (A) Sunlight absorbed directly by coral tissue</label>
+              <label class="hw-option" onclick="HW.selectRadio(this,'hw-h-q2','B')"><input type="radio" name="hw-h-q2" value="B" style="margin-right:0.5rem;"> (B) Photosynthetic algae living within the coral</label>
+              <label class="hw-option" onclick="HW.selectRadio(this,'hw-h-q2','C')"><input type="radio" name="hw-h-q2" value="C" style="margin-right:0.5rem;"> (C) Nutrients from surrounding ocean water</label>
+              <label class="hw-option" onclick="HW.selectRadio(this,'hw-h-q2','D')"><input type="radio" name="hw-h-q2" value="D" style="margin-right:0.5rem;"> (D) Microorganisms attached to the reef surface</label>
+            </div>
+            <div style="margin-bottom:1rem;">
+              <strong>Q3 (Inference):</strong> What can be inferred about why coral bleaching is called "bleaching"?
+              <label class="hw-option" onclick="HW.selectRadio(this,'hw-h-q3','A')"><input type="radio" name="hw-h-q3" value="A" style="margin-right:0.5rem;"> (A) The coral produces white pigment to protect itself</label>
+              <label class="hw-option" onclick="HW.selectRadio(this,'hw-h-q3','B')"><input type="radio" name="hw-h-q3" value="B" style="margin-right:0.5rem;"> (B) The coral loses its color when algae are expelled</label>
+              <label class="hw-option" onclick="HW.selectRadio(this,'hw-h-q3','C')"><input type="radio" name="hw-h-q3" value="C" style="margin-right:0.5rem;"> (C) The water becomes cloudy during thermal events</label>
+              <label class="hw-option" onclick="HW.selectRadio(this,'hw-h-q3','D')"><input type="radio" name="hw-h-q3" value="D" style="margin-right:0.5rem;"> (D) Dead coral turns blue-gray over time</label>
+            </div>
+            <div style="margin-bottom:1rem;">
+              <strong>Q4 (Negative Fact):</strong> All of the following are mentioned as conservation strategies EXCEPT:
+              <label class="hw-option" onclick="HW.selectRadio(this,'hw-h-q4','A')"><input type="radio" name="hw-h-q4" value="A" style="margin-right:0.5rem;"> (A) Limiting fishing in protected areas</label>
+              <label class="hw-option" onclick="HW.selectRadio(this,'hw-h-q4','B')"><input type="radio" name="hw-h-q4" value="B" style="margin-right:0.5rem;"> (B) Growing heat-resistant coral in nurseries</label>
+              <label class="hw-option" onclick="HW.selectRadio(this,'hw-h-q4','C')"><input type="radio" name="hw-h-q4" value="C" style="margin-right:0.5rem;"> (C) Reducing carbon emissions globally</label>
+              <label class="hw-option" onclick="HW.selectRadio(this,'hw-h-q4','D')"><input type="radio" name="hw-h-q4" value="D" style="margin-right:0.5rem;"> (D) Introducing new predator species to control algae</label>
+            </div>
+            <div style="margin-bottom:1rem;">
+              <strong>Q5 (Detail):</strong> According to the passage, what is "assisted gene flow"?
+              <label class="hw-option" onclick="HW.selectRadio(this,'hw-h-q5','A')"><input type="radio" name="hw-h-q5" value="A" style="margin-right:0.5rem;"> (A) Moving coral larvae to cooler waters</label>
+              <label class="hw-option" onclick="HW.selectRadio(this,'hw-h-q5','B')"><input type="radio" name="hw-h-q5" value="B" style="margin-right:0.5rem;"> (B) Selectively breeding corals from different temperature regions</label>
+              <label class="hw-option" onclick="HW.selectRadio(this,'hw-h-q5','C')"><input type="radio" name="hw-h-q5" value="C" style="margin-right:0.5rem;"> (C) Injecting heat-resistant genes into coral DNA</label>
+              <label class="hw-option" onclick="HW.selectRadio(this,'hw-h-q5','D')"><input type="radio" name="hw-h-q5" value="D" style="margin-right:0.5rem;"> (D) Transplanting zooxanthellae between coral species</label>
+            </div>
+          </div>
+        </div>
+
+        <button class="btn" onclick="HW.checkModule('hard')" style="font-size:1rem;padding:0.8rem 2rem;">Submit Stage 2 →</button>
+      </div>
+
+      <!-- ===================== STAGE 2: EASY MODULE ===================== -->
+      <div id="hw-easy" style="display:none;">
+        <!-- Complete the Words: Printing Press -->
+        <div class="card">
+          <span class="hw-stage-label">Stage 2 · Easy</span>
+          <div class="card-title">📝 Complete the Words — The Printing Press</div>
+          <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:0.75rem;">Read the paragraph. Each blank represents a missing word. Type the full word that fits.</p>
+          <div class="passage-box" style="max-height:none;">
+            <p>Gutenberg's invention of the movable-type printing press around 1440 <input type="text" class="hw-blank" data-answer="revolutionized" placeholder="____" style="width:130px;"> the spread of information across Europe. Before this innovation, books were <input type="text" class="hw-blank" data-answer="painstakingly" placeholder="____" style="width:120px;"> copied by hand, making them <input type="text" class="hw-blank" data-answer="prohibitively" placeholder="____" style="width:120px;"> expensive and <input type="text" class="hw-blank" data-answer="accessible" placeholder="____" style="width:100px;"> only to the wealthy elite and clergy. The printing press <input type="text" class="hw-blank" data-answer="dramatically" placeholder="____" style="width:110px;"> reduced production costs, enabling the mass production of books and pamphlets. This <input type="text" class="hw-blank" data-answer="democratization" placeholder="____" style="width:140px;"> of knowledge fueled the Renaissance, <input type="text" class="hw-blank" data-answer="facilitated" placeholder="____" style="width:100px;"> the Protestant Reformation, and laid the <input type="text" class="hw-blank" data-answer="groundwork" placeholder="____" style="width:100px;"> for the Scientific Revolution. Within fifty years of Gutenberg's first printed Bible, an <input type="text" class="hw-blank" data-answer="estimated" placeholder="____" style="width:100px;"> twenty million volumes had been produced across Europe, transforming education, religion, and political discourse in ways that continue to shape modern <input type="text" class="hw-blank" data-answer="civilization" placeholder="____" style="width:110px;">.</p>
+          </div>
+        </div>
+
+        <!-- Daily Life: Two Notices -->
+        <div class="card">
+          <span class="hw-stage-label">Stage 2 · Easy</span>
+          <div class="card-title">📧 Read in Daily Life — Campus Notices</div>
+          <div class="passage-box" style="max-height:none;">
+            <p><strong style="color:var(--accent-blue);">NOTICE: Chemistry Lab Room 204</strong><br>
+            Due to equipment maintenance, Chemistry Lab 204 will be closed on Wednesday, October 15th. Students enrolled in CHEM 201 should report to Room 312 in the Science Building for that day's session. The experiment schedule remains unchanged. Please bring your lab notebooks and safety goggles as usual. Contact Professor Chen at chen@university.edu with any questions.</p>
+            <p><strong style="color:var(--accent-purple);">LOST: Black iPhone 15 Pro</strong><br>
+            Last seen: Main Library, 3rd floor study area — Tuesday 2:30 PM<br>
+            The phone has a dark blue case with a university logo. There are important photos on the device that cannot be replaced. Reward offered for return. Please contact Maria at maria.s@university.edu or call 555-0142 if found. Thank you!</p>
+          </div>
+
+          <div style="font-size:0.9rem;">
+            <div style="margin-bottom:1rem;">
+              <strong>Q1:</strong> Why is Chemistry Lab 204 closed?
+              <label class="hw-option" onclick="HW.selectRadio(this,'hw-e-q1','A')"><input type="radio" name="hw-e-q1" value="A" style="margin-right:0.5rem;"> (A) A power outage affected the building</label>
+              <label class="hw-option" onclick="HW.selectRadio(this,'hw-e-q1','B')"><input type="radio" name="hw-e-q1" value="B" style="margin-right:0.5rem;"> (B) Equipment is being repaired or maintained</label>
+              <label class="hw-option" onclick="HW.selectRadio(this,'hw-e-q1','C')"><input type="radio" name="hw-e-q1" value="C" style="margin-right:0.5rem;"> (C) The room is reserved for a special event</label>
+              <label class="hw-option" onclick="HW.selectRadio(this,'hw-e-q1','D')"><input type="radio" name="hw-e-q1" value="D" style="margin-right:0.5rem;"> (D) Renovations are being completed</label>
+            </div>
+            <div style="margin-bottom:1rem;">
+              <strong>Q2:</strong> Where should CHEM 201 students go on Wednesday?
+              <label class="hw-option" onclick="HW.selectRadio(this,'hw-e-q2','A')"><input type="radio" name="hw-e-q2" value="A" style="margin-right:0.5rem;"> (A) Room 204 at the normal time</label>
+              <label class="hw-option" onclick="HW.selectRadio(this,'hw-e-q2','B')"><input type="radio" name="hw-e-q2" value="B" style="margin-right:0.5rem;"> (B) Room 312 in the Science Building</label>
+              <label class="hw-option" onclick="HW.selectRadio(this,'hw-e-q2','C')"><input type="radio" name="hw-e-q2" value="C" style="margin-right:0.5rem;"> (C) The main lecture hall</label>
+              <label class="hw-option" onclick="HW.selectRadio(this,'hw-e-q2','D')"><input type="radio" name="hw-e-q2" value="D" style="margin-right:0.5rem;"> (D) The outdoor research facility</label>
+            </div>
+            <div style="margin-bottom:1rem;">
+              <strong>Q3:</strong> What is TRUE about the lost phone?
+              <label class="hw-option" onclick="HW.selectRadio(this,'hw-e-q3','A')"><input type="radio" name="hw-e-q3" value="A" style="margin-right:0.5rem;"> (A) It was found in the cafeteria</label>
+              <label class="hw-option" onclick="HW.selectRadio(this,'hw-e-q3','B')"><input type="radio" name="hw-e-q3" value="B" style="margin-right:0.5rem;"> (B) It has a red case</label>
+              <label class="hw-option" onclick="HW.selectRadio(this,'hw-e-q3','C')"><input type="radio" name="hw-e-q3" value="C" style="margin-right:0.5rem;"> (C) It was last seen on the 3rd floor of the library</label>
+              <label class="hw-option" onclick="HW.selectRadio(this,'hw-e-q3','D')"><input type="radio" name="hw-e-q3" value="D" style="margin-right:0.5rem;"> (D) It belongs to Professor Chen</label>
+            </div>
+            <div style="margin-bottom:1rem;">
+              <strong>Q4:</strong> Why is the owner especially concerned about the phone?
+              <label class="hw-option" onclick="HW.selectRadio(this,'hw-e-q4','A')"><input type="radio" name="hw-e-q4" value="A" style="margin-right:0.5rem;"> (A) It contains irreplaceable photos</label>
+              <label class="hw-option" onclick="HW.selectRadio(this,'hw-e-q4','B')"><input type="radio" name="hw-e-q4" value="B" style="margin-right:0.5rem;"> (B) It is a brand new model</label>
+              <label class="hw-option" onclick="HW.selectRadio(this,'hw-e-q4','C')"><input type="radio" name="hw-e-q4" value="C" style="margin-right:0.5rem;"> (C) It has financial information stored on it</label>
+              <label class="hw-option" onclick="HW.selectRadio(this,'hw-e-q4','D')"><input type="radio" name="hw-e-q4" value="D" style="margin-right:0.5rem;"> (D) It was a gift from a family member</label>
+            </div>
+          </div>
+        </div>
+
+        <button class="btn" onclick="HW.checkModule('easy')" style="font-size:1rem;padding:0.8rem 2rem;">Submit Stage 2 →</button>
+      </div>
+
+      <!-- ===================== RESULTS SCREEN ===================== -->
+      <div id="hw-results" style="display:none;">
+        <div class="card" style="text-align:center;padding:2.5rem;">
+          <div class="hw-stage-label">Final Results</div>
+          <div class="hw-score-big" id="results-total">0%</div>
+          <p style="font-size:1.1rem;margin:0.5rem 0;" id="results-band"></p>
+          <div style="display:flex;justify-content:center;gap:2rem;margin:1.5rem 0;flex-wrap:wrap;">
+            <div style="text-align:center;">
+              <div style="font-size:0.8rem;color:var(--text-muted);margin-bottom:0.3rem;">Stage 1 (Router)</div>
+              <div style="font-size:1.5rem;font-weight:700;color:var(--accent-blue);" id="results-router">0/13</div>
+            </div>
+            <div style="text-align:center;">
+              <div style="font-size:0.8rem;color:var(--text-muted);margin-bottom:0.3rem;">Stage 2</div>
+              <div style="font-size:1.5rem;font-weight:700;color:var(--accent-green);" id="results-stage2">0/0</div>
+            </div>
+            <div style="text-align:center;">
+              <div style="font-size:0.8rem;color:var(--text-muted);margin-bottom:0.3rem;">Path</div>
+              <div style="font-size:1.5rem;font-weight:700;color:var(--primary);" id="results-path">—</div>
+            </div>
+          </div>
+          <div style="background:rgba(0,0,0,0.25);padding:1rem;border-radius:8px;text-align:left;font-size:0.85rem;line-height:1.7;margin-top:1rem;">
+            <strong style="color:var(--primary);">Per-Question Breakdown:</strong>
+            <div id="results-breakdown" style="margin-top:0.5rem;color:var(--text-muted);"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===================== OPTIONAL: YOUTUBE VIDEO ===================== -->
+      <div class="card">
+        <div class="card-title">🎬 Optional Task: Watch &amp; Reflect</div>
+        <p style="font-size:0.9rem;color:var(--text-muted);margin-bottom:1rem;">TST Prep walks through <strong style="color:var(--text-main);">every 2026 TOEFL Reading question type step-by-step</strong> — the same three task types you just practiced (Complete the Words, Read in Daily Life, Read an Academic Passage). After watching, write <strong>2-3 sentences</strong>: the most useful tip you learned and how you'll apply it on test day.</p>
+        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:8px;border:1px solid var(--border-color);">
+          <iframe src="https://www.youtube.com/embed/ij63VxP0FWQ" title="TOEFL Reading Practice (2026): Every Question Type Step-by-Step" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <textarea placeholder="Write your 2-3 sentence summary here..." style="margin-top:1rem;min-height:80px;"></textarea>
+      </div>
+
+      <!-- DISTRACTOR ANALYSIS TASK -->
+      <div class="card">
+        <div class="card-title">📝 Distractor Analysis</div>
+        <p style="font-size:0.9rem;">For <strong>every question you missed</strong> in the homework, write <strong>1 sentence</strong> naming the distractor type that fooled you:</p>
+        <div style="background:rgba(0,0,0,0.3);padding:0.75rem;border-radius:6px;margin-top:0.5rem;font-size:0.85rem;">
+          <p style="margin-bottom:0.3rem;"><strong>The 4 Distractor Types:</strong></p>
+          <p style="color:var(--text-muted);">1. <strong>Outside Knowledge Trap</strong> — true in real life, not in the text</p>
+          <p style="color:var(--text-muted);">2. <strong>Scope Exaggerator</strong> — "always/completely" vs text's "likely/partially"</p>
+          <p style="color:var(--text-muted);">3. <strong>Opposite Direction</strong> — reversed cause and effect</p>
+          <p style="color:var(--text-muted);">4. <strong>False Detail Combo</strong> — keywords from two different paragraphs merged</p>
+        </div>
+        <div style="background:rgba(0,0,0,0.25);padding:0.75rem;border-radius:6px;margin-top:0.75rem;font-size:0.85rem;">
+          <p style="margin-bottom:0.3rem;"><strong>Format:</strong></p>
+          <p style="color:var(--text-muted);">Question #: Option ___ fooled me because it was a(n) <em>[distractor type]</em> — <em>[1-sentence explanation]</em>.</p>
+        </div>
+      </div>
+
+      <!-- VOCABULARY TASK -->
+      <div class="card">
+        <div class="card-title">📝 Vocabulary — 5 Sentences</div>
+        <p style="font-size:0.9rem;">Write <strong>5 academic sentences</strong> using the following words. Each sentence must show the word in an academic context related to climate, technology, or policy.</p>
+        <div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin:0.75rem 0;">
+          <span style="background:var(--accent-blue);color:#000;padding:0.3rem 0.8rem;border-radius:20px;font-size:0.85rem;font-weight:600;">mitigate</span>
+          <span style="background:var(--accent-purple);color:#fff;padding:0.3rem 0.8rem;border-radius:20px;font-size:0.85rem;font-weight:600;">stratospheric</span>
+          <span style="background:var(--primary);color:#000;padding:0.3rem 0.8rem;border-radius:20px;font-size:0.85rem;font-weight:600;">offset</span>
+          <span style="background:var(--accent-green);color:#000;padding:0.3rem 0.8rem;border-radius:20px;font-size:0.85rem;font-weight:600;">vulnerable</span>
+          <span style="background:var(--accent-red);color:#fff;padding:0.3rem 0.8rem;border-radius:20px;font-size:0.85rem;font-weight:600;">termination shock</span>
+        </div>
+      </div>
+
+      <div style="margin-top:1rem;padding:0.75rem;background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.2);border-radius:8px;font-size:0.85rem;color:var(--text-muted);">
+        <strong style="color:var(--primary);">Submit</strong> — Send your results screenshot, distractor analysis, vocabulary sentences, and optional video summary via chat before the next session.
+      </div>
+    </div>
+  </main>
+
+  <script src="audio/shadowingTS.js"></script>
+<script>
+    function switchSlide(i) {
+      document.querySelectorAll('.slide').forEach((s, idx) => s.classList.toggle('active', idx === i));
+      document.querySelectorAll('.nav-btn').forEach((b, idx) => b.classList.toggle('active', idx === i));
+    }
+
+    // Hash-based slide navigation
+    window.addEventListener('hashchange', function() {
+      var m = location.hash.match(/^#slide-(\d+)$/);
+      if (m) switchSlide(parseInt(m[1]));
+    });
+    !function(){var m=location.hash.match(/^#slide-(\d+)$/);if(m)switchSlide(parseInt(m[1]))}();
+
+    // Shadowing Pacer + Karaoke
+    let pacerInterval = null, currentWordIndex = 0, karaokeIndex = -1;
+    const shadowingAudioEl = document.getElementById('shadowingAudio');
+    function wrapShadowingWords() {
+      const container = document.getElementById('shadowingTextDisplay');
+      if (container.dataset.wrapped) return;
+      if (typeof shadowingTS !== 'undefined' && shadowingTS.length) {
+        container.innerHTML = shadowingTS.map(w => `<span class="shadowing-word">${w.word}</span>`).join(' ');
+      } else {
+        container.innerHTML = container.innerText.split(/\s+/).map(w => `<span class="shadowing-word">${w}</span>`).join(' ');
+      }
+      container.dataset.wrapped = "true";
+    }
+    function clearAllHighlights() {
+      document.querySelectorAll('.shadowing-word').forEach(w => w.classList.remove('active'));
+    }
+    function toggleShadowingPacer() {
+      if (pacerInterval) { clearInterval(pacerInterval); pacerInterval = null; return; }
+      shadowingAudioEl.pause();
+      wrapShadowingWords();
+      const spanWords = document.querySelectorAll('.shadowing-word');
+      const speed = parseInt(document.getElementById('pacerSpeed').value) || 380;
+      pacerInterval = setInterval(() => {
+        spanWords.forEach(w => w.classList.remove('active'));
+        if (currentWordIndex < spanWords.length) {
+          spanWords[currentWordIndex].classList.add('active');
+          currentWordIndex++;
+        } else {
+          clearInterval(pacerInterval); pacerInterval = null; currentWordIndex = 0;
+        }
+      }, speed);
+    }
+    function resetShadowingPacer() {
+      if (pacerInterval) clearInterval(pacerInterval);
+      pacerInterval = null; currentWordIndex = 0; karaokeIndex = -1;
+      shadowingAudioEl.pause();
+      clearAllHighlights();
+    }
+    if (shadowingAudioEl) {
+      shadowingAudioEl.addEventListener('play', () => {
+        if (pacerInterval) { clearInterval(pacerInterval); pacerInterval = null; }
+        wrapShadowingWords();
+      });
+      shadowingAudioEl.addEventListener('timeupdate', () => {
+        if (typeof shadowingTS === 'undefined' || !shadowingTS.length) return;
+        const t = shadowingAudioEl.currentTime;
+        if (t < shadowingTS[0].start) return;
+        let idx = -1;
+        for (let i = karaokeIndex + 1; i < shadowingTS.length; i++) {
+          if (t >= shadowingTS[i].start) idx = i; else break;
+        }
+        if (idx === -1 && karaokeIndex >= 0) idx = karaokeIndex;
+        if (idx >= 0 && idx !== karaokeIndex) {
+          karaokeIndex = idx;
+          clearAllHighlights();
+          const spans = document.querySelectorAll('.shadowing-word');
+          if (spans[idx]) spans[idx].classList.add('active');
+        }
+      });
+      shadowingAudioEl.addEventListener('ended', () => { karaokeIndex = -1; clearAllHighlights(); });
+    }
+
+    // Timer
+    let activeT = null;
+    function startTimer(id, sec) {
+      if (activeT) clearInterval(activeT);
+      let r = sec;
+      const disp = document.getElementById(id);
+      disp.style.color = 'var(--primary)';
+      activeT = setInterval(() => {
+        const m = Math.floor(r/60), s = r%60;
+        disp.textContent = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+        if (r <= 60) disp.style.color = 'var(--accent-red)';
+        if (r <= 0) { clearInterval(activeT); activeT = null; disp.style.animation = 'pulse 0.5s ease 3'; setTimeout(() => disp.style.animation = '', 2000); }
+        r--;
+      }, 1000);
+    }
+    function resetTimer(id, sec) {
+      if (activeT) clearInterval(activeT);
+      activeT = null;
+      const disp = document.getElementById(id);
+      disp.textContent = `${String(Math.floor(sec/60)).padStart(2,'0')}:${String(sec%60).padStart(2,'0')}`;
+      disp.style.color = 'var(--primary)';
+    }
+
+    // Reveal
+    function toggleReveal(id) { document.getElementById(id).classList.toggle('show'); }
+
+    // ===================== 2026 TOEFL ADAPTIVE HOMEWORK ENGINE =====================
+    const HW = {
+      routerScore: 0,
+      routerCorrect: 0,
+      routerTotal: 13,
+      moduleCorrect: 0,
+      moduleTotal: 0,
+      path: '',
+      answers: {
+        'hw-r-q1': 'B', 'hw-r-q2': 'C', 'hw-r-q3': 'B',
+        'hw-h-q1': 'B', 'hw-h-q2': 'B', 'hw-h-q3': 'B', 'hw-h-q4': 'D', 'hw-h-q5': 'B',
+        'hw-e-q1': 'B', 'hw-e-q2': 'B', 'hw-e-q3': 'C', 'hw-e-q4': 'A'
+      },
+      routerBlanks: ['pathway','projects','reinforces','associated','anticipation','motivationally','implicated','hijack','compulsive','consequences'],
+      hardBlanks: ['phenomenon','luciferin','luciferase','particularly','communicating','deterring','appendage','aphotic','penetrate','intricate'],
+      easyBlanks: ['revolutionized','painstakingly','prohibitively','accessible','dramatically','democratization','facilitated','groundwork','estimated','civilization'],
+
+      selectRadio(label, name, value) {
+        document.querySelectorAll(`input[name="${name}"]`).forEach(r => r.checked = false);
+        label.querySelector('input[type="radio"]').checked = true;
+        document.querySelectorAll(`input[name="${name}"]`).forEach(r => {
+          r.closest('.hw-option').classList.toggle('selected', r.checked);
+        });
+      },
+
+      countBlanks(containerId) {
+        let correct = 0;
+        document.querySelectorAll(`#${containerId} .hw-blank`).forEach(input => {
+          const answer = input.dataset.answer.toLowerCase();
+          const user = input.value.trim().toLowerCase();
+          if (user === answer) { correct++; input.classList.add('correct'); input.classList.remove('incorrect'); }
+          else { input.classList.add('incorrect'); input.classList.remove('correct'); }
+        });
+        return correct;
+      },
+
+      countRadios(names) {
+        let correct = 0;
+        names.forEach(name => {
+          const checked = document.querySelector(`input[name="${name}"]:checked`);
+          if (checked && checked.value === this.answers[name]) correct++;
+        });
+        return correct;
+      },
+
+      checkRouter() {
+        const blankCorrect = this.countBlanks('hw-router');
+        const radioNames = ['hw-r-q1','hw-r-q2','hw-r-q3'];
+        const radioCorrect = this.countRadios(radioNames);
+        this.routerCorrect = blankCorrect + radioCorrect;
+        this.routerScore = this.routerCorrect / this.routerTotal;
+        const pct = Math.round(this.routerScore * 100);
+        this.path = this.routerScore >= 0.6 ? 'hard' : 'easy';
+        document.getElementById('routing-score').textContent = pct + '%';
+        document.getElementById('routing-detail').textContent = this.routerCorrect + '/' + this.routerTotal + ' correct';
+        const badge = document.getElementById('routing-path-badge');
+        if (this.path === 'hard') {
+          badge.textContent = 'HARD MODULE';
+          badge.style.background = 'rgba(239,68,68,0.15)';
+          badge.style.color = 'var(--accent-red)';
+          badge.style.borderColor = 'var(--accent-red)';
+          document.getElementById('routing-msg').textContent = 'Great work! You scored above 60%. You\'ll now tackle the Hard module with an academic passage and harder vocabulary.';
+        } else {
+          badge.textContent = 'EASY MODULE';
+          badge.style.background = 'rgba(56,189,248,0.15)';
+          badge.style.color = 'var(--accent-blue)';
+          badge.style.borderColor = 'var(--accent-blue)';
+          document.getElementById('routing-msg').textContent = 'You scored below 60%. You\'ll now take the Easy module with Daily Life passages to build foundational skills. Keep practicing!';
+        }
+        document.getElementById('hw-router').style.display = 'none';
+        document.getElementById('hw-routing').style.display = 'block';
+      },
+
+      startModule() {
+        document.getElementById('hw-routing').style.display = 'none';
+        document.getElementById('hw-' + this.path).style.display = 'block';
+      },
+
+      checkModule(path) {
+        const containerId = 'hw-' + path;
+        const blankCorrect = this.countBlanks(containerId);
+        let radioCorrect = 0;
+        let radioNames = [];
+        if (path === 'hard') radioNames = ['hw-h-q1','hw-h-q2','hw-h-q3','hw-h-q4','hw-h-q5'];
+        else radioNames = ['hw-e-q1','hw-e-q2','hw-e-q3','hw-e-q4'];
+        radioCorrect = this.countRadios(radioNames);
+        this.moduleCorrect = blankCorrect + radioCorrect;
+        this.moduleTotal = (path === 'hard' ? 15 : 14);
+        this.showResults();
+      },
+
+      showResults() {
+        const totalCorrect = this.routerCorrect + this.moduleCorrect;
+        const totalQ = this.routerTotal + this.moduleTotal;
+        const totalPct = Math.round((totalCorrect / totalQ) * 100);
+        document.getElementById('results-total').textContent = totalPct + '%';
+        document.getElementById('results-router').textContent = this.routerCorrect + '/' + this.routerTotal;
+        document.getElementById('results-stage2').textContent = this.moduleCorrect + '/' + this.moduleTotal;
+        document.getElementById('results-path').textContent = this.path.toUpperCase();
+        let band = '';
+        if (totalPct >= 90) band = 'Band 5.5–6.0 (C1)';
+        else if (totalPct >= 75) band = 'Band 4.5–5.0 (B2+)';
+        else if (totalPct >= 60) band = 'Band 3.5–4.0 (B2)';
+        else if (totalPct >= 45) band = 'Band 2.5–3.0 (B1+)';
+        else band = 'Band 1.5–2.0 (B1)';
+        document.getElementById('results-band').innerHTML = 'Estimated TOEFL Band: <strong>' + band + '</strong>';
+        let breakdown = '';
+        const allBlanks = document.querySelectorAll('#hw-router .hw-blank, #hw-' + this.path + ' .hw-blank');
+        let bi = 1;
+        allBlanks.forEach(input => {
+          const isCorrect = input.classList.contains('correct');
+          breakdown += '<span style="color:' + (isCorrect ? 'var(--accent-green)' : 'var(--accent-red)') + ';">Blank ' + bi + ': ' + (isCorrect ? '✓' : '✗ ' + input.dataset.answer) + '</span><br>';
+          bi++;
+        });
+        const allRadios = document.querySelectorAll('#hw-router input[type="radio"]:checked, #hw-hard input[type="radio"]:checked, #hw-easy input[type="radio"]:checked');
+        let ri = 1;
+        allRadios.forEach(radio => {
+          const isCorrect = radio.value === this.answers[radio.name];
+          breakdown += '<span style="color:' + (isCorrect ? 'var(--accent-green)' : 'var(--accent-red)') + ';">Radio ' + ri + ': ' + (isCorrect ? '✓' : '✗ ' + this.answers[radio.name]) + '</span><br>';
+          ri++;
+        });
+        document.getElementById('results-breakdown').innerHTML = breakdown;
+        document.getElementById('hw-hard').style.display = 'none';
+        document.getElementById('hw-easy').style.display = 'none';
+        document.getElementById('hw-results').style.display = 'block';
+      }
+    };
+  </script>
+<button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Open lesson navigation">&#9776;</button>
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+<!-- FE:MOBILE --><script>// FE:MOBILE
+(function(){
+  function initM() {
+    var t = document.getElementById('mobileNavToggle'), ov = document.getElementById('sidebarOverlay');
+    if (!t || !ov) return;
+    var sb = document.querySelector('.nav-btn').parentElement;
+    function close() { sb.classList.remove('open'); ov.classList.remove('open'); }
+    t.addEventListener('click', function() { sb.classList.toggle('open'); ov.classList.toggle('open'); });
+    ov.addEventListener('click', close);
+    document.querySelectorAll('.nav-btn').forEach(function(b) { b.addEventListener('click', close); });
+  }
+  if (document.readyState !== 'loading') initM(); else document.addEventListener('DOMContentLoaded', initM);
+})();</script>
+<!-- FE:KEYS --><script>// FE:KEYS
+(function(){
+  document.addEventListener('keydown', function(e) {
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT' || e.target.isContentEditable) return;
+    if (e.code === 'ArrowLeft' || e.code === 'ArrowRight') {
+      var btns = document.querySelectorAll('.nav-btn');
+      var cur = document.querySelector('.nav-btn.active');
+      var pos = cur ? Array.prototype.indexOf.call(btns, cur) : -1;
+      if (pos < 0) return;
+      var tgt = pos + (e.code === 'ArrowRight' ? 1 : -1);
+      if (tgt >= 0 && tgt < btns.length) { e.preventDefault(); window.switchSlide(tgt + 0); }
+    }
+  });
+})();</script>
+<!-- FE:CHIPJS --><script>// FE:CHIP
+(function(){
+  function updChipFromActive() {
+    var c = document.getElementById('slideChip'); if (!c) return;
+    var cur = document.querySelector('.nav-btn.active');
+    var pos = cur ? Array.prototype.indexOf.call(document.querySelectorAll('.nav-btn'), cur) : 0;
+    c.textContent = (pos + 1) + ' / ' + document.querySelectorAll('.slide').length;
+  }
+  if (!window.__feChipWrapped && window.switchSlide) {
+    window.__feChipWrapped = true;
+    var o = window.switchSlide;
+    window.switchSlide = function(i) { o(i); var c = document.getElementById('slideChip'); if (c) c.textContent = (i + 1) + ' / ' + document.querySelectorAll('.slide').length; };
+  }
+  if (document.readyState !== 'loading') updChipFromActive(); else document.addEventListener('DOMContentLoaded', updChipFromActive);
+})();</script>
+</body>
+</html>
