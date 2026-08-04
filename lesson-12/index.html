@@ -357,7 +357,7 @@
               <label class="hw-option" onclick="HW.selectRadio(this,'hw-r-q2','A')"><input type="radio" name="hw-r-q2" value="A" style="margin-right:0.5rem;"> (A) Fines for returning books late</label>
               <label class="hw-option" onclick="HW.selectRadio(this,'hw-r-q2','B')"><input type="radio" name="hw-r-q2" value="B" style="margin-right:0.5rem;"> (B) Fines for overdue materials</label>
               <label class="hw-option" onclick="HW.selectRadio(this,'hw-r-q2','C')"><input type="radio" name="hw-r-q2" value="C" style="margin-right:0.5rem;"> (C) Charges for lost items</label>
-              <label class="hw-option" onclick="HW.selectRadio(this,'hw-r-q2','D')"><input type="radio" name="hw-r-q2" value="D" style="margin-right:0.5rem;"> (D) Penalties for damaged books</label>
+              <label class="hw-option" onclick="HW.selectRadio(this,'hw-r-q2','D')"><input type="radio" name="hw-r-q2" value="D" style="margin-right:0.5rem;"> (D) Fines for books returned one week late</label>
             </div>
             <div style="margin-bottom:1rem;">
               <strong>Q3:</strong> What must students do to have their fines waived?
@@ -697,9 +697,6 @@
         'hw-h-q1': 'B', 'hw-h-q2': 'B', 'hw-h-q3': 'B', 'hw-h-q4': 'D', 'hw-h-q5': 'B',
         'hw-e-q1': 'B', 'hw-e-q2': 'B', 'hw-e-q3': 'C', 'hw-e-q4': 'A'
       },
-      routerBlanks: ['pathway','projects','reinforces','associated','anticipation','motivationally','implicated','hijack','compulsive','consequences'],
-      hardBlanks: ['phenomenon','luciferin','luciferase','particularly','communicating','deterring','appendage','aphotic','penetrate','intricate'],
-      easyBlanks: ['revolutionized','painstakingly','prohibitively','accessible','dramatically','democratization','facilitated','groundwork','estimated','civilization'],
 
       selectRadio(label, name, value) {
         document.querySelectorAll(`input[name="${name}"]`).forEach(r => r.checked = false);
@@ -798,11 +795,14 @@
           breakdown += '<span style="color:' + (isCorrect ? 'var(--accent-green)' : 'var(--accent-red)') + ';">Blank ' + bi + ': ' + (isCorrect ? '✓' : '✗ ' + input.dataset.answer) + '</span><br>';
           bi++;
         });
-        const allRadios = document.querySelectorAll('#hw-router input[type="radio"]:checked, #hw-hard input[type="radio"]:checked, #hw-easy input[type="radio"]:checked');
+        let radioNames = ['hw-r-q1','hw-r-q2','hw-r-q3'];
+        if (this.path === 'hard') radioNames = radioNames.concat(['hw-h-q1','hw-h-q2','hw-h-q3','hw-h-q4','hw-h-q5']);
+        else radioNames = radioNames.concat(['hw-e-q1','hw-e-q2','hw-e-q3','hw-e-q4']);
         let ri = 1;
-        allRadios.forEach(radio => {
-          const isCorrect = radio.value === this.answers[radio.name];
-          breakdown += '<span style="color:' + (isCorrect ? 'var(--accent-green)' : 'var(--accent-red)') + ';">Radio ' + ri + ': ' + (isCorrect ? '✓' : '✗ ' + this.answers[radio.name]) + '</span><br>';
+        radioNames.forEach(name => {
+          const checked = document.querySelector('input[name="' + name + '"]:checked');
+          const isCorrect = checked && checked.value === this.answers[name];
+          breakdown += '<span style="color:' + (isCorrect ? 'var(--accent-green)' : 'var(--accent-red)') + ';">Radio ' + ri + ': ' + (isCorrect ? '✓' : '✗ ' + this.answers[name]) + '</span><br>';
           ri++;
         });
         document.getElementById('results-breakdown').innerHTML = breakdown;
