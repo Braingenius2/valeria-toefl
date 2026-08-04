@@ -292,6 +292,19 @@ header{position:fixed;top:0;left:0;right:0;z-index:100;height:var(--header-h);ba
   .word-counter{font-size:0.75rem}
 }
 </style>
+<!-- FE:CSS-MOBILE --><style>.mobile-nav-toggle{display:none;position:fixed;bottom:20px;right:20px;z-index:200;width:48px;height:48px;border-radius:50%;background:var(--primary);color:#000;border:none;font-size:20px;cursor:pointer;align-items:center;justify-content:center;box-shadow:3px 3px 0 rgba(0,0,0,0.12)}
+.sidebar-overlay{display:none;position:fixed;inset:0;z-index:150;background:rgba(0,0,0,0.4)}
+.sidebar-overlay.open{display:block}@media(max-width:768px){
+  .mobile-nav-toggle{display:flex}
+  .sidebar{position:fixed;left:0;top:0;z-index:175;height:100vh;transform:translateX(-100%);transition:transform .25s ease;width:260px;display:flex!important}
+  .sidebar.open{transform:translateX(0)}
+  .main-content{margin-left:0;padding:1rem 1rem 84px;max-width:100%}
+  .header{flex-wrap:wrap;gap:0.5rem}
+  .grid-2{grid-template-columns:1fr}
+  .controls{flex-direction:column;align-items:stretch}
+  .timer-display{font-size:1.5rem}
+}</style>
+<!-- FE:CSS-CHIP --><style>.slide-chip{font-family:'Fira Code',monospace;font-size:0.72rem;font-weight:700;color:var(--primary);background:var(--bg-card,rgba(0,0,0,0.4));border:1px solid var(--border-color,rgba(255,255,255,0.15));padding:0.25rem 0.65rem;border-radius:20px;white-space:nowrap;margin-left:auto}</style>
 </head>
 <body>
 <header>
@@ -300,7 +313,8 @@ header{position:fixed;top:0;left:0;right:0;z-index:100;height:var(--header-h);ba
   <span class="header-logo">TOEFL MOCK</span>
   <span class="header-title">Full TOEFL iBT Simulation — 2026 Format</span>
   <span class="header-meta">Valeria · L10</span>
-</header>
+<!-- FE:CHIP --><span class="slide-chip" id="slideChip">1 / N</span>
+        </header>
 <div class="progress-bar-wrap"><div class="progress-bar" id="progressBar"></div></div>
 
 <div class="layout">
@@ -837,7 +851,7 @@ I am writing to express my concern about..."></textarea>
     </div>
 
     <!-- ===== SLIDE 9: SCORING ===== -->
-    <div class="slide" id="slide9">
+    <div class="slide" id="slide8">
       <div class="slide-header">
         <span class="slide-num">09</span>
         <div class="slide-title">Scoring & Review</div>
@@ -878,18 +892,6 @@ I am writing to express my concern about..."></textarea>
         </table></div>
       </div>
       <div class="card">
-        <div class="card-title"><span class="dot" style="background:var(--accent-red)"></span>Error Log</div>
-        <textarea class="notepad-area" id="live-notepad" style="min-height:100px;" placeholder="Describe each error..."></textarea>
-        <div class="btn-group">
-          <button class="btn btn-primary btn-sm" onclick="addNoteToTable()">Add to Log</button>
-          <button class="btn btn-secondary btn-sm" onclick="clearNotepad()">Clear</button>
-        </div>
-        <div style="overflow-x:auto"><table class="correction-table" id="correction-table">
-          <thead><tr><th>Error / Observation</th><th>Corrected Version</th><th>Source</th></tr></thead>
-          <tbody></tbody>
-        </table></div>
-      </div>
-      <div class="card">
         <div class="card-title"><span class="dot" style="background:var(--accent-cyan)"></span>Top 3 Areas to Improve</div>
         <div class="improve-area"><h4>1. <input placeholder="e.g., Grammar: 3rd person -s"></h4><textarea rows="2" placeholder="Specific action plan..."></textarea></div>
         <div class="improve-area"><h4>2. <input placeholder="e.g., Speaking: filler words"></h4><textarea rows="2" placeholder="Specific action plan..."></textarea></div>
@@ -898,7 +900,7 @@ I am writing to express my concern about..."></textarea>
     </div>
 
     <!-- ===== SLIDE 10: LANGUAGE HARVEST ===== -->
-    <div class="slide" id="slide10">
+    <div class="slide" id="slide9">
       <div class="slide-header">
         <span class="slide-num">10</span>
         <div class="slide-title">Language Harvest</div>
@@ -940,7 +942,7 @@ I am writing to express my concern about..."></textarea>
     </div>
 
     <!-- ===== SLIDE 11: HOMEWORK ===== -->
-    <div class="slide" id="slide11">
+    <div class="slide" id="slide10">
       <div class="slide-header">
         <span class="slide-num">11</span>
         <div class="slide-title">Homework</div>
@@ -1897,19 +1899,6 @@ function calcBand() {
 }
 
 // ========= ERROR LOG =========
-function addNoteToTable() {
-  const val = document.getElementById('live-notepad').value.trim();
-  if (!val) return;
-  const lines = val.split('\n');
-  const table = document.getElementById('correction-table').getElementsByTagName('tbody')[0];
-  const newRow = table.insertRow(0);
-  newRow.insertCell(0).textContent = lines[0] || '';
-  newRow.insertCell(1).textContent = lines[1] || 'Pending review...';
-  newRow.insertCell(2).innerHTML = '<span style="font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;background:rgba(139,92,246,0.15);color:var(--primary);padding:2px 8px;border-radius:4px;">Mock</span>';
-  document.getElementById('live-notepad').value = '';
-}
-function clearNotepad() { document.getElementById('live-notepad').value = ''; }
-
 // ========= LANGUAGE HARVEST =========
 function upgradeHarvest() {
   const input = document.getElementById('harvestInput').value.trim();
@@ -1949,5 +1938,46 @@ document.getElementById('progressBar').style.width = '8.33%';
 loadFromStorage('email-area', 'email');
 loadFromStorage('disc-area', 'disc');
 </script>
+<button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Open lesson navigation">&#9776;</button>
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+<!-- FE:MOBILE --><script>// FE:MOBILE
+(function(){
+  function initM() {
+    var t = document.getElementById('mobileNavToggle'), ov = document.getElementById('sidebarOverlay');
+    if (!t || !ov) return;
+    var sb = document.querySelector('.nav-btn').parentElement;
+    function close() { sb.classList.remove('open'); ov.classList.remove('open'); }
+    t.addEventListener('click', function() { sb.classList.toggle('open'); ov.classList.toggle('open'); });
+    ov.addEventListener('click', close);
+    document.querySelectorAll('.nav-btn').forEach(function(b) { b.addEventListener('click', close); });
+  }
+  if (document.readyState !== 'loading') initM(); else document.addEventListener('DOMContentLoaded', initM);
+})();</script>
+<!-- FE:HASH --><script>// FE:HASH
+(function(){
+  function mH() { var m = location.hash.match(/^#slide-(\d+)$/); if (m && window.switchSlide) window.switchSlide(parseInt(m[1])); }
+  window.addEventListener('hashchange', mH);
+  !function(){ mH(); }();
+  if (!window.__feHashWrapped && window.switchSlide) {
+    window.__feHashWrapped = true;
+    var o = window.switchSlide;
+    window.switchSlide = function(i) { o(i); try { history.replaceState(null, '', '#slide-' + i); } catch (e) {} };
+  }
+})();</script>
+<!-- FE:CHIPJS --><script>// FE:CHIP
+(function(){
+  function updChipFromActive() {
+    var c = document.getElementById('slideChip'); if (!c) return;
+    var cur = document.querySelector('.nav-btn.active');
+    var pos = cur ? Array.prototype.indexOf.call(document.querySelectorAll('.nav-btn'), cur) : 0;
+    c.textContent = (pos + 1) + ' / ' + document.querySelectorAll('.slide').length;
+  }
+  if (!window.__feChipWrapped && window.switchSlide) {
+    window.__feChipWrapped = true;
+    var o = window.switchSlide;
+    window.switchSlide = function(i) { o(i); var c = document.getElementById('slideChip'); if (c) c.textContent = (i + 1) + ' / ' + document.querySelectorAll('.slide').length; };
+  }
+  if (document.readyState !== 'loading') updChipFromActive(); else document.addEventListener('DOMContentLoaded', updChipFromActive);
+})();</script>
 </body>
 </html>

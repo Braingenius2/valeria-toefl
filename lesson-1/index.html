@@ -73,8 +73,6 @@
       font-weight: bold;
       letter-spacing: 0.05em;
     }
-    .back-link { color: var(--text-muted); text-decoration: none; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 0.3rem; transition: color 0.2s ease; }
-    .back-link:hover { color: var(--text-main); }
 
     h1 {
       font-size: 1.25rem;
@@ -409,13 +407,6 @@
       line-height: 1.6;
     }
 
-    /* Homework List Styles */
-    .hw-list {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-
     /* Live Teacher Board */
     .notepad-area {
       width: 100%;
@@ -458,89 +449,30 @@
     .correction-table tr:hover {
       background: rgba(255, 255, 255, 0.01);
     }
-
-    /* Mobile Responsiveness */
-    @media (max-width: 768px) {
-      header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.75rem;
-        padding: 1rem;
-      }
-      
-      .main-container {
-        flex-direction: column;
-        height: auto;
-      }
-
-      .sidebar {
-        width: 100%;
-        height: auto;
-        flex-direction: row;
-        overflow-x: auto;
-        overflow-y: hidden;
-        border-right: none;
-        border-bottom: 1px solid var(--border-color);
-        padding: 0.5rem;
-        gap: 0.5rem;
-        position: sticky;
-        top: 65px;
-        z-index: 90;
-        background: rgba(9, 13, 22, 0.95);
-        backdrop-filter: blur(8px);
-      }
-
-      .sidebar-btn {
-        padding: 0.5rem 0.75rem;
-        white-space: nowrap;
-        width: auto;
-        font-size: 0.8rem;
-      }
-
-      .sidebar-num {
-        display: none; /* Hide numbers to save space */
-      }
-
-      .content-area {
-        padding: 1rem;
-        overflow-y: visible;
-        background: none;
-      }
-
-      .card {
-        padding: 1.25rem;
-        border-radius: 8px;
-      }
-
-      .timer-container {
-        flex-direction: column;
-        gap: 0.75rem;
-      }
-
-      .exam-timer {
-        padding: 0.75rem;
-      }
-
-      .timer-val {
-        font-size: 1.75rem;
-      }
-    }
     .recorder-bar { display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap; margin-top: 0.75rem; padding-top: 0.75rem; border-top: 1px solid var(--border-color); }
     .rec-btn { padding: 0.35rem 0.75rem; font-size: 0.8rem; border-radius: 20px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); color: var(--text-muted); font-family: inherit; cursor: pointer; transition: all 0.2s ease; display: inline-flex; align-items: center; gap: 0.3rem; }
     .rec-btn:hover { background: rgba(255,255,255,0.1); }
     .rec-btn:disabled { opacity: 0.3; cursor: not-allowed; }
     .rec-btn.recording { background: var(--accent-rose); color: #000; border-color: var(--accent-rose); }
     .rec-status { font-size: 0.75rem; color: var(--text-muted); }
-  .ico { display: inline-flex; vertical-align: middle; flex-shrink: 0; }
-    </style>
+    .accuracy-card { display: none; margin-top: 16px; padding: 20px; background: var(--glass-bg, rgba(18,16,38,0.45)); border: 1px solid var(--border-color, rgba(99,102,241,0.15)); border-radius: 16px; }
+    .accuracy-card.visible { display: block; }
+    .gauge-row { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+    .gauge-wrap { display: flex; flex-direction: column; align-items: center; gap: 6px; flex-shrink: 0; }
+    .gauge-pct { font-size: 28px; font-weight: 700; font-family: 'Fira Code', monospace; }
+    .gauge-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted, #94a3b8); }
+    .accuracy-words { flex: 1; min-width: 200px; line-height: 1.8; font-size: 14px; }
+    .accuracy-word { display: inline-block; margin: 0 2px; padding: 0 3px; border-radius: 4px; }
+    .accuracy-word.correct { color: var(--primary, #6366f1); background: rgba(99, 102, 241, 0.08); border-bottom: 2px solid var(--primary, #6366f1); }
+    .accuracy-word.missed { color: var(--accent-red, #f43f5e); background: rgba(244, 63, 94, 0.08); border-bottom: 2px solid var(--accent-red, #f43f5e); }
+  </style>
 </head>
 <body>
 
   <header>
     <div class="logo-area">
-    <div class="badge-exam">TOEFL Prep</div>
-    <a href="../index.html" class="back-link">← Portal</a>
-    <h1>Valeria: Task 2 Synthesis & C1 Structure</h1>
+      <div class="badge-exam">TOEFL Prep</div>
+      <h1>Valeria: Task 2 Synthesis & C1 Structure</h1>
     </div>
     <div class="lesson-meta">
       <div class="meta-item">Student: <strong>Valeria (B2/C1)</strong></div>
@@ -564,9 +496,7 @@
       <button class="sidebar-btn" onclick="switchSlide(3)">
         <span class="sidebar-num">04</span> Task 2: Speaking Timers
       </button>
-      <button class="sidebar-btn" onclick="switchSlide(4)">
-        <span class="sidebar-num">05</span> Homework
-      </button>
+      
     </div>
 
     <!-- Content panels -->
@@ -591,7 +521,7 @@
             </button>
             <div class="timer-display" id="shadowing-timer" style="font-family:'Fira Code', monospace;">00:00</div>
             <button class="btn btn-secondary" onclick="resetShadowingTimer()">Reset</button>
-                        <button class="btn btn-secondary" onclick="autoHighlightWords()">Auto Pacer</button>
+            <button class="btn btn-secondary" onclick="autoHighlightWords()">Auto Pacer</button>
           </div>
           <div class="pacer-controls">
             <select class="speed-select" id="speedSelect">
@@ -612,10 +542,13 @@
             <button class="rec-btn" id="playRecord" disabled>🎧 Play</button>
             <span class="rec-status" id="recStatus">Record yourself, then compare with the model</span>
           </div>
+          <div class="accuracy-card" id="accuracyCard">
+            <div class="gauge-row" id="accuracySection"></div>
+          </div>
         </div>
 
         <div class="card">
-          <div class="card-title"> <svg class="ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>  C1 Vocal Mechanics (Advanced Polish)</div>
+          <div class="card-title">🎯 C1 Vocal Mechanics (Advanced Polish)</div>
           <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; font-size: 0.9rem;">
             <div>
               <p><strong>1. Content Word Stress & Pitch Range</strong></p>
@@ -636,7 +569,7 @@
       <!-- SLIDE 2: TOEFL STRUCTURE CHALLENGE -->
       <div class="slide" id="slide-1">
         <div class="card">
-          <div class="card-title"> <svg class="ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>  TOEFL Structure & Inversion Lab (C1 Check)</div>
+          <div class="card-title">📝 TOEFL Structure & Inversion Lab (C1 Check)</div>
           <p class="text-muted" style="margin-bottom: 1.25rem;">
             Excellent writing and speaking require mastery of high-scoring grammatical structures. Analyze these TOEFL-style items with Valeria. Click to reveal answer and syntax explanation.
           </p>
@@ -696,7 +629,7 @@
       <!-- SLIDE 3: TASK 2 CASE STUDY -->
       <div class="slide" id="slide-2">
         <div class="card">
-          <div class="card-title"> <svg class="ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><line x1="8" y1="7" x2="16" y2="7"/><line x1="8" y1="11" x2="14" y2="11"/></svg>  TOEFL Speaking Task 2: Campus Announcement</div>
+          <div class="card-title">📖 TOEFL Speaking Task 2: Campus Announcement</div>
           
           <div class="task2-grid">
             
@@ -727,7 +660,7 @@
               </div>
 
               <div style="margin-top: 1rem; display: flex; gap: 0.5rem;">
-                <button class="btn btn-primary" style="padding: 0.4rem 0.8rem;" onclick="toggleScriptText()" id="transcript-btn">Hide Transcript</button>
+                <button class="btn btn-primary" style="padding: 0.4rem 0.8rem;" onclick="toggleScriptText()">Show/Hide Transcript</button>
               </div>
             </div>
 
@@ -738,7 +671,7 @@
       <!-- SLIDE 4: TASK 2 SPEAKING TIMERS -->
       <div class="slide" id="slide-3">
         <div class="card">
-          <div class="card-title"> <svg class="ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>  Official TOEFL Speaking Simulator</div>
+          <div class="card-title">⏱️ Official TOEFL Speaking Simulator</div>
           <p class="text-muted" style="margin-bottom: 1rem;">
             <strong>Prompt:</strong> The woman expresses her opinion of the university's plan. State her opinion and explain the reasons she gives for holding that opinion.
           </p>
@@ -764,60 +697,15 @@
               <span>📋</span> TOEFL Speaking Task 2 Template (From TOEFL Resources)
             </h4>
             <ul style="padding-left: 1.25rem; font-size: 0.9rem;">
-              <li><strong>Introduce policy:</strong> "According to the announcement, the university plans to [change policy] because [reason 1]."</li>
-              <li><strong>State opinion:</strong> "The woman in the conversation disagrees with this plan, stating that..."</li>
-              <li><strong>Reason 1:</strong> "First, she argues that [unreliable bus schedule]. Specifically..."</li>
-              <li><strong>Reason 2:</strong> "Second, she points out that [commute/winter conditions]. For instance..."</li>
+              <li><strong>Introduce policy:</strong> "According to the reading passage, the university plans to eliminate all free student parking lots in order to reduce its carbon footprint."</li>
+              <li><strong>State opinion:</strong> "The woman in the conversation strongly disagrees with this policy."</li>
+              <li><strong>Reason 1:</strong> "First, she argues that the public bus service is highly unreliable. After 8 PM, buses run only once an hour, which affects students studying late."</li>
+              <li><strong>Reason 2:</strong> "Second, she points out that biking is impossible during the winter due to snow, forcing off-campus students to face long commutes."</li>
             </ul>
           </div>
         </div>
       </div>
-
-      <!-- SLIDE 5: HOMEWORK -->
-      <div class="slide" id="slide-4">
-        <div class="card">
-          <div class="card-title"> <svg class="ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>  TOEFL Homework Assignments</div>
-          <p class="text-muted" style="margin-bottom: 1.5rem;">Complete the tasks below before our next class. Submit your writing and audio recordings via your usual chat/email channels.</p>
-          
-          <div class="hw-list">
-            <div class="card" style="background: rgba(255,255,255,0.01); border-color: var(--border-color); margin-bottom: 1rem; padding: 1.25rem;">
-              <h3 style="font-size: 1.05rem; color: var(--accent-blue); margin-bottom: 0.5rem;">Task 1: Speaking (Audio Recording)</h3>
-              <p style="font-size: 0.95rem; line-height: 1.6;">
-                <strong>Scenario:</strong> University library bans personal laptops to prevent screen glare and encourage the use of institutional computers.
-              </p>
-              <ul style="padding-left: 1.25rem; font-size: 0.9rem; margin: 0.5rem 0; color: var(--text-muted);">
-                <li>Prepare for 30 seconds, record for exactly 60 seconds.</li>
-                <li>Focus on using C1 transitions (<em>vehemently opposes, asserts, posits</em>).</li>
-                <li>Ensure zero hesitation and smooth sentence transitions.</li>
-              </ul>
-            </div>
-
-            <div class="card" style="background: rgba(255,255,255,0.01); border-color: var(--border-color); margin-bottom: 1rem; padding: 1.25rem;">
-              <h3 style="font-size: 1.05rem; color: var(--accent-purple); margin-bottom: 0.5rem;">Task 2: Writing Synthesis</h3>
-              <p style="font-size: 0.95rem; line-height: 1.6;">
-                Write a <strong>120-150 word summary</strong> of the parking announcement from today's class and the speaker's objections.
-              </p>
-              <ul style="padding-left: 1.25rem; font-size: 0.9rem; margin: 0.5rem 0; color: var(--text-muted);">
-                <li>You must include at least one instance of <strong>Negative Inversion</strong> (<em>e.g., "Not only did..."</em>).</li>
-                <li>You must include at least one instance of <strong>Subjunctive Mood</strong> (<em>e.g., "It is essential that the university..."</em>).</li>
-                <li>Pay attention to indirect question word order.</li>
-              </ul>
-            </div>
-
-            <div class="card" style="background: rgba(255,255,255,0.01); border-color: var(--border-color); margin-bottom: 0; padding: 1.25rem;">
-              <h3 style="font-size: 1.05rem; color: var(--accent-green); margin-bottom: 0.5rem;">Task 3: Vocabulary Journal</h3>
-              <p style="font-size: 0.95rem; line-height: 1.6;">
-                Write <strong>5 contextualized sentences</strong> using our upgraded C1 vocabulary (<em>vehemently oppose, assert, highly inadequate, commute, reside</em>), linking them to university-level study scenarios.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <script>
+<script>
     // Slide Management
     function switchSlide(index) {
       document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
@@ -854,18 +742,18 @@
     function resetShadowingTimer() {
       clearInterval(timerInterval);
       timerInterval = null;
+      timerSeconds = 0;
+      document.getElementById('shadowing-timer').textContent = '00:00';
+      document.getElementById('btn-timer').innerHTML = '<span>▶</span> Start Timer';
       if (paceInterval) {
         clearInterval(paceInterval);
         paceInterval = null;
       }
-      timerSeconds = 0;
-      document.getElementById('shadowing-timer').textContent = '00:00';
-      document.getElementById('btn-timer').innerHTML = '<span>▶</span> Start Timer';
       document.querySelectorAll('.shadowing-word').forEach(w => w.classList.remove('highlighted'));
     }
 
     // Auto Pacer Highlighter simulation
-        let paceInterval = null;
+    let paceInterval = null;
     let pacerSpeed = 400;
 
   const shadowingText = "Starting next academic semester, the university will implement a new housing application system. Rather than allocating dormitories on a first-come, first-served basis, rooms will be distributed through a randomized lottery. This change is intended to address the growing complaints about registration servers crashing on opening day. Additionally, students who choose to stay off-campus will be eligible for a transport stipend, provided they reside outside a three-mile radius from the main campus center.";
@@ -951,12 +839,28 @@
   let mediaRecorder = null;
   let recordedChunks = [];
   let audioBlobUrl = null;
+  let accuracyRecognition = null;
+  let accuracySpokenText = '';
 
   document.getElementById('startRecord').addEventListener('click', async () => {
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
       mediaRecorder = new MediaRecorder(stream);
       recordedChunks = [];
+      accuracySpokenText = '';
+      const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (SR) {
+        accuracyRecognition = new SR();
+        accuracyRecognition.lang = 'en-US';
+        accuracyRecognition.continuous = true;
+        accuracyRecognition.interimResults = false;
+        accuracyRecognition.onresult = (e) => {
+          for (let i = e.resultIndex; i < e.results.length; i++)
+            if (e.results[i].isFinal) accuracySpokenText += e.results[i][0].transcript + ' ';
+        };
+        accuracyRecognition.onerror = () => {};
+        try { accuracyRecognition.start(); } catch(e) {}
+      }
       mediaRecorder.ondataavailable = (e) => { if (e.data.size > 0) recordedChunks.push(e.data); };
       mediaRecorder.onstop = () => {
         const blob = new Blob(recordedChunks, { type: 'audio/webm' });
@@ -978,9 +882,15 @@
   document.getElementById('stopRecord').addEventListener('click', () => {
     if (mediaRecorder && mediaRecorder.state === 'recording') {
       mediaRecorder.stop();
-      document.getElementById('startRecord').disabled = false;
-      document.getElementById('stopRecord').disabled = true;
     }
+    if (accuracyRecognition) { try { accuracyRecognition.stop(); } catch(e){} accuracyRecognition = null; }
+    document.getElementById('startRecord').disabled = false;
+    document.getElementById('stopRecord').disabled = true;
+    setTimeout(() => {
+      if (accuracySpokenText.trim()) {
+        computeValeriaAccuracy(accuracySpokenText.trim());
+      }
+    }, 500);
   });
 
   document.getElementById('playRecord').addEventListener('click', () => {
@@ -993,6 +903,68 @@
       };
     }
   });
+
+  function computeValeriaAccuracy(transcript) {
+    const targetNorm = (typeof shadowingText !== 'undefined' ? shadowingText : '').toLowerCase().replace(/[^a-z\s]/g,'').split(/\s+/).filter(Boolean);
+    const spokenNorm = transcript.toLowerCase().replace(/[^a-z\s]/g,'').split(/\s+/).filter(Boolean);
+    const aligned = lcsAlignValeria(targetNorm, spokenNorm);
+    const matched = aligned.filter(x => x.match).length;
+    const pct = targetNorm.length > 0 ? Math.round((matched / targetNorm.length) * 100) : 0;
+    showValeriaAccuracy(pct, aligned);
+  }
+
+  function lcsAlignValeria(target, spoken) {
+    const m = target.length, n = spoken.length;
+    const dp = Array.from({length: m + 1}, () => new Array(n + 1).fill(0));
+    for (let i = 1; i <= m; i++)
+      for (let j = 1; j <= n; j++)
+        dp[i][j] = target[i-1] === spoken[j-1] ? dp[i-1][j-1] + 1 : Math.max(dp[i-1][j], dp[i][j-1]);
+    let i = m, j = n; const result = [];
+    while (i > 0 && j > 0) {
+      if (target[i-1] === spoken[j-1]) { result.unshift({ word: target[i-1], match: true }); i--; j--; }
+      else if (dp[i-1][j] >= dp[i][j-1]) { result.unshift({ word: target[i-1], match: false }); i--; }
+      else j--;
+    }
+    while (i > 0) { result.unshift({ word: target[i-1], match: false }); i--; }
+    return result;
+  }
+
+  function showValeriaAccuracy(pct, aligned) {
+    const card = document.getElementById('accuracyCard');
+    const sec = document.getElementById('accuracySection');
+    if (!card || !sec) return;
+    card.style.display = 'block';
+    card.classList.add('visible');
+    const circumference = 220;
+    const offset = Math.round((1 - Math.min(pct, 100) / 100) * circumference);
+    const color = pct >= 80 ? 'var(--primary, #6366f1)' : pct >= 60 ? 'var(--accent-gold, #fbbf24)' : 'var(--accent-red, #f43f5e)';
+    let wordsHtml = '';
+    if (aligned && aligned.length > 0) {
+      wordsHtml = aligned.slice(0, 60).map(w =>
+        `<span class="accuracy-word ${w.match ? 'correct' : 'missed'}">${w.word}</span>`
+      ).join('');
+      if (aligned.length > 60) wordsHtml += `<span style="color:var(--text-muted, #94a3b8);font-size:12px;"> …+${aligned.length - 60} more</span>`;
+    }
+    sec.innerHTML = `
+      <div class="gauge-wrap">
+        <svg width="90" height="90" viewBox="0 0 90 90">
+          <circle cx="45" cy="45" r="35" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="8"/>
+          <circle cx="45" cy="45" r="35" fill="none" stroke="${color}" stroke-width="8"
+            stroke-dasharray="${circumference}" stroke-dashoffset="${circumference}"
+            stroke-linecap="round" transform="rotate(-90 45 45)"
+            style="transition:stroke-dashoffset 1.2s ease;" id="gaugeCircle"/>
+        </svg>
+        <div class="gauge-pct" style="color:${color};">${pct}%</div>
+        <div class="gauge-label">Accuracy</div>
+      </div>
+      <div class="accuracy-words">
+        ${wordsHtml || '<span style="color:var(--text-muted, #94a3b8)">Transcript not available.</span>'}
+      </div>`;
+    setTimeout(() => {
+      const c = document.getElementById('gaugeCircle');
+      if (c) c.style.strokeDashoffset = offset;
+    }, 80);
+  }
 
     document.addEventListener('change', function(e) {
       if (e.target.id === 'speedSelect') {
@@ -1031,13 +1003,10 @@
     // Script visibility toggle
     function toggleScriptText() {
       const panel = document.querySelector('.script-text');
-      const btn = document.getElementById('transcript-btn');
-      if (panel.style.display === 'none') {
-        panel.style.display = 'block';
-        btn.textContent = 'Hide Transcript';
+      if (panel.style.color === 'var(--text-main)') {
+        panel.style.color = 'var(--text-muted)';
       } else {
-        panel.style.display = 'none';
-        btn.textContent = 'Show Transcript';
+        panel.style.color = 'var(--text-main)';
       }
     }
 
@@ -1053,6 +1022,7 @@
       readInterval = setInterval(() => {
         timeLeft--;
         display.textContent = `${timeLeft}s`;
+        if (timeLeft === 10) playBeep(600, 150);
         if (timeLeft <= 10) {
           display.style.color = 'var(--accent-red)';
         }
@@ -1077,10 +1047,12 @@
       const speakVal = document.getElementById('speak-time');
       
       prepVal.style.color = 'var(--accent-blue)';
+      playBeep(400, 100);
       
       examPrepInterval = setInterval(() => {
         prepTime--;
         prepVal.textContent = prepTime;
+        if (prepTime === 5) playBeep(600, 150);
         if (prepTime <= 5) {
           prepVal.style.color = 'var(--accent-red)';
         }
@@ -1088,18 +1060,21 @@
           clearInterval(examPrepInterval);
           prepVal.textContent = "0";
           prepVal.style.color = 'var(--text-muted)';
+          playBeep(800, 100);
           
           // Start Speaking timer
           speakVal.style.color = 'var(--accent-green)';
           examSpeakInterval = setInterval(() => {
             speakTime--;
             speakVal.textContent = speakTime;
+            if (speakTime === 10) playBeep(600, 150);
             if (speakTime <= 10) {
               speakVal.style.color = 'var(--accent-red)';
             }
             if (speakTime <= 0) {
               clearInterval(examSpeakInterval);
               speakVal.textContent = "Done!";
+              playBeep(800, 200, 2);
             }
           }, 1000);
         }
@@ -1114,37 +1089,6 @@
       document.getElementById('speak-time').textContent = "60";
       document.getElementById('speak-time').style.color = 'var(--primary)';
     }
-
-    // Live Notepad logic
-    function addNoteToTable() {
-      const notepad = document.getElementById('live-notepad');
-      const val = notepad.value.trim();
-      if (!val) return;
-      
-      const lines = val.split('\n');
-      const errorText = lines[0] || "";
-      const correctionText = lines[1] || "Needs correction...";
-      
-      const table = document.getElementById('correction-table').getElementsByTagName('tbody')[0];
-      const newRow = table.insertRow(0);
-      
-      const cell1 = newRow.insertCell(0);
-      const cell2 = newRow.insertCell(1);
-      const cell3 = newRow.insertCell(2);
-      
-      cell1.textContent = errorText;
-      cell2.textContent = correctionText;
-      cell2.style.color = "var(--accent-green)";
-      cell2.style.fontWeight = "500";
-      cell3.innerHTML = `<span class="badge-exam" style="font-size:0.65rem; background:rgba(245,158,11,0.15); border-color:var(--primary); color:var(--primary);">Valeria</span>`;
-      
-      notepad.value = "";
-    }
-
-    function clearNotepad() {
-      document.getElementById('live-notepad').value = "";
-    }
-
     // Initialize elements on load
   </script>
 </body>

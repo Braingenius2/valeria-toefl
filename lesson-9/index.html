@@ -111,8 +111,30 @@
     .hw-card h3 { font-size: 1.05rem; color: var(--primary); margin-bottom: 0.5rem; }
     .hw-card p, .hw-card li { font-size: 0.92rem; line-height: 1.6; color: #cbd5e1; }
     .hw-card ul, .hw-card ol { padding-left: 1.25rem; margin: 0.5rem 0; }
-  .ico { display: inline-flex; vertical-align: middle; flex-shrink: 0; }
+    .accuracy-card { display: none; margin-top: 16px; padding: 20px; background: var(--glass-bg, rgba(18,16,38,0.45)); border: 1px solid var(--border-color, rgba(99,102,241,0.15)); border-radius: 16px; }
+    .accuracy-card.visible { display: block; }
+    .gauge-row { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+    .gauge-wrap { display: flex; flex-direction: column; align-items: center; gap: 6px; flex-shrink: 0; }
+    .gauge-pct { font-size: 28px; font-weight: 700; font-family: 'Fira Code', monospace; }
+    .gauge-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted, #94a3b8); }
+    .accuracy-words { flex: 1; min-width: 200px; line-height: 1.8; font-size: 14px; }
+    .accuracy-word { display: inline-block; margin: 0 2px; padding: 0 3px; border-radius: 4px; }
+    .accuracy-word.correct { color: var(--primary, #6366f1); background: rgba(99, 102, 241, 0.08); border-bottom: 2px solid var(--primary, #6366f1); }
+    .accuracy-word.missed { color: var(--accent-red, #f43f5e); background: rgba(244, 63, 94, 0.08); border-bottom: 2px solid var(--accent-red, #f43f5e); }
   </style>
+<!-- FE:CSS-MOBILE --><style>.mobile-nav-toggle{display:none;position:fixed;bottom:20px;right:20px;z-index:200;width:48px;height:48px;border-radius:50%;background:var(--primary);color:#000;border:none;font-size:20px;cursor:pointer;align-items:center;justify-content:center;box-shadow:3px 3px 0 rgba(0,0,0,0.12)}
+.sidebar-overlay{display:none;position:fixed;inset:0;z-index:150;background:rgba(0,0,0,0.4)}
+.sidebar-overlay.open{display:block}@media(max-width:768px){
+  .mobile-nav-toggle{display:flex}
+  .sidebar{position:fixed;left:0;top:0;z-index:175;height:100vh;transform:translateX(-100%);transition:transform .25s ease;width:260px;display:flex!important}
+  .sidebar.open{transform:translateX(0)}
+  .main-content{margin-left:0;padding:1rem 1rem 84px;max-width:100%}
+  .header{flex-wrap:wrap;gap:0.5rem}
+  .grid-2{grid-template-columns:1fr}
+  .controls{flex-direction:column;align-items:stretch}
+  .timer-display{font-size:1.5rem}
+}</style>
+<!-- FE:CSS-CHIP --><style>.slide-chip{font-family:'Fira Code',monospace;font-size:0.72rem;font-weight:700;color:var(--primary);background:var(--bg-card,rgba(0,0,0,0.4));border:1px solid var(--border-color,rgba(255,255,255,0.15));padding:0.25rem 0.65rem;border-radius:20px;white-space:nowrap;margin-left:auto}</style>
 </head>
 <body>
   <header>
@@ -125,7 +147,8 @@
       <div class="meta-item">Student: <strong>Valeria (B2/C1)</strong></div>
       <div class="meta-item">Focus: <strong style="color: var(--primary);">Academic Collocations</strong></div>
     </div>
-  </header>
+  <!-- FE:CHIP --><span class="slide-chip" id="slideChip">1 / N</span>
+        </header>
 
   <div class="main-container">
     <div class="sidebar">
@@ -134,8 +157,7 @@
       <button class="sidebar-btn" onclick="switchSlide(2)"><span class="sidebar-num">03</span> Practice Drills</button>
       <button class="sidebar-btn" onclick="switchSlide(3)"><span class="sidebar-num">04</span> Academic Discussion</button>
       <button class="sidebar-btn" onclick="switchSlide(4)"><span class="sidebar-num">05</span> Sentence Variation</button>
-      <button class="sidebar-btn" onclick="switchSlide(5)"><span class="sidebar-num">06</span> Task 4: Speaking</button>
-      <button class="sidebar-btn" onclick="switchSlide(6)"><span class="sidebar-num">07</span> Homework</button>
+      <button class="sidebar-btn" onclick="switchSlide(5)"><span class="sidebar-num">06</span> Homework</button>
     </div>
 
     <div class="content-area">
@@ -143,7 +165,7 @@
       <!-- Slide 0: Shadowing Pacer -->
       <div class="slide active" id="slide-0">
         <div class="card shadowing-box">
-          <div class="card-title"> <svg class="ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>  Shadowing Pacer: AI in Science</div>
+          <div class="card-title">🔊 Shadowing Pacer: AI in Science</div>
           <p class="text-muted">Focus on stress in technical vocabulary: <em>revolutionizing, computational, algorithms, exoplanets</em>. Pay attention to smooth linking through complex clauses.</p>
           <div id="shadowing-text" class="shadowing-text"></div>
           <canvas id="waveCanvas" width="800" height="90" style="width:100%;height:90px;background:#05070c;border-radius:6px;border:1px solid var(--border-color);margin-bottom:1.25rem;"></canvas>
@@ -167,9 +189,12 @@
             <button class="rec-btn" id="playRecord" disabled>🎧 Play</button>
             <span class="rec-status" id="recStatus">Record yourself, then compare with the model</span>
           </div>
+          <div class="accuracy-card" id="accuracyCard">
+            <div class="gauge-row" id="accuracySection"></div>
+          </div>
         </div>
         <div class="card">
-          <div class="card-title"> <svg class="ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>  Discussion Questions</div>
+          <div class="card-title">💬 Discussion Questions</div>
           <ol style="padding-left: 1.25rem; color: #cbd5e1; line-height: 1.8; font-size: 0.95rem;">
             <li>What scientific discovery would you most like to see AI help with?</li>
             <li>Is there a risk we rely too much on AI in research?</li>
@@ -223,7 +248,7 @@
         </div>
 
         <div class="card">
-          <div class="card-title"> <svg class="ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>  Gap-Fill — Complete with Target Collocations</div>
+          <div class="card-title">✏️ Gap-Fill — Complete with Target Collocations</div>
 
           <div class="gap-fill-item">
             <div class="sentence"><strong>1.</strong> The new algorithm can <input class="gap-input" id="gap1" placeholder="verb + noun"> in hours instead of weeks.</div>
@@ -257,7 +282,7 @@
         </div>
 
         <div class="card">
-          <div class="card-title"> <svg class="ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>  Error Targets (from Valeria's Error Log)</div>
+          <div class="card-title">⚠️ Error Targets (from Valeria's Error Log)</div>
           <div class="error-item"><span class="wrong">❌ "I will analyze the data and I will generate a report."</span> → <span class="right">✅ "I will analyze the data and generate a report."</span> <span style="color: var(--text-muted); font-size: 0.8rem;">(Unnecessary pronoun repetition)</span></div>
           <div class="error-item"><span class="wrong">❌ "The scientist have made a groundbreaking research."</span> → <span class="right">✅ "The scientist has conducted groundbreaking research."</span> <span style="color: var(--text-muted); font-size: 0.8rem;">(Subject-verb agreement + undetermined noun)</span></div>
           <div class="error-item"><span class="wrong">❌ "This is more better approach."</span> → <span class="right">✅ "This is a more promising approach."</span> <span style="color: var(--text-muted); font-size: 0.8rem;">(Double comparative + article)</span></div>
@@ -268,7 +293,7 @@
       <!-- Slide 2: Practice Drills -->
       <div class="slide" id="slide-2">
         <div class="card">
-          <div class="card-title"> <svg class="ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>  Practice Drills — Academic Collocations</div>
+          <div class="card-title">✏️ Practice Drills — Academic Collocations</div>
           <p class="text-muted" style="margin-bottom:1rem;">Tap to reveal answers. Focus on academic register and collocation accuracy.</p>
 
           <div class="drill-card">
@@ -319,7 +344,7 @@
       <!-- Slide 3: Academic Discussion (Writing, 10 min) -->
       <div class="slide" id="slide-3">
         <div class="card">
-          <div class="card-title"> <svg class="ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>  Academic Discussion — AI in Research</div>
+          <div class="card-title">✍️ Academic Discussion — AI in Research</div>
 
           <div class="prompt-box">
             <div class="speaker-label prof">👨‍🏫 Professor's Prompt</div>
@@ -336,7 +361,7 @@
         </div>
 
         <div class="card">
-          <div class="card-title"> <svg class="ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>  Timed Writing — 10 Minutes</div>
+          <div class="card-title">⏱️ Timed Writing — 10 Minutes</div>
           <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1rem;">
             Write 100+ words. Reference Elena's and/or James's posts. Use at least <strong>three target collocations</strong> from today's lesson. Target: 100-130 words.
           </p>
@@ -357,7 +382,7 @@
       <!-- Slide 4: Sentence Variation Exercise -->
       <div class="slide" id="slide-4">
         <div class="card">
-          <div class="card-title"> <svg class="ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>  Sentence Variation — Simple → Academic</div>
+          <div class="card-title">✏️ Sentence Variation — Simple → Academic</div>
           <p class="text-muted" style="margin-bottom:1rem;">Rewrite each simple sentence using academic collocations from today's lesson.</p>
 
           <div class="drill-card">
@@ -402,7 +427,7 @@
         </div>
 
         <div class="card">
-          <div class="card-title"> <svg class="ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>  Live Notepad — Your Rewrites</div>
+          <div class="card-title">📝 Live Notepad — Your Rewrites</div>
           <p class="text-muted" style="margin-bottom:0.5rem;">Paste your best rewrite here and see the word count:</p>
           <div class="word-counter" style="text-align:right;font-size:0.85rem;color:var(--text-muted);margin-bottom:0.5rem;font-family:'Fira Code',monospace;">
             Words: <span id="notepadWordCount">0</span>
@@ -411,58 +436,10 @@
         </div>
       </div>
 
-      <!-- Slide 5: Task 4 Speaking (Lecture-only L+S — 2026 format) -->
+      <!-- Slide 5: Homework -->
       <div class="slide" id="slide-5">
         <div class="card">
-          <div class="card-title"> <svg class="ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>  TOEFL Speaking Task 4 — Lecture Summary (2026 format)</div>
-          <p class="text-muted" style="margin-bottom: 1rem;">Listen to the lecture, take notes using Cornell + symbols (from L8), then summarize in 60 seconds. <strong>This is a real 2026 TOEFL Speaking Task 4 format</strong> (lecture-only L+S: 20s prep / 60s speak).</p>
-
-          <div style="background:rgba(16,185,129,0.06);border:1px solid rgba(16,185,129,0.2);border-radius:12px;padding:14px;margin-bottom:1rem;">
-            <div style="font-size:0.85rem;font-weight:700;color:var(--primary);margin-bottom:8px;">🎧 Lecture Audio — AI &amp; Protein Folding</div>
-            <audio id="task4LectureAudio" preload="none" src="audio/alphafold-lecture.wav" controls style="width:100%;max-width:500px;"></audio>
-            <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:8px;">
-              <label style="font-size:0.75rem;color:var(--text-muted);">Speed:</label>
-              <select onchange="document.getElementById('task4LectureAudio').playbackRate=this.value" style="background:var(--bg-card);color:var(--text-main);border:1px solid var(--border-color);border-radius:6px;padding:3px 6px;font-size:0.75rem;">
-                <option value="0.75">0.75×</option>
-                <option value="1" selected>1.0×</option>
-              </select>
-            </div>
-          </div>
-
-          <div style="margin-bottom:1rem;">
-            <div style="font-size:0.85rem;font-weight:700;margin-bottom:6px;">📝 Cornell Notes — Take notes while listening</div>
-            <textarea id="task4Notes" placeholder="Use symbols: ↑↓→≠≈ e.g.  AI → protein fold ↑ | 200M structures | yrs → mins | still need human valid." style="width:100%;height:120px;background:rgba(9,13,22,0.6);color:var(--text-main);border:1px solid var(--border-color);border-radius:8px;padding:10px;font-size:0.85rem;font-family:'Fira Code',monospace;resize:vertical;"></textarea>
-            <button class="btn btn-secondary" style="margin-top:6px;font-size:0.8rem;" onclick="document.getElementById('task4ModelNotes').style.display='block'">Show Model Notes</button>
-            <div id="task4ModelNotes" style="display:none;margin-top:8px;padding:10px;background:rgba(16,185,129,0.06);border:1px solid rgba(16,185,129,0.2);border-radius:8px;font-size:0.8rem;font-family:'Fira Code',monospace;line-height:1.8;">
-              AlphaFold = DeepMind AI → solved protein folding (50yr challenge) | deep learning → predict 3D shape fm amino acid seq | 200M+ structures predicted (≈all known proteins) | ↑ drug dev, disease understanding, synth bio | yrs → mins | BUT: still need experimental valid + human expertise
-            </div>
-          </div>
-
-          <div style="background:var(--bg-card);border:1px solid var(--border-color);border-radius:12px;padding:16px;margin-bottom:1rem;">
-            <div style="font-weight:600;margin-bottom:0.5rem;">Task: Using information from the lecture, explain how AlphaFold changed protein folding research and what limitations the professor notes.</div>
-            <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-top:0.75rem;">
-              <div>
-                <button class="btn btn-primary" onclick="startTask4Prep()">▶ Start 20s Prep</button>
-                <span id="task4PrepTime" style="font-family:'Fira Code',monospace;font-size:0.9rem;color:var(--text-muted);margin-left:6px;">0:20</span>
-              </div>
-              <div>
-                <button class="btn btn-amber" id="task4SpeakBtn" onclick="startTask4Speak()" style="display:none;">▶ Start 60s Speak</button>
-                <span id="task4SpeakTime" style="font-family:'Fira Code',monospace;font-size:0.9rem;color:var(--text-muted);margin-left:6px;">1:00</span>
-              </div>
-            </div>
-          </div>
-
-          <button class="btn btn-secondary" onclick="document.getElementById('task4Model').style.display='block'">Reveal Model Response</button>
-          <div id="task4Model" style="display:none;margin-top:1rem;padding:14px;background:rgba(16,185,129,0.06);border:1px solid rgba(16,185,129,0.2);border-radius:8px;font-size:0.9rem;line-height:1.8;">
-            <strong style="color:var(--primary);">Model Response (60s):</strong> "The professor explains that AlphaFold, an AI system developed by DeepMind, solved the fifty-year-old protein folding challenge by using deep learning to predict protein shapes from amino acid sequences. This breakthrough has enabled the prediction of over two hundred million protein structures, dramatically accelerating research in drug development and disease understanding — reducing timelines from years to minutes. However, the professor emphasizes that these AI predictions still require experimental validation, and that human expertise remains essential for interpreting the results."
-          </div>
-        </div>
-      </div>
-
-      <!-- Slide 6: Homework -->
-      <div class="slide" id="slide-6">
-        <div class="card">
-          <div class="card-title"> <svg class="ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>  Homework Assignments</div>
+          <div class="card-title">📋 Homework Assignments</div>
           <p class="text-muted" style="margin-bottom: 1.5rem;">Complete these tasks before our next class. Submit via your usual chat channel.</p>
 
           <div class="hw-card">
@@ -661,12 +638,28 @@
     let mediaRecorder = null;
     let recordedChunks = [];
     let audioBlobUrl = null;
+    let accuracyRecognition = null;
+    let accuracySpokenText = '';
 
     document.getElementById('startRecord').addEventListener('click', async () => {
       try {
         const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
         mediaRecorder = new MediaRecorder(stream);
         recordedChunks = [];
+        accuracySpokenText = '';
+        const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+        if (SR) {
+          accuracyRecognition = new SR();
+          accuracyRecognition.lang = 'en-US';
+          accuracyRecognition.continuous = true;
+          accuracyRecognition.interimResults = false;
+          accuracyRecognition.onresult = (e) => {
+            for (let i = e.resultIndex; i < e.results.length; i++)
+              if (e.results[i].isFinal) accuracySpokenText += e.results[i][0].transcript + ' ';
+          };
+          accuracyRecognition.onerror = () => {};
+          try { accuracyRecognition.start(); } catch(e) {}
+        }
         mediaRecorder.ondataavailable = (e) => { if (e.data.size > 0) recordedChunks.push(e.data); };
         mediaRecorder.onstop = () => {
           const blob = new Blob(recordedChunks, { type: 'audio/webm' });
@@ -688,9 +681,15 @@
     document.getElementById('stopRecord').addEventListener('click', () => {
       if (mediaRecorder && mediaRecorder.state === 'recording') {
         mediaRecorder.stop();
-        document.getElementById('startRecord').disabled = false;
-        document.getElementById('stopRecord').disabled = true;
       }
+      if (accuracyRecognition) { try { accuracyRecognition.stop(); } catch(e){} accuracyRecognition = null; }
+      document.getElementById('startRecord').disabled = false;
+      document.getElementById('stopRecord').disabled = true;
+      setTimeout(() => {
+        if (accuracySpokenText.trim()) {
+          computeValeriaAccuracy(accuracySpokenText.trim());
+        }
+      }, 500);
     });
 
     document.getElementById('playRecord').addEventListener('click', () => {
@@ -703,6 +702,68 @@
         };
       }
     });
+
+    function computeValeriaAccuracy(transcript) {
+      const targetNorm = (typeof shadowingText !== 'undefined' ? shadowingText : '').toLowerCase().replace(/[^a-z\s]/g,'').split(/\s+/).filter(Boolean);
+      const spokenNorm = transcript.toLowerCase().replace(/[^a-z\s]/g,'').split(/\s+/).filter(Boolean);
+      const aligned = lcsAlignValeria(targetNorm, spokenNorm);
+      const matched = aligned.filter(x => x.match).length;
+      const pct = targetNorm.length > 0 ? Math.round((matched / targetNorm.length) * 100) : 0;
+      showValeriaAccuracy(pct, aligned);
+    }
+
+    function lcsAlignValeria(target, spoken) {
+      const m = target.length, n = spoken.length;
+      const dp = Array.from({length: m + 1}, () => new Array(n + 1).fill(0));
+      for (let i = 1; i <= m; i++)
+        for (let j = 1; j <= n; j++)
+          dp[i][j] = target[i-1] === spoken[j-1] ? dp[i-1][j-1] + 1 : Math.max(dp[i-1][j], dp[i][j-1]);
+      let i = m, j = n; const result = [];
+      while (i > 0 && j > 0) {
+        if (target[i-1] === spoken[j-1]) { result.unshift({ word: target[i-1], match: true }); i--; j--; }
+        else if (dp[i-1][j] >= dp[i][j-1]) { result.unshift({ word: target[i-1], match: false }); i--; }
+        else j--;
+      }
+      while (i > 0) { result.unshift({ word: target[i-1], match: false }); i--; }
+      return result;
+    }
+
+    function showValeriaAccuracy(pct, aligned) {
+      const card = document.getElementById('accuracyCard');
+      const sec = document.getElementById('accuracySection');
+      if (!card || !sec) return;
+      card.style.display = 'block';
+      card.classList.add('visible');
+      const circumference = 220;
+      const offset = Math.round((1 - Math.min(pct, 100) / 100) * circumference);
+      const color = pct >= 80 ? 'var(--primary, #6366f1)' : pct >= 60 ? 'var(--accent-gold, #fbbf24)' : 'var(--accent-red, #f43f5e)';
+      let wordsHtml = '';
+      if (aligned && aligned.length > 0) {
+        wordsHtml = aligned.slice(0, 60).map(w =>
+          `<span class="accuracy-word ${w.match ? 'correct' : 'missed'}">${w.word}</span>`
+        ).join('');
+        if (aligned.length > 60) wordsHtml += `<span style="color:var(--text-muted, #94a3b8);font-size:12px;"> …+${aligned.length - 60} more</span>`;
+      }
+      sec.innerHTML = `
+        <div class="gauge-wrap">
+          <svg width="90" height="90" viewBox="0 0 90 90">
+            <circle cx="45" cy="45" r="35" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="8"/>
+            <circle cx="45" cy="45" r="35" fill="none" stroke="${color}" stroke-width="8"
+              stroke-dasharray="${circumference}" stroke-dashoffset="${circumference}"
+              stroke-linecap="round" transform="rotate(-90 45 45)"
+              style="transition:stroke-dashoffset 1.2s ease;" id="gaugeCircle"/>
+          </svg>
+          <div class="gauge-pct" style="color:${color};">${pct}%</div>
+          <div class="gauge-label">Accuracy</div>
+        </div>
+        <div class="accuracy-words">
+          ${wordsHtml || '<span style="color:var(--text-muted, #94a3b8)">Transcript not available.</span>'}
+        </div>`;
+      setTimeout(() => {
+        const c = document.getElementById('gaugeCircle');
+        if (c) c.style.strokeDashoffset = offset;
+      }, 80);
+    }
 
     let mediaRecorder2 = null;
     let recordedChunks2 = [];
@@ -803,41 +864,61 @@
         document.getElementById('notepadWordCount').textContent = words;
       }
     });
-
-    // Task 4 Timers (20s prep + 60s speak)
-    let task4PrepInterval = null;
-    let task4SpeakInterval = null;
-    function startTask4Prep() {
-      let secs = 20;
-      const d = document.getElementById('task4PrepTime');
-      task4PrepInterval = setInterval(() => {
-        secs--;
-        d.textContent = '0:' + String(secs).padStart(2,'0');
-        if (secs <= 5) d.style.color = 'var(--accent-amber)';
-        if (secs <= 0) {
-          clearInterval(task4PrepInterval);
-          d.textContent = 'GO!';
-          document.getElementById('task4SpeakBtn').style.display = 'inline-flex';
-        }
-      }, 1000);
-    }
-    function startTask4Speak() {
-      let secs = 60;
-      const d = document.getElementById('task4SpeakTime');
-      task4SpeakInterval = setInterval(() => {
-        secs--;
-        const m = Math.floor(secs / 60);
-        const s = secs % 60;
-        d.textContent = m + ':' + String(s).padStart(2,'0');
-        if (secs <= 30) d.style.color = 'var(--accent-amber)';
-        if (secs <= 10) d.style.color = 'var(--accent-red)';
-        if (secs <= 0) {
-          clearInterval(task4SpeakInterval);
-          d.textContent = 'STOP!';
-          d.style.color = 'var(--accent-red)';
-        }
-      }, 1000);
-    }
   </script>
+<button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Open lesson navigation">&#9776;</button>
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+<!-- FE:MOBILE --><script>// FE:MOBILE
+(function(){
+  function initM() {
+    var t = document.getElementById('mobileNavToggle'), ov = document.getElementById('sidebarOverlay');
+    if (!t || !ov) return;
+    var sb = document.querySelector('.nav-btn').parentElement;
+    function close() { sb.classList.remove('open'); ov.classList.remove('open'); }
+    t.addEventListener('click', function() { sb.classList.toggle('open'); ov.classList.toggle('open'); });
+    ov.addEventListener('click', close);
+    document.querySelectorAll('.nav-btn').forEach(function(b) { b.addEventListener('click', close); });
+  }
+  if (document.readyState !== 'loading') initM(); else document.addEventListener('DOMContentLoaded', initM);
+})();</script>
+<!-- FE:HASH --><script>// FE:HASH
+(function(){
+  function mH() { var m = location.hash.match(/^#slide-(\d+)$/); if (m && window.switchSlide) window.switchSlide(parseInt(m[1])); }
+  window.addEventListener('hashchange', mH);
+  !function(){ mH(); }();
+  if (!window.__feHashWrapped && window.switchSlide) {
+    window.__feHashWrapped = true;
+    var o = window.switchSlide;
+    window.switchSlide = function(i) { o(i); try { history.replaceState(null, '', '#slide-' + i); } catch (e) {} };
+  }
+})();</script>
+<!-- FE:KEYS --><script>// FE:KEYS
+(function(){
+  document.addEventListener('keydown', function(e) {
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT' || e.target.isContentEditable) return;
+    if (e.code === 'ArrowLeft' || e.code === 'ArrowRight') {
+      var btns = document.querySelectorAll('.nav-btn');
+      var cur = document.querySelector('.nav-btn.active');
+      var pos = cur ? Array.prototype.indexOf.call(btns, cur) : -1;
+      if (pos < 0) return;
+      var tgt = pos + (e.code === 'ArrowRight' ? 1 : -1);
+      if (tgt >= 0 && tgt < btns.length) { e.preventDefault(); window.switchSlide(tgt + 0); }
+    }
+  });
+})();</script>
+<!-- FE:CHIPJS --><script>// FE:CHIP
+(function(){
+  function updChipFromActive() {
+    var c = document.getElementById('slideChip'); if (!c) return;
+    var cur = document.querySelector('.nav-btn.active');
+    var pos = cur ? Array.prototype.indexOf.call(document.querySelectorAll('.nav-btn'), cur) : 0;
+    c.textContent = (pos + 1) + ' / ' + document.querySelectorAll('.slide').length;
+  }
+  if (!window.__feChipWrapped && window.switchSlide) {
+    window.__feChipWrapped = true;
+    var o = window.switchSlide;
+    window.switchSlide = function(i) { o(i); var c = document.getElementById('slideChip'); if (c) c.textContent = (i + 1) + ' / ' + document.querySelectorAll('.slide').length; };
+  }
+  if (document.readyState !== 'loading') updChipFromActive(); else document.addEventListener('DOMContentLoaded', updChipFromActive);
+})();</script>
 </body>
 </html>

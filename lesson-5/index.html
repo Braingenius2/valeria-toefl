@@ -101,8 +101,17 @@
     .discussion-post .post-content { font-size: 0.9rem; line-height: 1.6; color: #cbd5e1; }
     .speed-select { background:rgba(0,0,0,0.4); border:1px solid var(--border-color); border-radius:8px; color:var(--text-main); padding:0.45rem 0.8rem; font-family:inherit; font-size:0.85rem; font-weight:500; cursor:pointer; outline:none; transition:border-color 0.2s ease; }
     .speed-select:focus { border-color:var(--primary); }
-  .ico { display: inline-flex; vertical-align: middle; flex-shrink: 0; }
-    </style>
+    .accuracy-card { display: none; margin-top: 16px; padding: 20px; background: var(--glass-bg, rgba(18,16,38,0.45)); border: 1px solid var(--border-color, rgba(99,102,241,0.15)); border-radius: 16px; }
+    .accuracy-card.visible { display: block; }
+    .gauge-row { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+    .gauge-wrap { display: flex; flex-direction: column; align-items: center; gap: 6px; flex-shrink: 0; }
+    .gauge-pct { font-size: 28px; font-weight: 700; font-family: 'Fira Code', monospace; }
+    .gauge-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted, #94a3b8); }
+    .accuracy-words { flex: 1; min-width: 200px; line-height: 1.8; font-size: 14px; }
+    .accuracy-word { display: inline-block; margin: 0 2px; padding: 0 3px; border-radius: 4px; }
+    .accuracy-word.correct { color: var(--primary, #6366f1); background: rgba(99, 102, 241, 0.08); border-bottom: 2px solid var(--primary, #6366f1); }
+    .accuracy-word.missed { color: var(--accent-red, #f43f5e); background: rgba(244, 63, 94, 0.08); border-bottom: 2px solid var(--accent-red, #f43f5e); }
+  </style>
 </head>
 <body>
   <header>
@@ -131,7 +140,7 @@
       <!-- Slide 0: Warm-up -->
       <div class="slide active" id="slide-0">
         <div class="card shadowing-box">
-          <div class="card-title"> <svg class="ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>  Shadowing Pacer: Lifelong Learning &amp; Career Change</div>
+          <div class="card-title">🔊 Shadowing Pacer: Lifelong Learning &amp; Career Change</div>
           <p class="text-muted">Focus on natural speech rhythm and quick transitions between clauses.</p>
           <div id="shadowing-text" class="shadowing-text"></div>
           <canvas id="waveCanvas" width="800" height="90" style="width:100%;height:90px;background:#05070c;border-radius:6px;border:1px solid var(--border-color);margin-bottom:1.25rem;"></canvas>
@@ -155,10 +164,13 @@
             <button class="rec-btn" id="playRecord" disabled>🎧 Play</button>
             <span class="rec-status" id="recStatus">Record yourself, then compare with the model</span>
           </div>
+          <div class="accuracy-card" id="accuracyCard">
+            <div class="gauge-row" id="accuracySection"></div>
+          </div>
         </div>
-
+        
         <div class="card">
-          <div class="card-title"> <svg class="ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>  Quick-Fire Discussion Questions</div>
+          <div class="card-title">⚡ Quick-Fire Discussion Questions</div>
           <p class="text-muted" style="margin-bottom:1rem;">15 seconds each — no prep. Answer immediately!</p>
           <div class="practice-item">
             <div class="q"><strong>1.</strong> Do you think university education prepares people well for the modern job market?</div>
@@ -175,7 +187,7 @@
       <!-- Slide 1: Input -->
       <div class="slide" id="slide-1">
         <div class="card">
-          <div class="card-title"> <svg class="ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/></svg>  TOEFL "Take an Interview" Format</div>
+          <div class="card-title">🎤 TOEFL "Take an Interview" Format</div>
           <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:1rem;">
             <div style="background:rgba(56,189,248,0.04); border:1px solid rgba(56,189,248,0.15); border-radius:8px; padding:1rem;">
               <h4 style="color:var(--accent-blue); font-size:0.85rem; text-transform:uppercase; margin-bottom:0.5rem;">Format</h4>
@@ -198,7 +210,7 @@
         </div>
 
         <div class="card">
-          <div class="card-title"> <svg class="ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/><line x1="12" y1="6" x2="12" y2="18"/></svg>  OREO Compressed Structure (45-Second Responses)</div>
+          <div class="card-title">🧱 OREO Compressed Structure (45-Second Responses)</div>
           <table class="oreo-table">
             <thead>
               <tr><th>Component</th><th>Time</th><th>Content</th><th>Example</th></tr>
@@ -230,25 +242,9 @@
           </div>
         </div>
 
+        <div class="slide" id="slide-2">
         <div class="card">
-          <div class="card-title"> <svg class="ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>  Recycled Error Targets (Lessons 1–4)</div>
-          <table class="correction-table">
-            <thead><tr><th>Error Type</th><th>Incorrect</th><th>Correct</th></tr></thead>
-            <tbody>
-              <tr><td>Indirect Question Word Order</td><td>"The question is why do people change careers..."</td><td style="color:var(--accent-green);">"The question is why people change careers..."</td></tr>
-              <tr><td>3rd Person -s Omission</td><td>"The student believe that..."</td><td style="color:var(--accent-green);">"The student believes that..."</td></tr>
-              <tr><td>Article Drops</td><td>"Government should invest in education."</td><td style="color:var(--accent-green);">"The government should invest in education."</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-                <audio id="shadowingAudio" preload="none" style="display:none"></audio>
-
-<!-- Slide 2: Controlled Practice -->
-      <div class="slide" id="slide-2">
-        <div class="card">
-          <div class="card-title"> <svg class="ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>  Drill 1: Quick Opinion — OREO Practice</div>
+          <div class="card-title">🎯 Drill 1: Quick Opinion — OREO Practice</div>
           <p class="text-muted" style="margin-bottom:1rem;">15 seconds planning → 45 seconds speaking. Use the OREO structure.</p>
 
           <div class="practice-item">
@@ -288,7 +284,7 @@
         </div>
 
         <div class="card">
-          <div class="card-title"> <svg class="ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>  Drill 3: Error Correction (Recycled Targets)</div>
+          <div class="card-title">✏️ Drill 3: Error Correction (Recycled Targets)</div>
           <p class="text-muted" style="margin-bottom:1rem;">Correct these sentences from hypothetical speaking responses.</p>
 
           <div class="practice-item">
@@ -358,7 +354,7 @@
         </div>
 
         <div class="card">
-          <div class="card-title"> <svg class="ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>  Self-Evaluation Checklist</div>
+          <div class="card-title">✅ Self-Evaluation Checklist</div>
           <p class="text-muted" style="margin-bottom:0.5rem;">After each response, check the applicable box:</p>
           <ul class="checklist">
             <li><input type="checkbox"> Did I <strong>start speaking immediately</strong>? (Yes / Slight delay / Long pause)</li>
@@ -372,7 +368,7 @@
       <!-- Slide 4: Writing Practice -->
       <div class="slide" id="slide-4">
         <div class="card">
-          <div class="card-title"> <svg class="ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>  Academic Discussion Review</div>
+          <div class="card-title">📝 Academic Discussion Review</div>
           <div class="reading-passage">
             <strong>Professor's Prompt:</strong><br><br>
             "Let's discuss the value of a university education in today's world. With the rising cost of tuition and the availability of online learning resources, some argue that a traditional degree is no longer worth the investment. Others maintain that university provides irreplaceable benefits beyond academics — networking, personal growth, and structured learning. What's your perspective?"
@@ -411,7 +407,7 @@
       <!-- Slide 5: Homework -->
       <div class="slide" id="slide-5">
         <div class="card">
-          <div class="card-title"> <svg class="ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>  Homework Assignments</div>
+          <div class="card-title">📋 Homework Assignments</div>
           <p class="text-muted" style="margin-bottom: 1.5rem;">Complete these tasks before our next class. Submit via your usual chat channel.</p>
 
           <div class="hw-list">
@@ -683,18 +679,6 @@
       if (speaking) shadowingAudio.playbackRate = currentSpeed;
     });
 
-    function addNoteToTable() {
-      const val = document.getElementById('live-notepad').value.trim(); if (!val) return;
-      const lines = val.split('\n');
-      const table = document.getElementById('correction-table').getElementsByTagName('tbody')[0];
-      const newRow = table.insertRow(0);
-      newRow.insertCell(0).textContent = lines[0] || "";
-      const cell2 = newRow.insertCell(1); cell2.textContent = lines[1] || "Upgrade pending..."; cell2.style.color = "var(--accent-green)";
-      newRow.insertCell(2).innerHTML = `<span class="badge-exam">Valeria</span>`;
-      document.getElementById('live-notepad').value = "";
-    }
-    function clearNotepad() { document.getElementById('live-notepad').value = ""; }
-  
     document.addEventListener('input', function(e) {
       if (e.target.matches('#writing-area')) {
         const text = e.target.value.trim();
@@ -708,12 +692,28 @@
     let mediaRecorder = null;
     let recordedChunks = [];
     let audioBlobUrl = null;
+    let accuracyRecognition = null;
+    let accuracySpokenText = '';
 
     document.getElementById('startRecord').addEventListener('click', async () => {
       try {
         const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
         mediaRecorder = new MediaRecorder(stream);
         recordedChunks = [];
+        accuracySpokenText = '';
+        const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+        if (SR) {
+          accuracyRecognition = new SR();
+          accuracyRecognition.lang = 'en-US';
+          accuracyRecognition.continuous = true;
+          accuracyRecognition.interimResults = false;
+          accuracyRecognition.onresult = (e) => {
+            for (let i = e.resultIndex; i < e.results.length; i++)
+              if (e.results[i].isFinal) accuracySpokenText += e.results[i][0].transcript + ' ';
+          };
+          accuracyRecognition.onerror = () => {};
+          try { accuracyRecognition.start(); } catch(e) {}
+        }
         mediaRecorder.ondataavailable = (e) => { if (e.data.size > 0) recordedChunks.push(e.data); };
         mediaRecorder.onstop = () => {
           const blob = new Blob(recordedChunks, { type: 'audio/webm' });
@@ -735,9 +735,15 @@
     document.getElementById('stopRecord').addEventListener('click', () => {
       if (mediaRecorder && mediaRecorder.state === 'recording') {
         mediaRecorder.stop();
-        document.getElementById('startRecord').disabled = false;
-        document.getElementById('stopRecord').disabled = true;
       }
+      if (accuracyRecognition) { try { accuracyRecognition.stop(); } catch(e){} accuracyRecognition = null; }
+      document.getElementById('startRecord').disabled = false;
+      document.getElementById('stopRecord').disabled = true;
+      setTimeout(() => {
+        if (accuracySpokenText.trim()) {
+          computeValeriaAccuracy(accuracySpokenText.trim());
+        }
+      }, 500);
     });
 
     document.getElementById('playRecord').addEventListener('click', () => {
@@ -750,6 +756,68 @@
         };
       }
     });
+
+    function computeValeriaAccuracy(transcript) {
+      const targetNorm = (typeof shadowingText !== 'undefined' ? shadowingText : '').toLowerCase().replace(/[^a-z\s]/g,'').split(/\s+/).filter(Boolean);
+      const spokenNorm = transcript.toLowerCase().replace(/[^a-z\s]/g,'').split(/\s+/).filter(Boolean);
+      const aligned = lcsAlignValeria(targetNorm, spokenNorm);
+      const matched = aligned.filter(x => x.match).length;
+      const pct = targetNorm.length > 0 ? Math.round((matched / targetNorm.length) * 100) : 0;
+      showValeriaAccuracy(pct, aligned);
+    }
+
+    function lcsAlignValeria(target, spoken) {
+      const m = target.length, n = spoken.length;
+      const dp = Array.from({length: m + 1}, () => new Array(n + 1).fill(0));
+      for (let i = 1; i <= m; i++)
+        for (let j = 1; j <= n; j++)
+          dp[i][j] = target[i-1] === spoken[j-1] ? dp[i-1][j-1] + 1 : Math.max(dp[i-1][j], dp[i][j-1]);
+      let i = m, j = n; const result = [];
+      while (i > 0 && j > 0) {
+        if (target[i-1] === spoken[j-1]) { result.unshift({ word: target[i-1], match: true }); i--; j--; }
+        else if (dp[i-1][j] >= dp[i][j-1]) { result.unshift({ word: target[i-1], match: false }); i--; }
+        else j--;
+      }
+      while (i > 0) { result.unshift({ word: target[i-1], match: false }); i--; }
+      return result;
+    }
+
+    function showValeriaAccuracy(pct, aligned) {
+      const card = document.getElementById('accuracyCard');
+      const sec = document.getElementById('accuracySection');
+      if (!card || !sec) return;
+      card.style.display = 'block';
+      card.classList.add('visible');
+      const circumference = 220;
+      const offset = Math.round((1 - Math.min(pct, 100) / 100) * circumference);
+      const color = pct >= 80 ? 'var(--primary, #6366f1)' : pct >= 60 ? 'var(--accent-gold, #fbbf24)' : 'var(--accent-red, #f43f5e)';
+      let wordsHtml = '';
+      if (aligned && aligned.length > 0) {
+        wordsHtml = aligned.slice(0, 60).map(w =>
+          `<span class="accuracy-word ${w.match ? 'correct' : 'missed'}">${w.word}</span>`
+        ).join('');
+        if (aligned.length > 60) wordsHtml += `<span style="color:var(--text-muted, #94a3b8);font-size:12px;"> …+${aligned.length - 60} more</span>`;
+      }
+      sec.innerHTML = `
+        <div class="gauge-wrap">
+          <svg width="90" height="90" viewBox="0 0 90 90">
+            <circle cx="45" cy="45" r="35" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="8"/>
+            <circle cx="45" cy="45" r="35" fill="none" stroke="${color}" stroke-width="8"
+              stroke-dasharray="${circumference}" stroke-dashoffset="${circumference}"
+              stroke-linecap="round" transform="rotate(-90 45 45)"
+              style="transition:stroke-dashoffset 1.2s ease;" id="gaugeCircle"/>
+          </svg>
+          <div class="gauge-pct" style="color:${color};">${pct}%</div>
+          <div class="gauge-label">Accuracy</div>
+        </div>
+        <div class="accuracy-words">
+          ${wordsHtml || '<span style="color:var(--text-muted, #94a3b8)">Transcript not available.</span>'}
+        </div>`;
+      setTimeout(() => {
+        const c = document.getElementById('gaugeCircle');
+        if (c) c.style.strokeDashoffset = offset;
+      }, 80);
+    }
 
     // Recorder 2 (Speaking Practice)
     let mediaRecorder2 = null;
