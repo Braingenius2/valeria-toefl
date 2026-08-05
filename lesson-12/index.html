@@ -34,6 +34,8 @@
     .nav-num { font-family: 'Fira Code', monospace; font-size: 0.8rem; opacity: 0.7; }
     .main-content { margin-left: 260px; flex: 1; padding: 2rem 3rem; max-width: 1200px; }
     .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border-color); }
+    .back-link { color: var(--text-muted); text-decoration: none; font-size: 0.8rem; font-family: 'Fira Code', monospace; white-space: nowrap; transition: color 0.2s; margin-right: 1rem; }
+    .back-link:hover { color: var(--primary); }
     .page-title { font-size: 1.5rem; font-weight: 700; color: var(--text-main); }
     .tag { background: rgba(56,189,248,0.1); color: var(--accent-blue); border: 1px solid rgba(56,189,248,0.2); padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.8rem; font-family: 'Fira Code', monospace; }
     .slide { display: none; animation: fadeIn 0.3s ease; }
@@ -114,6 +116,7 @@
   <main class="main-content">
     <header class="header">
       <div>
+        <a href="../index.html" class="back-link">← Portal</a>
         <h1 class="page-title">TOEFL Reading Intensive</h1>
         <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 0.2rem;">Complex Inferences, Distractor Elimination &amp; Pacing</p>
       </div>
