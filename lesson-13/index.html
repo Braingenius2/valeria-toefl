@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Valeria — Lesson 13: Listening & Speaking Integration (Private Deck)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root { --bg-dark:#090d16; --bg-card:#131a26; --border-color:#243042; --text-main:#f1f5f9; --text-muted:#64748b; --primary:#f59e0b; --primary-hover:#d97706; --primary-dim:rgba(245,158,11,0.12); --accent-blue:#38bdf8; --accent-green:#10b981; --accent-red:#ef4444; --accent-purple:#a855f7; --accent-cyan:#06b6d4; }
+    * { box-sizing:border-box; margin:0; padding:0; }
+    body { font-family:'Inter',sans-serif; background:var(--bg-dark); color:var(--text-main); display:flex; min-height:100vh; overflow-x:hidden; }
+    .sidebar { width:260px; background:var(--bg-card); border-right:1px solid var(--border-color); display:flex; flex-direction:column; padding:1.5rem 1rem; position:fixed; height:100vh; z-index:100; }
+    .brand { display:flex; align-items:center; gap:0.75rem; margin-bottom:2rem; padding:0 0.5rem; }
+    .brand-badge { background:var(--primary); color:#000; font-weight:700; font-size:0.75rem; padding:0.2rem 0.5rem; border-radius:4px; text-transform:uppercase; }
+    .brand-title { font-weight:600; font-size:1.1rem; color:var(--text-main); }
+    .nav-btn { background:transparent; border:1px solid transparent; color:var(--text-muted); padding:0.75rem 1rem; border-radius:8px; text-align:left; font-size:0.9rem; font-family:inherit; cursor:pointer; margin-bottom:0.5rem; display:flex; align-items:center; gap:0.75rem; transition:all 0.2s ease; }
+    .nav-btn:hover { background:rgba(255,255,255,0.03); color:var(--text-main); }
+    .nav-btn.active { background:var(--primary-dim); border-color:rgba(245,158,11,0.3); color:var(--primary); font-weight:600; }
+    .nav-num { font-family:'Fira Code',monospace; font-size:0.8rem; opacity:0.7; }
+    .main-content { margin-left:260px; flex:1; padding:2rem 3rem; max-width:1200px; }
+    .header { display:flex; justify-content:space-between; align-items:center; margin-bottom:2rem; padding-bottom:1rem; border-bottom:1px solid var(--border-color); }
+    .page-title { font-size:1.5rem; font-weight:700; color:var(--text-main); }
+    .tag { background:rgba(56,189,248,0.1); color:var(--accent-blue); border:1px solid rgba(56,189,248,0.2); padding:0.25rem 0.75rem; border-radius:20px; font-size:0.8rem; font-family:'Fira Code',monospace; }
+    .slide { display:none; animation:fadeIn 0.3s ease; }
+    .slide.active { display:block; }
+    @keyframes fadeIn { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:translateY(0); } }
+    @keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:0.3; } }
+    .card { background:var(--bg-card); border:1px solid var(--border-color); border-radius:12px; padding:1.5rem; margin-bottom:1.5rem; }
+    .card-title { font-size:1.1rem; font-weight:600; color:var(--primary); margin-bottom:1rem; display:flex; align-items:center; gap:0.5rem; }
+    .shadowing-text { font-size:1.05rem; line-height:1.8; color:#cbd5e1; margin-bottom:1.5rem; background:rgba(0,0,0,0.2); padding:1.25rem; border-radius:8px; border-left:3px solid var(--primary); }
+    .shadowing-word { transition:background 0.15s ease,color 0.15s ease; border-radius:3px; padding:0 2px; }
+    .shadowing-word.active { background:var(--primary); color:#000; font-weight:600; }
+    .controls { display:flex; gap:0.75rem; align-items:center; flex-wrap:wrap; margin-bottom:1rem; }
+    .btn { background:var(--primary); color:#000; border:none; padding:0.6rem 1.2rem; border-radius:6px; font-weight:600; font-size:0.85rem; font-family:inherit; cursor:pointer; display:inline-flex; align-items:center; gap:0.4rem; transition:background 0.2s ease; }
+    .btn:hover { background:var(--primary-hover); }
+    .btn-secondary { background:transparent; border:1px solid var(--border-color); color:var(--text-main); }
+    .btn-secondary:hover { background:rgba(255,255,255,0.05); }
+    .timer-display { font-family:'Fira Code',monospace; font-size:2rem; font-weight:700; color:var(--primary); background:#000; padding:0.5rem 1.2rem; border-radius:8px; border:1px solid var(--border-color); display:inline-block; }
+    .grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; }
+    .grid-3 { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:1rem; }
+    .symbol-table { width:100%; border-collapse:collapse; font-size:0.9rem; }
+    .symbol-table th,.symbol-table td { padding:0.6rem 1rem; border:1px solid var(--border-color); text-align:left; }
+    .symbol-table th { background:rgba(0,0,0,0.4); color:var(--primary); font-weight:600; }
+    .symbol-char { font-size:1.3rem; font-weight:700; color:var(--accent-cyan); }
+    .lecture-box { background:rgba(0,0,0,0.25); padding:1.25rem; border-radius:8px; border:1px solid var(--border-color); font-size:0.9rem; line-height:1.7; margin-bottom:1rem; display:none; }
+    .lecture-box.show { display:block; }
+    .lecture-box p { margin-bottom:0.75rem; }
+    .attitude-card { background:rgba(0,0,0,0.3); border-left:3px solid var(--accent-blue); padding:0.8rem 1rem; border-radius:0 8px 8px 0; font-size:0.85rem; margin-bottom:0.75rem; }
+    .reveal-box { display:none; background:rgba(16,185,129,0.08); border:1px solid rgba(16,185,129,0.2); padding:1rem; border-radius:8px; margin-top:0.75rem; font-size:0.9rem; line-height:1.6; }
+    .reveal-box.show { display:block; }
+    .error-table { width:100%; border-collapse:collapse; margin-top:1rem; font-size:0.9rem; }
+    .error-table th,.error-table td { padding:0.75rem 1rem; border:1px solid var(--border-color); text-align:left; }
+    .error-table th { background:rgba(0,0,0,0.4); color:var(--primary); font-weight:600; }
+    .text-red { color:var(--accent-red); }
+    .text-green { color:var(--accent-green); }
+    textarea,input[type="text"] { width:100%; background:rgba(0,0,0,0.4); border:1px solid var(--border-color); color:var(--text-main); padding:0.75rem; border-radius:6px; font-family:inherit; font-size:0.9rem; resize:vertical; }
+    textarea:focus,input[type="text"]:focus { outline:none; border-color:var(--primary); }
+    .word-count-badge { font-family:'Fira Code',monospace; font-size:0.85rem; color:var(--accent-green); margin-top:0.5rem; }
+  </style>
+<!-- FE:CSS-MOBILE --><style>.mobile-nav-toggle{display:none;position:fixed;bottom:20px;right:20px;z-index:200;width:48px;height:48px;border-radius:50%;background:var(--primary);color:#000;border:none;font-size:20px;cursor:pointer;align-items:center;justify-content:center;box-shadow:3px 3px 0 rgba(0,0,0,0.12)}
+.sidebar-overlay{display:none;position:fixed;inset:0;z-index:150;background:rgba(0,0,0,0.4)}
+.sidebar-overlay.open{display:block}@media(max-width:768px){
+  .mobile-nav-toggle{display:flex}
+  .sidebar{position:fixed;left:0;top:0;z-index:175;height:100vh;transform:translateX(-100%);transition:transform .25s ease;width:260px;display:flex!important}
+  .sidebar.open{transform:translateX(0)}
+  .main-content{margin-left:0;padding:1rem 1rem 84px;max-width:100%}
+  .header{flex-wrap:wrap;gap:0.5rem}
+  .grid-2{grid-template-columns:1fr}
+  .controls{flex-direction:column;align-items:stretch}
+  .timer-display{font-size:1.5rem}
+}</style>
+<!-- FE:CSS-CHIP --><style>.slide-chip{font-family:'Fira Code',monospace;font-size:0.72rem;font-weight:700;color:var(--primary);background:var(--bg-card,rgba(0,0,0,0.4));border:1px solid var(--border-color,rgba(255,255,255,0.15));padding:0.25rem 0.65rem;border-radius:20px;white-space:nowrap;margin-left:auto}</style>
+</head>
+<body>
+
+  <aside class="sidebar">
+    <div class="brand">
+      <span class="brand-badge">TOEFL</span>
+      <span class="brand-title">Valeria L13</span>
+    </div>
+    <button class="nav-btn active" onclick="switchSlide(0)"><span class="nav-num">01</span> Warm-up Shadowing</button>
+    <button class="nav-btn" onclick="switchSlide(1)"><span class="nav-num">02</span> Attitude &amp; Symbols</button>
+    <button class="nav-btn" onclick="switchSlide(2)"><span class="nav-num">03</span> Lecture 1: Social Loafing</button>
+    <button class="nav-btn" onclick="switchSlide(3)"><span class="nav-num">04</span> Lecture 2: Cognitive Load</button>
+    <button class="nav-btn" onclick="switchSlide(4)"><span class="nav-num">05</span> Homework</button>
+    
+  </aside>
+
+  <main class="main-content">
+    <header class="header">
+      <div>
+        <h1 class="page-title">Listening &amp; Speaking Integration</h1>
+        <p style="color:var(--text-muted); font-size:0.85rem; margin-top:0.2rem;">Psychology &amp; Cognitive Science · Speaker Attitude Detection · Cornell Notes</p>
+      </div>
+      <!-- FE:CHIP --><span class="slide-chip" id="slideChip">1 / N</span>
+        <span class="tag">PRIVATE DECK</span>
+    </header>
+
+    <!-- SLIDE 1: SHADOWING -->
+    <div class="slide active" id="slide-0">
+      <div class="card">
+        <div class="card-title">🎙️ Shadowing: Cognitive Load Theory</div>
+        <div class="shadowing-text" id="shadowingTextDisplay">
+          Cognitive load theory posits that human working memory has a strictly limited capacity, which can easily become overloaded if instructional material is poorly designed. Educational psychologists differentiate between intrinsic load—the inherent difficulty of the topic—and extraneous load, which stems from unnecessary or confusing presentation formats. By minimizing extraneous load through structured visual organization and clear signposting, educators can maximize germane load, enabling students to construct robust cognitive schemas. Understanding these cognitive constraints is fundamental to optimizing both computer-assisted learning and high-stakes test performance.
+        </div>
+        <div class="controls">
+          <button class="btn" onclick="toggleShadowingPacer()">▶ Start Pacer</button>
+          <button class="btn btn-secondary" onclick="resetShadowingPacer()">↺ Reset</button>
+          <audio id="shadowingAudio" src="audio/shadowing.wav" preload="auto" style="display:none;"></audio>
+          <button class="btn btn-secondary" onclick="document.getElementById('shadowingAudio').play()">🔊 Play Audio</button>
+          <select id="pacerSpeed" style="background:#000;color:#fff;padding:0.4rem;border-radius:4px;border:1px solid var(--border-color);">
+            <option value="450">130 WPM</option>
+            <option value="380" selected>150 WPM</option>
+            <option value="320">175 WPM</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">🎯 Predictive Error Targets</div>
+        <div class="grid-2">
+          <div class="attitude-card" style="border-color:var(--accent-red);">
+            <strong style="color:var(--accent-red);">Speaker Attitude &amp; Intonation Signals</strong>
+            <p style="margin-top:0.4rem;color:var(--text-muted);">Recognizing when a professor uses hedge words (<em>"supposedly", "ostensibly", "at least in theory"</em>) to express skepticism.</p>
+          </div>
+          <div class="attitude-card" style="border-color:var(--accent-green);">
+            <strong style="color:var(--accent-green);">Note-taking Overload Trap</strong>
+            <p style="margin-top:0.4rem;color:var(--text-muted);">Reverting to full sentences instead of using shorthand symbols (↑, ↓, →, ≠, w/, w/o).</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 2: ATTITUDE & CORNELL SYMBOLS -->
+    <div class="slide" id="slide-1">
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-title">👂 Speaker Stance &amp; Attitude Detection</div>
+          <p style="font-size:0.9rem;color:var(--text-muted);margin-bottom:1rem;">Key vocabulary for identifying professor attitude in TOEFL Listening:</p>
+          <div class="attitude-card" style="border-color:var(--accent-red);">
+            <strong style="color:var(--accent-red);">Doubt / Skepticism</strong>
+            <p style="margin-top:0.3rem;font-size:0.85rem;color:var(--text-muted);"><em>supposedly, questionable, contentious, dubious, at least in theory, ostensibly</em></p>
+          </div>
+          <div class="attitude-card" style="border-color:var(--accent-green);">
+            <strong style="color:var(--accent-green);">Approval / Enthusiasm</strong>
+            <p style="margin-top:0.3rem;font-size:0.85rem;color:var(--text-muted);"><em>compelling, landmark, groundbreaking, promising, remarkable</em></p>
+          </div>
+          <div class="attitude-card" style="border-color:var(--accent-blue);">
+            <strong style="color:var(--accent-blue);">Neutrality / Objectivity</strong>
+            <p style="margin-top:0.3rem;font-size:0.85rem;color:var(--text-muted);"><em>claims, posits, suggests, preliminary, interesting, noteworthy</em></p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">✏️ Cornell Symbol System</div>
+          <p style="font-size:0.9rem;color:var(--text-muted);margin-bottom:1rem;">Use these shorthand symbols during note-taking:</p>
+          <table class="symbol-table">
+            <thead><tr><th>Concept</th><th>Symbol</th></tr></thead>
+            <tbody>
+              <tr><td>Increase / Higher / Surge</td><td><span class="symbol-char">↑</span></td></tr>
+              <tr><td>Decrease / Lower / Decline</td><td><span class="symbol-char">↓</span></td></tr>
+              <tr><td>Causes / Leads to / Results in</td><td><span class="symbol-char">→</span></td></tr>
+              <tr><td>Differs from / Opposes</td><td><span class="symbol-char">≠</span></td></tr>
+              <tr><td>With / Without</td><td><span class="symbol-char">w/ | w/o</span></td></tr>
+              <tr><td>Important / Key point</td><td><span class="symbol-char">!</span></td></tr>
+              <tr><td>Example / Case study</td><td><span class="symbol-char">e.g.</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 3: LECTURE 1 - SOCIAL LOAFING -->
+    <div class="slide" id="slide-2">
+      <div class="card">
+        <div class="card-title">🎧 Lecture 1: Social Loafing in Group Dynamics</div>
+        <div class="controls">
+          <audio class="lecture-audio" id="lec1p1" src="audio/lecture1-p1.wav" preload="none"></audio>
+          <audio class="lecture-audio" id="lec1p2" src="audio/lecture1-p2.wav" preload="none"></audio>
+          <button class="btn btn-secondary" onclick="playLectureAudio('lec1p1')">▶ Paragraph 1</button>
+          <button class="btn btn-secondary" onclick="playLectureAudio('lec1p2')">▶ Paragraph 2</button>
+        </div>
+        <p style="font-size:0.9rem;color:var(--text-muted);margin-bottom:0.5rem;"><strong>📝 Cornell Notes</strong> — symbols only (↑ ↓ → ≠ w/ w/o ! e.g.), no full sentences:</p>
+        <textarea id="lec1Notes" rows="3" placeholder="e.g. social loafing → less effort in groups | Ringelmann rope-pulling → accountability ↓ as group size ↑ | monitored & evaluated → loafing ↓"></textarea>
+        <div class="lecture-box" id="lec1Transcript">
+          <p>"Today we're exploring social loafing—the psychological phenomenon where individuals exert less effort when working collectively in a group than when working individually. First identified by Max Ringelmann in rope-pulling experiments, social loafing occurs because individual accountability diminishes as group size increases.</p>
+          <p>However, modern organizational psychologists emphasize that social loafing is not inevitable. When individual contributions are clearly monitored and evaluated—or when group members perceive the task as uniquely important—social loafing drops dramatically. Thus, the solution is not to eliminate group collaboration, but to structure tasks so that personal responsibility remains transparent."</p>
+        </div>
+
+        <div style="font-size:0.9rem;">
+          <div style="margin-bottom:1rem;">
+            <strong>Q1 (Gist):</strong> What is the main topic of the lecture?
+            <br><span style="color:var(--text-muted);font-size:0.85rem;">(A) How to eliminate group work in educational settings.</span>
+            <br><span style="color:var(--text-muted);font-size:0.85rem;">(B) How individual effort decreases in group settings and how to prevent it.</span>
+            <br><span style="color:var(--text-muted);font-size:0.85rem;">(C) The history of Max Ringelmann's rope-pulling experiments.</span>
+            <br><span style="color:var(--text-muted);font-size:0.85rem;">(D) Why individual work is always superior to group work.</span>
+          </div>
+          <div style="margin-bottom:1rem;">
+            <strong>Q2 (Attitude):</strong> What is the professor's attitude toward group collaboration?
+            <br><span style="color:var(--text-muted);font-size:0.85rem;">(A) Strongly critical — believes group work always fails.</span>
+            <br><span style="color:var(--text-muted);font-size:0.85rem;">(B) Constructive/Balanced — believes group work is valuable if individual accountability is maintained.</span>
+            <br><span style="color:var(--text-muted);font-size:0.85rem;">(C) Indifferent — has no particular opinion on group work.</span>
+            <br><span style="color:var(--text-muted);font-size:0.85rem;">(D) Enthusiastic — believes group work is always superior to individual work.</span>
+          </div>
+          <button class="btn btn-secondary" onclick="toggleReveal('lec1Transcript')">👁️ Show Transcript</button>
+          <button class="btn btn-secondary" onclick="toggleReveal('lec1Reveal')">👁️ Show Answers</button>
+          <div class="reveal-box" id="lec1Reveal">
+            <strong style="color:var(--accent-green);">Q1: (B)</strong> — The lecture covers how social loafing reduces effort in groups and presents solutions (monitoring, task importance).<br>
+            <strong style="color:var(--accent-green);">Q2: (B)</strong> — The professor says "the solution is not to eliminate group collaboration" but to structure tasks for personal responsibility — a balanced, constructive stance.
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">🗣️ Speaking Task 4 Synthesis (60s response / 20s prep)</div>
+        <p style="font-size:0.9rem;color:var(--text-muted);margin-bottom:1rem;"><strong>Prompt:</strong> "Based on the lecture, explain what social loafing is and how educators can prevent it."</p>
+        <div style="display:flex;gap:0.5rem;align-items:center;margin-bottom:1rem;">
+          <span class="timer-display" id="lec1SpeakTimer" style="font-size:1.5rem;">0:20</span>
+          <button class="btn" onclick="startSpeakTimer('lec1SpeakTimer', 20)">Start 20s Prep</button>
+          <button class="btn btn-secondary" onclick="startSpeakTimer('lec1SpeakTimer', 60)">Start 60s Speak</button>
+          <button class="btn btn-secondary" onclick="resetSpeakTimer('lec1SpeakTimer', 20)">Reset</button>
+        </div>
+        <textarea id="lec1Speaking" rows="5" placeholder="Type or prepare your 60-second response here..." oninput="updateWordCount('lec1Speaking','lec1WordCount')"></textarea>
+        <div class="word-count-badge" id="lec1WordCount">Words: 0</div>
+        <div style="margin-top:0.75rem; display:flex; gap:0.5rem; align-items:center; flex-wrap:wrap;">
+          <button class="btn btn-secondary" id="lec1RecBtn" onclick="toggleSpeakRecord('lec1')">🎤 Record Answer</button>
+          <button class="btn btn-secondary" id="lec1StopBtn" onclick="stopSpeakRecord('lec1')" disabled>⏹ Stop</button>
+          <span class="word-count-badge" id="lec1RecStatus"></span>
+        </div>
+        <div class="reveal-box" id="lec1Report"></div>
+        <button class="btn btn-secondary" style="margin-top:0.75rem;" onclick="toggleReveal('lec1Model')">👁️ Show Model Answer</button>
+        <div class="reveal-box" id="lec1Model">
+          <strong style="color:var(--accent-green);">Model Answer:</strong>
+          <p style="margin-top:0.5rem;line-height:1.7;">"The professor explains that social loafing occurs when individuals put in less effort in group settings due to reduced personal accountability. For instance, in group rope-pulling experiments, individual effort declined as group size grew. To prevent this, the professor suggests making individual contributions transparent and evaluating each student's specific input, which restores personal responsibility."</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 4: LECTURE 2 - COGNITIVE LOAD -->
+    <div class="slide" id="slide-3">
+      <div class="card">
+        <div class="card-title">🎧 Lecture 2: Cognitive Load &amp; Test Performance</div>
+        <div class="controls">
+          <audio class="lecture-audio" id="lec2p1" src="audio/lecture2-p1.wav" preload="none"></audio>
+          <audio class="lecture-audio" id="lec2p2" src="audio/lecture2-p2.wav" preload="none"></audio>
+          <button class="btn btn-secondary" onclick="playLectureAudio('lec2p1')">▶ Paragraph 1</button>
+          <button class="btn btn-secondary" onclick="playLectureAudio('lec2p2')">▶ Paragraph 2</button>
+        </div>
+        <p style="font-size:0.9rem;color:var(--text-muted);margin-bottom:0.5rem;"><strong>📝 Cornell Notes</strong> — symbols only (↑ ↓ → ≠ w/ w/o ! e.g.), no full sentences:</p>
+        <textarea id="lec2Notes" rows="3" placeholder="e.g. extraneous load → poorly organized material | diagram ≠ text → split-attention | labels on diagrams → load ↓"></textarea>
+        <div class="lecture-box" id="lec2Transcript">
+          <p>"Extraneous cognitive load occurs when students must process poorly organized material. For example, if a diagram is separated from its explanation text on different pages, students waste working memory switching back and forth—this is called the split-attention effect.</p>
+          <p>Research by Sweller and colleagues demonstrated that integrating visual and verbal information directly—placing text labels on diagrams rather than in separate captions—significantly reduces extraneous load and improves learning outcomes. The key principle is redundancy: when the same information is presented in two separate formats that must be mentally integrated, working memory is wasted on integration rather than understanding."</p>
+        </div>
+
+        <div style="font-size:0.9rem;">
+          <div style="margin-bottom:1rem;">
+            <strong>Q1 (Detail):</strong> What causes the split-attention effect?
+            <br><span style="color:var(--text-muted);font-size:0.85rem;">(A) Giving students too much information at once.</span>
+            <br><span style="color:var(--text-muted);font-size:0.85rem;">(B) Separating visual diagrams from their explanatory text.</span>
+            <br><span style="color:var(--text-muted);font-size:0.85rem;">(C) Using overly complex vocabulary in lecture slides.</span>
+            <br><span style="color:var(--text-muted);font-size:0.85rem;">(D) Presenting information only in written form.</span>
+          </div>
+          <div style="margin-bottom:1rem;">
+            <strong>Q2 (Inference):</strong> What would lower extraneous cognitive load in a lecture slide?
+            <br><span style="color:var(--text-muted);font-size:0.85rem;">(A) Adding more text to explain each diagram.</span>
+            <br><span style="color:var(--text-muted);font-size:0.85rem;">(B) Placing text labels directly adjacent to visual elements.</span>
+            <br><span style="color:var(--text-muted);font-size:0.85rem;">(C) Removing all images from the presentation.</span>
+            <br><span style="color:var(--text-muted);font-size:0.85rem;">(D) Using smaller fonts to fit more content on each slide.</span>
+          </div>
+          <button class="btn btn-secondary" onclick="toggleReveal('lec2Transcript')">👁️ Show Transcript</button>
+          <button class="btn btn-secondary" onclick="toggleReveal('lec2Reveal')">👁️ Show Answers</button>
+          <div class="reveal-box" id="lec2Reveal">
+            <strong style="color:var(--accent-green);">Q1: (B)</strong> — The text explicitly defines split-attention effect as occurring when "a diagram is separated from its explanation text on different pages."<br>
+            <strong style="color:var(--accent-green);">Q2: (B)</strong> — The lecture states that "placing text labels on diagrams rather than in separate captions" reduces extraneous load. This directly supports B.
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">🗣️ Speaking Task 4 Synthesis (60s response / 20s prep)</div>
+        <p style="font-size:0.9rem;color:var(--text-muted);margin-bottom:1rem;"><strong>Prompt:</strong> "Using examples from the lecture, explain what extraneous cognitive load is and how it can be reduced."</p>
+        <div style="display:flex;gap:0.5rem;align-items:center;margin-bottom:1rem;">
+          <span class="timer-display" id="lec2SpeakTimer" style="font-size:1.5rem;">0:20</span>
+          <button class="btn" onclick="startSpeakTimer('lec2SpeakTimer', 20)">Start 20s Prep</button>
+          <button class="btn btn-secondary" onclick="startSpeakTimer('lec2SpeakTimer', 60)">Start 60s Speak</button>
+          <button class="btn btn-secondary" onclick="resetSpeakTimer('lec2SpeakTimer', 20)">Reset</button>
+        </div>
+        <textarea id="lec2Speaking" rows="5" placeholder="Type or prepare your 60-second response here..." oninput="updateWordCount('lec2Speaking','lec2WordCount')"></textarea>
+        <div class="word-count-badge" id="lec2WordCount">Words: 0</div>
+        <div style="margin-top:0.75rem; display:flex; gap:0.5rem; align-items:center; flex-wrap:wrap;">
+          <button class="btn btn-secondary" id="lec2RecBtn" onclick="toggleSpeakRecord('lec2')">🎤 Record Answer</button>
+          <button class="btn btn-secondary" id="lec2StopBtn" onclick="stopSpeakRecord('lec2')" disabled>⏹ Stop</button>
+          <span class="word-count-badge" id="lec2RecStatus"></span>
+        </div>
+        <div class="reveal-box" id="lec2Report"></div>
+        <button class="btn btn-secondary" style="margin-top:0.75rem;" onclick="toggleReveal('lec2Model')">👁️ Show Model Answer</button>
+        <div class="reveal-box" id="lec2Model">
+          <strong style="color:var(--accent-green);">Model Answer:</strong>
+          <p style="margin-top:0.5rem;line-height:1.7;">"Extraneous cognitive load is unnecessary mental effort caused by poorly organized material. The professor gives the example of the split-attention effect, where students waste working memory switching between a diagram on one page and its explanation on another. The solution is to integrate visual and verbal information directly—placing text labels on diagrams rather than in separate captions—which frees working memory for actual understanding rather than mechanical integration."</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 5: HOMEWORK -->
+    <div class="slide" id="slide-4">
+      <div class="card">
+        <div class="card-title">📚 Homework Assignments</div>
+        <div class="attitude-card" style="border-color:var(--accent-green);">
+          <strong style="color:var(--accent-green);">1. Listening Practice</strong>
+          <p style="margin-top:0.4rem;color:var(--text-muted);">Re-listen to both mini-lectures with the transcript closed — take Cornell notes in symbols (↑ ↓ → ≠ w/ w/o ! e.g.) in the notes box, then reveal the transcript to check. Then complete 1 full-length TOEFL lecture (5–6 questions, ~3 min) from official practice material using the same symbol system.</p>
+        </div>
+        <div class="attitude-card" style="border-color:var(--accent-blue);">
+          <strong style="color:var(--accent-blue);">2. Speaking Recording</strong>
+          <p style="margin-top:0.4rem;color:var(--text-muted);">Record a 60-second summary of Lecture 2 (Cognitive Load) with no notes while speaking. Upload to the student portal.</p>
+        </div>
+        <div class="attitude-card" style="border-color:var(--accent-purple);">
+          <strong style="color:var(--accent-purple);">3. Vocabulary Journal</strong>
+          <p style="margin-top:0.4rem;color:var(--text-muted);">Write 5 academic sentences using: <em>cognitive load, intrinsic, extraneous, social loafing, accountability</em>.</p>
+        </div>
+      </div>
+    </div>
+</main>
+
+  <script src="audio/shadowingTS.js"></script>
+  <script>
+    function switchSlide(i) {
+      Object.keys(speakRec).forEach(k=>{const r=speakRec[k];if(r&&r.active&&r.recorder){try{r.recorder.stop();}catch(e){}}});
+      document.querySelectorAll('.slide').forEach((s,idx)=>s.classList.toggle('active',idx===i));
+      document.querySelectorAll('.nav-btn').forEach((b,idx)=>b.classList.toggle('active',idx===i));
+    }
+
+    // Shadowing Pacer + Karaoke
+    let pacerInterval=null,currentWordIndex=0,karaokeIndex=-1;
+    const shadowingAudioEl=document.getElementById('shadowingAudio');
+    function wrapShadowingWords(){
+      const c=document.getElementById('shadowingTextDisplay');
+      if(c.dataset.wrapped)return;
+      if(typeof shadowingTS!=='undefined'&&shadowingTS.length){
+        c.innerHTML=shadowingTS.map(w=>`<span class="shadowing-word">${w.word}</span>`).join(' ');
+      }else{
+        c.innerHTML=c.innerText.split(/\s+/).map(w=>`<span class="shadowing-word">${w}</span>`).join(' ');
+      }
+      c.dataset.wrapped="true";
+    }
+    function clearAllHighlights(){document.querySelectorAll('.shadowing-word').forEach(w=>w.classList.remove('active'));}
+    function toggleShadowingPacer(){
+      if(pacerInterval){clearInterval(pacerInterval);pacerInterval=null;return;}
+      if(shadowingAudioEl)shadowingAudioEl.pause();
+      wrapShadowingWords();
+      const sw=document.querySelectorAll('.shadowing-word');const sp=parseInt(document.getElementById('pacerSpeed').value)||380;
+      pacerInterval=setInterval(()=>{sw.forEach(w=>w.classList.remove('active'));if(currentWordIndex<sw.length){sw[currentWordIndex].classList.add('active');currentWordIndex++;}else{clearInterval(pacerInterval);pacerInterval=null;currentWordIndex=0;}},sp);
+    }
+    function resetShadowingPacer(){if(pacerInterval)clearInterval(pacerInterval);pacerInterval=null;currentWordIndex=0;karaokeIndex=-1;if(shadowingAudioEl)shadowingAudioEl.pause();clearAllHighlights();}
+    if(shadowingAudioEl){
+      shadowingAudioEl.addEventListener('play',()=>{if(pacerInterval){clearInterval(pacerInterval);pacerInterval=null;}wrapShadowingWords();});
+      shadowingAudioEl.addEventListener('timeupdate',()=>{
+        if(typeof shadowingTS==='undefined'||!shadowingTS.length)return;
+        const t=shadowingAudioEl.currentTime;
+        if(t<shadowingTS[0].start)return;
+        let idx=-1;
+        for(let i=karaokeIndex+1;i<shadowingTS.length;i++){if(t>=shadowingTS[i].start)idx=i;else break;}
+        if(idx===-1&&karaokeIndex>=0)idx=karaokeIndex;
+        if(idx>=0&&idx!==karaokeIndex){
+          karaokeIndex=idx;clearAllHighlights();
+          const spans=document.querySelectorAll('.shadowing-word');
+          if(spans[idx])spans[idx].classList.add('active');
+        }
+      });
+      shadowingAudioEl.addEventListener('ended',()=>{karaokeIndex=-1;clearAllHighlights();});
+    }
+    function playLectureAudio(id){document.querySelectorAll('audio.lecture-audio').forEach(a=>{if(a.id!==id)a.pause();});const a=document.getElementById(id);if(a.paused){a.currentTime=0;a.play();}}
+
+    // Speaking Timers
+    const speakTimers = {};
+    function startSpeakTimer(id,sec){
+      if(speakTimers[id])clearInterval(speakTimers[id]);
+      const disp=document.getElementById(id);
+      let r=sec;
+      disp.style.color='var(--primary)';
+      disp.textContent=`${Math.floor(r/60)}:${String(r%60).padStart(2,'0')}`;
+      speakTimers[id]=setInterval(()=>{
+        const m=Math.floor(r/60),s=r%60;
+        disp.textContent=`${m}:${String(s).padStart(2,'0')}`;
+        if(r<=10)disp.style.color='var(--accent-red)';
+        if(r<=0){clearInterval(speakTimers[id]);delete speakTimers[id];disp.textContent='0:00';disp.style.animation='pulse 0.5s ease 3';setTimeout(()=>disp.style.animation='',2000);}
+        r--;
+      },1000);
+    }
+    function resetSpeakTimer(id,sec){if(speakTimers[id]){clearInterval(speakTimers[id]);delete speakTimers[id];}const d=document.getElementById(id);d.textContent=`${Math.floor(sec/60)}:${String(sec%60).padStart(2,'0')}`;d.style.color='var(--primary)';}
+
+    // Word Count
+    function updateWordCount(areaId,countId){const v=document.getElementById(areaId).value.trim();const c=v?v.split(/\s+/).length:0;document.getElementById(countId).textContent=`Words: ${c}`;}
+
+    // Reveal
+    function toggleReveal(id){document.getElementById(id).classList.toggle('show');}
+
+    // Correction Table
+    function addCorrectionRow(){const e=document.getElementById('errorInput').value.trim();const c=document.getElementById('corrInput').value.trim();if(!e||!c)return;const t=document.getElementById('corrTableBody');const tr=document.createElement('tr');tr.innerHTML=`<td><span class="text-red">${e}</span></td><td><span class="text-green">${c}</span></td>`;t.appendChild(tr);document.getElementById('errorInput').value='';document.getElementById('corrInput').value='';}
+
+    // Speech Metrics: Record & Analyze
+    const speakRec={};
+    function toggleSpeakRecord(prefix){
+      const btn=document.getElementById(prefix+'RecBtn'),stop=document.getElementById(prefix+'StopBtn'),status=document.getElementById(prefix+'RecStatus');
+      if(speakRec[prefix])return;
+      speakRec[prefix]={pending:true};
+      const mic=navigator.mediaDevices&&navigator.mediaDevices.getUserMedia?navigator.mediaDevices.getUserMedia({audio:true}):Promise.reject(new Error('mic unavailable on this origin'));
+      mic.then(stream=>{
+        const recorder=new MediaRecorder(stream);
+        const start=performance.now();
+        speakRec[prefix]={recorder,stream,start,active:true};
+        recorder.onstop=()=>{
+          const dur=(performance.now()-start)/1000;
+          stream.getTracks().forEach(t=>t.stop());
+          delete speakRec[prefix];
+          stop.disabled=true;btn.disabled=false;
+          const text=document.getElementById(prefix+'Speaking').value.trim();
+          const words=text?text.split(/\s+/):[];
+          const wpm=words.length/(dur/60);
+          const pace=wpm>=128&&wpm<=188?'Target pace ✔':(wpm<128?'Under target — aim ~150 WPM':'Over target — slow down for clarity');
+          status.textContent='Saved — analysis below';status.style.color='var(--accent-green)';
+          const fillers=[['um',/\bum\b/gi],['uh',/\buh\b/gi],['like',/\blike\b/gi],['you know',/\byou know\b/gi],['actually',/\bactually\b/gi],['kind of',/\bkind of\b/gi],['sort of',/\bsort of\b/gi],['I mean',/\bi mean\b/gi],['basically',/\bbasically\b/gi]];
+          const found=fillers.map(([label,re])=>{const n=(text.match(re)||[]).length;return n?`${label} ×${n}`:null;}).filter(Boolean);
+          const patterns=[['although…but',/\balthough\b[^.]{0,80}\bbut\b/gi],['despite…but',/\bdespite\b[^.]{0,80}\bbut\b/gi],['more + comparative',/\bmore (better|easier|bigger|faster|simpler|worse)\b/gi],['3rd-person don\'t',/\b(he|she|it) don\'t\b/gi],['much + plural',/\bmuch (people|students|things|countries|reasons)\b/gi],['am agree',/\bam agree\b/gi],['people is',/\bpeople is\b/gi],['there is + plural',/\bthere is (many|several|two|three)\b/gi]];
+          const errs=patterns.map(([label,re])=>{const n=(text.match(re)||[]).length;return n?`${label} (${n})`:null;}).filter(Boolean);
+          const rep=[`Duration ${Math.round(dur)}s · ${words.length} words → ${Math.round(wpm)} WPM (script-paced — reading your prepared text) — ${pace}`];
+          if(found.length)rep.push('Fillers: '+found.join(', '));else rep.push('Fillers: none detected ✔');
+          if(errs.length)rep.push('<span class="text-red">Watch: '+errs.join(' · ')+'</span>');else rep.push('<span class="text-green">No target patterns flagged ✔</span>');
+          const r=document.getElementById(prefix+'Report');r.innerHTML=rep.join('<br>');r.classList.add('show');
+        };
+        recorder.start();
+        stop.disabled=false;btn.disabled=true;status.textContent='Recording… speak now';status.style.color='var(--accent-red)';
+      }).catch(()=>{delete speakRec[prefix];status.textContent='Mic denied — enable mic for analysis';});
+    }
+    function stopSpeakRecord(prefix){if(speakRec[prefix]&&speakRec[prefix].active&&speakRec[prefix].recorder)speakRec[prefix].recorder.stop();}
+  </script>
+<button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Open lesson navigation">&#9776;</button>
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+<!-- FE:MOBILE --><script>// FE:MOBILE
+(function(){
+  function initM() {
+    var t = document.getElementById('mobileNavToggle'), ov = document.getElementById('sidebarOverlay');
+    if (!t || !ov) return;
+    var sb = document.querySelector('.nav-btn').parentElement;
+    function close() { sb.classList.remove('open'); ov.classList.remove('open'); }
+    t.addEventListener('click', function() { sb.classList.toggle('open'); ov.classList.toggle('open'); });
+    ov.addEventListener('click', close);
+    document.querySelectorAll('.nav-btn').forEach(function(b) { b.addEventListener('click', close); });
+  }
+  if (document.readyState !== 'loading') initM(); else document.addEventListener('DOMContentLoaded', initM);
+})();</script>
+<!-- FE:HASH --><script>// FE:HASH
+(function(){
+  function mH() { var m = location.hash.match(/^#slide-(\d+)$/); if (m && window.switchSlide) window.switchSlide(parseInt(m[1])); }
+  window.addEventListener('hashchange', mH);
+  !function(){ mH(); }();
+  if (!window.__feHashWrapped && window.switchSlide) {
+    window.__feHashWrapped = true;
+    var o = window.switchSlide;
+    window.switchSlide = function(i) { o(i); try { history.replaceState(null, '', '#slide-' + i); } catch (e) {} };
+  }
+})();</script>
+<!-- FE:KEYS --><script>// FE:KEYS
+(function(){
+  document.addEventListener('keydown', function(e) {
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT' || e.target.isContentEditable) return;
+    if (e.code === 'ArrowLeft' || e.code === 'ArrowRight') {
+      var btns = document.querySelectorAll('.nav-btn');
+      var cur = document.querySelector('.nav-btn.active');
+      var pos = cur ? Array.prototype.indexOf.call(btns, cur) : -1;
+      if (pos < 0) return;
+      var tgt = pos + (e.code === 'ArrowRight' ? 1 : -1);
+      if (tgt >= 0 && tgt < btns.length) { e.preventDefault(); window.switchSlide(tgt + 0); }
+    }
+  });
+})();</script>
+<!-- FE:TIMERS --><script>// FE:TIMERS
+(function(){
+  window.__activeIntervals__ = window.__activeIntervals__ || [];
+  if (!window.__feIntervalPatched) {
+    window.__feIntervalPatched = true;
+    var _si = window.setInterval;
+    window.setInterval = function(fn, t) { var id = _si(fn, t); window.__activeIntervals__.push(id); return id; };
+  }
+  window.clearAllDeckTimers = function() {
+    window.__activeIntervals__.forEach(function(id) { clearInterval(id); });
+    window.__activeIntervals__ = [];
+  };
+  if (!window.__feTimersWrapped && window.switchSlide) {
+    window.__feTimersWrapped = true;
+    var o = window.switchSlide;
+    window.switchSlide = function(i) { if (window.clearAllDeckTimers) window.clearAllDeckTimers(); o(i); };
+  }
+})();</script>
+<!-- FE:CHIPJS --><script>// FE:CHIP
+(function(){
+  function updChipFromActive() {
+    var c = document.getElementById('slideChip'); if (!c) return;
+    var cur = document.querySelector('.nav-btn.active');
+    var pos = cur ? Array.prototype.indexOf.call(document.querySelectorAll('.nav-btn'), cur) : 0;
+    c.textContent = (pos + 1) + ' / ' + document.querySelectorAll('.slide').length;
+  }
+  if (!window.__feChipWrapped && window.switchSlide) {
+    window.__feChipWrapped = true;
+    var o = window.switchSlide;
+    window.switchSlide = function(i) { o(i); var c = document.getElementById('slideChip'); if (c) c.textContent = (i + 1) + ' / ' + document.querySelectorAll('.slide').length; };
+  }
+  if (document.readyState !== 'loading') updChipFromActive(); else document.addEventListener('DOMContentLoaded', updChipFromActive);
+})();</script>
+</body>
+</html>
