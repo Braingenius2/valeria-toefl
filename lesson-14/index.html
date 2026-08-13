@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Valeria — Lesson 14: Full TOEFL Mock #2 (Private Deck)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg-dark:#090d16;--bg-card:#131a26;--border-color:#243042;--text-main:#f1f5f9;--text-muted:#64748b;--primary:#f59e0b;--primary-hover:#d97706;--primary-dim:rgba(245,158,11,0.12);--accent-blue:#38bdf8;--accent-green:#10b981;--accent-red:#ef4444;--accent-purple:#a855f7;}
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:'Inter',sans-serif;background:var(--bg-dark);color:var(--text-main);display:flex;min-height:100vh;overflow-x:hidden;}
+    .sidebar{width:260px;background:var(--bg-card);border-right:1px solid var(--border-color);display:flex;flex-direction:column;padding:1.5rem 1rem;position:fixed;height:100vh;z-index:100;}
+    .brand{display:flex;align-items:center;gap:0.75rem;margin-bottom:2rem;padding:0 0.5rem;}
+    .brand-badge{background:var(--primary);color:#000;font-weight:700;font-size:0.75rem;padding:0.2rem 0.5rem;border-radius:4px;text-transform:uppercase;}
+    .brand-title{font-weight:600;font-size:1.1rem;color:var(--text-main);}
+    .nav-btn{background:transparent;border:1px solid transparent;color:var(--text-muted);padding:0.75rem 1rem;border-radius:8px;text-align:left;font-size:0.9rem;font-family:inherit;cursor:pointer;margin-bottom:0.5rem;display:flex;align-items:center;gap:0.75rem;transition:all 0.2s ease;}
+    .nav-btn:hover{background:rgba(255,255,255,0.03);color:var(--text-main);}
+    .nav-btn.active{background:var(--primary-dim);border-color:rgba(245,158,11,0.3);color:var(--primary);font-weight:600;}
+    .nav-num{font-family:'Fira Code',monospace;font-size:0.8rem;opacity:0.7;}
+    .main-content{margin-left:260px;flex:1;padding:2rem 3rem;max-width:1200px;}
+    .header{display:flex;justify-content:space-between;align-items:center;margin-bottom:2rem;padding-bottom:1rem;border-bottom:1px solid var(--border-color);}
+    .page-title{font-size:1.5rem;font-weight:700;color:var(--text-main);}
+    .tag{background:rgba(245,158,11,0.1);color:var(--primary);border:1px solid rgba(245,158,11,0.2);padding:0.25rem 0.75rem;border-radius:20px;font-size:0.8rem;font-family:'Fira Code',monospace;}
+    .slide{display:none;animation:fadeIn 0.3s ease;}
+    .slide.active{display:block;}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+    @keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.3;}}
+    .card{background:var(--bg-card);border:1px solid var(--border-color);border-radius:12px;padding:1.5rem;margin-bottom:1.5rem;}
+    .card-title{font-size:1.1rem;font-weight:600;color:var(--primary);margin-bottom:1rem;display:flex;align-items:center;gap:0.5rem;}
+    .shadowing-text{font-size:1.05rem;line-height:1.8;color:#cbd5e1;margin-bottom:1.5rem;background:rgba(0,0,0,0.2);padding:1.25rem;border-radius:8px;border-left:3px solid var(--primary);}
+    .shadowing-word{transition:background 0.15s ease,color 0.15s ease;border-radius:3px;padding:0 2px;}
+    .shadowing-word.active{background:var(--primary);color:#000;font-weight:600;}
+    .controls{display:flex;gap:0.75rem;align-items:center;flex-wrap:wrap;margin-bottom:1rem;}
+    .btn{background:var(--primary);color:#000;border:none;padding:0.6rem 1.2rem;border-radius:6px;font-weight:600;font-size:0.85rem;font-family:inherit;cursor:pointer;display:inline-flex;align-items:center;gap:0.4rem;transition:background 0.2s ease;}
+    .btn:hover{background:var(--primary-hover);}
+    .btn-secondary{background:transparent;border:1px solid var(--border-color);color:var(--text-main);}
+    .btn-secondary:hover{background:rgba(255,255,255,0.05);}
+    .timer-display{font-family:'Fira Code',monospace;font-size:2rem;font-weight:700;color:var(--primary);background:#000;padding:0.5rem 1.2rem;border-radius:8px;border:1px solid var(--border-color);display:inline-block;}
+    .passage-box{background:rgba(0,0,0,0.25);padding:1.25rem;border-radius:8px;border:1px solid var(--border-color);max-height:300px;overflow-y:auto;font-size:0.9rem;line-height:1.7;margin-bottom:1rem;}
+    .passage-box p{margin-bottom:0.75rem;}
+    .lecture-box{background:rgba(0,0,0,0.25);padding:1.25rem;border-radius:8px;border:1px solid var(--border-color);font-size:0.9rem;line-height:1.7;margin-bottom:1rem;display:none;}
+    .lecture-box.show{display:block;}
+    .lecture-box p{margin-bottom:0.75rem;}
+    .speaking-sent{background:rgba(0,0,0,0.2);border:1px solid var(--border-color);border-radius:8px;padding:0.75rem 1rem;margin-bottom:0.5rem;font-size:0.9rem;}
+    .speaking-sent .num{font-family:'Fira Code',monospace;font-weight:700;color:var(--primary);margin-right:0.5rem;}
+    #l14-lrSentences .sent-text{display:none;}
+    #l14-lrSentences.show .sent-text{display:inline;}
+    .reveal-box{display:none;background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.2);padding:1rem;border-radius:8px;margin-top:0.75rem;font-size:0.9rem;line-height:1.6;}
+    .reveal-box.show{display:block;}
+    .score-table{width:100%;border-collapse:collapse;font-size:0.9rem;}
+    .score-table th,.score-table td{padding:0.6rem 1rem;border:1px solid var(--border-color);text-align:center;}
+    .score-table th{background:rgba(0,0,0,0.4);color:var(--primary);font-weight:600;}
+    .error-table{width:100%;border-collapse:collapse;margin-top:1rem;font-size:0.9rem;}
+    .error-table th,.error-table td{padding:0.75rem 1rem;border:1px solid var(--border-color);text-align:left;}
+    .error-table th{background:rgba(0,0,0,0.4);color:var(--primary);font-weight:600;}
+    .text-red{color:var(--accent-red);}.text-green{color:var(--accent-green);}
+    textarea,input[type="text"]{width:100%;background:rgba(0,0,0,0.4);border:1px solid var(--border-color);color:var(--text-main);padding:0.75rem;border-radius:6px;font-family:inherit;font-size:0.9rem;resize:vertical;}
+    textarea:focus,input[type="text"]:focus{outline:none;border-color:var(--primary);}
+    .word-count-badge{font-family:'Fira Code',monospace;font-size:0.85rem;color:var(--accent-green);margin-top:0.5rem;}
+  </style>
+<!-- FE:CSS-MOBILE --><style>.mobile-nav-toggle{display:none;position:fixed;bottom:20px;right:20px;z-index:200;width:48px;height:48px;border-radius:50%;background:var(--primary);color:#000;border:none;font-size:20px;cursor:pointer;align-items:center;justify-content:center;box-shadow:3px 3px 0 rgba(0,0,0,0.12)}
+.sidebar-overlay{display:none;position:fixed;inset:0;z-index:150;background:rgba(0,0,0,0.4)}
+.sidebar-overlay.open{display:block}@media(max-width:768px){
+  .mobile-nav-toggle{display:flex}
+  .sidebar{position:fixed;left:0;top:0;z-index:175;height:100vh;transform:translateX(-100%);transition:transform .25s ease;width:260px;display:flex!important}
+  .sidebar.open{transform:translateX(0)}
+  .main-content{margin-left:0;padding:1rem 1rem 84px;max-width:100%}
+  .header{flex-wrap:wrap;gap:0.5rem}
+  .grid-2{grid-template-columns:1fr}
+  .controls{flex-direction:column;align-items:stretch}
+  .timer-display{font-size:1.5rem}
+}</style>
+<!-- FE:CSS-CHIP --><style>.slide-chip{font-family:'Fira Code',monospace;font-size:0.72rem;font-weight:700;color:var(--primary);background:var(--bg-card,rgba(0,0,0,0.4));border:1px solid var(--border-color,rgba(255,255,255,0.15));padding:0.25rem 0.65rem;border-radius:20px;white-space:nowrap;margin-left:auto}</style>
+</head>
+<body>
+
+  <aside class="sidebar">
+    <div class="brand">
+      <span class="brand-badge">TOEFL</span>
+      <span class="brand-title">Valeria L14</span>
+    </div>
+    <button class="nav-btn active" onclick="switchSlide(0)"><span class="nav-num">01</span> Warm-up</button>
+    <button class="nav-btn" onclick="switchSlide(1)"><span class="nav-num">02</span> Reading (18 min)</button>
+    <button class="nav-btn" onclick="switchSlide(2)"><span class="nav-num">03</span> Listening (15 min)</button>
+    <button class="nav-btn" onclick="switchSlide(3)"><span class="nav-num">04</span> Speaking T1 L&amp;R</button>
+    <button class="nav-btn" onclick="switchSlide(4)"><span class="nav-num">05</span> Speaking T2 Interview</button>
+    <button class="nav-btn" onclick="switchSlide(5)"><span class="nav-num">06</span> Writing (15 min)</button>
+    <button class="nav-btn" onclick="switchSlide(6)"><span class="nav-num">07</span> Homework</button>
+    
+  </aside>
+
+  <main class="main-content">
+    <header class="header">
+      <div>
+        <h1 class="page-title">Full TOEFL Mock #2</h1>
+        <p style="color:var(--text-muted);font-size:0.85rem;margin-top:0.2rem;">Environment &amp; Urban Society · Compare to L10 Baseline</p>
+      </div>
+      <!-- FE:CHIP --><span class="slide-chip" id="slideChip">1 / N</span>
+        <span class="tag">MOCK TEST</span>
+    </header>
+
+    <!-- SLIDE 1: WARM-UP -->
+    <div class="slide active" id="slide-0">
+      <div class="card">
+        <div class="card-title">🎙️ Shadowing: Urban Resilience</div>
+        <div class="shadowing-text" id="shadowingTextDisplay">
+          Rapid urbanization and climate change have exacerbated the urban heat island effect, forcing municipal planners to reconsider conventional infrastructure. Dense concrete surfaces absorb and retain thermal energy, causing urban temperatures to surge significantly above surrounding rural areas. To build climate-resilient cities, urban planners are integrating green roofs, permeable pavements, and expanded urban canopies. These nature-based solutions not only mitigate extreme heat but also improve stormwater management and public health. However, implementing such large-scale retrofits requires substantial municipal investment and sustained intergovernmental coordination.
+        </div>
+        <div class="controls">
+          <button class="btn" onclick="toggleShadowingPacer()">▶ Start Pacer</button>
+          <button class="btn btn-secondary" onclick="resetShadowingPacer()">↺ Reset</button>
+          <audio id="shadowingAudio" src="audio/shadowing.wav" preload="auto" style="display:none;"></audio>
+          <button class="btn btn-secondary" onclick="document.getElementById('shadowingAudio').play()">🔊 Play Audio</button>
+          <select id="pacerSpeed" style="background:#000;color:#fff;padding:0.4rem;border-radius:4px;border:1px solid var(--border-color);">
+            <option value="450">130 WPM</option><option value="380" selected>150 WPM</option><option value="320">175 WPM</option>
+          </select>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">📋 Mock Test Structure</div>
+        <table class="score-table">
+          <thead><tr><th>Section</th><th>Topic</th><th>Time</th><th>Target</th></tr></thead>
+          <tbody>
+            <tr><td>Reading</td><td>The Economics of Renewable Energy</td><td>18 min</td><td>4.0+</td></tr>
+            <tr><td>Listening</td><td>Urban Heat Islands</td><td>15 min</td><td>4.5+</td></tr>
+            <tr><td>Speaking T1</td><td>Listen &amp; Repeat (7 sentences)</td><td>5 min</td><td>4.0+</td></tr>
+            <tr><td>Speaking T2</td><td>Take an Interview (4 questions)</td><td>5 min</td><td>4.0+</td></tr>
+            <tr><td>Writing</td><td>Email Task + Academic Discussion</td><td>5 + 10 min</td><td>4.0+</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- SLIDE 2: READING -->
+    <div class="slide" id="slide-1">
+      <div class="card">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;">
+          <div class="card-title" style="margin-bottom:0;">📖 Reading: The Economics of Renewable Energy</div>
+          <div>
+            <span class="timer-display" id="readTimer" style="font-size:1.5rem;">18:00</span>
+            <button class="btn" style="margin-left:0.5rem;" onclick="startTimer('readTimer',1080)">Start</button>
+            <button class="btn btn-secondary" onclick="resetTimer('readTimer',1080)">Reset</button>
+          </div>
+        </div>
+        <div class="passage-box">
+          <p>The transition from fossil fuels to renewable energy is no longer merely an environmental imperative; it has become an economic necessity. Over the past decade, the levelized cost of energy (LCOE) for solar photovoltaics and onshore wind has fallen by over eighty percent, rendering them cheaper than coal in most major markets.</p>
+          <p>However, integrating high percentages of intermittent renewables into existing electrical grids poses structural challenges. Because solar and wind generation fluctuate with weather conditions, energy storage solutions such as utility-scale lithium-ion batteries and pumped hydro storage are vital to maintaining grid stability. Without adequate storage, energy grids risk destabilization during periods of peak demand or low generation.</p>
+        </div>
+        <div style="font-size:0.9rem;">
+          <div style="margin-bottom:0.75rem;"><strong>Q1 (Vocabulary):</strong> "imperative" in paragraph 1 is closest in meaning to:<br><span style="color:var(--text-muted);font-size:0.85rem;">(A) suggestion (B) vital requirement (C) optional choice (D) historical trend</span></div>
+          <div style="margin-bottom:0.75rem;"><strong>Q2 (Detail):</strong> By how much has the LCOE for solar energy fallen?<br><span style="color:var(--text-muted);font-size:0.85rem;">(A) over 50% (B) over 80% (C) exactly 10% (D) it has increased</span></div>
+          <div style="margin-bottom:0.75rem;"><strong>Q3 (Inference):</strong> What can be inferred about power grids relying purely on solar without storage?<br><span style="color:var(--text-muted);font-size:0.85rem;">(A) They are susceptible to outages during cloudy periods. (B) They are always stable. (C) They produce more energy than needed. (D) They eliminate the need for batteries.</span></div>
+          <div style="margin-bottom:0.75rem;"><strong>Q4 (Negative Fact):</strong> All are mentioned as grid storage solutions EXCEPT:<br><span style="color:var(--text-muted);font-size:0.85rem;">(A) lithium-ion batteries (B) pumped hydro (C) nuclear fission (D) none of the above</span></div>
+          <button class="btn btn-secondary" onclick="toggleReveal('readReveal')">👁️ Show Answers</button>
+          <div class="reveal-box" id="readReveal">
+            <strong style="color:var(--accent-green);">Q1: (B)</strong> — "Imperative" means an essential or vital requirement.<br>
+            <strong style="color:var(--accent-green);">Q2: (B)</strong> — "fallen by over eighty percent."<br>
+            <strong style="color:var(--accent-green);">Q3: (A)</strong> — Without storage, grids "risk destabilization during periods of peak demand or low generation."<br>
+            <strong style="color:var(--accent-green);">Q4: (C)</strong> — Nuclear fission is not mentioned. The text mentions lithium-ion batteries and pumped hydro.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 3: LISTENING -->
+    <div class="slide" id="slide-2">
+      <div class="card">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;">
+          <div class="card-title" style="margin-bottom:0;">🎧 Listening: Urban Heat Islands</div>
+          <div>
+            <span class="timer-display" id="listenTimer" style="font-size:1.5rem;">15:00</span>
+            <button class="btn" style="margin-left:0.5rem;" onclick="startTimer('listenTimer',900)">Start</button>
+            <button class="btn btn-secondary" onclick="resetTimer('listenTimer',900)">Reset</button>
+          </div>
+        </div>
+        <div class="controls">
+          <audio class="lecture-audio" id="lec1p1" src="audio/lecture1-p1.wav" preload="none"></audio>
+          <audio class="lecture-audio" id="lec1p2" src="audio/lecture1-p2.wav" preload="none"></audio>
+          <audio class="lecture-audio" id="lec1p3" src="audio/lecture1-p3.wav" preload="none"></audio>
+          <button class="btn btn-secondary" onclick="playLectureAudio('lec1p1')">▶ Paragraph 1</button>
+          <button class="btn btn-secondary" onclick="playLectureAudio('lec1p2')">▶ Paragraph 2</button>
+          <button class="btn btn-secondary" onclick="playLectureAudio('lec1p3')">▶ Paragraph 3</button>
+        </div>
+        <p style="font-size:0.9rem;color:var(--text-muted);margin-bottom:0.5rem;"><strong>📝 Cornell Notes</strong> — symbols only (↑ ↓ → ≠ w/ w/o ! e.g.), no full sentences:</p>
+        <textarea id="lecNotes" rows="3" placeholder="e.g. concrete/asphalt high thermal mass → heat ↑ 5°C | green roofs → evapotranspiration → cooling ↓ | critics: cost ↑ → trees cheaper"></textarea>
+        <div class="lecture-box" id="lecTranscript">
+          <p>"Today we're examining urban heat islands. Concrete and asphalt have high thermal mass—they store heat during the day and re-radiate it at night. This elevates urban temperatures by up to five degrees Celsius compared to surrounding rural areas.</p>
+          <p>To combat this, cities like Singapore are mandating green roofs on new high-rises. Vegetation absorbs water and cools the air through evapotranspiration. Studies show that neighborhoods with extensive green roof coverage experience temperature reductions of up to two degrees Celsius during peak summer months.</p>
+          <p>However, critics argue that green roofs are expensive to install and maintain, particularly for older buildings. They suggest that increasing urban tree canopy coverage may be a more cost-effective alternative, as mature trees provide shade and cooling at a fraction of the per-square-meter cost of green roof systems."</p>
+        </div>
+        <div style="font-size:0.9rem;">
+          <div style="margin-bottom:0.75rem;"><strong>Q1 (Gist):</strong> What is the main topic?<br><span style="color:var(--text-muted);font-size:0.85rem;">(A) How to build new cities (B) Causes of urban heat islands and cooling strategies (C) Why concrete is harmful (D) Singapore's architecture</span></div>
+          <div style="margin-bottom:0.75rem;"><strong>Q2 (Detail):</strong> How do green roofs cool surrounding air?<br><span style="color:var(--text-muted);font-size:0.85rem;">(A) By reflecting sunlight (B) Through evapotranspiration (C) By generating electricity (D) Through air conditioning</span></div>
+          <div style="margin-bottom:0.75rem;"><strong>Q3 (Attitude):</strong> What is the professor's attitude toward green roofs?<br><span style="color:var(--text-muted);font-size:0.85rem;">(A) Strongly critical (B) Balanced — presents both benefits and cost concerns (C) Completely neutral (D) Enthusiastic without reservation</span></div>
+          <button class="btn btn-secondary" onclick="toggleReveal('lecTranscript')">👁️ Show Transcript</button>
+          <button class="btn btn-secondary" onclick="toggleReveal('listenReveal')">👁️ Show Answers</button>
+          <div class="reveal-box" id="listenReveal">
+            <strong style="color:var(--accent-green);">Q1: (B)</strong> — The lecture covers causes (thermal mass) and solutions (green roofs, tree canopy).<br>
+            <strong style="color:var(--accent-green);">Q2: (B)</strong> — "Vegetation absorbs water and cools the air through evapotranspiration."<br>
+            <strong style="color:var(--accent-green);">Q3: (B)</strong> — The professor presents both the cooling benefits and the critics' cost concerns — a balanced stance.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 4: SPEAKING T1 - LISTEN & REPEAT -->
+    <div class="slide" id="slide-3">
+      <div class="card">
+        <div class="card-title">🗣️ Speaking Task 1: Listen &amp; Repeat (7 sentences)</div>
+        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:1rem;">Play each sentence audio once. Repeat exactly. 10 seconds per sentence. Sentence text is hidden — try repeating from hearing alone.</p>
+        <div style="margin-bottom:0.75rem;"><button class="btn btn-secondary" onclick="toggleReveal('l14-lrSentences')">👁️ Show Sentences</button></div>
+        <div id="l14-lrSentences">
+          <div class="speaking-sent"><span class="num">1.</span><span class="sent-text">Green roofs help reduce the urban heat island effect.</span><audio id="l14s1" class="sentence-audio" src="audio/l14-s1.wav" preload="none"></audio><button class="btn btn-secondary" style="margin-left:0.5rem;padding:0.25rem 0.7rem;font-size:0.8rem;" onclick="playSentence('l14s1')">▶ Play</button></div>
+          <div class="speaking-sent"><span class="num">2.</span><span class="sent-text">Intermittent solar power requires advanced energy storage.</span><audio id="l14s2" class="sentence-audio" src="audio/l14-s2.wav" preload="none"></audio><button class="btn btn-secondary" style="margin-left:0.5rem;padding:0.25rem 0.7rem;font-size:0.8rem;" onclick="playSentence('l14s2')">▶ Play</button></div>
+          <div class="speaking-sent"><span class="num">3.</span><span class="sent-text">Solar power costs continue to decline every year.</span><audio id="l14s3" class="sentence-audio" src="audio/l14-s3.wav" preload="none"></audio><button class="btn btn-secondary" style="margin-left:0.5rem;padding:0.25rem 0.7rem;font-size:0.8rem;" onclick="playSentence('l14s3')">▶ Play</button></div>
+          <div class="speaking-sent"><span class="num">4.</span><span class="sent-text">Urban planners balance development with environmental health.</span><audio id="l14s4" class="sentence-audio" src="audio/l14-s4.wav" preload="none"></audio><button class="btn btn-secondary" style="margin-left:0.5rem;padding:0.25rem 0.7rem;font-size:0.8rem;" onclick="playSentence('l14s4')">▶ Play</button></div>
+          <div class="speaking-sent"><span class="num">5.</span><span class="sent-text">Green roofs reduce energy use in commercial buildings.</span><audio id="l14s5" class="sentence-audio" src="audio/l14-s5.wav" preload="none"></audio><button class="btn btn-secondary" style="margin-left:0.5rem;padding:0.25rem 0.7rem;font-size:0.8rem;" onclick="playSentence('l14s5')">▶ Play</button></div>
+          <div class="speaking-sent"><span class="num">6.</span><span class="sent-text">Large-scale urban retrofits require complex financial planning.</span><audio id="l14s6" class="sentence-audio" src="audio/l14-s6.wav" preload="none"></audio><button class="btn btn-secondary" style="margin-left:0.5rem;padding:0.25rem 0.7rem;font-size:0.8rem;" onclick="playSentence('l14s6')">▶ Play</button></div>
+          <div class="speaking-sent"><span class="num">7.</span><span class="sent-text">International climate agreements depend on transparent emissions reporting.</span><audio id="l14s7" class="sentence-audio" src="audio/l14-s7.wav" preload="none"></audio><button class="btn btn-secondary" style="margin-left:0.5rem;padding:0.25rem 0.7rem;font-size:0.8rem;" onclick="playSentence('l14s7')">▶ Play</button></div>
+        </div>
+        <div style="display:flex;gap:0.5rem;align-items:center;margin-top:1rem;">
+          <span class="timer-display" id="lrTimer" style="font-size:1.5rem;">0:10</span>
+          <button class="btn" onclick="startLRSentence()">Start 10s Timer</button>
+          <button class="btn btn-secondary" onclick="nextLRSentence()">Next Sentence →</button>
+          <span id="lrProgress" style="font-size:0.8rem;color:var(--text-muted);margin-left:auto;">Sentence 1 / 7</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 5: SPEAKING T2 - INTERVIEW -->
+    <div class="slide" id="slide-4">
+      <div class="card">
+        <div class="card-title">🗣️ Speaking Task 2: Take an Interview (4 questions)</div>
+        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:1rem;">Answer each question. Up to 45 seconds per answer. Zero prep time.</p>
+        <div style="margin-bottom:1rem;">
+          <strong>Q1:</strong> Do you think cities should restrict cars in downtown areas to reduce pollution?
+          <div style="display:flex;gap:0.5rem;align-items:center;margin-top:0.5rem;">
+            <span class="timer-display" id="iq1Timer" style="font-size:1.3rem;">0:45</span>
+            <button class="btn" onclick="startIQ('iq1Timer',45)">Start Q1</button>
+            <button class="btn btn-secondary" onclick="resetIQ('iq1Timer',45)">Reset</button>
+          </div>
+        </div>
+        <div style="margin-bottom:1rem;">
+          <strong>Q2:</strong> What is the most effective way individuals can reduce their carbon footprint?
+          <div style="display:flex;gap:0.5rem;align-items:center;margin-top:0.5rem;">
+            <span class="timer-display" id="iq2Timer" style="font-size:1.3rem;">0:45</span>
+            <button class="btn" onclick="startIQ('iq2Timer',45)">Start Q2</button>
+            <button class="btn btn-secondary" onclick="resetIQ('iq2Timer',45)">Reset</button>
+          </div>
+        </div>
+        <div style="margin-bottom:1rem;">
+          <strong>Q3:</strong> Should governments subsidize renewable energy companies or let the free market decide?
+          <div style="display:flex;gap:0.5rem;align-items:center;margin-top:0.5rem;">
+            <span class="timer-display" id="iq3Timer" style="font-size:1.3rem;">0:45</span>
+            <button class="btn" onclick="startIQ('iq3Timer',45)">Start Q3</button>
+            <button class="btn btn-secondary" onclick="resetIQ('iq3Timer',45)">Reset</button>
+          </div>
+        </div>
+        <div>
+          <strong>Q4:</strong> Do you believe future cities will be cleaner or more polluted than today?
+          <div style="display:flex;gap:0.5rem;align-items:center;margin-top:0.5rem;">
+            <span class="timer-display" id="iq4Timer" style="font-size:1.3rem;">0:45</span>
+            <button class="btn" onclick="startIQ('iq4Timer',45)">Start Q4</button>
+            <button class="btn btn-secondary" onclick="resetIQ('iq4Timer',45)">Reset</button>
+          </div>
+        </div>
+        <div style="margin-top:1.5rem; padding-top:1rem; border-top:1px solid var(--border-color);">
+          <strong style="color:var(--accent-green);">🎤 Record &amp; Analyze a Full Answer</strong>
+          <p style="font-size:0.85rem;color:var(--text-muted);margin:0.5rem 0;">Type your final answer to one of the questions, then record yourself saying it to get WPM, filler and error-pattern analysis.</p>
+          <textarea id="t2Answer" rows="5" placeholder="Type your answer here..."></textarea>
+          <div style="margin-top:0.75rem; display:flex; gap:0.5rem; align-items:center; flex-wrap:wrap;">
+            <button class="btn btn-secondary" id="t2RecBtn" onclick="toggleSpeakRecord('t2')">🎤 Record Answer</button>
+            <button class="btn btn-secondary" id="t2StopBtn" onclick="stopSpeakRecord('t2')" disabled>⏹ Stop</button>
+            <span style="font-size:0.8rem;color:var(--accent-green);" id="t2RecStatus"></span>
+          </div>
+          <div class="reveal-box" id="t2Report"></div>
+        </div>
+        <button class="btn btn-secondary" style="margin-top:0.75rem;" onclick="toggleReveal('t2Models')">👁️ Show Model Answers</button>
+        <div class="reveal-box" id="t2Models">
+          <strong style="color:var(--accent-green);">Model Answers (45s each, ~110 words):</strong>
+          <p style="margin-top:0.5rem;line-height:1.7;"><strong>Q1:</strong> "In my view, cities should restrict cars in downtown areas, but in a gradual way rather than an immediate ban. This is primarily because car emissions are one of the main causes of urban air pollution, and reducing traffic directly improves public health. For example, cities like Madrid and London have introduced low-emission zones, and their air quality has improved noticeably within a few years. Critics may argue that restrictions harm businesses and commuters, yet this concern can be addressed by investing in reliable public transport and subsidizing electric vehicles. Therefore, a phased approach that combines restrictions with better alternatives is the most practical solution."</p>
+          <p style="margin-top:0.5rem;line-height:1.7;"><strong>Q2:</strong> "In my opinion, the most effective way individuals can reduce their carbon footprint is to change their transportation habits. This is primarily because transport accounts for a significant share of personal emissions, and unlike recycling, the impact is immediate and measurable. For instance, choosing to walk, cycle, or use public transport instead of driving reduces greenhouse gas emissions directly. Critics might say that individual actions are too small to matter, yet this perspective overlooks the fact that collective changes create market pressure for cleaner options. Therefore, by making small but consistent choices like using public transport, individuals can make a real difference."</p>
+          <p style="margin-top:0.5rem;line-height:1.7;"><strong>Q3:</strong> "I believe governments should subsidize renewable energy companies, but with clear conditions and time limits. This is primarily because renewable energy is still more expensive to build than fossil fuels, and without subsidies, many clean projects would never be financed. For example, Germany's feed-in tariffs helped solar power grow dramatically over the past decade, and prices later fell as a result of scale. Critics may argue that subsidies distort the free market, yet this argument ignores the fact that fossil fuels have themselves benefited from enormous government support for decades. Therefore, temporary subsidies are justified until renewables become naturally competitive."</p>
+          <p style="margin-top:0.5rem;line-height:1.7;"><strong>Q4:</strong> "I believe future cities will be cleaner than today, despite current challenges. This is primarily because technological progress and stronger environmental regulations are already pushing cities toward cleaner energy and transport. For instance, many major cities are replacing diesel buses with electric ones and expanding green spaces, which directly reduces pollution. Critics might argue that rapid population growth will make cities dirtier, yet this perspective overlooks the fact that modern urban planning can accommodate growth sustainably. Therefore, while progress may be uneven, the overall trend toward cleaner, greener cities is likely to continue."</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 6: WRITING -->
+    <div class="slide" id="slide-5">
+      <div class="card">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;">
+          <div class="card-title" style="margin-bottom:0;">✉️ Writing Task 1: Email Reply (5 min)</div>
+          <div>
+            <span class="timer-display" id="emailTimer" style="font-size:1.5rem;">5:00</span>
+            <button class="btn" style="margin-left:0.5rem;" onclick="startTimer('emailTimer',300)">Start</button>
+            <button class="btn btn-secondary" onclick="resetTimer('emailTimer',300)">Reset</button>
+          </div>
+        </div>
+        <div style="background:rgba(0,0,0,0.25);padding:1rem;border-radius:8px;font-size:0.85rem;line-height:1.6;margin-bottom:1rem;">
+          <strong>Email from Professor Allen:</strong> "Dear student, I am organizing the university's sustainability week next month and would like your input. Could you suggest two practical ideas for reducing waste in the campus cafeteria? Also, would you be willing to present one of your ideas during the event? Best regards, Professor Allen"
+        </div>
+        <textarea id="emailInput" rows="6" placeholder="Type your email reply here (Target: 90-120 words, 5 min)..." oninput="updateWordCount('emailInput','emailCount',90,'90-120')"></textarea>
+        <div class="word-count-badge" id="emailCount">Word count: 0 words (Goal: 90-120)</div>
+        <button class="btn btn-secondary" style="margin-top:0.75rem;" onclick="toggleReveal('emailReveal')">👁️ Show Model Answer</button>
+        <div class="reveal-box" id="emailReveal">
+          <strong style="color:var(--accent-green);">Model Answer (Band 4+):</strong>
+          <p style="margin-top:0.5rem;line-height:1.7;">Dear Professor Allen, Thank you for inviting me to contribute to the sustainability week — I would be happy to help. For reducing waste in the cafeteria, my first idea is a tray-free service, since research shows that diners take less food when trays are unavailable. My second idea is a discount for students who bring reusable containers, which would encourage more students to participate. I would gladly present the tray-free concept during the event, as I can explain the environmental data behind it. Please let me know which time suits you best, and I will confirm immediately. Best regards, Valeria</p>
+        </div>
+      </div>
+      <div class="card">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;">
+          <div class="card-title" style="margin-bottom:0;">✍️ Writing Task 2: Academic Discussion (10 min)</div>
+          <div>
+            <span class="timer-display" id="writeTimer" style="font-size:1.5rem;">10:00</span>
+            <button class="btn" style="margin-left:0.5rem;" onclick="startTimer('writeTimer',600)">Start</button>
+            <button class="btn btn-secondary" onclick="resetTimer('writeTimer',600)">Reset</button>
+          </div>
+        </div>
+        <div style="background:rgba(0,0,0,0.25);padding:1rem;border-radius:8px;font-size:0.85rem;line-height:1.6;margin-bottom:1rem;">
+          <strong>Professor:</strong> "Should governments completely ban single-use plastic packaging, or should they rely on consumer education and recycling incentives?"<br><br>
+          <strong>Sofia:</strong> "An immediate ban is necessary. Plastic pollution is destroying marine ecosystems, and voluntary recycling has failed."<br>
+          <strong>Liam:</strong> "A complete ban would harm small businesses and low-income consumers. Tax incentives for biodegradable alternatives are more practical."
+        </div>
+        <textarea id="writingInput" rows="7" placeholder="Type response here (Target: 120+ words using 5-sentence formula)..." oninput="updateWordCount('writingInput','wordCountDisplay')"></textarea>
+        <div class="word-count-badge" id="wordCountDisplay">Word count: 0 words (Goal: 120+)</div>
+        <button class="btn btn-secondary" style="margin-top:0.75rem;" onclick="toggleReveal('writeReveal')">👁️ Show Model Answer</button>
+        <div class="reveal-box" id="writeReveal">
+          <strong style="color:var(--accent-green);">Model Answer (Band 4+):</strong>
+          <p style="margin-top:0.5rem;line-height:1.7;">While I acknowledge Sofia's urgency about plastic pollution, I strongly maintain that a complete ban is too blunt an instrument. This is primarily because such bans disproportionately harm small businesses that lack the capital to switch to expensive alternatives, which directly impacts local economies. Critics often argue that recycling has failed, yet this perspective overlooks the fact that well-designed incentive programs have dramatically increased recycling rates in countries like Germany and South Korea. For instance, Germany's deposit-return system achieves recycling rates exceeding 95% for plastic bottles. Therefore, combining targeted bans on the most harmful plastics with robust incentive programs is essential for achieving environmental sustainability without economic disruption.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 7: HOMEWORK -->
+    <div class="slide" id="slide-6">
+      <div class="card">
+        <div class="card-title">📚 Homework Assignments</div>
+        <div class="speaking-sent"><span class="num">1.</span><strong style="color:var(--accent-green);">Self-Recorded Speaking Audit</strong> — Re-listen to your Speaking Task 2 interview recordings; self-evaluate each answer on the 1-6 scale.</div>
+        <div class="speaking-sent"><span class="num">2.</span><strong style="color:var(--accent-blue);">Writing Second Draft</strong> — Polish the single-use plastics discussion essay to 135+ words in 8 minutes.</div>
+        <div class="speaking-sent"><span class="num">3.</span><strong style="color:var(--accent-purple);">Vocabulary Journal</strong> — Write 5 sentences using: <em>imperative, intermittent, evapotranspiration, exacerbate, resilient</em>.</div>
+      </div>
+    </div>
+
+    <!-- SLIDE 8: SCORE AUDIT -->
+    </main>
+
+  <script src="audio/shadowingTS.js"></script>
+  <script>
+    function switchSlide(i){Object.keys(speakRec).forEach(k=>{const r=speakRec[k];if(r&&r.active&&r.recorder){try{r.recorder.stop();}catch(e){}}});document.querySelectorAll('.slide').forEach((s,idx)=>s.classList.toggle('active',idx===i));document.querySelectorAll('.nav-btn').forEach((b,idx)=>b.classList.toggle('active',idx===i));}
+
+    // Shadowing Pacer + Karaoke
+    let pacerInterval=null,currentWordIndex=0,karaokeIndex=-1;
+    const shadowingAudioEl=document.getElementById('shadowingAudio');
+    function wrapShadowingWords(){
+      const c=document.getElementById('shadowingTextDisplay');
+      if(c.dataset.wrapped)return;
+      if(typeof shadowingTS!=='undefined'&&shadowingTS.length){
+        c.innerHTML=shadowingTS.map(w=>`<span class="shadowing-word">${w.word}</span>`).join(' ');
+      }else{
+        c.innerHTML=c.innerText.split(/\s+/).map(w=>`<span class="shadowing-word">${w}</span>`).join(' ');
+      }
+      c.dataset.wrapped="true";
+    }
+    function clearAllHighlights(){document.querySelectorAll('.shadowing-word').forEach(w=>w.classList.remove('active'));}
+    function toggleShadowingPacer(){
+      if(pacerInterval){clearInterval(pacerInterval);pacerInterval=null;return;}
+      if(shadowingAudioEl)shadowingAudioEl.pause();
+      wrapShadowingWords();
+      const sw=document.querySelectorAll('.shadowing-word');const sp=parseInt(document.getElementById('pacerSpeed').value)||380;
+      pacerInterval=setInterval(()=>{sw.forEach(w=>w.classList.remove('active'));if(currentWordIndex<sw.length){sw[currentWordIndex].classList.add('active');currentWordIndex++;}else{clearInterval(pacerInterval);pacerInterval=null;currentWordIndex=0;}},sp);
+    }
+    function resetShadowingPacer(){if(pacerInterval)clearInterval(pacerInterval);pacerInterval=null;currentWordIndex=0;karaokeIndex=-1;if(shadowingAudioEl)shadowingAudioEl.pause();clearAllHighlights();}
+    if(shadowingAudioEl){
+      shadowingAudioEl.addEventListener('play',()=>{if(pacerInterval){clearInterval(pacerInterval);pacerInterval=null;}wrapShadowingWords();});
+      shadowingAudioEl.addEventListener('timeupdate',()=>{
+        if(typeof shadowingTS==='undefined'||!shadowingTS.length)return;
+        const t=shadowingAudioEl.currentTime;
+        if(t<shadowingTS[0].start)return;
+        let idx=-1;
+        for(let i=karaokeIndex+1;i<shadowingTS.length;i++){if(t>=shadowingTS[i].start)idx=i;else break;}
+        if(idx===-1&&karaokeIndex>=0)idx=karaokeIndex;
+        if(idx>=0&&idx!==karaokeIndex){
+          karaokeIndex=idx;clearAllHighlights();
+          const spans=document.querySelectorAll('.shadowing-word');
+          if(spans[idx])spans[idx].classList.add('active');
+        }
+      });
+      shadowingAudioEl.addEventListener('ended',()=>{karaokeIndex=-1;clearAllHighlights();});
+    }
+    function playLectureAudio(id){document.querySelectorAll('audio.lecture-audio').forEach(a=>{if(a.id!==id)a.pause();});const a=document.getElementById(id);if(a.paused){a.currentTime=0;a.play();}}
+    function playSentence(id){document.querySelectorAll('audio.sentence-audio').forEach(a=>{if(a.id!==id)a.pause();});const a=document.getElementById(id);if(a.paused){a.currentTime=0;a.play();}}
+
+    // Speech Metrics: Record & Analyze
+    const speakRec={};
+    function toggleSpeakRecord(prefix){
+      const btn=document.getElementById(prefix+'RecBtn'),stop=document.getElementById(prefix+'StopBtn'),status=document.getElementById(prefix+'RecStatus');
+      if(speakRec[prefix])return;
+      speakRec[prefix]={pending:true};
+      const mic=navigator.mediaDevices&&navigator.mediaDevices.getUserMedia?navigator.mediaDevices.getUserMedia({audio:true}):Promise.reject(new Error('mic unavailable on this origin'));
+      mic.then(stream=>{
+        const recorder=new MediaRecorder(stream);
+        const start=performance.now();
+        speakRec[prefix]={recorder,stream,start,active:true};
+        recorder.onstop=()=>{
+          const dur=(performance.now()-start)/1000;
+          stream.getTracks().forEach(t=>t.stop());
+          delete speakRec[prefix];
+          stop.disabled=true;btn.disabled=false;
+          const text=document.getElementById(prefix+'Answer').value.trim();
+          const words=text?text.split(/\s+/):[];
+          const wpm=words.length/(dur/60);
+          const pace=wpm>=128&&wpm<=188?'Target pace ✔':(wpm<128?'Under target — aim ~150 WPM':'Over target — slow down for clarity');
+          status.textContent='Saved — analysis below';status.style.color='var(--accent-green)';
+          const fillers=[['um',/\bum\b/gi],['uh',/\buh\b/gi],['like',/\blike\b/gi],['you know',/\byou know\b/gi],['actually',/\bactually\b/gi],['kind of',/\bkind of\b/gi],['sort of',/\bsort of\b/gi],['I mean',/\bi mean\b/gi],['basically',/\bbasically\b/gi]];
+          const found=fillers.map(([label,re])=>{const n=(text.match(re)||[]).length;return n?`${label} ×${n}`:null;}).filter(Boolean);
+          const patterns=[['although…but',/\balthough\b[^.]{0,80}\bbut\b/gi],['despite…but',/\bdespite\b[^.]{0,80}\bbut\b/gi],['more + comparative',/\bmore (better|easier|bigger|faster|simpler|worse)\b/gi],['3rd-person don\'t',/\b(he|she|it) don\'t\b/gi],['much + plural',/\bmuch (people|students|things|countries|reasons)\b/gi],['am agree',/\bam agree\b/gi],['people is',/\bpeople is\b/gi],['there is + plural',/\bthere is (many|several|two|three)\b/gi]];
+          const errs=patterns.map(([label,re])=>{const n=(text.match(re)||[]).length;return n?`${label} (${n})`:null;}).filter(Boolean);
+          const rep=[`Duration ${Math.round(dur)}s · ${words.length} words → ${Math.round(wpm)} WPM (script-paced — reading your prepared text) — ${pace}`];
+          if(found.length)rep.push('Fillers: '+found.join(', '));else rep.push('Fillers: none detected ✔');
+          if(errs.length)rep.push('<span class="text-red">Watch: '+errs.join(' · ')+'</span>');else rep.push('<span class="text-green">No target patterns flagged ✔</span>');
+          const r=document.getElementById(prefix+'Report');r.innerHTML=rep.join('<br>');r.classList.add('show');
+        };
+        recorder.start();
+        stop.disabled=false;btn.disabled=true;status.textContent='Recording… speak now';status.style.color='var(--accent-red)';
+      }).catch(()=>{delete speakRec[prefix];status.textContent='Mic denied — enable mic for analysis';});
+    }
+    function stopSpeakRecord(prefix){if(speakRec[prefix]&&speakRec[prefix].active&&speakRec[prefix].recorder)speakRec[prefix].recorder.stop();}
+
+    // Timers
+    let activeT=null;
+    function startTimer(id,sec){if(activeT)clearInterval(activeT);let r=sec;const d=document.getElementById(id);d.style.color='var(--primary)';activeT=setInterval(()=>{const m=Math.floor(r/60),s=r%60;d.textContent=`${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;if(r<=60)d.style.color='var(--accent-red)';if(r<=0){clearInterval(activeT);activeT=null;d.style.animation='pulse 0.5s ease 3';setTimeout(()=>d.style.animation='',2000);}r--;},1000);}
+    function resetTimer(id,sec){if(activeT)clearInterval(activeT);activeT=null;const d=document.getElementById(id);d.textContent=`${String(Math.floor(sec/60)).padStart(2,'0')}:${String(sec%60).padStart(2,'0')}`;d.style.color='var(--primary)';}
+
+    // LR Timer
+    let lrIdx=0,lrTimerIv=null;
+    function startLRSentence(){if(lrTimerIv)clearInterval(lrTimerIv);let r=10;const d=document.getElementById('lrTimer');d.style.color='var(--primary)';lrTimerIv=setInterval(()=>{r--;d.textContent=`0:${String(r).padStart(2,'0')}`;if(r<=3)d.style.color='var(--accent-red)';if(r<=0){clearInterval(lrTimerIv);lrTimerIv=null;d.textContent='0:00';}},1000);}
+    function nextLRSentence(){if(lrTimerIv){clearInterval(lrTimerIv);lrTimerIv=null;}document.getElementById('lrTimer').textContent='0:10';document.getElementById('lrTimer').style.color='var(--primary)';if(lrIdx<6){lrIdx++;document.getElementById('lrProgress').textContent=`Sentence ${lrIdx+1} / 7`;}else{document.getElementById('lrProgress').textContent='Complete!';}}
+
+    // Interview Timers
+    const iqTimers={};
+    function startIQ(id,sec){if(iqTimers[id])clearInterval(iqTimers[id]);let r=sec;const d=document.getElementById(id);d.style.color='var(--primary)';iqTimers[id]=setInterval(()=>{const m=Math.floor(r/60),s=r%60;d.textContent=`${m}:${String(s).padStart(2,'0')}`;if(r<=10)d.style.color='var(--accent-red)';if(r<=0){clearInterval(iqTimers[id]);delete iqTimers[id];d.textContent='0:00';}r--;},1000);}
+    function resetIQ(id,sec){if(iqTimers[id]){clearInterval(iqTimers[id]);delete iqTimers[id];}const d=document.getElementById(id);d.textContent=`${String(Math.floor(sec/60))}:${String(sec%60).padStart(2,'0')}`;d.style.color='var(--primary)';}
+
+    // Word Count
+    function updateWordCount(areaId,countId,min,label){const v=document.getElementById(areaId).value.trim();const c=v?v.split(/\s+/).length:0;const el=document.getElementById(countId);el.textContent=`Word count: ${c} words (Goal: ${label||'120+'})`;el.style.color=c>=(min||120)?'var(--accent-green)':'var(--primary)';}
+
+    // Score Calc
+    function calcBand(){const r=parseFloat(document.getElementById('score-reading').value)||0;const l=parseFloat(document.getElementById('score-listening').value)||0;const s=parseFloat(document.getElementById('score-speaking').value)||0;const w=parseFloat(document.getElementById('score-writing').value)||0;const avg=(r+l+s+w)/4;document.getElementById('bandResult').textContent=avg>0?`Estimated Band: ${avg.toFixed(1)} / 6`:'Enter scores above';const baselines={reading:3.0,listening:4.0,speaking:3.5,writing:3.0};[['reading',r],['listening',l],['speaking',s],['writing',w]].forEach(([k,v])=>{const el=document.getElementById('trend-'+k);if(v>0){el.textContent=v>baselines[k]?'↑':v<baselines[k]?'↓':'→';el.style.color=v>baselines[k]?'var(--accent-green)':v<baselines[k]?'var(--accent-red)':'var(--text-muted)';}});}
+
+    // Reveal
+    function toggleReveal(id){document.getElementById(id).classList.toggle('show');}
+  </script>
+<button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Open lesson navigation">&#9776;</button>
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+<!-- FE:MOBILE --><script>// FE:MOBILE
+(function(){
+  function initM() {
+    var t = document.getElementById('mobileNavToggle'), ov = document.getElementById('sidebarOverlay');
+    if (!t || !ov) return;
+    var sb = document.querySelector('.nav-btn').parentElement;
+    function close() { sb.classList.remove('open'); ov.classList.remove('open'); }
+    t.addEventListener('click', function() { sb.classList.toggle('open'); ov.classList.toggle('open'); });
+    ov.addEventListener('click', close);
+    document.querySelectorAll('.nav-btn').forEach(function(b) { b.addEventListener('click', close); });
+  }
+  if (document.readyState !== 'loading') initM(); else document.addEventListener('DOMContentLoaded', initM);
+})();</script>
+<!-- FE:HASH --><script>// FE:HASH
+(function(){
+  function mH() { var m = location.hash.match(/^#slide-(\d+)$/); if (m && window.switchSlide) window.switchSlide(parseInt(m[1])); }
+  window.addEventListener('hashchange', mH);
+  !function(){ mH(); }();
+  if (!window.__feHashWrapped && window.switchSlide) {
+    window.__feHashWrapped = true;
+    var o = window.switchSlide;
+    window.switchSlide = function(i) { o(i); try { history.replaceState(null, '', '#slide-' + i); } catch (e) {} };
+  }
+})();</script>
+<!-- FE:KEYS --><script>// FE:KEYS
+(function(){
+  document.addEventListener('keydown', function(e) {
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT' || e.target.isContentEditable) return;
+    if (e.code === 'ArrowLeft' || e.code === 'ArrowRight') {
+      var btns = document.querySelectorAll('.nav-btn');
+      var cur = document.querySelector('.nav-btn.active');
+      var pos = cur ? Array.prototype.indexOf.call(btns, cur) : -1;
+      if (pos < 0) return;
+      var tgt = pos + (e.code === 'ArrowRight' ? 1 : -1);
+      if (tgt >= 0 && tgt < btns.length) { e.preventDefault(); window.switchSlide(tgt + 0); }
+    }
+  });
+})();</script>
+<!-- FE:TIMERS --><script>// FE:TIMERS
+(function(){
+  window.__activeIntervals__ = window.__activeIntervals__ || [];
+  if (!window.__feIntervalPatched) {
+    window.__feIntervalPatched = true;
+    var _si = window.setInterval;
+    window.setInterval = function(fn, t) { var id = _si(fn, t); window.__activeIntervals__.push(id); return id; };
+  }
+  window.clearAllDeckTimers = function() {
+    window.__activeIntervals__.forEach(function(id) { clearInterval(id); });
+    window.__activeIntervals__ = [];
+  };
+  if (!window.__feTimersWrapped && window.switchSlide) {
+    window.__feTimersWrapped = true;
+    var o = window.switchSlide;
+    window.switchSlide = function(i) { if (window.clearAllDeckTimers) window.clearAllDeckTimers(); o(i); };
+  }
+})();</script>
+<!-- FE:CHIPJS --><script>// FE:CHIP
+(function(){
+  function updChipFromActive() {
+    var c = document.getElementById('slideChip'); if (!c) return;
+    var cur = document.querySelector('.nav-btn.active');
+    var pos = cur ? Array.prototype.indexOf.call(document.querySelectorAll('.nav-btn'), cur) : 0;
+    c.textContent = (pos + 1) + ' / ' + document.querySelectorAll('.slide').length;
+  }
+  if (!window.__feChipWrapped && window.switchSlide) {
+    window.__feChipWrapped = true;
+    var o = window.switchSlide;
+    window.switchSlide = function(i) { o(i); var c = document.getElementById('slideChip'); if (c) c.textContent = (i + 1) + ' / ' + document.querySelectorAll('.slide').length; };
+  }
+  if (document.readyState !== 'loading') updChipFromActive(); else document.addEventListener('DOMContentLoaded', updChipFromActive);
+})();</script>
+</body>
+</html>
