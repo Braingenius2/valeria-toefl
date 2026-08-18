@@ -51,6 +51,9 @@
      .reveal-box.show{display:block;}
      .prompt-list{margin:0.5rem 0 0 1.25rem;padding:0;color:#cbd5e1;font-size:0.9rem;line-height:1.6;}
      .prompt-list li{background:transparent;border:0;border-radius:0;box-shadow:none;font-size:inherit;font-weight:400;padding:0;margin:0;}
+     .task-header{display:flex;justify-content:space-between;align-items:center;gap:1rem;margin-bottom:1rem;}
+     .task-controls{display:flex;align-items:center;justify-content:flex-end;gap:0.5rem;flex-wrap:wrap;}
+     @media(max-width:768px){.task-header{flex-direction:column;align-items:stretch;}.task-controls{justify-content:flex-start;}.task-controls .btn{margin-left:0!important;}}
    </style>
 <!-- FE:CSS-MOBILE --><style>.mobile-nav-toggle{display:none;position:fixed;bottom:20px;right:20px;z-index:200;width:48px;height:48px;border-radius:50%;background:var(--primary);color:#000;border:none;font-size:20px;cursor:pointer;align-items:center;justify-content:center;box-shadow:3px 3px 0 rgba(0,0,0,0.12)}
 .sidebar-overlay{display:none;position:fixed;inset:0;z-index:150;background:rgba(0,0,0,0.4)}
@@ -74,7 +77,8 @@
  <button class="nav-btn" onclick="switchSlide(2)"><span class="nav-num">03</span> Evidence Drill</button>
  <button class="nav-btn" onclick="switchSlide(3)"><span class="nav-num">04</span> 10-Min Discussion</button>
  <button class="nav-btn" onclick="switchSlide(4)"><span class="nav-num">05</span> ✉️ 7-Min Email</button>
-
+ <button class="nav-btn" onclick="switchSlide(5)"><span class="nav-num">06</span> ✉️ Homework Emails</button>
+ 
   </aside>
   <main class="main-content">
      <header class="header"><div><h1 class="page-title">TOEFL Writing Practice</h1><p style="color:var(--text-muted);font-size:0.85rem;margin-top:0.2rem;">Current 2026 Tasks · Academic Discussion · Write an Email</p></div><!-- FE:CHIP --><span class="slide-chip" id="slideChip">1 / N</span>
@@ -205,6 +209,67 @@
           <strong style="color:var(--accent-green);">Strong sample (task score 4-5 range):</strong>
           <p style="margin-top:0.5rem;line-height:1.7;">Dear Professor Chen,<br><br>Thank you for asking students to comment on the proposed library hours. I support keeping the main library open until midnight because many students work part-time during the day and need a quiet place to study in the evening.<br><br>One useful improvement would be to create a separate silent zone. It would also be helpful to provide a small area for group work so that conversations do not disturb other students.<br><br>I would be happy to help collect student opinions about the new schedule. Please let me know if you would like me to share a short survey with my classmates. This would give the university useful feedback before making a permanent decision.<br><br>Best regards,<br>Valeria</p>
         </div>
+      </div>
+    </div>
+
+    <div class="slide" id="slide-5">
+      <div class="card">
+        <div class="card-title">📚 Homework: Two Write an Email Tasks</div>
+        <p style="font-size:0.9rem;color:var(--text-muted);line-height:1.6;margin-bottom:1rem;">Complete both tasks this week. Each response has a 7-minute practice timer and a 100-120 word target. The framework is flexible, not a script: adapt it to the recipient, tone, and every requested content point.</p>
+        <div class="rule-box" style="border-color:var(--accent-blue);">
+          <strong>Adaptable email skeleton</strong>
+          <ol class="prompt-list">
+            <li><strong>Greeting and purpose:</strong> address the recipient and explain why you are writing.</li>
+            <li><strong>Direct answer:</strong> give your position or answer to the main request with a reason.</li>
+            <li><strong>Requested detail:</strong> answer the next point with one specific detail or suggestion.</li>
+            <li><strong>Action or next step:</strong> offer help, ask a question, or state what should happen next.</li>
+            <li><strong>Close:</strong> finish politely and sign your name.</li>
+          </ol>
+          <p style="font-size:0.82rem;color:var(--text-muted);margin-top:0.75rem;line-height:1.5;">Do not force a block that the prompt does not need. Map every bullet point to a clear sentence or paragraph.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="task-header">
+          <div class="card-title" style="margin-bottom:0;">✉️ Homework 1: Guided Email</div>
+          <div class="task-controls">
+            <span class="timer-display" id="homeworkGuidedTimer" style="font-size:1.5rem;">07:00</span>
+            <button class="btn" style="margin-left:0.5rem;" onclick="startTimer('homeworkGuidedTimer',420)">Start</button>
+            <button class="btn btn-secondary" onclick="resetTimer('homeworkGuidedTimer',420)">Reset</button>
+          </div>
+        </div>
+        <div style="background:rgba(0,0,0,0.25);padding:1rem;border-radius:8px;font-size:0.85rem;line-height:1.6;margin-bottom:1rem;">
+          <strong>Email from the Student Services Coordinator:</strong> "The university is considering opening a quiet study room in the student center until 10 p.m. I would like your opinion."
+          <br><br><strong>In your email:</strong>
+          <ol class="prompt-list"><li>Say whether the study room would be useful and explain why.</li><li>Suggest one rule or feature that would improve the room.</li><li>Offer to help collect students' preferences.</li></ol>
+        </div>
+        <div class="framework-box" style="border-left-color:var(--accent-green);">
+          <strong style="color:var(--accent-green);">Sentence starters you may adapt</strong>
+          <p style="font-size:0.85rem;line-height:1.7;margin-top:0.5rem;">Dear [Name], I am writing to... / I support this idea because... / One useful improvement would be... / I would be happy to help... / Please let me know if... / Best regards, [Name]</p>
+        </div>
+        <textarea id="homeworkGuidedEmailInput" rows="8" placeholder="Write your guided email here (100-120 words, 7 minutes)..." oninput="updateWordCount('homeworkGuidedEmailInput','homeworkGuidedEmailCount',100,'100-120')"></textarea>
+        <div class="word-count-badge" id="homeworkGuidedEmailCount">Word count: 0 words (Minimum: 100; target: 100-120)</div>
+      </div>
+
+      <div class="card">
+        <div class="task-header">
+          <div class="card-title" style="margin-bottom:0;">✉️ Homework 2: Independent Email</div>
+          <div class="task-controls">
+            <span class="timer-display" id="homeworkIndependentTimer" style="font-size:1.5rem;">07:00</span>
+            <button class="btn" style="margin-left:0.5rem;" onclick="startTimer('homeworkIndependentTimer',420)">Start</button>
+            <button class="btn btn-secondary" onclick="resetTimer('homeworkIndependentTimer',420)">Reset</button>
+          </div>
+        </div>
+        <div style="background:rgba(0,0,0,0.25);padding:1rem;border-radius:8px;font-size:0.85rem;line-height:1.6;margin-bottom:1rem;">
+          <strong>Email from the Student Services Coordinator:</strong> "The university is planning to move the last campus shuttle from 9:00 p.m. to 8:00 p.m. I would like your view."
+          <br><br><strong>In your email:</strong>
+          <ol class="prompt-list"><li>Say whether you support the change and explain why.</li><li>Suggest one alternative or practical improvement.</li><li>Offer to help collect students' travel needs.</li></ol>
+        </div>
+        <div class="rule-box" style="border-color:var(--primary);">
+          <strong>Final check before submitting:</strong> answer all three points, use an appropriate tone, include specific details, and check your word count and obvious errors.
+        </div>
+        <textarea id="homeworkIndependentEmailInput" rows="8" placeholder="Write your independent email here (100-120 words, 7 minutes)..." oninput="updateWordCount('homeworkIndependentEmailInput','homeworkIndependentEmailCount',100,'100-120')"></textarea>
+        <div class="word-count-badge" id="homeworkIndependentEmailCount">Word count: 0 words (Minimum: 100; target: 100-120)</div>
       </div>
     </div>
 
