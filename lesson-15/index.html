@@ -249,6 +249,11 @@
         </div>
         <textarea id="homeworkGuidedEmailInput" rows="8" placeholder="Write your guided email here (100-120 words, 7 minutes)..." oninput="updateWordCount('homeworkGuidedEmailInput','homeworkGuidedEmailCount',100,'100-120')"></textarea>
         <div class="word-count-badge" id="homeworkGuidedEmailCount">Word count: 0 words (Minimum: 100; target: 100-120)</div>
+        <button class="btn btn-secondary" style="margin-top:0.75rem;" onclick="toggleReveal('homeworkGuidedReveal')">👁️ Show Model Answer</button>
+        <div class="reveal-box" id="homeworkGuidedReveal">
+          <strong style="color:var(--accent-green);">Model answer (~115 words, semi-formal):</strong>
+          <p style="margin-top:0.5rem;line-height:1.7;">Hi Kevin,<br><br>Thank you for recommending that restaurant for our team lunch. Unfortunately, the food was not as good as we expected, and the service was quite slow, so everyone was disappointed.<br><br>To be specific, the main dishes arrived cold, and we waited almost thirty minutes for the bill. Most of the team said they would prefer a place with faster service next time.<br><br>It might be better to try a casual café near the office instead. There is a new bistro on Market Street with good reviews, and we could book a table for Wednesday. Would it be possible for you to join us there?<br><br>Please let me know what you think.<br><br>Best,<br>[Name]</p>
+        </div>
       </div>
 
       <div class="card">
@@ -270,6 +275,11 @@
         </div>
         <textarea id="homeworkIndependentEmailInput" rows="8" placeholder="Write your independent email here (100-120 words, 7 minutes)..." oninput="updateWordCount('homeworkIndependentEmailInput','homeworkIndependentEmailCount',100,'100-120')"></textarea>
         <div class="word-count-badge" id="homeworkIndependentEmailCount">Word count: 0 words (Minimum: 100; target: 100-120)</div>
+        <button class="btn btn-secondary" style="margin-top:0.75rem;" onclick="toggleReveal('homeworkIndependentReveal')">👁️ Show Model Answer</button>
+        <div class="reveal-box" id="homeworkIndependentReveal">
+          <strong style="color:var(--accent-green);">Model answer (~120 words, polite but direct):</strong>
+          <p style="margin-top:0.5rem;line-height:1.7;">Hi Alex,<br><br>I hope you are doing well. I wanted to check in about our group project, since we are almost halfway through the deadline.<br><br>So far, we have finished the introduction and the first two sections of the report. However, your section is still missing, and the group has had to cover your part of the presentation preparation as well. This has made it harder for us to stay on schedule.<br><br>It would be great if you could send us your draft by Thursday. Even a rough version would help, and we could divide the remaining tasks so everyone contributes equally.<br><br>Please let me know if you need any help getting started. We would really like to finish this together.<br><br>Best,<br>[Name]</p>
+        </div>
       </div>
     </div>
 

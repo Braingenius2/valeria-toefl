@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Valeria — Lesson 16: Speaking L&R Prosody (Private Deck)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg-dark:#090d16;--bg-card:#131a26;--border-color:#243042;--text-main:#f1f5f9;--text-muted:#64748b;--primary:#f59e0b;--primary-hover:#d97706;--primary-dim:rgba(245,158,11,0.12);--accent-blue:#38bdf8;--accent-green:#10b981;--accent-red:#ef4444;--accent-purple:#a855f7;}
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:'Inter',sans-serif;background:var(--bg-dark);color:var(--text-main);display:flex;min-height:100vh;overflow-x:hidden;}
+    .sidebar{width:260px;background:var(--bg-card);border-right:1px solid var(--border-color);display:flex;flex-direction:column;padding:1.5rem 1rem;position:fixed;height:100vh;z-index:100;}
+    .brand{display:flex;align-items:center;gap:0.75rem;margin-bottom:2rem;padding:0 0.5rem;}
+    .brand-badge{background:var(--primary);color:#000;font-weight:700;font-size:0.75rem;padding:0.2rem 0.5rem;border-radius:4px;text-transform:uppercase;}
+    .brand-title{font-weight:600;font-size:1.1rem;color:var(--text-main);}
+    .nav-btn{background:transparent;border:1px solid transparent;color:var(--text-muted);padding:0.75rem 1rem;border-radius:8px;text-align:left;font-size:0.9rem;font-family:inherit;cursor:pointer;margin-bottom:0.5rem;display:flex;align-items:center;gap:0.75rem;transition:all 0.2s ease;}
+    .nav-btn:hover{background:rgba(255,255,255,0.03);color:var(--text-main);}
+    .nav-btn.active{background:var(--primary-dim);border-color:rgba(245,158,11,0.3);color:var(--primary);font-weight:600;}
+    .nav-num{font-family:'Fira Code',monospace;font-size:0.8rem;opacity:0.7;}
+    .main-content{margin-left:260px;flex:1;padding:2rem 3rem;max-width:1200px;}
+    .header{display:flex;justify-content:space-between;align-items:center;margin-bottom:2rem;padding-bottom:1rem;border-bottom:1px solid var(--border-color);}
+    .page-title{font-size:1.5rem;font-weight:700;color:var(--text-main);}
+    .tag{background:rgba(56,189,248,0.1);color:var(--accent-blue);border:1px solid rgba(56,189,248,0.2);padding:0.25rem 0.75rem;border-radius:20px;font-size:0.8rem;font-family:'Fira Code',monospace;}
+    .slide{display:none;animation:fadeIn 0.3s ease;}.slide.active{display:block;}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+    @keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.3;}}
+    .card{background:var(--bg-card);border:1px solid var(--border-color);border-radius:12px;padding:1.5rem;margin-bottom:1.5rem;}
+    .card-title{font-size:1.1rem;font-weight:600;color:var(--primary);margin-bottom:1rem;display:flex;align-items:center;gap:0.5rem;}
+    .shadowing-text{font-size:1.05rem;line-height:1.8;color:#cbd5e1;margin-bottom:1.5rem;background:rgba(0,0,0,0.2);padding:1.25rem;border-radius:8px;border-left:3px solid var(--primary);}
+    .shadowing-word{transition:background 0.15s ease,color 0.15s ease;border-radius:3px;padding:0 2px;}
+    .shadowing-word.active{background:var(--primary);color:#000;font-weight:600;}
+    .controls{display:flex;gap:0.75rem;align-items:center;flex-wrap:wrap;margin-bottom:1rem;}
+    .btn{background:var(--primary);color:#000;border:none;padding:0.6rem 1.2rem;border-radius:6px;font-weight:600;font-size:0.85rem;font-family:inherit;cursor:pointer;display:inline-flex;align-items:center;gap:0.4rem;transition:background 0.2s ease;}
+    .btn:hover{background:var(--primary-hover);}
+    .btn-secondary{background:transparent;border:1px solid var(--border-color);color:var(--text-main);}
+    .timer-display{font-family:'Fira Code',monospace;font-size:2rem;font-weight:700;color:var(--primary);background:#000;padding:0.5rem 1.2rem;border-radius:8px;border:1px solid var(--border-color);display:inline-block;}
+    .tier-box{border-left:3px solid;padding:1rem;border-radius:0 8px 8px 0;margin-bottom:0.75rem;background:rgba(0,0,0,0.2);}
+    .tier-label{font-family:'Fira Code',monospace;font-size:0.8rem;font-weight:700;text-transform:uppercase;margin-bottom:0.3rem;}
+    .error-table{width:100%;border-collapse:collapse;margin-top:1rem;font-size:0.9rem;}
+    .error-table th,.error-table td{padding:0.75rem 1rem;border:1px solid var(--border-color);text-align:left;}
+    .error-table th{background:rgba(0,0,0,0.4);color:var(--primary);font-weight:600;}
+    .text-red{color:var(--accent-red);}.text-green{color:var(--accent-green);}
+    .recording-box{background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.2);border-radius:8px;padding:1.25rem;margin-top:1rem;}
+    .recording-box.active{border-color:var(--accent-red);animation:pulse 1s ease infinite;}
+    .reveal-box{display:none;background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.2);padding:1rem;border-radius:8px;margin-top:0.75rem;font-size:0.9rem;line-height:1.6;}
+    .reveal-box.show{display:block;}
+    textarea{width:100%;background:rgba(0,0,0,0.4);border:1px solid var(--border-color);color:var(--text-main);padding:0.75rem;border-radius:6px;font-family:inherit;font-size:0.9rem;resize:vertical;}
+    textarea:focus{outline:none;border-color:var(--primary);}
+    .word-count-badge{font-family:'Fira Code',monospace;font-size:0.85rem;color:var(--accent-green);margin-top:0.5rem;}
+    .framework-box{background:rgba(0,0,0,0.3);border-left:3px solid var(--accent-blue);padding:1rem;border-radius:0 8px 8px 0;margin-bottom:0.75rem;}
+    .sent-text{display:none;}
+    .sent-text.show{display:inline;}
+    .sentence-audio{width:100%;height:35px;margin-bottom:0.5rem;}
+  </style>
+<!-- FE:CSS-MOBILE --><style>.mobile-nav-toggle{display:none;position:fixed;bottom:20px;right:20px;z-index:200;width:48px;height:48px;border-radius:50%;background:var(--primary);color:#000;border:none;font-size:20px;cursor:pointer;align-items:center;justify-content:center;box-shadow:3px 3px 0 rgba(0,0,0,0.12)}
+.sidebar-overlay{display:none;position:fixed;inset:0;z-index:150;background:rgba(0,0,0,0.4)}
+.sidebar-overlay.open{display:block}@media(max-width:768px){
+  .mobile-nav-toggle{display:flex}
+  .sidebar{position:fixed;left:0;top:0;z-index:175;height:100vh;transform:translateX(-100%);transition:transform .25s ease;width:260px;display:flex!important}
+  .sidebar.open{transform:translateX(0)}
+  .main-content{margin-left:0;padding:1rem 1rem 84px;max-width:100%}
+  .header{flex-wrap:wrap;gap:0.5rem}
+  .grid-2{grid-template-columns:1fr}
+  .controls{flex-direction:column;align-items:stretch}
+  .timer-display{font-size:1.5rem}
+}</style>
+<!-- FE:CSS-CHIP --><style>.slide-chip{font-family:'Fira Code',monospace;font-size:0.72rem;font-weight:700;color:var(--primary);background:var(--bg-card,rgba(0,0,0,0.4));border:1px solid var(--border-color,rgba(255,255,255,0.15));padding:0.25rem 0.65rem;border-radius:20px;white-space:nowrap;margin-left:auto}</style>
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="brand"><span class="brand-badge">TOEFL</span><span class="brand-title">Valeria L16</span></div>
+    <button class="nav-btn active" onclick="switchSlide(0)"><span class="nav-num">01</span> Warm-up</button>
+    <button class="nav-btn" onclick="switchSlide(1)"><span class="nav-num">02</span> 3-Tier Prosody</button>
+    <button class="nav-btn" onclick="switchSlide(2)"><span class="nav-num">03</span> Drill 1</button>
+    <button class="nav-btn" onclick="switchSlide(3)"><span class="nav-num">04</span> Drill 2</button>
+    <button class="nav-btn" onclick="switchSlide(4)"><span class="nav-num">05</span> Drill 3</button>
+    <button class="nav-btn" onclick="switchSlide(5)"><span class="nav-num">06</span> Synthesis</button>
+    <button class="nav-btn" onclick="switchSlide(6)"><span class="nav-num">07</span> ✉️ Email Task</button>
+    
+  </aside>
+  <main class="main-content">
+    <header class="header"><div><h1 class="page-title">Speaking L&amp;R Prosody</h1><p style="color:var(--text-muted);font-size:0.85rem;margin-top:0.2rem;">3-Tier Sentence Progression · Recording Practice</p></div><!-- FE:CHIP --><span class="slide-chip" id="slideChip">1 / N</span>
+        <span class="tag">PRIVATE DECK</span></header>
+
+    <div class="slide active" id="slide-0">
+      <div class="card">
+        <div class="card-title">🎙️ Shadowing</div>
+        <div class="shadowing-text" id="shadowingTextDisplay">Prosodic variation is the primary acoustic signal that distinguishes fluent, authoritative speech from hesitant, monotone delivery. By strategically modulating pitch peaks, adjusting speaking rate, and emphasizing contrastive stress, speakers convey analytical depth and rhetorical confidence. In high-stakes interview contexts, deliberate prosodic control not only clarifies logical structure for listeners but also projects cognitive mastery over complex subject matter.</div>
+        <div class="controls">
+          <button class="btn" onclick="toggleShadowingPacer()">▶ Start Pacer</button>
+          <button class="btn btn-secondary" onclick="resetShadowingPacer()">↺ Reset</button>
+          <audio id="shadowingAudio" src="audio/shadowing.wav" preload="auto" style="display:none;"></audio>
+          <button class="btn btn-secondary" onclick="document.getElementById('shadowingAudio').play()">🔊 Play Audio</button>
+          <select id="pacerSpeed" style="background:#000;color:#fff;padding:0.4rem;border-radius:4px;border:1px solid var(--border-color);"><option value="450">130 WPM</option><option value="380" selected>150 WPM</option><option value="320">175 WPM</option></select>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide" id="slide-1">
+      <div class="card">
+        <div class="card-title">🗣️ 3-Tier Prosody Framework</div>
+        <div class="tier-box" style="border-color:var(--accent-green);"><div class="tier-label" style="color:var(--accent-green);">Tier 1: Basic (Flat)</div><div style="font-size:0.9rem;">"Students should study more. It helps their grades."</div><div style="font-size:0.8rem;color:var(--text-muted);margin-top:0.3rem;">⚠️ Robotic, low fluency score</div></div>
+        <div class="tier-box" style="border-color:var(--primary);"><div class="tier-label" style="color:var(--primary);">Tier 2: Connected (Standard)</div><div style="font-size:0.9rem;">"Students should study more, because it helps their grades."</div><div style="font-size:0.8rem;color:var(--text-muted);margin-top:0.3rem;">✅ Fluent, clear linking</div></div>
+        <div class="tier-box" style="border-color:var(--accent-purple);"><div class="tier-label" style="color:var(--accent-purple);">Tier 3: Emphatic (Advanced)</div><div style="font-size:0.9rem;"><strong>STUDents</strong> should study more, <em>because</em> it <strong>helps</strong> their grades.</div><div style="font-size:0.8rem;color:var(--text-muted);margin-top:0.3rem;">🚀 Authoritative, high scores</div></div>
+      </div>
+    </div>
+
+    <div class="slide" id="slide-2">
+      <div class="card">
+        <div class="card-title">📢 Drill 1: Tier 1 — Single Complex Sentences (15-18 words)</div>
+        <div style="background:rgba(0,0,0,0.25);padding:1rem;border-radius:8px;font-size:0.85rem;line-height:1.6;margin-bottom:0.75rem;">
+          <strong style="color:var(--accent-green);">Strategy:</strong> Group subject + verb into one breath chunk. <strong style="color:var(--accent-purple);">Pitch:</strong> slight rise at the comma, fall at the end.
+        </div>
+        <div style="background:rgba(0,0,0,0.25);padding:1rem;border-radius:8px;margin-bottom:0.75rem;">
+          <audio id="sa1" class="sentence-audio" src="audio/l16s1.wav" preload="auto"></audio>
+          <button class="btn btn-secondary" onclick="playSentence('sa1')">🔊 Listen</button>
+          <button class="btn btn-secondary" style="margin-left:0.5rem;" onclick="toggleSent('s1')">👁️ Show Sentence</button>
+          <p style="margin-top:0.75rem;font-size:0.95rem;line-height:1.7;"><span class="sent-text" id="s1">Although initial costs were high, the university successfully implemented its new digital library system across all departments.</span></p>
+          <div class="recording-box" id="rec1Box">
+            <button class="btn" onclick="startRec('rec1')" id="rec1Btn">🎙️ Start Recording</button>
+            <span id="rec1Time" style="font-family:'Fira Code',monospace;margin-left:0.75rem;font-size:0.85rem;color:var(--text-muted);">0:00</span>
+            <div id="rec1Result" style="margin-top:0.75rem;"></div>
+          </div>
+        </div>
+        <div style="background:rgba(0,0,0,0.25);padding:1rem;border-radius:8px;margin-bottom:0.75rem;">
+          <audio id="sa2" class="sentence-audio" src="audio/l16s2.wav" preload="auto"></audio>
+          <button class="btn btn-secondary" onclick="playSentence('sa2')">🔊 Listen</button>
+          <button class="btn btn-secondary" style="margin-left:0.5rem;" onclick="toggleSent('s2')">👁️ Show Sentence</button>
+          <p style="margin-top:0.75rem;font-size:0.95rem;line-height:1.7;"><span class="sent-text" id="s2">Researchers observed a significant decrease in patient recovery time following the implementation of the new treatment protocol.</span></p>
+          <div class="recording-box" id="rec2Box">
+            <button class="btn" onclick="startRec('rec2')" id="rec2Btn">🎙️ Start Recording</button>
+            <span id="rec2Time" style="font-family:'Fira Code',monospace;margin-left:0.75rem;font-size:0.85rem;color:var(--text-muted);">0:00</span>
+            <div id="rec2Result" style="margin-top:0.75rem;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide" id="slide-3">
+      <div class="card">
+        <div class="card-title">📢 Drill 2: Tier 2 — Relative Clauses (20-23 words)</div>
+        <div style="background:rgba(0,0,0,0.25);padding:1rem;border-radius:8px;font-size:0.85rem;line-height:1.6;margin-bottom:0.75rem;">
+          <strong style="color:var(--accent-green);">Strategy:</strong> Mark a clear <strong style="color:var(--accent-purple);">pitch rise</strong> on the relative clause (the part after "which/that"), then drop back for the main clause.
+        </div>
+        <div style="background:rgba(0,0,0,0.25);padding:1rem;border-radius:8px;margin-bottom:0.75rem;">
+          <audio id="sa3" class="sentence-audio" src="audio/l16s3.wav" preload="auto"></audio>
+          <button class="btn btn-secondary" onclick="playSentence('sa3')">🔊 Listen</button>
+          <button class="btn btn-secondary" style="margin-left:0.5rem;" onclick="toggleSent('s3')">👁️ Show Sentence</button>
+          <p style="margin-top:0.75rem;font-size:0.95rem;line-height:1.7;"><span class="sent-text" id="s3">The preliminary report, which was published last month by leading economists, highlights severe inflation risks across international financial markets in developing economies.</span></p>
+          <div class="recording-box" id="rec3Box">
+            <button class="btn" onclick="startRec('rec3')" id="rec3Btn">🎙️ Start Recording</button>
+            <span id="rec3Time" style="font-family:'Fira Code',monospace;margin-left:0.75rem;font-size:0.85rem;color:var(--text-muted);">0:00</span>
+            <div id="rec3Result" style="margin-top:0.75rem;"></div>
+          </div>
+        </div>
+        <div style="background:rgba(0,0,0,0.25);padding:1rem;border-radius:8px;margin-bottom:0.75rem;">
+          <audio id="sa4" class="sentence-audio" src="audio/l16s4.wav" preload="auto"></audio>
+          <button class="btn btn-secondary" onclick="playSentence('sa4')">🔊 Listen</button>
+          <button class="btn btn-secondary" style="margin-left:0.5rem;" onclick="toggleSent('s4')">👁️ Show Sentence</button>
+          <p style="margin-top:0.75rem;font-size:0.95rem;line-height:1.7;"><span class="sent-text" id="s4">Environmental engineers are developing innovative filtration devices that can effectively remove microplastics from municipal water supplies and protect public health.</span></p>
+          <div class="recording-box" id="rec4Box">
+            <button class="btn" onclick="startRec('rec4')" id="rec4Btn">🎙️ Start Recording</button>
+            <span id="rec4Time" style="font-family:'Fira Code',monospace;margin-left:0.75rem;font-size:0.85rem;color:var(--text-muted);">0:00</span>
+            <div id="rec4Result" style="margin-top:0.75rem;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide" id="slide-4">
+      <div class="card">
+        <div class="card-title">📢 Drill 3: Tier 3 — Dual Subordination (24-28 words)</div>
+        <div style="background:rgba(0,0,0,0.25);padding:1rem;border-radius:8px;font-size:0.85rem;line-height:1.6;margin-bottom:0.75rem;">
+          <strong style="color:var(--accent-green);">Strategy:</strong> Hold the first clause in your memory buffer while listening to the second. Keep the same rhythm as the model — don't rush the middle.
+        </div>
+        <div style="background:rgba(0,0,0,0.25);padding:1rem;border-radius:8px;margin-bottom:0.75rem;">
+          <audio id="sa5" class="sentence-audio" src="audio/l16s5.wav" preload="auto"></audio>
+          <button class="btn btn-secondary" onclick="playSentence('sa5')">🔊 Listen</button>
+          <button class="btn btn-secondary" style="margin-left:0.5rem;" onclick="toggleSent('s5')">👁️ Show Sentence</button>
+          <p style="margin-top:0.75rem;font-size:0.95rem;line-height:1.7;"><span class="sent-text" id="s5">Because the experiment yielded unexpected statistical anomalies, the principal investigator decided to repeat the entire trial before publishing the final manuscript in a peer-reviewed journal.</span></p>
+          <div class="recording-box" id="rec5Box">
+            <button class="btn" onclick="startRec('rec5')" id="rec5Btn">🎙️ Start Recording</button>
+            <span id="rec5Time" style="font-family:'Fira Code',monospace;margin-left:0.75rem;font-size:0.85rem;color:var(--text-muted);">0:00</span>
+            <div id="rec5Result" style="margin-top:0.75rem;"></div>
+          </div>
+        </div>
+        <div style="background:rgba(0,0,0,0.25);padding:1rem;border-radius:8px;margin-bottom:0.75rem;">
+          <audio id="sa6" class="sentence-audio" src="audio/l16s6.wav" preload="auto"></audio>
+          <button class="btn btn-secondary" onclick="playSentence('sa6')">🔊 Listen</button>
+          <button class="btn btn-secondary" style="margin-left:0.5rem;" onclick="toggleSent('s6')">👁️ Show Sentence</button>
+          <p style="margin-top:0.75rem;font-size:0.95rem;line-height:1.7;"><span class="sent-text" id="s6">While proponents maintain that autonomous vehicles will dramatically reduce traffic accidents, consumer advocacy groups demand stricter safety testing before any commercial deployment is approved.</span></p>
+          <div class="recording-box" id="rec6Box">
+            <button class="btn" onclick="startRec('rec6')" id="rec6Btn">🎙️ Start Recording</button>
+            <span id="rec6Time" style="font-family:'Fira Code',monospace;margin-left:0.75rem;font-size:0.85rem;color:var(--text-muted);">0:00</span>
+            <div id="rec6Result" style="margin-top:0.75rem;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide" id="slide-5">
+      <div class="card">
+        <div class="card-title">🎯 Prosody Self-Assessment</div>
+        <table class="error-table">
+          <thead><tr><th>Skill</th><th>Check</th></tr></thead>
+          <tbody>
+            <tr><td>Linked sentences (conjunctions used)</td><td>☐</td></tr>
+            <tr><td>Emphasized key words (bold stress)</td><td>☐</td></tr>
+            <tr><td>Natural rhythm (not robotic)</td><td>☐</td></tr>
+            <tr><td>Appropriate speed (150-175 WPM)</td><td>☐</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="slide" id="slide-6">
+      <div class="card">
+        <div class="card-title">✉️ Email Writing: Session Practice &amp; Review</div>
+        <div class="framework-box" style="border-left:3px solid var(--accent-blue);border-left-color:var(--accent-blue);"><strong style="color:var(--accent-blue);">5-Part Formula (from L15):</strong> Greeting → Acknowledge → Requests (one paragraph each) → Offer/polite close. <strong style="color:var(--accent-green);">Polite request phrases:</strong> "Could you share…" · "I would really appreciate it if you could…" · "Could you please tell me…"</div>
+      </div>
+      <div class="card">
+        <div class="card-title">📧 Worked Example A: Guest Lecture Follow-up</div>
+        <div style="background:rgba(0,0,0,0.25);padding:1rem;border-radius:8px;font-size:0.85rem;line-height:1.7;margin-bottom:0.75rem;">
+          <strong>Prompt:</strong> You attended a guest lecture by Dr. Amina Rashid on Monday about how to stay productive and manage stress as a college student. Too many students were waiting to ask a follow-up question after the talk. Write to Dr. Rashid: explain that you attended and briefly mention what you found especially helpful; ask if she could share more information about the techniques she talked about; ask if she has any suggestions for resources you could use to improve your study habits this semester.
+        </div>
+        <div style="font-size:0.8rem;color:var(--text-muted);line-height:1.6;margin-bottom:0.75rem;">💡 <strong>What we practiced:</strong> one paragraph per request · polite openers (<em>Could you share… / I would really appreciate it if you could…</em>) · concrete follow-ups (articles, books, websites).</div>
+        <button class="btn btn-secondary" onclick="toggleReveal('exAReveal')">👁️ Show Model Answer (144 words)</button>
+        <div class="reveal-box" id="exAReveal">
+          <p style="line-height:1.8;">Hello Dr. Rashid,<br><br>I attended your lecture on Monday about managing stress, and enjoyed it quite a lot. Several of my classmates also enjoyed it, so I must thank you for taking the time to visit our campus and give such an inspiring presentation. All of us found your comments about dealing with exam-related anxiety particularly useful.<br><br>If possible, could you share additional information about the strategies you mentioned during the talk? Perhaps you could pass along copies of the articles you referred to, or examples of how students have put certain strategies into practice.<br><br>Moreover, I would really appreciate it if you could recommend some resources I could utilize to improve my study habits. Are there any books you would recommend? Or perhaps there are some websites I could check out for additional ideas.<br><br>Thank you very much for your time,<br>Michael Schertzer</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">🏨 Worked Example B: Hotel Booking Inquiry</div>
+        <div style="background:rgba(0,0,0,0.25);padding:1rem;border-radius:8px;font-size:0.85rem;line-height:1.7;margin-bottom:0.75rem;">
+          <strong>Prompt:</strong> You are planning a short holiday next month and found an advertisement for a hotel that looks suitable. However, the advertisement does not clearly say whether breakfast is included or if there is parking available. Write to the hotel owner: explain why you are interested in the hotel; ask whether breakfast and parking are included; request information about the easiest way to make a booking.
+        </div>
+        <div style="font-size:0.8rem;color:var(--text-muted);line-height:1.6;margin-bottom:0.75rem;">💡 <strong>What we practiced:</strong> reason first, then one question block per topic (breakfast / parking / booking) · polite closers (<em>Could you please tell me… / Thanks for your time and attention</em>).</div>
+        <button class="btn btn-secondary" onclick="toggleReveal('exBReveal')">👁️ Show Model Answer (134 words)</button>
+        <div class="reveal-box" id="exBReveal">
+          <p style="line-height:1.8;">Dear Hotel Manager,<br><br>I am planning a short stay in your city and came across a flyer advertising your hotel. I think I'd be interested in booking a stay in your facility because firstly, it is the only 5-star hotel in the vicinity, also, it has large swimming pools and saunas. All of which I think would make my stay memorable.<br><br>Moreover, could you give me information on whether you provide breakfast, if it's included in the price or would I have to pay separately for it. I also have a ride and would like to know if parking is available in the hotel.<br><br>Could you please tell me the easiest way to make a reservation? Maybe on the website or through the phone now?<br><br>Thanks for your time and attention to this,<br>Fortune</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">🎯 Bonus: Independent Practice — Exchange Program (90-120 words)</div>
+        <div style="background:rgba(0,0,0,0.25);padding:1rem;border-radius:8px;font-size:0.85rem;line-height:1.6;margin-bottom:1rem;">
+          <strong>Email from Professor Martin:</strong> "Dear student, the university is planning to create a student exchange program with a partner university in Spain. I would like your opinion on this proposal. What is one benefit you see, and what is one possible concern? Would you be willing to join the planning committee? Best regards, Professor Martin"
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem;">
+          <span class="timer-display" id="emailTimer" style="font-size:1.5rem;">05:00</span>
+          <div>
+            <button class="btn" onclick="startTimer('emailTimer',300)">Start</button>
+            <button class="btn btn-secondary" onclick="resetTimer('emailTimer',300)">Reset</button>
+          </div>
+        </div>
+        <textarea id="emailInput" rows="6" placeholder="Type your email reply here (Target: 90-120 words, 5 min)..." oninput="updateWordCount('emailInput','emailCount',90,'90-120')"></textarea>
+        <div class="word-count-badge" id="emailCount">Word count: 0 words (Goal: 90-120)</div>
+        <button class="btn btn-secondary" style="margin-top:0.75rem;" onclick="toggleReveal('emailReveal')">👁️ Show Model Answer</button>
+        <div class="reveal-box" id="emailReveal">
+          <strong style="color:var(--accent-green);">Model Answer (Band 4+):</strong>
+          <p style="margin-top:0.5rem;line-height:1.7;">Dear Professor Martin, Thank you for inviting students to share their views on the exchange program with our partner university in Spain. I believe the main benefit is cultural immersion, since living abroad develops both language skills and adaptability, which are essential for international careers. My main concern is financial support, because not all students can afford travel and accommodation costs. As a suggestion, the university could offer scholarships or subsidized housing for participants. I would be happy to join the planning committee and help promote the program among students. Please let me know how I can contribute. Best regards, Valeria</p>
+        </div>
+      </div>
+    </div>
+
+    </main>
+
+  <script src="audio/shadowingTS.js"></script>
+  <script>
+    function switchSlide(i){document.querySelectorAll('.slide').forEach((s,idx)=>s.classList.toggle('active',idx===i));document.querySelectorAll('.nav-btn').forEach((b,idx)=>b.classList.toggle('active',idx===i));}
+    let pacerInterval=null,currentWordIndex=0,karaokeIndex=-1;
+    const shadowingAudioEl=document.getElementById('shadowingAudio');
+    function wrapShadowingWords(){const c=document.getElementById('shadowingTextDisplay');if(c.dataset.wrapped)return;if(typeof shadowingTS!=='undefined'&&shadowingTS.length){c.innerHTML=shadowingTS.map(w=>`<span class="shadowing-word">${w.word}</span>`).join(' ');}else{c.innerHTML=c.innerText.split(/\s+/).map(w=>`<span class="shadowing-word">${w}</span>`).join(' ');}c.dataset.wrapped="true";}
+    function clearAllHighlights(){document.querySelectorAll('.shadowing-word').forEach(w=>w.classList.remove('active'));}
+    function toggleShadowingPacer(){if(pacerInterval){clearInterval(pacerInterval);pacerInterval=null;return;}if(shadowingAudioEl)shadowingAudioEl.pause();wrapShadowingWords();const sw=document.querySelectorAll('.shadowing-word');const sp=parseInt(document.getElementById('pacerSpeed').value)||380;pacerInterval=setInterval(()=>{sw.forEach(w=>w.classList.remove('active'));if(currentWordIndex<sw.length){sw[currentWordIndex].classList.add('active');currentWordIndex++;}else{clearInterval(pacerInterval);pacerInterval=null;currentWordIndex=0;}},sp);}
+    function resetShadowingPacer(){if(pacerInterval)clearInterval(pacerInterval);pacerInterval=null;currentWordIndex=0;karaokeIndex=-1;if(shadowingAudioEl)shadowingAudioEl.pause();clearAllHighlights();}
+    if(shadowingAudioEl){
+      shadowingAudioEl.addEventListener('play',()=>{if(pacerInterval){clearInterval(pacerInterval);pacerInterval=null;}wrapShadowingWords();});
+      shadowingAudioEl.addEventListener('timeupdate',()=>{if(typeof shadowingTS==='undefined'||!shadowingTS.length)return;const t=shadowingAudioEl.currentTime;if(t<shadowingTS[0].start)return;let idx=-1;for(let i=karaokeIndex+1;i<shadowingTS.length;i++){if(t>=shadowingTS[i].start)idx=i;else break;}if(idx===-1&&karaokeIndex>=0)idx=karaokeIndex;if(idx>=0&&idx!==karaokeIndex){karaokeIndex=idx;clearAllHighlights();const spans=document.querySelectorAll('.shadowing-word');if(spans[idx])spans[idx].classList.add('active');}});
+      shadowingAudioEl.addEventListener('ended',()=>{karaokeIndex=-1;clearAllHighlights();});
+    }
+    const speakRec={};
+    function startRec(p){
+      const btn=document.getElementById(p+'Btn'),box=document.getElementById(p+'Box'),tm=document.getElementById(p+'Time');
+      if(speakRec[p]&&speakRec[p].state==='recording'){speakRec[p].stop();return;}
+      if(speakRec[p]&&speakRec[p].pending)return;
+      if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){tm.textContent='mic unavailable on this origin';return;}
+      speakRec[p]={pending:true};
+      navigator.mediaDevices.getUserMedia({audio:true}).then(stream=>{
+        const mr=new MediaRecorder(stream);speakRec[p]=mr;box.classList.add('active');btn.textContent='⏹ Stop';tm.style.color='var(--accent-red)';
+        const st0=Date.now();
+        const tick=()=>{const s=Math.floor((Date.now()-st0)/1000);tm.textContent=`${Math.floor(s/60)}:${String(s%60).padStart(2,'0')}`;};
+        tick();const iv=setInterval(tick,1000);
+        const chunks=[];mr.ondataavailable=e=>chunks.push(e.data);
+        mr.onstop=()=>{clearInterval(iv);box.classList.remove('active');btn.textContent='🎙️ Start Recording';tm.style.color='var(--text-muted)';tm.textContent='0:00';const b=new Blob(chunks,{type:'audio/webm'});const u=URL.createObjectURL(b);document.getElementById(p+'Result').innerHTML=`<audio controls src="${u}" style="width:100%;height:35px;"></audio>`;speakRec[p]=null;};
+        mr.start();
+      }).catch(()=>{speakRec[p]=null;tm.textContent='mic unavailable on this origin';});
+    }
+    function playSentence(id){document.querySelectorAll('audio.sentence-audio').forEach(a=>{if(a.id!==id)a.pause();});const a=document.getElementById(id);if(a.paused){a.currentTime=0;a.play();}}
+    function toggleSent(id){document.getElementById(id).classList.toggle('show');}
+    let activeT=null;
+    function startTimer(id,sec){if(activeT)clearInterval(activeT);let r=sec;const d=document.getElementById(id);d.style.color='var(--primary)';activeT=setInterval(()=>{d.textContent=`${String(Math.floor(r/60)).padStart(2,'0')}:${String(r%60).padStart(2,'0')}`;if(r<=60)d.style.color='var(--accent-red)';if(r<=0){clearInterval(activeT);activeT=null;d.style.animation='pulse 0.5s ease 3';}r--;},1000);}
+    function resetTimer(id,sec){if(activeT)clearInterval(activeT);activeT=null;const d=document.getElementById(id);d.textContent=`${String(Math.floor(sec/60)).padStart(2,'0')}:${String(sec%60).padStart(2,'0')}`;d.style.color='var(--primary)';}
+    function updateWordCount(a,c,min,label){const v=document.getElementById(a).value.trim();const n=v?v.split(/\s+/).length:0;const el=document.getElementById(c);el.textContent=`Word count: ${n} words (Goal: ${label||'120+'})`;el.style.color=n>=(min||120)?'var(--accent-green)':'var(--primary)';}
+    function toggleReveal(id){document.getElementById(id).classList.toggle('show');}
+    const __origSwitch=switchSlide;
+    switchSlide=function(i){Object.keys(speakRec).forEach(k=>{const r=speakRec[k];if(r&&r.state==='recording')r.stop();});__origSwitch(i);};
+  </script>
+<button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Open lesson navigation">&#9776;</button>
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+<!-- FE:MOBILE --><script>// FE:MOBILE
+(function(){
+  function initM() {
+    var t = document.getElementById('mobileNavToggle'), ov = document.getElementById('sidebarOverlay');
+    if (!t || !ov) return;
+    var sb = document.querySelector('.nav-btn').parentElement;
+    function close() { sb.classList.remove('open'); ov.classList.remove('open'); }
+    t.addEventListener('click', function() { sb.classList.toggle('open'); ov.classList.toggle('open'); });
+    ov.addEventListener('click', close);
+    document.querySelectorAll('.nav-btn').forEach(function(b) { b.addEventListener('click', close); });
+  }
+  if (document.readyState !== 'loading') initM(); else document.addEventListener('DOMContentLoaded', initM);
+})();</script>
+<!-- FE:HASH --><script>// FE:HASH
+(function(){
+  function mH() { var m = location.hash.match(/^#slide-(\d+)$/); if (m && window.switchSlide) window.switchSlide(parseInt(m[1])); }
+  window.addEventListener('hashchange', mH);
+  !function(){ mH(); }();
+  if (!window.__feHashWrapped && window.switchSlide) {
+    window.__feHashWrapped = true;
+    var o = window.switchSlide;
+    window.switchSlide = function(i) { o(i); try { history.replaceState(null, '', '#slide-' + i); } catch (e) {} };
+  }
+})();</script>
+<!-- FE:KEYS --><script>// FE:KEYS
+(function(){
+  document.addEventListener('keydown', function(e) {
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT' || e.target.isContentEditable) return;
+    if (e.code === 'ArrowLeft' || e.code === 'ArrowRight') {
+      var btns = document.querySelectorAll('.nav-btn');
+      var cur = document.querySelector('.nav-btn.active');
+      var pos = cur ? Array.prototype.indexOf.call(btns, cur) : -1;
+      if (pos < 0) return;
+      var tgt = pos + (e.code === 'ArrowRight' ? 1 : -1);
+      if (tgt >= 0 && tgt < btns.length) { e.preventDefault(); window.switchSlide(tgt + 0); }
+    }
+  });
+})();</script>
+<!-- FE:TIMERS --><script>// FE:TIMERS
+(function(){
+  window.__activeIntervals__ = window.__activeIntervals__ || [];
+  if (!window.__feIntervalPatched) {
+    window.__feIntervalPatched = true;
+    var _si = window.setInterval;
+    window.setInterval = function(fn, t) { var id = _si(fn, t); window.__activeIntervals__.push(id); return id; };
+  }
+  window.clearAllDeckTimers = function() {
+    window.__activeIntervals__.forEach(function(id) { clearInterval(id); });
+    window.__activeIntervals__ = [];
+  };
+  if (!window.__feTimersWrapped && window.switchSlide) {
+    window.__feTimersWrapped = true;
+    var o = window.switchSlide;
+    window.switchSlide = function(i) { if (window.clearAllDeckTimers) window.clearAllDeckTimers(); o(i); };
+  }
+})();</script>
+<!-- FE:CHIPJS --><script>// FE:CHIP
+(function(){
+  function updChipFromActive() {
+    var c = document.getElementById('slideChip'); if (!c) return;
+    var cur = document.querySelector('.nav-btn.active');
+    var pos = cur ? Array.prototype.indexOf.call(document.querySelectorAll('.nav-btn'), cur) : 0;
+    c.textContent = (pos + 1) + ' / ' + document.querySelectorAll('.slide').length;
+  }
+  if (!window.__feChipWrapped && window.switchSlide) {
+    window.__feChipWrapped = true;
+    var o = window.switchSlide;
+    window.switchSlide = function(i) { o(i); var c = document.getElementById('slideChip'); if (c) c.textContent = (i + 1) + ' / ' + document.querySelectorAll('.slide').length; };
+  }
+  if (document.readyState !== 'loading') updChipFromActive(); else document.addEventListener('DOMContentLoaded', updChipFromActive);
+})();</script>
+</body>
+</html>

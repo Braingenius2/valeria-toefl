@@ -398,9 +398,7 @@
     function toggleReveal(id){document.getElementById(id).classList.toggle('show');}
 
     // Correction Table
-    function addCorrectionRow(){const e=document.getElementById('errorInput').value.trim();const c=document.getElementById('corrInput').value.trim();if(!e||!c)return;const t=document.getElementById('corrTableBody');const tr=document.createElement('tr');tr.innerHTML=`<td><span class="text-red">${e}</span></td><td><span class="text-green">${c}</span></td>`;t.appendChild(tr);document.getElementById('errorInput').value='';document.getElementById('corrInput').value='';}
-
-    // Speech Metrics: Record & Analyze
+// Speech Metrics: Record & Analyze
     const speakRec={};
     function toggleSpeakRecord(prefix){
       const btn=document.getElementById(prefix+'RecBtn'),stop=document.getElementById(prefix+'StopBtn'),status=document.getElementById(prefix+'RecStatus');
