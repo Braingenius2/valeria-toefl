@@ -71,13 +71,14 @@
 <body>
   <aside class="sidebar">
     <div class="brand"><span class="brand-badge">TOEFL</span><span class="brand-title">Valeria L16</span></div>
-    <button class="nav-btn active" onclick="switchSlide(0)"><span class="nav-num">01</span> Warm-up</button>
-    <button class="nav-btn" onclick="switchSlide(1)"><span class="nav-num">02</span> 3-Tier Prosody</button>
-    <button class="nav-btn" onclick="switchSlide(2)"><span class="nav-num">03</span> Drill 1</button>
-    <button class="nav-btn" onclick="switchSlide(3)"><span class="nav-num">04</span> Drill 2</button>
-    <button class="nav-btn" onclick="switchSlide(4)"><span class="nav-num">05</span> Drill 3</button>
-    <button class="nav-btn" onclick="switchSlide(5)"><span class="nav-num">06</span> Synthesis</button>
-    <button class="nav-btn" onclick="switchSlide(6)"><span class="nav-num">07</span> ✉️ Email Task</button>
+    <button class="nav-btn active" onclick="switchSlide(0)"><span class="nav-num">01</span> ✉️ Email Review</button>
+    <button class="nav-btn" onclick="switchSlide(1)"><span class="nav-num">02</span> Warm-up</button>
+    <button class="nav-btn" onclick="switchSlide(2)"><span class="nav-num">03</span> 3-Tier Prosody</button>
+    <button class="nav-btn" onclick="switchSlide(3)"><span class="nav-num">04</span> Drill 1</button>
+    <button class="nav-btn" onclick="switchSlide(4)"><span class="nav-num">05</span> Drill 2</button>
+    <button class="nav-btn" onclick="switchSlide(5)"><span class="nav-num">06</span> Drill 3</button>
+    <button class="nav-btn" onclick="switchSlide(6)"><span class="nav-num">07</span> Synthesis</button>
+    <button class="nav-btn" onclick="switchSlide(7)"><span class="nav-num">08</span> 📚 Homework</button>
     
   </aside>
   <main class="main-content">
@@ -85,137 +86,6 @@
         <span class="tag">PRIVATE DECK</span></header>
 
     <div class="slide active" id="slide-0">
-      <div class="card">
-        <div class="card-title">🎙️ Shadowing</div>
-        <div class="shadowing-text" id="shadowingTextDisplay">Prosodic variation is the primary acoustic signal that distinguishes fluent, authoritative speech from hesitant, monotone delivery. By strategically modulating pitch peaks, adjusting speaking rate, and emphasizing contrastive stress, speakers convey analytical depth and rhetorical confidence. In high-stakes interview contexts, deliberate prosodic control not only clarifies logical structure for listeners but also projects cognitive mastery over complex subject matter.</div>
-        <div class="controls">
-          <button class="btn" onclick="toggleShadowingPacer()">▶ Start Pacer</button>
-          <button class="btn btn-secondary" onclick="resetShadowingPacer()">↺ Reset</button>
-          <audio id="shadowingAudio" src="audio/shadowing.wav" preload="auto" style="display:none;"></audio>
-          <button class="btn btn-secondary" onclick="document.getElementById('shadowingAudio').play()">🔊 Play Audio</button>
-          <select id="pacerSpeed" style="background:#000;color:#fff;padding:0.4rem;border-radius:4px;border:1px solid var(--border-color);"><option value="450">130 WPM</option><option value="380" selected>150 WPM</option><option value="320">175 WPM</option></select>
-        </div>
-      </div>
-    </div>
-
-    <div class="slide" id="slide-1">
-      <div class="card">
-        <div class="card-title">🗣️ 3-Tier Prosody Framework</div>
-        <div class="tier-box" style="border-color:var(--accent-green);"><div class="tier-label" style="color:var(--accent-green);">Tier 1: Basic (Flat)</div><div style="font-size:0.9rem;">"Students should study more. It helps their grades."</div><div style="font-size:0.8rem;color:var(--text-muted);margin-top:0.3rem;">⚠️ Robotic, low fluency score</div></div>
-        <div class="tier-box" style="border-color:var(--primary);"><div class="tier-label" style="color:var(--primary);">Tier 2: Connected (Standard)</div><div style="font-size:0.9rem;">"Students should study more, because it helps their grades."</div><div style="font-size:0.8rem;color:var(--text-muted);margin-top:0.3rem;">✅ Fluent, clear linking</div></div>
-        <div class="tier-box" style="border-color:var(--accent-purple);"><div class="tier-label" style="color:var(--accent-purple);">Tier 3: Emphatic (Advanced)</div><div style="font-size:0.9rem;"><strong>STUDents</strong> should study more, <em>because</em> it <strong>helps</strong> their grades.</div><div style="font-size:0.8rem;color:var(--text-muted);margin-top:0.3rem;">🚀 Authoritative, high scores</div></div>
-      </div>
-    </div>
-
-    <div class="slide" id="slide-2">
-      <div class="card">
-        <div class="card-title">📢 Drill 1: Tier 1 — Single Complex Sentences (15-18 words)</div>
-        <div style="background:rgba(0,0,0,0.25);padding:1rem;border-radius:8px;font-size:0.85rem;line-height:1.6;margin-bottom:0.75rem;">
-          <strong style="color:var(--accent-green);">Strategy:</strong> Group subject + verb into one breath chunk. <strong style="color:var(--accent-purple);">Pitch:</strong> slight rise at the comma, fall at the end.
-        </div>
-        <div style="background:rgba(0,0,0,0.25);padding:1rem;border-radius:8px;margin-bottom:0.75rem;">
-          <audio id="sa1" class="sentence-audio" src="audio/l16s1.wav" preload="auto"></audio>
-          <button class="btn btn-secondary" onclick="playSentence('sa1')">🔊 Listen</button>
-          <button class="btn btn-secondary" style="margin-left:0.5rem;" onclick="toggleSent('s1')">👁️ Show Sentence</button>
-          <p style="margin-top:0.75rem;font-size:0.95rem;line-height:1.7;"><span class="sent-text" id="s1">Although initial costs were high, the university successfully implemented its new digital library system across all departments.</span></p>
-          <div class="recording-box" id="rec1Box">
-            <button class="btn" onclick="startRec('rec1')" id="rec1Btn">🎙️ Start Recording</button>
-            <span id="rec1Time" style="font-family:'Fira Code',monospace;margin-left:0.75rem;font-size:0.85rem;color:var(--text-muted);">0:00</span>
-            <div id="rec1Result" style="margin-top:0.75rem;"></div>
-          </div>
-        </div>
-        <div style="background:rgba(0,0,0,0.25);padding:1rem;border-radius:8px;margin-bottom:0.75rem;">
-          <audio id="sa2" class="sentence-audio" src="audio/l16s2.wav" preload="auto"></audio>
-          <button class="btn btn-secondary" onclick="playSentence('sa2')">🔊 Listen</button>
-          <button class="btn btn-secondary" style="margin-left:0.5rem;" onclick="toggleSent('s2')">👁️ Show Sentence</button>
-          <p style="margin-top:0.75rem;font-size:0.95rem;line-height:1.7;"><span class="sent-text" id="s2">Researchers observed a significant decrease in patient recovery time following the implementation of the new treatment protocol.</span></p>
-          <div class="recording-box" id="rec2Box">
-            <button class="btn" onclick="startRec('rec2')" id="rec2Btn">🎙️ Start Recording</button>
-            <span id="rec2Time" style="font-family:'Fira Code',monospace;margin-left:0.75rem;font-size:0.85rem;color:var(--text-muted);">0:00</span>
-            <div id="rec2Result" style="margin-top:0.75rem;"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="slide" id="slide-3">
-      <div class="card">
-        <div class="card-title">📢 Drill 2: Tier 2 — Relative Clauses (20-23 words)</div>
-        <div style="background:rgba(0,0,0,0.25);padding:1rem;border-radius:8px;font-size:0.85rem;line-height:1.6;margin-bottom:0.75rem;">
-          <strong style="color:var(--accent-green);">Strategy:</strong> Mark a clear <strong style="color:var(--accent-purple);">pitch rise</strong> on the relative clause (the part after "which/that"), then drop back for the main clause.
-        </div>
-        <div style="background:rgba(0,0,0,0.25);padding:1rem;border-radius:8px;margin-bottom:0.75rem;">
-          <audio id="sa3" class="sentence-audio" src="audio/l16s3.wav" preload="auto"></audio>
-          <button class="btn btn-secondary" onclick="playSentence('sa3')">🔊 Listen</button>
-          <button class="btn btn-secondary" style="margin-left:0.5rem;" onclick="toggleSent('s3')">👁️ Show Sentence</button>
-          <p style="margin-top:0.75rem;font-size:0.95rem;line-height:1.7;"><span class="sent-text" id="s3">The preliminary report, which was published last month by leading economists, highlights severe inflation risks across international financial markets in developing economies.</span></p>
-          <div class="recording-box" id="rec3Box">
-            <button class="btn" onclick="startRec('rec3')" id="rec3Btn">🎙️ Start Recording</button>
-            <span id="rec3Time" style="font-family:'Fira Code',monospace;margin-left:0.75rem;font-size:0.85rem;color:var(--text-muted);">0:00</span>
-            <div id="rec3Result" style="margin-top:0.75rem;"></div>
-          </div>
-        </div>
-        <div style="background:rgba(0,0,0,0.25);padding:1rem;border-radius:8px;margin-bottom:0.75rem;">
-          <audio id="sa4" class="sentence-audio" src="audio/l16s4.wav" preload="auto"></audio>
-          <button class="btn btn-secondary" onclick="playSentence('sa4')">🔊 Listen</button>
-          <button class="btn btn-secondary" style="margin-left:0.5rem;" onclick="toggleSent('s4')">👁️ Show Sentence</button>
-          <p style="margin-top:0.75rem;font-size:0.95rem;line-height:1.7;"><span class="sent-text" id="s4">Environmental engineers are developing innovative filtration devices that can effectively remove microplastics from municipal water supplies and protect public health.</span></p>
-          <div class="recording-box" id="rec4Box">
-            <button class="btn" onclick="startRec('rec4')" id="rec4Btn">🎙️ Start Recording</button>
-            <span id="rec4Time" style="font-family:'Fira Code',monospace;margin-left:0.75rem;font-size:0.85rem;color:var(--text-muted);">0:00</span>
-            <div id="rec4Result" style="margin-top:0.75rem;"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="slide" id="slide-4">
-      <div class="card">
-        <div class="card-title">📢 Drill 3: Tier 3 — Dual Subordination (24-28 words)</div>
-        <div style="background:rgba(0,0,0,0.25);padding:1rem;border-radius:8px;font-size:0.85rem;line-height:1.6;margin-bottom:0.75rem;">
-          <strong style="color:var(--accent-green);">Strategy:</strong> Hold the first clause in your memory buffer while listening to the second. Keep the same rhythm as the model — don't rush the middle.
-        </div>
-        <div style="background:rgba(0,0,0,0.25);padding:1rem;border-radius:8px;margin-bottom:0.75rem;">
-          <audio id="sa5" class="sentence-audio" src="audio/l16s5.wav" preload="auto"></audio>
-          <button class="btn btn-secondary" onclick="playSentence('sa5')">🔊 Listen</button>
-          <button class="btn btn-secondary" style="margin-left:0.5rem;" onclick="toggleSent('s5')">👁️ Show Sentence</button>
-          <p style="margin-top:0.75rem;font-size:0.95rem;line-height:1.7;"><span class="sent-text" id="s5">Because the experiment yielded unexpected statistical anomalies, the principal investigator decided to repeat the entire trial before publishing the final manuscript in a peer-reviewed journal.</span></p>
-          <div class="recording-box" id="rec5Box">
-            <button class="btn" onclick="startRec('rec5')" id="rec5Btn">🎙️ Start Recording</button>
-            <span id="rec5Time" style="font-family:'Fira Code',monospace;margin-left:0.75rem;font-size:0.85rem;color:var(--text-muted);">0:00</span>
-            <div id="rec5Result" style="margin-top:0.75rem;"></div>
-          </div>
-        </div>
-        <div style="background:rgba(0,0,0,0.25);padding:1rem;border-radius:8px;margin-bottom:0.75rem;">
-          <audio id="sa6" class="sentence-audio" src="audio/l16s6.wav" preload="auto"></audio>
-          <button class="btn btn-secondary" onclick="playSentence('sa6')">🔊 Listen</button>
-          <button class="btn btn-secondary" style="margin-left:0.5rem;" onclick="toggleSent('s6')">👁️ Show Sentence</button>
-          <p style="margin-top:0.75rem;font-size:0.95rem;line-height:1.7;"><span class="sent-text" id="s6">While proponents maintain that autonomous vehicles will dramatically reduce traffic accidents, consumer advocacy groups demand stricter safety testing before any commercial deployment is approved.</span></p>
-          <div class="recording-box" id="rec6Box">
-            <button class="btn" onclick="startRec('rec6')" id="rec6Btn">🎙️ Start Recording</button>
-            <span id="rec6Time" style="font-family:'Fira Code',monospace;margin-left:0.75rem;font-size:0.85rem;color:var(--text-muted);">0:00</span>
-            <div id="rec6Result" style="margin-top:0.75rem;"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="slide" id="slide-5">
-      <div class="card">
-        <div class="card-title">🎯 Prosody Self-Assessment</div>
-        <table class="error-table">
-          <thead><tr><th>Skill</th><th>Check</th></tr></thead>
-          <tbody>
-            <tr><td>Linked sentences (conjunctions used)</td><td>☐</td></tr>
-            <tr><td>Emphasized key words (bold stress)</td><td>☐</td></tr>
-            <tr><td>Natural rhythm (not robotic)</td><td>☐</td></tr>
-            <tr><td>Appropriate speed (150-175 WPM)</td><td>☐</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    <div class="slide" id="slide-6">
       <div class="card">
         <div class="card-title">✉️ Email Writing: Session Practice &amp; Review</div>
         <div class="framework-box" style="border-left:3px solid var(--accent-blue);border-left-color:var(--accent-blue);"><strong style="color:var(--accent-blue);">5-Part Formula (from L15):</strong> Greeting → Acknowledge → Requests (one paragraph each) → Offer/polite close. <strong style="color:var(--accent-green);">Polite request phrases:</strong> "Could you share…" · "I would really appreciate it if you could…" · "Could you please tell me…"</div>
@@ -261,6 +131,152 @@
           <strong style="color:var(--accent-green);">Model Answer (Band 4+):</strong>
           <p style="margin-top:0.5rem;line-height:1.7;">Dear Professor Martin, Thank you for inviting students to share their views on the exchange program with our partner university in Spain. I believe the main benefit is cultural immersion, since living abroad develops both language skills and adaptability, which are essential for international careers. My main concern is financial support, because not all students can afford travel and accommodation costs. As a suggestion, the university could offer scholarships or subsidized housing for participants. I would be happy to join the planning committee and help promote the program among students. Please let me know how I can contribute. Best regards, Valeria</p>
         </div>
+      </div>
+    </div>
+
+    <div class="slide" id="slide-1">
+      <div class="card">
+        <div class="card-title">🎙️ Shadowing</div>
+        <div class="shadowing-text" id="shadowingTextDisplay">Prosodic variation is the primary acoustic signal that distinguishes fluent, authoritative speech from hesitant, monotone delivery. By strategically modulating pitch peaks, adjusting speaking rate, and emphasizing contrastive stress, speakers convey analytical depth and rhetorical confidence. In high-stakes interview contexts, deliberate prosodic control not only clarifies logical structure for listeners but also projects cognitive mastery over complex subject matter.</div>
+        <div class="controls">
+          <button class="btn" onclick="toggleShadowingPacer()">▶ Start Pacer</button>
+          <button class="btn btn-secondary" onclick="resetShadowingPacer()">↺ Reset</button>
+          <audio id="shadowingAudio" src="audio/shadowing.wav" preload="auto" style="display:none;"></audio>
+          <button class="btn btn-secondary" onclick="document.getElementById('shadowingAudio').play()">🔊 Play Audio</button>
+          <select id="pacerSpeed" style="background:#000;color:#fff;padding:0.4rem;border-radius:4px;border:1px solid var(--border-color);"><option value="450">130 WPM</option><option value="380" selected>150 WPM</option><option value="320">175 WPM</option></select>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide" id="slide-2">
+      <div class="card">
+        <div class="card-title">🗣️ 3-Tier Prosody Framework</div>
+        <div class="tier-box" style="border-color:var(--accent-green);"><div class="tier-label" style="color:var(--accent-green);">Tier 1: Basic (Flat)</div><div style="font-size:0.9rem;">"Students should study more. It helps their grades."</div><div style="font-size:0.8rem;color:var(--text-muted);margin-top:0.3rem;">⚠️ Robotic, low fluency score</div></div>
+        <div class="tier-box" style="border-color:var(--primary);"><div class="tier-label" style="color:var(--primary);">Tier 2: Connected (Standard)</div><div style="font-size:0.9rem;">"Students should study more, because it helps their grades."</div><div style="font-size:0.8rem;color:var(--text-muted);margin-top:0.3rem;">✅ Fluent, clear linking</div></div>
+        <div class="tier-box" style="border-color:var(--accent-purple);"><div class="tier-label" style="color:var(--accent-purple);">Tier 3: Emphatic (Advanced)</div><div style="font-size:0.9rem;"><strong>STUDents</strong> should study more, <em>because</em> it <strong>helps</strong> their grades.</div><div style="font-size:0.8rem;color:var(--text-muted);margin-top:0.3rem;">🚀 Authoritative, high scores</div></div>
+      </div>
+    </div>
+
+    <div class="slide" id="slide-3">
+      <div class="card">
+        <div class="card-title">📢 Drill 1: Tier 1 — Single Complex Sentences (15-18 words)</div>
+        <div style="background:rgba(0,0,0,0.25);padding:1rem;border-radius:8px;font-size:0.85rem;line-height:1.6;margin-bottom:0.75rem;">
+          <strong style="color:var(--accent-green);">Strategy:</strong> Group subject + verb into one breath chunk. <strong style="color:var(--accent-purple);">Pitch:</strong> slight rise at the comma, fall at the end.
+        </div>
+        <div style="background:rgba(0,0,0,0.25);padding:1rem;border-radius:8px;margin-bottom:0.75rem;">
+          <audio id="sa1" class="sentence-audio" src="audio/l16s1.wav" preload="auto"></audio>
+          <button class="btn btn-secondary" onclick="playSentence('sa1')">🔊 Listen</button>
+          <button class="btn btn-secondary" style="margin-left:0.5rem;" onclick="toggleSent('s1')">👁️ Show Sentence</button>
+          <p style="margin-top:0.75rem;font-size:0.95rem;line-height:1.7;"><span class="sent-text" id="s1">Although initial costs were high, the university successfully implemented its new digital library system across all departments.</span></p>
+          <div class="recording-box" id="rec1Box">
+            <button class="btn" onclick="startRec('rec1')" id="rec1Btn">🎙️ Start Recording</button>
+            <span id="rec1Time" style="font-family:'Fira Code',monospace;margin-left:0.75rem;font-size:0.85rem;color:var(--text-muted);">0:00</span>
+            <div id="rec1Result" style="margin-top:0.75rem;"></div>
+          </div>
+        </div>
+        <div style="background:rgba(0,0,0,0.25);padding:1rem;border-radius:8px;margin-bottom:0.75rem;">
+          <audio id="sa2" class="sentence-audio" src="audio/l16s2.wav" preload="auto"></audio>
+          <button class="btn btn-secondary" onclick="playSentence('sa2')">🔊 Listen</button>
+          <button class="btn btn-secondary" style="margin-left:0.5rem;" onclick="toggleSent('s2')">👁️ Show Sentence</button>
+          <p style="margin-top:0.75rem;font-size:0.95rem;line-height:1.7;"><span class="sent-text" id="s2">Researchers observed a significant decrease in patient recovery time following the implementation of the new treatment protocol.</span></p>
+          <div class="recording-box" id="rec2Box">
+            <button class="btn" onclick="startRec('rec2')" id="rec2Btn">🎙️ Start Recording</button>
+            <span id="rec2Time" style="font-family:'Fira Code',monospace;margin-left:0.75rem;font-size:0.85rem;color:var(--text-muted);">0:00</span>
+            <div id="rec2Result" style="margin-top:0.75rem;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide" id="slide-4">
+      <div class="card">
+        <div class="card-title">📢 Drill 2: Tier 2 — Relative Clauses (20-23 words)</div>
+        <div style="background:rgba(0,0,0,0.25);padding:1rem;border-radius:8px;font-size:0.85rem;line-height:1.6;margin-bottom:0.75rem;">
+          <strong style="color:var(--accent-green);">Strategy:</strong> Mark a clear <strong style="color:var(--accent-purple);">pitch rise</strong> on the relative clause (the part after "which/that"), then drop back for the main clause.
+        </div>
+        <div style="background:rgba(0,0,0,0.25);padding:1rem;border-radius:8px;margin-bottom:0.75rem;">
+          <audio id="sa3" class="sentence-audio" src="audio/l16s3.wav" preload="auto"></audio>
+          <button class="btn btn-secondary" onclick="playSentence('sa3')">🔊 Listen</button>
+          <button class="btn btn-secondary" style="margin-left:0.5rem;" onclick="toggleSent('s3')">👁️ Show Sentence</button>
+          <p style="margin-top:0.75rem;font-size:0.95rem;line-height:1.7;"><span class="sent-text" id="s3">The preliminary report, which was published last month by leading economists, highlights severe inflation risks across international financial markets in developing economies.</span></p>
+          <div class="recording-box" id="rec3Box">
+            <button class="btn" onclick="startRec('rec3')" id="rec3Btn">🎙️ Start Recording</button>
+            <span id="rec3Time" style="font-family:'Fira Code',monospace;margin-left:0.75rem;font-size:0.85rem;color:var(--text-muted);">0:00</span>
+            <div id="rec3Result" style="margin-top:0.75rem;"></div>
+          </div>
+        </div>
+        <div style="background:rgba(0,0,0,0.25);padding:1rem;border-radius:8px;margin-bottom:0.75rem;">
+          <audio id="sa4" class="sentence-audio" src="audio/l16s4.wav" preload="auto"></audio>
+          <button class="btn btn-secondary" onclick="playSentence('sa4')">🔊 Listen</button>
+          <button class="btn btn-secondary" style="margin-left:0.5rem;" onclick="toggleSent('s4')">👁️ Show Sentence</button>
+          <p style="margin-top:0.75rem;font-size:0.95rem;line-height:1.7;"><span class="sent-text" id="s4">Environmental engineers are developing innovative filtration devices that can effectively remove microplastics from municipal water supplies and protect public health.</span></p>
+          <div class="recording-box" id="rec4Box">
+            <button class="btn" onclick="startRec('rec4')" id="rec4Btn">🎙️ Start Recording</button>
+            <span id="rec4Time" style="font-family:'Fira Code',monospace;margin-left:0.75rem;font-size:0.85rem;color:var(--text-muted);">0:00</span>
+            <div id="rec4Result" style="margin-top:0.75rem;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide" id="slide-5">
+      <div class="card">
+        <div class="card-title">📢 Drill 3: Tier 3 — Dual Subordination (24-28 words)</div>
+        <div style="background:rgba(0,0,0,0.25);padding:1rem;border-radius:8px;font-size:0.85rem;line-height:1.6;margin-bottom:0.75rem;">
+          <strong style="color:var(--accent-green);">Strategy:</strong> Hold the first clause in your memory buffer while listening to the second. Keep the same rhythm as the model — don't rush the middle.
+        </div>
+        <div style="background:rgba(0,0,0,0.25);padding:1rem;border-radius:8px;margin-bottom:0.75rem;">
+          <audio id="sa5" class="sentence-audio" src="audio/l16s5.wav" preload="auto"></audio>
+          <button class="btn btn-secondary" onclick="playSentence('sa5')">🔊 Listen</button>
+          <button class="btn btn-secondary" style="margin-left:0.5rem;" onclick="toggleSent('s5')">👁️ Show Sentence</button>
+          <p style="margin-top:0.75rem;font-size:0.95rem;line-height:1.7;"><span class="sent-text" id="s5">Because the experiment yielded unexpected statistical anomalies, the principal investigator decided to repeat the entire trial before publishing the final manuscript in a peer-reviewed journal.</span></p>
+          <div class="recording-box" id="rec5Box">
+            <button class="btn" onclick="startRec('rec5')" id="rec5Btn">🎙️ Start Recording</button>
+            <span id="rec5Time" style="font-family:'Fira Code',monospace;margin-left:0.75rem;font-size:0.85rem;color:var(--text-muted);">0:00</span>
+            <div id="rec5Result" style="margin-top:0.75rem;"></div>
+          </div>
+        </div>
+        <div style="background:rgba(0,0,0,0.25);padding:1rem;border-radius:8px;margin-bottom:0.75rem;">
+          <audio id="sa6" class="sentence-audio" src="audio/l16s6.wav" preload="auto"></audio>
+          <button class="btn btn-secondary" onclick="playSentence('sa6')">🔊 Listen</button>
+          <button class="btn btn-secondary" style="margin-left:0.5rem;" onclick="toggleSent('s6')">👁️ Show Sentence</button>
+          <p style="margin-top:0.75rem;font-size:0.95rem;line-height:1.7;"><span class="sent-text" id="s6">While proponents maintain that autonomous vehicles will dramatically reduce traffic accidents, consumer advocacy groups demand stricter safety testing before any commercial deployment is approved.</span></p>
+          <div class="recording-box" id="rec6Box">
+            <button class="btn" onclick="startRec('rec6')" id="rec6Btn">🎙️ Start Recording</button>
+            <span id="rec6Time" style="font-family:'Fira Code',monospace;margin-left:0.75rem;font-size:0.85rem;color:var(--text-muted);">0:00</span>
+            <div id="rec6Result" style="margin-top:0.75rem;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide" id="slide-6">
+      <div class="card">
+        <div class="card-title">🎯 Prosody Self-Assessment</div>
+        <table class="error-table">
+          <thead><tr><th>Skill</th><th>Check</th></tr></thead>
+          <tbody>
+            <tr><td>Linked sentences (conjunctions used)</td><td>☐</td></tr>
+            <tr><td>Emphasized key words (bold stress)</td><td>☐</td></tr>
+            <tr><td>Natural rhythm (not robotic)</td><td>☐</td></tr>
+            <tr><td>Appropriate speed (150-175 WPM)</td><td>☐</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="slide" id="slide-7">
+      <div class="card">
+        <div class="card-title">📚 Homework — Due Before Lesson 17</div>
+        <table class="error-table">
+          <thead><tr><th>Task</th><th>Details</th></tr></thead>
+          <tbody>
+            <tr><td>🎙️ Audio Recording Submission</td><td>Record all 6 drill sentences (Drills 1–3) and submit via the portal.</td></tr>
+            <tr><td>⚡ Shadowing Acceleration</td><td>Practice shadowing the Tier 3 sentences at 1.25x speed until fluent.</td></tr>
+            <tr><td>✉️ Email Reply — Career Fair Recruiter</td><td>90–120 words in 5 min: explain what you found interesting in her company presentation · ask whether the company offers internships for undergraduate students · ask which skills or certificates they value most in applicants.<br><strong>Self-check:</strong> 5-part formula ✓ · one paragraph per request ✓ · polite close ✓.</td></tr>
+            <tr><td>📓 Vocabulary Journal</td><td>Write 5 sentences using: convergence, concurrently, anomalies, advocacy, deployment.</td></tr>
+          </tbody>
+        </table>
       </div>
     </div>
 
