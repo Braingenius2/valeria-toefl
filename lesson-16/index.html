@@ -53,6 +53,33 @@
     .sent-text{display:none;}
     .sent-text.show{display:inline;}
     .sentence-audio{width:100%;height:35px;margin-bottom:0.5rem;}
+    /* STAGE MODE */
+    .stage-bar{display:none;position:fixed;top:0;left:0;right:0;z-index:400;background:rgba(9,13,22,0.95);border-bottom:1px solid var(--border-color);padding:0.6rem 1.25rem;align-items:center;gap:1rem;}
+    body.stage-mode .stage-bar{display:flex;}
+    body.stage-mode .sidebar,body.stage-mode .mobile-nav-toggle,body.stage-mode .sidebar-overlay{display:none!important;}
+    body.stage-mode .main-content{margin-left:auto;margin-right:auto;padding-top:4.25rem;max-width:940px;zoom:1.15;}
+    body.stage-mode .header .tag{display:none;}
+    .stage-title{font-family:'Fira Code',monospace;font-size:0.72rem;font-weight:700;color:var(--primary);white-space:nowrap;}
+    .stage-dots{display:flex;gap:6px;flex-wrap:wrap;}
+    .stage-dot{width:10px;height:10px;border-radius:50%;background:var(--border-color);border:none;padding:0;cursor:pointer;}
+    .stage-dot.on{background:var(--primary);box-shadow:0 0 0 3px rgba(245,158,11,0.2);}
+    #stageSlideName{font-size:0.8rem;color:var(--text-muted);white-space:nowrap;}
+    .star-btn{background:#000;border:1px solid rgba(245,158,11,0.45);color:var(--primary);border-radius:8px;padding:0.35rem 0.75rem;font-family:'Fira Code',monospace;font-weight:700;cursor:pointer;}
+    .deck-toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%);z-index:998;background:var(--bg-card);border:1px solid var(--primary);color:var(--primary);padding:0.7rem 1.4rem;border-radius:12px;font-weight:700;font-size:1rem;box-shadow:0 10px 34px rgba(0,0,0,0.55);transition:opacity 0.4s;}
+    .deck-toast.fade{opacity:0;}
+    body>i{position:fixed;top:-24px;width:9px;height:14px;border-radius:2px;z-index:999;pointer-events:none;animation:cfall 1.5s ease-in forwards;}
+    @keyframes cfall{to{transform:translate(var(--dx,0),105vh) rotate(720deg);}}
+    /* QUICK CHECK QUIZ */
+    .quiz-q{background:rgba(0,0,0,0.25);padding:1rem;border-radius:8px;margin-bottom:0.75rem;}
+    .quiz-qt{font-size:0.95rem;font-weight:600;margin-bottom:0.6rem;}
+    .quiz-opts{display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;}
+    .quiz-opt{background:#000;border:1px solid var(--border-color);color:var(--text-main);padding:0.6rem 0.8rem;border-radius:6px;text-align:left;font-family:inherit;font-size:0.85rem;cursor:pointer;}
+    .quiz-opt:hover:not(:disabled){border-color:var(--primary);}
+    .quiz-opt:disabled{cursor:default;}
+    .quiz-opt.correct{background:rgba(16,185,129,0.15);border-color:var(--accent-green);}
+    .quiz-opt.wrong{background:rgba(239,68,68,0.12);border-color:var(--accent-red);}
+    .quiz-opt.reveal{border-color:var(--accent-green);}
+    .quiz-fb{margin-top:0.5rem;font-size:0.85rem;min-height:1.2em;}
   </style>
 <!-- FE:CSS-MOBILE --><style>.mobile-nav-toggle{display:none;position:fixed;bottom:20px;right:20px;z-index:200;width:48px;height:48px;border-radius:50%;background:var(--primary);color:#000;border:none;font-size:20px;cursor:pointer;align-items:center;justify-content:center;box-shadow:3px 3px 0 rgba(0,0,0,0.12)}
 .sidebar-overlay{display:none;position:fixed;inset:0;z-index:150;background:rgba(0,0,0,0.4)}
@@ -67,8 +94,16 @@
   .timer-display{font-size:1.5rem}
 }</style>
 <!-- FE:CSS-CHIP --><style>.slide-chip{font-family:'Fira Code',monospace;font-size:0.72rem;font-weight:700;color:var(--primary);background:var(--bg-card,rgba(0,0,0,0.4));border:1px solid var(--border-color,rgba(255,255,255,0.15));padding:0.25rem 0.65rem;border-radius:20px;white-space:nowrap;margin-left:auto}</style>
-</head>
+<style>.back-link{color:var(--text-muted);text-decoration:none;font-size:0.8rem;font-family:'Fira Code',monospace;white-space:nowrap;transition:color 0.2s;margin-left:1rem;}.back-link:hover{color:var(--primary);}</style></head>
 <body>
+  <div class="stage-bar">
+    <span class="stage-title">TOEFL · L16 PROSODY</span>
+    <div class="stage-dots" id="stageDots"></div>
+    <span id="stageSlideName"></span>
+    <span style="flex:1;"></span>
+    <button class="star-btn" onclick="addStar()" title="Reward a TOEFL behaviour (+1 star)">⭐ <span id="starCount">0</span></button>
+    <button class="btn btn-secondary" onclick="toggleStage()">🪑 Exit Stage (S)</button>
+  </div>
   <aside class="sidebar">
     <div class="brand"><span class="brand-badge">TOEFL</span><span class="brand-title">Valeria L16</span></div>
     <button class="nav-btn active" onclick="switchSlide(0)"><span class="nav-num">01</span> ✉️ Email Review</button>
@@ -82,8 +117,8 @@
     
   </aside>
   <main class="main-content">
-    <header class="header"><div><h1 class="page-title">Speaking L&amp;R Prosody</h1><p style="color:var(--text-muted);font-size:0.85rem;margin-top:0.2rem;">3-Tier Sentence Progression · Recording Practice</p></div><!-- FE:CHIP --><span class="slide-chip" id="slideChip">1 / N</span>
-        <span class="tag">PRIVATE DECK</span></header>
+    <header class="header"><div><h1 class="page-title">Speaking L&amp;R Prosody</h1><p style="color:var(--text-muted);font-size:0.85rem;margin-top:0.2rem;">3-Tier Sentence Progression · Recording Practice</p></div><!-- FE:CHIP --><span class="slide-chip" id="slideChip">1 / N</span><a href="../index.html" class="back-link">&#8592; Portal</a>
+        <button class="btn btn-secondary" onclick="toggleStage()" title="Toggle Stage Mode (S)">🎬 Stage</button><span class="tag">PRIVATE DECK</span></header>
 
     <div class="slide active" id="slide-0">
       <div class="card">
@@ -263,6 +298,10 @@
           </tbody>
         </table>
       </div>
+      <div class="card">
+        <div class="card-title">🎯 Quick Check — Prosody &amp; Email Rules</div>
+        <div id="quizWrap"></div>
+      </div>
     </div>
 
     <div class="slide" id="slide-7">
@@ -322,6 +361,32 @@
     function toggleReveal(id){document.getElementById(id).classList.toggle('show');}
     const __origSwitch=switchSlide;
     switchSlide=function(i){Object.keys(speakRec).forEach(k=>{const r=speakRec[k];if(r&&r.state==='recording')r.stop();});__origSwitch(i);};
+    // ===== STAGE MODE =====
+    function toggleStage(){document.body.classList.toggle('stage-mode');try{localStorage.setItem('l16_stage',document.body.classList.contains('stage-mode')?'1':'0');}catch(e){}paintDots();}
+    try{if(localStorage.getItem('l16_stage')==='1')document.body.classList.add('stage-mode');}catch(e){}
+    document.addEventListener('keydown',e=>{if(e.target.tagName==='INPUT'||e.target.tagName==='TEXTAREA'||e.target.tagName==='SELECT'||e.target.isContentEditable)return;if(e.code==='KeyS'){e.preventDefault();toggleStage();}});
+    (function(){const w=document.getElementById('stageDots');document.querySelectorAll('.slide').forEach((s,i)=>{const b=document.createElement('button');b.className='stage-dot';b.title='Slide '+(i+1);b.onclick=()=>switchSlide(i);w.appendChild(b);});})();
+    function paintDots(){const ds=document.querySelectorAll('.stage-dot');const navs=[...document.querySelectorAll('.nav-btn')];const cur=Math.max(0,navs.findIndex(b=>b.classList.contains('active')));ds.forEach((d,i)=>{d.classList.toggle('on',i===cur);d.classList.toggle('past',i<cur);});if(navs[cur])document.getElementById('stageSlideName').textContent=navs[cur].textContent.replace(/^\s*\d+\s*/,'').trim();}
+    // ===== REWARDS =====
+    let stars=parseInt(localStorage.getItem('l16_stars')||'0',10)||0;
+    function paintStars(){document.getElementById('starCount').textContent=stars;}
+    function addStar(){stars++;try{localStorage.setItem('l16_stars',stars);}catch(e){}paintStars();if(stars%5===0){toast('\ud83d\udd25 '+stars+' stars — great pace!');confettiBurst();}}
+    function resetStars(){stars=0;try{localStorage.setItem('l16_stars','0');}catch(e){}paintStars();}
+    function toast(msg){const t=document.createElement('div');t.className='deck-toast';t.textContent=msg;document.body.appendChild(t);setTimeout(()=>t.classList.add('fade'),1500);setTimeout(()=>t.remove(),2000);}
+    function confettiBurst(){const cols=['#f59e0b','#38bdf8','#10b981','#a855f7','#ef4444'];for(let i=0;i<26;i++){const d=document.createElement('i');d.style.left=(42+Math.random()*16)+'vw';d.style.background=cols[i%5];d.style.animationDelay=(Math.random()*0.25)+'s';d.style.setProperty('--dx',(Math.random()*260-130)+'px');document.body.appendChild(d);setTimeout(()=>d.remove(),1900);}}
+    paintDots();paintStars();
+    // ===== QUICK CHECK QUIZ =====
+    const QUIZ=[
+     {q:'Tier 2 sentence — where does your pitch rise?',o:['On every stressed word','At the relative-clause boundary ("which…")','Only at the very end','It stays completely flat'],a:1},
+     {q:'What hurts a Listen & Repeat score the most?',o:['Pausing mid-phrase','Rising intonation at clause boundaries','Speaking slowly and clearly','Long sentences'],a:0},
+     {q:'While listening to the second half of a Tier 3 sentence, you should…',o:['Repeat the first half out loud','Write keywords down','Hold the first clause in your memory buffer','Wait for the text to be revealed'],a:2},
+     {q:'Which behaviour earns a star?',o:['Speaking as fast as possible','Finishing a full sentence without stopping or switching to Russian','Whispering the answer','Reading straight from the screen'],a:1},
+     {q:'In the Email Task, how do you organise requests?',o:['All requests in one giant paragraph','One paragraph per request','Bullet points only','Requests go in the subject line'],a:1}];
+    let qScore=0,qDone=0;
+    function renderQuiz(){const w=document.getElementById('quizWrap');qScore=0;qDone=0;w.innerHTML=QUIZ.map((it,qi)=>`<div class="quiz-q" id="qz${qi}"><div class="quiz-qt">${qi+1}. ${it.q}</div>${it.o.map((o,oi)=>`<button class="quiz-opt" onclick="answerQ(${qi},${oi})">${String.fromCharCode(65+oi)}. ${o}</button>`).join('')}<div class="quiz-fb" id="fb${qi}"></div></div>`).join('')+`<div style="display:flex;gap:0.75rem;align-items:center;margin-top:0.5rem;"><button class="btn btn-secondary" onclick="renderQuiz()">↺ Reset Quiz</button><span id="quizScore" style="font-family:'Fira Code',monospace;color:var(--accent-green);font-size:0.9rem;"></span></div>`;}
+    function answerQ(qi,oi){const it=QUIZ[qi];const w=document.getElementById('qz'+qi);if(w.dataset.done)return;w.dataset.done='1';qDone++;const fb=document.getElementById('fb'+qi);const opts=w.querySelectorAll('.quiz-opt');opts.forEach(b=>b.disabled=true);if(oi===it.a){opts[oi].classList.add('correct');fb.textContent='\u2705 Correct!';fb.style.color='var(--accent-green)';qScore++;}else{opts[oi].classList.add('wrong');opts[it.a].classList.add('reveal');fb.textContent='\u274c Answer: '+String.fromCharCode(65+it.a);fb.style.color='var(--accent-red)';}
+    if(qDone===QUIZ.length){document.getElementById('quizScore').textContent=`Score: ${qScore} / ${QUIZ.length}`+(qScore===QUIZ.length?' \ud83c\udf89 Perfect!':'');}}
+    renderQuiz();
   </script>
 <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Open lesson navigation">&#9776;</button>
 <div class="sidebar-overlay" id="sidebarOverlay"></div>

@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Valeria — Lesson 17: TOEFL Writing Practice</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg-dark:#090d16;--bg-card:#131a26;--border-color:#243042;--text-main:#f1f5f9;--text-muted:#64748b;--primary:#f59e0b;--primary-hover:#d97706;--primary-dim:rgba(245,158,11,0.12);--accent-blue:#38bdf8;--accent-green:#10b981;--accent-red:#ef4444;--accent-purple:#a855f7;}
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:'Inter',sans-serif;background:var(--bg-dark);color:var(--text-main);display:flex;min-height:100vh;overflow-x:hidden;}
+    .sidebar{width:260px;background:var(--bg-card);border-right:1px solid var(--border-color);display:flex;flex-direction:column;padding:1.5rem 1rem;position:fixed;height:100vh;z-index:100;}
+    .brand{display:flex;align-items:center;gap:0.75rem;margin-bottom:2rem;padding:0 0.5rem;}
+    .brand-badge{background:var(--primary);color:#000;font-weight:700;font-size:0.75rem;padding:0.2rem 0.5rem;border-radius:4px;text-transform:uppercase;}
+    .brand-title{font-weight:600;font-size:1.1rem;color:var(--text-main);}
+    .nav-btn{background:transparent;border:1px solid transparent;color:var(--text-muted);padding:0.75rem 1rem;border-radius:8px;text-align:left;font-size:0.9rem;font-family:inherit;cursor:pointer;margin-bottom:0.5rem;display:flex;align-items:center;gap:0.75rem;transition:all 0.2s ease;}
+    .nav-btn:hover{background:rgba(255,255,255,0.03);color:var(--text-main);}
+    .nav-btn.active{background:var(--primary-dim);border-color:rgba(245,158,11,0.3);color:var(--primary);font-weight:600;}
+    .nav-num{font-family:'Fira Code',monospace;font-size:0.8rem;opacity:0.7;}
+    .main-content{margin-left:260px;flex:1;padding:2rem 3rem;max-width:1200px;}
+    .header{display:flex;justify-content:space-between;align-items:center;margin-bottom:2rem;padding-bottom:1rem;border-bottom:1px solid var(--border-color);}
+    .page-title{font-size:1.5rem;font-weight:700;color:var(--text-main);}
+    .tag{background:rgba(56,189,248,0.1);color:var(--accent-blue);border:1px solid rgba(56,189,248,0.2);padding:0.25rem 0.75rem;border-radius:20px;font-size:0.8rem;font-family:'Fira Code',monospace;}
+    .slide{display:none;animation:fadeIn 0.3s ease;}.slide.active{display:block;}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+    @keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.3;}}
+    .card{background:var(--bg-card);border:1px solid var(--border-color);border-radius:12px;padding:1.5rem;margin-bottom:1.5rem;}
+    .card-title{font-size:1.1rem;font-weight:600;color:var(--primary);margin-bottom:1rem;display:flex;align-items:center;gap:0.5rem;}
+    .shadowing-text{font-size:1.05rem;line-height:1.8;color:#cbd5e1;margin-bottom:1.5rem;background:rgba(0,0,0,0.2);padding:1.25rem;border-radius:8px;border-left:3px solid var(--primary);}
+    .shadowing-word{transition:background 0.15s ease,color 0.15s ease;border-radius:3px;padding:0 2px;}
+    .shadowing-word.active{background:var(--primary);color:#000;font-weight:600;}
+    .controls{display:flex;gap:0.75rem;align-items:center;flex-wrap:wrap;margin-bottom:1rem;}
+    .btn{background:var(--primary);color:#000;border:none;padding:0.6rem 1.2rem;border-radius:6px;font-weight:600;font-size:0.85rem;font-family:inherit;cursor:pointer;display:inline-flex;align-items:center;gap:0.4rem;transition:background 0.2s ease;}
+    .btn:hover{background:var(--primary-hover);}
+    .btn-secondary{background:transparent;border:1px solid var(--border-color);color:var(--text-main);}
+    .timer-display{font-family:'Fira Code',monospace;font-size:2rem;font-weight:700;color:var(--primary);background:#000;padding:0.5rem 1.2rem;border-radius:8px;border:1px solid var(--border-color);display:inline-block;}
+    textarea{width:100%;background:rgba(0,0,0,0.4);border:1px solid var(--border-color);color:var(--text-main);padding:0.75rem;border-radius:6px;font-family:inherit;font-size:0.9rem;resize:vertical;}
+    textarea:focus{outline:none;border-color:var(--primary);}
+    .word-count-badge{font-family:'Fira Code',monospace;font-size:0.85rem;color:var(--accent-green);margin-top:0.5rem;}
+    .framework-box{background:rgba(0,0,0,0.3);border-left:3px solid var(--accent-blue);padding:1rem;border-radius:0 8px 8px 0;margin-bottom:0.75rem;}
+    .reveal-box{display:none;background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.2);padding:1rem;border-radius:8px;margin-top:0.75rem;font-size:0.9rem;line-height:1.6;}
+    .reveal-box.show{display:block;}
+    .error-table{width:100%;border-collapse:collapse;margin-top:1rem;font-size:0.9rem;}
+    .error-table th,.error-table td{padding:0.75rem 1rem;border:1px solid var(--border-color);text-align:left;}
+    .error-table th{background:rgba(0,0,0,0.4);color:var(--primary);font-weight:600;}
+    .prompt-list{margin:0.5rem 0 0 1.25rem;padding:0;color:#cbd5e1;font-size:0.9rem;line-height:1.6;}
+    .prompt-list li{background:transparent;border:0;border-radius:0;box-shadow:none;font-size:inherit;font-weight:400;padding:0;margin:0;}
+    .task-header{display:flex;justify-content:space-between;align-items:center;gap:1rem;margin-bottom:1rem;}
+    .task-controls{display:flex;align-items:center;justify-content:flex-end;gap:0.5rem;flex-wrap:wrap;}
+    @media(max-width:768px){.task-header{flex-direction:column;align-items:stretch;}.task-controls{justify-content:flex-start;}.task-controls .btn{margin-left:0!important;}}
+  </style>
+<!-- FE:CSS-MOBILE --><style>.mobile-nav-toggle{display:none;position:fixed;bottom:20px;right:20px;z-index:200;width:48px;height:48px;border-radius:50%;background:var(--primary);color:#000;border:none;font-size:20px;cursor:pointer;align-items:center;justify-content:center;box-shadow:3px 3px 0 rgba(0,0,0,0.12)}
+.sidebar-overlay{display:none;position:fixed;inset:0;z-index:150;background:rgba(0,0,0,0.4)}
+.sidebar-overlay.open{display:block}@media(max-width:768px){
+  .mobile-nav-toggle{display:flex}
+  .sidebar{position:fixed;left:0;top:0;z-index:175;height:100vh;transform:translateX(-100%);transition:transform .25s ease;width:260px;display:flex!important}
+  .sidebar.open{transform:translateX(0)}
+  .main-content{margin-left:0;padding:1rem 1rem 84px;max-width:100%}
+  .header{flex-wrap:wrap;gap:0.5rem}
+  .grid-2{grid-template-columns:1fr}
+  .controls{flex-direction:column;align-items:stretch}
+  .timer-display{font-size:1.5rem}
+}</style>
+<!-- FE:CSS-CHIP --><style>.slide-chip{font-family:'Fira Code',monospace;font-size:0.72rem;font-weight:700;color:var(--primary);background:var(--bg-card,rgba(0,0,0,0.4));border:1px solid var(--border-color,rgba(255,255,255,0.15));padding:0.25rem 0.65rem;border-radius:20px;white-space:nowrap;margin-left:auto}</style>
+<style>.back-link{color:var(--text-muted);text-decoration:none;font-size:0.8rem;font-family:'Fira Code',monospace;white-space:nowrap;transition:color 0.2s;margin-left:1rem;}.back-link:hover{color:var(--primary);}</style></head>
+<body>
+  <aside class="sidebar">
+    <div class="brand"><span class="brand-badge">TOEFL</span><span class="brand-title">Valeria L17</span></div>
+    <button class="nav-btn active" onclick="switchSlide(0)"><span class="nav-num">01</span> Warm-up</button>
+    <button class="nav-btn" onclick="switchSlide(1)"><span class="nav-num">02</span> C1 Framework</button>
+    <button class="nav-btn" onclick="switchSlide(2)"><span class="nav-num">03</span> Sprint 1</button>
+    <button class="nav-btn" onclick="switchSlide(3)"><span class="nav-num">04</span> Sprint 2</button>
+    <button class="nav-btn" onclick="switchSlide(4)"><span class="nav-num">05</span> ✉️ Email Sprint</button>
+    <button class="nav-btn" onclick="switchSlide(5)"><span class="nav-num">06</span> 📚 Homework</button>
+    <button class="nav-btn" onclick="switchSlide(6)"><span class="nav-num">07</span> ✅ Checklist</button>
+    
+  </aside>
+  <main class="main-content">
+    <header class="header"><div><h1 class="page-title">TOEFL Writing Practice</h1><p style="color:var(--text-muted);font-size:0.85rem;margin-top:0.2rem;">Current 2026 Tasks · Academic Discussion · Write an Email</p></div><!-- FE:CHIP --><span class="slide-chip" id="slideChip">1 / N</span><a href="../index.html" class="back-link">&#8592; Portal</a>
+        <span class="tag">2026 FORMAT</span></header>
+
+    <div class="slide active" id="slide-0">
+      <div class="card">
+        <div class="card-title">🎙️ Shadowing: Strategy Language</div>
+        <div class="shadowing-text" id="shadowingTextDisplay">Composing a substantive academic response under strict temporal constraints requires deliberate structural planning. To achieve the optimal length threshold without sacrificing analytical depth or introducing redundant assertions, proficient writers employ specific rhetorical strategies: contextual framing, concession-rebuttal pairings, concrete exemplification, and precise concluding synthesis. These techniques simultaneously satisfy quantitative length requirements and demonstrate sophisticated command of academic discourse conventions.</div>
+        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:1rem;">Targets: substantive · constraints · deliberate · threshold · proficient · rhetorical · exemplification · synthesis</p>
+        <div class="controls">
+          <button class="btn" onclick="toggleShadowingPacer()">▶ Start Pacer</button>
+          <button class="btn btn-secondary" onclick="resetShadowingPacer()">↺ Reset</button>
+          <audio id="shadowingAudio" src="audio/shadowing.wav" preload="auto" style="display:none;"></audio>
+          <button class="btn btn-secondary" onclick="document.getElementById('shadowingAudio').play()">🔊 Play Audio</button>
+          <select id="pacerSpeed" style="background:#000;color:#fff;padding:0.4rem;border-radius:4px;border:1px solid var(--border-color);"><option value="450">130 WPM</option><option value="380" selected>150 WPM</option><option value="320">175 WPM</option></select>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide" id="slide-1">
+      <div class="card">
+        <div class="card-title">📐 C1 Expansion Framework — 10-Minute Academic Discussion</div>
+        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:1rem;">Official task: at least 100 words. Practice target: 120–130 words in 10 minutes (includes reading, planning, writing, checking). This 4-sentence frame builds that length without filler.</p>
+        <div class="framework-box"><strong style="color:var(--accent-green);">Sentence 1: Stance (18-22 words)</strong><br>"While [Concession], I firmly maintain that [Your Opinion], because [Core Reason]."</div>
+        <div class="framework-box" style="border-color:var(--primary);"><strong style="color:var(--primary);">Sentence 2: Development (22-28 words)</strong><br>"This is primarily because [Elaboration on reason], and [Additional support], which [Impact]."</div>
+        <div class="framework-box" style="border-color:var(--accent-purple);"><strong style="color:var(--accent-purple);">Sentence 3: Counter-argument (28-35 words)</strong><br>"Critics often argue that [Opposing view], yet [Rebuttal], and [Stronger argument], demonstrating [Significance]."</div>
+        <div class="framework-box" style="border-color:var(--accent-blue);"><strong style="color:var(--accent-blue);">Sentence 4: Synthesis (22-28 words)</strong><br>"Therefore, combining [Your solution] with [Supporting element] is essential for achieving [Goal], not merely [Alternative]."</div>
+        <div style="text-align:center;margin-top:1rem;font-family:'Fira Code',monospace;color:var(--primary);font-size:0.85rem;">Frame ≈ 90–113 words before elaboration · With one example and precise linking you reach 120–130</div>
+        <div class="framework-box" style="border-color:var(--accent-blue);margin-top:1rem;"><strong>How to expand without padding:</strong> add one concrete example (7–12 words) to Sentence 2 or 3, and one precise linker (<em>for example, however, furthermore</em>). Do not add a fifth sentence.</div>
+      </div>
+    </div>
+
+    <div class="slide" id="slide-2">
+      <div class="card">
+        <div class="task-header">
+          <div class="card-title" style="margin-bottom:0;">✍️ Sprint 1: Traditional Schools vs. Online Learning (10 min)</div>
+          <div class="task-controls">
+            <span class="timer-display" id="writeTimer1" style="font-size:1.5rem;">10:00</span>
+            <button class="btn" style="margin-left:0.5rem;" onclick="startTimer('writeTimer1',600)">Start</button>
+            <button class="btn btn-secondary" onclick="resetTimer('writeTimer1',600)">Reset</button>
+          </div>
+        </div>
+        <div style="background:rgba(0,0,0,0.25);padding:1rem;border-radius:8px;font-size:0.85rem;line-height:1.6;margin-bottom:1rem;">
+          <strong>Task:</strong> State and support your opinion. Make a meaningful contribution using the classmates' ideas. Minimum: 100 words. Practice target: 120–130 words.<br><br>
+          <strong>Professor:</strong> "With the rapid advancement of digital platforms, some argue that traditional brick-and-mortar schools will eventually become obsolete. Others contend that physical classrooms remain essential for student development. What is your position?"<br><br>
+          <strong>Alex:</strong> "Online learning is much more flexible and cheaper than traditional schools."<br>
+          <strong>Emma:</strong> "Traditional schools develop social skills through face-to-face interaction. This is vital for children."
+        </div>
+        <textarea id="writingInput1" rows="8" placeholder="Type your response here (Minimum: 100 words; target: 120-130 in 10 minutes)..." oninput="updateWordCount('writingInput1','wordCount1',100,'100+ (target 120-130)')"></textarea>
+        <div class="word-count-badge" id="wordCount1">Word count: 0 words (Minimum: 100; target: 120-130)</div>
+        <button class="btn btn-secondary" style="margin-top:0.75rem;" onclick="toggleReveal('writeReveal1')">👁️ Show Model Answer</button>
+        <div class="reveal-box" id="writeReveal1">
+          <strong style="color:var(--accent-green);">Model Answer (Band 4+):</strong>
+          <p style="margin-top:0.5rem;line-height:1.7;">While I acknowledge Emma's concern that physical classrooms develop essential social skills through face-to-face interaction, I firmly maintain that traditional schools will remain essential, because they provide irreplaceable holistic development that digital platforms cannot fully replicate. This is primarily because structured in-person environments foster spontaneous peer collaboration, which builds communication competencies that transcend academic content, and these interpersonal skills directly impact long-term career readiness. Critics often argue that online learning's flexibility and affordability render physical campuses obsolete, yet this perspective overlooks the fact that remote students frequently report isolation and diminished motivation, demonstrating that educational effectiveness requires social infrastructure beyond mere content delivery. Therefore, combining structured digital resources with the physical school environment is essential for achieving comprehensive student development, not merely efficient content consumption.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide" id="slide-3">
+      <div class="card">
+        <div class="task-header">
+          <div class="card-title" style="margin-bottom:0;">✍️ Sprint 2: Artificial Intelligence in Education (10 min)</div>
+          <div class="task-controls">
+            <span class="timer-display" id="writeTimer2" style="font-size:1.5rem;">10:00</span>
+            <button class="btn" style="margin-left:0.5rem;" onclick="startTimer('writeTimer2',600)">Start</button>
+            <button class="btn btn-secondary" onclick="resetTimer('writeTimer2',600)">Reset</button>
+          </div>
+        </div>
+        <div style="background:rgba(0,0,0,0.25);padding:1rem;border-radius:8px;font-size:0.85rem;line-height:1.6;margin-bottom:1rem;">
+          <strong>Task:</strong> State and support your opinion. Make a meaningful contribution using the classmates' ideas. Minimum: 100 words. Practice target: 120–130 words.<br><br>
+          <strong>Professor:</strong> "AI-powered tutoring systems are becoming increasingly sophisticated. Some believe these systems will eventually replace human teachers. Others argue that human teachers are irreplaceable. What is your view?"<br><br>
+          <strong>Mark:</strong> "AI tutors are always available, which is great for students in different time zones."<br>
+          <strong>Lisa:</strong> "Human teachers provide emotional support and mentorship that AI cannot replicate."
+        </div>
+        <textarea id="writingInput2" rows="8" placeholder="Type your response here (Minimum: 100 words; target: 120-130 in 10 minutes)..." oninput="updateWordCount('writingInput2','wordCount2',100,'100+ (target 120-130)')"></textarea>
+        <div class="word-count-badge" id="wordCount2">Word count: 0 words (Minimum: 100; target: 120-130)</div>
+        <button class="btn btn-secondary" style="margin-top:0.75rem;" onclick="toggleReveal('writeReveal2')">👁️ Show Model Answer</button>
+        <div class="reveal-box" id="writeReveal2">
+          <strong style="color:var(--accent-green);">Model Answer (Band 4+):</strong>
+          <p style="margin-top:0.5rem;line-height:1.7;">While I acknowledge Mark's point that AI tutors offer unprecedented accessibility across time zones, I firmly maintain that human teachers are irreplaceable, because they provide emotional intelligence and adaptive mentorship that no algorithm can authentically replicate. This is primarily because effective education requires reading non-verbal cues, adjusting pedagogical approaches in real-time, and building trust-based relationships, and these deeply human capacities directly determine student engagement and long-term academic persistence. Critics often argue that AI's data-processing superiority and 24/7 availability make human instruction obsolete, yet this perspective ignores the fact that learning is fundamentally a social process, demonstrating that technological efficiency alone cannot substitute for empathetic human connection. Therefore, integrating AI tools as supplements within a human-centered teaching framework is essential for achieving both personalized instruction and meaningful student-teacher mentorship.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide" id="slide-4">
+      <div class="card">
+        <div class="task-header">
+          <div class="card-title" style="margin-bottom:0;">✉️ Write an Email (7 min, 100-120 words)</div>
+          <div class="task-controls">
+            <span class="timer-display" id="emailTimer" style="font-size:1.5rem;">07:00</span>
+            <button class="btn" style="margin-left:0.5rem;" onclick="startTimer('emailTimer',420)">Start</button>
+            <button class="btn btn-secondary" onclick="resetTimer('emailTimer',420)">Reset</button>
+          </div>
+        </div>
+        <div style="background:rgba(0,0,0,0.25);padding:1rem;border-radius:8px;font-size:0.85rem;line-height:1.6;margin-bottom:1rem;">
+          <strong>Email from Coach Rivera:</strong> "The campus gym must increase its membership fees next semester to pay for new equipment. I would like your opinion on this change and one suggestion for keeping membership affordable."
+          <br><br><strong>In your email:</strong>
+          <ol class="prompt-list"><li>Say whether you support the fee increase and explain why.</li><li>Suggest one idea for keeping membership affordable for students.</li><li>Offer to help communicate the change or collect student opinions.</li></ol>
+        </div>
+        <textarea id="emailInput" rows="7" placeholder="Type your email reply here (Target: 100-120 words, 7 min)..." oninput="updateWordCount('emailInput','emailCount',100,'100+ (target 100-120)')"></textarea>
+        <div class="word-count-badge" id="emailCount">Word count: 0 words (Minimum: 100; target: 100-120)</div>
+        <button class="btn btn-secondary" style="margin-top:0.75rem;" onclick="toggleReveal('emailReveal')">👁️ Show Model Answer</button>
+        <div class="reveal-box" id="emailReveal">
+          <strong style="color:var(--accent-green);">Model Answer (Band 4+):</strong>
+          <p style="margin-top:0.5rem;line-height:1.7;">Dear Coach Rivera,<br><br>Thank you for explaining the planned increase in gym membership fees. I understand the need to pay for new equipment and I support the change if it improves safety and training options for students.<br><br>One idea for keeping membership affordable would be to offer a discounted semester pass for students who register early. This would let students budget in advance while guaranteeing steady membership numbers for the gym.<br><br>I would be happy to help collect student opinions about the new schedule or share the updated information with classmates. Please let me know if you would like me to circulate a short survey before the new term begins.<br><br>Best regards,<br>Valeria</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide" id="slide-5">
+      <div class="card">
+        <div class="card-title">📚 Homework: Write an Email — Internship Recommendation</div>
+        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:1rem;">Official format: 7 minutes, 100–120 words. Address all three bullets in a polite, formal email to a professor.</p>
+      </div>
+      <div class="card">
+        <div class="task-header">
+          <div class="card-title" style="margin-bottom:0;">✉️ Homework — Email to Professor Anderson (7 min, 100–120 words)</div>
+          <div class="task-controls">
+            <span class="timer-display" id="homeworkTimer" style="font-size:1.5rem;">07:00</span>
+            <button class="btn" style="margin-left:0.5rem;" onclick="startTimer('homeworkTimer',420)">Start</button>
+            <button class="btn btn-secondary" onclick="resetTimer('homeworkTimer',420)">Reset</button>
+          </div>
+        </div>
+        <div style="background:rgba(0,0,0,0.25);padding:1rem;border-radius:8px;font-size:0.85rem;line-height:1.6;margin-bottom:1rem;">
+          <strong>Scenario:</strong> You are applying for a summer internship at a local company. The application requires a letter of recommendation from a professor who knows your academic work well. You took Professor Anderson's computer science course last semester and earned a high grade.
+          <br><br><strong>Write an email to Professor Anderson. In your email, do the following:</strong>
+          <ol class="prompt-list"><li>Explain why you are applying for the summer research program.</li><li>Ask Professor Anderson to write a letter of recommendation for you.</li><li>Offer to provide any information that would help Professor Anderson write the letter.</li></ol>
+        </div>
+        <textarea id="homeworkInput" rows="8" placeholder="Type your email here (Target: 100-120 words, 7 min)..." oninput="updateWordCount('homeworkInput','homeworkCount',100,'100+ (target 100-120)')"></textarea>
+        <div class="word-count-badge" id="homeworkCount">Word count: 0 words (Minimum: 100; target: 100-120)</div>
+        <button class="btn btn-secondary" style="margin-top:0.75rem;" onclick="toggleReveal('homeworkReveal')">👁️ Show Model Answer</button>
+        <div class="reveal-box" id="homeworkReveal">
+          <strong style="color:var(--accent-green);">Model Answer — Human, formal, 118 words:</strong>
+          <p style="margin-top:0.5rem;line-height:1.7;">Dear Professor Anderson,<br><br>I hope you are well. I am writing to ask if you would be willing to write a letter of recommendation for my application to a summer research internship at NovaTech, a local software company. I am applying because the program focuses on machine learning for educational tools, which directly connects to the final project I completed in your Computer Science course last semester.<br><br>I earned an A in your course and particularly valued your feedback on my algorithm design, so I thought you could speak well to my analytical skills and work ethic.<br><br>I would be happy to provide my CV, transcript, the internship description, and a brief summary of my course project to make writing the letter easier. The deadline is May 10, and I can send all materials this week. Thank you for considering my request.<br><br>Best regards,<br>Valeria</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide" id="slide-6">
+      <div class="card">
+        <div class="card-title">✅ Post-Sprint Checklist</div>
+        <table class="error-table">
+          <thead><tr><th>Check</th><th>Pass?</th></tr></thead>
+          <tbody>
+            <tr><td>Academic Discussion: ≥ 100 words (practice target 120–130)?</td><td>☐</td></tr>
+            <tr><td>Clear position + meaningful reference to at least one classmate?</td><td>☐</td></tr>
+            <tr><td>Email: all three content points answered with specific detail?</td><td>☐</td></tr>
+            <tr><td>No double concession (<em>Although ... but</em>)?</td><td>☐</td></tr>
+            <tr><td>No sentence fragments; subject-verb agreement intact?</td><td>☐</td></tr>
+            <tr><td>Appropriate tone/register for the recipient (email)?</td><td>☐</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    </main>
+
+  <script src="audio/shadowingTS.js"></script>
+  <script>
+    function switchSlide(i){document.querySelectorAll('.slide').forEach((s,idx)=>s.classList.toggle('active',idx===i));document.querySelectorAll('.nav-btn').forEach((b,idx)=>b.classList.toggle('active',idx===i));}
+    let pacerInterval=null,currentWordIndex=0,karaokeIndex=-1;
+    const shadowingAudioEl=document.getElementById('shadowingAudio');
+    function wrapShadowingWords(){const c=document.getElementById('shadowingTextDisplay');if(c.dataset.wrapped)return;if(typeof shadowingTS!=='undefined'&&shadowingTS.length){c.innerHTML=shadowingTS.map(w=>`<span class="shadowing-word">${w.word}</span>`).join(' ');}else{c.innerHTML=c.innerText.split(/\s+/).map(w=>`<span class="shadowing-word">${w}</span>`).join(' ');}c.dataset.wrapped="true";}
+    function clearAllHighlights(){document.querySelectorAll('.shadowing-word').forEach(w=>w.classList.remove('active'));}
+    function toggleShadowingPacer(){if(pacerInterval){clearInterval(pacerInterval);pacerInterval=null;return;}if(shadowingAudioEl)shadowingAudioEl.pause();wrapShadowingWords();const sw=document.querySelectorAll('.shadowing-word');const sp=parseInt(document.getElementById('pacerSpeed').value)||380;pacerInterval=setInterval(()=>{sw.forEach(w=>w.classList.remove('active'));if(currentWordIndex<sw.length){sw[currentWordIndex].classList.add('active');currentWordIndex++;}else{clearInterval(pacerInterval);pacerInterval=null;currentWordIndex=0;}},sp);}
+    function resetShadowingPacer(){if(pacerInterval)clearInterval(pacerInterval);pacerInterval=null;currentWordIndex=0;karaokeIndex=-1;if(shadowingAudioEl)shadowingAudioEl.pause();clearAllHighlights();}
+    if(shadowingAudioEl){
+      shadowingAudioEl.addEventListener('play',()=>{if(pacerInterval){clearInterval(pacerInterval);pacerInterval=null;}wrapShadowingWords();});
+      shadowingAudioEl.addEventListener('timeupdate',()=>{if(typeof shadowingTS==='undefined'||!shadowingTS.length)return;const t=shadowingAudioEl.currentTime;if(t<shadowingTS[0].start)return;let idx=-1;for(let i=karaokeIndex+1;i<shadowingTS.length;i++){if(t>=shadowingTS[i].start)idx=i;else break;}if(idx===-1&&karaokeIndex>=0)idx=karaokeIndex;if(idx>=0&&idx!==karaokeIndex){karaokeIndex=idx;clearAllHighlights();const spans=document.querySelectorAll('.shadowing-word');if(spans[idx])spans[idx].classList.add('active');}});
+      shadowingAudioEl.addEventListener('ended',()=>{karaokeIndex=-1;clearAllHighlights();});
+    }
+    let activeT=null;
+    function startTimer(id,sec){if(activeT)clearInterval(activeT);let r=sec;const d=document.getElementById(id);d.style.color='var(--primary)';activeT=setInterval(()=>{d.textContent=`${String(Math.floor(r/60)).padStart(2,'0')}:${String(r%60).padStart(2,'0')}`;if(r<=60)d.style.color='var(--accent-red)';if(r<=0){clearInterval(activeT);activeT=null;d.style.animation='pulse 0.5s ease 3';}r--;},1000);}
+    function resetTimer(id,sec){if(activeT)clearInterval(activeT);activeT=null;const d=document.getElementById(id);d.textContent=`${String(Math.floor(sec/60)).padStart(2,'0')}:${String(sec%60).padStart(2,'0')}`;d.style.color='var(--primary)';}
+    function updateWordCount(a,c,min,label){const v=document.getElementById(a).value.trim();const n=v?v.split(/\s+/).length:0;const el=document.getElementById(c);el.textContent=`Word count: ${n} words (Goal: ${label||'130+'})`;el.style.color=n>=(min||130)?'var(--accent-green)':'var(--primary)';}
+    function toggleReveal(id){document.getElementById(id).classList.toggle('show');}
+</script>
+<button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Open lesson navigation">&#9776;</button>
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+<!-- FE:MOBILE --><script>// FE:MOBILE
+(function(){
+  function initM() {
+    var t = document.getElementById('mobileNavToggle'), ov = document.getElementById('sidebarOverlay');
+    if (!t || !ov) return;
+    var sb = document.querySelector('.nav-btn').parentElement;
+    function close() { sb.classList.remove('open'); ov.classList.remove('open'); }
+    t.addEventListener('click', function() { sb.classList.toggle('open'); ov.classList.toggle('open'); });
+    ov.addEventListener('click', close);
+    document.querySelectorAll('.nav-btn').forEach(function(b) { b.addEventListener('click', close); });
+  }
+  if (document.readyState !== 'loading') initM(); else document.addEventListener('DOMContentLoaded', initM);
+})();</script>
+<!-- FE:HASH --><script>// FE:HASH
+(function(){
+  function mH() { var m = location.hash.match(/^#slide-(\d+)$/); if (m && window.switchSlide) window.switchSlide(parseInt(m[1])); }
+  window.addEventListener('hashchange', mH);
+  !function(){ mH(); }();
+  if (!window.__feHashWrapped && window.switchSlide) {
+    window.__feHashWrapped = true;
+    var o = window.switchSlide;
+    window.switchSlide = function(i) { o(i); try { history.replaceState(null, '', '#slide-' + i); } catch (e) {} };
+  }
+})();</script>
+<!-- FE:KEYS --><script>// FE:KEYS
+(function(){
+  document.addEventListener('keydown', function(e) {
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT' || e.target.isContentEditable) return;
+    if (e.code === 'ArrowLeft' || e.code === 'ArrowRight') {
+      var btns = document.querySelectorAll('.nav-btn');
+      var cur = document.querySelector('.nav-btn.active');
+      var pos = cur ? Array.prototype.indexOf.call(btns, cur) : -1;
+      if (pos < 0) return;
+      var tgt = pos + (e.code === 'ArrowRight' ? 1 : -1);
+      if (tgt >= 0 && tgt < btns.length) { e.preventDefault(); window.switchSlide(tgt + 0); }
+    }
+  });
+})();</script>
+<!-- FE:TIMERS --><script>// FE:TIMERS
+(function(){
+  window.__activeIntervals__ = window.__activeIntervals__ || [];
+  if (!window.__feIntervalPatched) {
+    window.__feIntervalPatched = true;
+    var _si = window.setInterval;
+    window.setInterval = function(fn, t) { var id = _si(fn, t); window.__activeIntervals__.push(id); return id; };
+  }
+  window.clearAllDeckTimers = function() {
+    window.__activeIntervals__.forEach(function(id) { clearInterval(id); });
+    window.__activeIntervals__ = [];
+  };
+  if (!window.__feTimersWrapped && window.switchSlide) {
+    window.__feTimersWrapped = true;
+    var o = window.switchSlide;
+    window.switchSlide = function(i) { if (window.clearAllDeckTimers) window.clearAllDeckTimers(); o(i); };
+  }
+})();</script>
+<!-- FE:CHIPJS --><script>// FE:CHIP
+(function(){
+  function updChipFromActive() {
+    var c = document.getElementById('slideChip'); if (!c) return;
+    var cur = document.querySelector('.nav-btn.active');
+    var pos = cur ? Array.prototype.indexOf.call(document.querySelectorAll('.nav-btn'), cur) : 0;
+    c.textContent = (pos + 1) + ' / ' + document.querySelectorAll('.slide').length;
+  }
+  if (!window.__feChipWrapped && window.switchSlide) {
+    window.__feChipWrapped = true;
+    var o = window.switchSlide;
+    window.switchSlide = function(i) { o(i); var c = document.getElementById('slideChip'); if (c) c.textContent = (i + 1) + ' / ' + document.querySelectorAll('.slide').length; };
+  }
+  if (document.readyState !== 'loading') updChipFromActive(); else document.addEventListener('DOMContentLoaded', updChipFromActive);
+})();</script>
+</body>
+</html>
