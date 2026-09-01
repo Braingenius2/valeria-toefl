@@ -11,7 +11,7 @@
     :root{--bg-dark:#090d16;--bg-card:#131a26;--border-color:#243042;--text-main:#f1f5f9;--text-muted:#64748b;--primary:#f59e0b;--primary-hover:#d97706;--primary-dim:rgba(245,158,11,0.12);--accent-blue:#38bdf8;--accent-green:#10b981;--accent-red:#ef4444;--accent-purple:#a855f7;}
     *{box-sizing:border-box;margin:0;padding:0;}
     body{font-family:'Inter',sans-serif;background:var(--bg-dark);color:var(--text-main);display:flex;min-height:100vh;overflow-x:hidden;}
-    .sidebar{width:260px;background:var(--bg-card);border-right:1px solid var(--border-color);display:flex;flex-direction:column;padding:1.5rem 1rem;position:fixed;height:100vh;z-index:100;}
+    .sidebar{width:260px;background:var(--bg-card);border-right:1px solid var(--border-color);display:flex;flex-direction:column;padding:1.5rem 1rem;position:fixed;height:100vh;z-index:100;overflow-y:auto;scrollbar-width:thin;}
     .brand{display:flex;align-items:center;gap:0.75rem;margin-bottom:2rem;padding:0 0.5rem;}
     .brand-badge{background:var(--primary);color:#000;font-weight:700;font-size:0.75rem;padding:0.2rem 0.5rem;border-radius:4px;text-transform:uppercase;}
     .brand-title{font-weight:600;font-size:1.1rem;color:var(--text-main);}
@@ -74,16 +74,27 @@
 <!-- FE:CSS-CHIP --><style>.slide-chip{font-family:'Fira Code',monospace;font-size:0.72rem;font-weight:700;color:var(--primary);background:var(--bg-card,rgba(0,0,0,0.4));border:1px solid var(--border-color,rgba(255,255,255,0.15));padding:0.25rem 0.65rem;border-radius:20px;white-space:nowrap;margin-left:auto}</style>
 <style>.back-link{color:var(--text-muted);text-decoration:none;font-size:0.8rem;font-family:'Fira Code',monospace;white-space:nowrap;transition:color 0.2s;margin-left:1rem;}.back-link:hover{color:var(--primary);}</style></head>
 <body>
-  <aside class="sidebar">
+  <aside class="sidebar" style="overflow-y:auto;">
     <div class="brand"><span class="brand-badge">TOEFL</span><span class="brand-title">Valeria L18</span></div>
     <button class="nav-btn active" onclick="switchSlide(0)"><span class="nav-num">01</span> Warm-up</button>
     <button class="nav-btn" onclick="switchSlide(1)"><span class="nav-num">02</span> 10 Collocations</button>
     <button class="nav-btn" onclick="switchSlide(2)"><span class="nav-num">03</span> Traps & Upgrades</button>
     <button class="nav-btn" onclick="switchSlide(3)"><span class="nav-num">04</span> Reading Drill</button>
     <button class="nav-btn" onclick="switchSlide(4)"><span class="nav-num">05</span> Listening Drill</button>
-    <button class="nav-btn" onclick="switchSlide(5)"><span class="nav-num">06</span> Error Fix</button>
+    <button class="nav-btn" onclick="switchSlide(5)"><span class="nav-num">06</span> Error Fix + Lab</button>
     <button class="nav-btn" onclick="switchSlide(6)"><span class="nav-num">07</span> Discussion Sprint</button>
     <button class="nav-btn" onclick="switchSlide(7)"><span class="nav-num">08</span> 📚 Homework</button>
+    <button class="nav-btn" onclick="switchSlide(8)"><span class="nav-num">09</span> AD: Sterling Redo</button>
+    <button class="nav-btn" onclick="switchSlide(9)"><span class="nav-num">10</span> AD: Internship</button>
+    <button class="nav-btn" onclick="switchSlide(10)"><span class="nav-num">11</span> AD: Bikes</button>
+    <button class="nav-btn" onclick="switchSlide(11)"><span class="nav-num">12</span> AD: AI Grading</button>
+    <button class="nav-btn" onclick="switchSlide(12)"><span class="nav-num">13</span> AD: Labs vs Sports</button>
+    <button class="nav-btn" onclick="switchSlide(13)"><span class="nav-num">14</span> Email: Leo Fix</button>
+    <button class="nav-btn" onclick="switchSlide(14)"><span class="nav-num">15</span> Email: Housing</button>
+    <button class="nav-btn" onclick="switchSlide(15)"><span class="nav-num">16</span> Email: Library</button>
+    <button class="nav-btn" onclick="switchSlide(16)"><span class="nav-num">17</span> Email: Career Fair</button>
+    <button class="nav-btn" onclick="switchSlide(17)"><span class="nav-num">18</span> Email: Office Hours</button>
+    <button class="nav-btn" onclick="switchSlide(18)"><span class="nav-num">19</span> Post-Lesson 17m</button>
     
   </aside>
   <main class="main-content">
@@ -222,6 +233,32 @@
           </div>
         </div>
       </div>
+      <div class="card" style="border-left:3px solid var(--accent-purple);">
+        <div class="card-title">🧩 Collocation Gap-Fill — Use the 10 Targets</div>
+        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:1rem;">Fill each gap with the correct verb from today's list. All 10 collocations appear once. Type the verb only (lowercase). Then reveal.</p>
+        <div style="font-size:0.88rem;line-height:2.4;background:rgba(0,0,0,0.2);padding:1rem;border-radius:8px;">
+          <div>1. The lab will <input type="text" id="gap1" placeholder="___" style="width:140px;display:inline-block;padding:0.3rem 0.5rem;font-size:0.85rem;"> research on solar energy.</div>
+          <div>2. She managed to <input type="text" id="gap2" placeholder="___" style="width:140px;display:inline-block;padding:0.3rem 0.5rem;font-size:0.85rem;"> all graduation requirements on time.</div>
+          <div>3. Children <input type="text" id="gap3" placeholder="___" style="width:140px;display:inline-block;padding:0.3rem 0.5rem;font-size:0.85rem;"> knowledge quickly when they practice daily.</div>
+          <div>4. Don't rush — we need more data before we can <input type="text" id="gap4" placeholder="___" style="width:140px;display:inline-block;padding:0.3rem 0.5rem;font-size:0.85rem;"> firm conclusions.</div>
+          <div>5. He hopes to <input type="text" id="gap5" placeholder="___" style="width:140px;display:inline-block;padding:0.3rem 0.5rem;font-size:0.85rem;"> experience during his internship at the startup.</div>
+          <div>6. The candidate must <input type="text" id="gap6" placeholder="___" style="width:160px;display:inline-block;padding:0.3rem 0.5rem;font-size:0.85rem;"> competence in data analysis.</div>
+          <div>7. The study tries to <input type="text" id="gap7" placeholder="___" style="width:140px;display:inline-block;padding:0.3rem 0.5rem;font-size:0.85rem;"> credibility by citing peer-reviewed sources.</div>
+          <div>8. Universities should <input type="text" id="gap8" placeholder="___" style="width:140px;display:inline-block;padding:0.3rem 0.5rem;font-size:0.85rem;"> these issues before enrolment drops further.</div>
+          <div>9. Hard work and focus are necessary to <input type="text" id="gap9" placeholder="___" style="width:140px;display:inline-block;padding:0.3rem 0.5rem;font-size:0.85rem;"> success in any competitive field.</div>
+          <div>10. The article did not <input type="text" id="gap10" placeholder="___" style="width:140px;display:inline-block;padding:0.3rem 0.5rem;font-size:0.85rem;"> enough evidence for its central claim.</div>
+        </div>
+        <div style="margin-top:0.75rem;display:flex;gap:0.5rem;flex-wrap:wrap;"><button class="btn btn-secondary" onclick="checkGaps()">✓ Check</button><button class="btn" onclick="toggleReveal('gapReveal')">👁️ Show Answers</button><span id="gapScore" style="font-family:'Fira Code',monospace;font-size:0.85rem;color:var(--accent-green);align-self:center;margin-left:0.5rem;"></span></div>
+        <div class="reveal-box" id="gapReveal"><div style="line-height:2;"><div>1. <span class="text-green">conduct</span> research</div><div>2. <span class="text-green">fulfill</span> requirements</div><div>3. <span class="text-green">acquire</span> knowledge</div><div>4. <span class="text-green">draw</span> conclusions</div><div>5. <span class="text-green">gain</span> experience</div><div>6. <span class="text-green">demonstrate</span> competence</div><div>7. <span class="text-green">establish</span> credibility</div><div>8. <span class="text-green">address</span> issues</div><div>9. <span class="text-green">achieve</span> success</div><div>10. <span class="text-green">provide</span> evidence</div><p style="margin-top:0.5rem;color:var(--text-muted);">All 10 are uncountable / fixed — no <em>a research / an evidence</em>, no <em>make conclusions / learn knowledge</em>.</p></div></div>
+      </div>
+      <div class="card" style="border-left:3px solid var(--accent-green);">
+        <div class="card-title">✍️ Quick Production — Use 3 Collocations Right Now</div>
+        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:1rem;">Write <strong>3 original sentences</strong> about your own studies/work. Use a <strong>different</strong> collocation in each. Keep each 12-20 words. You will reuse these patterns in the sprint next slide.</p>
+        <textarea id="collProdInput" rows="5" placeholder="1. I ...&#10;2. I ...&#10;3. I ..." oninput="updateWordCount('collProdInput','collProdCount',25,'~30-45 words for 3 sentences')"></textarea><div class="word-count-badge" id="collProdCount">Word count: 0 words (Aim: ~30-45 for 3 sentences)</div>
+        <div style="margin-top:0.75rem;display:flex;gap:0.5rem;flex-wrap:wrap;"><button class="btn btn-secondary" onclick="toggleReveal('collProdReveal')">👁️ Show Examples</button><button class="btn btn-secondary" onclick="toggleReveal('collProdCheck')">✓ Self-Check</button></div>
+        <div class="reveal-box" id="collProdReveal"><div style="line-height:1.8;"><div><em>"I want to <span class="text-green">conduct research</span> on psychology and <span class="text-green">acquire knowledge</span> about memory."</em> — counts as 2, but aim for 3 separate sentences.</div><div><em>"Last semester I had to <span class="text-green">fulfill requirements</span> for two lab courses."</em></div><div><em>"My mentor helped me <span class="text-green">establish credibility</span> by reviewing my data before publication."</em></div></div></div>
+        <div class="reveal-box" id="collProdCheck"><strong>Self-check:</strong> Different collocation in each sentence? Verb + noun correct (not <em>make/do/learn</em> calques)? No <em>a research / an evidence</em>? Each sentence complete (subject+verb)?</div>
+      </div>
     </div>
 
     <div class="slide" id="slide-6">
@@ -283,6 +320,148 @@
       </div>
     </div>
 
+    <div class="slide" id="slide-8">
+      <div class="card">
+        <div class="task-header"><div class="card-title" style="margin-bottom:0;">🎯 A1 — Sterling Redo (10m) · <span style="font-size:0.8rem;color:var(--text-muted);">Remediation of 99w fail — USE TODAY</span></div><div class="task-controls"><span class="timer-display" id="visA1Timer" style="font-size:1.5rem;">10:00</span><button class="btn" style="margin-left:0.5rem;" onclick="startTimer('visA1Timer',600)">Start</button><button class="btn btn-secondary" onclick="resetTimer('visA1Timer',600)">Reset</button></div></div>
+        <div style="background:rgba(0,0,0,0.25);padding:1rem;border-radius:8px;font-size:0.85rem;line-height:1.6;margin:1rem 0;"><strong>Professor Sterling:</strong> "When you research a topic you encounter two highly reputable sources that present completely conflicting conclusions. What is the best strategy to handle the conflicting information?"<br><br><strong>Elena:</strong> "Check publication dates — newer is usually more accurate (better tech, builds on older). Prioritize latest."<br><strong>Marcus:</strong> "Examine methodology — compare how studies were conducted (sample size, data collection objectivity) to judge which is more robust."<br><br><strong>Task:</strong> Side clearly with <strong>Marcus</strong>, reference Elena once, give one concrete method contrast (e.g., 50 vs 2000 participants, self-report vs objective test), 120-130w, ≥3 collocations.</div>
+        <textarea id="visA1Input" rows="6" placeholder="Type response (120-130w)..." oninput="updateWordCount('visA1Input','visA1Count',100,'100+ target 120-130')"></textarea><div class="word-count-badge" id="visA1Count">Word count: 0 words (Minimum: 100; target 120-130)</div>
+        <div style="margin-top:0.75rem;display:flex;gap:0.5rem;flex-wrap:wrap;"><button class="btn btn-secondary" onclick="toggleReveal('visA1Model')">👁️ Show Model</button><button class="btn btn-secondary" onclick="toggleReveal('visA1Check')">✓ Checklist</button></div>
+        <div class="reveal-box" id="visA1Model"><strong style="color:var(--accent-green);">Model ~128w (5 collocations):</strong><p style="margin-top:0.5rem;line-height:1.7;">While I acknowledge Elena's point that newer studies can reflect updated technology, I firmly agree with Marcus that the best strategy is to closely examine the methodology of both sources. This is primarily because publication date alone does not guarantee quality; a recent study with a small, biased sample may still provide weak evidence, whereas an older study with a large sample and objective measures may have established greater credibility. For example, if one experiment tested 40 students with self-reported data and the other tested 2,000 with standardized tests, the second should carry more weight even if it is older. Therefore, students should acquire knowledge about research design, compare how conclusions were drawn, and demonstrate competence by weighing evidence rather than assuming newer is always better.</p></div>
+        <div class="reveal-box" id="visA1Check"><strong>Checklist:</strong> 120w+? Clear stance (Marcus)? Elena referenced? Concrete example (numbers/method)? No "Although…,but…"? No "researches/sourses"? 3 collocations?</div>
+      </div>
+    </div>
+
+    <div class="slide" id="slide-9">
+      <div class="card">
+        <div class="task-header"><div class="card-title" style="margin-bottom:0;">🎯 A2 — Internship Required (10m)</div><div class="task-controls"><span class="timer-display" id="visA2Timer" style="font-size:1.5rem;">10:00</span><button class="btn" style="margin-left:0.5rem;" onclick="startTimer('visA2Timer',600)">Start</button><button class="btn btn-secondary" onclick="resetTimer('visA2Timer',600)">Reset</button></div></div>
+        <div style="background:rgba(0,0,0,0.25);padding:1rem;border-radius:8px;font-size:0.85rem;line-height:1.6;margin:1rem 0;"><strong>Professor:</strong> "Should the university require an internship for all majors, or should students choose freely?"<br><strong>Maya:</strong> "Internships help students gain experience and establish credibility for jobs — essential for success."<br><strong>Jon:</strong> "Unpaid internships limit access and are unfair for working students who already struggle to fulfill requirements."<br><strong>Task:</strong> Take a position, reference one classmate, give example, 120-130w, use <em>gain experience, establish credibility, fulfill requirements</em>.</div>
+        <textarea id="visA2Input" rows="6" placeholder="Type response..." oninput="updateWordCount('visA2Input','visA2Count',100,'100+ target 120-130')"></textarea><div class="word-count-badge" id="visA2Count">Word count: 0 words (Minimum: 100; target 120-130)</div>
+        <div style="margin-top:0.75rem;display:flex;gap:0.5rem;flex-wrap:wrap;"><button class="btn btn-secondary" onclick="toggleReveal('visA2Model')">👁️ Show Model</button><button class="btn btn-secondary" onclick="toggleReveal('visA2Check')">✓ Checklist</button></div>
+        <div class="reveal-box" id="visA2Model"><strong style="color:var(--accent-green);">Model ~124w:</strong><p style="margin-top:0.5rem;line-height:1.7;">While I understand Jon's concern that unpaid internships can burden students who work to fulfill requirements, I support Maya's view that an internship should be required. This is primarily because students who gain practical experience in a real workplace can provide evidence of their skills and establish credibility with employers more easily than those with only classroom grades. For example, an engineering student who conducted research in a company lab can demonstrate competence during an interview by describing actual projects. Critics argue internships reduce choice, yet universities can address these issues by funding stipends and allowing flexible timing. Therefore, a funded, well-organized internship better prepares learners to achieve success after graduation than purely optional experience.</p></div>
+        <div class="reveal-box" id="visA2Check">120w+? Stance clear? One classmate referenced? Example with numbers/field? 3 target collocations? Double-concession clean?</div>
+      </div>
+    </div>
+
+    <div class="slide" id="slide-10">
+      <div class="card">
+        <div class="task-header"><div class="card-title" style="margin-bottom:0;">🎯 A3 — Free Public Bikes (10m)</div><div class="task-controls"><span class="timer-display" id="visA3Timer" style="font-size:1.5rem;">10:00</span><button class="btn" style="margin-left:0.5rem;" onclick="startTimer('visA3Timer',600)">Start</button><button class="btn btn-secondary" onclick="resetTimer('visA3Timer',600)">Reset</button></div></div>
+        <div style="background:rgba(0,0,0,0.25);padding:1rem;border-radius:8px;font-size:0.85rem;line-height:1.6;margin:1rem 0;"><strong>Professor:</strong> "The city is considering free public bikes. Is this a good investment?"<br><strong>Elena (alt):</strong> "Bikes reduce traffic and pollution — we can achieve success for environment."<br><strong>Marcus (alt):</strong> "Maintenance and vandalism costs waste money; better spend on buses."<br><strong>Task:</strong> Position + one classmate + example, 120-130w, use <em>achieve success/achieve a goal, provide evidence, address issues</em>.</div>
+        <textarea id="visA3Input" rows="6" placeholder="Type response..." oninput="updateWordCount('visA3Input','visA3Count',100,'100+ target 120-130')"></textarea><div class="word-count-badge" id="visA3Count">Word count: 0 words (Minimum: 100; target 120-130)</div>
+        <div style="margin-top:0.75rem;display:flex;gap:0.5rem;flex-wrap:wrap;"><button class="btn btn-secondary" onclick="toggleReveal('visA3Model')">👁️ Show Model</button><button class="btn btn-secondary" onclick="toggleReveal('visA3Check')">✓ Checklist</button></div>
+        <div class="reveal-box" id="visA3Model"><strong style="color:var(--accent-green);">Model ~122w:</strong><p style="margin-top:0.5rem;line-height:1.7;">While I acknowledge Marcus's point that bike-sharing requires maintenance and may face vandalism, I agree that free public bikes are a worthwhile investment. This is primarily because cities that provide evidence from pilot programs often show reduced traffic and healthier residents, which helps them achieve success in pollution goals without major construction. For instance, in my hometown a small pilot that provided 200 bikes led local researchers to draw conclusions about shorter car trips. Critics worry about costs, yet the city can address these issues by requiring deposits and tracking bikes with an app to establish credibility for the system. Therefore, with clear rules, public bikes offer a practical, low-cost step rather than wasteful spending.</p></div>
+        <div class="reveal-box" id="visA3Check">120w+? Position + classmate? Example with data? 3 collocations? No invented stats without hedge?</div>
+      </div>
+    </div>
+
+    <div class="slide" id="slide-11">
+      <div class="card">
+        <div class="task-header"><div class="card-title" style="margin-bottom:0;">🎯 A4 — AI Grading Essays (10m)</div><div class="task-controls"><span class="timer-display" id="visA4Timer" style="font-size:1.5rem;">10:00</span><button class="btn" style="margin-left:0.5rem;" onclick="startTimer('visA4Timer',600)">Start</button><button class="btn btn-secondary" onclick="resetTimer('visA4Timer',600)">Reset</button></div></div>
+        <div style="background:rgba(0,0,0,0.25);padding:1rem;border-radius:8px;font-size:0.85rem;line-height:1.6;margin:1rem 0;"><strong>Professor:</strong> "Should essays be graded by AI instead of human professors?"<br><strong>Priya:</strong> "AI is fast and consistent and can address issues of bias."<br><strong>Daniel:</strong> "AI misses nuance and cannot demonstrate competence in evaluating creativity."<br><strong>Task:</strong> Position + one classmate + example, 120-130w, use <em>address issues, demonstrate competence in, provide evidence</em>.</div>
+        <textarea id="visA4Input" rows="6" placeholder="Type response..." oninput="updateWordCount('visA4Input','visA4Count',100,'100+ target 120-130')"></textarea><div class="word-count-badge" id="visA4Count">Word count: 0 words (Minimum: 100; target 120-130)</div>
+        <div style="margin-top:0.75rem;display:flex;gap:0.5rem;flex-wrap:wrap;"><button class="btn btn-secondary" onclick="toggleReveal('visA4Model')">👁️ Show Model</button><button class="btn btn-secondary" onclick="toggleReveal('visA4Check')">✓ Checklist</button></div>
+        <div class="reveal-box" id="visA4Model"><strong style="color:var(--accent-green);">Model ~125w:</strong><p style="margin-top:0.5rem;line-height:1.7;">While I acknowledge Priya's point that AI grading is faster and more consistent, I agree with Daniel that human evaluation remains essential. This is primarily because professors who have studied pedagogy can demonstrate competence in judging originality and argument depth, whereas AI often provides evidence based only on surface features. For example, a student who conducted research and drew novel conclusions about climate policy might be marked down by an algorithm that rewards standard phrasing. Although AI can address issues of workload, it cannot fully evaluate critical thinking. Therefore, AI should support preliminary checks, but final grades should depend on human expertise to ensure fair assessment.</p></div>
+        <div class="reveal-box" id="visA4Check">120w+? Stance? One classmate? Example? 3 collocations?</div>
+      </div>
+    </div>
+
+    <div class="slide" id="slide-12">
+      <div class="card">
+        <div class="task-header"><div class="card-title" style="margin-bottom:0;">🎯 A5 — Labs vs Sports Funding (10m)</div><div class="task-controls"><span class="timer-display" id="visA5Timer" style="font-size:1.5rem;">10:00</span><button class="btn" style="margin-left:0.5rem;" onclick="startTimer('visA5Timer',600)">Start</button><button class="btn btn-secondary" onclick="resetTimer('visA5Timer',600)">Reset</button></div></div>
+        <div style="background:rgba(0,0,0,0.25);padding:1rem;border-radius:8px;font-size:0.85rem;line-height:1.6;margin:1rem 0;"><strong>Professor:</strong> "Should extra university funding go to sports facilities or to science labs?"<br><strong>Alex:</strong> "Sports improve health and community; students gain experience in teamwork."<br><strong>Lisa:</strong> "Lab upgrades let students conduct research and acquire specialized knowledge essential for careers."<br><strong>Task:</strong> Choose side, reference one speaker, example, 120-130w, ≥3 collocations.</div>
+        <textarea id="visA5Input" rows="6" placeholder="Type response..." oninput="updateWordCount('visA5Input','visA5Count',100,'100+ target 120-130')"></textarea><div class="word-count-badge" id="visA5Count">Word count: 0 words (Minimum: 100; target 120-130)</div>
+        <div style="margin-top:0.75rem;display:flex;gap:0.5rem;flex-wrap:wrap;"><button class="btn btn-secondary" onclick="toggleReveal('visA5Model')">👁️ Show Model</button><button class="btn btn-secondary" onclick="toggleReveal('visA5Check')">✓ Checklist</button></div>
+        <div class="reveal-box" id="visA5Model"><strong style="color:var(--accent-green);">Model ~123w:</strong><p style="margin-top:0.5rem;line-height:1.7;">While I acknowledge Alex's point that sports facilities help students gain experience in teamwork and reduce stress, I side with Lisa that funding should prioritize science labs. This is primarily because modern labs allow students to conduct research, acquire specialized knowledge, and provide evidence for their findings with professional equipment. For example, biology students who demonstrate competence in handling microscopes can more easily achieve success when applying for internships. Although sports foster community, labs directly improve academic outcomes and establish credibility for the university. Therefore, investing in labs better fulfills the core educational requirements than expanding athletic facilities alone.</p></div>
+        <div class="reveal-box" id="visA5Check">120w+? Stance? Classmate? Example? 3 collocations? No "a research"?</div>
+      </div>
+    </div>
+
+    <div class="slide" id="slide-13">
+      <div class="card">
+        <div class="task-header"><div class="card-title" style="margin-bottom:0;">✉️ E1 — Leo Kayaking Fix (7m)</div><div class="task-controls"><span class="timer-display" id="visE1Timer" style="font-size:1.5rem;">07:00</span><button class="btn" style="margin-left:0.5rem;" onclick="startTimer('visE1Timer',420)">Start</button><button class="btn btn-secondary" onclick="resetTimer('visE1Timer',420)">Reset</button></div></div>
+        <div style="background:rgba(0,0,0,0.25);padding:1rem;border-radius:8px;font-size:0.85rem;line-height:1.6;margin:1rem 0;"><strong>Scenario:</strong> Outdoor Adventure Club beginner-friendly kayaking trip. Flyer: <em>Lakewood Park, Sat 9am, boats + instruction provided</em>. Friend Leo stressed with midterms, wants outdoors.<br><strong>Bullets:</strong> (1) explain details when/where/what provided (2) 2 reasons to join (midterm stress + outdoors) (3) suggest <strong>one</strong> gear item (sunscreen / water shoes / waterproof bag) + why.<br><span style="color:var(--accent-red);">⚠️ No professor invention — use only flyer info.</span> Target 100-120w.</div>
+        <textarea id="visE1Input" rows="6" placeholder="Write email 100-120w..." oninput="updateWordCount('visE1Input','visE1Count',100,'100+ target 100-120')"></textarea><div class="word-count-badge" id="visE1Count">Word count: 0 words (Minimum: 100; target 100-120)</div>
+        <div style="margin-top:0.75rem;display:flex;gap:0.5rem;flex-wrap:wrap;"><button class="btn btn-secondary" onclick="toggleReveal('visE1Model')">👁️ Show Model</button><button class="btn btn-secondary" onclick="toggleReveal('visE1Check')">✓ Checklist</button></div>
+        <div class="reveal-box" id="visE1Model"><strong style="color:var(--accent-green);">Model ~112w:</strong><p style="margin-top:0.5rem;line-height:1.7;">Dear Leo,<br><br>I hope you are well. I saw a flyer for the university's Outdoor Adventure Club — they are holding a beginner-friendly kayaking trip at Lakewood Park this Saturday at 9:00 a.m. They provide boats and basic instruction, so no experience is needed.<br><br>I think you should join because you mentioned feeling stressed about midterms and wanting to spend more time outdoors. Paddling is a great way to clear your mind and reduce stress, and it is also a nice way to meet new friends.<br><br>I suggest you bring sunscreen and a hat because we will be on the water for several hours. Let me know if you want to go together!<br><br>Best wishes,<br>Valeria</p></div>
+        <div class="reveal-box" id="visE1Check"><strong>Checklist:</strong> 3 bullets yes? ≥100w? Gear + why? No hallucination? Friendly register correct?</div>
+      </div>
+    </div>
+
+    <div class="slide" id="slide-14">
+      <div class="card">
+        <div class="task-header"><div class="card-title" style="margin-bottom:0;">✉️ E2 — Housing: Noisy Dorm (7m)</div><div class="task-controls"><span class="timer-display" id="visE2Timer" style="font-size:1.5rem;">07:00</span><button class="btn" style="margin-left:0.5rem;" onclick="startTimer('visE2Timer',420)">Start</button><button class="btn btn-secondary" onclick="resetTimer('visE2Timer',420)">Reset</button></div></div>
+        <div style="background:rgba(0,0,0,0.25);padding:1rem;border-radius:8px;font-size:0.85rem;line-height:1.6;margin:1rem 0;"><strong>To:</strong> Housing Office<br><strong>Subject:</strong> Request for room change<br><strong>Bullets:</strong> (1) explain issue — dorm next to construction, thin walls, noise at night (2) describe impact — poor sleep, cannot focus on midterms (3) propose solution — move to quieter floor / temporary room. Polite formal, 100-120w.</div>
+        <textarea id="visE2Input" rows="6" placeholder="Write email..." oninput="updateWordCount('visE2Input','visE2Count',100,'100+ target 100-120')"></textarea><div class="word-count-badge" id="visE2Count">Word count: 0 words (Minimum: 100; target 100-120)</div>
+        <div style="margin-top:0.75rem;display:flex;gap:0.5rem;flex-wrap:wrap;"><button class="btn btn-secondary" onclick="toggleReveal('visE2Model')">👁️ Show Model</button><button class="btn btn-secondary" onclick="toggleReveal('visE2Check')">✓ Checklist</button></div>
+        <div class="reveal-box" id="visE2Model"><strong style="color:var(--accent-green);">Model ~108w:</strong><p style="margin-top:0.5rem;line-height:1.7;">Dear Housing Office,<br><br>I am writing to request a room change because my current dorm is extremely noisy. It is located next to a construction site, and the walls are thin, so drilling starts early and continues late into the evening.<br><br>This has affected my sleep and my ability to prepare for midterms. I have not been able to concentrate in the evenings, and I am concerned about my upcoming exams.<br><br>Would it be possible to move to a quieter floor or a temporary room for the next two weeks? I am flexible about timing and happy to follow any procedure.<br><br>Thank you for your help.<br>Best regards,<br>Valeria</p></div>
+        <div class="reveal-box" id="visE2Check">3 bullets? ≥100w? Polite formal (Dear / Best regards)? No extra invented compensation demands?</div>
+      </div>
+    </div>
+
+    <div class="slide" id="slide-15">
+      <div class="card">
+        <div class="task-header"><div class="card-title" style="margin-bottom:0;">✉️ E3 — Library Hours Extension (7m)</div><div class="task-controls"><span class="timer-display" id="visE3Timer" style="font-size:1.5rem;">07:00</span><button class="btn" style="margin-left:0.5rem;" onclick="startTimer('visE3Timer',420)">Start</button><button class="btn btn-secondary" onclick="resetTimer('visE3Timer',420)">Reset</button></div></div>
+        <div style="background:rgba(0,0,0,0.25);padding:1rem;border-radius:8px;font-size:0.85rem;line-height:1.6;margin:1rem 0;"><strong>To:</strong> Prof. Chen (Library Committee)<br><strong>Subject:</strong> Extending library hours during finals<br><strong>Bullets:</strong> (1) ask to extend hours (currently closes 6pm) (2) describe your evening study schedule + why needed (3) offer to volunteer/collect signatures. Formal, 100-120w.</div>
+        <textarea id="visE3Input" rows="6" placeholder="Write email..." oninput="updateWordCount('visE3Input','visE3Count',100,'100+ target 100-120')"></textarea><div class="word-count-badge" id="visE3Count">Word count: 0 words (Minimum: 100; target 100-120)</div>
+        <div style="margin-top:0.75rem;display:flex;gap:0.5rem;flex-wrap:wrap;"><button class="btn btn-secondary" onclick="toggleReveal('visE3Model')">👁️ Show Model</button><button class="btn btn-secondary" onclick="toggleReveal('visE3Check')">✓ Checklist</button></div>
+        <div class="reveal-box" id="visE3Model"><strong style="color:var(--accent-green);">Model ~115w:</strong><p style="margin-top:0.5rem;line-height:1.7;">Dear Professor Chen,<br><br>I am writing to ask whether the library hours could be extended during finals week. Currently the building closes at 6 p.m., which makes it difficult for students with daytime classes to find a quiet place to study.<br><br>I usually study in the evenings after my labs finish at 5 p.m., so an extra two hours would allow me to complete my research and prepare for exams without rushing.<br><br>I would be happy to volunteer at the front desk or collect signatures from classmates who support the change. Thank you for considering this request.<br><br>Best regards,<br>Valeria</p></div>
+        <div class="reveal-box" id="visE3Check">3 bullets? ≥100w? Formal tone? Offer concrete (volunteer/signatures)?</div>
+      </div>
+    </div>
+
+    <div class="slide" id="slide-16">
+      <div class="card">
+        <div class="task-header"><div class="card-title" style="margin-bottom:0;">✉️ E4 — Career Fair Follow-up (7m)</div><div class="task-controls"><span class="timer-display" id="visE4Timer" style="font-size:1.5rem;">07:00</span><button class="btn" style="margin-left:0.5rem;" onclick="startTimer('visE4Timer',420)">Start</button><button class="btn btn-secondary" onclick="resetTimer('visE4Timer',420)">Reset</button></div></div>
+        <div style="background:rgba(0,0,0,0.25);padding:1rem;border-radius:8px;font-size:0.85rem;line-height:1.6;margin:1rem 0;"><strong>To:</strong> Recruiter Ms. Patel (career fair presentation)<br><strong>Subject:</strong> Thank you and internship question<br><strong>Bullets:</strong> (1) what you found interesting in presentation (2) ask about internship openings next semester (3) ask which skills they value most. Formal, 100-120w.</div>
+        <textarea id="visE4Input" rows="6" placeholder="Write email..." oninput="updateWordCount('visE4Input','visE4Count',100,'100+ target 100-120')"></textarea><div class="word-count-badge" id="visE4Count">Word count: 0 words (Minimum: 100; target 100-120)</div>
+        <div style="margin-top:0.75rem;display:flex;gap:0.5rem;flex-wrap:wrap;"><button class="btn btn-secondary" onclick="toggleReveal('visE4Model')">👁️ Show Model</button><button class="btn btn-secondary" onclick="toggleReveal('visE4Check')">✓ Checklist</button></div>
+        <div class="reveal-box" id="visE4Model"><strong style="color:var(--accent-green);">Model ~110w:</strong><p style="margin-top:0.5rem;line-height:1.7;">Dear Ms. Patel,<br><br>Thank you for your presentation at yesterday's career fair. I found your explanation of how your team draws conclusions from user data and then conducts follow-up research especially interesting.<br><br>I am writing to ask whether you will have internship openings next semester for students with a background in data analysis and programming.<br><br>I would also like to know which skills you value most in applicants, so I can better prepare and demonstrate competence in those areas. I would be happy to provide my transcript or meet at your convenience.<br><br>Best regards,<br>Valeria</p></div>
+        <div class="reveal-box" id="visE4Check">3 bullets? ≥100w? Formal? Uses 1 collocation naturally? No "I think, it would be" comma splice?</div>
+      </div>
+    </div>
+
+    <div class="slide" id="slide-17">
+      <div class="card">
+        <div class="task-header"><div class="card-title" style="margin-bottom:0;">✉️ E5 — Professor Office Hours (7m)</div><div class="task-controls"><span class="timer-display" id="visE5Timer" style="font-size:1.5rem;">07:00</span><button class="btn" style="margin-left:0.5rem;" onclick="startTimer('visE5Timer',420)">Start</button><button class="btn btn-secondary" onclick="resetTimer('visE5Timer',420)">Reset</button></div></div>
+        <div style="background:rgba(0,0,0,0.25);padding:1rem;border-radius:8px;font-size:0.85rem;line-height:1.6;margin:1rem 0;"><strong>To:</strong> Professor Lee<br><strong>Subject:</strong> Question about assignment deadline<br><strong>Bullets:</strong> (1) explain misunderstanding about deadline (sick last week, missed announcement) (2) ask for 2-day extension + explain why needed (to provide better evidence for paper) (3) promise to submit complete draft / ask if penalty applies. Polite formal, 100-120w.</div>
+        <textarea id="visE5Input" rows="6" placeholder="Write email..." oninput="updateWordCount('visE5Input','visE5Count',100,'100+ target 100-120')"></textarea><div class="word-count-badge" id="visE5Count">Word count: 0 words (Minimum: 100; target 100-120)</div>
+        <div style="margin-top:0.75rem;display:flex;gap:0.5rem;flex-wrap:wrap;"><button class="btn btn-secondary" onclick="toggleReveal('visE5Model')">👁️ Show Model</button><button class="btn btn-secondary" onclick="toggleReveal('visE5Check')">✓ Checklist</button></div>
+        <div class="reveal-box" id="visE5Model"><strong style="color:var(--accent-green);">Model ~118w:</strong><p style="margin-top:0.5rem;line-height:1.7;">Dear Professor Lee,<br><br>I am writing because I misunderstood the deadline for the research paper. I was sick last week and missed your announcement that it is due this Friday.<br><br>I would like to ask whether a two-day extension to Sunday might be possible. The extra time would allow me to conduct additional research and provide stronger evidence for my conclusions rather than submitting a rushed draft.<br><br>I can send you a complete outline by Friday to show my progress. Please let me know whether a late penalty would apply. Thank you for your understanding.<br><br>Best regards,<br>Valeria</p></div>
+        <div class="reveal-box" id="visE5Check">3 bullets? ≥100w? Polite formal? Extension + why + penalty question all present?</div>
+      </div>
+    </div>
+
+    <div class="slide" id="slide-18">
+      <div class="card" style="border:2px solid var(--accent-green);">
+        <div class="card-title" style="color:var(--accent-green);">📮 Post-Lesson Simulation — HOMEWORK for External Grading (17m block · 10+7)</div>
+        <p style="font-size:0.85rem;color:var(--text-muted);line-height:1.6;margin-bottom:1rem;">Do in <strong style="color:var(--text-main);">ONE 17-minute block</strong> (10m AD → 7m Email, no break). No AI, no dictionary, keep word counts visible. Paste raw texts as written.</p>
+        <div style="background:rgba(0,0,0,0.2);padding:1rem;border-radius:8px;font-size:0.85rem;line-height:1.6;margin-bottom:1rem;">
+          <strong style="color:var(--accent-green);">Instructions to copy:</strong><br><em>Do this in one 17-minute block: 10 min for Task 1, then immediately 7 min for Task 2. Keep word counts visible. No AI, no extra time, no dictionary. Paste both texts exactly as you wrote them (include word counts).</em>
+        </div>
+        <div style="background:rgba(0,0,0,0.25);padding:1rem;border-radius:8px;font-size:0.85rem;line-height:1.6;margin-bottom:1rem;">
+          <strong>Task 1 — Academic Discussion (10 min, 100w min, target 120-130w, ≥2 collocations)</strong><br><br>
+          <strong>Professor Alvarez:</strong> "Many universities now require all students to take a course in AI literacy — understanding how AI systems work, their limitations, and ethical issues. Others believe AI literacy should be optional and students should choose courses most relevant to their major. What is your view?"<br><br>
+          <strong>Sofia:</strong> "I think it should be required. AI is already part of almost every profession, so students need to acquire basic knowledge about it to be prepared, even if it is not their major."<br>
+          <strong>David:</strong> "I disagree. Requiring it takes away choice. Students who need to fulfill requirements for their own major should not be forced to learn AI that they may never use."<br><br>
+          <em>Requirements: clear position + reference at least one classmate + reason + concrete example, 120-130w, ≥2 collocations.</em>
+          <div class="task-header" style="margin-top:1rem;"><div class="card-title" style="margin-bottom:0;">✍️ Task 1 — AD</div><div class="task-controls"><span class="timer-display" id="visPostADTimer" style="font-size:1.5rem;">10:00</span><button class="btn" style="margin-left:0.5rem;" onclick="startTimer('visPostADTimer',600)">Start</button><button class="btn btn-secondary" onclick="resetTimer('visPostADTimer',600)">Reset</button></div></div>
+          <textarea id="visPostADInput" rows="6" placeholder="Type AD response (120-130w)..." oninput="updateWordCount('visPostADInput','visPostADCount',100,'100+ target 120-130')" style="margin-top:0.75rem;"></textarea><div class="word-count-badge" id="visPostADCount">Word count: 0 words (Minimum: 100; target 120-130)</div>
+        </div>
+        <div style="background:rgba(0,0,0,0.25);padding:1rem;border-radius:8px;font-size:0.85rem;line-height:1.6;">
+          <strong>Task 2 — Email (7 min, 100w min, target 100-120w, formal)</strong><br><br>
+          You want to volunteer in Professor Martinez's psychology lab next semester.<br>
+          <strong>Recipient:</strong> Professor Martinez &nbsp;|&nbsp; <strong>Subject:</strong> Volunteering in your psychology lab<br>
+          <strong>Bullets:</strong> (1) why interested in her decision-making research (2) relevant coursework/experience (statistics / lab / data analysis) (3) offer transcript / meet office hours.<br><br>
+          <em>All 3 bullets + formal tone (Dear / Best regards), 100-120w.</em>
+          <div class="task-header" style="margin-top:1rem;"><div class="card-title" style="margin-bottom:0;">✉️ Task 2 — Email</div><div class="task-controls"><span class="timer-display" id="visPostEmailTimer" style="font-size:1.5rem;">07:00</span><button class="btn" style="margin-left:0.5rem;" onclick="startTimer('visPostEmailTimer',420)">Start</button><button class="btn btn-secondary" onclick="resetTimer('visPostEmailTimer',420)">Reset</button></div></div>
+          <textarea id="visPostEmailInput" rows="6" placeholder="Write email 100-120w..." oninput="updateWordCount('visPostEmailInput','visPostEmailCount',100,'100+ target 100-120')" style="margin-top:0.75rem;"></textarea><div class="word-count-badge" id="visPostEmailCount">Word count: 0 words (Minimum: 100; target 100-120)</div>
+        </div>
+        <div style="margin-top:1rem;display:flex;gap:0.5rem;flex-wrap:wrap;"><button class="btn btn-secondary" onclick="toggleReveal('visPostModel')">👁️ Show Tutor Models (DO NOT send to student)</button><button class="btn btn-secondary" onclick="toggleReveal('visPostGrading')">📊 Grading Spec</button></div>
+        <div class="reveal-box" id="visPostModel"><strong style="color:var(--accent-green);">AD Model ~126w:</strong><p style="margin-top:0.5rem;line-height:1.7;">While I acknowledge David's point that students must fulfill requirements for their own major, I firmly support Sofia's view that AI literacy should be required. This is primarily because students need to acquire knowledge about AI to provide evidence for their own decisions, even outside technical fields. For example, a future teacher or doctor who does not understand how data is collected may draw conclusions from biased tools and make poor judgments. Moreover, requiring one accessible course helps all graduates demonstrate competence in evaluating information, which establishes credibility in any profession. Critics argue it reduces choice, yet a single foundation course still leaves ample room for major requirements. Therefore, a required AI literacy course is essential for achieving success in a modern university, not merely an optional extra.</p><p style="margin-top:0.75rem;"><strong style="color:var(--accent-green);">Email Model ~114w:</strong></p><p style="line-height:1.7;">Dear Professor Martinez,<br><br>I am writing to ask whether you will accept a volunteer in your psychology lab next semester. I am especially interested in your research on decision-making because I hope to conduct research of my own after I complete my degree.<br><br>Last semester I took statistics and research methods, where I learned to analyze datasets and draw conclusions from experiments. Working in your lab would help me gain practical experience before my final year.<br><br>I would be happy to provide my transcript or meet during office hours to discuss how I could contribute. Thank you for considering my request.<br><br>Best regards,<br>Valeria</p></div>
+        <div class="reveal-box" id="visPostGrading"><strong>Grading spec:</strong> 1-6 per task per ETS (Content/Development, Organization/Coherence, Language, Task Fulfillment incl. length/bullets/hallucination/register). Avg → /30. Return per-task score + avg, bullet checklist, word-count verdict, 3 line-edits, 1 collocation upgrade. Anchor vs 2026-08-28 2.0.</div>
+      </div>
+    </div>
+
+
     </main>
 
   <script src="audio/shadowingTS.js"></script>
@@ -304,6 +483,7 @@
     function resetTimer(id,sec){if(activeT)clearInterval(activeT);activeT=null;const d=document.getElementById(id);d.textContent=`${String(Math.floor(sec/60)).padStart(2,'0')}:${String(sec%60).padStart(2,'0')}`;d.style.color='var(--primary)';}
     function updateWordCount(a,c,min,label){const v=document.getElementById(a).value.trim();const n=v?v.split(/\s+/).length:0;const el=document.getElementById(c);el.textContent=`Word count: ${n} words (Goal: ${label||'130+'})`;el.style.color=n>=(min||130)?'var(--accent-green)':'var(--primary)';}
     function toggleReveal(id){document.getElementById(id).classList.toggle('show');}
+    function checkGaps(){const ans={gap1:'conduct',gap2:'fulfill',gap3:'acquire',gap4:'draw',gap5:'gain',gap6:'demonstrate',gap7:'establish',gap8:'address',gap9:'achieve',gap10:'provide'};let ok=0;for(const k in ans){const el=document.getElementById(k);if(!el)continue;const v=el.value.trim().toLowerCase();if(v===ans[k]){el.style.borderColor='var(--accent-green)';el.style.background='rgba(16,185,129,0.12)';ok++;}else if(v===''){el.style.borderColor='var(--border-color)';el.style.background='rgba(0,0,0,0.4)';}else{el.style.borderColor='var(--accent-red)';el.style.background='rgba(239,68,68,0.1)';}}const s=document.getElementById('gapScore');if(s)s.textContent=ok+'/10 correct'+(ok===10?' — excellent!':'');}
 </script>
 <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Open lesson navigation">&#9776;</button>
 <div class="sidebar-overlay" id="sidebarOverlay"></div>
