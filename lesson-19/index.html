@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Valeria — Lesson 19: Speaking Interview Second Move</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg-dark:#090d16;--bg-card:#131a26;--border-color:#243042;--text-main:#f1f5f9;--text-muted:#64748b;--primary:#f59e0b;--primary-hover:#d97706;--primary-dim:rgba(245,158,11,0.12);--accent-blue:#38bdf8;--accent-green:#10b981;--accent-red:#ef4444;--accent-purple:#a855f7;}
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:'Inter',sans-serif;background:var(--bg-dark);color:var(--text-main);display:flex;min-height:100vh;overflow-x:hidden;}
+    .sidebar{width:260px;background:var(--bg-card);border-right:1px solid var(--border-color);display:flex;flex-direction:column;padding:1.5rem 1rem;position:fixed;height:100vh;z-index:100;overflow-y:auto;scrollbar-width:thin;}
+    .brand{display:flex;align-items:center;gap:0.75rem;margin-bottom:2rem;padding:0 0.5rem;}
+    .brand-badge{background:var(--primary);color:#000;font-weight:700;font-size:0.75rem;padding:0.2rem 0.5rem;border-radius:4px;text-transform:uppercase;}
+    .brand-title{font-weight:600;font-size:1.1rem;color:var(--text-main);}
+    .nav-btn{background:transparent;border:1px solid transparent;color:var(--text-muted);padding:0.75rem 1rem;border-radius:8px;text-align:left;font-size:0.9rem;font-family:inherit;cursor:pointer;margin-bottom:0.5rem;display:flex;align-items:center;gap:0.75rem;transition:all 0.2s ease;}
+    .nav-btn:hover{background:rgba(255,255,255,0.03);color:var(--text-main);}
+    .nav-btn.active{background:var(--primary-dim);border-color:rgba(245,158,11,0.3);color:var(--primary);font-weight:600;}
+    .nav-num{font-family:'Fira Code',monospace;font-size:0.8rem;opacity:0.7;}
+    .main-content{margin-left:260px;flex:1;padding:2rem 3rem;max-width:1200px;}
+    .header{display:flex;justify-content:space-between;align-items:center;margin-bottom:2rem;padding-bottom:1rem;border-bottom:1px solid var(--border-color);}
+    .page-title{font-size:1.5rem;font-weight:700;color:var(--text-main);}
+    .tag{background:rgba(56,189,248,0.1);color:var(--accent-blue);border:1px solid rgba(56,189,248,0.2);padding:0.25rem 0.75rem;border-radius:20px;font-size:0.8rem;font-family:'Fira Code',monospace;}
+    .slide{display:none;animation:fadeIn 0.3s ease;}.slide.active{display:block;}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+    @keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.3;}}
+    .card{background:var(--bg-card);border:1px solid var(--border-color);border-radius:12px;padding:1.5rem;margin-bottom:1.5rem;}
+    .card-title{font-size:1.1rem;font-weight:600;color:var(--primary);margin-bottom:1rem;display:flex;align-items:center;gap:0.5rem;}
+    .shadowing-text{font-size:1.05rem;line-height:1.8;color:#cbd5e1;margin-bottom:1.5rem;background:rgba(0,0,0,0.2);padding:1.25rem;border-radius:8px;border-left:3px solid var(--primary);}
+    .shadowing-word{transition:background 0.15s ease,color 0.15s ease;border-radius:3px;padding:0 2px;}
+    .shadowing-word.active{background:var(--primary);color:#000;font-weight:600;}
+    .controls{display:flex;gap:0.75rem;align-items:center;flex-wrap:wrap;margin-bottom:1rem;}
+    .btn{background:var(--primary);color:#000;border:none;padding:0.6rem 1.2rem;border-radius:6px;font-weight:600;font-size:0.85rem;font-family:inherit;cursor:pointer;display:inline-flex;align-items:center;gap:0.4rem;transition:background 0.2s ease;}
+    .btn:hover{background:var(--primary-hover);}
+    .btn-secondary{background:transparent;border:1px solid var(--border-color);color:var(--text-main);}
+    .timer-display{font-family:'Fira Code',monospace;font-size:1.5rem;font-weight:700;color:var(--primary);background:#000;padding:0.4rem 1rem;border-radius:8px;border:1px solid var(--border-color);display:inline-block;}
+    .pattern-box{background:rgba(0,0,0,0.3);border-left:3px solid;padding:1rem;border-radius:0 8px 8px 0;margin-bottom:0.75rem;}
+    .error-table{width:100%;border-collapse:collapse;margin-top:1rem;font-size:0.9rem;}
+    .error-table th,.error-table td{padding:0.75rem 1rem;border:1px solid var(--border-color);text-align:left;}
+    .error-table th{background:rgba(0,0,0,0.4);color:var(--primary);font-weight:600;}
+    .text-red{color:var(--accent-red);}.text-green{color:var(--accent-green);}
+    .recording-box{background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.2);border-radius:8px;padding:1.25rem;margin-top:1rem;}
+    .recording-box.active{border-color:var(--accent-red);animation:pulse 1s ease infinite;}
+    .reveal-box{display:none;background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.2);padding:1rem;border-radius:8px;margin-top:0.75rem;font-size:0.9rem;line-height:1.7;}
+    .reveal-box.show{display:block;}
+    textarea,input[type="text"]{width:100%;background:rgba(0,0,0,0.4);border:1px solid var(--border-color);color:var(--text-main);padding:0.75rem;border-radius:6px;font-family:inherit;font-size:0.9rem;resize:vertical;}
+    textarea:focus,input[type="text"]:focus{outline:none;border-color:var(--primary);}
+    .word-count-badge{font-family:'Fira Code',monospace;font-size:0.85rem;color:var(--accent-green);margin-top:0.5rem;}
+    .prompt-block{background:rgba(0,0,0,0.25);padding:1rem;border-radius:8px;font-size:0.9rem;line-height:1.7;margin-bottom:1rem;border-left:3px solid var(--primary);}
+    @media(max-width:768px){.main-content{margin-left:0;padding:1rem 1rem 84px;max-width:100%}.header{flex-wrap:wrap;gap:0.5rem}.controls{flex-direction:column;align-items:stretch}.timer-display{font-size:1.25rem}}
+  </style>
+ <!-- FE:CSS-MOBILE --><style>.mobile-nav-toggle{display:none;position:fixed;bottom:20px;right:20px;z-index:200;width:48px;height:48px;border-radius:50%;background:var(--primary);color:#000;border:none;font-size:20px;cursor:pointer;align-items:center;justify-content:center;box-shadow:3px 3px 0 rgba(0,0,0,0.12)}
+.sidebar-overlay{display:none;position:fixed;inset:0;z-index:150;background:rgba(0,0,0,0.4)}
+.sidebar-overlay.open{display:block}@media(max-width:768px){
+  .mobile-nav-toggle{display:flex}
+  .sidebar{position:fixed;left:0;top:0;z-index:175;height:100vh;transform:translateX(-100%);transition:transform .25s ease;width:260px;display:flex!important}
+  .sidebar.open{transform:translateX(0)}
+  .main-content{margin-left:0;padding:1rem 1rem 84px;max-width:100%}
+  .header{flex-wrap:wrap;gap:0.5rem}
+  .grid-2{grid-template-columns:1fr}
+  .controls{flex-direction:column;align-items:stretch}
+  .timer-display{font-size:1.5rem}
+}</style>
+ <!-- FE:CSS-CHIP --><style>.slide-chip{font-family:'Fira Code',monospace;font-size:0.72rem;font-weight:700;color:var(--primary);background:var(--bg-card,rgba(0,0,0,0.4));border:1px solid var(--border-color,rgba(255,255,255,0.15));padding:0.25rem 0.65rem;border-radius:20px;white-space:nowrap;margin-left:auto}</style>
+ <style>.back-link{color:var(--text-muted);text-decoration:none;font-size:0.8rem;font-family:'Fira Code',monospace;white-space:nowrap;transition:color 0.2s;margin-left:1rem;}.back-link:hover{color:var(--primary);}</style></head>
+<body>
+  <aside class="sidebar">
+    <div class="brand"><span class="brand-badge">TOEFL</span><span class="brand-title">Valeria L19</span></div>
+    <button class="nav-btn active" onclick="switchSlide(0)"><span class="nav-num">01</span> Warm-up</button>
+    <button class="nav-btn" onclick="switchSlide(1)"><span class="nav-num">02</span> 3 Patterns</button>
+    <button class="nav-btn" onclick="switchSlide(2)"><span class="nav-num">03</span> Drill R1 · Tech & Edu</button>
+    <button class="nav-btn" onclick="switchSlide(3)"><span class="nav-num">04</span> Drill R2 · Climate & Health</button>
+    <button class="nav-btn" onclick="switchSlide(4)"><span class="nav-num">05</span> Drill R3 · Surprise</button>
+    <button class="nav-btn" onclick="switchSlide(5)"><span class="nav-num">06</span> Live Review</button>
+    <button class="nav-btn" onclick="switchSlide(6)"><span class="nav-num">07</span> Homework</button>
+    
+  </aside>
+  <main class="main-content">
+    <header class="header"><div><h1 class="page-title">Speaking Interview: Second Move</h1><p style="color:var(--text-muted);font-size:0.85rem;margin-top:0.2rem;">45s · Zero Prep · 3 Expansion Patterns · L18 Collocations Recycled</p></div><!-- FE:CHIP --><span class="slide-chip" id="slideChip">1 / N</span><a href="../index.html" class="back-link">&#8592; Portal</a>
+        <span class="tag">SPEAKING 45s</span></header>
+
+    <div class="slide active" id="slide-0">
+      <div class="card">
+        <div class="card-title">🎙️ Shadowing — Second-Move Fluency</div>
+        <div class="shadowing-text" id="shadowingTextDisplay">In structured academic interviews, effective respondents extend their initial positions through purposeful elaboration rather than offering brief, isolated statements. By employing specific expansion techniques — providing concrete examples, articulating underlying rationale, or contrasting alternative perspectives — speakers demonstrate both analytical sophistication and genuine engagement with complex topics.</div>
+        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:1rem;">Targets: <em>purposeful elaboration · concrete examples · articulating rationale · contrasting perspectives · analytical sophistication</em> — all signposts for Move 2.</p>
+        <div class="controls">
+          <button class="btn" onclick="toggleShadowingPacer()">▶ Start Pacer</button>
+          <button class="btn btn-secondary" onclick="resetShadowingPacer()">↺ Reset</button>
+          <audio id="shadowingAudio" src="audio/shadowing.wav" preload="auto" style="display:none;"></audio>
+          <button class="btn btn-secondary" onclick="document.getElementById('shadowingAudio').play()">🔊 Play Audio</button>
+          <select id="pacerSpeed" style="background:#000;color:#fff;padding:0.4rem;border-radius:4px;border:1px solid var(--border-color);"><option value="450">130 WPM</option><option value="380" selected>150 WPM</option><option value="320">175 WPM</option></select>
+        </div>
+        <p style="font-size:0.82rem;color:var(--text-muted);margin-top:0.75rem;">L18 link: try to re-use one collocation aloud while shadowing — e.g., <span style="color:var(--accent-green);">address issues / provide evidence</span>.</p>
+      </div>
+    </div>
+
+    <div class="slide" id="slide-1">
+      <div class="card">
+        <div class="card-title">🧩 The 3 Second-Move Patterns (Move 2 at 25–45s)</div>
+        <p style="font-size:0.9rem;color:var(--text-muted);margin-bottom:1rem;">Move 1 (0–25s): <strong>Stance + Core Reason</strong> in 1–2 sentences. If you stay in Move 1 past second 30 you will run out (L10 failure). Move 2 must start by second 25–30.</p>
+        <div class="pattern-box" style="border-color:var(--accent-green);"><strong style="color:var(--accent-green);">A: Counter-Pivot</strong> — acknowledge the other side and refute<br><em>Signpost:</em> “Of course, opponents argue that… however, …”</div>
+        <div class="pattern-box" style="border-color:var(--accent-blue);"><strong style="color:var(--accent-blue);">B: Societal Implication</strong> — broaden to economic / social impact<br><em>Signpost:</em> “Looking at the broader picture, this implies that…”</div>
+        <div class="pattern-box" style="border-color:var(--accent-purple);"><strong style="color:var(--accent-purple);">C: Concrete Analogy / Example</strong> — personal or observed case<br><em>Signpost:</em> “A clear illustration of this can be seen in…”</div>
+        <p style="font-size:0.82rem;color:var(--text-muted);margin-top:1rem;">💡 Second-move language is <em>functional</em> — vary the signpost, don’t memorise one sentence. Aim to use a different pattern each prompt to avoid repetition.</p>
+      </div>
+      <div class="card">
+        <div class="card-title">🔗 L18 → L19 — Say Your Collocations</div>
+        <p style="font-size:0.85rem;color:var(--text-muted);">Re-cycle at least one per answer: <span style="color:var(--accent-green);">conduct research · acquire knowledge · gain experience · demonstrate competence · establish credibility · address issues · achieve success · provide evidence · fulfill requirements · draw conclusions</span>. Spoken form counts — no article errors.</p>
+      </div>
+    </div>
+
+    <div class="slide" id="slide-2">
+      <div class="card">
+        <div class="card-title">📢 Round 1 — Technology & Education (2 × 45s)</div>
+        <div class="prompt-block">
+          <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.75rem;">
+            <strong>Prompt 1 — Mandatory Attendance:</strong>
+            <span style="display:flex;align-items:center;gap:0.5rem;"><span class="timer-display" id="p1Timer" style="font-size:1.25rem;">00:45</span><button class="btn" onclick="startTimer('p1Timer',45)">Start 45s</button><button class="btn btn-secondary" onclick="resetTimer('p1Timer',45)">Reset</button></span>
+          </div>
+          <p style="margin-top:0.75rem;"><em>“Do you think universities should mandate in-person attendance for lectures?”</em></p>
+        </div>
+        <div class="recording-box" id="recP1Box">
+          <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:0.5rem;">Move 1 (0–25s): Stance + reason. Move 2 (25–45s): pick A / B / C.</p>
+          <div style="display:flex;align-items:center;gap:0.5rem;flex-wrap:wrap;"><button class="btn" onclick="startRec('recP1Box')">🎙️ Record</button><span id="recP1Time" style="font-family:'Fira Code',monospace;font-size:0.85rem;color:var(--text-muted);">0:00</span><span style="font-size:0.8rem;color:var(--text-muted);">— auto-stops at 0:45, or tap again to stop early</span></div>
+          <div id="recP1Result" style="margin-top:0.75rem;"></div>
+        </div>
+        <button class="btn btn-secondary" style="margin-top:0.75rem;" onclick="toggleReveal('p1Models')">👁️ Show 3 Second-Move Models</button>
+        <div class="reveal-box" id="p1Models">
+          <div><strong style="color:var(--accent-green);">A Counter-Pivot:</strong> “Some argue mandatory attendance limits adult autonomy; however, regular presence helps students acquire knowledge through discussion that recordings cannot provide, which ultimately helps them achieve success.”</div>
+          <div style="margin-top:0.5rem;"><strong style="color:var(--accent-blue);">B Societal:</strong> “More broadly, enforcing attendance helps universities address issues of disengagement and demonstrate competence in supporting student success.”</div>
+          <div style="margin-top:0.5rem;"><strong style="color:var(--accent-purple);">C Analogy:</strong> “For example, in my programming course students who attended in person were able to conduct research with peers and draw conclusions faster than those who watched recordings alone.”</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="prompt-block" style="border-color:var(--accent-purple);">
+          <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.75rem;">
+            <strong>Prompt 2 — AI in Elementary School:</strong>
+            <span style="display:flex;align-items:center;gap:0.5rem;"><span class="timer-display" id="p2Timer" style="font-size:1.25rem;">00:45</span><button class="btn" onclick="startTimer('p2Timer',45)">Start 45s</button><button class="btn btn-secondary" onclick="resetTimer('p2Timer',45)">Reset</button></span>
+          </div>
+          <p style="margin-top:0.75rem;"><em>“Should artificial intelligence tools be integrated into elementary school classrooms?”</em></p>
+        </div>
+        <div class="recording-box" id="recP2Box">
+          <div style="display:flex;align-items:center;gap:0.5rem;flex-wrap:wrap;"><button class="btn" onclick="startRec('recP2Box')">🎙️ Record</button><span id="recP2Time" style="font-family:'Fira Code',monospace;font-size:0.85rem;color:var(--text-muted);">0:00</span></div>
+          <div id="recP2Result" style="margin-top:0.75rem;"></div>
+        </div>
+        <button class="btn btn-secondary" style="margin-top:0.75rem;" onclick="toggleReveal('p2Models')">👁️ Show Models</button>
+        <div class="reveal-box" id="p2Models">
+          <div><strong style="color:var(--accent-green);">A:</strong> “Critics worry AI reduces creativity; yet when guided, it lets children gain experience with research tools while teachers still provide evidence for correct answers.”</div>
+          <div style="margin-top:0.5rem;"><strong style="color:var(--accent-blue);">B:</strong> “On a broader level, early AI literacy helps children establish credibility as digital citizens and achieve success in later studies.”</div>
+          <div style="margin-top:0.5rem;"><strong style="color:var(--accent-purple);">C:</strong> “I saw this in my cousin's school where students used AI to acquire knowledge about space, then presented findings — engagement soared.”</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide" id="slide-3">
+      <div class="card">
+        <div class="card-title">📢 Round 2 — Environment & Society (2 × 45s)</div>
+        <div class="prompt-block" style="border-color:var(--accent-green);">
+          <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.75rem;">
+            <strong>Prompt 3 — Climate Action:</strong>
+            <span style="display:flex;align-items:center;gap:0.5rem;"><span class="timer-display" id="p3Timer" style="font-size:1.25rem;">00:45</span><button class="btn" onclick="startTimer('p3Timer',45)">Start 45s</button><button class="btn btn-secondary" onclick="resetTimer('p3Timer',45)">Reset</button></span>
+          </div>
+          <p style="margin-top:0.75rem;"><em>“Is individual consumer action or government regulation more important for solving climate change?”</em></p>
+        </div>
+        <div class="recording-box" id="recP3Box">
+          <div style="display:flex;align-items:center;gap:0.5rem;flex-wrap:wrap;"><button class="btn" onclick="startRec('recP3Box')">🎙️ Record</button><span id="recP3Time" style="font-family:'Fira Code',monospace;font-size:0.85rem;color:var(--text-muted);">0:00</span></div>
+          <div id="recP3Result" style="margin-top:0.75rem;"></div>
+        </div>
+        <button class="btn btn-secondary" style="margin-top:0.75rem;" onclick="toggleReveal('p3Models')">👁️ Show Models</button>
+        <div class="reveal-box" id="p3Models">
+          <div><strong style="color:var(--accent-green);">A:</strong> “Some claim individual choices are enough, but without regulation companies lack incentive to fulfill requirements for emission cuts.”</div>
+          <div style="margin-top:0.5rem;"><strong style="color:var(--accent-blue);">B:</strong> “Societally, regulation creates market pressure that allows consumers and firms to address issues at scale rather than in isolation.”</div>
+          <div style="margin-top:0.5rem;"><strong style="color:var(--accent-purple);">C:</strong> “A concrete case is my city where a bag tax led shops to provide evidence of waste reduction within months.”</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="prompt-block" style="border-color:var(--accent-red);">
+          <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.75rem;">
+            <strong>Prompt 4 — Sugar Tax:</strong>
+            <span style="display:flex;align-items:center;gap:0.5rem;"><span class="timer-display" id="p4Timer" style="font-size:1.25rem;">00:45</span><button class="btn" onclick="startTimer('p4Timer',45)">Start 45s</button><button class="btn btn-secondary" onclick="resetTimer('p4Timer',45)">Reset</button></span>
+          </div>
+          <p style="margin-top:0.75rem;"><em>“Should governments impose higher taxes on sugar-sweetened beverages to improve public health?”</em></p>
+        </div>
+        <div class="recording-box" id="recP4Box">
+          <div style="display:flex;align-items:center;gap:0.5rem;flex-wrap:wrap;"><button class="btn" onclick="startRec('recP4Box')">🎙️ Record</button><span id="recP4Time" style="font-family:'Fira Code',monospace;font-size:0.85rem;color:var(--text-muted);">0:00</span></div>
+          <div id="recP4Result" style="margin-top:0.75rem;"></div>
+        </div>
+        <button class="btn btn-secondary" style="margin-top:0.75rem;" onclick="toggleReveal('p4Models')">👁️ Show Models</button>
+        <div class="reveal-box" id="p4Models">
+          <div><strong style="color:var(--accent-green);">A:</strong> “Opponents argue taxes limit freedom; however, they help address issues of childhood obesity and fund health campaigns.”</div>
+          <div style="margin-top:0.5rem;"><strong style="color:var(--accent-blue);">B:</strong> “Broadly, such taxes signal that public health outweighs short-term industry profit, which can establish credibility for health policy.”</div>
+          <div style="margin-top:0.5rem;"><strong style="color:var(--accent-purple);">C:</strong> “In the UK, a levy led manufacturers to reformulate drinks — a clear illustration of how taxes can achieve success without banning products.”</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide" id="slide-4">
+      <div class="card">
+        <div class="card-title">📢 Round 3 — Surprise TOEFL Prompts (2 × 45s, Zero Activation)</div>
+        <div class="prompt-block" style="border-color:var(--accent-blue);">
+          <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.75rem;">
+            <strong>Prompt 5 — Remote Work ★ Review Focus:</strong>
+            <span style="display:flex;align-items:center;gap:0.5rem;"><span class="timer-display" id="p5Timer" style="font-size:1.25rem;">00:45</span><button class="btn" onclick="startTimer('p5Timer',45)">Start 45s</button><button class="btn btn-secondary" onclick="resetTimer('p5Timer',45)">Reset</button></span>
+          </div>
+          <p style="margin-top:0.75rem;"><em>“Do you believe remote working increases or decreases overall employee productivity?”</em></p>
+        </div>
+        <div class="recording-box" id="recP5Box">
+          <div style="display:flex;align-items:center;gap:0.5rem;flex-wrap:wrap;"><button class="btn" onclick="startRec('recP5Box')">🎙️ Record</button><span id="recP5Time" style="font-family:'Fira Code',monospace;font-size:0.85rem;color:var(--text-muted);">0:00</span><span style="font-size:0.8rem;color:var(--text-muted);">— this one we will replay together next slide</span></div>
+          <div id="recP5Result" style="margin-top:0.75rem;"></div>
+        </div>
+        <button class="btn btn-secondary" style="margin-top:0.75rem;" onclick="toggleReveal('p5Models')">👁️ Show Models</button>
+        <div class="reveal-box" id="p5Models">
+          <div><strong style="color:var(--accent-green);">A:</strong> “Managers often argue remote work lowers oversight; however, employees who gain experience managing their own schedules often demonstrate competence by meeting tighter deadlines.”</div>
+          <div style="margin-top:0.5rem;"><strong style="color:var(--accent-blue);">B:</strong> “More broadly, remote work implies companies can address issues of office costs and broaden talent pools beyond one city.”</div>
+          <div style="margin-top:0.5rem;"><strong style="color:var(--accent-purple);">C:</strong> “For instance, a friend who conducts research from home now provides evidence of higher output because she avoids a two-hour commute.”</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="prompt-block" style="border-color:var(--accent-purple);">
+          <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.75rem;">
+            <strong>Prompt 6 — Space vs Ocean Funding:</strong>
+            <span style="display:flex;align-items:center;gap:0.5rem;"><span class="timer-display" id="p6Timer" style="font-size:1.25rem;">00:45</span><button class="btn" onclick="startTimer('p6Timer',45)">Start 45s</button><button class="btn btn-secondary" onclick="resetTimer('p6Timer',45)">Reset</button></span>
+          </div>
+          <p style="margin-top:0.75rem;"><em>“Should public funding for scientific space exploration be redirected to ocean conservation?”</em></p>
+        </div>
+        <div class="recording-box" id="recP6Box">
+          <div style="display:flex;align-items:center;gap:0.5rem;flex-wrap:wrap;"><button class="btn" onclick="startRec('recP6Box')">🎙️ Record</button><span id="recP6Time" style="font-family:'Fira Code',monospace;font-size:0.85rem;color:var(--text-muted);">0:00</span></div>
+          <div id="recP6Result" style="margin-top:0.75rem;"></div>
+        </div>
+        <button class="btn btn-secondary" style="margin-top:0.75rem;" onclick="toggleReveal('p6Models')">👁️ Show Models</button>
+        <div class="reveal-box" id="p6Models">
+          <div><strong style="color:var(--accent-green);">A:</strong> “Some argue oceans deserve priority; yet space research has helped us acquire knowledge about climate that also benefits ocean science.”</div>
+          <div style="margin-top:0.5rem;"><strong style="color:var(--accent-blue);">B:</strong> “Societally, both fields need investment, but reallocating entirely would undermine our ability to draw conclusions about planetary threats.”</div>
+          <div style="margin-top:0.5rem;"><strong style="color:var(--accent-purple);">C:</strong> “A good example is satellite data that helps scientists monitor coral reefs — space spending indirectly protects oceans.”</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide" id="slide-5">
+      <div class="card">
+        <div class="card-title">🔍 Live Audio Review — Prompt 5 Check</div>
+        <p style="font-size:0.9rem;color:var(--text-muted);margin-bottom:1rem;">Replay Valeria’s 45s recording for Prompt 5 (remote work). Check the 3 points — don’t re-record, just diagnose.</p>
+        <div style="background:rgba(0,0,0,0.25);padding:1rem;border-radius:8px;font-size:0.9rem;line-height:1.7;">
+          <strong>Checklist:</strong>
+          <div>✓ Did Move 2 start at <strong>25–30s</strong>? (If no → signpost was late)</div>
+          <div>✓ Which pattern was used (A / B / C)? Which does she avoid? (Nudge toward weakest next time)</div>
+          <div>✓ One collocation hit? (e.g., <em>do research → conduct research</em>, <em>solve issues → address issues</em>)</div>
+          <div>✓ Pronunciation flag: listen for one L2 word if it surfaced (<em>subsequently, counterintuitive, fundamentally</em> etc.)</div>
+        </div>
+        <div style="margin-top:1rem;display:flex;gap:0.5rem;align-items:center;flex-wrap:wrap;">
+          <button class="btn btn-secondary" onclick="switchSlide(4);setTimeout(()=>{const el=document.getElementById('recP5Result');if(el)el.scrollIntoView({behavior:'smooth',block:'center'})},200)">↗ Jump to P5 Recording</button>
+          <span style="font-size:0.8rem;color:var(--text-muted);">Log the 4 points on the next slide — one upgraded sentence only.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide" id="slide-6">
+      <div class="card">
+        <div class="card-title">📚 Homework — Recordings + Writing</div>
+        <ol style="margin-left:1.25rem;font-size:0.9rem;line-height:1.7;color:var(--text-muted);">
+          <li><strong style="color:var(--text-main);">Audio Submission — 6 × 45s:</strong> Record all 6 drill prompts in one take each (no re-dos within a take). Submit via portal / Telegram as <code style="background:rgba(0,0,0,0.3);padding:0.15rem 0.4rem;border-radius:4px;font-family:'Fira Code',monospace;font-size:0.8rem;">L19_P1_attendance.webm</code> etc.</li>
+          <li><strong style="color:var(--text-main);">Second-Move Self-Audit:</strong> For each recording note: pattern (A/B/C) + second when transition occurred (e.g., “P3 — B at 27s”).</li>
+          <li><strong style="color:var(--text-main);">Email (timed, 7 min, 100–120w):</strong> University library — extend a book loan (due Friday) + propose one new service for students (24h room / digital archive). Use ≥1 collocation; check model only after writing.</li>
+          <li><strong style="color:var(--text-main);">Vocabulary Journal:</strong> 5 sentences (12–20w each) using: <em>stands to reason, counter-consideration, empirical analogy, unwavering fluency, pivotal</em>.</li>
+          <li><strong style="color:var(--text-main);">Collocation Retrieval:</strong> Say aloud without looking: the 5 collocations you used least today (<em>fulfill requirements, establish credibility, demonstrate competence, achieve success, provide evidence</em>).</li>
+        </ol>
+      </div>
+      <div class="card">
+        <div class="task-header"><div class="card-title" style="margin-bottom:0;">✉️ Email — Library Loan (7 min)</div><div class="task-controls"><span class="timer-display" id="hwTimer" style="font-size:1.25rem;">07:00</span><button class="btn" onclick="startTimer('hwTimer',420)">Start</button><button class="btn btn-secondary" onclick="resetTimer('hwTimer',420)">Reset</button></div></div>
+        <div style="background:rgba(0,0,0,0.25);padding:1rem;border-radius:8px;font-size:0.85rem;line-height:1.6;margin:1rem 0;">
+          <strong>To:</strong> University Library &nbsp;|&nbsp; <strong>Subject:</strong> Request to extend book loan<br>
+          <strong>Bullets:</strong> (1) explain why you need extension (book due Friday, still needed for research) (2) ask for new due date + confirm if fine applies (3) propose one new service that would help students (e.g., 24-hour study room, extended digital archive). Formal, 100–120w.
+        </div>
+        <textarea id="hwInput" rows="6" placeholder="Write email 100-120w..." oninput="updateWordCount('hwInput','hwCount',100,'100+ target 100-120')"></textarea><div class="word-count-badge" id="hwCount">Word count: 0 words (Minimum: 100; target 100-120)</div>
+        <button class="btn btn-secondary" style="margin-top:0.75rem;" onclick="toggleReveal('hwModel')">👁️ Show Model</button>
+        <div class="reveal-box" id="hwModel">
+          <strong style="color:var(--accent-green);">Model ~112w:</strong>
+          <p style="margin-top:0.5rem;line-height:1.7;">Dear University Library,<br><br>I am writing to ask whether I could extend the loan for “Research Methods” (due this Friday). I still need it to conduct research for my final paper and to provide evidence for my conclusions.<br><br>Would it be possible to extend the due date to next Friday? Please let me know whether a fine applies for the extension.<br><br>I would also like to suggest a 24-hour study room during exams. Such a space would help students address issues with crowded dorms and achieve success in their preparations.<br><br>Thank you for your help.<br><br>Best regards,<br>Valeria</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">📝 Vocabulary — 5 Sentences</div>
+        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:0.75rem;">Use each target once in a 12–20w spoken-style sentence.</p>
+        <div style="font-size:0.85rem;line-height:2;color:var(--text-muted);background:rgba(0,0,0,0.2);padding:1rem;border-radius:8px;">
+          <div>• stands to reason — <span style="color:var(--text-main);">“It stands to reason that…”</span></div>
+          <div>• counter-consideration</div>
+          <div>• empirical analogy</div>
+          <div>• unwavering fluency</div>
+          <div>• pivotal</div>
+        </div>
+        <textarea rows="5" placeholder="1. It stands to reason that...&#10;2. A counter-consideration is...&#10;3. An empirical analogy is...&#10;4. ...&#10;5. ..." style="margin-top:0.75rem;"></textarea>
+      </div>
+    </div>
+
+    </main>
+
+  <script src="audio/shadowingTS.js"></script>
+  <script>
+    function switchSlide(i){document.querySelectorAll('.slide').forEach((s,idx)=>s.classList.toggle('active',idx===i));document.querySelectorAll('.nav-btn').forEach((b,idx)=>b.classList.toggle('active',idx===i));window.scrollTo(0,0);}
+    let pacerInterval=null,currentWordIndex=0,karaokeIndex=-1;
+    const shadowingAudioEl=document.getElementById('shadowingAudio');
+    function wrapShadowingWords(){const c=document.getElementById('shadowingTextDisplay');if(c.dataset.wrapped)return;if(typeof shadowingTS!=='undefined'&&shadowingTS.length){c.innerHTML=shadowingTS.map(w=>`<span class="shadowing-word">${w.word}</span>`).join(' ');}else{c.innerHTML=c.innerText.split(/\s+/).map(w=>`<span class="shadowing-word">${w}</span>`).join(' ');}c.dataset.wrapped="true";}
+    function clearAllHighlights(){document.querySelectorAll('.shadowing-word').forEach(w=>w.classList.remove('active'));}
+    function toggleShadowingPacer(){if(pacerInterval){clearInterval(pacerInterval);pacerInterval=null;return;}if(shadowingAudioEl)shadowingAudioEl.pause();wrapShadowingWords();const sw=document.querySelectorAll('.shadowing-word');const sp=parseInt(document.getElementById('pacerSpeed').value)||380;pacerInterval=setInterval(()=>{sw.forEach(w=>w.classList.remove('active'));if(currentWordIndex<sw.length){sw[currentWordIndex].classList.add('active');currentWordIndex++;}else{clearInterval(pacerInterval);pacerInterval=null;currentWordIndex=0;}},sp);}
+    function resetShadowingPacer(){if(pacerInterval)clearInterval(pacerInterval);pacerInterval=null;currentWordIndex=0;karaokeIndex=-1;if(shadowingAudioEl)shadowingAudioEl.pause();clearAllHighlights();}
+    if(shadowingAudioEl){
+      shadowingAudioEl.addEventListener('play',()=>{if(pacerInterval){clearInterval(pacerInterval);pacerInterval=null;}wrapShadowingWords();});
+      shadowingAudioEl.addEventListener('timeupdate',()=>{if(typeof shadowingTS==='undefined'||!shadowingTS.length)return;const t=shadowingAudioEl.currentTime;if(t<shadowingTS[0].start)return;let idx=-1;for(let i=karaokeIndex+1;i<shadowingTS.length;i++){if(t>=shadowingTS[i].start)idx=i;else break;}if(idx===-1&&karaokeIndex>=0)idx=karaokeIndex;if(idx>=0&&idx!==karaokeIndex){karaokeIndex=idx;clearAllHighlights();const spans=document.querySelectorAll('.shadowing-word');if(spans[idx])spans[idx].classList.add('active');}});
+      shadowingAudioEl.addEventListener('ended',()=>{karaokeIndex=-1;clearAllHighlights();});
+    }
+    let activeT=null;
+    function startTimer(id,sec){if(activeT)clearInterval(activeT);let r=sec;const d=document.getElementById(id);if(!d)return;d.style.color='var(--primary)';d.textContent=`${String(Math.floor(r/60)).padStart(2,'0')}:${String(r%60).padStart(2,'0')}`;activeT=setInterval(()=>{d.textContent=`${String(Math.floor(r/60)).padStart(2,'0')}:${String(r%60).padStart(2,'0')}`;if(r<=10)d.style.color='var(--accent-red)';if(r<=0){clearInterval(activeT);activeT=null;d.style.animation='pulse 0.5s ease 3';}r--;},1000);}
+    function resetTimer(id,sec){if(activeT)clearInterval(activeT);activeT=null;const d=document.getElementById(id);if(!d)return;d.textContent=`${String(Math.floor(sec/60)).padStart(2,'0')}:${String(sec%60).padStart(2,'0')}`;d.style.color='var(--primary)';d.style.animation='none';}
+    function updateWordCount(a,c,min,label){const v=document.getElementById(a).value.trim();const n=v?v.split(/\s+/).length:0;const el=document.getElementById(c);if(!el)return;el.textContent=`Word count: ${n} words (Goal: ${label||'100+'})`;el.style.color=n>=(min||100)?'var(--accent-green)':'var(--primary)';}
+    function toggleReveal(id){const el=document.getElementById(id);if(el)el.classList.toggle('show');}
+    let mediaRecorder=null,recInterval=null,recSec=0;
+    function stopRec(boxId){if(mediaRecorder&&mediaRecorder.state==='recording'){mediaRecorder.stop();}clearInterval(recInterval);const bx=document.getElementById(boxId);if(bx)bx.classList.remove('active');}
+    function startRec(boxId){
+      if(mediaRecorder&&mediaRecorder.state==='recording'){stopRec(boxId);return;}
+      navigator.mediaDevices.getUserMedia({audio:true}).then(stream=>{
+        mediaRecorder=new MediaRecorder(stream);mediaRecorder.start();document.getElementById(boxId).classList.add('active');
+        recSec=0;clearInterval(recInterval);const timeEl=document.getElementById(boxId.replace('Box','Time'));recInterval=setInterval(()=>{recSec++;const m=Math.floor(recSec/60);const s=String(recSec%60).padStart(2,'0');if(timeEl)timeEl.textContent=`${m}:${s}`;if(recSec>=45){stopRec(boxId);}},1000);
+        const chunks=[];mediaRecorder.ondataavailable=e=>chunks.push(e.data);mediaRecorder.onstop=()=>{const b=new Blob(chunks,{type:'audio/webm'});const u=URL.createObjectURL(b);const r=document.getElementById(boxId.replace('Box','Result'));if(r)r.innerHTML=`<audio controls src="${u}" style="width:100%;height:35px;"></audio>`;clearInterval(recInterval);document.getElementById(boxId).classList.remove('active');};
+      }).catch(()=>alert('Microphone access denied or unavailable.'));
+    }
+</script>
+
+<button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Open lesson navigation">&#9776;</button>
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+<!-- FE:MOBILE --><script>// FE:MOBILE
+(function(){
+  function initM() {
+    var t = document.getElementById('mobileNavToggle'), ov = document.getElementById('sidebarOverlay');
+    if (!t || !ov) return;
+    var sb = document.querySelector('.nav-btn').parentElement;
+    function close() { sb.classList.remove('open'); ov.classList.remove('open'); }
+    t.addEventListener('click', function() { sb.classList.toggle('open'); ov.classList.toggle('open'); });
+    ov.addEventListener('click', close);
+    document.querySelectorAll('.nav-btn').forEach(function(b) { b.addEventListener('click', close); });
+  }
+  if (document.readyState !== 'loading') initM(); else document.addEventListener('DOMContentLoaded', initM);
+})();</script>
+<!-- FE:HASH --><script>// FE:HASH
+(function(){
+  function mH() { var m = location.hash.match(/^#slide-(\d+)$/); if (m && window.switchSlide) window.switchSlide(parseInt(m[1])); }
+  window.addEventListener('hashchange', mH);
+  !function(){ mH(); }();
+  if (!window.__feHashWrapped && window.switchSlide) {
+    window.__feHashWrapped = true;
+    var o = window.switchSlide;
+    window.switchSlide = function(i) { o(i); try { history.replaceState(null, '', '#slide-' + i); } catch (e) {} };
+  }
+})();</script>
+<!-- FE:KEYS --><script>// FE:KEYS
+(function(){
+  document.addEventListener('keydown', function(e) {
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT' || e.target.isContentEditable) return;
+    if (e.code === 'ArrowLeft' || e.code === 'ArrowRight') {
+      var btns = document.querySelectorAll('.nav-btn');
+      var cur = document.querySelector('.nav-btn.active');
+      var pos = cur ? Array.prototype.indexOf.call(btns, cur) : -1;
+      if (pos < 0) return;
+      var tgt = pos + (e.code === 'ArrowRight' ? 1 : -1);
+      if (tgt >= 0 && tgt < btns.length) { e.preventDefault(); window.switchSlide(tgt + 0); }
+    }
+  });
+})();</script>
+<!-- FE:TIMERS --><script>// FE:TIMERS
+(function(){
+  window.__activeIntervals__ = window.__activeIntervals__ || [];
+  if (!window.__feIntervalPatched) {
+    window.__feIntervalPatched = true;
+    var _si = window.setInterval;
+    window.setInterval = function(fn, t) { var id = _si(fn, t); window.__activeIntervals__.push(id); return id; };
+  }
+  window.clearAllDeckTimers = function() {
+    window.__activeIntervals__.forEach(function(id) { clearInterval(id); });
+    window.__activeIntervals__ = [];
+  };
+  if (!window.__feTimersWrapped && window.switchSlide) {
+    window.__feTimersWrapped = true;
+    var o = window.switchSlide;
+    window.switchSlide = function(i) { if (window.clearAllDeckTimers) window.clearAllDeckTimers(); o(i); };
+  }
+})();</script>
+<!-- FE:CHIPJS --><script>// FE:CHIP
+(function(){
+  function updChipFromActive() {
+    var c = document.getElementById('slideChip'); if (!c) return;
+    var cur = document.querySelector('.nav-btn.active');
+    var pos = cur ? Array.prototype.indexOf.call(document.querySelectorAll('.nav-btn'), cur) : 0;
+    c.textContent = (pos + 1) + ' / ' + document.querySelectorAll('.slide').length;
+  }
+  if (!window.__feChipWrapped && window.switchSlide) {
+    window.__feChipWrapped = true;
+    var o = window.switchSlide;
+    window.switchSlide = function(i) { o(i); var c = document.getElementById('slideChip'); if (c) c.textContent = (i + 1) + ' / ' + document.querySelectorAll('.slide').length; };
+  }
+  if (document.readyState !== 'loading') updChipFromActive(); else document.addEventListener('DOMContentLoaded', updChipFromActive);
+})();</script>
+</body>
+</html>
