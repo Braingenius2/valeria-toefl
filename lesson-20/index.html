@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Valeria — Lesson 20: Final Readiness Mock &amp; Assessment (Private Deck)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #090d16;
+      --bg-card: #131a26;
+      --border-color: #243042;
+      --text-main: #f1f5f9;
+      --text-muted: #64748b;
+      --primary: #f59e0b;
+      --primary-hover: #d97706;
+      --primary-dim: rgba(245, 158, 11, 0.12);
+      --accent-blue: #38bdf8;
+      --accent-green: #10b981;
+      --accent-red: #ef4444;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', sans-serif; background-color: var(--bg-dark); color: var(--text-main); display: flex; min-height: 100vh; }
+    .sidebar { width: 260px; background: var(--bg-card); border-right: 1px solid var(--border-color); display: flex; flex-direction: column; padding: 1.5rem 1rem; position: fixed; height: 100vh; z-index: 100; }
+    .brand { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 2rem; padding: 0 0.5rem; }
+    .brand-badge { background: var(--primary); color: #000; font-weight: 700; font-size: 0.75rem; padding: 0.2rem 0.5rem; border-radius: 4px; }
+    .brand-title { font-weight: 600; font-size: 1.1rem; color: var(--text-main); }
+    .nav-btn { background: transparent; border: 1px solid transparent; color: var(--text-muted); padding: 0.75rem 1rem; border-radius: 8px; text-align: left; font-size: 0.9rem; font-family: inherit; cursor: pointer; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.75rem; transition: all 0.2s ease; }
+    .nav-btn.active { background: var(--primary-dim); border-color: rgba(245, 158, 11, 0.3); color: var(--primary); font-weight: 600; }
+    .nav-num { font-family: 'Fira Code', monospace; font-size: 0.8rem; opacity: 0.7; }
+    .main-content { margin-left: 260px; flex: 1; padding: 2rem 3rem; max-width: 1200px; }
+    .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border-color); }
+    .page-title { font-size: 1.5rem; font-weight: 700; color: var(--text-main); }
+    .tag { background: rgba(16, 185, 129, 0.1); color: var(--accent-green); border: 1px solid rgba(16, 185, 129, 0.2); padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.8rem; font-family: 'Fira Code', monospace; }
+    .slide { display: none; }
+    .slide.active { display: block; }
+    .card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem; }
+    .card-title { font-size: 1.1rem; font-weight: 600; color: var(--primary); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+    .shadowing-text { font-size: 1.05rem; line-height: 1.8; color: #cbd5e1; margin-bottom: 1.5rem; background: rgba(0, 0, 0, 0.2); padding: 1.25rem; border-radius: 8px; border-left: 3px solid var(--primary); }
+    .shadowing-word { transition: background 0.15s ease, color 0.15s ease; border-radius: 3px; padding: 0 2px; }
+    .shadowing-word.active { background: var(--primary); color: #000; font-weight: 600; }
+    .controls { display: flex; gap: 0.75rem; align-items: center; flex-wrap: wrap; margin-bottom: 1rem; }
+    .btn-secondary { background: transparent; border: 1px solid var(--border-color); color: var(--text-main); }
+    .btn { background: var(--primary); color: #000; border: none; padding: 0.6rem 1.2rem; border-radius: 6px; font-weight: 600; font-size: 0.85rem; font-family: inherit; cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem; }
+    .timer-display { font-family: 'Fira Code', monospace; font-size: 2rem; font-weight: 700; color: var(--primary); background: #000; padding: 0.5rem 1.2rem; border-radius: 8px; border: 1px solid var(--border-color); display: inline-block; }
+    textarea { width: 100%; background: rgba(0,0,0,0.4); border: 1px solid var(--border-color); color: var(--text-main); padding: 0.75rem; border-radius: 6px; font-family: inherit; font-size: 0.9rem; }
+    .table-trajectory { width: 100%; border-collapse: collapse; margin-top: 1rem; font-size: 0.9rem; }
+    .table-trajectory th, .table-trajectory td { padding: 0.75rem; border: 1px solid var(--border-color); text-align: center; }
+    .table-trajectory th { background: rgba(0,0,0,0.4); color: var(--primary); }
+    .reveal-box { display: none; background: rgba(16,185,129,0.08); border: 1px solid rgba(16,185,129,0.2); padding: 1rem; border-radius: 8px; margin-top: 0.75rem; font-size: 0.9rem; line-height: 1.6; }
+    .reveal-box.show { display: block; }
+    .text-red { color: #ef4444; }
+    .text-green { color: #10b981; }
+    #l20-lrSentences .sent-text{display:none;}
+    #l20-lrSentences.show .sent-text{display:inline;}
+    .speaking-sent{background:rgba(0,0,0,0.2);border:1px solid var(--border-color);border-radius:8px;padding:0.75rem 1rem;margin-bottom:0.5rem;font-size:0.9rem;}
+    .num{font-family:'Fira Code',monospace;font-weight:700;color:var(--primary);margin-right:0.5rem;}
+  </style>
+<!-- FE:CSS-MOBILE --><style>.mobile-nav-toggle{display:none;position:fixed;bottom:20px;right:20px;z-index:200;width:48px;height:48px;border-radius:50%;background:var(--primary);color:#000;border:none;font-size:20px;cursor:pointer;align-items:center;justify-content:center;box-shadow:3px 3px 0 rgba(0,0,0,0.12)}
+.sidebar-overlay{display:none;position:fixed;inset:0;z-index:150;background:rgba(0,0,0,0.4)}
+.sidebar-overlay.open{display:block}@media(max-width:768px){
+  .mobile-nav-toggle{display:flex}
+  .sidebar{position:fixed;left:0;top:0;z-index:175;height:100vh;transform:translateX(-100%);transition:transform .25s ease;width:260px;display:flex!important}
+  .sidebar.open{transform:translateX(0)}
+  .main-content{margin-left:0;padding:1rem 1rem 84px;max-width:100%}
+  .header{flex-wrap:wrap;gap:0.5rem}
+  .grid-2{grid-template-columns:1fr}
+  .controls{flex-direction:column;align-items:stretch}
+  .timer-display{font-size:1.5rem}
+}</style>
+<!-- FE:CSS-CHIP --><style>.slide-chip{font-family:'Fira Code',monospace;font-size:0.72rem;font-weight:700;color:var(--primary);background:var(--bg-card,rgba(0,0,0,0.4));border:1px solid var(--border-color,rgba(255,255,255,0.15));padding:0.25rem 0.65rem;border-radius:20px;white-space:nowrap;margin-left:auto}</style>
+<style>.back-link{color:var(--text-muted);text-decoration:none;font-size:0.8rem;font-family:'Fira Code',monospace;white-space:nowrap;transition:color 0.2s;margin-left:1rem;}.back-link:hover{color:var(--primary);}</style></head>
+<body>
+
+  <aside class="sidebar">
+    <div class="brand">
+      <span class="brand-badge">TOEFL</span>
+      <span class="brand-title">Valeria L20</span>
+    </div>
+    <button class="nav-btn active" onclick="switchSlide(0)"><span class="nav-num">01</span> Shadowing Warm-up</button>
+    <button class="nav-btn" onclick="switchSlide(1)"><span class="nav-num">02</span> Final Reading Mock</button>
+    <button class="nav-btn" onclick="switchSlide(2)"><span class="nav-num">03</span> Final Listening Mock</button>
+    <button class="nav-btn" onclick="switchSlide(3)"><span class="nav-num">04</span> Final Speaking Mock</button>
+    <button class="nav-btn" onclick="switchSlide(4)"><span class="nav-num">05</span> Final Writing Mock (15 min)</button>
+    <button class="nav-btn" onclick="switchSlide(5)"><span class="nav-num">06</span> 3-Mock Verdict Audit</button>
+    <button class="nav-btn" onclick="switchSlide(6)"><span class="nav-num">07</span> Homework</button>
+  </aside>
+
+  <main class="main-content">
+    <header class="header">
+      <div>
+        <h1 class="page-title">Final TOEFL Readiness Mock #3</h1>
+        <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 0.2rem;">Final Capstone Simulation &amp; Test-Booking Verdict</p>
+      </div>
+      <!-- FE:CHIP --><span class="slide-chip" id="slideChip">1 / N</span><a href="../index.html" class="back-link">&#8592; Portal</a>
+        <span class="tag">CAPSTONE MOCK</span>
+    </header>
+
+    <!-- SLIDE 1 -->
+    <div class="slide active" id="slide-0">
+      <div class="card">
+        <div class="card-title">🎙️ Shadowing: Behavioural Economics &amp; Choice Architecture</div>
+        <div class="shadowing-text" id="shadowingTextDisplay">
+          Behavioural economics has fundamentally reshaped our understanding of financial decision-making by demonstrating that human choice is systematically influenced by cognitive biases. Unlike classical economic models, which assume rational actors with perfect information, behavioural frameworks account for loss aversion, anchoring, and status quo bias. For example, individuals consistently weigh prospective losses more heavily than equivalent gains, leading to suboptimal investment decisions. By incorporating psychological insights into policy design, governments can deploy choice architecture—or 'nudges'—to encourage healthier savings habits and environmental stewardship without restricting personal freedom.
+        </div>
+        <div class="controls">
+          <button class="btn" onclick="toggleShadowingPacer()">▶ Start Pacer</button>
+          <button class="btn btn-secondary" onclick="resetShadowingPacer()">↺ Reset</button>
+          <audio id="shadowingAudio" src="audio/shadowing.wav" preload="auto" style="display:none;"></audio>
+          <button class="btn btn-secondary" onclick="document.getElementById('shadowingAudio').play()">🔊 Play Audio</button>
+          <select id="pacerSpeed" style="background:#000;color:#fff;padding:0.4rem;border-radius:4px;border:1px solid var(--border-color);"><option value="450">130 WPM</option><option value="380" selected>150 WPM</option><option value="320">175 WPM</option></select>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 2: READING MOCK -->
+    <div class="slide" id="slide-1">
+      <div class="card">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+          <div class="card-title" style="margin-bottom:0;">📖 Section 1: Reading (18 Minutes)</div>
+          <div>
+            <span class="timer-display" id="rTimer">18:00</span>
+            <button class="btn" onclick="startTimer('rTimer', 1080)">Start Clock</button>
+            <button class="btn btn-secondary" onclick="resetTimer('rTimer', 1080)">Reset</button>
+          </div>
+        </div>
+        <div style="background:rgba(0,0,0,0.3); padding:1rem; border-radius:8px; font-size:0.88rem; line-height:1.7; max-height:220px; overflow-y:auto; margin-bottom:1rem;">
+          <h4 style="color:var(--primary); margin-bottom:0.4rem;">Neuroscience of Language Acquisition</h4>
+          Language acquisition involves complex interactions between declarative and procedural memory systems. Neuroscientists have established that the brain's capacity for reorganization—known as neuroplasticity—enables adult learners to develop new neural pathways for processing foreign grammar and vocabulary, though typically through different cognitive mechanisms than children acquiring their first language. Broca's area, located in the left frontal lobe, handles speech production and grammatical processing, while Wernicke's area in the temporal lobe manages language comprehension. Research on the critical period hypothesis suggests that while children absorb language implicitly through immersion, adult learners increasingly depend on explicit instruction and declarative memory systems. This explains why adult second-language acquisition often requires more structured pedagogical approaches, even though neuroplasticity ensures the brain retains its capacity for linguistic adaptation throughout life...
+        </div>
+        <div style="font-size:0.88rem; line-height:2; margin-bottom:1rem;">
+          <div><strong>Q1 (gist):</strong> What is the passage mainly about?</div>
+          <div><strong>Q2 (vocabulary):</strong> What does <em>neuroplasticity</em> mean?</div>
+          <div><strong>Q3 (inference):</strong> What can be inferred about adult language learners?</div>
+          <div><strong>Q4 (detail):</strong> According to the passage, which area handles speech production?</div>
+        </div>
+        <button class="btn btn-secondary" onclick="toggleReveal('rKey')">👁️ Show Teacher Answer Key</button>
+        <div class="reveal-box" id="rKey">
+          <strong>Answer Key:</strong> Q1: How the brain processes language differently in children vs adults. | Q2: The brain's ability to adapt and reorganize neural pathways. | Q3: They rely more on declarative memory systems than child L1 acquirers. | Q4: Broca's area, in the left frontal lobe.
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 3: LISTENING MOCK -->
+    <div class="slide" id="slide-2">
+      <div class="card">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+          <div class="card-title" style="margin-bottom:0;">🎧 Section 2: Listening (15 Minutes)</div>
+          <div>
+            <span class="timer-display" id="lTimer">15:00</span>
+            <button class="btn" onclick="startTimer('lTimer', 900)">Start Clock</button>
+            <button class="btn btn-secondary" onclick="resetTimer('lTimer', 900)">Reset</button>
+          </div>
+        </div>
+        <div style="margin-bottom:0.75rem;">
+          <audio id="listeningAudio" src="audio/listening.wav" preload="auto" style="display:none;"></audio>
+          <button class="btn" onclick="document.getElementById('listeningAudio').play()">🔊 Play Lecture Audio</button>
+          <span style="font-size:0.82rem; color:var(--text-muted); margin-left:0.5rem;">Listen once, take Cornell notes, then answer.</span>
+        </div>
+        <div style="font-size:0.88rem; line-height:2; margin-bottom:1rem;">
+          <div><strong>Q1 (main point):</strong> What is the lecture mainly about?</div>
+          <div><strong>Q2 (detail):</strong> Name two nudges mentioned in the lecture.</div>
+        </div>
+        <button class="btn btn-secondary" onclick="toggleReveal('lKey')">👁️ Show Teacher Answer Key</button>
+        <div class="reveal-box" id="lKey">
+          <strong>Answer Key:</strong> Q1: How choice presentation influences decision-making. | Q2: Placing healthier food at eye level; automatic enrolment in retirement savings plans.
+        </div>
+        <button class="btn btn-secondary" style="margin-top:0.75rem;" onclick="toggleReveal('lTranscript')">📜 Show Transcript (only after answering)</button>
+        <div class="reveal-box" id="lTranscript">
+          <h4 style="color:var(--primary); margin-bottom:0.4rem;">Choice Architecture &amp; Nudge Theory</h4>
+          "Today we're examining choice architecture—the concept that the way options are presented significantly influences the decisions people make. Behavioural economist Richard Thaler demonstrated that 'nudges'—subtle changes to choice environments—can steer individuals toward better outcomes without restricting freedom. For example, placing healthier food at eye level in a cafeteria dramatically increases its selection, while automatic enrolment in retirement savings plans boosts participation rates far more than voluntary sign-up systems. Critics argue that nudges can be manipulative, but proponents counter that all choice environments are designed somehow—the question is whether we design them thoughtfully..."
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 4: SPEAKING MOCK -->
+    <div class="slide" id="slide-3">
+      <div class="card">
+        <div class="card-title">🗣️ Section 3: Speaking (Task 1 &amp; Task 2)</div>
+        <div style="margin-bottom:1.5rem;">
+          <h4 style="color:var(--accent-blue); margin-bottom:0.5rem;">Task 1: Listen &amp; Repeat (7 Prompts)</h4>
+          <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:0.75rem;">Play each sentence audio once. Repeat exactly. Sentence text is hidden — try repeating from hearing alone.</p>
+          <div style="margin-bottom:0.75rem;"><button class="btn btn-secondary" onclick="toggleReveal('l20-lrSentences')">👁️ Show Sentences</button></div>
+          <div id="l20-lrSentences">
+            <div class="speaking-sent"><span class="num">1.</span><span class="sent-text">Neuroplasticity enables the adult brain to develop new neural pathways for processing foreign grammar and vocabulary.</span><audio id="l20s1" class="sentence-audio" src="audio/l20-s1.wav" preload="none"></audio><button class="btn" style="margin-left:0.5rem;padding:0.25rem 0.7rem;font-size:0.8rem;" onclick="playSentence('l20s1')">▶ Play</button></div>
+            <div class="speaking-sent"><span class="num">2.</span><span class="sent-text">The critical period hypothesis suggests that children acquire language implicitly through immersion and exposure.</span><audio id="l20s2" class="sentence-audio" src="audio/l20-s2.wav" preload="none"></audio><button class="btn" style="margin-left:0.5rem;padding:0.25rem 0.7rem;font-size:0.8rem;" onclick="playSentence('l20s2')">▶ Play</button></div>
+            <div class="speaking-sent"><span class="num">3.</span><span class="sent-text">Broca's area handles speech production and grammatical processing while Wernicke's area manages comprehension.</span><audio id="l20s3" class="sentence-audio" src="audio/l20-s3.wav" preload="none"></audio><button class="btn" style="margin-left:0.5rem;padding:0.25rem 0.7rem;font-size:0.8rem;" onclick="playSentence('l20s3')">▶ Play</button></div>
+            <div class="speaking-sent"><span class="num">4.</span><span class="sent-text">Adult second-language acquisition often requires more structured pedagogical approaches than childhood learning.</span><audio id="l20s4" class="sentence-audio" src="audio/l20-s4.wav" preload="none"></audio><button class="btn" style="margin-left:0.5rem;padding:0.25rem 0.7rem;font-size:0.8rem;" onclick="playSentence('l20s4')">▶ Play</button></div>
+            <div class="speaking-sent"><span class="num">5.</span><span class="sent-text">Behavioural economists demonstrate that the presentation of choices significantly influences human decision-making.</span><audio id="l20s5" class="sentence-audio" src="audio/l20-s5.wav" preload="none"></audio><button class="btn" style="margin-left:0.5rem;padding:0.25rem 0.7rem;font-size:0.8rem;" onclick="playSentence('l20s5')">▶ Play</button></div>
+            <div class="speaking-sent"><span class="num">6.</span><span class="sent-text">Nudges are subtle changes to choice environments that steer individuals toward better outcomes without restricting freedom.</span><audio id="l20s6" class="sentence-audio" src="audio/l20-s6.wav" preload="none"></audio><button class="btn" style="margin-left:0.5rem;padding:0.25rem 0.7rem;font-size:0.8rem;" onclick="playSentence('l20s6')">▶ Play</button></div>
+            <div class="speaking-sent"><span class="num">7.</span><span class="sent-text">Automatic enrolment in retirement savings plans boosts participation rates far more than voluntary sign-up systems.</span><audio id="l20s7" class="sentence-audio" src="audio/l20-s7.wav" preload="none"></audio><button class="btn" style="margin-left:0.5rem;padding:0.25rem 0.7rem;font-size:0.8rem;" onclick="playSentence('l20s7')">▶ Play</button></div>
+          </div>
+        </div>
+        <div>
+          <h4 style="color:var(--accent-green); margin-bottom:0.5rem;">Task 2: Take an Interview (4 Prompts, 45s each)</h4>
+          <div style="display:flex; align-items:center; gap:1rem; margin-bottom:0.75rem;">
+            <span class="timer-display" id="spkTimer">00:45</span>
+            <button class="btn" onclick="startTimer('spkTimer', 45)">Start 45s Clock</button>
+            <button class="btn btn-secondary" onclick="resetTimer('spkTimer', 45)">Reset</button>
+          </div>
+          <div style="background:rgba(0,0,0,0.25); padding:0.75rem; border-radius:8px; font-size:0.88rem; line-height:1.6;">
+            1. Think back to the last time you needed to make detailed plans to get ready for an important event. What was that event? What was the most challenging part of making a plan?<br>
+            2. Some people like to know exactly what they're going to do each day and make detailed plans in advance. Others prefer to live life in a more spontaneous way. Which kind of person are you?<br>
+            3. Remembering upcoming dates and deadlines is an important part of planning. What's your method for remembering them? Why do you like this method?<br>
+            4. Can you think of a time when something didn't go according to plan? What was it? How did that experience make you feel?
+          </div>
+        </div>
+        <div style="margin-top:1.5rem; padding-top:1rem; border-top:1px solid var(--border-color);">
+          <h4 style="color:var(--accent-green); margin-bottom:0.5rem;">🎤 Record &amp; Analyze a Full Answer</h4>
+          <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:0.75rem;">Type your final answer to one of the prompts, then record yourself saying it to get WPM, filler and error-pattern analysis.</p>
+          <textarea id="t2Answer" rows="5" placeholder="Type your answer here..."></textarea>
+          <div style="display:flex; align-items:center; gap:0.5rem; margin-top:0.75rem; flex-wrap:wrap;">
+            <button class="btn btn-secondary" id="t2RecBtn" onclick="toggleSpeakRecord('t2')">🎤 Record Answer</button>
+            <button class="btn btn-secondary" id="t2StopBtn" onclick="stopSpeakRecord('t2')" disabled>⏹ Stop</button>
+            <span style="font-size:0.8rem; color:var(--accent-green);" id="t2RecStatus"></span>
+          </div>
+          <div class="reveal-box" id="t2Report"></div>
+        </div>
+        <button class="btn btn-secondary" style="margin-top:0.75rem;" onclick="toggleReveal('l20-t2Models')">👁️ Show Model Answers</button>
+        <div class="reveal-box" id="l20-t2Models">
+          <strong style="color:var(--accent-green);">Model Answers (45s each, ~100-115 words — polished from Valeria's session responses):</strong>
+          <p style="margin-top:0.5rem;line-height:1.7;"><strong>Q1:</strong> "The last time I had to make detailed plans was for a weekend trip to another city. I needed to arrange transport and accommodation, and fit the main sights into just two days. The most challenging part was finding a tour company that offered the best value and experience. This was mainly because there were dozens of options online with completely contradictory reviews. For example, one company was cheap but skipped the most interesting places, while another was expensive without any clear advantage. Some people say detailed planning kills the fun, yet for me it actually reduces stress. Therefore, comparing everything carefully was exhausting, but the trip itself went smoothly."</p>
+          <p style="margin-top:0.5rem;line-height:1.7;"><strong>Q2:</strong> "I am definitely a planner. I prefer to plan my day in advance, almost down to the smallest detail, because I hate being caught off guard. This is mainly because knowing exactly what comes next helps me stay calm and use my time well. For example, every evening I write a list for the next day, with lessons, tasks, and even breaks. Some people say a spontaneous life is freer and more exciting, yet for me unexpected changes mostly bring stress rather than joy. Therefore, while I can adapt when I must, I always feel best with a clear plan."</p>
+          <p style="margin-top:0.5rem;line-height:1.7;"><strong>Q3:</strong> "My method for remembering dates and deadlines is writing everything down in a journal and lists that I always keep with me. I like this method mainly because paper never runs out of battery, and the physical act of writing helps me memorize things better. For example, I keep one daily list for tasks and one monthly page for deadlines, and I check them every morning. Some people prefer phone reminders and digital calendars, yet for me notifications are too easy to swipe away and forget. Therefore, a notebook I can always open, even offline, remains the most reliable system for me."</p>
+          <p style="margin-top:0.5rem;line-height:1.7;"><strong>Q4:</strong> "I can think of a time when a booked tour did not go according to plan. The company changed the itinerary at the last moment, cutting the two places I most wanted to see. I decided to cancel and ask for a refund, which made me feel frustrated and anxious at first. This was mainly because I had already paid in full and feared losing my money. For example, I had to write several emails and wait two weeks. Some people would simply accept the change, yet for me standing up for what I paid for mattered. Therefore, although the experience was stressful, getting the refund back felt like a real victory."</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 5: WRITING MOCK -->
+    <div class="slide" id="slide-4">
+      <div class="card">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+          <div class="card-title" style="margin-bottom:0;">✉️ Writing Task 1: Email Reply (7 Minutes)</div>
+          <div>
+            <span class="timer-display" id="emailTimer">07:00</span>
+            <button class="btn" onclick="startTimer('emailTimer', 420)">Start</button>
+            <button class="btn btn-secondary" onclick="resetTimer('emailTimer', 420)">Reset</button>
+          </div>
+        </div>
+        <div style="background:rgba(0,0,0,0.25); padding:1rem; border-radius:8px; font-size:0.85rem; margin-bottom:1rem; line-height:1.6;">
+          <strong>Email from Professor Silva:</strong> "Dear student, the university is planning to offer free online courses to high school students. I would like your opinion on this idea. What is one benefit you see, and what is one possible problem? Best regards, Professor Silva"
+        </div>
+        <textarea id="emailInput" rows="6" placeholder="Type your email reply here (Target: 100-120 words, 7 min)..." oninput="updateWC('emailInput','emailCount',100,'100-120')"></textarea>
+        <div style="font-family:'Fira Code',monospace; font-size:0.85rem; color:var(--accent-green); margin-top:0.4rem;" id="emailCount">Word count: 0 words (Goal: 100-120)</div>
+        <button class="btn btn-secondary" style="margin-top:0.75rem;" onclick="toggleReveal('emailReveal')">👁️ Show Model Answer</button>
+        <div class="reveal-box" id="emailReveal">
+          <strong style="color:var(--accent-green);">Model Answer (~110 words):</strong>
+          <p style="margin-top:0.5rem;line-height:1.7;">Dear Professor Silva, Thank you for inviting students to share their views on the free online course program. I believe the main benefit is access, since high school students in remote areas currently have few opportunities to experience university-level learning. However, I also see one possible problem: without regular interaction with instructors, some students may lose motivation and quit. As a suggestion, the university could pair each course with a mentor or study group. I would be happy to help promote the program among local schools. Please let me know if you need further input. Best regards, Valeria</p>
+        </div>
+      </div>
+      <div class="card">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+          <div class="card-title" style="margin-bottom:0;">✍️ Writing Task 2: Academic Discussion (10 Minutes)</div>
+          <div>
+            <span class="timer-display" id="wTimer">10:00</span>
+            <button class="btn" onclick="startTimer('wTimer', 600)">Start 10m Clock</button>
+            <button class="btn btn-secondary" onclick="resetTimer('wTimer', 600)">Reset</button>
+          </div>
+        </div>
+        <div style="background:rgba(0,0,0,0.25); padding:1rem; border-radius:8px; font-size:0.85rem; margin-bottom:1rem;">
+          <strong>Prompt:</strong> "Should universities prioritize teaching soft skills or technical knowledge?"
+        </div>
+        <textarea id="wInput" rows="7" placeholder="Type discussion response here (Target: 120-130 words)..." oninput="updateWC('wInput','wcBadge',120,'120-130')"></textarea>
+        <div style="font-family:'Fira Code',monospace; font-size:0.85rem; color:var(--accent-green); margin-top:0.4rem;" id="wcBadge">Word count: 0 words (Goal: 120-130)</div>
+        <button class="btn btn-secondary" style="margin-top:0.75rem;" onclick="toggleReveal('discReveal')">👁️ Show Model Answer</button>
+        <div class="reveal-box" id="discReveal">
+          <strong style="color:var(--accent-green);">Model Answer (~125 words, uses five collocations):</strong>
+          <p style="margin-top:0.5rem;line-height:1.7;">While I acknowledge the view that technical knowledge secures employment, I firmly maintain that universities should prioritize soft skills, because students must acquire knowledge that transfers across careers and provide evidence of their ability to collaborate. This is primarily because technical tools change rapidly, whereas communication and critical thinking allow graduates to gain experience in any field. For example, an engineer who can demonstrate competence in presenting ideas will achieve success faster than one who only masters software. Critics argue universities should focus on measurable expertise, yet employers consistently report they can train tools but cannot teach attitude. Therefore, curricula should establish credibility through balanced programs that address these issues by combining labs with teamwork, not merely technical drills.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 6: 3-MOCK TRAJECTORY & VERDICT -->
+    <div class="slide" id="slide-5">
+      <div class="card">
+        <div class="card-title">🏆 3-Mock Growth Trajectory &amp; Test Booking Verdict</div>
+        <table class="table-trajectory">
+          <thead>
+            <tr><th>Section</th><th>Mock #1 (L10)</th><th>Mock #2 (L14)</th><th>Mock #3 (L20)</th><th>Target</th><th>Verdict</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Reading</td><td>3.0</td><td><input type="text" style="width:50px; text-align:center;" placeholder="?" title="Confirm from L14 session notes before the lesson"></td><td><input type="text" style="width:50px; text-align:center;"></td><td>4.5+</td><td><input type="text" style="width:70px; text-align:center;" placeholder="—"></td></tr>
+            <tr><td>Listening</td><td>4.0</td><td><input type="text" style="width:50px; text-align:center;" placeholder="?" title="Confirm from L14 session notes before the lesson"></td><td><input type="text" style="width:50px; text-align:center;"></td><td>4.5+</td><td><input type="text" style="width:70px; text-align:center;" placeholder="—"></td></tr>
+            <tr><td>Speaking</td><td>3.5</td><td><input type="text" style="width:50px; text-align:center;" placeholder="?" title="Confirm from L14 session notes before the lesson"></td><td><input type="text" style="width:50px; text-align:center;"></td><td>4.5+</td><td><input type="text" style="width:70px; text-align:center;" placeholder="—"></td></tr>
+            <tr><td>Writing</td><td>3.0</td><td><input type="text" style="width:50px; text-align:center;" placeholder="?" title="Confirm from L14 session notes before the lesson"></td><td><input type="text" style="width:50px; text-align:center;"></td><td>4.5+</td><td><input type="text" style="width:70px; text-align:center;" placeholder="—"></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="card">
+        <div class="card-title">📋 Final Recommendation</div>
+        <textarea rows="4" placeholder="Enter official test registration advice and test-day guidelines..."></textarea>
+      </div>
+    </div>
+
+    <!-- SLIDE 7: HOMEWORK -->
+    <div class="slide" id="slide-6">
+      <div class="card">
+        <div class="card-title">📚 Homework Assignments</div>
+        <div class="speaking-sent"><span class="num">1.</span><strong style="color:var(--accent-green);">Interview Redo — Making Plans (real TOEFL set)</strong> — Re-answer all 4 Planning questions on <a href="https://www.toeflresources.com/toefl-speaking-take-an-interview-making-plans/" target="_blank" rel="noopener" style="color:var(--accent-blue);">toeflresources.com: Making Plans</a> (45s each, zero prep, audio included). Then compare against the deck models + the site's sample answers. Priority: Q4 refund story — retell it twice until it flows without pauses.</div>
+        <div class="speaking-sent"><span class="num">2.</span><strong style="color:var(--accent-blue);">Listen &amp; Repeat Drill — Train Station</strong> — Two full rounds of <a href="https://www.toeflresources.com/toefl-speaking-listen-and-repeat-train-ticket/" target="_blank" rel="noopener" style="color:var(--accent-blue);">toeflresources.com: Train Station</a> (7 sentences, listen → repeat, no reading). Travel theme recycles your weekend-trip vocabulary.</div>
+        <div class="speaking-sent"><span class="num">3.</span><strong style="color:var(--primary);">Exam-Eve Polish</strong> — Re-read the L20 email + discussion models once; review the 10 C1 collocations (L18) and the 5-sentence scaffold (L17). Rest 24 hours before exam day. Browse the full bank anytime: <a href="https://www.toeflresources.com/speaking-section/toefl-speaking-samples/" target="_blank" rel="noopener" style="color:var(--accent-blue);">TOEFL Speaking Samples hub</a>.</div>
+      </div>
+    </div>
+  </main>
+
+  <script src="audio/shadowingTS.js"></script>
+  <script>
+    function switchSlide(i) {
+      document.querySelectorAll('.slide').forEach((s, idx) => s.classList.toggle('active', idx === i));
+      document.querySelectorAll('.nav-btn').forEach((b, idx) => b.classList.toggle('active', idx === i));
+      window.scrollTo(0, 0);
+    }
+    let pacerInterval=null,currentWordIndex=0,karaokeIndex=-1;
+    const shadowingAudioEl=document.getElementById('shadowingAudio');
+    function wrapShadowingWords(){const c=document.getElementById('shadowingTextDisplay');if(c.dataset.wrapped)return;if(typeof shadowingTS!=='undefined'&&shadowingTS.length){c.innerHTML=shadowingTS.map(w=>`<span class="shadowing-word">${w.word}</span>`).join(' ');}else{c.innerHTML=c.innerText.split(/\s+/).map(w=>`<span class="shadowing-word">${w}</span>`).join(' ');}c.dataset.wrapped="true";}
+    function clearAllHighlights(){document.querySelectorAll('.shadowing-word').forEach(w=>w.classList.remove('active'));}
+    function toggleShadowingPacer(){if(pacerInterval){clearInterval(pacerInterval);pacerInterval=null;return;}if(shadowingAudioEl)shadowingAudioEl.pause();wrapShadowingWords();const sw=document.querySelectorAll('.shadowing-word');const sp=parseInt(document.getElementById('pacerSpeed').value)||380;pacerInterval=setInterval(()=>{sw.forEach(w=>w.classList.remove('active'));if(currentWordIndex<sw.length){sw[currentWordIndex].classList.add('active');currentWordIndex++;}else{clearInterval(pacerInterval);pacerInterval=null;currentWordIndex=0;}},sp);}
+    function resetShadowingPacer(){if(pacerInterval)clearInterval(pacerInterval);pacerInterval=null;currentWordIndex=0;karaokeIndex=-1;if(shadowingAudioEl)shadowingAudioEl.pause();clearAllHighlights();}
+    if(shadowingAudioEl){
+      shadowingAudioEl.addEventListener('play',()=>{if(pacerInterval){clearInterval(pacerInterval);pacerInterval=null;}wrapShadowingWords();});
+      shadowingAudioEl.addEventListener('timeupdate',()=>{if(typeof shadowingTS==='undefined'||!shadowingTS.length)return;const t=shadowingAudioEl.currentTime;if(t<shadowingTS[0].start)return;let idx=-1;for(let i=karaokeIndex+1;i<shadowingTS.length;i++){if(t>=shadowingTS[i].start)idx=i;else break;}if(idx===-1&&karaokeIndex>=0)idx=karaokeIndex;if(idx>=0&&idx!==karaokeIndex){karaokeIndex=idx;clearAllHighlights();const spans=document.querySelectorAll('.shadowing-word');if(spans[idx])spans[idx].classList.add('active');}});
+      shadowingAudioEl.addEventListener('ended',()=>{karaokeIndex=-1;clearAllHighlights();});
+    }
+    function playSentence(id){document.querySelectorAll('audio.sentence-audio').forEach(a=>{if(a.id!==id)a.pause();});const a=document.getElementById(id);if(a.paused){a.currentTime=0;a.play();}}
+
+    // Speech Metrics: Record & Analyze
+    const speakRec={};
+    function toggleSpeakRecord(prefix){
+      const btn=document.getElementById(prefix+'RecBtn'),stop=document.getElementById(prefix+'StopBtn'),status=document.getElementById(prefix+'RecStatus');
+      if(speakRec[prefix]&&speakRec[prefix].active)return;
+      navigator.mediaDevices.getUserMedia({audio:true}).then(stream=>{
+        const recorder=new MediaRecorder(stream);
+        const start=performance.now();
+        speakRec[prefix]={recorder,stream,start,active:true};
+        recorder.start();
+        stop.disabled=false;btn.disabled=true;status.textContent='Recording… speak now';status.style.color='var(--accent-red)';
+        recorder.onstop=()=>{
+          const dur=(performance.now()-start)/1000;
+          stream.getTracks().forEach(t=>t.stop());
+          speakRec[prefix].active=false;
+          stop.disabled=true;btn.disabled=false;
+          const text=document.getElementById(prefix+'Answer').value.trim();
+          const words=text?text.split(/\s+/):[];
+          const wpm=words.length/(dur/60);
+          const pace=wpm>=128&&wpm<=188?'Target pace ✔':(wpm<128?'Under target — aim ~150 WPM':'Over target — slow down for clarity');
+          status.textContent='Saved — analysis below';status.style.color='var(--accent-green)';
+          const fillers=[['um',/\bum\b/gi],['uh',/\buh\b/gi],['like',/\blike\b/gi],['you know',/\byou know\b/gi],['actually',/\bactually\b/gi],['kind of',/\bkind of\b/gi],['sort of',/\bsort of\b/gi],['I mean',/\bi mean\b/gi],['basically',/\bbasically\b/gi]];
+          const found=fillers.map(([label,re])=>{const n=(text.match(re)||[]).length;return n?`${label} ×${n}`:null;}).filter(Boolean);
+          const patterns=[['although…but',/\balthough\b[^.]{0,80}\bbut\b/gi],['despite…but',/\bdespite\b[^.]{0,80}\bbut\b/gi],['more + comparative',/\bmore (better|easier|bigger|faster|simpler|worse)\b/gi],['3rd-person don\'t',/\b(he|she|it) don\'t\b/gi],['much + plural',/\bmuch (people|students|things|countries|reasons)\b/gi],['am agree',/\bam agree\b/gi],['people is',/\bpeople is\b/gi],['there is + plural',/\bthere is (many|several|two|three)\b/gi]];
+          const errs=patterns.map(([label,re])=>{const n=(text.match(re)||[]).length;return n?`${label} (${n})`:null;}).filter(Boolean);
+          const rep=[`Duration ${Math.round(dur)}s · ${words.length} words → ${Math.round(wpm)} WPM — ${pace}`];
+          if(found.length)rep.push('Fillers: '+found.join(', '));else rep.push('Fillers: none detected ✔');
+          if(errs.length)rep.push('<span class="text-red">Watch: '+errs.join(' · ')+'</span>');else rep.push('<span class="text-green">No target patterns flagged ✔</span>');
+          const r=document.getElementById(prefix+'Report');r.innerHTML=rep.join('<br>');r.classList.add('show');
+        };
+      }).catch(()=>{status.textContent='Mic denied — enable mic for analysis';});
+    }
+    function stopSpeakRecord(prefix){if(speakRec[prefix]&&speakRec[prefix].active)speakRec[prefix].recorder.stop();}
+    let activeT = null;
+    function startTimer(id, sec) {
+      if (activeT) clearInterval(activeT);
+      let r = sec;
+      activeT = setInterval(() => {
+        const m = Math.floor(r/60), s = r%60;
+        document.getElementById(id).textContent = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+        if (r <= 0) clearInterval(activeT);
+        r--;
+      }, 1000);
+    }
+    function updateWC(a, c, min, label) {
+      const v = document.getElementById(a).value.trim();
+      const n = v ? v.split(/\s+/).length : 0;
+      const el = document.getElementById(c);
+      el.textContent = `Word count: ${n} words (Goal: ${label || '130+'})`;
+      el.style.color = n >= (min || 130) ? 'var(--accent-green)' : 'var(--accent-red)';
+    }
+    function resetTimer(id, sec) { if (window.clearAllDeckTimers) window.clearAllDeckTimers(); const d = document.getElementById(id); d.textContent = `${String(Math.floor(sec / 60)).padStart(2, '0')}:${String(sec % 60).padStart(2, '0')}`; }
+    function toggleReveal(id) { document.getElementById(id).classList.toggle('show'); }
+  </script>
+<button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Open lesson navigation">&#9776;</button>
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+<!-- FE:MOBILE --><script>// FE:MOBILE
+(function(){
+  function initM() {
+    var t = document.getElementById('mobileNavToggle'), ov = document.getElementById('sidebarOverlay');
+    if (!t || !ov) return;
+    var sb = document.querySelector('.nav-btn').parentElement;
+    function close() { sb.classList.remove('open'); ov.classList.remove('open'); }
+    t.addEventListener('click', function() { sb.classList.toggle('open'); ov.classList.toggle('open'); });
+    ov.addEventListener('click', close);
+    document.querySelectorAll('.nav-btn').forEach(function(b) { b.addEventListener('click', close); });
+  }
+  if (document.readyState !== 'loading') initM(); else document.addEventListener('DOMContentLoaded', initM);
+})();</script>
+<!-- FE:HASH --><script>// FE:HASH
+(function(){
+  function mH() { var m = location.hash.match(/^#slide-(\d+)$/); if (m && window.switchSlide) window.switchSlide(parseInt(m[1])); }
+  window.addEventListener('hashchange', mH);
+  !function(){ mH(); }();
+  if (!window.__feHashWrapped && window.switchSlide) {
+    window.__feHashWrapped = true;
+    var o = window.switchSlide;
+    window.switchSlide = function(i) { o(i); try { history.replaceState(null, '', '#slide-' + i); } catch (e) {} };
+  }
+})();</script>
+<!-- FE:KEYS --><script>// FE:KEYS
+(function(){
+  document.addEventListener('keydown', function(e) {
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT' || e.target.isContentEditable) return;
+    if (e.code === 'ArrowLeft' || e.code === 'ArrowRight') {
+      var btns = document.querySelectorAll('.nav-btn');
+      var cur = document.querySelector('.nav-btn.active');
+      var pos = cur ? Array.prototype.indexOf.call(btns, cur) : -1;
+      if (pos < 0) return;
+      var tgt = pos + (e.code === 'ArrowRight' ? 1 : -1);
+      if (tgt >= 0 && tgt < btns.length) { e.preventDefault(); window.switchSlide(tgt + 0); }
+    }
+  });
+})();</script>
+<!-- FE:TIMERS --><script>// FE:TIMERS
+(function(){
+  window.__activeIntervals__ = window.__activeIntervals__ || [];
+  if (!window.__feIntervalPatched) {
+    window.__feIntervalPatched = true;
+    var _si = window.setInterval;
+    window.setInterval = function(fn, t) { var id = _si(fn, t); window.__activeIntervals__.push(id); return id; };
+  }
+  window.clearAllDeckTimers = function() {
+    window.__activeIntervals__.forEach(function(id) { clearInterval(id); });
+    window.__activeIntervals__ = [];
+  };
+  if (!window.__feTimersWrapped && window.switchSlide) {
+    window.__feTimersWrapped = true;
+    var o = window.switchSlide;
+    window.switchSlide = function(i) { if (window.clearAllDeckTimers) window.clearAllDeckTimers(); o(i); };
+  }
+})();</script>
+<!-- FE:CHIPJS --><script>// FE:CHIP
+(function(){
+  function updChipFromActive() {
+    var c = document.getElementById('slideChip'); if (!c) return;
+    var cur = document.querySelector('.nav-btn.active');
+    var pos = cur ? Array.prototype.indexOf.call(document.querySelectorAll('.nav-btn'), cur) : 0;
+    c.textContent = (pos + 1) + ' / ' + document.querySelectorAll('.slide').length;
+  }
+  if (!window.__feChipWrapped && window.switchSlide) {
+    window.__feChipWrapped = true;
+    var o = window.switchSlide;
+    window.switchSlide = function(i) { o(i); var c = document.getElementById('slideChip'); if (c) c.textContent = (i + 1) + ' / ' + document.querySelectorAll('.slide').length; };
+  }
+  if (document.readyState !== 'loading') updChipFromActive(); else document.addEventListener('DOMContentLoaded', updChipFromActive);
+})();</script>
+</body>
+</html>
