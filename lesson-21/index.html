@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Valeria — Lesson 21: Mock #3 Debrief &amp; Error Surgery</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #090d16;
+      --bg-card: #131a26;
+      --border-color: #243042;
+      --text-main: #f1f5f9;
+      --text-muted: #64748b;
+      --primary: #f59e0b;
+      --primary-hover: #d97706;
+      --primary-dim: rgba(245, 158, 11, 0.12);
+      --accent-blue: #38bdf8;
+      --accent-green: #10b981;
+      --accent-red: #ef4444;
+      --accent-purple: #a78bfa;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', sans-serif; background-color: var(--bg-dark); color: var(--text-main); display: flex; min-height: 100vh; }
+    .sidebar { width: 260px; background: var(--bg-card); border-right: 1px solid var(--border-color); display: flex; flex-direction: column; padding: 1.5rem 1rem; position: fixed; height: 100vh; z-index: 100; }
+    .brand { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 2rem; padding: 0 0.5rem; }
+    .brand-badge { background: var(--primary); color: #000; font-weight: 700; font-size: 0.75rem; padding: 0.2rem 0.5rem; border-radius: 4px; }
+    .brand-title { font-weight: 600; font-size: 1.1rem; color: var(--text-main); }
+    .nav-btn { background: transparent; border: 1px solid transparent; color: var(--text-muted); padding: 0.75rem 1rem; border-radius: 8px; text-align: left; font-size: 0.9rem; font-family: inherit; cursor: pointer; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.75rem; transition: all 0.2s ease; }
+    .nav-btn.active { background: var(--primary-dim); border-color: rgba(245, 158, 11, 0.3); color: var(--primary); font-weight: 600; }
+    .nav-num { font-family: 'Fira Code', monospace; font-size: 0.8rem; opacity: 0.7; }
+    .main-content { margin-left: 260px; flex: 1; padding: 2rem 3rem; max-width: 1200px; }
+    .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border-color); }
+    .page-title { font-size: 1.5rem; font-weight: 700; color: var(--text-main); }
+    .tag { background: rgba(16, 185, 129, 0.1); color: var(--accent-green); border: 1px solid rgba(16, 185, 129, 0.2); padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.8rem; font-family: 'Fira Code', monospace; }
+    .slide { display: none; }
+    .slide.active { display: block; }
+    .card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem; }
+    .card-title { font-size: 1.1rem; font-weight: 600; color: var(--primary); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+    .shadowing-text { font-size: 1.05rem; line-height: 1.8; color: #cbd5e1; margin-bottom: 1.5rem; background: rgba(0, 0, 0, 0.2); padding: 1.25rem; border-radius: 8px; border-left: 3px solid var(--primary); }
+    .shadowing-word { transition: background 0.15s ease, color 0.15s ease; border-radius: 3px; padding: 0 2px; }
+    .shadowing-word.active { background: var(--primary); color: #000; font-weight: 600; }
+    .controls { display: flex; gap: 0.75rem; align-items: center; flex-wrap: wrap; margin-bottom: 1rem; }
+    .btn-secondary { background: transparent; border: 1px solid var(--border-color); color: var(--text-main); }
+    .btn { background: var(--primary); color: #000; border: none; padding: 0.6rem 1.2rem; border-radius: 6px; font-weight: 600; font-size: 0.85rem; font-family: inherit; cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem; }
+    .timer-display { font-family: 'Fira Code', monospace; font-size: 2rem; font-weight: 700; color: var(--primary); background: #000; padding: 0.5rem 1.2rem; border-radius: 8px; border: 1px solid var(--border-color); display: inline-block; }
+    textarea { width: 100%; background: rgba(0,0,0,0.4); border: 1px solid var(--border-color); color: var(--text-main); padding: 0.75rem; border-radius: 6px; font-family: inherit; font-size: 0.9rem; }
+    .reveal-box { display: none; background: rgba(16,185,129,0.08); border: 1px solid rgba(16,185,129,0.2); padding: 1rem; border-radius: 8px; margin-top: 0.75rem; font-size: 0.9rem; line-height: 1.6; }
+    .reveal-box.show { display: block; }
+    .text-red { color: #ef4444; }
+    .text-green { color: #10b981; }
+    .score-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+    .score-table th, .score-table td { padding: 0.6rem 1rem; border: 1px solid var(--border-color); text-align: center; }
+    .score-table th { background: rgba(0,0,0,0.4); color: var(--primary); font-weight: 600; }
+    .error-table { width: 100%; border-collapse: collapse; margin-top: 1rem; font-size: 0.9rem; }
+    .error-table th, .error-table td { padding: 0.75rem 1rem; border: 1px solid var(--border-color); text-align: left; }
+    .error-table th { background: rgba(0,0,0,0.4); color: var(--primary); }
+    .speaking-sent { background: rgba(0,0,0,0.2); border: 1px solid var(--border-color); border-radius: 8px; padding: 0.75rem 1rem; margin-bottom: 0.5rem; font-size: 0.9rem; }
+    .num { font-family: 'Fira Code', monospace; font-weight: 700; color: var(--primary); margin-right: 0.5rem; }
+    #l21-lrSentences .sent-text { display: none; }
+    #l21-lrSentences.show .sent-text { display: inline; }
+  </style>
+<!-- FE:CSS-MOBILE --><style>.mobile-nav-toggle{display:none;position:fixed;bottom:20px;right:20px;z-index:200;width:48px;height:48px;border-radius:50%;background:var(--primary);color:#000;border:none;font-size:20px;cursor:pointer;align-items:center;justify-content:center;box-shadow:3px 3px 0 rgba(0,0,0,0.12)}
+.sidebar-overlay{display:none;position:fixed;inset:0;z-index:150;background:rgba(0,0,0,0.4)}
+.sidebar-overlay.open{display:block}@media(max-width:768px){
+  .mobile-nav-toggle{display:flex}
+  .sidebar{position:fixed;left:0;top:0;z-index:175;height:100vh;transform:translateX(-100%);transition:transform .25s ease;width:260px;display:flex!important}
+  .sidebar.open{transform:translateX(0)}
+  .main-content{margin-left:0;padding:1rem 1rem 84px;max-width:100%}
+  .header{flex-wrap:wrap;gap:0.5rem}
+  .grid-2{grid-template-columns:1fr}
+  .controls{flex-direction:column;align-items:stretch}
+  .timer-display{font-size:1.5rem}
+}</style>
+<!-- FE:CSS-CHIP --><style>.slide-chip{font-family:'Fira Code',monospace;font-size:0.72rem;font-weight:700;color:var(--primary);background:var(--bg-card,rgba(0,0,0,0.4));border:1px solid var(--border-color,rgba(255,255,255,0.15));padding:0.25rem 0.65rem;border-radius:20px;white-space:nowrap;margin-left:auto}</style>
+<style>.back-link{color:var(--text-muted);text-decoration:none;font-size:0.8rem;font-family:'Fira Code',monospace;white-space:nowrap;transition:color 0.2s;margin-left:1rem;}.back-link:hover{color:var(--primary);}</style></head>
+<body>
+
+  <aside class="sidebar">
+    <div class="brand">
+      <span class="brand-badge">TOEFL</span>
+      <span class="brand-title">Valeria L21</span>
+    </div>
+    <button class="nav-btn active" onclick="switchSlide(0)"><span class="nav-num">01</span> Shadowing Warm-up</button>
+    <button class="nav-btn" onclick="switchSlide(1)"><span class="nav-num">02</span> L20 Mock #3 Verdict</button>
+    <button class="nav-btn" onclick="switchSlide(2)"><span class="nav-num">03</span> Error Surgery: Top 3</button>
+    <button class="nav-btn" onclick="switchSlide(3)"><span class="nav-num">04</span> Listen &amp; Repeat Drill</button>
+    <button class="nav-btn" onclick="switchSlide(4)"><span class="nav-num">05</span> Correction Table</button>
+    <button class="nav-btn" onclick="switchSlide(5)"><span class="nav-num">06</span> Homework</button>
+  </aside>
+
+  <main class="main-content">
+    <header class="header">
+      <div>
+        <h1 class="page-title">Mock #3 Debrief &amp; Error Surgery</h1>
+        <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 0.2rem;">Log L20 scores, drill top-3 writing fixes, rebuild speed habits</p>
+      </div>
+      <!-- FE:CHIP --><span class="slide-chip" id="slideChip">1 / N</span><a href="../index.html" class="back-link">&#8592; Portal</a>
+        <span class="tag">DEBRIEF</span>
+    </header>
+
+    <!-- SLIDE 1: SHADOWING -->
+    <div class="slide active" id="slide-0">
+      <div class="card">
+        <div class="card-title">🎙️ Shadowing: Writing Under Time Pressure</div>
+        <div class="shadowing-text" id="shadowingTextDisplay">
+          Efficient academic writing under timed conditions requires writers to manage both speed and accuracy simultaneously. Successful test-takers develop pre-planned structural frames, allocate roughly one minute per sentence, and reserve the final minute for proofreading critical errors. Rather than pursuing perfect opening sentences, experienced writers begin with their strongest argument and build outward. This strategic approach allows candidates to produce substantive responses that meet length requirements while maintaining grammatical precision and lexical variety.
+        </div>
+        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:1rem;">Targets: <em>manage speed and accuracy · pre-planned structural frames · one minute per sentence · proofreading pass · substantive responses · grammatical precision · lexical variety</em></p>
+        <div class="controls">
+          <button class="btn" onclick="toggleShadowingPacer()">▶ Start Pacer</button>
+          <button class="btn btn-secondary" onclick="resetShadowingPacer()">↺ Reset</button>
+          <audio id="shadowingAudio" src="audio/shadowing.wav" preload="auto" style="display:none;"></audio>
+          <button class="btn btn-secondary" onclick="document.getElementById('shadowingAudio').play()">🔊 Play Audio</button>
+          <select id="pacerSpeed" style="background:#000;color:#fff;padding:0.4rem;border-radius:4px;border:1px solid var(--border-color);"><option value="450">130 WPM</option><option value="380" selected>150 WPM</option><option value="320">175 WPM</option></select>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 2: MOCK #3 VERDICT -->
+    <div class="slide" id="slide-1">
+      <div class="card">
+        <div class="card-title">📊 Mock #3 (L20) — Score Entry</div>
+        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:1rem;">Enter the scores from your L20 mock. Compare to L10 baseline and the target.</p>
+        <table class="score-table">
+          <thead>
+            <tr><th>Skill</th><th>L10 Baseline</th><th>L20 Final</th><th>Target</th><th>Trend</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Reading</td><td>3.0</td><td><input type="text" id="score-reading" placeholder="?" style="width:60px;text-align:center;background:rgba(0,0,0,0.3);border:1px solid var(--border-color);color:var(--text-main);padding:0.3rem;border-radius:4px;"></td><td>4.5+</td><td id="trend-reading">—</td></tr>
+            <tr><td>Listening</td><td>4.0</td><td><input type="text" id="score-listening" placeholder="?" style="width:60px;text-align:center;background:rgba(0,0,0,0.3);border:1px solid var(--border-color);color:var(--text-main);padding:0.3rem;border-radius:4px;"></td><td>4.5+</td><td id="trend-listening">—</td></tr>
+            <tr><td>Speaking</td><td>3.5</td><td><input type="text" id="score-speaking" placeholder="?" style="width:60px;text-align:center;background:rgba(0,0,0,0.3);border:1px solid var(--border-color);color:var(--text-main);padding:0.3rem;border-radius:4px;"></td><td>4.5+</td><td id="trend-speaking">—</td></tr>
+            <tr><td>Writing</td><td>3.0</td><td><input type="text" id="score-writing" placeholder="?" style="width:60px;text-align:center;background:rgba(0,0,0,0.3);border:1px solid var(--border-color);color:var(--text-main);padding:0.3rem;border-radius:4px;"></td><td>4.5+</td><td id="trend-writing">—</td></tr>
+          </tbody>
+        </table>
+        <button class="btn" style="margin-top:1rem;" onclick="calcScores()">Calculate Trends</button>
+        <div id="trendResult" style="margin-top:0.75rem;font-size:1.05rem;font-weight:600;"></div>
+      </div>
+      <div class="card">
+        <div class="card-title">📝 Key Observations from L20</div>
+        <div style="background:rgba(0,0,0,0.25);padding:1rem;border-radius:8px;font-size:0.88rem;line-height:1.7;">
+          <strong style="color:var(--accent-green);">Progress since L10:</strong> Listening stable at 4.0. Speaking improved with second-move framework. Writing floor raised from 75w → 88–104w (still short of targets).<br><br>
+          <strong style="color:var(--accent-red);">Still to fix:</strong> (1) Generation speed ~10–12 wpm (needs 13–15). (2) Email bullet-2 chronically thin. (3) Zero collocations transferred to writing. (4) Spelling under pressure.<br><br>
+          <strong style="color:var(--accent-blue);">Today's target:</strong> Rebuild the writing speed habit. One sprint per fix. Log improvements on the correction table.
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 3: ERROR SURGERY -->
+    <div class="slide" id="slide-2">
+      <div class="card">
+        <div class="card-title">🔧 Error Surgery: Top 3 Writing Fixes</div>
+        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:1rem;">Three focused drills targeting the #1 cap on both writing tasks: <strong>speed + length</strong>.</p>
+
+        <div style="margin-bottom:1.5rem;">
+          <h4 style="color:var(--accent-red);margin-bottom:0.5rem;">Fix 1: Generation Speed — Chunk-Writing (10 min)</h4>
+          <p style="font-size:0.88rem;line-height:1.6;margin-bottom:0.75rem;">Write in <strong>chunks of 25–30 words</strong> (one idea = one chunk). Do NOT stop to edit mid-sentence. Set a 4-minute timer and write 60+ words on this prompt:</p>
+          <div style="background:rgba(0,0,0,0.25);padding:0.75rem;border-radius:8px;font-size:0.88rem;line-height:1.6;margin-bottom:0.75rem;">
+            <strong>Academic Discussion (TOEFL format):</strong> Your professor is teaching a course on university policy. Write a post responding to her question. In your post, you should: express and support your opinion; make a contribution to the discussion in your own words. <strong>Drill target: 60+ words in 4 minutes.</strong><br><br>
+            <strong>Professor:</strong> "This week we are discussing graduation requirements. Should universities require all students to complete a community service project before graduation? Why or why not?"<br><br>
+            <strong>Nina:</strong> "Service work builds practical skills that ordinary classes cannot teach, and it strengthens the community at the same time."<br>
+            <strong>Tom:</strong> "Required service adds pressure to already heavy schedules; students should volunteer freely, not for credit."
+          </div>
+          <div style="display:flex;align-items:center;gap:1rem;margin-bottom:0.75rem;">
+            <span class="timer-display" id="fix1Timer" style="font-size:1.5rem;">04:00</span>
+            <button class="btn" onclick="startTimer('fix1Timer',240)">Start 4m</button>
+            <button class="btn btn-secondary" onclick="resetTimer('fix1Timer',240)">Reset</button>
+          </div>
+          <textarea id="fix1Input" rows="5" placeholder="Write 60+ words in 4 minutes. Do NOT stop to edit..." oninput="updateWC('fix1Input','fix1Count',60,'60+')"></textarea>
+          <div style="font-family:'Fira Code',monospace;font-size:0.85rem;color:var(--accent-green);margin-top:0.4rem;" id="fix1Count">Word count: 0 words (Goal: 60+)</div>
+          <div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-top:0.75rem;">
+            <button class="btn btn-secondary" onclick="toggleReveal('fix1Model')">👁️ Show Strong Chunk Example</button>
+            <button class="btn btn-secondary" onclick="toggleReveal('fix1Check')">✓ Checklist</button>
+          </div>
+          <div class="reveal-box" id="fix1Model">
+            <strong style="color:var(--accent-green);">Chunk example (4 chunks ≈ 80 words, references Nina, concedes to Tom):</strong>
+            <p style="margin-top:0.5rem;line-height:1.7;">I firmly agree with Nina that community service should be required before graduation. <span style="color:var(--accent-blue);">[chunk 1 — stance + classmate]</span> This is primarily because students acquire knowledge better when they apply it in real-world settings, which builds both competence and confidence. <span style="color:var(--accent-blue);">[chunk 2 — reason]</span> For example, tutoring younger students helps future teachers gain experience while providing evidence that they can communicate complex ideas clearly. <span style="color:var(--accent-blue);">[chunk 3 — example]</span> While Tom raises a fair concern about heavy schedules, universities can address issues of time by integrating service into existing courses rather than adding extra credits. <span style="color:var(--accent-blue);">[chunk 4 — concession + counter]</span></p>
+          </div>
+          <div class="reveal-box" id="fix1Check">
+            <strong>Checklist:</strong> 60+ words in 4 minutes? No mid-sentence editing (chunks only)? Stance clear in sentence 1? One classmate referenced? Concession clean ("While…, universities can…" — no "Although…but")? No known spelling traps?
+          </div>
+        </div>
+
+        <div style="margin-bottom:1.5rem;">
+          <h4 style="color:var(--accent-red);margin-bottom:0.5rem;">Fix 2: Email Bullet-2-First Planning (8 min)</h4>
+          <p style="font-size:0.88rem;line-height:1.6;margin-bottom:0.75rem;">Write your <strong>strongest content in bullet 2</strong> (the middle). Bullet 1 = context. Bullet 3 = offer/close. Bullet 2 = your most specific detail.</p>
+          <div style="background:rgba(0,0,0,0.25);padding:0.75rem;border-radius:8px;font-size:0.88rem;line-height:1.6;margin-bottom:0.75rem;">
+            <strong>Write an Email (TOEFL format, 7 min):</strong> You are a second-year student who wants to join a research group next semester. Write an email to Professor Hayes. In your email, do the following:<br>
+            1. Explain why you are interested in her machine-learning research group.<br>
+            2. Describe relevant coursework or experience you have.<br>
+            3. Offer to provide your transcript or meet during office hours.<br>
+            Formal register. Target: 100–120 words (minimum 100).
+          </div>
+          <div style="display:flex;align-items:center;gap:1rem;margin-bottom:0.75rem;">
+            <span class="timer-display" id="fix2Timer" style="font-size:1.5rem;">07:00</span>
+            <button class="btn" onclick="startTimer('fix2Timer',420)">Start 7m</button>
+            <button class="btn btn-secondary" onclick="resetTimer('fix2Timer',420)">Reset</button>
+          </div>
+          <textarea id="fix2Input" rows="6" placeholder="Write 100-120 words. Bullet 2 = strongest content..." oninput="updateWC('fix2Input','fix2Count',100,'100-120')"></textarea>
+          <div style="font-family:'Fira Code',monospace;font-size:0.85rem;color:var(--accent-green);margin-top:0.4rem;" id="fix2Count">Word count: 0 words (Goal: 100-120)</div>
+          <div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-top:0.75rem;">
+            <button class="btn btn-secondary" onclick="toggleReveal('fix2Model')">👁️ Show Model Answer</button>
+            <button class="btn btn-secondary" onclick="toggleReveal('fix2Check')">✓ Checklist</button>
+          </div>
+          <div class="reveal-box" id="fix2Model">
+            <strong style="color:var(--accent-green);">Model (~111 words, formal, uses "conduct research" + "draw conclusions"):</strong>
+            <p style="margin-top:0.5rem;line-height:1.7;">Dear Professor Hayes, I am writing to express my interest in joining your machine-learning research group next semester. I have followed your published work on natural-language processing and find the approach to evaluating model accuracy particularly relevant to my own academic goals.</p>
+            <p style="margin-top:0.5rem;line-height:1.7;">Last semester I completed coursework in statistics and data analysis, where I learned to conduct research with Python and draw conclusions from datasets. I also contributed to a group project on sentiment analysis, which gave me practical experience with the methods your group uses.</p>
+            <p style="margin-top:0.5rem;line-height:1.7;">I would be happy to provide my transcript or meet during office hours to discuss how I could contribute. Thank you for considering my request. Best regards, Valeria</p>
+          </div>
+          <div class="reveal-box" id="fix2Check">
+            <strong>Checklist:</strong> All 3 bullets present? Bullet 2 has specifics (course names, Python, datasets, project)? ≥100 words? Formal register? No known spelling traps? No "Although…but"?
+          </div>
+        </div>
+
+        <div>
+          <h4 style="color:var(--accent-red);margin-bottom:0.5rem;">Fix 3: Proofread Pass — Spelling Under Pressure (5 min)</h4>
+          <p style="font-size:0.88rem;line-height:1.6;margin-bottom:0.75rem;">After every timed response, spend <strong>60–90 seconds</strong> scanning for your known traps:</p>
+          <div style="background:rgba(0,0,0,0.25);padding:0.75rem;border-radius:8px;font-size:0.88rem;line-height:1.8;">
+            <strong style="color:var(--accent-purple);">Valeria's known traps:</strong><br>
+            ❌ <em>desure</em> → ✅ <em>ensure</em><br>
+            ❌ <em>phychology</em> → ✅ <em>psychology</em><br>
+            ❌ <em>usefull</em> → ✅ <em>useful</em><br>
+            ❌ <em>sourses</em> → ✅ <em>sources</em><br>
+            ❌ <em>researches</em> (as noun) → ✅ <em>research</em><br>
+            ❌ <em>Although…, but…</em> → ✅ pick one<br>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 4: LISTEN & REPEAT -->
+    <div class="slide" id="slide-3">
+      <div class="card">
+        <div class="card-title">🗣️ Listen &amp; Repeat: Speed-Writing Vocabulary</div>
+        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:0.75rem;">Play each sentence audio once. Repeat exactly. Sentence text is hidden — try repeating from hearing alone.</p>
+        <div style="margin-bottom:0.75rem;"><button class="btn btn-secondary" onclick="toggleReveal('l21-lrSentences')">👁️ Show Sentences</button></div>
+        <div id="l21-lrSentences">
+          <div class="speaking-sent"><span class="num">1.</span><span class="sent-text">Efficient writing under timed conditions requires pre-planned structural frames and deliberate sentence allocation.</span><audio id="l21s1" class="sentence-audio" src="audio/l21-s1.wav" preload="none"></audio><button class="btn" style="margin-left:0.5rem;padding:0.25rem 0.7rem;font-size:0.8rem;" onclick="playSentence('l21s1')">▶ Play</button></div>
+          <div class="speaking-sent"><span class="num">2.</span><span class="sent-text">Experienced test-takers begin with their strongest argument rather than pursuing perfect opening sentences.</span><audio id="l21s2" class="sentence-audio" src="audio/l21-s2.wav" preload="none"></audio><button class="btn" style="margin-left:0.5rem;padding:0.25rem 0.7rem;font-size:0.8rem;" onclick="playSentence('l21s2')">▶ Play</button></div>
+          <div class="speaking-sent"><span class="num">3.</span><span class="sent-text">Candidates must demonstrate lexical variety while maintaining grammatical precision throughout their responses.</span><audio id="l21s3" class="sentence-audio" src="audio/l21-s3.wav" preload="none"></audio><button class="btn" style="margin-left:0.5rem;padding:0.25rem 0.7rem;font-size:0.8rem;" onclick="playSentence('l21s3')">▶ Play</button></div>
+          <div class="speaking-sent"><span class="num">4.</span><span class="sent-text">The proofreading pass eliminates critical spelling errors that would otherwise reduce the score significantly.</span><audio id="l21s4" class="sentence-audio" src="audio/l21-s4.wav" preload="none"></audio><button class="btn" style="margin-left:0.5rem;padding:0.25rem 0.7rem;font-size:0.8rem;" onclick="playSentence('l21s4')">▶ Play</button></div>
+          <div class="speaking-sent"><span class="num">5.</span><span class="sent-text">Chunk-writing allows candidates to sustain output momentum without pausing to edit mid-sentence.</span><audio id="l21s5" class="sentence-audio" src="audio/l21-s5.wav" preload="none"></audio><button class="btn" style="margin-left:0.5rem;padding:0.25rem 0.7rem;font-size:0.8rem;" onclick="playSentence('l21s5')">▶ Play</button></div>
+          <div class="speaking-sent"><span class="num">6.</span><span class="sent-text">Substantive responses meet length requirements when writers allocate roughly one minute per sentence.</span><audio id="l21s6" class="sentence-audio" src="audio/l21-s6.wav" preload="none"></audio><button class="btn" style="margin-left:0.5rem;padding:0.25rem 0.7rem;font-size:0.8rem;" onclick="playSentence('l21s6')">▶ Play</button></div>
+          <div class="speaking-sent"><span class="num">7.</span><span class="sent-text">Strategic paragraph organisation enables candidates to address issues efficiently while preserving coherence and formal register.</span><audio id="l21s7" class="sentence-audio" src="audio/l21-s7.wav" preload="none"></audio><button class="btn" style="margin-left:0.5rem;padding:0.25rem 0.7rem;font-size:0.8rem;" onclick="playSentence('l21s7')">▶ Play</button></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 5: CORRECTION TABLE -->
+    <div class="slide" id="slide-4">
+      <div class="card">
+        <div class="card-title">📋 Correction Table — Live Errors</div>
+        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:1rem;">Log any errors that surfaced during the sprints. Focus on recurring patterns, not one-off slips.</p>
+        <table class="error-table" id="errorTable">
+          <thead><tr><th>Error Type</th><th>Example</th><th>Correction</th><th>Occurrence</th></tr></thead>
+          <tbody id="errorBody">
+            <tr><td>Spelling under pressure</td><td contenteditable="true" style="color:var(--accent-red);"></td><td contenteditable="true" style="color:var(--accent-green);"></td><td contenteditable="true"></td></tr>
+            <tr><td>Although…but</td><td contenteditable="true" style="color:var(--accent-red);"></td><td contenteditable="true" style="color:var(--accent-green);"></td><td contenteditable="true"></td></tr>
+            <tr><td>Thin bullet (no specifics)</td><td contenteditable="true" style="color:var(--accent-red);"></td><td contenteditable="true" style="color:var(--accent-green);"></td><td contenteditable="true"></td></tr>
+            <tr><td>Zero collocations</td><td contenteditable="true" style="color:var(--accent-red);"></td><td contenteditable="true" style="color:var(--accent-green);"></td><td contenteditable="true"></td></tr>
+            <tr><td>Tautological closer</td><td contenteditable="true" style="color:var(--accent-red);"></td><td contenteditable="true" style="color:var(--accent-green);"></td><td contenteditable="true"></td></tr>
+          </tbody>
+        </table>
+        <button class="btn btn-secondary" onclick="addErrorRow()" style="margin-top:0.75rem;">+ Add Row</button>
+      </div>
+    </div>
+
+    <!-- SLIDE 6: HOMEWORK -->
+    <div class="slide" id="slide-5">
+      <div class="card">
+        <div class="card-title">📚 Homework Assignments</div>
+        <div class="speaking-sent"><span class="num">1.</span><strong style="color:var(--accent-green);">Writing Speed Sprint (timed, 10 min)</strong> — Academic Discussion (TOEFL format). <strong>Professor:</strong> "This week we are discussing transportation policy. Should governments invest more in public transportation than in building new roads?" <strong>Nina:</strong> "Public transport reduces traffic and pollution and serves more people per dollar." <strong>Tom:</strong> "Roads are essential for trade and for people who live far from transit lines." Write a post: express and support your opinion, reference one classmate, 120–130 words. Use ≥2 collocations (conduct research, address issues, demonstrate competence, provide evidence). Apply chunk-writing: do NOT stop to edit mid-sentence. Log your word count and wpm.</div>
+        <div class="speaking-sent"><span class="num">2.</span><strong style="color:var(--accent-blue);">Email Sprint (timed, 7 min)</strong> — You live in a university dormitory and want to report a problem. Write an email to the university housing office. In your email, do the following: (1) explain the issue with your dorm room (2) describe how it affects your studies (3) propose a solution. Apply bullet-2-first planning. Target 100–120 words. Run the 60–90s proofread pass before submitting.</div>
+        <div class="speaking-sent"><span class="num">3.</span><strong style="color:var(--accent-purple);">Proofread Pass Drill</strong> — Re-read your two timed responses from today. Circle every instance of: <em>although…but</em>, missing collocations, thin bullets, tautological closers, and the 6 known spelling traps. Rewrite one sentence per error type.</div>
+        <div class="speaking-sent"><span class="num">4.</span><strong style="color:var(--primary);">Vocabulary Journal (5 sentences)</strong> — Use: <em>substantiate, deliberately, threshold, proficiency, exemplify</em> — each in a 12–20 word sentence about studying or writing under time pressure.</div>
+      </div>
+    </div>
+  </main>
+
+  <script src="audio/shadowingTS.js"></script>
+  <script>
+    function switchSlide(i) {
+      document.querySelectorAll('.slide').forEach((s, idx) => s.classList.toggle('active', idx === i));
+      document.querySelectorAll('.nav-btn').forEach((b, idx) => b.classList.toggle('active', idx === i));
+      window.scrollTo(0, 0);
+    }
+    let pacerInterval=null,currentWordIndex=0,karaokeIndex=-1;
+    const shadowingAudioEl=document.getElementById('shadowingAudio');
+    function wrapShadowingWords(){const c=document.getElementById('shadowingTextDisplay');if(c.dataset.wrapped)return;if(typeof shadowingTS!=='undefined'&&shadowingTS.length){c.innerHTML=shadowingTS.map(w=>`<span class="shadowing-word">${w.word}</span>`).join(' ');}else{c.innerHTML=c.innerText.split(/\s+/).map(w=>`<span class="shadowing-word">${w}</span>`).join(' ');}c.dataset.wrapped="true";}
+    function clearAllHighlights(){document.querySelectorAll('.shadowing-word').forEach(w=>w.classList.remove('active'));}
+    function toggleShadowingPacer(){if(pacerInterval){clearInterval(pacerInterval);pacerInterval=null;return;}if(shadowingAudioEl)shadowingAudioEl.pause();wrapShadowingWords();const sw=document.querySelectorAll('.shadowing-word');const sp=parseInt(document.getElementById('pacerSpeed').value)||380;pacerInterval=setInterval(()=>{sw.forEach(w=>w.classList.remove('active'));if(currentWordIndex<sw.length){sw[currentWordIndex].classList.add('active');currentWordIndex++;}else{clearInterval(pacerInterval);pacerInterval=null;currentWordIndex=0;}},sp);}
+    function resetShadowingPacer(){if(pacerInterval)clearInterval(pacerInterval);pacerInterval=null;currentWordIndex=0;karaokeIndex=-1;if(shadowingAudioEl)shadowingAudioEl.pause();clearAllHighlights();}
+    if(shadowingAudioEl){
+      shadowingAudioEl.addEventListener('play',()=>{if(pacerInterval){clearInterval(pacerInterval);pacerInterval=null;}wrapShadowingWords();});
+      shadowingAudioEl.addEventListener('timeupdate',()=>{if(typeof shadowingTS==='undefined'||!shadowingTS.length)return;const t=shadowingAudioEl.currentTime;if(t<shadowingTS[0].start)return;let idx=-1;for(let i=karaokeIndex+1;i<shadowingTS.length;i++){if(t>=shadowingTS[i].start)idx=i;else break;}if(idx===-1&&karaokeIndex>=0)idx=karaokeIndex;if(idx>=0&&idx!==karaokeIndex){karaokeIndex=idx;clearAllHighlights();const spans=document.querySelectorAll('.shadowing-word');if(spans[idx])spans[idx].classList.add('active');}});
+      shadowingAudioEl.addEventListener('ended',()=>{karaokeIndex=-1;clearAllHighlights();});
+    }
+    function playSentence(id){document.querySelectorAll('audio.sentence-audio').forEach(a=>{if(a.id!==id)a.pause();});const a=document.getElementById(id);if(a.paused){a.currentTime=0;a.play();}}
+    function updateWC(a,c,min,label){const v=document.getElementById(a).value.trim();const n=v?v.split(/\s+/).length:0;const el=document.getElementById(c);el.textContent=`Word count: ${n} words (Goal: ${label||'130+'})`;el.style.color=n>=(min||130)?'var(--accent-green)':'var(--accent-red)';}
+    let activeT=null;
+    function startTimer(id,sec){if(activeT)clearInterval(activeT);let r=sec;activeT=setInterval(()=>{const m=Math.floor(r/60),s=r%60;document.getElementById(id).textContent=`${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;if(r<=0)clearInterval(activeT);r--;},1000);}
+    function resetTimer(id,sec){if(window.clearAllDeckTimers)window.clearAllDeckTimers();const d=document.getElementById(id);d.textContent=`${String(Math.floor(sec/60)).padStart(2,'0')}:${String(sec%60).padStart(2,'0')}`;}
+    function toggleReveal(id){document.getElementById(id).classList.toggle('show');}
+    function addErrorRow(){
+      const tbody=document.getElementById('errorBody');
+      if(!tbody)return;
+      const tr=document.createElement('tr');
+      tr.innerHTML='<td contenteditable="true"></td><td contenteditable="true" style="color:var(--accent-red);"></td><td contenteditable="true" style="color:var(--accent-green);"></td><td contenteditable="true"></td>';
+      tbody.appendChild(tr);
+    }
+    function calcScores(){
+      const r=parseFloat(document.getElementById('score-reading').value);
+      const l=parseFloat(document.getElementById('score-listening').value);
+      const s=parseFloat(document.getElementById('score-speaking').value);
+      const w=parseFloat(document.getElementById('score-writing').value);
+      const base={r:3.0,l:4.0,s:3.5,w:3.0};
+      const trends={r:'trend-reading',l:'trend-listening',s:'trend-speaking',w:'trend-writing'};
+      const vals={r:r,l:l,s:s,w:w};
+      let html='';
+      for(const[k,el]of Object.entries(trends)){
+        const v=vals[k];const b=base[k];
+        if(!isNaN(v)){const d=v-b;const arrow=d>0?'▲':d<0?'▼':'—';const col=d>0?'var(--accent-green)':d<0?'var(--accent-red)':'var(--text-muted)';document.getElementById(el).innerHTML=`<span style="color:${col}">${arrow} ${d>=0?'+':''}${d.toFixed(1)}</span>`;html+=`${k.toUpperCase()} ${v} (${d>=0?'+':''}${d.toFixed(1)}) `;}
+      }
+      if(!isNaN(r)&&!isNaN(l)&&!isNaN(s)&&!isNaN(w)){const avg=((r+l+s+w)/4).toFixed(2);html+=`<br><strong>Average: ${avg}</strong>`;}
+      document.getElementById('trendResult').innerHTML=html;
+    }
+  </script>
+<button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Open lesson navigation">&#9776;</button>
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+<!-- FE:MOBILE --><script>// FE:MOBILE
+(function(){
+  function initM() {
+    var t = document.getElementById('mobileNavToggle'), ov = document.getElementById('sidebarOverlay');
+    if (!t || !ov) return;
+    var sb = document.querySelector('.nav-btn').parentElement;
+    function close() { sb.classList.remove('open'); ov.classList.remove('open'); }
+    t.addEventListener('click', function() { sb.classList.toggle('open'); ov.classList.toggle('open'); });
+    ov.addEventListener('click', close);
+    document.querySelectorAll('.nav-btn').forEach(function(b) { b.addEventListener('click', close); });
+  }
+  if (document.readyState !== 'loading') initM(); else document.addEventListener('DOMContentLoaded', initM);
+})();</script>
+<!-- FE:HASH --><script>// FE:HASH
+(function(){
+  function mH() { var m = location.hash.match(/^#slide-(\d+)$/); if (m && window.switchSlide) window.switchSlide(parseInt(m[1])); }
+  window.addEventListener('hashchange', mH);
+  !function(){ mH(); }();
+  if (!window.__feHashWrapped && window.switchSlide) {
+    window.__feHashWrapped = true;
+    var o = window.switchSlide;
+    window.switchSlide = function(i) { o(i); try { history.replaceState(null, '', '#slide-' + i); } catch (e) {} };
+  }
+})();</script>
+<!-- FE:KEYS --><script>// FE:KEYS
+(function(){
+  document.addEventListener('keydown', function(e) {
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT' || e.target.isContentEditable) return;
+    if (e.code === 'ArrowLeft' || e.code === 'ArrowRight') {
+      var btns = document.querySelectorAll('.nav-btn');
+      var cur = document.querySelector('.nav-btn.active');
+      var pos = cur ? Array.prototype.indexOf.call(btns, cur) : -1;
+      if (pos < 0) return;
+      var tgt = pos + (e.code === 'ArrowRight' ? 1 : -1);
+      if (tgt >= 0 && tgt < btns.length) { e.preventDefault(); window.switchSlide(tgt + 0); }
+    }
+  });
+})();</script>
+<!-- FE:TIMERS --><script>// FE:TIMERS
+(function(){
+  window.__activeIntervals__ = window.__activeIntervals__ || [];
+  if (!window.__feIntervalPatched) {
+    window.__feIntervalPatched = true;
+    var _si = window.setInterval;
+    window.setInterval = function(fn, t) { var id = _si(fn, t); window.__activeIntervals__.push(id); return id; };
+  }
+  window.clearAllDeckTimers = function() {
+    window.__activeIntervals__.forEach(function(id) { clearInterval(id); });
+    window.__activeIntervals__ = [];
+  };
+  if (!window.__feTimersWrapped && window.switchSlide) {
+    window.__feTimersWrapped = true;
+    var o = window.switchSlide;
+    window.switchSlide = function(i) { if (window.clearAllDeckTimers) window.clearAllDeckTimers(); o(i); };
+  }
+})();</script>
+<!-- FE:CHIPJS --><script>// FE:CHIP
+(function(){
+  function updChipFromActive() {
+    var c = document.getElementById('slideChip'); if (!c) return;
+    var cur = document.querySelector('.nav-btn.active');
+    var pos = cur ? Array.prototype.indexOf.call(document.querySelectorAll('.nav-btn'), cur) : 0;
+    c.textContent = (pos + 1) + ' / ' + document.querySelectorAll('.slide').length;
+  }
+  if (!window.__feChipWrapped && window.switchSlide) {
+    window.__feChipWrapped = true;
+    var o = window.switchSlide;
+    window.switchSlide = function(i) { o(i); var c = document.getElementById('slideChip'); if (c) c.textContent = (i + 1) + ' / ' + document.querySelectorAll('.slide').length; };
+  }
+  if (document.readyState !== 'loading') updChipFromActive(); else document.addEventListener('DOMContentLoaded', updChipFromActive);
+})();</script>
+</body>
+</html>

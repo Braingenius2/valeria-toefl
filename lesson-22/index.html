@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Valeria — Lesson 22: Writing Speed Floor</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg-dark:#090d16;--bg-card:#131a26;--border-color:#243042;--text-main:#f1f5f9;--text-muted:#64748b;--primary:#f59e0b;--primary-hover:#d97706;--primary-dim:rgba(245,158,11,0.12);--accent-blue:#38bdf8;--accent-green:#10b981;--accent-red:#ef4444;--accent-purple:#a855f7;}
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:'Inter',sans-serif;background:var(--bg-dark);color:var(--text-main);display:flex;min-height:100vh;overflow-x:hidden;}
+    .sidebar{width:260px;background:var(--bg-card);border-right:1px solid var(--border-color);display:flex;flex-direction:column;padding:1.5rem 1rem;position:fixed;height:100vh;z-index:100;overflow-y:auto;scrollbar-width:thin;}
+    .brand{display:flex;align-items:center;gap:0.75rem;margin-bottom:2rem;padding:0 0.5rem;}
+    .brand-badge{background:var(--primary);color:#000;font-weight:700;font-size:0.75rem;padding:0.2rem 0.5rem;border-radius:4px;text-transform:uppercase;}
+    .brand-title{font-weight:600;font-size:1.1rem;color:var(--text-main);}
+    .nav-btn{background:transparent;border:1px solid transparent;color:var(--text-muted);padding:0.75rem 1rem;border-radius:8px;text-align:left;font-size:0.9rem;font-family:inherit;cursor:pointer;margin-bottom:0.5rem;display:flex;align-items:center;gap:0.75rem;transition:all 0.2s ease;}
+    .nav-btn:hover{background:rgba(255,255,255,0.03);color:var(--text-main);}
+    .nav-btn.active{background:var(--primary-dim);border-color:rgba(245,158,11,0.3);color:var(--primary);font-weight:600;}
+    .nav-num{font-family:'Fira Code',monospace;font-size:0.8rem;opacity:0.7;}
+    .main-content{margin-left:260px;flex:1;padding:2rem 3rem;max-width:1200px;}
+    .header{display:flex;justify-content:space-between;align-items:center;margin-bottom:2rem;padding-bottom:1rem;border-bottom:1px solid var(--border-color);}
+    .page-title{font-size:1.5rem;font-weight:700;color:var(--text-main);}
+    .tag{background:rgba(56,189,248,0.1);color:var(--accent-blue);border:1px solid rgba(56,189,248,0.2);padding:0.25rem 0.75rem;border-radius:20px;font-size:0.8rem;font-family:'Fira Code',monospace;}
+    .slide{display:none;animation:fadeIn 0.3s ease;}.slide.active{display:block;}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+    @keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.3;}}
+    .card{background:var(--bg-card);border:1px solid var(--border-color);border-radius:12px;padding:1.5rem;margin-bottom:1.5rem;}
+    .card-title{font-size:1.1rem;font-weight:600;color:var(--primary);margin-bottom:1rem;display:flex;align-items:center;gap:0.5rem;}
+    .shadowing-text{font-size:1.05rem;line-height:1.8;color:#cbd5e1;margin-bottom:1.5rem;background:rgba(0,0,0,0.2);padding:1.25rem;border-radius:8px;border-left:3px solid var(--primary);}
+    .shadowing-word{transition:background 0.15s ease,color 0.15s ease;border-radius:3px;padding:0 2px;}
+    .shadowing-word.active{background:var(--primary);color:#000;font-weight:600;}
+    .controls{display:flex;gap:0.75rem;align-items:center;flex-wrap:wrap;margin-bottom:1rem;}
+    .btn{background:var(--primary);color:#000;border:none;padding:0.6rem 1.2rem;border-radius:6px;font-weight:600;font-size:0.85rem;font-family:inherit;cursor:pointer;display:inline-flex;align-items:center;gap:0.4rem;transition:background 0.2s ease;}
+    .btn:hover{background:var(--primary-hover);}
+    .btn-secondary{background:transparent;border:1px solid var(--border-color);color:var(--text-main);}
+    .timer-display{font-family:'Fira Code',monospace;font-size:1.5rem;font-weight:700;color:var(--primary);background:#000;padding:0.4rem 1rem;border-radius:8px;border:1px solid var(--border-color);display:inline-block;}
+    .error-table{width:100%;border-collapse:collapse;margin-top:1rem;font-size:0.9rem;}
+    .error-table th,.error-table td{padding:0.75rem 1rem;border:1px solid var(--border-color);text-align:left;}
+    .error-table th{background:rgba(0,0,0,0.4);color:var(--primary);font-weight:600;}
+    .text-red{color:var(--accent-red);}.text-green{color:var(--accent-green);}
+    .recording-box{background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.2);border-radius:8px;padding:1.25rem;margin-top:1rem;}
+    .recording-box.active{border-color:var(--accent-red);animation:pulse 1s ease infinite;}
+    .reveal-box{display:none;background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.2);padding:1rem;border-radius:8px;margin-top:0.75rem;font-size:0.9rem;line-height:1.7;}
+    .reveal-box.show{display:block;}
+    textarea,input[type="text"]{width:100%;background:rgba(0,0,0,0.4);border:1px solid var(--border-color);color:var(--text-main);padding:0.75rem;border-radius:6px;font-family:inherit;font-size:0.9rem;resize:vertical;}
+    textarea:focus,input[type="text"]:focus{outline:none;border-color:var(--primary);}
+    .word-count-badge{font-family:'Fira Code',monospace;font-size:0.85rem;color:var(--accent-green);margin-top:0.5rem;}
+    .prompt-block{background:rgba(0,0,0,0.25);padding:1rem;border-radius:8px;font-size:0.9rem;line-height:1.7;margin-bottom:1rem;border-left:3px solid var(--primary);}
+    .speed-bar{height:6px;background:var(--border-color);border-radius:3px;margin-top:0.5rem;overflow:hidden;}
+    .speed-fill{height:100%;background:var(--accent-green);border-radius:3px;transition:width 0.3s ease;}
+    .speed-fill.warn{background:var(--primary);}
+    .speed-fill.danger{background:var(--accent-red);}
+    .sent-text{display:none;font-size:0.92rem;color:#e2e8f0;margin-top:0.5rem;line-height:1.6;}
+    .speaking-sent{margin-bottom:0.75rem;}
+    .num{font-weight:700;color:var(--primary);margin-right:0.4rem;}
+    @media(max-width:768px){.main-content{margin-left:0;padding:1rem 1rem 84px;max-width:100%}.header{flex-wrap:wrap;gap:0.5rem}.controls{flex-direction:column;align-items:stretch}.timer-display{font-size:1.25rem}}
+  </style>
+ <!-- FE:CSS-MOBILE --><style>.mobile-nav-toggle{display:none;position:fixed;bottom:20px;right:20px;z-index:200;width:48px;height:48px;border-radius:50%;background:var(--primary);color:#000;border:none;font-size:20px;cursor:pointer;align-items:center;justify-content:center;box-shadow:3px 3px 0 rgba(0,0,0,0.12)}
+.sidebar-overlay{display:none;position:fixed;inset:0;z-index:150;background:rgba(0,0,0,0.4)}
+.sidebar-overlay.open{display:block}@media(max-width:768px){
+  .mobile-nav-toggle{display:flex}
+  .sidebar{position:fixed;left:0;top:0;z-index:175;height:100vh;transform:translateX(-100%);transition:transform .25s ease;width:260px;display:flex!important}
+  .sidebar.open{transform:translateX(0)}
+  .main-content{margin-left:0;padding:1rem 1rem 84px;max-width:100%}
+  .header{flex-wrap:wrap;gap:0.5rem}
+  .grid-2{grid-template-columns:1fr}
+  .controls{flex-direction:column;align-items:stretch}
+  .timer-display{font-size:1.5rem}
+}</style>
+ <!-- FE:CSS-CHIP --><style>.slide-chip{font-family:'Fira Code',monospace;font-size:0.72rem;font-weight:700;color:var(--primary);background:var(--bg-card,rgba(0,0,0,0.4));border:1px solid var(--border-color,rgba(255,255,255,0.15));padding:0.25rem 0.65rem;border-radius:20px;white-space:nowrap;margin-left:auto}</style>
+ <style>.back-link{color:var(--text-muted);text-decoration:none;font-size:0.8rem;font-family:'Fira Code',monospace;white-space:nowrap;transition:color 0.2s;margin-left:1rem;}.back-link:hover{color:var(--primary);}</style></head>
+<body>
+  <aside class="sidebar">
+    <div class="brand"><span class="brand-badge">TOEFL</span><span class="brand-title">Valeria L22</span></div>
+    <button class="nav-btn active" onclick="switchSlide(0)"><span class="nav-num">01</span> Warm-up</button>
+    <button class="nav-btn" onclick="switchSlide(1)"><span class="nav-num">02</span> L21 Speed Check</button>
+    <button class="nav-btn" onclick="switchSlide(2)"><span class="nav-num">03</span> Sprint #1 · AD</button>
+    <button class="nav-btn" onclick="switchSlide(3)"><span class="nav-num">04</span> Sprint #2 · Email</button>
+    <button class="nav-btn" onclick="switchSlide(4)"><span class="nav-num">05</span> Listen & Repeat ×8</button>
+    <button class="nav-btn" onclick="switchSlide(5)"><span class="nav-num">06</span> Correction Table</button>
+    <button class="nav-btn" onclick="switchSlide(6)"><span class="nav-num">07</span> Homework</button>
+  </aside>
+  <main class="main-content">
+    <header class="header"><div><h1 class="page-title">Writing Speed Floor</h1><p style="color:var(--text-muted);font-size:0.85rem;margin-top:0.2rem;">Speed Sprint · 8-Sentence L&R · Collocation Transfer Check · Timed Email</p></div><!-- FE:CHIP --><span class="slide-chip" id="slideChip">1 / N</span><a href="../index.html" class="back-link">&#8592; Portal</a>
+        <span class="tag">SPEED FLOOR</span></header>
+
+    <!-- SLIDE 01: Shadowing Warm-up -->
+    <div class="slide active" id="slide-0">
+      <div class="card">
+        <div class="card-title">🎙️ Shadowing — Academic Paragraph</div>
+        <div class="shadowing-text" id="shadowingTextDisplay">Academic writing under time pressure demands a disciplined approach to both structure and speed. Writers who develop pre-planned structural frames and allocate deliberate time per paragraph consistently outperform those who write without a plan. The most effective technique is chunk-writing: producing complete thought units of twenty-five to thirty words without pausing to edit. This sustained momentum allows candidates to reach target word counts while reserving the final minutes for a focused proofreading pass that catches high-impact errors.</div>
+        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:1rem;">Targets: <em>disciplined approach · pre-planned structural frames · deliberate time allocation · chunk-writing · sustained momentum · proofreading pass</em></p>
+        <div class="controls">
+          <button class="btn" onclick="toggleShadowingPacer()">▶ Start Pacer</button>
+          <button class="btn btn-secondary" onclick="resetShadowingPacer()">↺ Reset</button>
+          <audio id="shadowingAudio" src="audio/shadowing.wav" preload="auto" style="display:none;"></audio>
+          <button class="btn btn-secondary" onclick="document.getElementById('shadowingAudio').play()">🔊 Play Audio</button>
+          <select id="pacerSpeed" style="background:#000;color:#fff;padding:0.4rem;border-radius:4px;border:1px solid var(--border-color);"><option value="450">130 WPM</option><option value="380" selected>150 WPM</option><option value="320">175 WPM</option></select>
+        </div>
+        <p style="font-size:0.82rem;color:var(--text-muted);margin-top:0.75rem;">L21 link: try to re-use one collocation aloud — e.g., <span style="color:var(--accent-green);">chunk-writing / proofreading pass / substantive responses</span>.</p>
+      </div>
+    </div>
+
+    <!-- SLIDE 02: L21 Speed Check -->
+    <div class="slide" id="slide-1">
+      <div class="card">
+        <div class="card-title">📊 L21 Speed Sprint — Verdict</div>
+        <p style="font-size:0.9rem;color:var(--text-muted);margin-bottom:1rem;">Enter your L21 homework results. The floor target is <strong>13 wpm</strong> for the Academic Discussion and <strong>15 wpm</strong> for the Email.</p>
+        <div class="grid-2" style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+          <div>
+            <label style="font-size:0.85rem;color:var(--text-muted);">AD Sprint — Words Written</label>
+            <input type="number" id="l21AdWords" placeholder="e.g. 115" style="background:rgba(0,0,0,0.4);border:1px solid var(--border-color);color:var(--text-main);padding:0.6rem;border-radius:6px;font-family:'Fira Code',monospace;margin-top:0.3rem;">
+            <label style="font-size:0.85rem;color:var(--text-muted);margin-top:0.5rem;display:block;">Time Used (seconds)</label>
+            <input type="number" id="l21AdTime" placeholder="e.g. 540" style="background:rgba(0,0,0,0.4);border:1px solid var(--border-color);color:var(--text-main);padding:0.6rem;border-radius:6px;font-family:'Fira Code',monospace;margin-top:0.3rem;">
+          </div>
+          <div>
+            <label style="font-size:0.85rem;color:var(--text-muted);">Email Sprint — Words Written</label>
+            <input type="number" id="l21EmailWords" placeholder="e.g. 105" style="background:rgba(0,0,0,0.4);border:1px solid var(--border-color);color:var(--text-main);padding:0.6rem;border-radius:6px;font-family:'Fira Code',monospace;margin-top:0.3rem;">
+            <label style="font-size:0.85rem;color:var(--text-muted);margin-top:0.5rem;display:block;">Time Used (seconds)</label>
+            <input type="number" id="l21EmailTime" placeholder="e.g. 420" style="background:rgba(0,0,0,0.4);border:1px solid var(--border-color);color:var(--text-main);padding:0.6rem;border-radius:6px;font-family:'Fira Code',monospace;margin-top:0.3rem;">
+          </div>
+        </div>
+        <button class="btn" onclick="calcSpeed()" style="margin-top:1rem;">Calculate WPM</button>
+        <div id="speedResult" style="margin-top:1rem;"></div>
+      </div>
+      <div class="card">
+        <div class="card-title">🎯 Today's Speed Floor Targets</div>
+        <table class="error-table">
+          <tr><th>Task</th><th>Target Words</th><th>Time</th><th>Floor WPM</th><th>Stretch WPM</th></tr>
+          <tr><td>Academic Discussion</td><td>120–130</td><td>10 min</td><td class="text-red">13</td><td class="text-green">15+</td></tr>
+          <tr><td>Email Reply</td><td>100–120</td><td>7 min</td><td class="text-red">15</td><td class="text-green">17+</td></tr>
+        </table>
+        <p style="font-size:0.82rem;color:var(--text-muted);margin-top:0.75rem;">If your wpm is below floor, the issue is pausing to edit mid-sentence. Today's fix: <strong>chunk-write only</strong> — do NOT stop until the timer ends.</p>
+      </div>
+    </div>
+
+    <!-- SLIDE 03: Sprint #1 — Academic Discussion -->
+    <div class="slide" id="slide-2">
+      <div class="card">
+        <div class="card-title">✍️ Sprint #1 — Academic Discussion (10 min)</div>
+        <div class="prompt-block">
+          <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.75rem;">
+            <strong>Academic Discussion — TOEFL format:</strong>
+            <span style="display:flex;align-items:center;gap:0.5rem;"><span class="timer-display" id="sprint1Timer" style="font-size:1.25rem;">10:00</span><button class="btn" onclick="startTimer('sprint1Timer',600)">Start 10 min</button><button class="btn btn-secondary" onclick="resetTimer('sprint1Timer',600)">Reset</button></span>
+          </div>
+          <p style="margin-top:0.75rem;">Your professor is teaching a course on higher education. Write a post responding to the professor's question. In your post, you should: express and support your opinion; make a contribution to the discussion in your own words. An effective response will contain at least 100 words.</p>
+          <p style="margin-top:0.6rem;"><strong>Professor:</strong> "This week we are discussing degree requirements. Should all university students be required to take at least one course outside their major? Why or why not?"</p>
+          <p style="margin-top:0.4rem;"><strong>Nina:</strong> "Students broaden their thinking and gain skills they would never discover inside their major."<br>
+          <strong>Tom:</strong> "Extra courses take time away from the specialization students chose and pay for."</p>
+        </div>
+        <div style="background:rgba(0,0,0,0.2);padding:0.75rem 1rem;border-radius:6px;font-size:0.85rem;color:var(--text-muted);margin-bottom:0.75rem;">
+          <strong>Technique:</strong> Chunk-write. Aim for 120–130 words. Do NOT stop to edit mid-sentence. Use ≥2 collocations: <em>conduct research, address issues, demonstrate competence, provide evidence, draw conclusions, acquire knowledge</em>.
+        </div>
+        <textarea id="sprint1Text" rows="8" placeholder="Write your Academic Discussion response here..."></textarea>
+        <div style="display:flex;align-items:center;gap:1rem;margin-top:0.5rem;">
+          <span class="word-count-badge" id="sprint1WC">0 words</span>
+          <span class="word-count-badge" id="sprint1WPM" style="color:var(--accent-blue);">— wpm</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">📝 Collocation Check</div>
+        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:0.5rem;">After writing, search your text for these collocations. Count how many you used:</p>
+        <div id="collocationCheck" style="font-size:0.9rem;line-height:1.8;">
+          <label><input type="checkbox" class="cc-box" data-cc="conduct research"> conduct research</label> · 
+          <label><input type="checkbox" class="cc-box" data-cc="address issues"> address issues</label> · 
+          <label><input type="checkbox" class="cc-box" data-cc="demonstrate competence"> demonstrate competence</label> · 
+          <label><input type="checkbox" class="cc-box" data-cc="provide evidence"> provide evidence</label> · 
+          <label><input type="checkbox" class="cc-box" data-cc="draw conclusions"> draw conclusions</label> · 
+          <label><input type="checkbox" class="cc-box" data-cc="acquire knowledge"> acquire knowledge</label>
+        </div>
+        <div class="word-count-badge" id="ccCount" style="margin-top:0.5rem;">0 / 6 collocations used</div>
+        <div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-top:0.75rem;">
+          <button class="btn btn-secondary" onclick="toggleReveal('sprint1Model')">👁️ Model A — Nina's side</button>
+          <button class="btn btn-secondary" onclick="toggleReveal('sprint1ModelTom')">👁️ Model B — Tom's side (your position)</button>
+          <button class="btn btn-secondary" onclick="toggleReveal('sprint1Check')">✓ Checklist</button>
+        </div>
+        <div class="reveal-box" id="sprint1Model">
+          <strong style="color:var(--accent-green);">Model A (~120 words, agrees with Nina, concedes to Tom, 3 collocations):</strong>
+          <p style="margin-top:0.5rem;line-height:1.7;">While I acknowledge Tom's concern that extra courses take time away from a chosen specialization, I agree with Nina that every student should take at least one class outside their major. This is primarily because students acquire knowledge more deeply when they encounter unfamiliar methods, and this builds flexible thinking they can transfer back to their own field. For example, an engineering student who studies psychology learns how users behave, which helps her address issues in product design more effectively. Critics argue that non-major courses delay progress toward a degree, yet universities can provide evidence that interdisciplinary training improves employment outcomes. Therefore, extending students' intellectual range with a single outside course is a small requirement that offers substantial long-term benefits.</p>
+        </div>
+        <div class="reveal-box" id="sprint1ModelTom">
+          <strong style="color:var(--accent-green);">Model B (~115 words, agrees with Tom — your in-class position — concedes to Nina, 2 collocations):</strong>
+          <p style="margin-top:0.5rem;line-height:1.7;">While I understand Nina's point that students gain valuable skills from courses outside their major, I agree with Tom that extra requirements take time away from the specialization students chose and pay for. This is primarily because depth in a field requires sustained focus, and every additional course reduces the hours available for advanced work. For example, an engineering student who must take three unrelated electives has less time to conduct research in a lab or complete a substantial capstone project. Supporters argue that breadth creates flexible thinkers, yet universities can address these issues by offering optional workshops instead of mandatory courses. Therefore, degree requirements should protect students' time for the specialization they are actually here to master.</p>
+        </div>
+        <div class="reveal-box" id="sprint1Check">
+          <strong>Checklist:</strong> 120–130 words? Position clear? One classmate referenced by name? Concrete example? ≥2 collocations (acquire knowledge / address issues / provide evidence)? Concession clean (no "Although…but")? Known spelling traps checked?
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 04: Sprint #2 — Email -->
+    <div class="slide" id="slide-3">
+      <div class="card">
+        <div class="card-title">✉️ Sprint #2 — Email Reply (7 min)</div>
+        <div class="prompt-block" style="border-color:var(--accent-purple);">
+          <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.75rem;">
+            <strong>Write an Email — TOEFL format:</strong>
+            <span style="display:flex;align-items:center;gap:0.5rem;"><span class="timer-display" id="sprint2Timer" style="font-size:1.25rem;">07:00</span><button class="btn" onclick="startTimer('sprint2Timer',420)">Start 7 min</button><button class="btn btn-secondary" onclick="resetTimer('sprint2Timer',420)">Reset</button></span>
+          </div>
+          <p style="margin-top:0.75rem;">You attended a presentation by Dr. Elena Vasquez about renewable energy research at your university. Write an email to Dr. Vasquez. In your email, do the following:</p>
+          <p style="margin-top:0.4rem;">1. Explain what you found interesting in her presentation.<br>
+          2. Ask whether there are internship openings in her lab.<br>
+          3. Ask what skills or coursework she values most in potential interns.</p>
+          <p style="margin-top:0.4rem;color:var(--text-muted);">Target: 100–120 words (minimum 100). Formal register.</p>
+        </div>
+        <div style="background:rgba(0,0,0,0.2);padding:0.75rem 1rem;border-radius:6px;font-size:0.85rem;color:var(--text-muted);margin-bottom:0.75rem;">
+          <strong>Technique:</strong> Bullet-2-first planning. Write the strongest content (bullet 2: internship details) FIRST. Bullet 1 = context. Bullet 3 = offer/close. Target 100–120 words. Run proofread pass in last 60s.
+        </div>
+        <textarea id="sprint2Text" rows="8" placeholder="Dear Dr. Vasquez,&#10;&#10;..."></textarea>
+        <div style="display:flex;align-items:center;gap:1rem;margin-top:0.5rem;">
+          <span class="word-count-badge" id="sprint2WC">0 words</span>
+          <span class="word-count-badge" id="sprint2WPM" style="color:var(--accent-blue);">— wpm</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">🔍 Proofread Pass Targets</div>
+        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:0.5rem;">After the timer, spend 60–90 seconds scanning your email for:</p>
+        <div style="font-size:0.9rem;line-height:1.8;">
+          <span class="text-red">✗</span> <code>Although…but</code> (pick one) · 
+          <span class="text-red">✗</span> <code>desure, phychology, usefull, sourses, researches</code> (spelling) · 
+          <span class="text-red">✗</span> Tautological closers (<em>In conclusion,Overall,To sum up</em>) · 
+          <span class="text-red">✗</span> Missing collocations · 
+          <span class="text-red">✗</span> Bullet 2 too thin (no specifics/statistics)
+        </div>
+        <div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-top:0.75rem;">
+          <button class="btn btn-secondary" onclick="toggleReveal('sprint2Model')">👁️ Show Model Answer</button>
+          <button class="btn btn-secondary" onclick="toggleReveal('sprint2Check')">✓ Checklist</button>
+        </div>
+        <div class="reveal-box" id="sprint2Model">
+          <strong style="color:var(--accent-green);">Model (~105 words, all 3 tasks covered, specific details):</strong>
+          <p style="margin-top:0.5rem;line-height:1.7;">Dear Dr. Vasquez,<br><br>I am writing to thank you for your presentation on renewable energy research and to ask about opportunities in your lab. I found your comparison of solar storage costs especially interesting.<br><br>I would like to know whether your lab will offer internships next semester, because I am looking for practical experience before my final year. I have completed coursework in chemistry and data analysis, where I learned to conduct research with laboratory equipment and analyze experimental results.<br><br>Could you tell me which skills you value most in interns? I would be glad to meet during office hours. Thank you for your time.<br><br>Best regards,<br>Valeria</p>
+        </div>
+        <div class="reveal-box" id="sprint2Check">
+          <strong>Checklist:</strong> All 3 tasks covered (interesting point / internship question / skills question)? Bullet 2 has specifics (chemistry, data analysis, lab equipment)? ≥100 words? Formal register? No spelling traps?
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 05: Listen & Repeat ×8 -->
+    <div class="slide" id="slide-4">
+      <div class="card">
+        <div class="card-title">🎧 Listen & Repeat — 8 Sentences</div>
+        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:1rem;">Play each sentence, repeat immediately. Text is hidden — try from hearing alone. Click "Show" to verify.</p>
+        <div id="l22-lrSentences">
+          <div class="speaking-sent"><span class="num">1.</span> <button class="btn btn-secondary" onclick="playL22(1)" style="padding:0.3rem 0.6rem;font-size:0.8rem;">🔊</button> <button class="btn btn-secondary" onclick="toggleReveal('lr1')" style="padding:0.3rem 0.6rem;font-size:0.8rem;">Show</button> <span class="sent-text" id="lr1">Writers who measure their speed can systematically raise their word-per-minute floor.</span></div>
+          <div class="speaking-sent"><span class="num">2.</span> <button class="btn btn-secondary" onclick="playL22(2)" style="padding:0.3rem 0.6rem;font-size:0.8rem;">🔊</button> <button class="btn btn-secondary" onclick="toggleReveal('lr2')" style="padding:0.3rem 0.6rem;font-size:0.8rem;">Show</button> <span class="sent-text" id="lr2">Practising collocations aloud helps them transfer into timed writing when it matters.</span></div>
+          <div class="speaking-sent"><span class="num">3.</span> <button class="btn btn-secondary" onclick="playL22(3)" style="padding:0.3rem 0.6rem;font-size:0.8rem;">🔊</button> <button class="btn btn-secondary" onclick="toggleReveal('lr3')" style="padding:0.3rem 0.6rem;font-size:0.8rem;">Show</button> <span class="sent-text" id="lr3">Chunk-writing produces complete thought units of twenty-five to thirty words.</span></div>
+          <div class="speaking-sent"><span class="num">4.</span> <button class="btn btn-secondary" onclick="playL22(4)" style="padding:0.3rem 0.6rem;font-size:0.8rem;">🔊</button> <button class="btn btn-secondary" onclick="toggleReveal('lr4')" style="padding:0.3rem 0.6rem;font-size:0.8rem;">Show</button> <span class="sent-text" id="lr4">Reserving the final ninety seconds for proofreading protects high-impact accuracy.</span></div>
+          <div class="speaking-sent"><span class="num">5.</span> <button class="btn btn-secondary" onclick="playL22(5)" style="padding:0.3rem 0.6rem;font-size:0.8rem;">🔊</button> <button class="btn btn-secondary" onclick="toggleReveal('lr5')" style="padding:0.3rem 0.6rem;font-size:0.8rem;">Show</button> <span class="sent-text" id="lr5">Hesitation costs more words than imperfect grammar under a strict time limit.</span></div>
+          <div class="speaking-sent"><span class="num">6.</span> <button class="btn btn-secondary" onclick="playL22(6)" style="padding:0.3rem 0.6rem;font-size:0.8rem;">🔊</button> <button class="btn btn-secondary" onclick="toggleReveal('lr6')" style="padding:0.3rem 0.6rem;font-size:0.8rem;">Show</button> <span class="sent-text" id="lr6">A clear structural frame removes the need to plan mid-sentence.</span></div>
+          <div class="speaking-sent"><span class="num">7.</span> <button class="btn btn-secondary" onclick="playL22(7)" style="padding:0.3rem 0.6rem;font-size:0.8rem;">🔊</button> <button class="btn btn-secondary" onclick="toggleReveal('lr7')" style="padding:0.3rem 0.6rem;font-size:0.8rem;">Show</button> <span class="sent-text" id="lr7">Candidates who begin immediately consistently reach the target word count.</span></div>
+          <div class="speaking-sent"><span class="num">8.</span> <button class="btn btn-secondary" onclick="playL22(8)" style="padding:0.3rem 0.6rem;font-size:0.8rem;">🔊</button> <button class="btn btn-secondary" onclick="toggleReveal('lr8')" style="padding:0.3rem 0.6rem;font-size:0.8rem;">Show</button> <span class="sent-text" id="lr8">Sustained momentum, not sporadic bursts, determines whether you finish.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 06: Correction Table -->
+    <div class="slide" id="slide-5">
+      <div class="card">
+        <div class="card-title">📋 Live Error Correction</div>
+        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:1rem;">Log any errors caught during sprints or L&R. Focus on patterns, not one-off typos.</p>
+        <table class="error-table" id="errorTable">
+          <thead><tr><th>Error</th><th>Correction</th><th>Type</th></tr></thead>
+          <tbody id="errorBody">
+            <tr><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+            <tr><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+            <tr><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+            <tr><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+          </tbody>
+        </table>
+        <button class="btn btn-secondary" onclick="addErrorRow()" style="margin-top:0.75rem;">+ Add Row</button>
+      </div>
+      <div class="card">
+        <div class="card-title">📈 Speed Progress Tracker</div>
+        <p style="font-size:0.85rem;color:var(--text-muted);">Record your wpm from each sprint. Target: 13+ wpm for AD, 15+ wpm for Email.</p>
+        <table class="error-table">
+          <tr><th>Sprint</th><th>Words</th><th>Time (s)</th><th>WPM</th><th>vs Floor (13/15)</th></tr>
+          <tr><td>L22 AD</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+          <tr><td>L22 Email</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- SLIDE 07: Homework -->
+    <div class="slide" id="slide-6">
+      <div class="card">
+        <div class="card-title">📝 Homework Assignments</div>
+        <div style="margin-bottom:1rem;">
+          <p style="font-weight:600;margin-bottom:0.5rem;">1. Writing Speed Sprint (timed, 10 min)</p>
+          <p style="font-size:0.88rem;color:var(--text-muted);">Academic Discussion (TOEFL format). <strong>Professor:</strong> "This week we are discussing university budgets. Should universities cut funding for arts programmes to invest more in science and technology?" <strong>Nina:</strong> "Science and technology drive innovation and create future jobs." <strong>Tom:</strong> "Arts programmes develop creativity and communication skills that every field needs." Write a post: express and support your opinion, reference one classmate, 120–130 words. Use ≥2 collocations. Apply chunk-writing. Log wpm.</p>
+        </div>
+        <div style="margin-bottom:1rem;">
+          <p style="font-weight:600;margin-bottom:0.5rem;">2. Email Sprint (timed, 7 min)</p>
+          <p style="font-size:0.88rem;color:var(--text-muted);">You want to plan your next semester. Write an email to your academic advisor. In your email, do the following: (1) explain why you need the meeting (2) describe the specific courses you are considering (3) suggest times when you are available. Bullet-2-first planning. Target 100–120 words. Run the proofread pass.</p>
+        </div>
+        <div style="margin-bottom:1rem;">
+          <p style="font-weight:600;margin-bottom:0.5rem;">3. Collocation Transfer Drill</p>
+          <p style="font-size:0.88rem;color:var(--text-muted);">Write 3 spoken-style sentences (12–20 words each) using: <em>substantiate a claim, address issues, draw conclusions, conduct research</em>. Say them aloud — no reading from screen.</p>
+        </div>
+        <div>
+          <p style="font-weight:600;margin-bottom:0.5rem;">4. Vocabulary Journal</p>
+          <p style="font-size:0.88rem;color:var(--text-muted);">Write 5 sentences using: <em>deliberately, threshold, exemplify, proficiency, substantiate</em>. Each sentence must be about studying or writing.</p>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <button class="mobile-nav-toggle" id="mobileNavBtn" aria-label="Open navigation">☰</button>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <script>
+    const TOTAL = 7;
+    let current = 0;
+
+    function switchSlide(n) {
+      document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById('slide-' + n).classList.add('active');
+      document.querySelectorAll('.nav-btn')[n].classList.add('active');
+      current = n;
+      document.getElementById('slideChip').textContent = (n + 1) + ' / ' + TOTAL;
+      window.scrollTo({top: 0, behavior: 'smooth'});
+    }
+
+    // Shadowing pacer
+    let pacerInterval = null;
+    function toggleShadowingPacer() {
+      const display = document.getElementById('shadowingTextDisplay');
+      const audio = document.getElementById('shadowingAudio');
+      if (pacerInterval) { clearInterval(pacerInterval); pacerInterval = null; return; }
+      const wpm = parseInt(document.getElementById('pacerSpeed').value);
+      const words = display.textContent.trim().split(/\s+/);
+      display.innerHTML = words.map((w, i) => `<span class="shadowing-word" id="sw${i}">${w}</span>`).join(' ');
+      let i = 0;
+      audio.play();
+      pacerInterval = setInterval(() => {
+        if (i > 0) document.getElementById('sw' + (i - 1)).classList.remove('active');
+        if (i < words.length) { document.getElementById('sw' + i).classList.add('active'); i++; }
+        else { clearInterval(pacerInterval); pacerInterval = null; }
+      }, 60000 / wpm);
+    }
+    function resetShadowingPacer() {
+      if (pacerInterval) { clearInterval(pacerInterval); pacerInterval = null; }
+      const display = document.getElementById('shadowingTextDisplay');
+      display.innerHTML = 'Academic writing under time pressure demands a disciplined approach to both structure and speed. Writers who develop pre-planned structural frames and allocate deliberate time per paragraph consistently outperform those who write without a plan. The most effective technique is chunk-writing: producing complete thought units of twenty-five to thirty words without pausing to edit. This sustained momentum allows candidates to reach target word counts while reserving the final minutes for a focused proofreading pass that catches high-impact errors.';
+      document.getElementById('shadowingAudio').pause();
+      document.getElementById('shadowingAudio').currentTime = 0;
+    }
+
+    // Timers
+    const timerIntervals = {};
+    function startTimer(id, seconds) {
+      if (timerIntervals[id]) { clearInterval(timerIntervals[id]); delete timerIntervals[id]; return; }
+      let remaining = seconds;
+      const el = document.getElementById(id);
+      timerIntervals[id] = setInterval(() => {
+        remaining--;
+        const m = Math.floor(remaining / 60);
+        const s = remaining % 60;
+        el.textContent = String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
+        if (remaining <= 0) { clearInterval(timerIntervals[id]); delete timerIntervals[id]; el.textContent = "TIME!"; el.style.color = 'var(--accent-red)'; }
+      }, 1000);
+    }
+    function resetTimer(id, seconds) {
+      if (timerIntervals[id]) { clearInterval(timerIntervals[id]); delete timerIntervals[id]; }
+      const el = document.getElementById(id);
+      const m = Math.floor(seconds / 60);
+      const s = seconds % 60;
+      el.textContent = String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
+      el.style.color = 'var(--primary)';
+    }
+
+    // Word counts + live WPM (tracked from first keystroke)
+    function wireWC(textId, wcId, wpmId, floor) {
+      const ta = document.getElementById(textId);
+      const wc = document.getElementById(wcId);
+      const wpm = document.getElementById(wpmId);
+      let startTime = null;
+      ta.addEventListener('input', () => {
+        if (!ta.value.trim()) { startTime = null; wc.textContent = '0 words'; wpm.textContent = '— wpm'; wpm.style.color = 'var(--accent-blue)'; return; }
+        if (!startTime) startTime = Date.now();
+        const words = ta.value.trim().split(/\s+/).filter(w => w.length > 0).length;
+        wc.textContent = words + ' words';
+        const mins = (Date.now() - startTime) / 60000;
+        if (mins >= 0.08) {
+          const rate = Math.round(words / mins);
+          wpm.textContent = rate + ' wpm (live)';
+          wpm.style.color = rate >= floor ? 'var(--accent-green)' : rate >= floor - 2 ? 'var(--primary)' : 'var(--accent-red)';
+        }
+      });
+    }
+    wireWC('sprint1Text', 'sprint1WC', 'sprint1WPM', 13);
+    wireWC('sprint2Text', 'sprint2WC', 'sprint2WPM', 15);
+
+    // Collocation counter
+    document.querySelectorAll('.cc-box').forEach(cb => {
+      cb.addEventListener('change', () => {
+        const count = document.querySelectorAll('.cc-box:checked').length;
+        document.getElementById('ccCount').textContent = count + ' / 6 collocations used';
+      });
+    });
+
+    // Speed calc
+    function calcSpeed() {
+      const adW = parseInt(document.getElementById('l21AdWords').value) || 0;
+      const adT = parseInt(document.getElementById('l21AdTime').value) || 600;
+      const emW = parseInt(document.getElementById('l21EmailWords').value) || 0;
+      const emT = parseInt(document.getElementById('l21EmailTime').value) || 420;
+      const adWPM = Math.round(adW / (adT / 60));
+      const emWPM = Math.round(emW / (emT / 60));
+      const adClass = adWPM >= 13 ? 'text-green' : 'text-red';
+      const emClass = emWPM >= 15 ? 'text-green' : 'text-red';
+      document.getElementById('speedResult').innerHTML = `
+        <table class="error-table">
+          <tr><th>Task</th><th>Words</th><th>Time</th><th>WPM</th><th>Status</th></tr>
+          <tr><td>AD Sprint</td><td>${adW}</td><td>${adT}s</td><td class="${adClass}">${adWPM}</td><td>${adWPM >= 13 ? '✅ Above floor' : '⚠️ Below floor (13)'}</td></tr>
+          <tr><td>Email Sprint</td><td>${emW}</td><td>${emT}s</td><td class="${emClass}">${emWPM}</td><td>${emWPM >= 15 ? '✅ Above floor' : '⚠️ Below floor (15)'}</td></tr>
+        </table>`;
+    }
+
+    // L&R audio
+    function playL22(n) {
+      const audio = new Audio('audio/l22-s' + n + '.wav');
+      audio.play();
+    }
+
+    // Toggle reveal
+    function toggleReveal(id) {
+      document.getElementById(id).classList.toggle('show');
+    }
+
+    // Add error row
+    function addErrorRow() {
+      const tbody = document.getElementById('errorBody');
+      const tr = document.createElement('tr');
+      tr.innerHTML = '<td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td>';
+      tbody.appendChild(tr);
+    }
+
+    // Mobile nav
+    document.getElementById('mobileNavBtn').addEventListener('click', () => {
+      document.querySelector('.sidebar').classList.toggle('open');
+      document.getElementById('sidebarOverlay').classList.toggle('open');
+    });
+    document.getElementById('sidebarOverlay').addEventListener('click', () => {
+      document.querySelector('.sidebar').classList.remove('open');
+      document.getElementById('sidebarOverlay').classList.remove('open');
+    });
+
+    switchSlide(0);
+  </script>
+</body>
+</html>
