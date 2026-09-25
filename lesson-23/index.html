@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Valeria — Lesson 23: Writing Transitions</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg-dark:#090d16;--bg-card:#131a26;--border-color:#243042;--text-main:#f1f5f9;--text-muted:#64748b;--primary:#f59e0b;--primary-hover:#d97706;--primary-dim:rgba(245,158,11,0.12);--accent-blue:#38bdf8;--accent-green:#10b981;--accent-red:#ef4444;--accent-purple:#a855f7;}
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:'Inter',sans-serif;background:var(--bg-dark);color:var(--text-main);display:flex;min-height:100vh;overflow-x:hidden;}
+    .sidebar{width:260px;background:var(--bg-card);border-right:1px solid var(--border-color);display:flex;flex-direction:column;padding:1.5rem 1rem;position:fixed;height:100vh;z-index:100;overflow-y:auto;scrollbar-width:thin;}
+    .brand{display:flex;align-items:center;gap:0.75rem;margin-bottom:2rem;padding:0 0.5rem;}
+    .brand-badge{background:var(--primary);color:#000;font-weight:700;font-size:0.75rem;padding:0.2rem 0.5rem;border-radius:4px;text-transform:uppercase;}
+    .brand-title{font-weight:600;font-size:1.1rem;color:var(--text-main);}
+    .nav-btn{background:transparent;border:1px solid transparent;color:var(--text-muted);padding:0.75rem 1rem;border-radius:8px;text-align:left;font-size:0.9rem;font-family:inherit;cursor:pointer;margin-bottom:0.5rem;display:flex;align-items:center;gap:0.75rem;transition:all 0.2s ease;}
+    .nav-btn:hover{background:rgba(255,255,255,0.03);color:var(--text-main);}
+    .nav-btn.active{background:var(--primary-dim);border-color:rgba(245,158,11,0.3);color:var(--primary);font-weight:600;}
+    .nav-num{font-family:'Fira Code',monospace;font-size:0.8rem;opacity:0.7;}
+    .main-content{margin-left:260px;flex:1;padding:2rem 3rem;max-width:1200px;}
+    .header{display:flex;justify-content:space-between;align-items:center;margin-bottom:2rem;padding-bottom:1rem;border-bottom:1px solid var(--border-color);}
+    .page-title{font-size:1.5rem;font-weight:700;color:var(--text-main);}
+    .tag{background:rgba(56,189,248,0.1);color:var(--accent-blue);border:1px solid rgba(56,189,248,0.2);padding:0.25rem 0.75rem;border-radius:20px;font-size:0.8rem;font-family:'Fira Code',monospace;}
+    .slide{display:none;animation:fadeIn 0.3s ease;}.slide.active{display:block;}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+    @keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.3;}}
+    .card{background:var(--bg-card);border:1px solid var(--border-color);border-radius:12px;padding:1.5rem;margin-bottom:1.5rem;}
+    .card-title{font-size:1.1rem;font-weight:600;color:var(--primary);margin-bottom:1rem;display:flex;align-items:center;gap:0.5rem;}
+    .shadowing-text{font-size:1.05rem;line-height:1.8;color:#cbd5e1;margin-bottom:1.5rem;background:rgba(0,0,0,0.2);padding:1.25rem;border-radius:8px;border-left:3px solid var(--primary);}
+    .shadowing-word{transition:background 0.15s ease,color 0.15s ease;border-radius:3px;padding:0 2px;}
+    .shadowing-word.active{background:var(--primary);color:#000;font-weight:600;}
+    .controls{display:flex;gap:0.75rem;align-items:center;flex-wrap:wrap;margin-bottom:1rem;}
+    .btn{background:var(--primary);color:#000;border:none;padding:0.6rem 1.2rem;border-radius:6px;font-weight:600;font-size:0.85rem;font-family:inherit;cursor:pointer;display:inline-flex;align-items:center;gap:0.4rem;transition:background 0.2s ease;}
+    .btn:hover{background:var(--primary-hover);}
+    .btn-secondary{background:transparent;border:1px solid var(--border-color);color:var(--text-main);}
+    .timer-display{font-family:'Fira Code',monospace;font-size:1.5rem;font-weight:700;color:var(--primary);background:#000;padding:0.4rem 1rem;border-radius:8px;border:1px solid var(--border-color);display:inline-block;}
+    .error-table{width:100%;border-collapse:collapse;margin-top:1rem;font-size:0.9rem;}
+    .error-table th,.error-table td{padding:0.75rem 1rem;border:1px solid var(--border-color);text-align:left;}
+    .error-table th{background:rgba(0,0,0,0.4);color:var(--primary);font-weight:600;}
+    .text-red{color:var(--accent-red);}.text-green{color:var(--accent-green);}
+    .recording-box{background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.2);border-radius:8px;padding:1.25rem;margin-top:1rem;}
+    .recording-box.active{border-color:var(--accent-red);animation:pulse 1s ease infinite;}
+    .reveal-box{display:none;background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.2);padding:1rem;border-radius:8px;margin-top:0.75rem;font-size:0.9rem;line-height:1.7;}
+    .reveal-box.show{display:block;}
+    textarea,input[type="text"]{width:100%;background:rgba(0,0,0,0.4);border:1px solid var(--border-color);color:var(--text-main);padding:0.75rem;border-radius:6px;font-family:inherit;font-size:0.9rem;resize:vertical;}
+    textarea:focus,input[type="text"]:focus{outline:none;border-color:var(--primary);}
+    .word-count-badge{font-family:'Fira Code',monospace;font-size:0.85rem;color:var(--accent-green);margin-top:0.5rem;}
+    .prompt-block{background:rgba(0,0,0,0.25);padding:1rem;border-radius:8px;font-size:0.9rem;line-height:1.7;margin-bottom:1rem;border-left:3px solid var(--primary);}
+    .transition-box{background:rgba(0,0,0,0.2);border-left:3px solid;padding:0.75rem 1rem;border-radius:0 6px 6px 0;margin-bottom:0.5rem;font-size:0.9rem;}
+    .sent-text{display:none;font-size:0.92rem;color:#e2e8f0;margin-top:0.5rem;line-height:1.6;}
+    .speaking-sent{margin-bottom:0.75rem;}
+    .num{font-weight:700;color:var(--primary);margin-right:0.4rem;}
+    @media(max-width:768px){.main-content{margin-left:0;padding:1rem 1rem 84px;max-width:100%}.header{flex-wrap:wrap;gap:0.5rem}.controls{flex-direction:column;align-items:stretch}.timer-display{font-size:1.25rem}}
+  </style>
+ <!-- FE:CSS-MOBILE --><style>.mobile-nav-toggle{display:none;position:fixed;bottom:20px;right:20px;z-index:200;width:48px;height:48px;border-radius:50%;background:var(--primary);color:#000;border:none;font-size:20px;cursor:pointer;align-items:center;justify-content:center;box-shadow:3px 3px 0 rgba(0,0,0,0.12)}
+.sidebar-overlay{display:none;position:fixed;inset:0;z-index:150;background:rgba(0,0,0,0.4)}
+.sidebar-overlay.open{display:block}@media(max-width:768px){
+  .mobile-nav-toggle{display:flex}
+  .sidebar{position:fixed;left:0;top:0;z-index:175;height:100vh;transform:translateX(-100%);transition:transform .25s ease;width:260px;display:flex!important}
+  .sidebar.open{transform:translateX(0)}
+  .main-content{margin-left:0;padding:1rem 1rem 84px;max-width:100%}
+  .header{flex-wrap:wrap;gap:0.5rem}
+  .grid-2{grid-template-columns:1fr}
+  .controls{flex-direction:column;align-items:stretch}
+  .timer-display{font-size:1.5rem}
+}</style>
+ <!-- FE:CSS-CHIP --><style>.slide-chip{font-family:'Fira Code',monospace;font-size:0.72rem;font-weight:700;color:var(--primary);background:var(--bg-card,rgba(0,0,0,0.4));border:1px solid var(--border-color,rgba(255,255,255,0.15));padding:0.25rem 0.65rem;border-radius:20px;white-space:nowrap;margin-left:auto}</style>
+ <style>.back-link{color:var(--text-muted);text-decoration:none;font-size:0.8rem;font-family:'Fira Code',monospace;white-space:nowrap;transition:color 0.2s;margin-left:1rem;}.back-link:hover{color:var(--primary);}</style></head>
+<body>
+  <aside class="sidebar">
+    <div class="brand"><span class="brand-badge">TOEFL</span><span class="brand-title">Valeria L23</span></div>
+    <button class="nav-btn active" onclick="switchSlide(0)"><span class="nav-num">01</span> Warm-up</button>
+    <button class="nav-btn" onclick="switchSlide(1)"><span class="nav-num">02</span> Transition Toolkit</button>
+    <button class="nav-btn" onclick="switchSlide(2)"><span class="nav-num">03</span> Sprint #1 · AD</button>
+    <button class="nav-btn" onclick="switchSlide(3)"><span class="nav-num">04</span> Sprint #2 · Email</button>
+    <button class="nav-btn" onclick="switchSlide(4)"><span class="nav-num">05</span> Listen & Repeat ×8</button>
+    <button class="nav-btn" onclick="switchSlide(5)"><span class="nav-num">06</span> Correction Table</button>
+    <button class="nav-btn" onclick="switchSlide(6)"><span class="nav-num">07</span> Homework</button>
+  </aside>
+  <main class="main-content">
+    <header class="header"><div><h1 class="page-title">Writing Transitions & Flow</h1><p style="color:var(--text-muted);font-size:0.85rem;margin-top:0.2rem;">Transition Toolkit · Timed Sprints · L&R Drill · Collocation Transfer</p></div><!-- FE:CHIP --><span class="slide-chip" id="slideChip">1 / N</span><a href="../index.html" class="back-link">&#8592; Portal</a>
+        <span class="tag">WRITING FLOW</span></header>
+
+    <!-- SLIDE 01: Shadowing Warm-up -->
+    <div class="slide active" id="slide-0">
+      <div class="card">
+        <div class="card-title">🎙️ Shadowing — Transitions in Academic Writing</div>
+        <div class="shadowing-text" id="shadowingTextDisplay">Effective academic writing flows logically from one idea to the next through the strategic use of transition words and phrases. These connectors serve as signposts that guide the reader through the writer's reasoning. Contrast transitions such as however and nevertheless signal a shift in perspective. Additive transitions like moreover and furthermore build upon previous points. Causal transitions including consequently and therefore establish logical chains. Mastering these devices transforms disconnected sentences into a coherent, persuasive argument that meets the expectations of formal academic discourse.</div>
+        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:1rem;">Targets: <em>strategic use · signposts · contrast transitions · additive transitions · causal transitions · coherent argument</em></p>
+        <div class="controls">
+          <button class="btn" onclick="toggleShadowingPacer()">▶ Start Pacer</button>
+          <button class="btn btn-secondary" onclick="resetShadowingPacer()">↺ Reset</button>
+          <audio id="shadowingAudio" src="audio/shadowing.wav" preload="auto" style="display:none;"></audio>
+          <button class="btn btn-secondary" onclick="document.getElementById('shadowingAudio').play()">🔊 Play Audio</button>
+          <select id="pacerSpeed" style="background:#000;color:#fff;padding:0.4rem;border-radius:4px;border:1px solid var(--border-color);"><option value="450">130 WPM</option><option value="380" selected>150 WPM</option><option value="320">175 WPM</option></select>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 02: Transition Toolkit -->
+    <div class="slide" id="slide-1">
+      <div class="card">
+        <div class="card-title">🔧 The Transition Toolkit</div>
+        <p style="font-size:0.9rem;color:var(--text-muted);margin-bottom:1rem;">Use transitions to connect ideas across sentences. Each type serves a different logical function. Vary them — don't repeat the same one in every paragraph.</p>
+        <div class="transition-box" style="border-color:var(--accent-green);"><strong style="color:var(--accent-green);">Contrast:</strong> however, nevertheless, nonetheless, on the other hand, conversely, although</div>
+        <div class="transition-box" style="border-color:var(--accent-blue);"><strong style="color:var(--accent-blue);">Additive:</strong> moreover, furthermore, in addition, additionally, also</div>
+        <div class="transition-box" style="border-color:var(--accent-purple);"><strong style="color:var(--accent-purple);">Causal:</strong> consequently, therefore, as a result, thus, hence, accordingly</div>
+        <div class="transition-box" style="border-color:var(--primary);"><strong style="color:var(--primary);">Example:</strong> for instance, for example, to illustrate, specifically, such as</div>
+        <div class="transition-box" style="border-color:var(--accent-red);"><strong style="color:var(--accent-red);">Conclusion:</strong> in conclusion, to summarise, overall, ultimately, in summary</div>
+        <p style="font-size:0.82rem;color:var(--text-muted);margin-top:1rem;"><strong>⚠️ TOEFL trap:</strong> Don't use "Although… but" together. Pick one. Also, avoid tautological closers — end with a concrete point, not a generic "In conclusion."</p>
+        <p style="font-size:0.82rem;color:var(--text-muted);margin-top:0.5rem;"><strong>✍️ Comma rule:</strong> sentence-initial transition + comma (<em>However, the results differ.</em>) · mid-sentence transition wrapped in commas (<em>The results, however, differ.</em>) · never join two sentences with only a comma — use a full stop or semicolon. Sequencing extras: <em>subsequently, previously, meanwhile</em>.</p>
+      </div>
+      <div class="card">
+        <div class="card-title">🎯 Mini-Drill: Insert Transitions</div>
+        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:0.75rem;">Read the paragraph. Identify where transitions are missing and add them:</p>
+        <div style="background:rgba(0,0,0,0.2);padding:1rem;border-radius:8px;font-size:0.9rem;line-height:1.8;">
+          "University education is expensive. <span class="text-red">[?]</span> many students benefit from part-time work to offset costs. Working students gain practical experience. <span class="text-red">[?]</span> they may struggle to balance responsibilities. Employers value graduates with work experience. <span class="text-red">[?]</span> students who work during their studies often have stronger CVs."
+        </div>
+        <button class="btn btn-secondary" onclick="toggleReveal('transitionAns')" style="margin-top:0.75rem;">👁️ Show Answers</button>
+        <div class="reveal-box" id="transitionAns">
+          "University education is expensive. <strong style="color:var(--accent-blue);">Moreover</strong>, many students benefit from part-time work to offset costs. Working students gain practical experience. <strong style="color:var(--accent-green);">However</strong>, they may struggle to balance responsibilities. Employers value graduates with work experience. <strong style="color:var(--accent-purple);">Consequently</strong>, students who work during their studies often have stronger CVs."
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 03: Sprint #1 — Academic Discussion -->
+    <div class="slide" id="slide-2">
+      <div class="card">
+        <div class="card-title">✍️ Sprint #1 — Academic Discussion (10 min)</div>
+        <div class="prompt-block">
+          <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.75rem;">
+            <strong>Academic Discussion — TOEFL format:</strong>
+            <span style="display:flex;align-items:center;gap:0.5rem;"><span class="timer-display" id="sprint1Timer" style="font-size:1.25rem;">10:00</span><button class="btn" onclick="startTimer('sprint1Timer',600)">Start 10 min</button><button class="btn btn-secondary" onclick="resetTimer('sprint1Timer',600)">Reset</button></span>
+          </div>
+          <p style="margin-top:0.75rem;">Your professor is teaching a course on education technology. Write a post responding to the professor's question. In your post, you should: express and support your opinion; make a contribution to the discussion in your own words.</p>
+          <p style="margin-top:0.6rem;"><strong>Professor:</strong> "This week we are discussing online learning. Are online classes just as effective as traditional in-person classes, or is face-to-face instruction essential for meaningful learning?"</p>
+          <p style="margin-top:0.4rem;"><strong>Nina:</strong> "Online classes are flexible and let students learn at their own pace, so more people can access education."<br>
+          <strong>Tom:</strong> "Face-to-face discussion builds real relationships and forces active participation that a screen cannot replace."</p>
+        </div>
+        <div style="background:rgba(0,0,0,0.2);padding:0.75rem 1rem;border-radius:6px;font-size:0.85rem;color:var(--text-muted);margin-bottom:0.75rem;">
+          <strong>Focus today:</strong> Use ≥3 different transitions (one contrast, one additive, one causal). Chunk-write. Target 120–130 words. Do NOT stop to edit mid-sentence.
+        </div>
+        <textarea id="sprint1Text" rows="8" placeholder="Write your Academic Discussion response here..."></textarea>
+        <div style="display:flex;align-items:center;gap:1rem;margin-top:0.5rem;">
+          <span class="word-count-badge" id="sprint1WC">0 words</span>
+          <span class="word-count-badge" id="sprint1WPM" style="color:var(--accent-blue);">— wpm</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">🔍 Transition Audit</div>
+        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:0.5rem;">After writing, search your text for transitions. Check off each type you used:</p>
+        <div id="transitionCheck" style="font-size:0.9rem;line-height:1.8;">
+          <label><input type="checkbox" class="tc-box" data-tc="contrast"> Contrast (however, nevertheless, on the other hand)</label><br>
+          <label><input type="checkbox" class="tc-box" data-tc="additive"> Additive (moreover, furthermore, in addition)</label><br>
+          <label><input type="checkbox" class="tc-box" data-tc="causal"> Causal (consequently, therefore, as a result)</label><br>
+          <label><input type="checkbox" class="tc-box" data-tc="example"> Example (for instance, for example, to illustrate)</label>
+        </div>
+        <div class="word-count-badge" id="tcCount" style="margin-top:0.5rem;">0 / 4 transition types used</div>
+        <div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-top:0.75rem;">
+          <button class="btn btn-secondary" onclick="toggleReveal('sprint1Model')">👁️ Show Model Answer</button>
+          <button class="btn btn-secondary" onclick="toggleReveal('sprint1Check')">✓ Checklist</button>
+        </div>
+        <div class="reveal-box" id="sprint1Model">
+          <strong style="color:var(--accent-green);">Model (~128 words, agrees with Tom):</strong> transitions colour-coded — <span style="color:var(--accent-green);">contrast</span>, <span style="color:var(--accent-blue);">additive</span>, <span style="color:var(--accent-purple);">causal</span>, <span style="color:var(--primary);">example</span>.
+          <p style="margin-top:0.5rem;line-height:1.7;"><span style="color:var(--accent-green);">While</span> I understand Nina's point that online classes are flexible and widen access, I believe Tom is right that face-to-face instruction is essential for meaningful learning. This is primarily because live discussion forces students to think on their feet and respond to counterarguments immediately, which builds deeper understanding. <span style="color:var(--primary);">For example</span>, a seminar in which students debate a case study aloud develops critical thinking far more effectively than watching recorded lectures alone. <span style="color:var(--accent-blue);">Moreover</span>, campus interaction creates trust, and trust encourages quieter students to contribute. <span style="color:var(--accent-purple);">Consequently</span>, universities should keep face-to-face seminars at the core of their programmes. Online materials can certainly complement those seminars, but they cannot replace the energy and accountability of a real classroom. <span style="color:var(--accent-purple);">Therefore</span>, a blended model is valuable, but the live seminar must remain the centrepiece.</p>
+        </div>
+        <div class="reveal-box" id="sprint1Check">
+          <strong>Checklist:</strong> 120–130 words? Position clear (Tom's side)? One classmate referenced by name? ≥3 transition types used (contrast / additive / causal / example)? Comma after every sentence-initial transition? Concrete example? No "Although…but"?
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 04: Sprint #2 — Email -->
+    <div class="slide" id="slide-3">
+      <div class="card">
+        <div class="card-title">✉️ Sprint #2 — Email Reply (7 min)</div>
+        <div class="prompt-block" style="border-color:var(--accent-purple);">
+          <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.75rem;">
+            <strong>Write an Email — TOEFL format:</strong>
+            <span style="display:flex;align-items:center;gap:0.5rem;"><span class="timer-display" id="sprint2Timer" style="font-size:1.25rem;">07:00</span><button class="btn" onclick="startTimer('sprint2Timer',420)">Start 7 min</button><button class="btn btn-secondary" onclick="resetTimer('sprint2Timer',420)">Reset</button></span>
+          </div>
+          <p style="margin-top:0.75rem;">You are a student who uses the campus library. Write an email to the university library director. In your email, do the following:</p>
+          <p style="margin-top:0.4rem;">1. Explain why extended evening hours would benefit students.<br>
+          2. Describe how the current hours affect your study routine.<br>
+          3. Suggest a trial period or compromise solution.</p>
+          <p style="margin-top:0.4rem;color:var(--text-muted);">Target: 100–120 words (minimum 100). Formal register.</p>
+        </div>
+        <div style="background:rgba(0,0,0,0.2);padding:0.75rem 1rem;border-radius:6px;font-size:0.85rem;color:var(--text-muted);margin-bottom:0.75rem;">
+          <strong>Focus today:</strong> Bullet-2-first planning. Use ≥2 transitions. Target 100–120 words. Reserve last 60s for proofread pass.
+        </div>
+        <textarea id="sprint2Text" rows="8" placeholder="Dear Library Director,&#10;&#10;..."></textarea>
+        <div style="display:flex;align-items:center;gap:1rem;margin-top:0.5rem;">
+          <span class="word-count-badge" id="sprint2WC">0 words</span>
+          <span class="word-count-badge" id="sprint2WPM" style="color:var(--accent-blue);">— wpm</span>
+        </div>
+        <div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-top:0.75rem;">
+          <button class="btn btn-secondary" onclick="toggleReveal('sprint2Model')">👁️ Show Model Answer</button>
+          <button class="btn btn-secondary" onclick="toggleReveal('sprint2Check')">✓ Checklist</button>
+        </div>
+        <div class="reveal-box" id="sprint2Model">
+          <strong style="color:var(--accent-green);">Model (~111 words, all 3 tasks covered, specific details):</strong>
+          <p style="margin-top:0.5rem;line-height:1.7;">Dear Library Director,<br><br>I am writing to ask whether the library could trial extended evening hours during exam periods. In my view, later closing times would greatly benefit students.<br><br>At present, the library closes at 8 p.m., so students who work or attend late seminars have almost no quiet place to study during the week. Consequently, many of us end up writing assignments at home, where distractions reduce the quality of our work.<br><br>I understand that extending hours increases staffing costs. Therefore, I would like to suggest a two-month trial on weekdays until 11 p.m., after which the university could evaluate attendance.<br><br>Thank you for considering this request.<br><br>Best regards,<br>Valeria</p>
+        </div>
+        <div class="reveal-box" id="sprint2Check">
+          <strong>Checklist:</strong> All 3 tasks covered? Task 2 has specifics (8 p.m. closing, work/late seminars, home distractions)? ≥100 words? ≥2 transitions with correct comma use? Formal register? No known spelling traps?
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 05: Listen & Repeat ×8 -->
+    <div class="slide" id="slide-4">
+      <div class="card">
+        <div class="card-title">🎧 Listen & Repeat — 8 Sentences</div>
+        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:1rem;">Play each sentence, repeat immediately. Text is hidden — try from hearing alone.</p>
+        <div id="l23-lrSentences">
+          <div class="speaking-sent"><span class="num">1.</span> <button class="btn btn-secondary" onclick="playL23(1)" style="padding:0.3rem 0.6rem;font-size:0.8rem;">🔊</button> <button class="btn btn-secondary" onclick="toggleReveal('lr1')" style="padding:0.3rem 0.6rem;font-size:0.8rem;">Show</button> <span class="sent-text" id="lr1">However, the most effective approach combines online resources with face-to-face discussion.</span></div>
+          <div class="speaking-sent"><span class="num">2.</span> <button class="btn btn-secondary" onclick="playL23(2)" style="padding:0.3rem 0.6rem;font-size:0.8rem;">🔊</button> <button class="btn btn-secondary" onclick="toggleReveal('lr2')" style="padding:0.3rem 0.6rem;font-size:0.8rem;">Show</button> <span class="sent-text" id="lr2">Moreover, students who engage in collaborative learning tend to develop stronger critical thinking skills.</span></div>
+          <div class="speaking-sent"><span class="num">3.</span> <button class="btn btn-secondary" onclick="playL23(3)" style="padding:0.3rem 0.6rem;font-size:0.8rem;">🔊</button> <button class="btn btn-secondary" onclick="toggleReveal('lr3')" style="padding:0.3rem 0.6rem;font-size:0.8rem;">Show</button> <span class="sent-text" id="lr3">Consequently, universities that invest in flexible scheduling see higher student satisfaction rates.</span></div>
+          <div class="speaking-sent"><span class="num">4.</span> <button class="btn btn-secondary" onclick="playL23(4)" style="padding:0.3rem 0.6rem;font-size:0.8rem;">🔊</button> <button class="btn btn-secondary" onclick="toggleReveal('lr4')" style="padding:0.3rem 0.6rem;font-size:0.8rem;">Show</button> <span class="sent-text" id="lr4">For instance, a student who works part-time may find that recorded lectures allow more flexible study schedules.</span></div>
+          <div class="speaking-sent"><span class="num">5.</span> <button class="btn btn-secondary" onclick="playL23(5)" style="padding:0.3rem 0.6rem;font-size:0.8rem;">🔊</button> <button class="btn btn-secondary" onclick="toggleReveal('lr5')" style="padding:0.3rem 0.6rem;font-size:0.8rem;">Show</button> <span class="sent-text" id="lr5">Furthermore, the ability to review recorded material reinforces long-term retention of complex concepts.</span></div>
+          <div class="speaking-sent"><span class="num">6.</span> <button class="btn btn-secondary" onclick="playL23(6)" style="padding:0.3rem 0.6rem;font-size:0.8rem;">🔊</button> <button class="btn btn-secondary" onclick="toggleReveal('lr6')" style="padding:0.3rem 0.6rem;font-size:0.8rem;">Show</button> <span class="sent-text" id="lr6">Nevertheless, the social dimension of learning cannot be replicated through a screen alone.</span></div>
+          <div class="speaking-sent"><span class="num">7.</span> <button class="btn btn-secondary" onclick="playL23(7)" style="padding:0.3rem 0.6rem;font-size:0.8rem;">🔊</button> <button class="btn btn-secondary" onclick="toggleReveal('lr7')" style="padding:0.3rem 0.6rem;font-size:0.8rem;">Show</button> <span class="sent-text" id="lr7">Therefore, a blended model that integrates both modalities offers the strongest educational outcomes.</span></div>
+          <div class="speaking-sent"><span class="num">8.</span> <button class="btn btn-secondary" onclick="playL23(8)" style="padding:0.3rem 0.6rem;font-size:0.8rem;">🔊</button> <button class="btn btn-secondary" onclick="toggleReveal('lr8')" style="padding:0.3rem 0.6rem;font-size:0.8rem;">Show</button> <span class="sent-text" id="lr8">In contrast, purely online programmes often struggle to foster the sense of community that campus life provides.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 06: Correction Table -->
+    <div class="slide" id="slide-5">
+      <div class="card">
+        <div class="card-title">📋 Live Error Correction</div>
+        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:1rem;">Log any errors caught during sprints or L&R. Focus on transition misuse and flow issues.</p>
+        <table class="error-table" id="errorTable">
+          <thead><tr><th>Error</th><th>Correction</th><th>Type</th></tr></thead>
+          <tbody id="errorBody">
+            <tr><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+            <tr><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+            <tr><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+            <tr><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+          </tbody>
+        </table>
+        <button class="btn btn-secondary" onclick="addErrorRow()" style="margin-top:0.75rem;">+ Add Row</button>
+      </div>
+    </div>
+
+    <!-- SLIDE 07: Homework -->
+    <div class="slide" id="slide-6">
+      <div class="card">
+        <div class="card-title">📝 Homework Assignments</div>
+        <div style="margin-bottom:1rem;">
+          <p style="font-weight:600;margin-bottom:0.5rem;">1. Writing Speed Sprint (timed, 10 min)</p>
+          <p style="font-size:0.88rem;color:var(--muted);">Academic Discussion (TOEFL format). <strong>Professor:</strong> "This week we are discussing transport policy. Should governments fund public transportation more than road building?" <strong>Nina:</strong> "Public transport reduces traffic and pollution and serves more people per dollar." <strong>Tom:</strong> "Roads are essential for trade and for people who live far from transit lines." Write a post: express and support your opinion, reference one classmate, 120–130 words. Use ≥3 transitions (contrast, additive, causal). Chunk-write. Log wpm.</p>
+        </div>
+        <div style="margin-bottom:1rem;">
+          <p style="font-weight:600;margin-bottom:0.5rem;">2. Email Sprint (timed, 7 min)</p>
+          <p style="font-size:0.88rem;color:var(--muted);">You are a student who eats in the campus dining hall. Write an email to campus dining services. In your email, do the following: (1) explain a food quality concern (2) describe how it affects student wellbeing (3) propose a solution. Bullet-2-first. Target 100–120 words. Run the proofread pass.</p>
+        </div>
+        <div style="margin-bottom:1rem;">
+          <p style="font-weight:600;margin-bottom:0.5rem;">3. Transition Insert Drill</p>
+          <p style="font-size:0.88rem;color:var(--muted);">Write a 5-sentence paragraph about a university policy you disagree with. Use at least 4 different transitions (one from each category: contrast, additive, causal, example).</p>
+        </div>
+        <div style="margin-bottom:1rem;">
+          <p style="font-weight:600;margin-bottom:0.5rem;">4. Vocabulary Journal</p>
+          <p style="font-size:0.88rem;color:var(--muted);">Write 5 sentences using: <em>nevertheless, furthermore, consequently, exemplify, deliberately</em>. Each must contain a transition and a collocation.</p>
+        </div>
+        <div>
+          <p style="font-weight:600;margin-bottom:0.5rem;">5. Daily Vocabulary Centre (5–10 min/day)</p>
+          <p style="font-size:0.88rem;color:var(--muted);">Starting today: open the Vocabulary Centre on your portal every day. Learn 5 new words with flashcards + audio, clear the review queue, and finish the day's quiz. Keep your streak alive — 7 days a week.</p>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <button class="mobile-nav-toggle" id="mobileNavBtn" aria-label="Open navigation">☰</button>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <script>
+    const TOTAL = 7;
+    let current = 0;
+
+    function switchSlide(n) {
+      document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById('slide-' + n).classList.add('active');
+      document.querySelectorAll('.nav-btn')[n].classList.add('active');
+      current = n;
+      document.getElementById('slideChip').textContent = (n + 1) + ' / ' + TOTAL;
+      window.scrollTo({top: 0, behavior: 'smooth'});
+    }
+
+    // Shadowing pacer
+    let pacerInterval = null;
+    function toggleShadowingPacer() {
+      const display = document.getElementById('shadowingTextDisplay');
+      const audio = document.getElementById('shadowingAudio');
+      if (pacerInterval) { clearInterval(pacerInterval); pacerInterval = null; return; }
+      const wpm = parseInt(document.getElementById('pacerSpeed').value);
+      const words = display.textContent.trim().split(/\s+/);
+      display.innerHTML = words.map((w, i) => `<span class="shadowing-word" id="sw${i}">${w}</span>`).join(' ');
+      let i = 0;
+      audio.play();
+      pacerInterval = setInterval(() => {
+        if (i > 0) document.getElementById('sw' + (i - 1)).classList.remove('active');
+        if (i < words.length) { document.getElementById('sw' + i).classList.add('active'); i++; }
+        else { clearInterval(pacerInterval); pacerInterval = null; }
+      }, 60000 / wpm);
+    }
+    function resetShadowingPacer() {
+      if (pacerInterval) { clearInterval(pacerInterval); pacerInterval = null; }
+      const display = document.getElementById('shadowingTextDisplay');
+      display.innerHTML = 'Effective academic writing flows logically from one idea to the next through the strategic use of transition words and phrases. These connectors serve as signposts that guide the reader through the writer\'s reasoning. Contrast transitions such as however and nevertheless signal a shift in perspective. Additive transitions like moreover and furthermore build upon previous points. Causal transitions including consequently and therefore establish logical chains. Mastering these devices transforms disconnected sentences into a coherent, persuasive argument that meets the expectations of formal academic discourse.';
+      document.getElementById('shadowingAudio').pause();
+      document.getElementById('shadowingAudio').currentTime = 0;
+    }
+
+    // Timers
+    const timerIntervals = {};
+    function startTimer(id, seconds) {
+      if (timerIntervals[id]) { clearInterval(timerIntervals[id]); delete timerIntervals[id]; return; }
+      let remaining = seconds;
+      const el = document.getElementById(id);
+      timerIntervals[id] = setInterval(() => {
+        remaining--;
+        const m = Math.floor(remaining / 60);
+        const s = remaining % 60;
+        el.textContent = String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
+        if (remaining <= 0) { clearInterval(timerIntervals[id]); delete timerIntervals[id]; el.textContent = "TIME!"; el.style.color = 'var(--accent-red)'; }
+      }, 1000);
+    }
+    function resetTimer(id, seconds) {
+      if (timerIntervals[id]) { clearInterval(timerIntervals[id]); delete timerIntervals[id]; }
+      const el = document.getElementById(id);
+      const m = Math.floor(seconds / 60);
+      const s = seconds % 60;
+      el.textContent = String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
+      el.style.color = 'var(--primary)';
+    }
+
+    // Word counts + live WPM (tracked from first keystroke)
+    function wireWC(textId, wcId, wpmId, floor) {
+      const ta = document.getElementById(textId);
+      const wc = document.getElementById(wcId);
+      const wpm = document.getElementById(wpmId);
+      let startTime = null;
+      ta.addEventListener('input', () => {
+        if (!ta.value.trim()) { startTime = null; wc.textContent = '0 words'; wpm.textContent = '— wpm'; wpm.style.color = 'var(--accent-blue)'; return; }
+        if (!startTime) startTime = Date.now();
+        const words = ta.value.trim().split(/\s+/).filter(w => w.length > 0).length;
+        wc.textContent = words + ' words';
+        const mins = (Date.now() - startTime) / 60000;
+        if (mins >= 0.08) {
+          const rate = Math.round(words / mins);
+          wpm.textContent = rate + ' wpm (live)';
+          wpm.style.color = rate >= floor ? 'var(--accent-green)' : rate >= floor - 2 ? 'var(--primary)' : 'var(--accent-red)';
+        }
+      });
+    }
+    wireWC('sprint1Text', 'sprint1WC', 'sprint1WPM', 13);
+    wireWC('sprint2Text', 'sprint2WC', 'sprint2WPM', 15);
+
+    // Transition counter
+    document.querySelectorAll('.tc-box').forEach(cb => {
+      cb.addEventListener('change', () => {
+        const count = document.querySelectorAll('.tc-box:checked').length;
+        document.getElementById('tcCount').textContent = count + ' / 4 transition types used';
+      });
+    });
+
+    // L&R audio
+    function playL23(n) {
+      const audio = new Audio('audio/l23-s' + n + '.wav');
+      audio.play();
+    }
+
+    // Toggle reveal
+    function toggleReveal(id) {
+      document.getElementById(id).classList.toggle('show');
+    }
+
+    // Add error row
+    function addErrorRow() {
+      const tbody = document.getElementById('errorBody');
+      const tr = document.createElement('tr');
+      tr.innerHTML = '<td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td>';
+      tbody.appendChild(tr);
+    }
+
+    // Mobile nav
+    document.getElementById('mobileNavBtn').addEventListener('click', () => {
+      document.querySelector('.sidebar').classList.toggle('open');
+      document.getElementById('sidebarOverlay').classList.toggle('open');
+    });
+    document.getElementById('sidebarOverlay').addEventListener('click', () => {
+      document.querySelector('.sidebar').classList.remove('open');
+      document.getElementById('sidebarOverlay').classList.remove('open');
+    });
+
+    switchSlide(0);
+  </script>
+</body>
+</html>
