@@ -379,6 +379,22 @@
 
     <div class="main-column">
 
+      <!-- Daily Vocabulary Centre -->
+      <div class="card" style="border-color: rgba(245,158,11,0.5); background: linear-gradient(135deg, #fffbeb 0%, #ffffff 70%);">
+        <div class="card-title">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><path d="M8 7h8M8 11h5"/></svg>
+          Daily Vocabulary Centre
+        </div>
+        <p style="font-size:0.9rem;color:var(--muted);line-height:1.6;margin-bottom:0.75rem;">
+          120 high-value academic words — <strong style="color:var(--text);">5 new words a day</strong> with illustrated flashcards, audio, spaced review, and a daily quiz. 7 days a week.
+        </p>
+        <div id="vocabWidget" style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:0.9rem;"></div>
+        <a href="vocabulary/index.html" style="display:inline-flex;align-items:center;gap:0.5rem;background:var(--amber);color:#fff;font-weight:700;font-size:0.9rem;padding:0.6rem 1.1rem;border-radius:8px;text-decoration:none;">
+          Open today's 5 words
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+
       <!-- Lesson Index -->
       <div class="card">
         <div class="card-title">
@@ -876,6 +892,30 @@ document.querySelectorAll('.hw-checkbox').forEach(cb => {
     localStorage.setItem(key, cb.checked);
   });
 });
+
+// Daily Vocabulary Centre widget
+(function(){
+  const el = document.getElementById('vocabWidget');
+  if (!el) return;
+  let s = null;
+  try { s = JSON.parse(localStorage.getItem('valeriaVocabV1')); } catch (e) {}
+  const total = 120;
+  let learned = 0, mastered = 0, streak = 0;
+  if (s && s.words) {
+    for (const id in s.words) {
+      const w = s.words[id];
+      if (w && w.box >= 1) learned++;
+      if (w && w.box >= 4) mastered++;
+    }
+  }
+  if (s && s.streak && s.streak.count) streak = s.streak.count;
+  const pill = (label, val, color) =>
+    '<span style="display:inline-flex;align-items:center;gap:0.35rem;background:#fff;border:1px solid var(--border);border-radius:99px;padding:0.35rem 0.8rem;font-size:0.82rem;color:var(--muted);">' +
+    label + ' <strong style="color:' + color + ';">' + val + '</strong></span>';
+  el.innerHTML = pill('🔥 Streak', streak + (streak === 1 ? ' day' : ' days'), 'var(--amber)') +
+    pill('📚 Started', learned + '/' + total, 'var(--text)') +
+    pill('🏆 Mastered', mastered, 'var(--emerald)');
+})();
 </script>
 </body>
 </html>

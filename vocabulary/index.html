@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Valeria — Daily Vocabulary Centre</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0b0d12; --card:#12151d; --card2:#171b26; --border:#252a37;
+      --text:#e9edf5; --muted:#8b93a7; --amber:#f59e0b;
+      --green:#34d399; --red:#f87171; --blue:#38bdf8; --purple:#a78bfa;
+    }
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.55;}
+    a{color:var(--amber);text-decoration:none;}
+    .wrap{max-width:980px;margin:0 auto;padding:1.25rem 1rem 4rem;}
+    header.top{display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;padding:0.75rem 0 1rem;border-bottom:1px solid var(--border);margin-bottom:1rem;}
+    .badge{background:var(--amber);color:#000;font-weight:800;font-size:0.7rem;padding:0.25rem 0.55rem;border-radius:5px;letter-spacing:0.04em;}
+    h1{font-size:1.3rem;font-weight:800;}
+    .sub{color:var(--muted);font-size:0.82rem;}
+    .spacer{flex:1;}
+    .back{font-family:'Fira Code',monospace;font-size:0.78rem;color:var(--muted);}
+    .back:hover{color:var(--amber);}
+    .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:0.6rem;margin:0.9rem 0;}
+    .stat{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:0.65rem 0.8rem;}
+    .stat .k{font-size:0.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.05em;}
+    .stat .v{font-size:1.15rem;font-weight:800;}
+    .bar{height:7px;background:var(--card2);border:1px solid var(--border);border-radius:99px;overflow:hidden;margin-top:0.45rem;}
+    .bar > i{display:block;height:100%;background:linear-gradient(90deg,var(--amber),#fbbf24);width:0%;transition:width .3s;}
+    nav.tabs{display:flex;gap:0.4rem;flex-wrap:wrap;margin:0.75rem 0 1rem;}
+    .tab{background:var(--card);border:1px solid var(--border);color:var(--muted);padding:0.5rem 0.95rem;border-radius:99px;font-size:0.85rem;font-weight:600;cursor:pointer;font-family:inherit;}
+    .tab.active{background:rgba(245,158,11,0.14);border-color:rgba(245,158,11,0.45);color:var(--amber);}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.1rem;margin-bottom:1rem;}
+    .card h2{font-size:1.02rem;font-weight:700;margin-bottom:0.6rem;}
+    .muted{color:var(--muted);font-size:0.85rem;}
+    .btn{background:var(--amber);color:#000;border:none;padding:0.55rem 1rem;border-radius:8px;font-weight:700;font-size:0.86rem;cursor:pointer;font-family:inherit;}
+    .btn:hover{background:#d97706;}
+    .btn.sec{background:transparent;border:1px solid var(--border);color:var(--text);}
+    .btn.sec:hover{background:var(--card2);}
+    .btn.green{background:var(--green);}
+    .btn.red{background:var(--red);color:#fff;}
+    .btn:disabled{opacity:0.5;cursor:default;}
+
+    /* Flashcard */
+    .flash{perspective:1200px;margin:0.6rem 0;}
+    .flash-inner{position:relative;width:100%;min-height:290px;transition:transform .5s;transform-style:preserve-3d;cursor:pointer;}
+    .flash.flipped .flash-inner{transform:rotateY(180deg);}
+    .face{position:absolute;inset:0;backface-visibility:hidden;background:var(--card2);border:1px solid var(--border);border-radius:14px;padding:1.2rem;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:0.5rem;}
+    .face.back{transform:rotateY(180deg);align-items:flex-start;text-align:left;overflow-y:auto;justify-content:flex-start;padding:1.1rem;}
+    .word{font-size:2.1rem;font-weight:800;letter-spacing:-0.01em;}
+    .ipa{font-family:'Fira Code',monospace;color:var(--blue);font-size:0.95rem;}
+    .emoji{font-size:2rem;}
+    .pos{color:var(--muted);font-size:0.8rem;text-transform:uppercase;letter-spacing:0.06em;}
+    .def{font-size:1rem;font-weight:600;margin-bottom:0.6rem;}
+    .example{background:rgba(0,0,0,0.25);border-left:3px solid var(--amber);border-radius:8px;padding:0.6rem 0.75rem;font-size:0.92rem;margin-bottom:0.6rem;}
+    mark{background:rgba(245,158,11,0.28);color:var(--amber);font-weight:700;border-radius:3px;padding:0 2px;}
+    .chips{display:flex;gap:0.35rem;flex-wrap:wrap;margin:0.35rem 0;}
+    .chip{background:rgba(56,189,248,0.10);border:1px solid rgba(56,189,248,0.3);color:var(--blue);font-size:0.78rem;padding:0.2rem 0.55rem;border-radius:99px;}
+    .family{font-size:0.82rem;color:var(--muted);margin-top:0.35rem;}
+    .tip{font-size:0.82rem;color:var(--purple);margin-top:0.45rem;}
+    .pos-dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:0.4rem;}
+
+    /* Quiz */
+    .qtext{font-size:0.98rem;margin:0.5rem 0 0.8rem;}
+    .qtext .blank{color:var(--amber);font-weight:800;letter-spacing:0.08em;}
+    .qinput{width:100%;background:rgba(0,0,0,0.35);border:1px solid var(--border);color:var(--text);padding:0.65rem 0.75rem;border-radius:8px;font-family:inherit;font-size:0.95rem;}
+    .qinput:focus{outline:none;border-color:var(--amber);}
+    .opt{display:block;width:100%;text-align:left;background:var(--card2);border:1px solid var(--border);color:var(--text);padding:0.6rem 0.8rem;border-radius:8px;margin-bottom:0.45rem;cursor:pointer;font-family:inherit;font-size:0.92rem;}
+    .opt:hover{border-color:var(--amber);}
+    .opt.correct{border-color:var(--green);background:rgba(52,211,153,0.12);}
+    .opt.wrong{border-color:var(--red);background:rgba(248,113,113,0.12);}
+    .fb{font-size:0.88rem;font-weight:600;margin-top:0.5rem;}
+    .fb.ok{color:var(--green);} .fb.no{color:var(--red);}
+    .progress-pills{display:flex;gap:0.3rem;margin-bottom:0.7rem;}
+    .pill{width:26px;height:6px;border-radius:99px;background:var(--card2);border:1px solid var(--border);}
+    .pill.done{background:var(--green);border-color:var(--green);}
+    .pill.now{background:var(--amber);border-color:var(--amber);}
+
+    /* Review */
+    .rv{border:1px solid var(--border);border-radius:12px;padding:0.9rem;margin-bottom:0.7rem;background:var(--card2);}
+    .rv .prompt{font-size:0.95rem;font-weight:600;}
+    .rv .answer{display:none;margin-top:0.6rem;}
+    .rv.show .answer{display:block;}
+
+    /* Bank */
+    .bank-tools{display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:0.8rem;}
+    .bank-tools input,.bank-tools select{background:var(--card);border:1px solid var(--border);color:var(--text);border-radius:8px;padding:0.55rem 0.7rem;font-family:inherit;font-size:0.88rem;}
+    .bank-tools input{flex:1;min-width:180px;}
+    .bw{border:1px solid var(--border);border-radius:12px;padding:0.85rem 0.95rem;margin-bottom:0.6rem;background:var(--card);}
+    .bw .head{display:flex;align-items:center;gap:0.5rem;flex-wrap:wrap;}
+    .bw .hw{font-size:1.05rem;font-weight:800;}
+    .mastery{font-size:0.7rem;font-weight:700;padding:0.15rem 0.5rem;border-radius:99px;border:1px solid var(--border);color:var(--muted);}
+    .mastery.m1{color:var(--amber);border-color:rgba(245,158,11,0.4);}
+    .mastery.m4{color:var(--green);border-color:rgba(52,211,153,0.4);}
+    .audio-btn{background:transparent;border:1px solid var(--border);color:var(--blue);border-radius:8px;padding:0.25rem 0.6rem;cursor:pointer;font-size:0.85rem;font-family:inherit;}
+    .audio-btn:hover{border-color:var(--blue);}
+
+    .celebrate{font-size:1.05rem;font-weight:800;color:var(--green);}
+    .chips-row{display:flex;gap:0.4rem;flex-wrap:wrap;margin-top:0.6rem;}
+    textarea.useit{width:100%;background:rgba(0,0,0,0.35);border:1px solid var(--border);color:var(--text);border-radius:8px;padding:0.65rem;font-family:inherit;font-size:0.92rem;resize:vertical;}
+    textarea.useit:focus{outline:none;border-color:var(--amber);}
+    .hidden{display:none !important;}
+    @media(max-width:640px){
+      .face{position:relative;min-height:0;}
+      .flash-inner{min-height:0;display:flex;flex-direction:column;gap:0.6rem;transform:none !important;}
+      .face.back{transform:none;position:relative;}
+      .flash.flipped .face.front{display:none;}
+      .flash:not(.flipped) .face.back{display:none;}
+      .stats{grid-template-columns:1fr 1fr;}
+      .word{font-size:1.7rem;}
+    }
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <span class="badge">VOCAB</span>
+    <div>
+      <h1>Daily Vocabulary Centre</h1>
+      <div class="sub" id="dateLine">—</div>
+    </div>
+    <span class="spacer"></span>
+    <a class="back" href="../index.html">&#8592; Portal</a>
+  </header>
+
+  <div class="stats">
+    <div class="stat"><div class="k">🔥 Streak</div><div class="v" id="statStreak">0 days</div></div>
+    <div class="stat"><div class="k">📚 Words started</div><div class="v" id="statLearned">0 / 120</div><div class="bar"><i id="barLearned"></i></div></div>
+    <div class="stat"><div class="k">🏆 Mastered</div><div class="v" id="statMastered">0</div></div>
+  </div>
+
+  <nav class="tabs">
+    <button class="tab active" data-tab="today" onclick="showTab('today')">Today</button>
+    <button class="tab" data-tab="review" onclick="showTab('review')">Review <span id="dueBadge"></span></button>
+    <button class="tab" data-tab="bank" onclick="showTab('bank')">Word Bank</button>
+  </nav>
+
+  <section id="tab-today"></section>
+  <section id="tab-review" class="hidden"></section>
+  <section id="tab-bank" class="hidden"></section>
+
+  <div class="card" style="margin-top:1rem;">
+    <h2>📤 Share my progress</h2>
+    <p class="muted" style="margin-bottom:0.6rem;">Copy a summary of your week to show your tutor.</p>
+    <button class="btn sec" onclick="exportProgress()">Copy progress summary</button>
+    <span id="exportMsg" class="muted" style="margin-left:0.6rem;"></span>
+  </div>
+</div>
+
+<script src="packs-01-02.js"></script>
+<script src="packs-03-04.js"></script>
+<script src="packs-05-06.js"></script>
+<script src="packs-07-08.js"></script>
+<script>
+(function(){
+  'use strict';
+  const LS_KEY = 'valeriaVocabV1';
+  const DAY_SIZE = 5;
+
+  const WORDS = (window.VOCAB_PACKS || []).flatMap(p =>
+    p.words.map(w => Object.assign({}, w, { pack: p.id, packTitle: p.title, color: p.color })));
+  const TOTAL_DAYS = Math.ceil(WORDS.length / DAY_SIZE);
+
+  function todayStr(d){ d = d || new Date(); return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0'); }
+  function addDays(str, n){ const p = str.split('-').map(Number); const dt = new Date(p[0], p[1]-1, p[2], 12); dt.setDate(dt.getDate()+n); return todayStr(dt); }
+  function dayDiff(a, b){ return Math.round((new Date(b+'T12:00:00') - new Date(a+'T12:00:00')) / 86400000); }
+  function esc(s){ return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+  function escRe(s){ return String(s).replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
+  function wordForms(w){
+    const forms = [w];
+    const add = f => { if (f !== w && !forms.includes(f)) forms.push(f); };
+    add(w + 's'); add(w + 'es'); add(w + 'ed'); add(w + 'd'); add(w + 'ing');
+    if (w.endsWith('e')) add(w.slice(0, -1) + 'ing');
+    if (w.endsWith('y')) { add(w.slice(0, -1) + 'ies'); add(w.slice(0, -1) + 'ied'); }
+    if (/(s|x|ch|sh)$/.test(w)) add(w + 'es');
+    if (/[^aeiou][aeiou][^aeiouwxy]$/.test(w)) { add(w + w.slice(-1) + 'ed'); add(w + w.slice(-1) + 'ing'); }
+    return forms;
+  }
+  function findForm(word, text){
+    for (const f of wordForms(word)){ const m = new RegExp('\\b' + escRe(f) + '\\b', 'i').exec(text); if (m) return m[0]; }
+    return null;
+  }
+  function hl(word, text){
+    const form = findForm(word, text);
+    if (!form) return esc(text);
+    const re = new RegExp('\\b' + escRe(form) + '\\b', 'gi');
+    return esc(text).replace(re, m => '<mark>' + m + '</mark>');
+  }
+  function shuffle(a){ a = a.slice(); for (let i = a.length - 1; i > 0; i--){ const j = Math.floor(Math.random()*(i+1)); [a[i],a[j]] = [a[j],a[i]]; } return a; }
+
+  let state;
+  function load(){
+    try { const s = JSON.parse(localStorage.getItem(LS_KEY)); if (s && s.words) { s.startDate = s.startDate || todayStr(); return s; } } catch(e){}
+    return { startDate: todayStr(), words:{}, days:{}, streak:{count:0,last:null}, sentences:{} };
+  }
+  function save(){ try { localStorage.setItem(LS_KEY, JSON.stringify(state)); } catch(e){} }
+  state = load(); save();
+
+  function wordsForDay(i){ return WORDS.slice(i*DAY_SIZE, i*DAY_SIZE + DAY_SIZE); }
+  function dayKey(i){ return 'day' + i; }
+  function todayIndex(){ return dayDiff(state.startDate, todayStr()); }
+  function learnedCount(){ return WORDS.filter(w => state.words[w.id] && state.words[w.id].box >= 1).length; }
+  function masteredCount(){ return WORDS.filter(w => state.words[w.id] && state.words[w.id].box >= 4).length; }
+  function dueWords(){
+    const t = todayStr();
+    return WORDS.filter(w => { const s = state.words[w.id]; return s && s.box >= 1 && s.box < 4 && s.next && s.next <= t; });
+  }
+  function bumpStreak(){
+    const t = todayStr();
+    if (state.streak.last === t) return;
+    state.streak.count = (state.streak.last && dayDiff(state.streak.last, t) === 1) ? state.streak.count + 1 : 1;
+    state.streak.last = t;
+  }
+  function markLearned(w){
+    if (!state.words[w.id]) state.words[w.id] = { box: 1, next: addDays(todayStr(), 1), seen: 1 };
+  }
+  function rateWord(w, good){
+    const s = state.words[w.id] || { box: 1, next: todayStr(), seen: 0 };
+    s.seen = (s.seen || 0) + 1;
+    if (good){ s.box = Math.min(4, (s.box || 1) + 1); s.next = s.box >= 4 ? null : addDays(todayStr(), [1,3,7][Math.min(s.box - 1, 2)]); }
+    else { s.box = 1; s.next = addDays(todayStr(), 1); }
+    state.words[w.id] = s;
+  }
+
+  /* ---------- audio ---------- */
+  let currentAudio = null;
+  function playWord(id){
+    if (currentAudio) { currentAudio.pause(); }
+    currentAudio = new Audio('audio/' + id + '.wav');
+    currentAudio.play().catch(()=>{});
+  }
+
+  /* ---------- flashcard flow ---------- */
+  let learn = { day: null, idx: 0, flipped: false };
+  let quiz = null;
+
+  function showTab(name){
+    document.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', t.dataset.tab === name));
+    document.getElementById('tab-today').classList.toggle('hidden', name !== 'today');
+    document.getElementById('tab-review').classList.toggle('hidden', name !== 'review');
+    document.getElementById('tab-bank').classList.toggle('hidden', name !== 'bank');
+    if (name === 'review') renderReview();
+    if (name === 'bank') renderBank();
+  }
+
+  /* ---------- header ---------- */
+  function renderHeader(){
+    document.getElementById('dateLine').textContent = new Date().toLocaleDateString('en-GB', { weekday:'long', day:'numeric', month:'long', year:'numeric' });
+    document.getElementById('statStreak').textContent = (state.streak.count || 0) + ' day' + ((state.streak.count||0) === 1 ? '' : 's');
+    document.getElementById('statLearned').textContent = learnedCount() + ' / ' + WORDS.length;
+    document.getElementById('statMastered').textContent = masteredCount() + ' / ' + WORDS.length;
+    const pct = Math.round(learnedCount() / WORDS.length * 100);
+    document.getElementById('barLearned').style.width = pct + '%';
+    const due = dueWords().length;
+    document.getElementById('dueBadge').textContent = due ? '(' + due + ')' : '';
+  }
+
+  /* ---------- today ---------- */
+  function renderToday(){
+    const el = document.getElementById('tab-today');
+    const ti = todayIndex();
+    if (ti < 0){ el.innerHTML = '<div class="card"><h2>⏳ Starts soon</h2><p class="muted">The Vocabulary Centre opens on ' + esc(state.startDate) + '.</p></div>'; return; }
+    const showDay = (learn.day !== null) ? learn.day : Math.min(ti, TOTAL_DAYS - 1);
+    const day = wordsForDay(showDay);
+    const pack = window.VOCAB_PACKS.find(p => p.id === day[0].pack);
+    let html = '';
+
+    // catch-up chips
+    const missed = [];
+    for (let i = Math.min(ti, TOTAL_DAYS - 1) - 1; i >= 0; i--){ if (!state.days[dayKey(i)]) missed.push(i); if (missed.length >= 3) break; }
+    if (missed.length && learn.day === null && !state.days[dayKey(Math.min(ti, TOTAL_DAYS-1))]){
+      html += '<div class="card" style="border-color:rgba(245,158,11,0.4);"><h2>⏮️ Catch-up available</h2><p class="muted" style="margin-bottom:0.5rem;">You have unfinished earlier sets. Finish them to keep your streak accurate.</p><div class="chips-row">' +
+        missed.map(i => '<button class="btn sec" onclick="startCatchup(' + i + ')">Day ' + (i+1) + '</button>').join('') + '</div></div>';
+    }
+
+    if (state.days[dayKey(showDay)] && learn.day === null){
+      const d = state.days[dayKey(showDay)];
+      html += '<div class="card"><h2>✅ Day ' + (showDay+1) + ' complete</h2>' +
+        '<p class="celebrate">Score: ' + d.score + ' / ' + d.total + ' — streak ' + (state.streak.count||0) + ' 🔥</p>' +
+        '<p class="muted" style="margin-top:0.5rem;">Review due words tomorrow. You can still replay today\'s words in the Word Bank.</p>' +
+        sentenceBox(day) + '</div>';
+      if (ti < TOTAL_DAYS - 1) html += '<div class="card"><h2>🔜 Next set</h2><p class="muted">Day ' + (ti+2) + ' unlocks tomorrow. Reviews of today\'s 5 words are due tomorrow too.</p></div>';
+      else html += '<div class="card"><h2>🏁 All 120 words released</h2><p class="muted">From now on, keep clearing the review queue — that is where mastery happens.</p></div>';
+      el.innerHTML = html;
+      return;
+    }
+
+    const w = day[learn.idx];
+    const dayDone = !!state.days[dayKey(showDay)];
+    if (!w || learn.idx >= day.length){
+      if (quiz){
+        el.innerHTML = html + renderQuizCard();
+        return;
+      }
+      html += '<div class="card"><h2>Day ' + (showDay+1) + ' — ' + esc(pack.title) + '</h2><p class="muted" style="margin-bottom:0.6rem;">You reviewed all 5 words. Take the quick quiz to lock them in.</p><button class="btn" onclick="startQuiz()">Start quiz ▶</button></div>';
+      el.innerHTML = html;
+      return;
+    }
+
+    html += '<div class="card">' +
+      '<div class="muted" style="margin-bottom:0.4rem;">Day ' + (showDay+1) + ' · ' + esc(pack.title) + ' · word ' + (learn.idx+1) + ' of ' + day.length + '</div>' +
+      '<div class="flash' + (learn.flipped ? ' flipped' : '') + '" onclick="flipCard()">' +
+        '<div class="flash-inner">' +
+          '<div class="face front">' +
+            '<div class="emoji">' + esc(w.emoji) + '</div>' +
+            '<div class="word">' + esc(w.word) + '</div>' +
+            '<div class="ipa">' + esc(w.ipa) + '</div>' +
+            '<div class="pos">' + esc(w.pos) + '</div>' +
+            '<button class="audio-btn" onclick="event.stopPropagation();playWord(\'' + w.id + '\')">🔊 Listen</button>' +
+            '<div class="muted" style="margin-top:0.6rem;">tap the card to flip</div>' +
+          '</div>' +
+          '<div class="face back">' +
+            '<div style="display:flex;align-items:center;gap:0.5rem;flex-wrap:wrap;"><span class="pos-dot" style="background:' + pack.color + '"></span><strong style="font-size:1.1rem;">' + esc(w.word) + '</strong><span class="ipa">' + esc(w.ipa) + '</span><button class="audio-btn" onclick="event.stopPropagation();playWord(\'' + w.id + '\')">🔊</button></div>' +
+            '<div class="def" style="margin-top:0.55rem;">' + esc(w.def) + '</div>' +
+            '<div class="example">' + hl(w.word, w.ex) + '</div>' +
+            '<div class="chips">' + w.collocs.map(c => '<span class="chip">' + esc(c) + '</span>').join('') + '</div>' +
+            '<div class="family"><strong>Family:</strong> ' + esc(w.family) + '</div>' +
+            '<div class="tip">💡 ' + esc(w.tip) + '</div>' +
+          '</div>' +
+        '</div>' +
+      '</div>' +
+      '<div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-top:0.6rem;">' +
+        '<button class="btn sec" onclick="flipCard()">🔁 Flip</button>' +
+        '<button class="btn" onclick="nextWord()">' + (learn.idx === day.length - 1 ? 'Done — to quiz ▶' : 'Got it →') + '</button>' +
+      '</div>' +
+    '</div>';
+    el.innerHTML = html;
+  }
+
+  function flipCard(){ learn.flipped = !learn.flipped; renderToday(); }
+  function nextWord(){ learn.idx++; learn.flipped = false; renderToday(); }
+  function startCatchup(i){ learn = { day: i, idx: 0, flipped: false }; quiz = null; renderToday(); window.scrollTo(0,0); }
+  function startQuiz(){ quiz = { qs: makeQuestions(wordsForDay(learn.day === null ? Math.min(todayIndex(), TOTAL_DAYS-1) : learn.day)), idx: 0, score: 0, answered: false, chosen: null, input: '' }; renderToday(); }
+
+  /* ---------- quiz ---------- */
+  function mcOptions(w){
+    let pool = WORDS.filter(x => x.id !== w.id && x.pos === w.pos);
+    if (pool.length < 3) pool = pool.concat(WORDS.filter(x => x.id !== w.id && x.pos !== w.pos));
+    return shuffle([w.word].concat(shuffle(pool).slice(0,3).map(x => x.word)));
+  }
+  function defQ(w){ return { type:'mc', word:w, prompt:'Which word means: “' + w.def + '”?', options: mcOptions(w), answer:w.word }; }
+  function makeQuestions(day){
+    const types = ['gap','def','gap','def','colloc'];
+    return day.map((w, i) => {
+      const t = types[i % types.length];
+      if (t === 'gap'){
+        const form = findForm(w.word, w.ex);
+        if (form){
+          const text = w.ex.replace(new RegExp('\\b' + escRe(form) + '\\b', 'i'), '_______');
+          return { type:'gap', word:w, prompt:'Type the missing word:', text:text, answer:w.word };
+        }
+        return defQ(w);
+      }
+      if (t === 'colloc'){
+        const col = (w.collocs && w.collocs[0]) || '';
+        const form = findForm(w.word, col);
+        if (form){
+          const text = col.replace(new RegExp('\\b' + escRe(form) + '\\b', 'i'), '_______');
+          return { type:'mc', word:w, prompt:'Which word completes the collocation?', text:text, options:mcOptions(w), answer:w.word };
+        }
+        return defQ(w);
+      }
+      return defQ(w);
+    });
+  }
+  function renderQuizCard(){
+    const q = quiz.qs[quiz.idx];
+    if (!q) return '';
+    const pills = quiz.qs.map((x, i) => '<span class="pill ' + (i < quiz.idx ? 'done' : i === quiz.idx ? 'now' : '') + '"></span>').join('');
+    let body = '';
+    if (q.type === 'gap'){
+      body = '<div class="qtext">' + esc(q.text).replace(/_______/g, '<span class="blank">_______</span>') + '</div>' +
+        '<input class="qinput" id="qInput" autocomplete="off" placeholder="Type the word..." value="' + esc(quiz.input || '') + '" oninput="setQuizInput(this.value)" onkeydown="if(event.key===\'Enter\')checkAnswer()">';
+    } else {
+      body = '<div class="qtext"><strong>' + esc(q.prompt) + '</strong></div>' +
+        (q.text ? '<div class="qtext" style="color:var(--muted);">' + esc(q.text) + '</div>' : '') +
+        q.options.map(o => '<button class="opt" id="opt-' + esc(o) + '" onclick="pickOption(\'' + esc(o).replace(/'/g, "\\'") + '\')">' + esc(o) + '</button>').join('');
+    }
+    const fb = quiz.answered ? '<div class="fb ' + (quiz.correct ? 'ok' : 'no') + '">' + (quiz.correct ? '✓ Correct!' : '✗ Answer: ' + esc(q.answer)) + '</div>' : '';
+    const action = quiz.answered
+      ? '<button class="btn" style="margin-top:0.6rem;" onclick="nextQuestion()">' + (quiz.idx === quiz.qs.length - 1 ? 'See result ▶' : 'Next →') + '</button>'
+      : '<button class="btn" style="margin-top:0.6rem;" onclick="checkAnswer()">Check</button>';
+    return '<div class="card quiz"><div class="muted" style="margin-bottom:0.3rem;">Quiz — question ' + (quiz.idx+1) + ' of ' + quiz.qs.length + '</div>' + pills + body + fb + '<div>' + action + '</div></div>';
+  }
+  function pickOption(o){ if (quiz && quiz.answered) return; quiz.chosen = o; checkAnswer(); }
+  function setQuizInput(v){ if (quiz && !quiz.answered) quiz.input = v; }
+  function checkAnswer(){
+    if (quiz.answered) return;
+    const q = quiz.qs[quiz.idx];
+    let ok = false;
+    if (q.type === 'gap'){
+      const val = (document.getElementById('qInput') ? document.getElementById('qInput').value : '').trim().toLowerCase();
+      ok = val === q.answer.toLowerCase();
+      quiz.input = val;
+    } else {
+      ok = (quiz.chosen || '') === q.answer;
+      if (q.type === 'mc' && quiz.chosen){ const el = document.getElementById('opt-' + quiz.chosen); if (el) el.classList.add(ok ? 'correct' : 'wrong'); }
+      if (!ok){ const el = document.getElementById('opt-' + q.answer); if (el) el.classList.add('correct'); }
+    }
+    quiz.correct = ok; quiz.answered = true;
+    if (ok) quiz.score++;
+    renderToday();
+  }
+  function nextQuestion(){
+    if (quiz.idx === quiz.qs.length - 1){ finishQuiz(); return; }
+    quiz.idx++; quiz.answered = false; quiz.chosen = null; quiz.input = '';
+    renderToday();
+  }
+  function finishQuiz(){
+    const day = (learn.day === null) ? Math.min(todayIndex(), TOTAL_DAYS - 1) : learn.day;
+    wordsForDay(day).forEach(markLearned);
+    state.days[dayKey(day)] = { done:true, score: quiz.score, total: quiz.qs.length, date: todayStr() };
+    bumpStreak(); save();
+    const sc = quiz.score, tt = quiz.qs.length;
+    quiz = null; learn = { day: null, idx: 0, flipped: false };
+    renderAll();
+    if (sc < tt) alert('Quiz finished: ' + sc + '/' + tt + '.\n\nWords you missed will come back in review — that is how they stick!');
+  }
+  function sentenceBox(day){
+    const w = day[0];
+    const saved = state.sentences[w.id] || '';
+    return '<div style="margin-top:0.7rem;"><strong>✍️ Use it:</strong><div class="muted" style="margin:0.3rem 0 0.45rem;">Write one sentence with “' + esc(w.word) + '” — your tutor can see it.</div>' +
+      '<textarea class="useit" rows="2" placeholder="Type your sentence..." oninput="saveSentence(\'' + w.id + '\', this.value)">' + esc(saved) + '</textarea></div>';
+  }
+  function saveSentence(id, v){ state.sentences[id] = v; save(); }
+
+  /* ---------- review ---------- */
+  function renderReview(){
+    const el = document.getElementById('tab-review');
+    const due = dueWords();
+    if (!due.length){ el.innerHTML = '<div class="card"><h2>🎉 No reviews due</h2><p class="muted">Come back tomorrow — or browse the Word Bank to listen to words again.</p></div>'; return; }
+    el.innerHTML = '<div class="card"><h2>🔁 Reviews due: ' + due.length + '</h2><p class="muted">Look at the definition, say the word out loud, then reveal and rate yourself honestly.</p></div>' +
+      due.map(w => {
+        const s = state.words[w.id];
+        return '<div class="rv" id="rv-' + w.id + '">' +
+          '<div class="prompt">' + esc(w.def) + '</div>' +
+          '<div class="muted" style="margin-top:0.25rem;">' + esc(w.collocs[0] || '') + '</div>' +
+          '<div class="answer">' +
+            '<div style="display:flex;align-items:center;gap:0.5rem;flex-wrap:wrap;"><strong style="font-size:1.05rem;">' + esc(w.word) + '</strong><span class="ipa">' + esc(w.ipa) + '</span><button class="audio-btn" onclick="playWord(\'' + w.id + '\')">🔊</button><span class="mastery m' + s.box + '">box ' + s.box + '/4</span></div>' +
+            '<div class="example" style="margin-top:0.5rem;">' + hl(w.word, w.ex) + '</div>' +
+          '</div>' +
+          '<div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-top:0.5rem;">' +
+            '<button class="btn sec" onclick="document.getElementById(\'rv-' + w.id + '\').classList.add(\'show\')">👁️ Reveal</button>' +
+            '<button class="btn red" onclick="rateReview(\'' + w.id + '\', false)">Again</button>' +
+            '<button class="btn green" onclick="rateReview(\'' + w.id + '\', true)">Got it</button>' +
+          '</div>' +
+        '</div>';
+      }).join('');
+  }
+  function rateReview(id, good){
+    const w = WORDS.find(x => x.id === id);
+    rateWord(w, good); bumpStreak(); save(); renderHeader(); renderReview();
+  }
+
+  /* ---------- word bank ---------- */
+  let bankQuery = '';
+  let bankPackId = 0;
+  function renderBank(){
+    const el = document.getElementById('tab-bank');
+    el.innerHTML = '<div class="card"><div class="bank-tools">' +
+      '<input id="bankInput" placeholder="Search 120 words..." value="' + esc(bankQuery) + '" oninput="bankSearch(this.value)">' +
+      '<select id="bankSelect" onchange="bankPack(this.value)"><option value="0">All packs</option>' +
+      window.VOCAB_PACKS.map(p => '<option value="' + p.id + '"' + (bankPackId === p.id ? ' selected' : '') + '>' + esc(p.id + '. ' + p.title) + '</option>').join('') +
+      '</select></div><div class="muted" id="bankCount"></div></div><div id="bankList"></div>';
+    refreshBankList();
+  }
+  function refreshBankList(){
+    const q = bankQuery.trim().toLowerCase();
+    const words = WORDS.filter(w => (!q || w.word.toLowerCase().includes(q) || w.def.toLowerCase().includes(q)) && (!bankPackId || w.pack === bankPackId));
+    const list = words.map(w => {
+      const s = state.words[w.id];
+      const box = s ? s.box : 0;
+      const label = box === 0 ? 'new' : box >= 4 ? 'mastered' : 'box ' + box;
+      const pack = window.VOCAB_PACKS.find(p => p.id === w.pack);
+      return '<div class="bw"><div class="head"><span class="pos-dot" style="background:' + pack.color + '"></span><span class="hw">' + esc(w.word) + '</span>' +
+        '<span class="ipa">' + esc(w.ipa) + '</span><span class="muted" style="font-size:0.78rem;">' + esc(w.pos) + '</span>' +
+        '<span class="mastery ' + (box >= 4 ? 'm4' : box >= 1 ? 'm1' : '') + '">' + label + '</span>' +
+        '<span style="flex:1;"></span><button class="audio-btn" onclick="playWord(\'' + w.id + '\')">🔊</button></div>' +
+        '<div class="def" style="margin-top:0.4rem;font-size:0.92rem;">' + esc(w.def) + '</div>' +
+        '<div class="example">' + hl(w.word, w.ex) + '</div>' +
+        '<div class="chips">' + w.collocs.map(c => '<span class="chip">' + esc(c) + '</span>').join('') + '</div>' +
+        '<div class="family"><strong>Family:</strong> ' + esc(w.family) + ' · <span class="tip" style="display:inline;">💡 ' + esc(w.tip) + '</span></div>' +
+      '</div>';
+    }).join('');
+    document.getElementById('bankList').innerHTML = list || '<div class="card"><p class="muted">No words match your search.</p></div>';
+    document.getElementById('bankCount').textContent = words.length + ' words';
+  }
+  function bankSearch(v){ bankQuery = v; refreshBankList(); }
+  function bankPack(v){ bankPackId = parseInt(v) || 0; refreshBankList(); }
+
+  /* ---------- export ---------- */
+  function exportProgress(){
+    const t = todayStr();
+    const daysDone = Object.keys(state.days).length;
+    const recent = [];
+    for (let i = 0; i < 7; i++){
+      const d = addDays(t, -i); const dayIdx = dayDiff(state.startDate, d);
+      const done = state.days[dayKey(dayIdx)];
+      recent.push(d + (done ? ' ✓ ' + done.score + '/' + done.total : ' —'));
+    }
+    const mastered = WORDS.filter(w => state.words[w.id] && state.words[w.id].box >= 4).map(w => w.word);
+    const txt = 'VOCABULARY CENTRE — ' + t + '\n' +
+      'Streak: ' + (state.streak.count||0) + ' days · Days completed: ' + daysDone + '/' + TOTAL_DAYS + '\n' +
+      'Words started: ' + learnedCount() + '/120 · Mastered: ' + masteredCount() + '\n' +
+      'Last 7 days:\n' + recent.reverse().map(r => '  ' + r).join('\n') + '\n' +
+      'Mastered: ' + (mastered.join(', ') || '(none yet)');
+    if (navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(txt).then(() => { document.getElementById('exportMsg').textContent = 'Copied ✓'; setTimeout(()=>{document.getElementById('exportMsg').textContent='';}, 2000); });
+    } else {
+      alert(txt);
+    }
+  }
+
+  function renderAll(){
+    state = load();
+    renderHeader();
+    renderToday();
+    if (!document.getElementById('tab-review').classList.contains('hidden')) renderReview();
+    if (!document.getElementById('tab-bank').classList.contains('hidden')) renderBank();
+  }
+
+  window.showTab = showTab; window.flipCard = flipCard; window.nextWord = nextWord;
+  window.startCatchup = startCatchup; window.startQuiz = startQuiz; window.checkAnswer = checkAnswer;
+  window.nextQuestion = nextQuestion; window.pickOption = pickOption; window.rateReview = rateReview;
+  window.playWord = playWord; window.bankSearch = bankSearch; window.bankPack = bankPack;
+  window.saveSentence = saveSentence; window.exportProgress = exportProgress;
+  window.setQuizInput = setQuizInput;
+
+  renderAll();
+})();
+</script>
+</body>
+</html>
