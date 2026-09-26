@@ -229,7 +229,7 @@
   let currentAudio = null;
   function playWord(id){
     if (currentAudio) { currentAudio.pause(); }
-    currentAudio = new Audio('audio/' + id + '.wav');
+    currentAudio = new Audio('audio/' + id + '.mp3');
     currentAudio.play().catch(()=>{});
   }
 
