@@ -100,6 +100,14 @@
 
     .celebrate{font-size:1.05rem;font-weight:800;color:var(--green);}
     .chips-row{display:flex;gap:0.4rem;flex-wrap:wrap;margin-top:0.6rem;}
+    .day-strip{display:flex;flex-wrap:wrap;gap:0.3rem;}
+    .day-chip{font-family:'Fira Code',monospace;font-size:0.72rem;padding:0.22rem 0.5rem;border-radius:7px;border:1px solid var(--border);background:var(--card2);color:var(--muted);cursor:pointer;}
+    .day-chip:hover{border-color:var(--amber);}
+    .day-chip.done{border-color:rgba(52,211,153,0.45);color:var(--green);}
+    .day-chip.today{border-color:var(--amber);color:var(--amber);font-weight:700;}
+    .day-chip.missed{border-color:rgba(248,113,113,0.5);color:var(--red);}
+    .day-chip.future{opacity:0.3;cursor:default;}
+    .day-chip.current{background:rgba(245,158,11,0.16);}
     textarea.useit{width:100%;background:rgba(0,0,0,0.35);border:1px solid var(--border);color:var(--text);border-radius:8px;padding:0.65rem;font-family:inherit;font-size:0.92rem;resize:vertical;}
     textarea.useit:focus{outline:none;border-color:var(--amber);}
     .hidden{display:none !important;}
@@ -259,6 +267,31 @@
   }
 
   /* ---------- today ---------- */
+  function dayStripHtml(ti, showDay, todayDay){
+    const chips = [];
+    for (let i = 0; i < TOTAL_DAYS; i++){
+      const done = !!state.days[dayKey(i)];
+      const future = (i > ti);
+      const isToday = (i === todayDay);
+      let cls = 'day-chip ' + (done ? 'done' : future ? 'future' : (isToday ? 'today' : 'missed'));
+      if (i === showDay) cls += ' current';
+      const mark = done ? '✓' : future ? '🔒' : (isToday ? '●' : '!');
+      chips.push('<button class="' + cls + '"' + (future ? ' disabled' : '') + ' onclick="openDay(' + i + ')" title="Day ' + (i+1) + '">' + (i+1) + ' ' + mark + '</button>');
+    }
+    const back = (learn.day !== null && learn.day !== todayDay)
+      ? '<button class="btn sec" style="margin-top:0.7rem;" onclick="openDay(' + todayDay + ')">→ Back to today (Day ' + (todayDay+1) + ')</button>'
+      : '';
+    return '<div class="card"><div class="muted" style="margin-bottom:0.5rem;"><strong style="color:var(--text);">Your 24 days</strong> — click any released day to open it: ' +
+      '<span style="color:var(--green);">✓ done</span> · <span style="color:var(--red);">! missed</span> · <span style="color:var(--amber);">● today</span></div>' +
+      '<div class="day-strip">' + chips.join('') + '</div>' + back + '</div>';
+  }
+  function openDay(i){
+    const todayDay = Math.min(todayIndex(), TOTAL_DAYS - 1);
+    learn = { day: (i === todayDay ? null : i), idx: 0, flipped: false };
+    quiz = null;
+    renderToday();
+    window.scrollTo(0, 0);
+  }
   function renderToday(){
     const el = document.getElementById('tab-today');
     const ti = todayIndex();
@@ -266,21 +299,14 @@
     const showDay = (learn.day !== null) ? learn.day : Math.min(ti, TOTAL_DAYS - 1);
     const day = wordsForDay(showDay);
     const pack = window.VOCAB_PACKS.find(p => p.id === day[0].pack);
-    let html = '';
-
-    // catch-up chips
-    const missed = [];
-    for (let i = Math.min(ti, TOTAL_DAYS - 1) - 1; i >= 0; i--){ if (!state.days[dayKey(i)]) missed.push(i); if (missed.length >= 3) break; }
-    if (missed.length && learn.day === null && !state.days[dayKey(Math.min(ti, TOTAL_DAYS-1))]){
-      html += '<div class="card" style="border-color:rgba(245,158,11,0.4);"><h2>⏮️ Catch-up available</h2><p class="muted" style="margin-bottom:0.5rem;">You have unfinished earlier sets. Finish them to keep your streak accurate.</p><div class="chips-row">' +
-        missed.map(i => '<button class="btn sec" onclick="startCatchup(' + i + ')">Day ' + (i+1) + '</button>').join('') + '</div></div>';
-    }
+    const todayDay = Math.min(ti, TOTAL_DAYS - 1);
+    let html = dayStripHtml(ti, showDay, todayDay);
 
     if (state.days[dayKey(showDay)] && learn.day === null){
       const d = state.days[dayKey(showDay)];
       html += '<div class="card"><h2>✅ Day ' + (showDay+1) + ' complete</h2>' +
         '<p class="celebrate">Score: ' + d.score + ' / ' + d.total + ' — streak ' + (state.streak.count||0) + ' 🔥</p>' +
-        '<p class="muted" style="margin-top:0.5rem;">Review due words tomorrow. You can still replay today\'s words in the Word Bank.</p>' +
+        '<p class="muted" style="margin-top:0.5rem;">Review due words tomorrow — or replay any day from the strip above (Word Bank always works too).</p>' +
         sentenceBox(day) + '</div>';
       if (ti < TOTAL_DAYS - 1) html += '<div class="card"><h2>🔜 Next set</h2><p class="muted">Day ' + (ti+2) + ' unlocks tomorrow. Reviews of today\'s 5 words are due tomorrow too.</p></div>';
       else html += '<div class="card"><h2>🏁 All 120 words released</h2><p class="muted">From now on, keep clearing the review queue — that is where mastery happens.</p></div>';
@@ -524,6 +550,7 @@
 
   window.showTab = showTab; window.flipCard = flipCard; window.nextWord = nextWord;
   window.startCatchup = startCatchup; window.startQuiz = startQuiz; window.checkAnswer = checkAnswer;
+  window.openDay = openDay;
   window.nextQuestion = nextQuestion; window.pickOption = pickOption; window.rateReview = rateReview;
   window.playWord = playWord; window.bankSearch = bankSearch; window.bankPack = bankPack;
   window.saveSentence = saveSentence; window.exportProgress = exportProgress;
