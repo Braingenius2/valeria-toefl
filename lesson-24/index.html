@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Valeria — Lesson 24: Paragraph Structure</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg-dark:#090d16;--bg-card:#131a26;--border-color:#243042;--text-main:#f1f5f9;--text-muted:#64748b;--primary:#f59e0b;--primary-hover:#d97706;--primary-dim:rgba(245,158,11,0.12);--accent-blue:#38bdf8;--accent-green:#10b981;--accent-red:#ef4444;--accent-purple:#a855f7;}
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:'Inter',sans-serif;background:var(--bg-dark);color:var(--text-main);display:flex;min-height:100vh;overflow-x:hidden;}
+    .sidebar{width:260px;background:var(--bg-card);border-right:1px solid var(--border-color);display:flex;flex-direction:column;padding:1.5rem 1rem;position:fixed;height:100vh;z-index:100;overflow-y:auto;scrollbar-width:thin;}
+    .brand{display:flex;align-items:center;gap:0.75rem;margin-bottom:2rem;padding:0 0.5rem;}
+    .brand-badge{background:var(--primary);color:#000;font-weight:700;font-size:0.75rem;padding:0.2rem 0.5rem;border-radius:4px;text-transform:uppercase;}
+    .brand-title{font-weight:600;font-size:1.1rem;color:var(--text-main);}
+    .nav-btn{background:transparent;border:1px solid transparent;color:var(--text-muted);padding:0.75rem 1rem;border-radius:8px;text-align:left;font-size:0.9rem;font-family:inherit;cursor:pointer;margin-bottom:0.5rem;display:flex;align-items:center;gap:0.75rem;transition:all 0.2s ease;}
+    .nav-btn:hover{background:rgba(255,255,255,0.03);color:var(--text-main);}
+    .nav-btn.active{background:var(--primary-dim);border-color:rgba(245,158,11,0.3);color:var(--primary);font-weight:600;}
+    .nav-num{font-family:'Fira Code',monospace;font-size:0.8rem;opacity:0.7;}
+    .main-content{margin-left:260px;flex:1;padding:2rem 3rem;max-width:1200px;}
+    .header{display:flex;justify-content:space-between;align-items:center;margin-bottom:2rem;padding-bottom:1rem;border-bottom:1px solid var(--border-color);}
+    .page-title{font-size:1.5rem;font-weight:700;color:var(--text-main);}
+    .tag{background:rgba(56,189,248,0.1);color:var(--accent-blue);border:1px solid rgba(56,189,248,0.2);padding:0.25rem 0.75rem;border-radius:20px;font-size:0.8rem;font-family:'Fira Code',monospace;}
+    .slide{display:none;animation:fadeIn 0.3s ease;}.slide.active{display:block;}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+    @keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.3;}}
+    .card{background:var(--bg-card);border:1px solid var(--border-color);border-radius:12px;padding:1.5rem;margin-bottom:1.5rem;}
+    .card-title{font-size:1.1rem;font-weight:600;color:var(--primary);margin-bottom:1rem;display:flex;align-items:center;gap:0.5rem;}
+    .shadowing-text{font-size:1.05rem;line-height:1.8;color:#cbd5e1;margin-bottom:1.5rem;background:rgba(0,0,0,0.2);padding:1.25rem;border-radius:8px;border-left:3px solid var(--primary);}
+    .shadowing-word{transition:background 0.15s ease,color 0.15s ease;border-radius:3px;padding:0 2px;}
+    .shadowing-word.active{background:var(--primary);color:#000;font-weight:600;}
+    .controls{display:flex;gap:0.75rem;align-items:center;flex-wrap:wrap;margin-bottom:1rem;}
+    .btn{background:var(--primary);color:#000;border:none;padding:0.6rem 1.2rem;border-radius:6px;font-weight:600;font-size:0.85rem;font-family:inherit;cursor:pointer;display:inline-flex;align-items:center;gap:0.4rem;transition:background 0.2s ease;}
+    .btn:hover{background:var(--primary-hover);}
+    .btn-secondary{background:transparent;border:1px solid var(--border-color);color:var(--text-main);}
+    .timer-display{font-family:'Fira Code',monospace;font-size:1.5rem;font-weight:700;color:var(--primary);background:#000;padding:0.4rem 1rem;border-radius:8px;border:1px solid var(--border-color);display:inline-block;}
+    .error-table{width:100%;border-collapse:collapse;margin-top:1rem;font-size:0.9rem;}
+    .error-table th,.error-table td{padding:0.75rem 1rem;border:1px solid var(--border-color);text-align:left;}
+    .error-table th{background:rgba(0,0,0,0.4);color:var(--primary);font-weight:600;}
+    .text-red{color:var(--accent-red);}.text-green{color:var(--accent-green);}
+    .reveal-box{display:none;background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.2);padding:1rem;border-radius:8px;margin-top:0.75rem;font-size:0.9rem;line-height:1.7;}
+    .reveal-box.show{display:block;}
+    textarea,input[type="text"]{width:100%;background:rgba(0,0,0,0.4);border:1px solid var(--border-color);color:var(--text-main);padding:0.75rem;border-radius:6px;font-family:inherit;font-size:0.9rem;resize:vertical;}
+    textarea:focus,input[type="text"]:focus{outline:none;border-color:var(--primary);}
+    .word-count-badge{font-family:'Fira Code',monospace;font-size:0.85rem;color:var(--accent-green);margin-top:0.5rem;}
+    .prompt-block{background:rgba(0,0,0,0.25);padding:1rem;border-radius:8px;font-size:0.9rem;line-height:1.7;margin-bottom:1rem;border-left:3px solid var(--primary);}
+    .para-box{background:rgba(0,0,0,0.2);border:1px solid var(--border-color);border-radius:8px;padding:1rem;margin-bottom:0.75rem;}
+    .para-label{font-family:'Fira Code',monospace;font-size:0.75rem;font-weight:700;text-transform:uppercase;margin-bottom:0.5rem;}
+    .sent-text{display:none;font-size:0.92rem;color:#e2e8f0;margin-top:0.5rem;line-height:1.6;}
+    .speaking-sent{margin-bottom:0.75rem;}
+    .num{font-weight:700;color:var(--primary);margin-right:0.4rem;}
+    @media(max-width:768px){.main-content{margin-left:0;padding:1rem 1rem 84px;max-width:100%}.header{flex-wrap:wrap;gap:0.5rem}.controls{flex-direction:column;align-items:stretch}.timer-display{font-size:1.25rem}}
+  </style>
+ <!-- FE:CSS-MOBILE --><style>.mobile-nav-toggle{display:none;position:fixed;bottom:20px;right:20px;z-index:200;width:48px;height:48px;border-radius:50%;background:var(--primary);color:#000;border:none;font-size:20px;cursor:pointer;align-items:center;justify-content:center;box-shadow:3px 3px 0 rgba(0,0,0,0.12)}
+.sidebar-overlay{display:none;position:fixed;inset:0;z-index:150;background:rgba(0,0,0,0.4)}
+.sidebar-overlay.open{display:block}@media(max-width:768px){
+  .mobile-nav-toggle{display:flex}
+  .sidebar{position:fixed;left:0;top:0;z-index:175;height:100vh;transform:translateX(-100%);transition:transform .25s ease;width:260px;display:flex!important}
+  .sidebar.open{transform:translateX(0)}
+  .main-content{margin-left:0;padding:1rem 1rem 84px;max-width:100%}
+  .header{flex-wrap:wrap;gap:0.5rem}
+  .grid-2{grid-template-columns:1fr}
+  .controls{flex-direction:column;align-items:stretch}
+  .timer-display{font-size:1.5rem}
+}</style>
+ <!-- FE:CSS-CHIP --><style>.slide-chip{font-family:'Fira Code',monospace;font-size:0.72rem;font-weight:700;color:var(--primary);background:var(--bg-card,rgba(0,0,0,0.4));border:1px solid var(--border-color,rgba(255,255,255,0.15));padding:0.25rem 0.65rem;border-radius:20px;white-space:nowrap;margin-left:auto}</style>
+ <style>.back-link{color:var(--text-muted);text-decoration:none;font-size:0.8rem;font-family:'Fira Code',monospace;white-space:nowrap;transition:color 0.2s;margin-left:1rem;}.back-link:hover{color:var(--primary);}</style></head>
+<body>
+  <aside class="sidebar">
+    <div class="brand"><span class="brand-badge">TOEFL</span><span class="brand-title">Valeria L24</span></div>
+    <button class="nav-btn active" onclick="switchSlide(0)"><span class="nav-num">01</span> Warm-up</button>
+    <button class="nav-btn" onclick="switchSlide(1)"><span class="nav-num">02</span> Paragraph Anatomy</button>
+    <button class="nav-btn" onclick="switchSlide(2)"><span class="nav-num">03</span> Sprint #1 · AD</button>
+    <button class="nav-btn" onclick="switchSlide(3)"><span class="nav-num">04</span> Sprint #2 · Email</button>
+    <button class="nav-btn" onclick="switchSlide(4)"><span class="nav-num">05</span> Listen & Repeat ×8</button>
+    <button class="nav-btn" onclick="switchSlide(5)"><span class="nav-num">06</span> Correction Table</button>
+    <button class="nav-btn" onclick="switchSlide(6)"><span class="nav-num">07</span> Homework</button>
+  </aside>
+  <main class="main-content">
+    <header class="header"><div><h1 class="page-title">Paragraph Structure & Coherence</h1><p style="color:var(--text-muted);font-size:0.85rem;margin-top:0.2rem;">Topic Sentence · Supporting Details · Concluding Sentence · Timed Sprints</p></div><!-- FE:CHIP --><span class="slide-chip" id="slideChip">1 / N</span><a href="../index.html" class="back-link">&#8592; Portal</a>
+        <span class="tag">WRITING STRUCTURE</span></header>
+
+    <!-- SLIDE 01: Shadowing Warm-up -->
+    <div class="slide active" id="slide-0">
+      <div class="card">
+        <div class="card-title">🎙️ Shadowing — Paragraph Architecture</div>
+        <div class="shadowing-text" id="shadowingTextDisplay">A well-structured paragraph in academic writing follows a clear architectural pattern. It opens with a topic sentence that states the central claim or idea of the paragraph. The body sentences provide supporting evidence, examples, or reasoning that develop the topic sentence. Each body sentence connects to the next through transitions that maintain logical flow. The paragraph concludes with a closing sentence that either summarises the key point or links to the next paragraph. This three-part structure — topic, support, close — ensures coherence and helps readers follow complex arguments without confusion.</div>
+        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:1rem;">Targets: <em>architectural pattern · topic sentence · supporting evidence · logical flow · three-part structure · coherence</em></p>
+        <div class="controls">
+          <button class="btn" onclick="toggleShadowingPacer()">▶ Start Pacer</button>
+          <button class="btn btn-secondary" onclick="resetShadowingPacer()">↺ Reset</button>
+          <audio id="shadowingAudio" src="audio/shadowing.mp3" preload="metadata" style="display:none;"></audio>
+          <button class="btn btn-secondary" onclick="document.getElementById('shadowingAudio').play()">🔊 Play Audio</button>
+          <select id="pacerSpeed" style="background:#000;color:#fff;padding:0.4rem;border-radius:4px;border:1px solid var(--border-color);"><option value="450">130 WPM</option><option value="380" selected>150 WPM</option><option value="320">175 WPM</option></select>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 02: Paragraph Anatomy -->
+    <div class="slide" id="slide-1">
+      <div class="card">
+        <div class="card-title">🏗️ Paragraph Anatomy: T-S-C</div>
+        <p style="font-size:0.9rem;color:var(--text-muted);margin-bottom:1rem;">Every strong paragraph follows three parts. Apply this to both AD and Email responses.</p>
+        <div class="para-box">
+          <div class="para-label" style="color:var(--accent-green);">T — Topic Sentence</div>
+          <p style="font-size:0.9rem;">States the main claim. Clear stance. 1 sentence. No evidence here — just the position.</p>
+          <p style="font-size:0.82rem;color:var(--text-muted);margin-top:0.3rem;"><em>Example:</em> "University campuses should extend library hours during examination periods to support student wellbeing."</p>
+        </div>
+        <div class="para-box">
+          <div class="para-label" style="color:var(--accent-blue);">S — Supporting Details (2–3 sentences)</div>
+          <p style="font-size:0.9rem;">Evidence, examples, reasoning. Each sentence develops the topic sentence. Use transitions to connect them.</p>
+          <p style="font-size:0.82rem;color:var(--text-muted);margin-top:0.3rem;"><em>Example:</em> "Furthermore, late-night study sessions are common during finals week, and many students rely on the library's quiet spaces. Moreover, research shows that access to study environments reduces exam-related anxiety."</p>
+        </div>
+        <div class="para-box">
+          <div class="para-label" style="color:var(--accent-purple);">C — Closing Sentence</div>
+          <p style="font-size:0.9rem;">Summarises the point or links to the next paragraph. No new evidence. No tautological closers.</p>
+          <p style="font-size:0.82rem;color:var(--text-muted);margin-top:0.3rem;"><em>Example:</em> "Extending library hours would therefore directly address a practical need that currently goes unmet."</p>
+        </div>
+        <p style="font-size:0.82rem;color:var(--text-muted);margin-top:1rem;"><strong>⚠️ TOEFL trap:</strong> Body sentences without a clear topic sentence read as a list. Always open with a claim.</p>
+      </div>
+      <div class="card">
+        <div class="card-title">🎯 Mini-Drill: Identify the Parts</div>
+        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:0.75rem;">Read the paragraph. Label each sentence as T, S, or C:</p>
+        <div style="background:rgba(0,0,0,0.2);padding:1rem;border-radius:8px;font-size:0.9rem;line-height:1.8;">
+          "Mandatory attendance policies benefit university students. First, regular participation helps students acquire knowledge through discussion. Second, attending lectures demonstrates competence and commitment to academic success. Consequently, universities with attendance requirements tend to report higher completion rates."
+        </div>
+        <button class="btn btn-secondary" onclick="toggleReveal('paraAns')" style="margin-top:0.75rem;">👁️ Show Answers</button>
+        <div class="reveal-box" id="paraAns">
+          <span class="text-green">T:</span> "Mandatory attendance policies benefit university students." — Topic sentence (claim)<br>
+          <span class="text-green">S:</span> "First, regular participation helps students acquire knowledge through discussion." — Supporting detail 1<br>
+          <span class="text-green">S:</span> "Second, attending lectures demonstrates competence and commitment to academic success." — Supporting detail 2<br>
+          <span class="text-green">C:</span> "Consequently, universities with attendance requirements tend to report higher completion rates." — Closing sentence (summary/link)
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">🔁 Flow Check — Adverb Position</div>
+        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:0.75rem;">Architecture holds the paragraph together; adverb position keeps each sentence smooth. Where does the bold adverb go? Decide first, then check.</p>
+        <div style="font-size:0.9rem;line-height:2;">
+          1. The committee presented its recommendations. <strong>convincingly</strong><br>
+          2. Students consult a single source. <strong>rarely</strong><br>
+          3. This claim is convincing. <strong>extremely</strong><br>
+          4. The library extended its hours. <strong>fortunately</strong>
+        </div>
+        <button class="btn btn-secondary" onclick="toggleReveal('flowAns')" style="margin-top:0.75rem;">👁️ Show Answers</button>
+        <div class="reveal-box" id="flowAns">
+          <strong>1. …its recommendations convincingly.</strong> <span style="color:var(--text-muted);">End position (also possible: <em>convincingly presented</em>) — never between the verb and its object (✗ presented convincingly its recommendations).</span><br>
+          <strong>2. Students rarely consult a single source.</strong> <span style="color:var(--text-muted);">Frequency adverbs go before the main verb (mid-position).</span><br>
+          <strong>3. This claim is extremely convincing.</strong> <span style="color:var(--text-muted);">Degree adverbs go before the adjective they modify.</span><br>
+          <strong>4. Fortunately, the library extended its hours.</strong> <span style="color:var(--text-muted);">Comment adverbs open the sentence with a comma — same pattern as Consequently / However / Therefore.</span>
+        </div>
+        <p style="font-size:0.82rem;color:var(--text-muted);margin-top:0.75rem;"><strong>⚡ Proofread pass:</strong> adverb position is a 10-second scan — check nothing sits between a verb and its object.</p>
+      </div>
+    </div>
+
+    <!-- SLIDE 03: Sprint #1 — Academic Discussion -->
+    <div class="slide" id="slide-2">
+      <div class="card">
+        <div class="card-title">✍️ Sprint #1 — Academic Discussion (10 min)</div>
+        <div class="prompt-block">
+          <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.75rem;">
+            <strong>Academic Discussion — TOEFL format:</strong>
+            <span style="display:flex;align-items:center;gap:0.5rem;"><span class="timer-display" id="sprint1Timer" style="font-size:1.25rem;">10:00</span><button class="btn" onclick="startTimer('sprint1Timer',600)">Start 10 min</button><button class="btn btn-secondary" onclick="resetTimer('sprint1Timer',600)">Reset</button></span>
+          </div>
+          <p style="margin-top:0.75rem;">Your professor is teaching a course on career preparation. Write a post responding to the professor's question. In your post, you should: express and support your opinion; make a contribution to the discussion in your own words.</p>
+          <p style="margin-top:0.6rem;"><strong>Professor:</strong> "This week we are discussing career preparation. Should all university students complete a mandatory internship before graduating?"</p>
+          <p style="margin-top:0.4rem;"><strong>Nina:</strong> "Internships build practical skills and professional contacts that coursework alone cannot provide."<br>
+          <strong>Tom:</strong> "Mandatory internships are unfair — unpaid placements exclude students who must work to pay for their studies."</p>
+        </div>
+        <div style="background:rgba(0,0,0,0.2);padding:0.75rem 1rem;border-radius:6px;font-size:0.85rem;color:var(--text-muted);margin-bottom:0.75rem;">
+          <strong>Focus today:</strong> Apply T-S-C structure. Topic sentence = clear claim. 2–3 supporting sentences with transitions. Closing = summary or link. Chunk-write. 120–130 words.<br>
+          <strong style="color:var(--primary);">🗣️ Say it first (30–45s, no prep):</strong> answer the prompt aloud before you write — stance + 2 reasons. Interview muscle.
+        </div>
+        <textarea id="sprint1Text" rows="8" placeholder="Write your Academic Discussion response here..."></textarea>
+        <div style="display:flex;align-items:center;gap:1rem;margin-top:0.5rem;">
+          <span class="word-count-badge" id="sprint1WC">0 words</span>
+          <span class="word-count-badge" id="sprint1WPM" style="color:var(--accent-blue);">— wpm</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">🔍 Structure Audit</div>
+        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:0.5rem;">After writing, check your paragraph structure:</p>
+        <div style="font-size:0.9rem;line-height:1.8;">
+          <label><input type="checkbox" class="sc-box" data-sc="topic"> Topic sentence = clear claim (no evidence in it)</label><br>
+          <label><input type="checkbox" class="sc-box" data-sc="support"> 2–3 supporting sentences with evidence/reasoning</label><br>
+          <label><input type="checkbox" class="sc-box" data-sc="transitions"> At least 2 transitions used</label><br>
+          <label><input type="checkbox" class="sc-box" data-sc="closing"> Closing sentence = summary or link (no new evidence)</label>
+        </div>
+        <div class="word-count-badge" id="scCount" style="margin-top:0.5rem;">0 / 4 structure elements present</div>
+        <div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-top:0.75rem;">
+          <button class="btn btn-secondary" onclick="toggleReveal('sprint1Model')">👁️ Show Model Answer</button>
+          <button class="btn btn-secondary" onclick="toggleReveal('sprint1Check')">✓ Checklist</button>
+        </div>
+        <div class="reveal-box" id="sprint1Model">
+          <strong style="color:var(--accent-green);">Model (~124 words, agrees with Nina, concedes to Tom, T-S-C structure):</strong>
+          <p style="margin-top:0.5rem;line-height:1.7;">While I understand Tom's concern that unpaid internships exclude students from lower-income backgrounds, I agree with Nina that practical experience should be required before graduation. A single semester in a real workplace teaches skills that lectures cannot: meeting deadlines, communicating with colleagues, and solving unstructured problems. For example, a marketing student who runs a real social-media campaign for a small charity learns more about audience research in eight weeks than in a year of theory classes. Moreover, universities can address Tom's fairness worry by funding stipends and offering flexible, credit-bearing placements. Therefore, a funded internship requirement would prepare graduates for employment without punishing those who need to earn. The key is not whether to require experience, but how to make it accessible to everyone.</p>
+        </div>
+        <div class="reveal-box" id="sprint1Check">
+          <strong>Checklist:</strong> 120–130 words? Topic sentence = clear claim (no evidence)? 2–3 supporting sentences? Closing = summary/link, no new evidence? One classmate referenced? ≥2 transitions? No "Although…but"?
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 04: Sprint #2 — Email -->
+    <div class="slide" id="slide-3">
+      <div class="card">
+        <div class="card-title">✉️ Sprint #2 — Email Reply (7 min)</div>
+        <div class="prompt-block" style="border-color:var(--accent-purple);">
+          <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.75rem;">
+            <strong>Write an Email — TOEFL format:</strong>
+            <span style="display:flex;align-items:center;gap:0.5rem;"><span class="timer-display" id="sprint2Timer" style="font-size:1.25rem;">07:00</span><button class="btn" onclick="startTimer('sprint2Timer',420)">Start 7 min</button><button class="btn btn-secondary" onclick="resetTimer('sprint2Timer',420)">Reset</button></span>
+          </div>
+          <p style="margin-top:0.75rem;">You are a student who drives to campus. Write an email to the campus transportation office. In your email, do the following:</p>
+          <p style="margin-top:0.4rem;">1. Explain the difficulty of finding parking on campus.<br>
+          2. Describe how this affects your daily schedule.<br>
+          3. Suggest a solution such as a permit system or shuttle service.</p>
+          <p style="margin-top:0.4rem;color:var(--text-muted);">Target: 100–120 words (minimum 100). Formal register.</p>
+        </div>
+        <div style="background:rgba(0,0,0,0.2);padding:0.75rem 1rem;border-radius:6px;font-size:0.85rem;color:var(--text-muted);margin-bottom:0.75rem;">
+          <strong>Focus today:</strong> Bullet-2-first planning. Each bullet = one mini-paragraph (T-S-C). Target 100–120 words. Reserve last 60s for proofread pass.
+        </div>
+        <textarea id="sprint2Text" rows="8" placeholder="Dear Transportation Office,&#10;&#10;..."></textarea>
+        <div style="display:flex;align-items:center;gap:1rem;margin-top:0.5rem;">
+          <span class="word-count-badge" id="sprint2WC">0 words</span>
+          <span class="word-count-badge" id="sprint2WPM" style="color:var(--accent-blue);">— wpm</span>
+        </div>
+        <div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-top:0.75rem;">
+          <button class="btn btn-secondary" onclick="toggleReveal('sprint2Model')">👁️ Show Model Answer</button>
+          <button class="btn btn-secondary" onclick="toggleReveal('sprint2Check')">✓ Checklist</button>
+        </div>
+        <div class="reveal-box" id="sprint2Model">
+          <strong style="color:var(--accent-green);">Model (~106 words, all 3 tasks covered, each bullet = a mini T-S-C):</strong>
+          <p style="margin-top:0.5rem;line-height:1.7;">Dear Transportation Office,<br><br>I am writing to describe a problem that affects my daily schedule: parking on campus is extremely limited, and the main lot is usually full by 8:30 a.m.<br><br>As a result, I often park a fifteen-minute walk away and arrive at morning seminars late and stressed. Last week I missed the first ten minutes of two lectures while circling the campus looking for a space.<br><br>A possible solution would be a simple permit system with a fixed number of spaces per faculty, supported by a shuttle from the overflow lot.<br><br>I would be happy to provide details about peak times. Thank you for considering this suggestion.<br><br>Best regards,<br>Valeria</p>
+        </div>
+        <div class="reveal-box" id="sprint2Check">
+          <strong>Checklist:</strong> All 3 tasks covered? Each bullet = a mini T-S-C paragraph? ≥100 words? Formal register? ≥2 transitions (e.g. As a result / A possible solution)? Proofread pass done?
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 05: Listen & Repeat ×8 -->
+    <div class="slide" id="slide-4">
+      <div class="card">
+        <div class="card-title">🎧 Listen & Repeat — 8 Sentences</div>
+        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:1rem;">Play each sentence, repeat immediately. Text is hidden — try from hearing alone.</p>
+        <div id="l24-lrSentences">
+          <div class="speaking-sent"><span class="num">1.</span> <button class="btn btn-secondary" onclick="playL24(1)" style="padding:0.3rem 0.6rem;font-size:0.8rem;">🔊</button> <button class="btn btn-secondary" onclick="toggleReveal('lr1')" style="padding:0.3rem 0.6rem;font-size:0.8rem;">Show</button> <span class="sent-text" id="lr1">A well-structured paragraph opens with a topic sentence that states the central claim.</span></div>
+          <div class="speaking-sent"><span class="num">2.</span> <button class="btn btn-secondary" onclick="playL24(2)" style="padding:0.3rem 0.6rem;font-size:0.8rem;">🔊</button> <button class="btn btn-secondary" onclick="toggleReveal('lr2')" style="padding:0.3rem 0.6rem;font-size:0.8rem;">Show</button> <span class="sent-text" id="lr2">Supporting sentences provide evidence, examples, or reasoning that develop the topic.</span></div>
+          <div class="speaking-sent"><span class="num">3.</span> <button class="btn btn-secondary" onclick="playL24(3)" style="padding:0.3rem 0.6rem;font-size:0.8rem;">🔊</button> <button class="btn btn-secondary" onclick="toggleReveal('lr3')" style="padding:0.3rem 0.6rem;font-size:0.8rem;">Show</button> <span class="sent-text" id="lr3">Each body sentence connects to the next through transitions that maintain logical flow.</span></div>
+          <div class="speaking-sent"><span class="num">4.</span> <button class="btn btn-secondary" onclick="playL24(4)" style="padding:0.3rem 0.6rem;font-size:0.8rem;">🔊</button> <button class="btn btn-secondary" onclick="toggleReveal('lr4')" style="padding:0.3rem 0.6rem;font-size:0.8rem;">Show</button> <span class="sent-text" id="lr4">The closing sentence summarises the key point without introducing new evidence.</span></div>
+          <div class="speaking-sent"><span class="num">5.</span> <button class="btn btn-secondary" onclick="playL24(5)" style="padding:0.3rem 0.6rem;font-size:0.8rem;">🔊</button> <button class="btn btn-secondary" onclick="toggleReveal('lr5')" style="padding:0.3rem 0.6rem;font-size:0.8rem;">Show</button> <span class="sent-text" id="lr5">Furthermore, candidates who organise their writing clearly tend to score higher on coherence.</span></div>
+          <div class="speaking-sent"><span class="num">6.</span> <button class="btn btn-secondary" onclick="playL24(6)" style="padding:0.3rem 0.6rem;font-size:0.8rem;">🔊</button> <button class="btn btn-secondary" onclick="toggleReveal('lr6')" style="padding:0.3rem 0.6rem;font-size:0.8rem;">Show</button> <span class="sent-text" id="lr6">Consequently, examiners reward responses that demonstrate clear paragraph organisation.</span></div>
+          <div class="speaking-sent"><span class="num">7.</span> <button class="btn btn-secondary" onclick="playL24(7)" style="padding:0.3rem 0.6rem;font-size:0.8rem;">🔊</button> <button class="btn btn-secondary" onclick="toggleReveal('lr7')" style="padding:0.3rem 0.6rem;font-size:0.8rem;">Show</button> <span class="sent-text" id="lr7">However, structure alone is insufficient without substantive content in the supporting sentences.</span></div>
+          <div class="speaking-sent"><span class="num">8.</span> <button class="btn btn-secondary" onclick="playL24(8)" style="padding:0.3rem 0.6rem;font-size:0.8rem;">🔊</button> <button class="btn btn-secondary" onclick="toggleReveal('lr8')" style="padding:0.3rem 0.6rem;font-size:0.8rem;">Show</button> <span class="sent-text" id="lr8">Therefore, the three-part structure ensures coherence and helps readers follow complex arguments.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 06: Correction Table -->
+    <div class="slide" id="slide-5">
+      <div class="card">
+        <div class="card-title">📋 Live Error Correction</div>
+        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:1rem;">Log any errors caught during sprints or L&R. Focus on structure issues (missing topic sentences, weak closings).</p>
+        <table class="error-table" id="errorTable">
+          <thead><tr><th>Error</th><th>Correction</th><th>Type</th></tr></thead>
+          <tbody id="errorBody">
+            <tr><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+            <tr><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+            <tr><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+            <tr><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+          </tbody>
+        </table>
+        <button class="btn btn-secondary" onclick="addErrorRow()" style="margin-top:0.75rem;">+ Add Row</button>
+      </div>
+    </div>
+
+    <!-- SLIDE 07: Homework -->
+    <div class="slide" id="slide-6">
+      <div class="card">
+        <div class="card-title">📝 Homework Assignments</div>
+        <div style="margin-bottom:1rem;">
+          <p style="font-weight:600;margin-bottom:0.5rem;">1. Writing Speed Sprint (timed, 10 min)</p>
+          <p style="font-size:0.88rem;color:var(--muted);">Academic Discussion: "Should students be required to take courses outside their major?" Write 120–130 words. Apply T-S-C structure. Chunk-write. Log wpm. Proofread pass: check adverb position.</p>
+        </div>
+        <div style="margin-bottom:1rem;">
+          <p style="font-weight:600;margin-bottom:0.5rem;">2. Email Sprint (timed, 7 min)</p>
+          <p style="font-size:0.88rem;color:var(--muted);">Write to the IT department: (1) explain a computer lab issue, (2) describe impact on your coursework, (3) propose a fix. Bullet-2-first. 100–120 words. Proofread pass.</p>
+        </div>
+        <div style="margin-bottom:1rem;">
+          <p style="font-weight:600;margin-bottom:0.5rem;">3. Structure Drill</p>
+          <p style="font-size:0.88rem;color:var(--muted);">Write 3 separate paragraphs (80–100 words each) on the same topic. Each must have T-S-C. Vary the topic sentence each time. Highlight the topic sentence in green.</p>
+        </div>
+        <div style="margin-bottom:1rem;">
+          <p style="font-weight:600;margin-bottom:0.5rem;">4. Vocabulary Journal</p>
+          <p style="font-size:0.88rem;color:var(--muted);">Write 5 sentences using: <em>coherence, substantive, consequently, deliberately, exemplify</em>. Each must demonstrate clear T-S-C logic.</p>
+        </div>
+        <div style="margin-bottom:1rem;">
+          <p style="font-weight:600;margin-bottom:0.5rem;">5. Speaking Sprint (record, 45s, no prep)</p>
+          <p style="font-size:0.88rem;color:var(--muted);">Answer today's AD prompt (mandatory internships) aloud — one take, 45 seconds, no notes. Claim → 2 supports → close. Listen back once; note one fix. Send the recording.</p>
+        </div>
+        <div>
+          <p style="font-weight:600;margin-bottom:0.5rem;">6. Daily Vocabulary Centre (5–10 min/day)</p>
+          <p style="font-size:0.88rem;color:var(--muted);">Open the Vocabulary Centre on your portal every day: 5 new words (flashcards + audio), clear the review queue, finish the day's quiz. Keep the streak alive.</p>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <button class="mobile-nav-toggle" id="mobileNavBtn" aria-label="Open navigation">☰</button>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <script>
+    const TOTAL = 7;
+    let current = 0;
+
+    function switchSlide(n) {
+      document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById('slide-' + n).classList.add('active');
+      document.querySelectorAll('.nav-btn')[n].classList.add('active');
+      current = n;
+      document.getElementById('slideChip').textContent = (n + 1) + ' / ' + TOTAL;
+      window.scrollTo({top: 0, behavior: 'smooth'});
+    }
+
+    let pacerInterval = null;
+    function toggleShadowingPacer() {
+      const display = document.getElementById('shadowingTextDisplay');
+      const audio = document.getElementById('shadowingAudio');
+      if (pacerInterval) { clearInterval(pacerInterval); pacerInterval = null; return; }
+      const wpm = parseInt(document.getElementById('pacerSpeed').value);
+      const words = display.textContent.trim().split(/\s+/);
+      display.innerHTML = words.map((w, i) => `<span class="shadowing-word" id="sw${i}">${w}</span>`).join(' ');
+      let i = 0;
+      audio.play();
+      pacerInterval = setInterval(() => {
+        if (i > 0) document.getElementById('sw' + (i - 1)).classList.remove('active');
+        if (i < words.length) { document.getElementById('sw' + i).classList.add('active'); i++; }
+        else { clearInterval(pacerInterval); pacerInterval = null; }
+      }, 60000 / wpm);
+    }
+    function resetShadowingPacer() {
+      if (pacerInterval) { clearInterval(pacerInterval); pacerInterval = null; }
+      const display = document.getElementById('shadowingTextDisplay');
+      display.innerHTML = 'A well-structured paragraph in academic writing follows a clear architectural pattern. It opens with a topic sentence that states the central claim or idea of the paragraph. The body sentences provide supporting evidence, examples, or reasoning that develop the topic sentence. Each body sentence connects to the next through transitions that maintain logical flow. The paragraph concludes with a closing sentence that either summarises the key point or links to the next paragraph. This three-part structure — topic, support, close — ensures coherence and helps readers follow complex arguments without confusion.';
+      document.getElementById('shadowingAudio').pause();
+      document.getElementById('shadowingAudio').currentTime = 0;
+    }
+
+    const timerIntervals = {};
+    function startTimer(id, seconds) {
+      if (timerIntervals[id]) { clearInterval(timerIntervals[id]); delete timerIntervals[id]; return; }
+      let remaining = seconds;
+      const el = document.getElementById(id);
+      timerIntervals[id] = setInterval(() => {
+        remaining--;
+        const m = Math.floor(remaining / 60);
+        const s = remaining % 60;
+        el.textContent = String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
+        if (remaining <= 0) { clearInterval(timerIntervals[id]); delete timerIntervals[id]; el.textContent = "TIME!"; el.style.color = 'var(--accent-red)'; }
+      }, 1000);
+    }
+    function resetTimer(id, seconds) {
+      if (timerIntervals[id]) { clearInterval(timerIntervals[id]); delete timerIntervals[id]; }
+      const el = document.getElementById(id);
+      const m = Math.floor(seconds / 60);
+      const s = seconds % 60;
+      el.textContent = String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
+      el.style.color = 'var(--primary)';
+    }
+
+    // Word counts + live WPM (tracked from first keystroke)
+    function wireWC(textId, wcId, wpmId, floor) {
+      const ta = document.getElementById(textId);
+      const wc = document.getElementById(wcId);
+      const wpm = document.getElementById(wpmId);
+      let startTime = null;
+      ta.addEventListener('input', () => {
+        if (!ta.value.trim()) { startTime = null; wc.textContent = '0 words'; wpm.textContent = '— wpm'; wpm.style.color = 'var(--accent-blue)'; return; }
+        if (!startTime) startTime = Date.now();
+        const words = ta.value.trim().split(/\s+/).filter(w => w.length > 0).length;
+        wc.textContent = words + ' words';
+        const mins = (Date.now() - startTime) / 60000;
+        if (mins >= 0.08) {
+          const rate = Math.round(words / mins);
+          wpm.textContent = rate + ' wpm (live)';
+          wpm.style.color = rate >= floor ? 'var(--accent-green)' : rate >= floor - 2 ? 'var(--primary)' : 'var(--accent-red)';
+        }
+      });
+    }
+    wireWC('sprint1Text', 'sprint1WC', 'sprint1WPM', 13);
+    wireWC('sprint2Text', 'sprint2WC', 'sprint2WPM', 15);
+
+    document.querySelectorAll('.sc-box').forEach(cb => {
+      cb.addEventListener('change', () => {
+        const count = document.querySelectorAll('.sc-box:checked').length;
+        document.getElementById('scCount').textContent = count + ' / 4 structure elements present';
+      });
+    });
+
+    function playL24(n) {
+      const audio = new Audio('audio/l24-s' + n + '.mp3');
+      audio.play();
+    }
+
+    function toggleReveal(id) {
+      document.getElementById(id).classList.toggle('show');
+    }
+
+    function addErrorRow() {
+      const tbody = document.getElementById('errorBody');
+      const tr = document.createElement('tr');
+      tr.innerHTML = '<td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td>';
+      tbody.appendChild(tr);
+    }
+
+    document.getElementById('mobileNavBtn').addEventListener('click', () => {
+      document.querySelector('.sidebar').classList.toggle('open');
+      document.getElementById('sidebarOverlay').classList.toggle('open');
+    });
+    document.getElementById('sidebarOverlay').addEventListener('click', () => {
+      document.querySelector('.sidebar').classList.remove('open');
+      document.getElementById('sidebarOverlay').classList.remove('open');
+    });
+
+    switchSlide(0);
+  </script>
+</body>
+</html>
