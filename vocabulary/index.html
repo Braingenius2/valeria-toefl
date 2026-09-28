@@ -267,14 +267,6 @@
   }
 
   /* ---------- today ---------- */
-  function prettyDate(str){
-    if (!str) return '';
-    const p = String(str).split('-');
-    if (p.length !== 3) return str;
-    const m = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-    const mm = m[Number(p[1]) - 1] || p[1];
-    return Number(p[2]) + ' ' + mm;
-  }
   function dayStripHtml(ti, showDay, todayDay){
     const chips = [];
     for (let i = 0; i < TOTAL_DAYS; i++){
@@ -289,7 +281,7 @@
     const back = (learn.day !== null && learn.day !== todayDay)
       ? '<button class="btn sec" style="margin-top:0.7rem;" onclick="openDay(' + todayDay + ')">→ Back to today (Day ' + (todayDay+1) + ')</button>'
       : '';
-    return '<div class="card"><div class="muted" style="margin-bottom:0.5rem;"><strong style="color:var(--text);">Your 24 days</strong> — Day 1 started ' + esc(prettyDate(state.startDate)) + '. Click any released day to open it: ' +
+    return '<div class="card"><div class="muted" style="margin-bottom:0.5rem;"><strong style="color:var(--text);">Your 24 days</strong> — click any released day to open it: ' +
       '<span style="color:var(--green);">✓ done</span> · <span style="color:var(--red);">! missed</span> · <span style="color:var(--amber);">● today</span></div>' +
       '<div class="day-strip">' + chips.join('') + '</div>' + back + '</div>';
   }
