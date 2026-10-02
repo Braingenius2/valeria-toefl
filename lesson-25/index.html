@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Valeria — Lesson 25: Sentence Variety</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg-dark:#090d16;--bg-card:#131a26;--border-color:#243042;--text-main:#f1f5f9;--text-muted:#64748b;--primary:#f59e0b;--primary-hover:#d97706;--primary-dim:rgba(245,158,11,0.12);--accent-blue:#38bdf8;--accent-green:#10b981;--accent-red:#ef4444;--accent-purple:#a855f7;}
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:'Inter',sans-serif;background:var(--bg-dark);color:var(--text-main);display:flex;min-height:100vh;overflow-x:hidden;}
+    .sidebar{width:260px;background:var(--bg-card);border-right:1px solid var(--border-color);display:flex;flex-direction:column;padding:1.5rem 1rem;position:fixed;height:100vh;z-index:100;overflow-y:auto;scrollbar-width:thin;}
+    .brand{display:flex;align-items:center;gap:0.75rem;margin-bottom:2rem;padding:0 0.5rem;}
+    .brand-badge{background:var(--primary);color:#000;font-weight:700;font-size:0.75rem;padding:0.2rem 0.5rem;border-radius:4px;text-transform:uppercase;}
+    .brand-title{font-weight:600;font-size:1.1rem;color:var(--text-main);}
+    .nav-btn{background:transparent;border:1px solid transparent;color:var(--text-muted);padding:0.75rem 1rem;border-radius:8px;text-align:left;font-size:0.9rem;font-family:inherit;cursor:pointer;margin-bottom:0.5rem;display:flex;align-items:center;gap:0.75rem;transition:all 0.2s ease;}
+    .nav-btn:hover{background:rgba(255,255,255,0.03);color:var(--text-main);}
+    .nav-btn.active{background:var(--primary-dim);border-color:rgba(245,158,11,0.3);color:var(--primary);font-weight:600;}
+    .nav-num{font-family:'Fira Code',monospace;font-size:0.8rem;opacity:0.7;}
+    .main-content{margin-left:260px;flex:1;padding:2rem 3rem;max-width:1200px;}
+    .header{display:flex;justify-content:space-between;align-items:center;margin-bottom:2rem;padding-bottom:1rem;border-bottom:1px solid var(--border-color);}
+    .page-title{font-size:1.5rem;font-weight:700;color:var(--text-main);}
+    .tag{background:rgba(56,189,248,0.1);color:var(--accent-blue);border:1px solid rgba(56,189,248,0.2);padding:0.25rem 0.75rem;border-radius:20px;font-size:0.8rem;font-family:'Fira Code',monospace;}
+    .slide{display:none;animation:fadeIn 0.3s ease;}.slide.active{display:block;}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+    @keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.3;}}
+    .card{background:var(--bg-card);border:1px solid var(--border-color);border-radius:12px;padding:1.5rem;margin-bottom:1.5rem;}
+    .card-title{font-size:1.1rem;font-weight:600;color:var(--primary);margin-bottom:1rem;display:flex;align-items:center;gap:0.5rem;}
+    .shadowing-text{font-size:1.05rem;line-height:1.8;color:#cbd5e1;margin-bottom:1.5rem;background:rgba(0,0,0,0.2);padding:1.25rem;border-radius:8px;border-left:3px solid var(--primary);}
+    .shadowing-word{transition:background 0.15s ease,color 0.15s ease;border-radius:3px;padding:0 2px;}
+    .shadowing-word.active{background:var(--primary);color:#000;font-weight:600;}
+    .controls{display:flex;gap:0.75rem;align-items:center;flex-wrap:wrap;margin-bottom:1rem;}
+    .btn{background:var(--primary);color:#000;border:none;padding:0.6rem 1.2rem;border-radius:6px;font-weight:600;font-size:0.85rem;font-family:inherit;cursor:pointer;display:inline-flex;align-items:center;gap:0.4rem;transition:background 0.2s ease;}
+    .btn:hover{background:var(--primary-hover);}
+    .btn-secondary{background:transparent;border:1px solid var(--border-color);color:var(--text-main);}
+    .timer-display{font-family:'Fira Code',monospace;font-size:1.5rem;font-weight:700;color:var(--primary);background:#000;padding:0.4rem 1rem;border-radius:8px;border:1px solid var(--border-color);display:inline-block;}
+    .error-table{width:100%;border-collapse:collapse;margin-top:1rem;font-size:0.9rem;}
+    .error-table th,.error-table td{padding:0.75rem 1rem;border:1px solid var(--border-color);text-align:left;}
+    .error-table th{background:rgba(0,0,0,0.4);color:var(--primary);font-weight:600;}
+    .text-red{color:var(--accent-red);}.text-green{color:var(--accent-green);}
+    .reveal-box{display:none;background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.2);padding:1rem;border-radius:8px;margin-top:0.75rem;font-size:0.9rem;line-height:1.7;}
+    .reveal-box.show{display:block;}
+    textarea,input[type="text"]{width:100%;background:rgba(0,0,0,0.4);border:1px solid var(--border-color);color:var(--text-main);padding:0.75rem;border-radius:6px;font-family:inherit;font-size:0.9rem;resize:vertical;}
+    textarea:focus,input[type="text"]:focus{outline:none;border-color:var(--primary);}
+    .word-count-badge{font-family:'Fira Code',monospace;font-size:0.85rem;color:var(--accent-green);margin-top:0.5rem;}
+    .prompt-block{background:rgba(0,0,0,0.25);padding:1rem;border-radius:8px;font-size:0.9rem;line-height:1.7;margin-bottom:1rem;border-left:3px solid var(--primary);}
+    .sent-type{display:inline-block;font-family:'Fira Code',monospace;font-size:0.7rem;font-weight:700;padding:0.15rem 0.4rem;border-radius:4px;margin-right:0.3rem;}
+    .sent-text{display:none;font-size:0.92rem;color:#e2e8f0;margin-top:0.5rem;line-height:1.6;}
+    .sent-text.show{display:inline;}
+    .speaking-sent{margin-bottom:0.75rem;}
+    .num{font-weight:700;color:var(--primary);margin-right:0.4rem;}
+    @media(max-width:768px){.main-content{margin-left:0;padding:1rem 1rem 84px;max-width:100%}.header{flex-wrap:wrap;gap:0.5rem}.controls{flex-direction:column;align-items:stretch}.timer-display{font-size:1.25rem}}
+  </style>
+ <!-- FE:CSS-MOBILE --><style>.mobile-nav-toggle{display:none;position:fixed;bottom:20px;right:20px;z-index:200;width:48px;height:48px;border-radius:50%;background:var(--primary);color:#000;border:none;font-size:20px;cursor:pointer;align-items:center;justify-content:center;box-shadow:3px 3px 0 rgba(0,0,0,0.12)}
+.sidebar-overlay{display:none;position:fixed;inset:0;z-index:150;background:rgba(0,0,0,0.4)}
+.sidebar-overlay.open{display:block}@media(max-width:768px){
+  .mobile-nav-toggle{display:flex}
+  .sidebar{position:fixed;left:0;top:0;z-index:175;height:100vh;transform:translateX(-100%);transition:transform .25s ease;width:260px;display:flex!important}
+  .sidebar.open{transform:translateX(0)}
+  .main-content{margin-left:0;padding:1rem 1rem 84px;max-width:100%}
+  .header{flex-wrap:wrap;gap:0.5rem}
+  .grid-2{grid-template-columns:1fr}
+  .controls{flex-direction:column;align-items:stretch}
+  .timer-display{font-size:1.5rem}
+}</style>
+ <!-- FE:CSS-CHIP --><style>.slide-chip{font-family:'Fira Code',monospace;font-size:0.72rem;font-weight:700;color:var(--primary);background:var(--bg-card,rgba(0,0,0,0.4));border:1px solid var(--border-color,rgba(255,255,255,0.15));padding:0.25rem 0.65rem;border-radius:20px;white-space:nowrap;margin-left:auto}</style>
+ <style>.back-link{color:var(--text-muted);text-decoration:none;font-size:0.8rem;font-family:'Fira Code',monospace;white-space:nowrap;transition:color 0.2s;margin-left:1rem;}.back-link:hover{color:var(--primary);}</style></head>
+<body>
+  <aside class="sidebar">
+    <div class="brand"><span class="brand-badge">TOEFL</span><span class="brand-title">Valeria L25</span></div>
+    <button class="nav-btn active" onclick="switchSlide(0)"><span class="nav-num">01</span> Warm-up</button>
+    <button class="nav-btn" onclick="switchSlide(1)"><span class="nav-num">02</span> Sentence Types</button>
+    <button class="nav-btn" onclick="switchSlide(2)"><span class="nav-num">03</span> Sprint #1 · AD</button>
+    <button class="nav-btn" onclick="switchSlide(3)"><span class="nav-num">04</span> Sprint #2 · Email</button>
+    <button class="nav-btn" onclick="switchSlide(4)"><span class="nav-num">05</span> Listen & Repeat ×8</button>
+    <button class="nav-btn" onclick="switchSlide(5)"><span class="nav-num">06</span> Correction Table</button>
+    <button class="nav-btn" onclick="switchSlide(6)"><span class="nav-num">07</span> Homework</button>
+  </aside>
+  <main class="main-content">
+    <header class="header"><div><h1 class="page-title">Sentence Variety & Range</h1><p style="color:var(--text-muted);font-size:0.85rem;margin-top:0.2rem;">Simple · Compound · Complex · Compound-Complex · Timed Sprints</p></div><!-- FE:CHIP --><span class="slide-chip" id="slideChip">1 / N</span><a href="../index.html" class="back-link">&#8592; Portal</a>
+        <span class="tag">WRITING RANGE</span></header>
+
+    <!-- SLIDE 01: Shadowing Warm-up -->
+    <div class="slide active" id="slide-0">
+      <div class="card">
+        <div class="card-title">🎙️ Shadowing — Sentence Variety</div>
+        <div class="shadowing-text" id="shadowingTextDisplay">Experienced academic writers vary their sentence structures to maintain reader engagement and demonstrate linguistic range. Simple sentences deliver direct claims with clarity. Compound sentences connect equal ideas using coordinating conjunctions. Complex sentences establish relationships of cause, condition, or concession through subordinate clauses. The most sophisticated responses combine all three types — simple for emphasis, compound for balance, complex for nuance. This variety signals to examiners that the writer possesses both grammatical control and the ability to organise ideas at multiple levels of complexity.</div>
+        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:1rem;">Targets: <em>linguistic range · simple/compound/complex · grammatical control · multiple levels of complexity</em></p>
+        <div class="controls">
+          <button class="btn" onclick="toggleShadowingPacer()">▶ Start Pacer</button>
+          <button class="btn btn-secondary" onclick="resetShadowingPacer()">↺ Reset</button>
+          <audio id="shadowingAudio" src="audio/shadowing.mp3" preload="metadata" style="display:none;"></audio>
+          <button class="btn btn-secondary" onclick="document.getElementById('shadowingAudio').play()">🔊 Play Audio</button>
+          <select id="pacerSpeed" style="background:#000;color:#fff;padding:0.4rem;border-radius:4px;border:1px solid var(--border-color);"><option value="450">130 WPM</option><option value="380" selected>150 WPM</option><option value="320">175 WPM</option></select>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 02: Sentence Types -->
+    <div class="slide" id="slide-1">
+      <div class="card">
+        <div class="card-title">🧩 The 4 Sentence Types</div>
+        <p style="font-size:0.9rem;color:var(--text-muted);margin-bottom:1rem;">Aim for variety. Don't write all simple sentences (repetitive) or all complex (hard to follow). Mix them.</p>
+        <div style="background:rgba(0,0,0,0.2);border-left:3px solid var(--accent-green);padding:0.75rem 1rem;border-radius:0 6px 6px 0;margin-bottom:0.5rem;">
+          <span class="sent-type" style="background:rgba(16,185,129,0.2);color:var(--accent-green);">SIMPLE</span> One independent clause. Clear, direct.
+          <p style="font-size:0.85rem;color:var(--text-muted);margin-top:0.3rem;"><em>"Universities should extend library hours."</em></p>
+        </div>
+        <div style="background:rgba(0,0,0,0.2);border-left:3px solid var(--accent-blue);padding:0.75rem 1rem;border-radius:0 6px 6px 0;margin-bottom:0.5rem;">
+          <span class="sent-type" style="background:rgba(56,189,248,0.2);color:var(--accent-blue);">COMPOUND</span> Two independent clauses joined by and/but/or/so.
+          <p style="font-size:0.85rem;color:var(--text-muted);margin-top:0.3rem;"><em>"Students benefit from quiet spaces, and the library provides them."</em></p>
+        </div>
+        <div style="background:rgba(0,0,0,0.2);border-left:3px solid var(--accent-purple);padding:0.75rem 1rem;border-radius:0 6px 6px 0;margin-bottom:0.5rem;">
+          <span class="sent-type" style="background:rgba(168,85,247,0.2);color:var(--accent-purple);">COMPLEX</span> Independent clause + dependent clause (because, although, when, if).
+          <p style="font-size:0.85rem;color:var(--text-muted);margin-top:0.3rem;"><em>"Although some argue against extended hours, many students rely on them during finals."</em></p>
+        </div>
+        <div style="background:rgba(0,0,0,0.2);border-left:3px solid var(--primary);padding:0.75rem 1rem;border-radius:0 6px 6px 0;margin-bottom:0.5rem;">
+          <span class="sent-type" style="background:var(--primary-dim);color:var(--primary);">COMPOUND-COMPLEX</span> Two independent clauses + at least one dependent clause.
+          <p style="font-size:0.85rem;color:var(--text-muted);margin-top:0.3rem;"><em>"When universities extend hours, students study more effectively, and exam results improve."</em></p>
+        </div>
+        <p style="font-size:0.82rem;color:var(--text-muted);margin-top:1rem;"><strong>TOEFL scoring:</strong> "Displays consistent facility in the use of sentence structure" = variety matters. Repetitive sentence openings reduce the score.</p>
+      </div>
+      <div class="card">
+        <div class="card-title">🎯 Mini-Drill: Label the Types</div>
+        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:0.75rem;">Label each sentence as S (simple), Cm (compound), Cx (complex), or Cc (compound-complex):</p>
+        <div style="background:rgba(0,0,0,0.2);padding:1rem;border-radius:8px;font-size:0.9rem;line-height:1.8;">
+          1. "Technology has transformed education." <span class="text-red">[?]</span><br>
+          2. "Students learn online, and they also attend campus lectures." <span class="text-red">[?]</span><br>
+          3. "Because recorded lectures are available, students can review material at their own pace." <span class="text-red">[?]</span><br>
+          4. "Although online learning offers flexibility, it lacks the social interaction that campus life provides." <span class="text-red">[?]</span>
+        </div>
+        <button class="btn btn-secondary" onclick="toggleReveal('typeAns')" style="margin-top:0.75rem;">👁️ Show Answers</button>
+        <div class="reveal-box" id="typeAns">
+          1. <strong>S</strong> — Simple (one independent clause)<br>
+          2. <strong>Cm</strong> — Compound (two independent clauses joined by "and")<br>
+          3. <strong>Cx</strong> — Complex (dependent clause "Because…" + independent clause)<br>
+          4. <strong>Cx</strong> — Complex (dependent clause "Although…" + independent clause)
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">🔀 Range Check — Four Upgrades</div>
+        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:0.75rem;">Same idea, stronger structure. Upgrade each pair — decide the best version, then check.</p>
+        <div style="font-size:0.9rem;line-height:2.1;">
+          1. "Cities need housing. They also need parks." → combine (balance)<br>
+          2. "Exams are stressful. They are necessary." → combine (concession)<br>
+          3. "Students can study abroad. This develops independence." → one sentence, gerund opening<br>
+          4. "People say that internships help careers." → impersonal passive
+        </div>
+        <button class="btn btn-secondary" onclick="toggleReveal('rangeAns')" style="margin-top:0.75rem;">👁️ Show Answers</button>
+        <div class="reveal-box" id="rangeAns">
+          <strong>1. Cities need housing, and they also need parks.</strong> <span style="color:var(--text-muted);">Compound — coordinating conjunction joins equal ideas.</span><br>
+          <strong>2. Although exams are stressful, they are necessary.</strong> <span style="color:var(--text-muted);">Complex — subordinate clause adds nuance.</span><br>
+          <strong>3. Studying abroad develops independence.</strong> <span style="color:var(--text-muted);">Gerund as subject; also possible: Students go abroad to develop independence.</span><br>
+          <strong>4. It is said that internships help careers. / Internships are said to help careers.</strong> <span style="color:var(--text-muted);">Impersonal passive — formal claims without "people".</span>
+        </div>
+        <p style="font-size:0.82rem;color:var(--text-muted);margin-top:0.75rem;"><strong>⚡ Proofread pass:</strong> scan your openings — if two sentences start the same way, upgrade one with a gerund, a subordinate clause, or the impersonal passive.</p>
+      </div>
+    </div>
+
+    <!-- SLIDE 03: Sprint #1 — Academic Discussion -->
+    <div class="slide" id="slide-2">
+      <div class="card">
+        <div class="card-title">✍️ Sprint #1 — Academic Discussion (10 min)</div>
+        <div class="prompt-block">
+          <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.75rem;">
+            <strong>Academic Discussion — TOEFL format:</strong>
+            <span style="display:flex;align-items:center;gap:0.5rem;"><span class="timer-display" id="sprint1Timer" style="font-size:1.25rem;">10:00</span><button class="btn" onclick="startTimer('sprint1Timer',600)">Start 10 min</button><button class="btn btn-secondary" onclick="resetTimer('sprint1Timer',600)">Reset</button></span>
+          </div>
+          <p style="margin-top:0.75rem;">Your professor is teaching a course on personal development. Write a post responding to the professor's question. In your post, you should: express and support your opinion; make a contribution to the discussion in your own words.</p>
+          <p style="margin-top:0.6rem;"><strong>Professor:</strong> "This week we are discussing study abroad. Does living in another country develop personal growth more than studying at home?"</p>
+          <p style="margin-top:0.4rem;"><strong>Nina:</strong> "Living abroad teaches independence and adaptability — things no classroom can give you."<br>
+          <strong>Tom:</strong> "I stayed home for university and still grew a lot: part-time jobs and clubs taught me the same lessons for much less money."</p>
+        </div>
+        <div style="background:rgba(0,0,0,0.2);padding:0.75rem 1rem;border-radius:6px;font-size:0.85rem;color:var(--text-muted);margin-bottom:0.75rem;">
+          <strong>Focus today:</strong> Use all 4 sentence types (simple, compound, complex, compound-complex). Aim for variety — don't start every sentence the same way. Chunk-write. 120–130 words.<br>
+          <strong style="color:var(--primary);">🗣️ Say it first (30–45s, no prep):</strong> answer the prompt aloud before you write — stance + 2 reasons. Interview muscle.
+        </div>
+        <textarea id="sprint1Text" rows="8" placeholder="Write your Academic Discussion response here..."></textarea>
+        <div style="display:flex;align-items:center;gap:1rem;margin-top:0.5rem;">
+          <span class="word-count-badge" id="sprint1WC">0 words</span>
+          <span class="word-count-badge" id="sprint1WPM" style="color:var(--accent-blue);">— wpm</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">🔍 Sentence Variety Audit</div>
+        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:0.5rem;">After writing, check which sentence types you used:</p>
+        <div style="font-size:0.9rem;line-height:1.8;">
+          <label><input type="checkbox" class="sv-box" data-sv="simple"> Simple sentence(s)</label><br>
+          <label><input type="checkbox" class="sv-box" data-sv="compound"> Compound sentence(s) (and/but/or/so)</label><br>
+          <label><input type="checkbox" class="sv-box" data-sv="complex"> Complex sentence(s) (because/although/when/if)</label><br>
+          <label><input type="checkbox" class="sv-box" data-sv="cc"> Compound-complex sentence(s)</label>
+        </div>
+        <div class="word-count-badge" id="svCount" style="margin-top:0.5rem;">0 / 4 sentence types used</div>
+        <div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-top:0.75rem;">
+          <button class="btn btn-secondary" onclick="toggleReveal('sprint1Model')">👁️ Show Model Answer</button>
+          <button class="btn btn-secondary" onclick="toggleReveal('sprint1Check')">✓ Checklist</button>
+        </div>
+        <div class="reveal-box" id="sprint1Model">
+          <strong style="color:var(--accent-green);">Model (~120 words, agrees with Nina, concedes to Tom, all 4 sentence types):</strong>
+          <p style="margin-top:0.5rem;line-height:1.7;">Although studying abroad is expensive, I agree with Nina that it develops personal growth more deeply than a normal semester at home. Living in a new country forces you to manage budgets, homes, and friendships in a second language, and every small task becomes a lesson in independence. My cousin, for example, returned from six months in Berlin far more confident: she now plans her own projects and speaks up in meetings without fear. However, Tom's concern about fairness is real, so universities should fund scholarships and short exchanges that keep the experience open to everyone. In short, growth depends less on distance than on challenge. Living abroad supplies both, but universities must make it affordable for every student.</p>
+        </div>
+        <div class="reveal-box" id="sprint1Check">
+          <strong>Checklist:</strong> 120–130 words? Clear stance (agrees with Nina, concedes to Tom)? One classmate referenced? All 4 sentence types (S/Cm/Cx/Cc)? ≥2 transitions? Closing = synthesis, no new evidence? No "Although…but"?
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 04: Sprint #2 — Email -->
+    <div class="slide" id="slide-3">
+      <div class="card">
+        <div class="card-title">✉️ Sprint #2 — Email Reply (7 min)</div>
+        <div class="prompt-block" style="border-color:var(--accent-purple);">
+          <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.75rem;">
+            <strong>Write an Email — TOEFL format:</strong>
+            <span style="display:flex;align-items:center;gap:0.5rem;"><span class="timer-display" id="sprint2Timer" style="font-size:1.25rem;">07:00</span><button class="btn" onclick="startTimer('sprint2Timer',420)">Start 7 min</button><button class="btn btn-secondary" onclick="resetTimer('sprint2Timer',420)">Reset</button></span>
+          </div>
+          <p style="margin-top:0.75rem;">You are a student in the science faculty. Write an email to the science department. In your email, do the following:</p>
+          <p style="margin-top:0.4rem;">1. Explain that the lab equipment is outdated.<br>
+          2. Describe how this affects your practical coursework.<br>
+          3. Request new equipment or a maintenance schedule.</p>
+          <p style="margin-top:0.4rem;color:var(--text-muted);">Target: 100–120 words (minimum 100). Formal register.</p>
+        </div>
+        <div style="background:rgba(0,0,0,0.2);padding:0.75rem 1rem;border-radius:6px;font-size:0.85rem;color:var(--text-muted);margin-bottom:0.75rem;">
+          <strong>Focus today:</strong> Bullet-2-first. Use ≥2 sentence types. Target 100–120 words. Reserve last 60s for proofread pass.
+        </div>
+        <textarea id="sprint2Text" rows="8" placeholder="Dear Science Department,&#10;&#10;..."></textarea>
+        <div style="display:flex;align-items:center;gap:1rem;margin-top:0.5rem;">
+          <span class="word-count-badge" id="sprint2WC">0 words</span>
+          <span class="word-count-badge" id="sprint2WPM" style="color:var(--accent-blue);">— wpm</span>
+        </div>
+        <div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-top:0.75rem;">
+          <button class="btn btn-secondary" onclick="toggleReveal('sprint2Model')">👁️ Show Model Answer</button>
+          <button class="btn btn-secondary" onclick="toggleReveal('sprint2Check')">✓ Checklist</button>
+        </div>
+        <div class="reveal-box" id="sprint2Model">
+          <strong style="color:var(--accent-green);">Model (~108 words, all 3 tasks covered, each bullet = a mini T-S-C):</strong>
+          <p style="margin-top:0.5rem;line-height:1.7;">Dear Science Department,<br><br>I am writing about a problem that affects my practical coursework: several pieces of lab equipment in the main teaching lab are outdated and frequently break down.<br><br>As a result, my lab group often works in pairs on single machines, so we lose valuable practice time. Last week our microscope failed during an assessed practical, and three students could not complete the task.<br><br>A possible solution would be a maintenance schedule for the current equipment, supported by a small budget for replacements each semester.<br><br>I would be happy to collect student feedback about which machines fail most often. Thank you for considering this request.<br><br>Best regards,<br>Valeria</p>
+        </div>
+        <div class="reveal-box" id="sprint2Check">
+          <strong>Checklist:</strong> All 3 tasks covered? Each bullet = a mini T-S-C paragraph? ≥100 words? Formal register? ≥2 transitions (e.g. As a result / A possible solution)? Proofread pass done?
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 05: Listen & Repeat ×8 -->
+    <div class="slide" id="slide-4">
+      <div class="card">
+        <div class="card-title">🎧 Listen & Repeat — 8 Sentences</div>
+        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:1rem;">Play each sentence, repeat immediately. Text is hidden — try from hearing alone.</p>
+        <div id="l25-lrSentences">
+          <div class="speaking-sent"><span class="num">1.</span> <span class="sent-type" style="background:rgba(16,185,129,0.2);color:var(--accent-green);font-size:0.65rem;">S</span> <button class="btn btn-secondary" onclick="playL25(1)" style="padding:0.3rem 0.6rem;font-size:0.8rem;">🔊</button> <button class="btn btn-secondary" onclick="toggleReveal('lr1')" style="padding:0.3rem 0.6rem;font-size:0.8rem;">Show</button> <span class="sent-text" id="lr1">Sentence variety demonstrates linguistic range.</span></div>
+          <div class="speaking-sent"><span class="num">2.</span> <span class="sent-type" style="background:rgba(56,189,248,0.2);color:var(--accent-blue);font-size:0.65rem;">Cm</span> <button class="btn btn-secondary" onclick="playL25(2)" style="padding:0.3rem 0.6rem;font-size:0.8rem;">🔊</button> <button class="btn btn-secondary" onclick="toggleReveal('lr2')" style="padding:0.3rem 0.6rem;font-size:0.8rem;">Show</button> <span class="sent-text" id="lr2">Simple sentences deliver claims clearly, and complex sentences add nuance.</span></div>
+          <div class="speaking-sent"><span class="num">3.</span> <span class="sent-type" style="background:rgba(168,85,247,0.2);color:var(--accent-purple);font-size:0.65rem;">Cx</span> <button class="btn btn-secondary" onclick="playL25(3)" style="padding:0.3rem 0.6rem;font-size:0.8rem;">🔊</button> <button class="btn btn-secondary" onclick="toggleReveal('lr3')" style="padding:0.3rem 0.6rem;font-size:0.8rem;">Show</button> <span class="sent-text" id="lr3">When writers vary their sentence structures, examiners notice the range.</span></div>
+          <div class="speaking-sent"><span class="num">4.</span> <span class="sent-type" style="background:rgba(168,85,247,0.2);color:var(--accent-purple);font-size:0.65rem;">Cx</span> <button class="btn btn-secondary" onclick="playL25(4)" style="padding:0.3rem 0.6rem;font-size:0.8rem;">🔊</button> <button class="btn btn-secondary" onclick="toggleReveal('lr4')" style="padding:0.3rem 0.6rem;font-size:0.8rem;">Show</button> <span class="sent-text" id="lr4">Although repetitive writing meets basic requirements, it fails to demonstrate advanced competence.</span></div>
+          <div class="speaking-sent"><span class="num">5.</span> <span class="sent-type" style="background:var(--primary-dim);color:var(--primary);font-size:0.65rem;">Cc</span> <button class="btn btn-secondary" onclick="playL25(5)" style="padding:0.3rem 0.6rem;font-size:0.8rem;">🔊</button> <button class="btn btn-secondary" onclick="toggleReveal('lr5')" style="padding:0.3rem 0.6rem;font-size:0.8rem;">Show</button> <span class="sent-text" id="lr5">When candidates mix sentence types, their writing flows naturally and examiners reward the variety.</span></div>
+          <div class="speaking-sent"><span class="num">6.</span> <span class="sent-type" style="background:rgba(56,189,248,0.2);color:var(--accent-blue);font-size:0.65rem;">Cm</span> <button class="btn btn-secondary" onclick="playL25(6)" style="padding:0.3rem 0.6rem;font-size:0.8rem;">🔊</button> <button class="btn btn-secondary" onclick="toggleReveal('lr6')" style="padding:0.3rem 0.6rem;font-size:0.8rem;">Show</button> <span class="sent-text" id="lr6">Compound sentences connect equal ideas, and they maintain balanced rhythm.</span></div>
+          <div class="speaking-sent"><span class="num">7.</span> <span class="sent-type" style="background:rgba(16,185,129,0.2);color:var(--accent-green);font-size:0.65rem;">S</span> <button class="btn btn-secondary" onclick="playL25(7)" style="padding:0.3rem 0.6rem;font-size:0.8rem;">🔊</button> <button class="btn btn-secondary" onclick="toggleReveal('lr7')" style="padding:0.3rem 0.6rem;font-size:0.8rem;">Show</button> <span class="sent-text" id="lr7">Variety matters.</span></div>
+          <div class="speaking-sent"><span class="num">8.</span> <span class="sent-type" style="background:var(--primary-dim);color:var(--primary);font-size:0.65rem;">Cc</span> <button class="btn btn-secondary" onclick="playL25(8)" style="padding:0.3rem 0.6rem;font-size:0.8rem;">🔊</button> <button class="btn btn-secondary" onclick="toggleReveal('lr8')" style="padding:0.3rem 0.6rem;font-size:0.8rem;">Show</button> <span class="sent-text" id="lr8">Although simple sentences are useful for emphasis, writers who rely exclusively on them produce monotonous text.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 06: Correction Table -->
+    <div class="slide" id="slide-5">
+      <div class="card">
+        <div class="card-title">📋 Live Error Correction</div>
+        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:1rem;">Log any errors caught during sprints or L&R. Focus on repetitive sentence openings and missing variety.</p>
+        <table class="error-table" id="errorTable">
+          <thead><tr><th>Error</th><th>Correction</th><th>Type</th></tr></thead>
+          <tbody id="errorBody">
+            <tr><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+            <tr><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+            <tr><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+            <tr><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+          </tbody>
+        </table>
+        <button class="btn btn-secondary" onclick="addErrorRow()" style="margin-top:0.75rem;">+ Add Row</button>
+      </div>
+    </div>
+
+    <!-- SLIDE 07: Homework -->
+    <div class="slide" id="slide-6">
+      <div class="card">
+        <div class="card-title">📝 Homework Assignments</div>
+        <div style="margin-bottom:1rem;">
+          <p style="font-weight:600;margin-bottom:0.5rem;">1. Writing Speed Sprint (timed, 10 min)</p>
+          <p style="font-size:0.88rem;color:var(--muted);">Academic Discussion: "Should universities require all students to take a public speaking course?" Write 120–130 words. Use all 4 sentence types. Chunk-write. Log wpm.</p>
+          <div style="display:flex;align-items:center;gap:1rem;margin-top:0.6rem;flex-wrap:wrap;">
+            <span class="timer-display" id="hw1Timer" style="font-size:1.1rem;">10:00</span><button class="btn" onclick="startTimer('hw1Timer',600)">Start 10 min</button><button class="btn btn-secondary" onclick="resetTimer('hw1Timer',600)">Reset</button>
+          </div>
+          <textarea id="hw1Text" rows="6" placeholder="Write your Academic Discussion response here..."></textarea>
+          <div style="display:flex;align-items:center;gap:1rem;margin-top:0.4rem;">
+            <span class="word-count-badge" id="hw1WC">0 words</span>
+            <span class="word-count-badge" id="hw1WPM" style="color:var(--accent-blue);">— wpm</span>
+          </div>
+        </div>
+        <div style="margin-bottom:1rem;">
+          <p style="font-weight:600;margin-bottom:0.5rem;">2. Email Sprint (timed, 7 min)</p>
+          <p style="font-size:0.88rem;color:var(--muted);">Write to the campus health centre: (1) explain a wellness concern, (2) describe how it affects your studies, (3) request additional services. Bullet-2-first. 100–120 words. Proofread pass.</p>
+          <div style="display:flex;align-items:center;gap:1rem;margin-top:0.6rem;flex-wrap:wrap;">
+            <span class="timer-display" id="hw2Timer" style="font-size:1.1rem;">07:00</span><button class="btn" onclick="startTimer('hw2Timer',420)">Start 7 min</button><button class="btn btn-secondary" onclick="resetTimer('hw2Timer',420)">Reset</button>
+          </div>
+          <textarea id="hw2Text" rows="6" placeholder="Write your email here..."></textarea>
+          <div style="display:flex;align-items:center;gap:1rem;margin-top:0.4rem;">
+            <span class="word-count-badge" id="hw2WC">0 words</span>
+            <span class="word-count-badge" id="hw2WPM" style="color:var(--accent-blue);">— wpm</span>
+          </div>
+        </div>
+        <div style="margin-bottom:1rem;">
+          <p style="font-weight:600;margin-bottom:0.5rem;">3. Sentence Type Rewrite</p>
+          <p style="font-size:0.88rem;color:var(--muted);">Take one paragraph from today's AD sprint. Rewrite it using all 4 sentence types. Highlight the sentence types in different colours.</p>
+        </div>
+        <div style="margin-bottom:1rem;">
+          <p style="font-weight:600;margin-bottom:0.5rem;">4. Vocabulary Journal</p>
+          <p style="font-size:0.88rem;color:var(--muted);">Write 5 sentences using: <em>linguistic, demonstrate, nevertheless, furthermore, substantiate</em>. Each must be a different sentence type.</p>
+        </div>
+        <div>
+          <p style="font-weight:600;margin-bottom:0.5rem;">5. Speaking Sprint (record, 45s, no prep)</p>
+          <p style="font-size:0.88rem;color:var(--muted);">Answer today's AD prompt (studying abroad) aloud — one take, 45 seconds, no notes. Aim for all 4 sentence types. Listen back once; note one fix. Send the recording.</p>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <button class="mobile-nav-toggle" id="mobileNavBtn" aria-label="Open navigation">☰</button>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <script>
+    const TOTAL = 7;
+    let current = 0;
+
+    function switchSlide(n) {
+      document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById('slide-' + n).classList.add('active');
+      document.querySelectorAll('.nav-btn')[n].classList.add('active');
+      current = n;
+      document.getElementById('slideChip').textContent = (n + 1) + ' / ' + TOTAL;
+      window.scrollTo({top: 0, behavior: 'smooth'});
+    }
+
+    let pacerInterval = null;
+    function toggleShadowingPacer() {
+      const display = document.getElementById('shadowingTextDisplay');
+      const audio = document.getElementById('shadowingAudio');
+      if (pacerInterval) { clearInterval(pacerInterval); pacerInterval = null; return; }
+      const wpm = parseInt(document.getElementById('pacerSpeed').value);
+      const words = display.textContent.trim().split(/\s+/);
+      display.innerHTML = words.map((w, i) => `<span class="shadowing-word" id="sw${i}">${w}</span>`).join(' ');
+      let i = 0;
+      audio.play();
+      pacerInterval = setInterval(() => {
+        if (i > 0) document.getElementById('sw' + (i - 1)).classList.remove('active');
+        if (i < words.length) { document.getElementById('sw' + i).classList.add('active'); i++; }
+        else { clearInterval(pacerInterval); pacerInterval = null; }
+      }, 60000 / wpm);
+    }
+    function resetShadowingPacer() {
+      if (pacerInterval) { clearInterval(pacerInterval); pacerInterval = null; }
+      const display = document.getElementById('shadowingTextDisplay');
+      display.innerHTML = 'Experienced academic writers vary their sentence structures to maintain reader engagement and demonstrate linguistic range. Simple sentences deliver direct claims with clarity. Compound sentences connect equal ideas using coordinating conjunctions. Complex sentences establish relationships of cause, condition, or concession through subordinate clauses. The most sophisticated responses combine all three types — simple for emphasis, compound for balance, complex for nuance. This variety signals to examiners that the writer possesses both grammatical control and the ability to organise ideas at multiple levels of complexity.';
+      document.getElementById('shadowingAudio').pause();
+      document.getElementById('shadowingAudio').currentTime = 0;
+    }
+
+    const timerIntervals = {};
+    function startTimer(id, seconds) {
+      if (timerIntervals[id]) { clearInterval(timerIntervals[id]); delete timerIntervals[id]; return; }
+      let remaining = seconds;
+      const el = document.getElementById(id);
+      timerIntervals[id] = setInterval(() => {
+        remaining--;
+        const m = Math.floor(remaining / 60);
+        const s = remaining % 60;
+        el.textContent = String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
+        if (remaining <= 0) { clearInterval(timerIntervals[id]); delete timerIntervals[id]; el.textContent = "TIME!"; el.style.color = 'var(--accent-red)'; }
+      }, 1000);
+    }
+    function resetTimer(id, seconds) {
+      if (timerIntervals[id]) { clearInterval(timerIntervals[id]); delete timerIntervals[id]; }
+      const el = document.getElementById(id);
+      const m = Math.floor(seconds / 60);
+      const s = seconds % 60;
+      el.textContent = String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
+      el.style.color = 'var(--primary)';
+    }
+
+    function wireWC(textId, wcId, wpmId, totalSeconds) {
+      const ta = document.getElementById(textId);
+      const wc = document.getElementById(wcId);
+      const wpm = document.getElementById(wpmId);
+      ta.addEventListener('input', () => {
+        const words = ta.value.trim().split(/\s+/).filter(w => w.length > 0).length;
+        wc.textContent = words + ' words';
+        wpm.textContent = Math.round(words / (totalSeconds / 60)) + ' wpm';
+      });
+    }
+    wireWC('sprint1Text', 'sprint1WC', 'sprint1WPM', 600);
+    wireWC('sprint2Text', 'sprint2WC', 'sprint2WPM', 420);
+    wireWC('hw1Text', 'hw1WC', 'hw1WPM', 600);
+    wireWC('hw2Text', 'hw2WC', 'hw2WPM', 420);
+
+    document.querySelectorAll('.sv-box').forEach(cb => {
+      cb.addEventListener('change', () => {
+        const count = document.querySelectorAll('.sv-box:checked').length;
+        document.getElementById('svCount').textContent = count + ' / 4 sentence types used';
+      });
+    });
+
+    function playL25(n) {
+      const audio = new Audio('audio/l25-s' + n + '.mp3');
+      audio.play();
+    }
+
+    function toggleReveal(id) {
+      document.getElementById(id).classList.toggle('show');
+    }
+
+    function addErrorRow() {
+      const tbody = document.getElementById('errorBody');
+      const tr = document.createElement('tr');
+      tr.innerHTML = '<td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td>';
+      tbody.appendChild(tr);
+    }
+
+    document.getElementById('mobileNavBtn').addEventListener('click', () => {
+      document.querySelector('.sidebar').classList.toggle('open');
+      document.getElementById('sidebarOverlay').classList.toggle('open');
+    });
+    document.getElementById('sidebarOverlay').addEventListener('click', () => {
+      document.querySelector('.sidebar').classList.remove('open');
+      document.getElementById('sidebarOverlay').classList.remove('open');
+    });
+
+    switchSlide(0);
+  </script>
+</body>
+</html>
