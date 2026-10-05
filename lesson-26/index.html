@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Valeria — Lesson 26: Vocabulary Precision</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg-dark:#090d16;--bg-card:#131a26;--border-color:#243042;--text-main:#f1f5f9;--text-muted:#64748b;--primary:#f59e0b;--primary-hover:#d97706;--primary-dim:rgba(245,158,11,0.12);--accent-blue:#38bdf8;--accent-green:#10b981;--accent-red:#ef4444;--accent-purple:#a855f7;}
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:'Inter',sans-serif;background:var(--bg-dark);color:var(--text-main);display:flex;min-height:100vh;overflow-x:hidden;}
+    .sidebar{width:260px;background:var(--bg-card);border-right:1px solid var(--border-color);display:flex;flex-direction:column;padding:1.5rem 1rem;position:fixed;height:100vh;z-index:100;overflow-y:auto;scrollbar-width:thin;}
+    .brand{display:flex;align-items:center;gap:0.75rem;margin-bottom:2rem;padding:0 0.5rem;}
+    .brand-badge{background:var(--primary);color:#000;font-weight:700;font-size:0.75rem;padding:0.2rem 0.5rem;border-radius:4px;text-transform:uppercase;}
+    .brand-title{font-weight:600;font-size:1.1rem;color:var(--text-main);}
+    .nav-btn{background:transparent;border:1px solid transparent;color:var(--text-muted);padding:0.75rem 1rem;border-radius:8px;text-align:left;font-size:0.9rem;font-family:inherit;cursor:pointer;margin-bottom:0.5rem;display:flex;align-items:center;gap:0.75rem;transition:all 0.2s ease;}
+    .nav-btn:hover{background:rgba(255,255,255,0.03);color:var(--text-main);}
+    .nav-btn.active{background:var(--primary-dim);border-color:rgba(245,158,11,0.3);color:var(--primary);font-weight:600;}
+    .nav-num{font-family:'Fira Code',monospace;font-size:0.8rem;opacity:0.7;}
+    .main-content{margin-left:260px;flex:1;padding:2rem 3rem;max-width:1200px;}
+    .header{display:flex;justify-content:space-between;align-items:center;margin-bottom:2rem;padding-bottom:1rem;border-bottom:1px solid var(--border-color);}
+    .page-title{font-size:1.5rem;font-weight:700;color:var(--text-main);}
+    .tag{background:rgba(56,189,248,0.1);color:var(--accent-blue);border:1px solid rgba(56,189,248,0.2);padding:0.25rem 0.75rem;border-radius:20px;font-size:0.8rem;font-family:'Fira Code',monospace;}
+    .slide{display:none;animation:fadeIn 0.3s ease;}.slide.active{display:block;}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+    @keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.3;}}
+    .card{background:var(--bg-card);border:1px solid var(--border-color);border-radius:12px;padding:1.5rem;margin-bottom:1.5rem;}
+    .card-title{font-size:1.1rem;font-weight:600;color:var(--primary);margin-bottom:1rem;display:flex;align-items:center;gap:0.5rem;}
+    .shadowing-text{font-size:1.05rem;line-height:1.8;color:#cbd5e1;margin-bottom:1.5rem;background:rgba(0,0,0,0.2);padding:1.25rem;border-radius:8px;border-left:3px solid var(--primary);}
+    .shadowing-word{transition:background 0.15s ease,color 0.15s ease;border-radius:3px;padding:0 2px;}
+    .shadowing-word.active{background:var(--primary);color:#000;font-weight:600;}
+    .controls{display:flex;gap:0.75rem;align-items:center;flex-wrap:wrap;margin-bottom:1rem;}
+    .btn{background:var(--primary);color:#000;border:none;padding:0.6rem 1.2rem;border-radius:6px;font-weight:600;font-size:0.85rem;font-family:inherit;cursor:pointer;display:inline-flex;align-items:center;gap:0.4rem;transition:background 0.2s ease;}
+    .btn:hover{background:var(--primary-hover);}
+    .btn-secondary{background:transparent;border:1px solid var(--border-color);color:var(--text-main);}
+    .timer-display{font-family:'Fira Code',monospace;font-size:1.5rem;font-weight:700;color:var(--primary);background:#000;padding:0.4rem 1rem;border-radius:8px;border:1px solid var(--border-color);display:inline-block;}
+    .error-table{width:100%;border-collapse:collapse;margin-top:1rem;font-size:0.9rem;}
+    .error-table th,.error-table td{padding:0.75rem 1rem;border:1px solid var(--border-color);text-align:left;}
+    .error-table th{background:rgba(0,0,0,0.4);color:var(--primary);font-weight:600;}
+    .text-red{color:var(--accent-red);}.text-green{color:var(--accent-green);}
+    .reveal-box{display:none;background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.2);padding:1rem;border-radius:8px;margin-top:0.75rem;font-size:0.9rem;line-height:1.7;}
+    .reveal-box.show{display:block;}
+    textarea,input[type="text"]{width:100%;background:rgba(0,0,0,0.4);border:1px solid var(--border-color);color:var(--text-main);padding:0.75rem;border-radius:6px;font-family:inherit;font-size:0.9rem;resize:vertical;}
+    textarea:focus,input[type="text"]:focus{outline:none;border-color:var(--primary);}
+    .word-count-badge{font-family:'Fira Code',monospace;font-size:0.85rem;color:var(--accent-green);margin-top:0.5rem;}
+    .prompt-block{background:rgba(0,0,0,0.25);padding:1rem;border-radius:8px;font-size:0.9rem;line-height:1.7;margin-bottom:1rem;border-left:3px solid var(--primary);}
+    .vocab-pair{display:grid;grid-template-columns:1fr auto 1fr;gap:0.5rem;align-items:center;margin-bottom:0.5rem;font-size:0.9rem;}
+    .vocab-vague{color:var(--accent-red);text-decoration:line-through;}
+    .vocab-precise{color:var(--accent-green);font-weight:600;}
+    .vocab-arrow{color:var(--text-muted);}
+    .sent-text{display:none;font-size:0.92rem;color:#e2e8f0;margin-top:0.5rem;line-height:1.6;}
+    .sent-text.show{display:inline;}
+    .speaking-sent{margin-bottom:0.75rem;}
+    .num{font-weight:700;color:var(--primary);margin-right:0.4rem;}
+    @media(max-width:768px){.main-content{margin-left:0;padding:1rem 1rem 84px;max-width:100%}.header{flex-wrap:wrap;gap:0.5rem}.controls{flex-direction:column;align-items:stretch}.timer-display{font-size:1.25rem}}
+  </style>
+ <!-- FE:CSS-MOBILE --><style>.mobile-nav-toggle{display:none;position:fixed;bottom:20px;right:20px;z-index:200;width:48px;height:48px;border-radius:50%;background:var(--primary);color:#000;border:none;font-size:20px;cursor:pointer;align-items:center;justify-content:center;box-shadow:3px 3px 0 rgba(0,0,0,0.12)}
+.sidebar-overlay{display:none;position:fixed;inset:0;z-index:150;background:rgba(0,0,0,0.4)}
+.sidebar-overlay.open{display:block}@media(max-width:768px){
+  .mobile-nav-toggle{display:flex}
+  .sidebar{position:fixed;left:0;top:0;z-index:175;height:100vh;transform:translateX(-100%);transition:transform .25s ease;width:260px;display:flex!important}
+  .sidebar.open{transform:translateX(0)}
+  .main-content{margin-left:0;padding:1rem 1rem 84px;max-width:100%}
+  .header{flex-wrap:wrap;gap:0.5rem}
+  .grid-2{grid-template-columns:1fr}
+  .controls{flex-direction:column;align-items:stretch}
+  .timer-display{font-size:1.5rem}
+}</style>
+ <!-- FE:CSS-CHIP --><style>.slide-chip{font-family:'Fira Code',monospace;font-size:0.72rem;font-weight:700;color:var(--primary);background:var(--bg-card,rgba(0,0,0,0.4));border:1px solid var(--border-color,rgba(255,255,255,0.15));padding:0.25rem 0.65rem;border-radius:20px;white-space:nowrap;margin-left:auto}</style>
+ <style>.back-link{color:var(--text-muted);text-decoration:none;font-size:0.8rem;font-family:'Fira Code',monospace;white-space:nowrap;transition:color 0.2s;margin-left:1rem;}.back-link:hover{color:var(--primary);}</style></head>
+<body>
+  <aside class="sidebar">
+    <div class="brand"><span class="brand-badge">TOEFL</span><span class="brand-title">Valeria L26</span></div>
+    <button class="nav-btn active" onclick="switchSlide(0)"><span class="nav-num">01</span> Warm-up</button>
+    <button class="nav-btn" onclick="switchSlide(1)"><span class="nav-num">02</span> Precision Toolkit</button>
+    <button class="nav-btn" onclick="switchSlide(2)"><span class="nav-num">03</span> Sprint #1 · AD</button>
+    <button class="nav-btn" onclick="switchSlide(3)"><span class="nav-num">04</span> Sprint #2 · Email</button>
+    <button class="nav-btn" onclick="switchSlide(4)"><span class="nav-num">05</span> Listen & Repeat ×8</button>
+    <button class="nav-btn" onclick="switchSlide(5)"><span class="nav-num">06</span> Correction Table</button>
+    <button class="nav-btn" onclick="switchSlide(6)"><span class="nav-num">07</span> Homework</button>
+  </aside>
+  <main class="main-content">
+    <header class="header"><div><h1 class="page-title">Vocabulary Precision</h1><p style="color:var(--text-muted);font-size:0.85rem;margin-top:0.2rem;">Precise Word Choice · Academic Register · Vague → Specific · Timed Sprints</p></div><!-- FE:CHIP --><span class="slide-chip" id="slideChip">1 / N</span><a href="../index.html" class="back-link">&#8592; Portal</a>
+        <span class="tag">WRITING VOCAB</span></header>
+
+    <!-- SLIDE 01: Shadowing Warm-up -->
+    <div class="slide active" id="slide-0">
+      <div class="card">
+        <div class="card-title">🎙️ Shadowing — Vocabulary Precision</div>
+        <div class="shadowing-text" id="shadowingTextDisplay">Precise vocabulary distinguishes competent academic writing from merely adequate prose. Where vague language relies on general terms like good or important, precise word choice selects the exact term that conveys the intended meaning. Academic register demands specific lexical items: substantiate rather than prove, demonstrate rather than show, detrimental rather than bad. This precision eliminates ambiguity and signals to examiners that the writer possesses both lexical range and the judgement to deploy it effectively. Over the course of a timed response, even small vocabulary upgrades accumulate into a measurably stronger performance.</div>
+        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:1rem;">Targets: <em>precise vocabulary · academic register · lexical range · deploy effectively · small vocabulary upgrades</em></p>
+        <div class="controls">
+          <button class="btn" onclick="toggleShadowingPacer()">▶ Start Pacer</button>
+          <button class="btn btn-secondary" onclick="resetShadowingPacer()">↺ Reset</button>
+          <audio id="shadowingAudio" src="audio/shadowing.mp3" preload="metadata" style="display:none;"></audio>
+          <button class="btn btn-secondary" onclick="document.getElementById('shadowingAudio').play()">🔊 Play Audio</button>
+          <select id="pacerSpeed" style="background:#000;color:#fff;padding:0.4rem;border-radius:4px;border:1px solid var(--border-color);"><option value="450">130 WPM</option><option value="380" selected>150 WPM</option><option value="320">175 WPM</option></select>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 02: Precision Toolkit -->
+    <div class="slide" id="slide-1">
+      <div class="card">
+        <div class="card-title">🔧 Vague → Precise: The Upgrade Toolkit</div>
+        <p style="font-size:0.9rem;color:var(--text-muted);margin-bottom:1rem;">Replace vague words with precise alternatives. Each upgrade improves your lexical resource score.</p>
+        <div class="vocab-pair"><span class="vocab-vague">good</span><span class="vocab-arrow">→</span><span class="vocab-precise">beneficial / advantageous / favourable</span></div>
+        <div class="vocab-pair"><span class="vocab-vague">bad</span><span class="vocab-arrow">→</span><span class="vocab-precise">detrimental / adverse / harmful</span></div>
+        <div class="vocab-pair"><span class="vocab-vague">important</span><span class="vocab-arrow">→</span><span class="vocab-precise">essential / crucial / paramount</span></div>
+        <div class="vocab-pair"><span class="vocab-vague">show</span><span class="vocab-arrow">→</span><span class="vocab-precise">demonstrate / illustrate / indicate</span></div>
+        <div class="vocab-pair"><span class="vocab-vague">prove</span><span class="vocab-arrow">→</span><span class="vocab-precise">substantiate / confirm / validate</span></div>
+        <div class="vocab-pair"><span class="vocab-vague">get</span><span class="vocab-arrow">→</span><span class="vocab-precise">obtain / acquire / gain</span></div>
+        <div class="vocab-pair"><span class="vocab-vague">help</span><span class="vocab-arrow">→</span><span class="vocab-precise">facilitate / assist / contribute to</span></div>
+        <div class="vocab-pair"><span class="vocab-vague">more and more</span><span class="vocab-arrow">→</span><span class="vocab-precise">an increasing number of / a growing trend</span></div>
+        <p style="font-size:0.82rem;color:var(--text-muted);margin-top:1rem;"><strong>⚠️ TOEFL trap:</strong> Don't over-upgrade. Use precise vocabulary only where it fits naturally. Forced synonyms sound awkward and reduce coherence.</p>
+      </div>
+      <div class="card">
+        <div class="card-title">🎯 Mini-Drill: Upgrade the Sentences</div>
+        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:0.75rem;">Replace the underlined vague word with a precise alternative:</p>
+        <div style="background:rgba(0,0,0,0.2);padding:1rem;border-radius:8px;font-size:0.9rem;line-height:1.8;">
+          1. "Technology has a <span class="text-red">good</span> effect on education." <span class="text-red">[?]</span><br>
+          2. "Research <span class="text-red">shows</span> that exercise improves memory." <span class="text-red">[?]</span><br>
+          3. "Universities should <span class="text-red">get</span> more funding for labs." <span class="text-red">[?]</span><br>
+          4. "Climate change is <span class="text-red">bad</span> for coastal communities." <span class="text-red">[?]</span>
+        </div>
+        <button class="btn btn-secondary" onclick="toggleReveal('vocabAns')" style="margin-top:0.75rem;">👁️ Show Answers</button>
+        <div class="reveal-box" id="vocabAns">
+          1. "Technology has a <strong style="color:var(--accent-green);">beneficial</strong> effect on education."<br>
+          2. "Research <strong style="color:var(--accent-green);">demonstrates</strong> that exercise improves memory."<br>
+          3. "Universities should <strong style="color:var(--accent-green);">obtain</strong> more funding for labs."<br>
+          4. "Climate change is <strong style="color:var(--accent-green);">detrimental</strong> to coastal communities."
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 03: Sprint #1 — Academic Discussion -->
+    <div class="slide" id="slide-2">
+      <div class="card">
+        <div class="card-title">✍️ Sprint #1 — Academic Discussion (10 min)</div>
+        <div class="prompt-block">
+          <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.75rem;">
+            <strong>Prompt — Technology in Education:</strong>
+            <span style="display:flex;align-items:center;gap:0.5rem;"><span class="timer-display" id="sprint1Timer" style="font-size:1.25rem;">10:00</span><button class="btn" onclick="startTimer('sprint1Timer',600)">Start 10 min</button><button class="btn btn-secondary" onclick="resetTimer('sprint1Timer',600)">Reset</button></span>
+          </div>
+          <p style="margin-top:0.75rem;"><em>"Some argue that technology has improved education more than any other innovation. Others believe that traditional teaching methods remain more effective. Which view do you support?"</em></p>
+        </div>
+        <div style="background:rgba(0,0,0,0.2);padding:0.75rem 1rem;border-radius:6px;font-size:0.85rem;color:var(--text-muted);margin-bottom:0.75rem;">
+          <strong>Focus today:</strong> Replace at least 5 vague words with precise alternatives. Use the upgrade toolkit. Chunk-write. 120–130 words. Do NOT stop to edit.
+        </div>
+        <textarea id="sprint1Text" rows="8" placeholder="Write your Academic Discussion response here..."></textarea>
+        <div style="display:flex;align-items:center;gap:1rem;margin-top:0.5rem;">
+          <span class="word-count-badge" id="sprint1WC">0 words</span>
+          <span class="word-count-badge" id="sprint1WPM" style="color:var(--accent-blue);">— wpm</span>
+        </div>
+        <button class="btn btn-secondary" onclick="toggleReveal('sprint1Check')" style="margin-top:0.75rem;">✅ Sprint Checklist</button>
+        <div class="reveal-box" id="sprint1Check">
+          Stance stated in the first 2 sentences?<br>
+          120–130 words (10-min floor met)?<br>
+          ≥5 vague → precise upgrades (see audit below)?<br>
+          One concrete example, not just claims?<br>
+          Zero mid-write editing — chunk-wrote straight through?
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">🔍 Vocabulary Audit</div>
+        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:0.5rem;">After writing, search for vague words. How many did you replace?</p>
+        <div style="font-size:0.9rem;line-height:1.8;">
+          <label><input type="checkbox" class="va-box" data-va="good"> good → beneficial/advantageous</label><br>
+          <label><input type="checkbox" class="va-box" data-va="bad"> bad → detrimental/adverse</label><br>
+          <label><input type="checkbox" class="va-box" data-va="show"> show → demonstrate/illustrate</label><br>
+          <label><input type="checkbox" class="va-box" data-va="prove"> prove → substantiate/validate</label><br>
+          <label><input type="checkbox" class="va-box" data-va="help"> help → facilitate/assist</label>
+        </div>
+        <div class="word-count-badge" id="vaCount" style="margin-top:0.5rem;">0 / 5 vague words replaced</div>
+      </div>
+    </div>
+
+    <!-- SLIDE 04: Sprint #2 — Email -->
+    <div class="slide" id="slide-3">
+      <div class="card">
+        <div class="card-title">✉️ Sprint #2 — Email Reply (7 min)</div>
+        <div class="prompt-block" style="border-color:var(--accent-purple);">
+          <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.75rem;">
+            <strong>Prompt — Career Services:</strong>
+            <span style="display:flex;align-items:center;gap:0.5rem;"><span class="timer-display" id="sprint2Timer" style="font-size:1.25rem;">07:00</span><button class="btn" onclick="startTimer('sprint2Timer',420)">Start 7 min</button><button class="btn btn-secondary" onclick="resetTimer('sprint2Timer',420)">Reset</button></span>
+          </div>
+          <p style="margin-top:0.75rem;"><em>Write to the career services office: (1) explain that you need help with your resume, (2) describe your career goals, and (3) request a review session or workshop.</em></p>
+        </div>
+        <div style="background:rgba(0,0,0,0.2);padding:0.75rem 1rem;border-radius:6px;font-size:0.85rem;color:var(--text-muted);margin-bottom:0.75rem;">
+          <strong>Focus today:</strong> Bullet-2-first. Use ≥3 precise vocabulary upgrades. Target 100–120 words. Reserve last 60s for proofread pass.
+        </div>
+        <textarea id="sprint2Text" rows="8" placeholder="Dear Career Services,&#10;&#10;..."></textarea>
+        <div style="display:flex;align-items:center;gap:1rem;margin-top:0.5rem;">
+          <span class="word-count-badge" id="sprint2WC">0 words</span>
+          <span class="word-count-badge" id="sprint2WPM" style="color:var(--accent-blue);">— wpm</span>
+        </div>
+        <button class="btn btn-secondary" onclick="toggleReveal('sprint2Check')" style="margin-top:0.75rem;">✅ Sprint Checklist</button>
+        <div class="reveal-box" id="sprint2Check">
+          All 3 bullets covered (resume help · career goals · review session)?<br>
+          Bullet 2 (strongest content) written first?<br>
+          100–120 words in 7 minutes?<br>
+          Formal tone — no contractions, no chatty openers?<br>
+          60–90s proofread pass done at the end?
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 05: Listen & Repeat ×8 -->
+    <div class="slide" id="slide-4">
+      <div class="card">
+        <div class="card-title">🎧 Listen & Repeat — 8 Sentences</div>
+        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:1rem;">Play each sentence, repeat immediately. Text is hidden — try from hearing alone.</p>
+        <div id="l26-lrSentences">
+          <div class="speaking-sent"><span class="num">1.</span> <button class="btn btn-secondary" onclick="playL26(1)" style="padding:0.3rem 0.6rem;font-size:0.8rem;">🔊</button> <button class="btn btn-secondary" onclick="toggleReveal('lr1')" style="padding:0.3rem 0.6rem;font-size:0.8rem;">Show</button> <span class="sent-text" id="lr1">Precise vocabulary distinguishes competent academic writing from merely adequate prose.</span></div>
+          <div class="speaking-sent"><span class="num">2.</span> <button class="btn btn-secondary" onclick="playL26(2)" style="padding:0.3rem 0.6rem;font-size:0.8rem;">🔊</button> <button class="btn btn-secondary" onclick="toggleReveal('lr2')" style="padding:0.3rem 0.6rem;font-size:0.8rem;">Show</button> <span class="sent-text" id="lr2">Academic register demands specific lexical items: substantiate rather than prove.</span></div>
+          <div class="speaking-sent"><span class="num">3.</span> <button class="btn btn-secondary" onclick="playL26(3)" style="padding:0.3rem 0.6rem;font-size:0.8rem;">🔊</button> <button class="btn btn-secondary" onclick="toggleReveal('lr3')" style="padding:0.3rem 0.6rem;font-size:0.8rem;">Show</button> <span class="sent-text" id="lr3">This precision eliminates ambiguity and signals lexical range to examiners.</span></div>
+          <div class="speaking-sent"><span class="num">4.</span> <button class="btn btn-secondary" onclick="playL26(4)" style="padding:0.3rem 0.6rem;font-size:0.8rem;">🔊</button> <button class="btn btn-secondary" onclick="toggleReveal('lr4')" style="padding:0.3rem 0.6rem;font-size:0.8rem;">Show</button> <span class="sent-text" id="lr4">Even small vocabulary upgrades accumulate into a measurably stronger performance.</span></div>
+          <div class="speaking-sent"><span class="num">5.</span> <button class="btn btn-secondary" onclick="playL26(5)" style="padding:0.3rem 0.6rem;font-size:0.8rem;">🔊</button> <button class="btn btn-secondary" onclick="toggleReveal('lr5')" style="padding:0.3rem 0.6rem;font-size:0.8rem;">Show</button> <span class="sent-text" id="lr5">Furthermore, candidates who demonstrate lexical variety tend to score higher on writing tasks.</span></div>
+          <div class="speaking-sent"><span class="num">6.</span> <button class="btn btn-secondary" onclick="playL26(6)" style="padding:0.3rem 0.6rem;font-size:0.8rem;">🔊</button> <button class="btn btn-secondary" onclick="toggleReveal('lr6')" style="padding:0.3rem 0.6rem;font-size:0.8rem;">Show</button> <span class="sent-text" id="lr6">Consequently, replacing vague terms with precise alternatives improves coherence.</span></div>
+          <div class="speaking-sent"><span class="num">7.</span> <button class="btn btn-secondary" onclick="playL26(7)" style="padding:0.3rem 0.6rem;font-size:0.8rem;">🔊</button> <button class="btn btn-secondary" onclick="toggleReveal('lr7')" style="padding:0.3rem 0.6rem;font-size:0.8rem;">Show</button> <span class="sent-text" id="lr7">However, forced synonyms sound awkward and reduce clarity.</span></div>
+          <div class="speaking-sent"><span class="num">8.</span> <button class="btn btn-secondary" onclick="playL26(8)" style="padding:0.3rem 0.6rem;font-size:0.8rem;">🔊</button> <button class="btn btn-secondary" onclick="toggleReveal('lr8')" style="padding:0.3rem 0.6rem;font-size:0.8rem;">Show</button> <span class="sent-text" id="lr8">Therefore, use precise vocabulary only where it fits naturally in context.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 06: Correction Table -->
+    <div class="slide" id="slide-5">
+      <div class="card">
+        <div class="card-title">📋 Live Error Correction</div>
+        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:1rem;">Log any errors caught during sprints or L&R. Focus on vague vocabulary and forced synonyms.</p>
+        <table class="error-table" id="errorTable">
+          <thead><tr><th>Error</th><th>Correction</th><th>Type</th></tr></thead>
+          <tbody id="errorBody">
+            <tr><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+            <tr><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+            <tr><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+            <tr><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+          </tbody>
+        </table>
+        <button class="btn btn-secondary" onclick="addErrorRow()" style="margin-top:0.75rem;">+ Add Row</button>
+      </div>
+    </div>
+
+    <!-- SLIDE 07: Homework -->
+    <div class="slide" id="slide-6">
+      <div class="card">
+        <div class="card-title">📝 Homework Assignments</div>
+        <div style="margin-bottom:1rem;">
+          <p style="font-weight:600;margin-bottom:0.5rem;">1. Writing Speed Sprint (timed, 10 min)</p>
+          <p style="font-size:0.88rem;color:var(--muted);">Academic Discussion: "Should universities offer more online courses?" Write 120–130 words. Replace ≥5 vague words with precise alternatives. Chunk-write. Log wpm.</p>
+          <div style="display:flex;align-items:center;gap:1rem;margin-top:0.6rem;flex-wrap:wrap;">
+            <span class="timer-display" id="hw1Timer" style="font-size:1.1rem;">10:00</span><button class="btn" onclick="startTimer('hw1Timer',600)">Start 10 min</button><button class="btn btn-secondary" onclick="resetTimer('hw1Timer',600)">Reset</button>
+          </div>
+          <textarea id="hw1Text" rows="6" placeholder="Write your Academic Discussion response here..."></textarea>
+          <div style="display:flex;align-items:center;gap:1rem;margin-top:0.4rem;">
+            <span class="word-count-badge" id="hw1WC">0 words</span>
+            <span class="word-count-badge" id="hw1WPM" style="color:var(--accent-blue);">— wpm</span>
+          </div>
+        </div>
+        <div style="margin-bottom:1rem;">
+          <p style="font-weight:600;margin-bottom:0.5rem;">2. Email Sprint (timed, 7 min)</p>
+          <p style="font-size:0.88rem;color:var(--muted);">Write to the student affairs office: (1) explain a housing concern, (2) describe how it affects your studies, (3) request assistance. Bullet-2-first. 100–120 words. Proofread pass.</p>
+          <div style="display:flex;align-items:center;gap:1rem;margin-top:0.6rem;flex-wrap:wrap;">
+            <span class="timer-display" id="hw2Timer" style="font-size:1.1rem;">07:00</span><button class="btn" onclick="startTimer('hw2Timer',420)">Start 7 min</button><button class="btn btn-secondary" onclick="resetTimer('hw2Timer',420)">Reset</button>
+          </div>
+          <textarea id="hw2Text" rows="6" placeholder="Write your email here..."></textarea>
+          <div style="display:flex;align-items:center;gap:1rem;margin-top:0.4rem;">
+            <span class="word-count-badge" id="hw2WC">0 words</span>
+            <span class="word-count-badge" id="hw2WPM" style="color:var(--accent-blue);">— wpm</span>
+          </div>
+        </div>
+        <div style="margin-bottom:1rem;">
+          <p style="font-weight:600;margin-bottom:0.5rem;">3. Vocabulary Upgrade Drill</p>
+          <p style="font-size:0.88rem;color:var(--muted);">Take a paragraph from today's AD sprint. Underline every vague word. Replace each with a precise alternative from the toolkit. Rewrite the paragraph.</p>
+        </div>
+        <div>
+          <p style="font-weight:600;margin-bottom:0.5rem;">4. Vocabulary Journal</p>
+          <p style="font-size:0.88rem;color:var(--muted);">Write 5 sentences using: <em>substantiate, detrimental, facilitate, paramount, ambiguous</em>. Each must demonstrate precise word choice.</p>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <button class="mobile-nav-toggle" id="mobileNavBtn" aria-label="Open navigation">☰</button>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <script>
+    const TOTAL = 7;
+    let current = 0;
+
+    function switchSlide(n) {
+      document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById('slide-' + n).classList.add('active');
+      document.querySelectorAll('.nav-btn')[n].classList.add('active');
+      current = n;
+      document.getElementById('slideChip').textContent = (n + 1) + ' / ' + TOTAL;
+      window.scrollTo({top: 0, behavior: 'smooth'});
+    }
+
+    let pacerInterval = null;
+    function toggleShadowingPacer() {
+      const display = document.getElementById('shadowingTextDisplay');
+      const audio = document.getElementById('shadowingAudio');
+      if (pacerInterval) { clearInterval(pacerInterval); pacerInterval = null; return; }
+      const wpm = parseInt(document.getElementById('pacerSpeed').value);
+      const words = display.textContent.trim().split(/\s+/);
+      display.innerHTML = words.map((w, i) => `<span class="shadowing-word" id="sw${i}">${w}</span>`).join(' ');
+      let i = 0;
+      audio.play();
+      pacerInterval = setInterval(() => {
+        if (i > 0) document.getElementById('sw' + (i - 1)).classList.remove('active');
+        if (i < words.length) { document.getElementById('sw' + i).classList.add('active'); i++; }
+        else { clearInterval(pacerInterval); pacerInterval = null; }
+      }, 60000 / wpm);
+    }
+    function resetShadowingPacer() {
+      if (pacerInterval) { clearInterval(pacerInterval); pacerInterval = null; }
+      const display = document.getElementById('shadowingTextDisplay');
+      display.innerHTML = 'Precise vocabulary distinguishes competent academic writing from merely adequate prose. Where vague language relies on general terms like good or important, precise word choice selects the exact term that conveys the intended meaning. Academic register demands specific lexical items: substantiate rather than prove, demonstrate rather than show, detrimental rather than bad. This precision eliminates ambiguity and signals to examiners that the writer possesses both lexical range and the judgement to deploy it effectively. Over the course of a timed response, even small vocabulary upgrades accumulate into a measurably stronger performance.';
+      document.getElementById('shadowingAudio').pause();
+      document.getElementById('shadowingAudio').currentTime = 0;
+    }
+
+    const timerIntervals = {};
+    function startTimer(id, seconds) {
+      if (timerIntervals[id]) { clearInterval(timerIntervals[id]); delete timerIntervals[id]; return; }
+      let remaining = seconds;
+      const el = document.getElementById(id);
+      timerIntervals[id] = setInterval(() => {
+        remaining--;
+        const m = Math.floor(remaining / 60);
+        const s = remaining % 60;
+        el.textContent = String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
+        if (remaining <= 0) { clearInterval(timerIntervals[id]); delete timerIntervals[id]; el.textContent = "TIME!"; el.style.color = 'var(--accent-red)'; }
+      }, 1000);
+    }
+    function resetTimer(id, seconds) {
+      if (timerIntervals[id]) { clearInterval(timerIntervals[id]); delete timerIntervals[id]; }
+      const el = document.getElementById(id);
+      const m = Math.floor(seconds / 60);
+      const s = seconds % 60;
+      el.textContent = String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
+      el.style.color = 'var(--primary)';
+    }
+
+    function wireWC(textId, wcId, wpmId, totalSeconds) {
+      const ta = document.getElementById(textId);
+      const wc = document.getElementById(wcId);
+      const wpm = document.getElementById(wpmId);
+      ta.addEventListener('input', () => {
+        const words = ta.value.trim().split(/\s+/).filter(w => w.length > 0).length;
+        wc.textContent = words + ' words';
+        wpm.textContent = Math.round(words / (totalSeconds / 60)) + ' wpm';
+      });
+    }
+    wireWC('sprint1Text', 'sprint1WC', 'sprint1WPM', 600);
+    wireWC('sprint2Text', 'sprint2WC', 'sprint2WPM', 420);
+    wireWC('hw1Text', 'hw1WC', 'hw1WPM', 600);
+    wireWC('hw2Text', 'hw2WC', 'hw2WPM', 420);
+
+    document.querySelectorAll('.va-box').forEach(cb => {
+      cb.addEventListener('change', () => {
+        const count = document.querySelectorAll('.va-box:checked').length;
+        document.getElementById('vaCount').textContent = count + ' / 5 vague words replaced';
+      });
+    });
+
+    function playL26(n) {
+      const audio = new Audio('audio/l26-s' + n + '.mp3');
+      audio.play();
+    }
+
+    function toggleReveal(id) {
+      document.getElementById(id).classList.toggle('show');
+    }
+
+    function addErrorRow() {
+      const tbody = document.getElementById('errorBody');
+      const tr = document.createElement('tr');
+      tr.innerHTML = '<td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td>';
+      tbody.appendChild(tr);
+    }
+
+    document.getElementById('mobileNavBtn').addEventListener('click', () => {
+      document.querySelector('.sidebar').classList.toggle('open');
+      document.getElementById('sidebarOverlay').classList.toggle('open');
+    });
+    document.getElementById('sidebarOverlay').addEventListener('click', () => {
+      document.querySelector('.sidebar').classList.remove('open');
+      document.getElementById('sidebarOverlay').classList.remove('open');
+    });
+
+    switchSlide(0);
+  </script>
+</body>
+</html>
