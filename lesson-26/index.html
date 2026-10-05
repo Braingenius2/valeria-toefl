@@ -141,10 +141,13 @@
         <div class="card-title">✍️ Sprint #1 — Academic Discussion (10 min)</div>
         <div class="prompt-block">
           <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.75rem;">
-            <strong>Prompt — Technology in Education:</strong>
+            <strong>Prompt — Technology in Education (TOEFL format):</strong>
             <span style="display:flex;align-items:center;gap:0.5rem;"><span class="timer-display" id="sprint1Timer" style="font-size:1.25rem;">10:00</span><button class="btn" onclick="startTimer('sprint1Timer',600)">Start 10 min</button><button class="btn btn-secondary" onclick="resetTimer('sprint1Timer',600)">Reset</button></span>
           </div>
-          <p style="margin-top:0.75rem;"><em>"Some argue that technology has improved education more than any other innovation. Others believe that traditional teaching methods remain more effective. Which view do you support?"</em></p>
+          <p style="margin-top:0.75rem;">Your professor is teaching a course on education and technology. Write a post responding to the professor's question. In your post, you should: express and support your opinion; make a contribution to the discussion in your own words.</p>
+          <p style="margin-top:0.5rem;"><strong>Professor:</strong> “This week we are discussing technology in education. Has technology improved education more than any other innovation, or do traditional teaching methods remain more effective?”</p>
+          <p><strong>Alex:</strong> “Technology wins — recorded lectures, instant feedback, and global resources do things a chalkboard never could.”</p>
+          <p><strong>Maria:</strong> “Methods matter more than tools. A great teacher with a whiteboard beats a mediocre app, and screens mostly distract students.”</p>
         </div>
         <div style="background:rgba(0,0,0,0.2);padding:0.75rem 1rem;border-radius:6px;font-size:0.85rem;color:var(--text-muted);margin-bottom:0.75rem;">
           <strong>Focus today:</strong> Replace at least 5 vague words with precise alternatives. Use the upgrade toolkit. Chunk-write. 120–130 words. Do NOT stop to edit.
@@ -154,9 +157,15 @@
           <span class="word-count-badge" id="sprint1WC">0 words</span>
           <span class="word-count-badge" id="sprint1WPM" style="color:var(--accent-blue);">— wpm</span>
         </div>
+        <button class="btn btn-secondary" onclick="toggleReveal('sprint1Model')" style="margin-top:0.75rem;">👁️ Show Model Answer</button>
         <button class="btn btn-secondary" onclick="toggleReveal('sprint1Check')" style="margin-top:0.75rem;">✅ Sprint Checklist</button>
+        <div class="reveal-box" id="sprint1Model">
+          <strong>Model (~125 words, agrees with Alex, concedes to Maria, toolkit upgrades underlined in class):</strong><br><br>
+          Technology has improved education more than any single earlier innovation, although good teaching still matters. Recorded lectures facilitate revision: students can replay difficult sections, which demonstrates how on-demand access supports different paces of learning. My cousin, for example, obtained an internship after completing free online coding courses her school could never offer. Teachers also benefit: automated quizzes handle routine marking, which frees class time for discussion that builds real understanding. However, Maria's crucial point stands — a distracted student gains nothing from a laptop. The answer is therefore blended: schools should keep expert teachers while using technology for practice and feedback. Where this combination exists, results show substantial gains, especially for students far from good schools. Districts that invested in both training and devices report the strongest progress.
+        </div>
         <div class="reveal-box" id="sprint1Check">
           Stance stated in the first 2 sentences?<br>
+          One classmate referenced by name (agrees / concedes)?<br>
           120–130 words (10-min floor met)?<br>
           ≥5 vague → precise upgrades (see audit below)?<br>
           One concrete example, not just claims?<br>
@@ -186,7 +195,7 @@
             <strong>Prompt — Career Services:</strong>
             <span style="display:flex;align-items:center;gap:0.5rem;"><span class="timer-display" id="sprint2Timer" style="font-size:1.25rem;">07:00</span><button class="btn" onclick="startTimer('sprint2Timer',420)">Start 7 min</button><button class="btn btn-secondary" onclick="resetTimer('sprint2Timer',420)">Reset</button></span>
           </div>
-          <p style="margin-top:0.75rem;"><em>Write to the career services office: (1) explain that you need help with your resume, (2) describe your career goals, and (3) request a review session or workshop.</em></p>
+          <p style="margin-top:0.75rem;">You are a student in the economics faculty. Write an email to the career services office. In your email, do the following:<br>1. Explain that you need help with your resume.<br>2. Describe your career goals.<br>3. Request a review session or workshop.</p>
         </div>
         <div style="background:rgba(0,0,0,0.2);padding:0.75rem 1rem;border-radius:6px;font-size:0.85rem;color:var(--text-muted);margin-bottom:0.75rem;">
           <strong>Focus today:</strong> Bullet-2-first. Use ≥3 precise vocabulary upgrades. Target 100–120 words. Reserve last 60s for proofread pass.
@@ -196,7 +205,14 @@
           <span class="word-count-badge" id="sprint2WC">0 words</span>
           <span class="word-count-badge" id="sprint2WPM" style="color:var(--accent-blue);">— wpm</span>
         </div>
+        <button class="btn btn-secondary" onclick="toggleReveal('sprint2Model')" style="margin-top:0.75rem;">👁️ Show Model Answer</button>
         <button class="btn btn-secondary" onclick="toggleReveal('sprint2Check')" style="margin-top:0.75rem;">✅ Sprint Checklist</button>
+        <div class="reveal-box" id="sprint2Model">
+          <strong>Model (~105 words, all 3 tasks covered):</strong><br><br>
+          Dear Career Services,<br><br>
+          I am writing to request help with my resume: although I have strong grades, my applications receive no replies. My career goal is to obtain an internship in data analysis, where I can facilitate reporting work while I develop professional skills. Specifically, I need guidance on describing my coursework as relevant experience. A workshop on interview preparation would also be beneficial, since my practical experience is limited. Would it be possible to arrange a review session or workshop next week? I am available on weekday afternoons, preferably after 2 p.m., and can bring printed copies of my current resume. Thank you for considering this request.<br><br>
+          Best regards,<br>Valeria
+        </div>
         <div class="reveal-box" id="sprint2Check">
           All 3 bullets covered (resume help · career goals · review session)?<br>
           Bullet 2 (strongest content) written first?<br>
