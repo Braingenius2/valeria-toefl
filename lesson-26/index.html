@@ -69,7 +69,8 @@
   .timer-display{font-size:1.5rem}
 }</style>
  <!-- FE:CSS-CHIP --><style>.slide-chip{font-family:'Fira Code',monospace;font-size:0.72rem;font-weight:700;color:var(--primary);background:var(--bg-card,rgba(0,0,0,0.4));border:1px solid var(--border-color,rgba(255,255,255,0.15));padding:0.25rem 0.65rem;border-radius:20px;white-space:nowrap;margin-left:auto}</style>
- <style>.back-link{color:var(--text-muted);text-decoration:none;font-size:0.8rem;font-family:'Fira Code',monospace;white-space:nowrap;transition:color 0.2s;margin-left:1rem;}.back-link:hover{color:var(--primary);}</style></head>
+ <style>.back-link{color:var(--text-muted);text-decoration:none;font-size:0.8rem;font-family:'Fira Code',monospace;white-space:nowrap;transition:color 0.2s;margin-left:1rem;}.back-link:hover{color:var(--primary);}</style>
+  <style>.drill-item{padding:0.6rem 0.75rem;border:1px solid var(--border-color);border-radius:8px;margin-bottom:0.5rem;background:rgba(0,0,0,0.15);}.drill-item .d-sent{font-size:0.9rem;margin-bottom:0.35rem;}.drill-item input[type="text"]{font-size:0.88rem;}.drill-count{font-family:'Fira Code',monospace;font-size:0.78rem;color:var(--text-muted);}.drill-ans{font-size:0.86rem;line-height:2;}</style></head>
 <body>
   <aside class="sidebar">
     <div class="brand"><span class="brand-badge">TOEFL</span><span class="brand-title">Valeria L26</span></div>
@@ -288,11 +289,49 @@
           </div>
         </div>
         <div style="margin-bottom:1rem;">
-          <p style="font-weight:600;margin-bottom:0.5rem;">3. Vocabulary Upgrade Drill</p>
+          <p style="font-weight:600;margin-bottom:0.5rem;">3. Sentence Upgrade Bank — 12 Sentences (10 min)</p>
+          <p style="font-size:0.88rem;color:var(--muted);margin-bottom:0.6rem;">Rewrite each sentence, replacing the vague word with a precise alternative. Type your version, then check the suggestions.</p>
+          <div id="drillBank">
+            <div class="drill-item"><div class="d-sent">1. Online courses are a <span class="text-red">good</span> way to learn new skills.</div><input type="text" class="drill-input" placeholder="Your upgrade..."></div>
+            <div class="drill-item"><div class="d-sent">2. The new policy had a <span class="text-red">bad</span> effect on small businesses.</div><input type="text" class="drill-input" placeholder="Your upgrade..."></div>
+            <div class="drill-item"><div class="d-sent">3. Sleep is <span class="text-red">important</span> for memory.</div><input type="text" class="drill-input" placeholder="Your upgrade..."></div>
+            <div class="drill-item"><div class="d-sent">4. The survey <span class="text-red">shows</span> that students prefer hybrid classes.</div><input type="text" class="drill-input" placeholder="Your upgrade..."></div>
+            <div class="drill-item"><div class="d-sent">5. These results <span class="text-red">prove</span> that the method works.</div><input type="text" class="drill-input" placeholder="Your upgrade..."></div>
+            <div class="drill-item"><div class="d-sent">6. Students can <span class="text-red">get</span> free tutoring on campus.</div><input type="text" class="drill-input" placeholder="Your upgrade..."></div>
+            <div class="drill-item"><div class="d-sent">7. Study groups <span class="text-red">help</span> students stay motivated.</div><input type="text" class="drill-input" placeholder="Your upgrade..."></div>
+            <div class="drill-item"><div class="d-sent">8. <span class="text-red">More and more</span> students are choosing online degrees.</div><input type="text" class="drill-input" placeholder="Your upgrade..."></div>
+            <div class="drill-item"><div class="d-sent">9. Reading widely has a <span class="text-red">big</span> impact on writing quality.</div><input type="text" class="drill-input" placeholder="Your upgrade..."></div>
+            <div class="drill-item"><div class="d-sent">10. The course covers <span class="text-red">a lot of</span> material.</div><input type="text" class="drill-input" placeholder="Your upgrade..."></div>
+            <div class="drill-item"><div class="d-sent">11. Her feedback was <span class="text-red">very</span> useful.</div><input type="text" class="drill-input" placeholder="Your upgrade..."></div>
+            <div class="drill-item"><div class="d-sent">12. The library is a <span class="text-red">nice</span> place to study.</div><input type="text" class="drill-input" placeholder="Your upgrade..."></div>
+          </div>
+          <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;margin-top:0.6rem;">
+            <span class="drill-count" id="drillCount">0 / 12 attempted</span>
+            <button class="btn btn-secondary" onclick="toggleReveal('drillAns')">👁️ Show Suggested Upgrades</button>
+          </div>
+          <div class="reveal-box" id="drillAns">
+            <div class="drill-ans">
+              1. an <strong style="color:var(--accent-green);">effective</strong> way (practical)<br>
+              2. a <strong style="color:var(--accent-green);">detrimental</strong> effect (adverse · harmful)<br>
+              3. <strong style="color:var(--accent-green);">essential</strong> for memory (crucial · vital)<br>
+              4. the survey <strong style="color:var(--accent-green);">indicates</strong> (reveals · demonstrates)<br>
+              5. results <strong style="color:var(--accent-green);">confirm</strong> that… (validate · substantiate)<br>
+              6. can <strong style="color:var(--accent-green);">obtain</strong> free tutoring (access)<br>
+              7. <strong style="color:var(--accent-green);">contribute to</strong> sustained motivation (support)<br>
+              8. <strong style="color:var(--accent-green);">An increasing number of</strong> students…<br>
+              9. a <strong style="color:var(--accent-green);">substantial</strong> impact (profound · considerable)<br>
+              10. <strong style="color:var(--accent-green);">a substantial amount of</strong> material (extensive material)<br>
+              11. <strong style="color:var(--accent-green);">exceptionally</strong> useful (highly practical · extremely valuable)<br>
+              12. a <strong style="color:var(--accent-green);">pleasant</strong> place to study (quiet, well-equipped)
+            </div>
+          </div>
+        </div>
+        <div style="margin-bottom:1rem;">
+          <p style="font-weight:600;margin-bottom:0.5rem;">4. Paragraph Upgrade Drill</p>
           <p style="font-size:0.88rem;color:var(--muted);">Take a paragraph from today's AD sprint. Underline every vague word. Replace each with a precise alternative from the toolkit. Rewrite the paragraph.</p>
         </div>
         <div>
-          <p style="font-weight:600;margin-bottom:0.5rem;">4. Vocabulary Journal</p>
+          <p style="font-weight:600;margin-bottom:0.5rem;">5. Vocabulary Journal</p>
           <p style="font-size:0.88rem;color:var(--muted);">Write 5 sentences using: <em>substantiate, detrimental, facilitate, paramount, ambiguous</em>. Each must demonstrate precise word choice.</p>
         </div>
       </div>
@@ -384,6 +423,14 @@
         document.getElementById('vaCount').textContent = count + ' / 5 vague words replaced';
       });
     });
+
+    const drillInputs = [...document.querySelectorAll('.drill-input')];
+    if (drillInputs.length) {
+      drillInputs.forEach(inp => inp.addEventListener('input', () => {
+        const filled = drillInputs.filter(x => x.value.trim() !== '').length;
+        document.getElementById('drillCount').textContent = filled + ' / ' + drillInputs.length + ' attempted';
+      }));
+    }
 
     function playL26(n) {
       const audio = new Audio('audio/l26-s' + n + '.mp3');
