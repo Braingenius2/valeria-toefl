@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Valeria — Lesson 27: Argument Structure</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg-dark:#090d16;--bg-card:#131a26;--border-color:#243042;--text-main:#f1f5f9;--text-muted:#64748b;--primary:#f59e0b;--primary-hover:#d97706;--primary-dim:rgba(245,158,11,0.12);--accent-blue:#38bdf8;--accent-green:#10b981;--accent-red:#ef4444;--accent-purple:#a855f7;}
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:'Inter',sans-serif;background:var(--bg-dark);color:var(--text-main);display:flex;min-height:100vh;overflow-x:hidden;}
+    .sidebar{width:260px;background:var(--bg-card);border-right:1px solid var(--border-color);display:flex;flex-direction:column;padding:1.5rem 1rem;position:fixed;height:100vh;z-index:100;overflow-y:auto;scrollbar-width:thin;}
+    .brand{display:flex;align-items:center;gap:0.75rem;margin-bottom:2rem;padding:0 0.5rem;}
+    .brand-badge{background:var(--primary);color:#000;font-weight:700;font-size:0.75rem;padding:0.2rem 0.5rem;border-radius:4px;text-transform:uppercase;}
+    .brand-title{font-weight:600;font-size:1.1rem;color:var(--text-main);}
+    .nav-btn{background:transparent;border:1px solid transparent;color:var(--text-muted);padding:0.75rem 1rem;border-radius:8px;text-align:left;font-size:0.9rem;font-family:inherit;cursor:pointer;margin-bottom:0.5rem;display:flex;align-items:center;gap:0.75rem;transition:all 0.2s ease;}
+    .nav-btn:hover{background:rgba(255,255,255,0.03);color:var(--text-main);}
+    .nav-btn.active{background:var(--primary-dim);border-color:rgba(245,158,11,0.3);color:var(--primary);font-weight:600;}
+    .nav-num{font-family:'Fira Code',monospace;font-size:0.8rem;opacity:0.7;}
+    .main-content{margin-left:260px;flex:1;padding:2rem 3rem;max-width:1200px;}
+    .header{display:flex;justify-content:space-between;align-items:center;margin-bottom:2rem;padding-bottom:1rem;border-bottom:1px solid var(--border-color);}
+    .page-title{font-size:1.5rem;font-weight:700;color:var(--text-main);}
+    .tag{background:rgba(56,189,248,0.1);color:var(--accent-blue);border:1px solid rgba(56,189,248,0.2);padding:0.25rem 0.75rem;border-radius:20px;font-size:0.8rem;font-family:'Fira Code',monospace;}
+    .slide{display:none;animation:fadeIn 0.3s ease;}.slide.active{display:block;}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+    @keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.3;}}
+    .card{background:var(--bg-card);border:1px solid var(--border-color);border-radius:12px;padding:1.5rem;margin-bottom:1.5rem;}
+    .card-title{font-size:1.1rem;font-weight:600;color:var(--primary);margin-bottom:1rem;display:flex;align-items:center;gap:0.5rem;}
+    .shadowing-text{font-size:1.05rem;line-height:1.8;color:#cbd5e1;margin-bottom:1.5rem;background:rgba(0,0,0,0.2);padding:1.25rem;border-radius:8px;border-left:3px solid var(--primary);}
+    .shadowing-word{transition:background 0.15s ease,color 0.15s ease;border-radius:3px;padding:0 2px;}
+    .shadowing-word.active{background:var(--primary);color:#000;font-weight:600;}
+    .controls{display:flex;gap:0.75rem;align-items:center;flex-wrap:wrap;margin-bottom:1rem;}
+    .btn{background:var(--primary);color:#000;border:none;padding:0.6rem 1.2rem;border-radius:6px;font-weight:600;font-size:0.85rem;font-family:inherit;cursor:pointer;display:inline-flex;align-items:center;gap:0.4rem;transition:background 0.2s ease;}
+    .btn:hover{background:var(--primary-hover);}
+    .btn-secondary{background:transparent;border:1px solid var(--border-color);color:var(--text-main);}
+    .timer-display{font-family:'Fira Code',monospace;font-size:1.5rem;font-weight:700;color:var(--primary);background:#000;padding:0.4rem 1rem;border-radius:8px;border:1px solid var(--border-color);display:inline-block;}
+    .error-table{width:100%;border-collapse:collapse;margin-top:1rem;font-size:0.9rem;}
+    .error-table th,.error-table td{padding:0.75rem 1rem;border:1px solid var(--border-color);text-align:left;}
+    .error-table th{background:rgba(0,0,0,0.4);color:var(--primary);font-weight:600;}
+    .text-red{color:var(--accent-red);}.text-green{color:var(--accent-green);}
+    .reveal-box{display:none;background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.2);padding:1rem;border-radius:8px;margin-top:0.75rem;font-size:0.9rem;line-height:1.7;}
+    .reveal-box.show{display:block;}
+    textarea,input[type="text"]{width:100%;background:rgba(0,0,0,0.4);border:1px solid var(--border-color);color:var(--text-main);padding:0.75rem;border-radius:6px;font-family:inherit;font-size:0.9rem;resize:vertical;}
+    textarea:focus,input[type="text"]:focus{outline:none;border-color:var(--primary);}
+    .word-count-badge{font-family:'Fira Code',monospace;font-size:0.85rem;color:var(--accent-green);margin-top:0.5rem;}
+    .prompt-block{background:rgba(0,0,0,0.25);padding:1rem;border-radius:8px;font-size:0.9rem;line-height:1.7;margin-bottom:1rem;border-left:3px solid var(--primary);}
+    .arg-box{background:rgba(0,0,0,0.2);border-left:3px solid;padding:0.75rem 1rem;border-radius:0 6px 6px 0;margin-bottom:0.5rem;}
+    .arg-label{font-family:'Fira Code',monospace;font-size:0.7rem;font-weight:700;text-transform:uppercase;margin-bottom:0.3rem;}
+    .sent-text{display:none;font-size:0.92rem;color:#e2e8f0;margin-top:0.5rem;line-height:1.6;}
+    .sent-text.show{display:inline;}
+    .speaking-sent{margin-bottom:0.75rem;}
+    .num{font-weight:700;color:var(--primary);margin-right:0.4rem;}
+    @media(max-width:768px){.main-content{margin-left:0;padding:1rem 1rem 84px;max-width:100%}.header{flex-wrap:wrap;gap:0.5rem}.controls{flex-direction:column;align-items:stretch}.timer-display{font-size:1.25rem}}
+  </style>
+ <!-- FE:CSS-MOBILE --><style>.mobile-nav-toggle{display:none;position:fixed;bottom:20px;right:20px;z-index:200;width:48px;height:48px;border-radius:50%;background:var(--primary);color:#000;border:none;font-size:20px;cursor:pointer;align-items:center;justify-content:center;box-shadow:3px 3px 0 rgba(0,0,0,0.12)}
+.sidebar-overlay{display:none;position:fixed;inset:0;z-index:150;background:rgba(0,0,0,0.4)}
+.sidebar-overlay.open{display:block}@media(max-width:768px){
+  .mobile-nav-toggle{display:flex}
+  .sidebar{position:fixed;left:0;top:0;z-index:175;height:100vh;transform:translateX(-100%);transition:transform .25s ease;width:260px;display:flex!important}
+  .sidebar.open{transform:translateX(0)}
+  .main-content{margin-left:0;padding:1rem 1rem 84px;max-width:100%}
+  .header{flex-wrap:wrap;gap:0.5rem}
+  .grid-2{grid-template-columns:1fr}
+  .controls{flex-direction:column;align-items:stretch}
+  .timer-display{font-size:1.5rem}
+}</style>
+ <!-- FE:CSS-CHIP --><style>.slide-chip{font-family:'Fira Code',monospace;font-size:0.72rem;font-weight:700;color:var(--primary);background:var(--bg-card,rgba(0,0,0,0.4));border:1px solid var(--border-color,rgba(255,255,255,0.15));padding:0.25rem 0.65rem;border-radius:20px;white-space:nowrap;margin-left:auto}</style>
+ <style>.back-link{color:var(--text-muted);text-decoration:none;font-size:0.8rem;font-family:'Fira Code',monospace;white-space:nowrap;transition:color 0.2s;margin-left:1rem;}.back-link:hover{color:var(--primary);}</style>
+  <style>.cb-item{padding:0.6rem 0.75rem;border:1px solid var(--border-color);border-radius:8px;margin-bottom:0.5rem;background:rgba(0,0,0,0.15);}.cb-item .cb-claim{font-size:0.9rem;margin-bottom:0.35rem;}.cb-input{margin-top:0.35rem;}.cb-count{font-family:'Fira Code',monospace;font-size:0.78rem;color:var(--text-muted);}</style></head>
+<body>
+  <aside class="sidebar">
+    <div class="brand"><span class="brand-badge">TOEFL</span><span class="brand-title">Valeria L27</span></div>
+    <button class="nav-btn active" onclick="switchSlide(0)"><span class="nav-num">01</span> Warm-up</button>
+    <button class="nav-btn" onclick="switchSlide(1)"><span class="nav-num">02</span> Argument Framework</button>
+    <button class="nav-btn" onclick="switchSlide(2)"><span class="nav-num">03</span> Sprint #1 · AD</button>
+    <button class="nav-btn" onclick="switchSlide(3)"><span class="nav-num">04</span> Sprint #2 · Email</button>
+    <button class="nav-btn" onclick="switchSlide(4)"><span class="nav-num">05</span> Listen & Repeat ×8</button>
+    <button class="nav-btn" onclick="switchSlide(5)"><span class="nav-num">06</span> Correction Table</button>
+    <button class="nav-btn" onclick="switchSlide(6)"><span class="nav-num">07</span> Homework</button>
+  </aside>
+  <main class="main-content">
+    <header class="header"><div><h1 class="page-title">Argument Structure</h1><p style="color:var(--text-muted);font-size:0.85rem;margin-top:0.2rem;">Claim · Evidence · Counterargument · Rebuttal · Timed Sprints</p></div><!-- FE:CHIP --><span class="slide-chip" id="slideChip">1 / N</span><a href="../index.html" class="back-link">&#8592; Portal</a>
+        <span class="tag">WRITING ARGUMENT</span></header>
+
+    <!-- SLIDE 01: Shadowing Warm-up -->
+    <div class="slide active" id="slide-0">
+      <div class="card">
+        <div class="card-title">🎙️ Shadowing — Argument Structure</div>
+        <div class="shadowing-text" id="shadowingTextDisplay">Strong academic arguments follow a four-part framework that demonstrates both analytical thinking and persuasive skill. The claim states the writer's position clearly. The evidence supports the claim with specific examples, data, or reasoning. The counterargument acknowledges opposing viewpoints, showing intellectual honesty. The rebuttal refutes the counterargument, reinforcing the original claim. This structure — claim, evidence, counterargument, rebuttal — transforms a simple opinion into a sophisticated argument that meets the expectations of formal academic discourse and scores highly on the TOEFL writing assessment.</div>
+        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:1rem;">Targets: <em>four-part framework · analytical thinking · persuasive skill · counterargument · rebuttal · intellectual honesty</em></p>
+        <div class="controls">
+          <button class="btn" onclick="toggleShadowingPacer()">▶ Start Pacer</button>
+          <button class="btn btn-secondary" onclick="resetShadowingPacer()">↺ Reset</button>
+          <audio id="shadowingAudio" src="audio/shadowing.mp3" preload="metadata" style="display:none;"></audio>
+          <button class="btn btn-secondary" onclick="document.getElementById('shadowingAudio').play()">🔊 Play Audio</button>
+          <select id="pacerSpeed" style="background:#000;color:#fff;padding:0.4rem;border-radius:4px;border:1px solid var(--border-color);"><option value="450">130 WPM</option><option value="380" selected>150 WPM</option><option value="320">175 WPM</option></select>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 02: Argument Framework -->
+    <div class="slide" id="slide-1">
+      <div class="card">
+        <div class="card-title">🏗️ The C-E-C-R Framework</div>
+        <p style="font-size:0.9rem;color:var(--text-muted);margin-bottom:1rem;">A strong argument has 4 parts. In a short response, you may not have space for all 4 — but aim for at least 3 (C-E-R or C-E-C).</p>
+        <div class="arg-box" style="border-color:var(--accent-green);">
+          <div class="arg-label" style="color:var(--accent-green);">C — Claim</div>
+          <p style="font-size:0.9rem;">States your position. 1 sentence. Clear stance.</p>
+          <p style="font-size:0.82rem;color:var(--text-muted);margin-top:0.3rem;"><em>"Universities should prioritise funding for student mental health services."</em></p>
+        </div>
+        <div class="arg-box" style="border-color:var(--accent-blue);">
+          <div class="arg-label" style="color:var(--accent-blue);">E — Evidence</div>
+          <p style="font-size:0.9rem;">Supports the claim with examples, data, or reasoning. 2–3 sentences.</p>
+          <p style="font-size:0.82rem;color:var(--text-muted);margin-top:0.3rem;"><em>"Research demonstrates that students who access counselling services show higher retention rates. Furthermore, mental health issues are a leading cause of dropout in higher education."</em></p>
+        </div>
+        <div class="arg-box" style="border-color:var(--accent-purple);">
+          <div class="arg-label" style="color:var(--accent-purple);">C — Counterargument</div>
+          <p style="font-size:0.9rem;">Acknowledges the opposing view. 1 sentence. Shows intellectual honesty.</p>
+          <p style="font-size:0.82rem;color:var(--text-muted);margin-top:0.3rem;"><em>"Critics argue that funding should prioritise academic resources rather than support services."</em></p>
+        </div>
+        <div class="arg-box" style="border-color:var(--primary);">
+          <div class="arg-label" style="color:var(--primary);">R — Rebuttal</div>
+          <p style="font-size:0.9rem;">Refutes the counterargument. 1 sentence. Reinforces the claim.</p>
+          <p style="font-size:0.82rem;color:var(--text-muted);margin-top:0.3rem;"><em>"However, without adequate mental health support, academic resources cannot be used effectively."</em></p>
+        </div>
+        <p style="font-size:0.82rem;color:var(--text-muted);margin-top:1rem;"><strong>TOEFL tip:</strong> The counterargument + rebuttal pair is what separates 4.0+ from 3.0 responses. It shows you can consider multiple perspectives.</p>
+        <div style="background:rgba(0,0,0,0.2);border-left:3px solid var(--accent-blue);padding:0.75rem 1rem;border-radius:0 6px 6px 0;margin-top:1rem;">
+          <div class="arg-label" style="color:var(--accent-blue);">Concession language — counterargument → rebuttal</div>
+          <p style="font-size:0.85rem;line-height:1.8;color:#cbd5e1;">
+            <strong>Although / While</strong> + clause: <em>Although critics argue that regulation slows growth, ...</em><br>
+            <strong>Despite / In spite of</strong> + noun: <em>Despite these concerns, ...</em><br>
+            <strong>Even if / Even though</strong> + clause: <em>Even if the costs are high, ...</em><br>
+            <strong>Critics argue that… / It is true that… ; However, ...</strong>
+          </p>
+          <p style="font-size:0.8rem;color:var(--accent-red);margin-top:0.4rem;">⚠️ Never “Although… but…” — one connector per sentence.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 03: Sprint #1 — Academic Discussion -->
+    <div class="slide" id="slide-2">
+      <div class="card">
+        <div class="card-title">✍️ Sprint #1 — Academic Discussion (10 min)</div>
+        <div class="prompt-block">
+          <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.75rem;">
+            <strong>Prompt — Environmental Policy (TOEFL format):</strong>
+            <span style="display:flex;align-items:center;gap:0.5rem;"><span class="timer-display" id="sprint1Timer" style="font-size:1.25rem;">10:00</span><button class="btn" onclick="startTimer('sprint1Timer',600)">Start 10 min</button><button class="btn btn-secondary" onclick="resetTimer('sprint1Timer',600)">Reset</button></span>
+          </div>
+          <p style="margin-top:0.75rem;">Your professor is teaching a course on environmental policy. Write a post responding to the professor's question. In your post, you should: express and support your opinion; make a contribution to the discussion in your own words.</p>
+          <p style="margin-top:0.5rem;"><strong>Professor:</strong> "This week we are discussing environmental policy. Should governments impose strict environmental regulations even if they harm economic growth, or should economic development take priority?"</p>
+          <p><strong>Elena:</strong> "Strict rules force companies to innovate — we can't trade the planet for short-term growth."</p>
+          <p><strong>Marcus:</strong> "Poorer countries need growth first; harsh rules punish the people who can least afford them."</p>
+        </div>
+        <div style="background:rgba(0,0,0,0.2);padding:0.75rem 1rem;border-radius:6px;font-size:0.85rem;color:var(--text-muted);margin-bottom:0.75rem;">
+          <strong>Focus today:</strong> Apply C-E-C-R — claim → evidence → counterargument → rebuttal. Reference one classmate by name (agree or concede). Chunk-write. 120–130 words.
+        </div>
+        <textarea id="sprint1Text" rows="8" placeholder="Write your Academic Discussion response here..."></textarea>
+        <div style="display:flex;align-items:center;gap:1rem;margin-top:0.5rem;">
+          <span class="word-count-badge" id="sprint1WC">0 words</span>
+          <span class="word-count-badge" id="sprint1WPM" style="color:var(--accent-blue);">— wpm</span>
+        </div>
+        <button class="btn btn-secondary" onclick="toggleReveal('sprint1Model')" style="margin-top:0.75rem;">👁️ Show Model Answer</button>
+        <button class="btn btn-secondary" onclick="toggleReveal('sprint1Check')" style="margin-top:0.75rem;">✅ Sprint Checklist</button>
+        <div class="reveal-box" id="sprint1Model">
+          <strong>Model (~125 words, agrees with Elena, answers Marcus, full C-E-C-R):</strong><br><br>
+          Strict environmental regulations are worth the short-term cost, so governments should impose them even when growth slows. Elena is right that strict rules push companies to innovate: countries with ambitious air-quality laws saw new clean industries emerge rather than their economies collapsing. Solar and electric-vehicle sectors, for instance, expanded fastest in countries with the strictest standards. Marcus raises the strongest objection — poorer countries need affordable growth first — and it deserves a serious answer. However, climate damage falls hardest on low-income communities, so delaying regulation costs more than it saves. Regulation can also be paired with support for affected industries, which turns it into an investment rather than a burden. Strict, well-designed rules protect both the environment and the economy that depends on it.
+        </div>
+        <div class="reveal-box" id="sprint1Check">
+          Clear claim in the first 2 sentences?<br>
+          Counterargument acknowledged AND refuted (C + R present)?<br>
+          One classmate referenced by name (agree or concede)?<br>
+          120–130 words (10-min floor met)?<br>
+          Zero mid-write editing — chunk-wrote straight through?
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">🔍 Argument Audit</div>
+        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:0.5rem;">After writing, check your argument structure:</p>
+        <div style="font-size:0.9rem;line-height:1.8;">
+          <label><input type="checkbox" class="ac-box" data-ac="claim"> Clear claim (1 sentence, stated position)</label><br>
+          <label><input type="checkbox" class="ac-box" data-ac="evidence"> 2–3 evidence sentences with examples/reasoning</label><br>
+          <label><input type="checkbox" class="ac-box" data-ac="counter"> Counterargument acknowledged</label><br>
+          <label><input type="checkbox" class="ac-box" data-ac="rebuttal"> Rebuttal refutes the counterargument</label>
+        </div>
+        <div class="word-count-badge" id="acCount" style="margin-top:0.5rem;">0 / 4 argument elements present</div>
+      </div>
+    </div>
+
+    <!-- SLIDE 04: Sprint #2 — Email -->
+    <div class="slide" id="slide-3">
+      <div class="card">
+        <div class="card-title">✉️ Sprint #2 — Email Reply (7 min)</div>
+        <div class="prompt-block" style="border-color:var(--accent-purple);">
+          <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.75rem;">
+            <strong>Prompt — Academic Advising:</strong>
+            <span style="display:flex;align-items:center;gap:0.5rem;"><span class="timer-display" id="sprint2Timer" style="font-size:1.25rem;">07:00</span><button class="btn" onclick="startTimer('sprint2Timer',420)">Start 7 min</button><button class="btn btn-secondary" onclick="resetTimer('sprint2Timer',420)">Reset</button></span>
+          </div>
+          <p style="margin-top:0.75rem;">You are a first-year student at a university. Write an email to your academic advisor. In your email, do the following:</p>
+          <p style="margin-top:0.35rem;">1. Explain that you are struggling with your course load.<br>2. Describe how it is affecting your performance.<br>3. Request a meeting to discuss options.</p>
+        </div>
+        <div style="background:rgba(0,0,0,0.2);padding:0.75rem 1rem;border-radius:6px;font-size:0.85rem;color:var(--text-muted);margin-bottom:0.75rem;">
+          <strong>Focus today:</strong> Bullet-2-first. Use C-E structure within each bullet. Target 100–120 words. Reserve last 60s for proofread pass.
+        </div>
+        <textarea id="sprint2Text" rows="8" placeholder="Dear Professor,&#10;&#10;..."></textarea>
+        <div style="display:flex;align-items:center;gap:1rem;margin-top:0.5rem;">
+          <span class="word-count-badge" id="sprint2WC">0 words</span>
+          <span class="word-count-badge" id="sprint2WPM" style="color:var(--accent-blue);">— wpm</span>
+        </div>
+        <button class="btn btn-secondary" onclick="toggleReveal('sprint2Model')" style="margin-top:0.75rem;">👁️ Show Model Answer</button>
+        <button class="btn btn-secondary" onclick="toggleReveal('sprint2Check')" style="margin-top:0.75rem;">✅ Sprint Checklist</button>
+        <div class="reveal-box" id="sprint2Model">
+          <strong>Model (~105 words, all 3 tasks covered):</strong><br><br>
+          Dear Dr. Alvarez,<br><br>
+          I am writing about a problem that affects my performance in your course: my current course load is heavier than I anticipated. Two core requirements overlap with my lab sessions, so I cannot keep up with readings and assignments. As a result, my recent papers have been rushed — last week I submitted an analysis that I knew was below my usual standard. A possible solution would be a short meeting to discuss options, such as rearranging my schedule or deferring one elective. Would you be available on Thursday or Friday afternoon? Thank you for considering my situation.<br><br>
+          Best regards,<br>Valeria
+        </div>
+        <div class="reveal-box" id="sprint2Check">
+          All 3 tasks covered (course load · performance · meeting request)?<br>
+          Bullet-2-first — strongest content written first?<br>
+          100–120 words in 7 minutes?<br>
+          Formal register — no contractions, no chatty openers?<br>
+          60–90s proofread pass done at the end?
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 05: Listen & Repeat ×8 -->
+    <div class="slide" id="slide-4">
+      <div class="card">
+        <div class="card-title">🎧 Listen & Repeat — 8 Sentences</div>
+        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:1rem;">Play each sentence, repeat immediately. Text is hidden — try from hearing alone.</p>
+        <div id="l27-lrSentences">
+          <div class="speaking-sent"><span class="num">1.</span> <button class="btn btn-secondary" onclick="playL27(1)" style="padding:0.3rem 0.6rem;font-size:0.8rem;">🔊</button> <button class="btn btn-secondary" onclick="toggleReveal('lr1')" style="padding:0.3rem 0.6rem;font-size:0.8rem;">Show</button> <span class="sent-text" id="lr1">A strong argument follows a four-part framework: claim, evidence, counterargument, rebuttal.</span></div>
+          <div class="speaking-sent"><span class="num">2.</span> <button class="btn btn-secondary" onclick="playL27(2)" style="padding:0.3rem 0.6rem;font-size:0.8rem;">🔊</button> <button class="btn btn-secondary" onclick="toggleReveal('lr2')" style="padding:0.3rem 0.6rem;font-size:0.8rem;">Show</button> <span class="sent-text" id="lr2">The claim states the writer's position clearly and directly.</span></div>
+          <div class="speaking-sent"><span class="num">3.</span> <button class="btn btn-secondary" onclick="playL27(3)" style="padding:0.3rem 0.6rem;font-size:0.8rem;">🔊</button> <button class="btn btn-secondary" onclick="toggleReveal('lr3')" style="padding:0.3rem 0.6rem;font-size:0.8rem;">Show</button> <span class="sent-text" id="lr3">Evidence supports the claim with specific examples, data, or reasoning.</span></div>
+          <div class="speaking-sent"><span class="num">4.</span> <button class="btn btn-secondary" onclick="playL27(4)" style="padding:0.3rem 0.6rem;font-size:0.8rem;">🔊</button> <button class="btn btn-secondary" onclick="toggleReveal('lr4')" style="padding:0.3rem 0.6rem;font-size:0.8rem;">Show</button> <span class="sent-text" id="lr4">The counterargument acknowledges opposing viewpoints, demonstrating intellectual honesty.</span></div>
+          <div class="speaking-sent"><span class="num">5.</span> <button class="btn btn-secondary" onclick="playL27(5)" style="padding:0.3rem 0.6rem;font-size:0.8rem;">🔊</button> <button class="btn btn-secondary" onclick="toggleReveal('lr5')" style="padding:0.3rem 0.6rem;font-size:0.8rem;">Show</button> <span class="sent-text" id="lr5">Furthermore, the rebuttal refutes the counterargument and reinforces the original claim.</span></div>
+          <div class="speaking-sent"><span class="num">6.</span> <button class="btn btn-secondary" onclick="playL27(6)" style="padding:0.3rem 0.6rem;font-size:0.8rem;">🔊</button> <button class="btn btn-secondary" onclick="toggleReveal('lr6')" style="padding:0.3rem 0.6rem;font-size:0.8rem;">Show</button> <span class="sent-text" id="lr6">Consequently, responses with counterarguments tend to score higher on analytical quality.</span></div>
+          <div class="speaking-sent"><span class="num">7.</span> <button class="btn btn-secondary" onclick="playL27(7)" style="padding:0.3rem 0.6rem;font-size:0.8rem;">🔊</button> <button class="btn btn-secondary" onclick="toggleReveal('lr7')" style="padding:0.3rem 0.6rem;font-size:0.8rem;">Show</button> <span class="sent-text" id="lr7">However, a rebuttal without evidence remains unpersuasive.</span></div>
+          <div class="speaking-sent"><span class="num">8.</span> <button class="btn btn-secondary" onclick="playL27(8)" style="padding:0.3rem 0.6rem;font-size:0.8rem;">🔊</button> <button class="btn btn-secondary" onclick="toggleReveal('lr8')" style="padding:0.3rem 0.6rem;font-size:0.8rem;">Show</button> <span class="sent-text" id="lr8">Therefore, the strongest responses balance claim, evidence, and counterargument within the time limit.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 06: Correction Table -->
+    <div class="slide" id="slide-5">
+      <div class="card">
+        <div class="card-title">📋 Live Error Correction</div>
+        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:1rem;">Log any errors caught during sprints or L&R. Focus on argument structure issues (missing counterargument, weak rebuttal).</p>
+        <table class="error-table" id="errorTable">
+          <thead><tr><th>Error</th><th>Correction</th><th>Type</th></tr></thead>
+          <tbody id="errorBody">
+            <tr><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+            <tr><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+            <tr><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+            <tr><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+          </tbody>
+        </table>
+        <button class="btn btn-secondary" onclick="addErrorRow()" style="margin-top:0.75rem;">+ Add Row</button>
+      </div>
+    </div>
+
+    <!-- SLIDE 07: Homework -->
+    <div class="slide" id="slide-6">
+      <div class="card">
+        <div class="card-title">📝 Homework Assignments</div>
+        <div style="margin-bottom:1rem;">
+          <p style="font-weight:600;margin-bottom:0.5rem;">1. Writing Speed Sprint (timed, 10 min)</p>
+          <p style="font-size:0.88rem;color:var(--muted);">Academic Discussion: "Should universities ban single-use plastics on campus?" Write 120–130 words. Apply C-E-C-R structure. Chunk-write. Log wpm.</p>
+          <div style="display:flex;align-items:center;gap:1rem;margin-top:0.6rem;flex-wrap:wrap;">
+            <span class="timer-display" id="hw1Timer" style="font-size:1.1rem;">10:00</span><button class="btn" onclick="startTimer('hw1Timer',600)">Start 10 min</button><button class="btn btn-secondary" onclick="resetTimer('hw1Timer',600)">Reset</button>
+          </div>
+          <textarea id="hw1Text" rows="6" placeholder="Write your Academic Discussion response here..."></textarea>
+          <div style="display:flex;align-items:center;gap:1rem;margin-top:0.4rem;">
+            <span class="word-count-badge" id="hw1WC">0 words</span>
+            <span class="word-count-badge" id="hw1WPM" style="color:var(--accent-blue);">— wpm</span>
+          </div>
+        </div>
+        <div style="margin-bottom:1rem;">
+          <p style="font-weight:600;margin-bottom:0.5rem;">2. Email Sprint (timed, 7 min)</p>
+          <p style="font-size:0.88rem;color:var(--muted);">Write to the registrar: (1) explain a transcript issue, (2) describe how it affects your application, (3) request expedited processing. Bullet-2-first. 100–120 words. Proofread pass.</p>
+          <div style="display:flex;align-items:center;gap:1rem;margin-top:0.6rem;flex-wrap:wrap;">
+            <span class="timer-display" id="hw2Timer" style="font-size:1.1rem;">07:00</span><button class="btn" onclick="startTimer('hw2Timer',420)">Start 7 min</button><button class="btn btn-secondary" onclick="resetTimer('hw2Timer',420)">Reset</button>
+          </div>
+          <textarea id="hw2Text" rows="6" placeholder="Write your email here..."></textarea>
+          <div style="display:flex;align-items:center;gap:1rem;margin-top:0.4rem;">
+            <span class="word-count-badge" id="hw2WC">0 words</span>
+            <span class="word-count-badge" id="hw2WPM" style="color:var(--accent-blue);">— wpm</span>
+          </div>
+        </div>
+        <div style="margin-bottom:1rem;">
+          <p style="font-weight:600;margin-bottom:0.5rem;">3. Counterargument Bank — 5 Claims (10 min)</p>
+          <p style="font-size:0.88rem;color:var(--muted);margin-bottom:0.6rem;">For each claim, write one counterargument and the rebuttal that answers it. Type your pairs, then check the suggestions. Finally, write one counterargument + rebuttal for your own AD claim.</p>
+          <div id="cbBank">
+            <div class="cb-item"><div class="cb-claim">1. Homework should be banned in primary schools.</div><input type="text" class="cb-input" placeholder="Counterargument..." aria-label="Counterargument for claim 1"><input type="text" class="cb-input" placeholder="Rebuttal..." aria-label="Rebuttal for claim 1"></div>
+            <div class="cb-item"><div class="cb-claim">2. Social media companies should be held responsible for harmful content on their platforms.</div><input type="text" class="cb-input" placeholder="Counterargument..." aria-label="Counterargument for claim 2"><input type="text" class="cb-input" placeholder="Rebuttal..." aria-label="Rebuttal for claim 2"></div>
+            <div class="cb-item"><div class="cb-claim">3. Public transport should be free in large cities.</div><input type="text" class="cb-input" placeholder="Counterargument..." aria-label="Counterargument for claim 3"><input type="text" class="cb-input" placeholder="Rebuttal..." aria-label="Rebuttal for claim 3"></div>
+            <div class="cb-item"><div class="cb-claim">4. Companies should allow employees to work from home permanently.</div><input type="text" class="cb-input" placeholder="Counterargument..." aria-label="Counterargument for claim 4"><input type="text" class="cb-input" placeholder="Rebuttal..." aria-label="Rebuttal for claim 4"></div>
+            <div class="cb-item"><div class="cb-claim">5. Schools should teach financial literacy before advanced algebra.</div><input type="text" class="cb-input" placeholder="Counterargument..." aria-label="Counterargument for claim 5"><input type="text" class="cb-input" placeholder="Rebuttal..." aria-label="Rebuttal for claim 5"></div>
+          </div>
+          <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;margin-top:0.6rem;">
+            <span class="cb-count" id="cbCount">0 / 5 pairs attempted</span>
+            <button class="btn btn-secondary" onclick="toggleReveal('cbAns')">👁️ Show Suggested Pairs</button>
+          </div>
+          <div class="reveal-box" id="cbAns">
+            1. <strong>Counter:</strong> Many parents argue that homework builds discipline and reinforces classroom learning. <strong>Rebuttal:</strong> Yet schools that dropped homework have seen no fall in achievement, while student stress levels clearly drop.<br>
+            2. <strong>Counter:</strong> Platforms describe themselves as neutral hosts — users, not companies, create the content. <strong>Rebuttal:</strong> However, recommendation algorithms choose what millions see, so platforms actively shape reach and must answer for it.<br>
+            3. <strong>Counter:</strong> Critics claim free fares would overwhelm city budgets and degrade service quality. <strong>Rebuttal:</strong> Yet the costs are often recovered through less congestion, cleaner air and stronger spending in city centres.<br>
+            4. <strong>Counter:</strong> Managers worry that fully remote work weakens teamwork and slows the training of new staff. <strong>Rebuttal:</strong> However, hybrid schedules with fixed meeting days protect collaboration while keeping the flexibility employees value.<br>
+            5. <strong>Counter:</strong> Some educators object that schools already lack time for core subjects like mathematics. <strong>Rebuttal:</strong> In fact, financial topics can be taught inside maths lessons, adding relevance without extra teaching hours.
+          </div>
+        </div>
+        <div>
+          <p style="font-weight:600;margin-bottom:0.5rem;">4. Vocabulary Journal</p>
+          <p style="font-size:0.88rem;color:var(--muted);">Write 5 sentences using: <em>substantiate, detrimental, facilitate, paramount, nevertheless</em>. Each must demonstrate C-E-C-R logic.</p>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <button class="mobile-nav-toggle" id="mobileNavBtn" aria-label="Open navigation">☰</button>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <script>
+    const TOTAL = 7;
+    let current = 0;
+
+    function switchSlide(n) {
+      document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById('slide-' + n).classList.add('active');
+      document.querySelectorAll('.nav-btn')[n].classList.add('active');
+      current = n;
+      document.getElementById('slideChip').textContent = (n + 1) + ' / ' + TOTAL;
+      window.scrollTo({top: 0, behavior: 'smooth'});
+    }
+
+    let pacerInterval = null;
+    function toggleShadowingPacer() {
+      const display = document.getElementById('shadowingTextDisplay');
+      const audio = document.getElementById('shadowingAudio');
+      if (pacerInterval) { clearInterval(pacerInterval); pacerInterval = null; return; }
+      const wpm = parseInt(document.getElementById('pacerSpeed').value);
+      const words = display.textContent.trim().split(/\s+/);
+      display.innerHTML = words.map((w, i) => `<span class="shadowing-word" id="sw${i}">${w}</span>`).join(' ');
+      let i = 0;
+      audio.play();
+      pacerInterval = setInterval(() => {
+        if (i > 0) document.getElementById('sw' + (i - 1)).classList.remove('active');
+        if (i < words.length) { document.getElementById('sw' + i).classList.add('active'); i++; }
+        else { clearInterval(pacerInterval); pacerInterval = null; }
+      }, 60000 / wpm);
+    }
+    function resetShadowingPacer() {
+      if (pacerInterval) { clearInterval(pacerInterval); pacerInterval = null; }
+      const display = document.getElementById('shadowingTextDisplay');
+      display.innerHTML = 'Strong academic arguments follow a four-part framework that demonstrates both analytical thinking and persuasive skill. The claim states the writer\'s position clearly. The evidence supports the claim with specific examples, data, or reasoning. The counterargument acknowledges opposing viewpoints, showing intellectual honesty. The rebuttal refutes the counterargument, reinforcing the original claim. This structure — claim, evidence, counterargument, rebuttal — transforms a simple opinion into a sophisticated argument that meets the expectations of formal academic discourse and scores highly on the TOEFL writing assessment.';
+      document.getElementById('shadowingAudio').pause();
+      document.getElementById('shadowingAudio').currentTime = 0;
+    }
+
+    const timerIntervals = {};
+    function startTimer(id, seconds) {
+      if (timerIntervals[id]) { clearInterval(timerIntervals[id]); delete timerIntervals[id]; return; }
+      let remaining = seconds;
+      const el = document.getElementById(id);
+      timerIntervals[id] = setInterval(() => {
+        remaining--;
+        const m = Math.floor(remaining / 60);
+        const s = remaining % 60;
+        el.textContent = String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
+        if (remaining <= 0) { clearInterval(timerIntervals[id]); delete timerIntervals[id]; el.textContent = "TIME!"; el.style.color = 'var(--accent-red)'; }
+      }, 1000);
+    }
+    function resetTimer(id, seconds) {
+      if (timerIntervals[id]) { clearInterval(timerIntervals[id]); delete timerIntervals[id]; }
+      const el = document.getElementById(id);
+      const m = Math.floor(seconds / 60);
+      const s = seconds % 60;
+      el.textContent = String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
+      el.style.color = 'var(--primary)';
+    }
+
+    function wireWC(textId, wcId, wpmId, totalSeconds) {
+      const ta = document.getElementById(textId);
+      const wc = document.getElementById(wcId);
+      const wpm = document.getElementById(wpmId);
+      ta.addEventListener('input', () => {
+        const words = ta.value.trim().split(/\s+/).filter(w => w.length > 0).length;
+        wc.textContent = words + ' words';
+        wpm.textContent = Math.round(words / (totalSeconds / 60)) + ' wpm';
+      });
+    }
+    wireWC('sprint1Text', 'sprint1WC', 'sprint1WPM', 600);
+    wireWC('sprint2Text', 'sprint2WC', 'sprint2WPM', 420);
+    wireWC('hw1Text', 'hw1WC', 'hw1WPM', 600);
+    wireWC('hw2Text', 'hw2WC', 'hw2WPM', 420);
+
+    document.querySelectorAll('.ac-box').forEach(cb => {
+      cb.addEventListener('change', () => {
+        const count = document.querySelectorAll('.ac-box:checked').length;
+        document.getElementById('acCount').textContent = count + ' / 4 argument elements present';
+      });
+    });
+
+    const cbItems = [...document.querySelectorAll('.cb-item')];
+    if (cbItems.length) {
+      const updateCbCount = () => {
+        const done = cbItems.filter(it => [...it.querySelectorAll('.cb-input')].every(i => i.value.trim() !== '')).length;
+        document.getElementById('cbCount').textContent = done + ' / ' + cbItems.length + ' pairs attempted';
+      };
+      cbItems.forEach(it => it.querySelectorAll('.cb-input').forEach(inp => inp.addEventListener('input', updateCbCount)));
+    }
+
+    function playL27(n) {
+      const audio = new Audio('audio/l27-s' + n + '.mp3');
+      audio.play();
+    }
+
+    function toggleReveal(id) {
+      document.getElementById(id).classList.toggle('show');
+    }
+
+    function addErrorRow() {
+      const tbody = document.getElementById('errorBody');
+      const tr = document.createElement('tr');
+      tr.innerHTML = '<td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td>';
+      tbody.appendChild(tr);
+    }
+
+    document.getElementById('mobileNavBtn').addEventListener('click', () => {
+      document.querySelector('.sidebar').classList.toggle('open');
+      document.getElementById('sidebarOverlay').classList.toggle('open');
+    });
+    document.getElementById('sidebarOverlay').addEventListener('click', () => {
+      document.querySelector('.sidebar').classList.remove('open');
+      document.getElementById('sidebarOverlay').classList.remove('open');
+    });
+
+    switchSlide(0);
+  </script>
+</body>
+</html>
