@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Valeria — Lesson 28: Reading Under Pressure + The Interview</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg-dark:#090d16;--bg-card:#131a26;--border-color:#243042;--text-main:#f1f5f9;--text-muted:#64748b;--primary:#f59e0b;--primary-hover:#d97706;--primary-dim:rgba(245,158,11,0.12);--accent-blue:#38bdf8;--accent-green:#10b981;--accent-red:#ef4444;--accent-purple:#a855f7;}
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:'Inter',sans-serif;background:var(--bg-dark);color:var(--text-main);display:flex;min-height:100vh;overflow-x:hidden;}
+    .sidebar{width:260px;background:var(--bg-card);border-right:1px solid var(--border-color);display:flex;flex-direction:column;padding:1.5rem 1rem;position:fixed;height:100vh;z-index:100;overflow-y:auto;scrollbar-width:thin;}
+    .brand{display:flex;align-items:center;gap:0.75rem;margin-bottom:2rem;padding:0 0.5rem;}
+    .brand-badge{background:var(--primary);color:#000;font-weight:700;font-size:0.75rem;padding:0.2rem 0.5rem;border-radius:4px;text-transform:uppercase;}
+    .brand-title{font-weight:600;font-size:1.1rem;color:var(--text-main);}
+    .nav-btn{background:transparent;border:1px solid transparent;color:var(--text-muted);padding:0.75rem 1rem;border-radius:8px;text-align:left;font-size:0.9rem;font-family:inherit;cursor:pointer;margin-bottom:0.5rem;display:flex;align-items:center;gap:0.75rem;transition:all 0.2s ease;}
+    .nav-btn:hover{background:rgba(255,255,255,0.03);color:var(--text-main);}
+    .nav-btn.active{background:var(--primary-dim);border-color:rgba(245,158,11,0.3);color:var(--primary);font-weight:600;}
+    .nav-num{font-family:'Fira Code',monospace;font-size:0.8rem;opacity:0.7;}
+    .main-content{margin-left:260px;flex:1;padding:2rem 3rem;max-width:1200px;}
+    .header{display:flex;justify-content:space-between;align-items:center;margin-bottom:2rem;padding-bottom:1rem;border-bottom:1px solid var(--border-color);}
+    .page-title{font-size:1.5rem;font-weight:700;color:var(--text-main);}
+    .tag{background:rgba(56,189,248,0.1);color:var(--accent-blue);border:1px solid rgba(56,189,248,0.2);padding:0.25rem 0.75rem;border-radius:20px;font-size:0.8rem;font-family:'Fira Code',monospace;}
+    .slide{display:none;animation:fadeIn 0.3s ease;}.slide.active{display:block;}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+    .card{background:var(--bg-card);border:1px solid var(--border-color);border-radius:12px;padding:1.5rem;margin-bottom:1.5rem;}
+    .card-title{font-size:1.1rem;font-weight:600;color:var(--primary);margin-bottom:1rem;display:flex;align-items:center;gap:0.5rem;}
+    .controls{display:flex;gap:0.75rem;align-items:center;flex-wrap:wrap;margin-bottom:1rem;}
+    .btn{background:var(--primary);color:#000;border:none;padding:0.6rem 1.2rem;border-radius:6px;font-weight:600;font-size:0.85rem;font-family:inherit;cursor:pointer;display:inline-flex;align-items:center;gap:0.4rem;transition:background 0.2s ease;}
+    .btn:hover{background:var(--primary-hover);}
+    .btn-secondary{background:transparent;border:1px solid var(--border-color);color:var(--text-main);}
+    .timer-display{font-family:'Fira Code',monospace;font-size:1.5rem;font-weight:700;color:var(--primary);background:#000;padding:0.4rem 1rem;border-radius:8px;border:1px solid var(--border-color);display:inline-block;}
+    .error-table{width:100%;border-collapse:collapse;margin-top:1rem;font-size:0.9rem;}
+    .error-table th,.error-table td{padding:0.75rem 1rem;border:1px solid var(--border-color);text-align:left;}
+    .error-table th{background:rgba(0,0,0,0.4);color:var(--primary);font-weight:600;}
+    .text-red{color:var(--accent-red);}.text-green{color:var(--accent-green);}
+    .reveal-box{display:none;background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.2);padding:1rem;border-radius:8px;margin-top:0.75rem;font-size:0.9rem;line-height:1.7;}
+    .reveal-box.show{display:block;}
+    textarea,input[type="text"]{width:100%;background:rgba(0,0,0,0.4);border:1px solid var(--border-color);color:var(--text-main);padding:0.75rem;border-radius:6px;font-family:inherit;font-size:0.9rem;resize:vertical;}
+    textarea:focus,input[type="text"]:focus{outline:none;border-color:var(--primary);}
+    .word-count-badge{font-family:'Fira Code',monospace;font-size:0.85rem;color:var(--accent-green);margin-top:0.5rem;display:inline-block;}
+    .prompt-block{background:rgba(0,0,0,0.25);padding:1rem;border-radius:8px;font-size:0.9rem;line-height:1.7;margin-bottom:1rem;border-left:3px solid var(--primary);}
+    .arg-box{background:rgba(0,0,0,0.2);border-left:3px solid;padding:0.75rem 1rem;border-radius:0 6px 6px 0;margin-bottom:0.5rem;}
+    .arg-label{font-family:'Fira Code',monospace;font-size:0.7rem;font-weight:700;text-transform:uppercase;margin-bottom:0.3rem;}
+    .reading-text{background:rgba(0,0,0,0.2);padding:1.1rem;border-radius:8px;font-size:0.92rem;line-height:1.75;color:#cbd5e1;margin-bottom:1rem;}
+    .reading-text p{margin-bottom:0.7rem;}
+    .reading-text p:last-child{margin-bottom:0;}
+    .q-item{margin-bottom:0.8rem;}
+    .q-text{font-size:0.92rem;font-weight:600;}
+    .q-opts{margin-top:0.2rem;font-size:0.88rem;color:var(--text-muted);line-height:1.75;}
+    .ans-note{font-size:0.83rem;color:var(--text-muted);}
+    .cw-input{display:inline-block;width:7rem;padding:0.2rem 0.4rem;font-size:0.9rem;border-radius:5px;vertical-align:baseline;}
+    .bs-item{padding:0.6rem 0.75rem;border:1px solid var(--border-color);border-radius:8px;margin-bottom:0.5rem;background:rgba(0,0,0,0.15);}
+    .bs-chips{display:flex;flex-wrap:wrap;gap:0.3rem;margin-bottom:0.45rem;}
+    .bs-chips span{background:rgba(56,189,248,0.1);border:1px solid rgba(56,189,248,0.3);color:var(--accent-blue);font-family:'Fira Code',monospace;font-size:0.78rem;padding:0.15rem 0.45rem;border-radius:5px;}
+    .bs-input{margin-top:0.1rem;}
+    @media(max-width:768px){.main-content{margin-left:0;padding:1rem 1rem 84px;max-width:100%}.header{flex-wrap:wrap;gap:0.5rem}.controls{flex-direction:column;align-items:stretch}.timer-display{font-size:1.25rem}}
+  </style>
+ <!-- FE:CSS-MOBILE --><style>.mobile-nav-toggle{display:none;position:fixed;bottom:20px;right:20px;z-index:200;width:48px;height:48px;border-radius:50%;background:var(--primary);color:#000;border:none;font-size:20px;cursor:pointer;align-items:center;justify-content:center;box-shadow:3px 3px 0 rgba(0,0,0,0.12)}
+.sidebar-overlay{display:none;position:fixed;inset:0;z-index:150;background:rgba(0,0,0,0.4)}
+.sidebar-overlay.open{display:block}@media(max-width:768px){
+  .mobile-nav-toggle{display:flex}
+  .sidebar{position:fixed;left:0;top:0;z-index:175;height:100vh;transform:translateX(-100%);transition:transform .25s ease;width:260px;display:flex!important}
+  .sidebar.open{transform:translateX(0)}
+  .main-content{margin-left:0;padding:1rem 1rem 84px;max-width:100%}
+  .header{flex-wrap:wrap;gap:0.5rem}
+  .grid-2{grid-template-columns:1fr}
+  .controls{flex-direction:column;align-items:stretch}
+  .timer-display{font-size:1.5rem}
+}</style>
+ <!-- FE:CSS-CHIP --><style>.slide-chip{font-family:'Fira Code',monospace;font-size:0.72rem;font-weight:700;color:var(--primary);background:var(--bg-card,rgba(0,0,0,0.4));border:1px solid var(--border-color,rgba(255,255,255,0.15));padding:0.25rem 0.65rem;border-radius:20px;white-space:nowrap;margin-left:auto}</style>
+ <style>.back-link{color:var(--text-muted);text-decoration:none;font-size:0.8rem;font-family:'Fira Code',monospace;white-space:nowrap;transition:color 0.2s;margin-left:1rem;}.back-link:hover{color:var(--primary);}</style></head>
+<body>
+  <aside class="sidebar">
+    <div class="brand"><span class="brand-badge">TOEFL</span><span class="brand-title">Valeria L28</span></div>
+    <button class="nav-btn active" onclick="switchSlide(0)"><span class="nav-num">01</span> Warm-up · Words</button>
+    <button class="nav-btn" onclick="switchSlide(1)"><span class="nav-num">02</span> Reading Method</button>
+    <button class="nav-btn" onclick="switchSlide(2)"><span class="nav-num">03</span> Daily Life</button>
+    <button class="nav-btn" onclick="switchSlide(3)"><span class="nav-num">04</span> Academic Passage</button>
+    <button class="nav-btn" onclick="switchSlide(4)"><span class="nav-num">05</span> The Interview</button>
+    <button class="nav-btn" onclick="switchSlide(5)"><span class="nav-num">06</span> Build a Sentence</button>
+    <button class="nav-btn" onclick="switchSlide(6)"><span class="nav-num">07</span> Correction Table</button>
+    <button class="nav-btn" onclick="switchSlide(7)"><span class="nav-num">08</span> Homework</button>
+  </aside>
+  <main class="main-content">
+    <header class="header"><div><h1 class="page-title">Reading Under Pressure + The Interview</h1><p style="color:var(--text-muted);font-size:0.85rem;margin-top:0.2rem;">New-format rotation · Complete the Words · Reading tasks · Interview · Build a Sentence</p></div><!-- FE:CHIP --><span class="slide-chip" id="slideChip">1 / N</span><a href="../index.html" class="back-link">&#8592; Portal</a>
+        <span class="tag">READING + SPEAKING</span></header>
+
+    <!-- SLIDE 01: Warm-up — Complete the Words -->
+    <div class="slide active" id="slide-0">
+      <div class="card">
+        <div class="card-title">⚡ Warm-up — Complete the Words (4 min)</div>
+        <p style="font-size:0.9rem;color:var(--text-muted);margin-bottom:1rem;">A new task type: fill the missing letters. Use the context to predict each word — spelling counts. One guess per gap; no dictionary.</p>
+        <div class="controls">
+          <span class="timer-display" id="cwTimer" style="font-size:1.25rem;">04:00</span>
+          <button class="btn" onclick="startTimer('cwTimer',240)">Start 4 min</button>
+          <button class="btn btn-secondary" onclick="resetTimer('cwTimer',240)">Reset</button>
+        </div>
+        <div style="background:rgba(0,0,0,0.2);padding:1.1rem;border-radius:8px;font-size:0.95rem;line-height:2.4;color:#cbd5e1;">
+          Studying abroad offers students a unique <input type="text" class="cw-input" placeholder="opp___" aria-label="Word 1"> to expand their <input type="text" class="cw-input" placeholder="acad___" aria-label="Word 2"> knowledge while experiencing a new <input type="text" class="cw-input" placeholder="cul___" aria-label="Word 3">. Many <input type="text" class="cw-input" placeholder="univ___" aria-label="Word 4"> encourage international <input type="text" class="cw-input" placeholder="exch___" aria-label="Word 5"> programmes because living in an <input type="text" class="cw-input" placeholder="unfam___" aria-label="Word 6"> environment develops independence and <input type="text" class="cw-input" placeholder="adapt___" aria-label="Word 7">. Although the <input type="text" class="cw-input" placeholder="trans___" aria-label="Word 8"> can be <input type="text" class="cw-input" placeholder="chall___" aria-label="Word 9">, most students eventually <input type="text" class="cw-input" placeholder="rep___" aria-label="Word 10"> lasting personal growth.
+        </div>
+        <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;margin-top:0.6rem;">
+          <span class="word-count-badge" id="cwCount">0 / 10 completed</span>
+          <button class="btn btn-secondary" onclick="toggleReveal('cwAns')">👁️ Show Answers</button>
+        </div>
+        <div class="reveal-box" id="cwAns">
+          opportunity · academic · culture · universities · exchange · unfamiliar · adaptability · transition · challenging · report<br>
+          <span class="ans-note"><strong>Context beats guessing:</strong> "a unique ___ to expand" demands a noun; "can be ___" demands an adjective. Predict the word class first, then the word.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 02: Reading Method -->
+    <div class="slide" id="slide-1">
+      <div class="card">
+        <div class="card-title">🧭 The Reading Section — What Changed</div>
+        <p style="font-size:0.9rem;color:var(--text-muted);margin-bottom:1rem;">~18–27 minutes · 35–48 items · <strong>adaptive</strong>: the second set adjusts to your first-set performance — a strong start matters. Three task types:</p>
+        <div class="arg-box" style="border-color:var(--accent-blue);">
+          <div class="arg-label" style="color:var(--accent-blue);">Complete the Words</div>
+          <p style="font-size:0.9rem;">Fill the missing letters. Context + spelling. Fast — don't stall on one word.</p>
+        </div>
+        <div class="arg-box" style="border-color:var(--accent-green);">
+          <div class="arg-label" style="color:var(--accent-green);">Read in Daily Life</div>
+          <p style="font-size:0.9rem;">Notices, emails, campus messages + questions. Detail-focused: find the exact line.</p>
+        </div>
+        <div class="arg-box" style="border-color:var(--accent-purple);">
+          <div class="arg-label" style="color:var(--accent-purple);">Read an Academic Passage</div>
+          <p style="font-size:0.9rem;">Passage + questions: main idea, detail, inference, vocabulary-in-context, negative fact.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">⚡ Three rules for reading under time</div>
+        <p style="font-size:0.9rem;line-height:1.8;color:#cbd5e1;">
+          <strong>1 · Questions first.</strong> Read the questions, underline keywords, then read the text — you read looking for answers, not for the sake of reading.<br>
+          <strong>2 · Never leave blanks.</strong> There is no penalty for wrong answers — a guess is a chance, an empty box is a zero.<br>
+          <strong>3 · 90-second rule.</strong> Any single item that takes longer than ~90 seconds: guess, flag it, move on. One stuck item costs two later items.
+        </p>
+        <p style="font-size:0.83rem;color:var(--text-muted);margin-top:0.75rem;">Today: Diagnostic mode — we time everything and find <em>your</em> failure pattern, not just the score.</p>
+      </div>
+    </div>
+
+    <!-- SLIDE 03: Read in Daily Life -->
+    <div class="slide" id="slide-2">
+      <div class="card">
+        <div class="card-title">📋 Read in Daily Life — Library Notice (4 min)</div>
+        <div class="reading-text">
+          <p><strong>LIBRARY NOTICE — Weekend Opening Hours</strong></p>
+          <p>From Saturday 12 October, the main library will open from 10:00 to 20:00 on weekends, two hours later than before. The change follows student feedback requesting later access during exam preparation. The 24-hour study room remains accessible with a student card at all times. Book returns will be processed only during staffed hours. Group study rooms can be booked via the student portal up to seven days in advance. Please note that the café closes at 18:00, one hour before the library.</p>
+        </div>
+        <div class="q-item"><div class="q-text">1. The new weekend opening time is:</div><div class="q-opts">A 08:00 &nbsp;&nbsp; B 10:00 &nbsp;&nbsp; C 12:00</div></div>
+        <div class="q-item"><div class="q-text">2. Which facility is available to students at all times?</div><div class="q-opts">A the café &nbsp;&nbsp; B the book return desk &nbsp;&nbsp; C the 24-hour study room</div></div>
+        <div class="q-item"><div class="q-text">3. Group study rooms can be booked:</div><div class="q-opts">A one day in advance &nbsp;&nbsp; B up to seven days in advance &nbsp;&nbsp; C one month in advance</div></div>
+        <div class="controls" style="margin-top:0.6rem;margin-bottom:0;">
+          <span class="timer-display" id="dlTimer" style="font-size:1.1rem;">04:00</span>
+          <button class="btn" onclick="startTimer('dlTimer',240)">Start 4 min</button>
+          <button class="btn btn-secondary" onclick="resetTimer('dlTimer',240)">Reset</button>
+          <button class="btn btn-secondary" onclick="toggleReveal('dlAns')">👁️ Show Answers</button>
+        </div>
+        <div class="reveal-box" id="dlAns">
+          <strong>1 B</strong> — "open from 10:00 to 20:00". &nbsp;<strong>2 C</strong> — "24-hour study room remains accessible… at all times". &nbsp;<strong>3 B</strong> — "up to seven days in advance".<br>
+          <span class="ans-note">Traps: the café time (18:00) belongs to the café, not the library question; "book returns during staffed hours" is a distractor for Q2.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 04: Academic Passage -->
+    <div class="slide" id="slide-3">
+      <div class="card">
+        <div class="card-title">📖 Read an Academic Passage (12 min)</div>
+        <div class="controls">
+          <span class="timer-display" id="apTimer" style="font-size:1.25rem;">12:00</span>
+          <button class="btn" onclick="startTimer('apTimer',720)">Start 12 min</button>
+          <button class="btn btn-secondary" onclick="resetTimer('apTimer',720)">Reset</button>
+        </div>
+        <div class="reading-text">
+          <p><strong>Urban Trees</strong></p>
+          <p>Cities are increasingly investing in trees — not as decoration, but as infrastructure. A mature street tree can lower surrounding air temperature by several degrees on hot days, because leaves release water vapour and shade surfaces that would otherwise absorb heat. This cooling effect reduces the demand for air conditioning in nearby buildings, cutting both energy costs and carbon emissions.</p>
+          <p>Trees also intercept rainwater before it reaches drains. A single mature tree can absorb hundreds of litres of storm water each year, which reduces flooding during heavy rain and eases pressure on ageing drainage systems. For city planners, this makes trees a form of 'green infrastructure' — cheaper than concrete pipes and with additional benefits.</p>
+          <p>Those benefits include public health. Studies in several countries link neighbourhoods with more trees to lower stress levels and better mental health outcomes, though researchers caution that such correlations do not prove that trees cause the improvements. What is clearer is the effect on air quality: leaves trap particulate pollution, removing it from the air that residents breathe.</p>
+          <p>The challenge is maintenance. Trees need water, pruning and protection during their first years, and budgets for care are often cut before budgets for planting. As a result, many cities lose a significant share of new trees within a decade — a reminder that planting is the beginning of the work, not the end.</p>
+        </div>
+        <div class="q-item"><div class="q-text">1. What is the main idea of the passage?</div><div class="q-opts">A Cities should plant more trees for decoration. &nbsp; B Urban trees function as valuable city infrastructure. &nbsp; C Drainage systems are cheaper than trees. &nbsp; D Air conditioning causes most urban emissions.</div></div>
+        <div class="q-item"><div class="q-text">2. How do trees reduce air conditioning demand?</div><div class="q-opts">A By blocking sunlight only. &nbsp; B By releasing water vapour and providing shade. &nbsp; C By trapping pollution particles. &nbsp; D By absorbing storm water.</div></div>
+        <div class="q-item"><div class="q-text">3. Why does the author mention "concrete pipes"?</div><div class="q-opts">A To show trees can replace some built infrastructure at lower cost. &nbsp; B To criticise modern drainage systems. &nbsp; C To explain how pipes are installed. &nbsp; D To argue that trees are more expensive.</div></div>
+        <div class="q-item"><div class="q-text">4. What do researchers caution about the health studies?</div><div class="q-opts">A The samples were too small. &nbsp; B The studies covered only one country. &nbsp; C Correlation does not prove causation. &nbsp; D Mental health is difficult to measure.</div></div>
+        <div class="q-item"><div class="q-text">5. The word "intercept" in paragraph 2 is closest in meaning to:</div><div class="q-opts">A catch &nbsp; B clean &nbsp; C direct &nbsp; D predict</div></div>
+        <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;margin-top:0.6rem;">
+          <button class="btn btn-secondary" onclick="toggleReveal('apAns')">👁️ Show Answers</button>
+        </div>
+        <div class="reveal-box" id="apAns">
+          <strong>1 B</strong> — the whole passage argues trees = infrastructure. &nbsp;<strong>2 B</strong> — "leaves release water vapour and shade surfaces". &nbsp;<strong>3 A</strong> — "cheaper than concrete pipes and with additional benefits". &nbsp;<strong>4 C</strong> — "correlations do not prove that trees cause the improvements". &nbsp;<strong>5 A</strong> — intercept = catch (rainwater before it reaches drains).<br>
+          <span class="ans-note">Log your failure pattern: main idea? detail hunt? inference? vocab-in-context? Each one trains differently.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 05: The Interview -->
+    <div class="slide" id="slide-4">
+      <div class="card">
+        <div class="card-title">🎤 Take an Interview — 4 Questions, No Prep</div>
+        <p style="font-size:0.9rem;color:var(--text-muted);margin-bottom:1rem;"><strong>Exam rules:</strong> zero preparation time · one take · 30–45 seconds per answer · natural and complete, not rushed. The examiner starts with the first question and follows the conversation organically.</p>
+        <div class="arg-box" style="border-color:var(--accent-green);"><div class="arg-label" style="color:var(--accent-green);">Q1</div><p style="font-size:0.92rem;">What is one skill you would like to learn this year, and why?</p></div>
+        <div class="arg-box" style="border-color:var(--accent-blue);"><div class="arg-label" style="color:var(--accent-blue);">Q2</div><p style="font-size:0.92rem;">Do you prefer studying alone or in a group? Why?</p></div>
+        <div class="arg-box" style="border-color:var(--accent-purple);"><div class="arg-label" style="color:var(--accent-purple);">Q3</div><p style="font-size:0.92rem;">Describe a time when you had to manage several tasks at once.</p></div>
+        <div class="arg-box" style="border-color:var(--primary);"><div class="arg-label" style="color:var(--primary);">Q4</div><p style="font-size:0.92rem;">Some students choose to study abroad. Would you? Why or why not?</p></div>
+        <div class="controls" style="margin-top:0.75rem;margin-bottom:0;">
+          <button class="btn btn-secondary" onclick="toggleReveal('interviewModel')">👁️ Model Answer (Q1)</button>
+          <button class="btn btn-secondary" onclick="document.getElementById('interviewAudio').play()">🔊 Play Model</button>
+          <audio id="interviewAudio" src="audio/interview-model.mp3" preload="metadata" style="display:none;"></audio>
+          <button class="btn btn-secondary" onclick="toggleReveal('interviewCheck')">✅ Interview Checklist</button>
+        </div>
+        <div class="reveal-box" id="interviewModel">
+          <strong>Model (~60 words — one skill, one reason, one concrete detail):</strong><br><br>
+          One skill I would like to learn this year is public speaking, because I want to present my ideas more confidently at university. I have started by practising short talks in front of a mirror, and I record myself once a week to check my pace and clarity. It feels uncomfortable, but that awkwardness is exactly why the skill is worth building.<br><br>
+          <span class="ans-note">Notice the shape: answer → reason → habit/detail → one closing line. One idea, fully developed — not three half-ideas.</span>
+        </div>
+        <div class="reveal-box" id="interviewCheck">
+          Answered within 30–45 seconds?<br>
+          One clear reason + one concrete detail?<br>
+          No long initial pause (start within ~2 seconds)?<br>
+          Natural tone — not an essay voice?<br>
+          No mid-answer restarts (one take)?<br>
+          <span class="ans-note">Homework: record all four, one take each. Best one + one sentence why it was best.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 06: Build a Sentence -->
+    <div class="slide" id="slide-5">
+      <div class="card">
+        <div class="card-title">🧩 Build a Sentence — 6 Items (Target: 45s each)</div>
+        <p style="font-size:0.9rem;color:var(--text-muted);margin-bottom:0.75rem;">New task type: assemble the words into a correct sentence. Watch order, connectors and little words (a/the/your). Type the full sentence.</p>
+        <div id="bsBank">
+          <div class="bs-item"><div class="bs-chips"><span>that</span><span>argue</span><span>some</span><span>people</span><span>technology</span><span>reduces</span><span>creativity</span></div><input type="text" class="bs-input" placeholder="Build the sentence..." aria-label="Sentence 1"></div>
+          <div class="bs-item"><div class="bs-chips"><span>submitted</span><span>students</span><span>the</span><span>their</span><span>before</span><span>essays</span><span>the</span><span>deadline</span></div><input type="text" class="bs-input" placeholder="Build the sentence..." aria-label="Sentence 2"></div>
+          <div class="bs-item"><div class="bs-chips"><span>tired</span><span>although</span><span>was</span><span>she</span><span>the</span><span>finished</span><span>she</span><span>project</span></div><input type="text" class="bs-input" placeholder="Build the sentence..." aria-label="Sentence 3"></div>
+          <div class="bs-item"><div class="bs-chips"><span>suggest</span><span>scientists</span><span>city</span><span>that</span><span>trees</span><span>help</span><span>cool</span><span>air</span><span>urban</span></div><input type="text" class="bs-input" placeholder="Build the sentence..." aria-label="Sentence 4"></div>
+          <div class="bs-item"><div class="bs-chips"><span>important</span><span>it</span><span>is</span><span>to</span><span>manage</span><span>time</span><span>effectively</span><span>your</span></div><input type="text" class="bs-input" placeholder="Build the sentence..." aria-label="Sentence 5"></div>
+          <div class="bs-item"><div class="bs-chips"><span>answer</span><span>always</span><span>before</span><span>check</span><span>you</span><span>your</span><span>submit</span></div><input type="text" class="bs-input" placeholder="Build the sentence..." aria-label="Sentence 6"></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;margin-top:0.6rem;">
+          <span class="word-count-badge" id="bsCount">0 / 6 built</span>
+          <button class="btn btn-secondary" onclick="toggleReveal('bsAns')">👁️ Show Answers</button>
+        </div>
+        <div class="reveal-box" id="bsAns">
+          1. <span class="text-green">Some people argue that technology reduces creativity.</span><br>
+          2. <span class="text-green">The students submitted their essays before the deadline.</span><br>
+          3. <span class="text-green">Although she was tired, she finished the project.</span> <span class="ans-note">(comma after the opening clause)</span><br>
+          4. <span class="text-green">Scientists suggest that city trees help cool urban air.</span><br>
+          5. <span class="text-green">It is important to manage your time effectively.</span> <span class="ans-note">("it" = dummy subject)</span><br>
+          6. <span class="text-green">Always check your answer before you submit.</span> <span class="ans-note">(you ≠ your — both words are in the bank)</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 07: Correction Table -->
+    <div class="slide" id="slide-6">
+      <div class="card">
+        <div class="card-title">📋 Live Error Correction</div>
+        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:1rem;">Log any errors caught during reading review, interview or build-a-sentence. Focus on today's patterns: detail hunt, word order, connector logic.</p>
+        <table class="error-table" id="errorTable">
+          <thead><tr><th>Error</th><th>Correction</th><th>Type</th></tr></thead>
+          <tbody id="errorBody">
+            <tr><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+            <tr><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+            <tr><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+            <tr><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+          </tbody>
+        </table>
+        <button class="btn btn-secondary" onclick="addErrorRow()" style="margin-top:0.75rem;">+ Add Row</button>
+      </div>
+    </div>
+
+    <!-- SLIDE 08: Homework -->
+    <div class="slide" id="slide-7">
+      <div class="card">
+        <div class="card-title">📝 Homework Assignments</div>
+        <div style="margin-bottom:1rem;">
+          <p style="font-weight:600;margin-bottom:0.5rem;">1. Reading Set — Exam Accommodations (10 min, timed)</p>
+          <p style="font-size:0.88rem;color:var(--muted);margin-bottom:0.5rem;">Read the email and answer 4 questions. One pass, then check. Log your score and failure pattern.</p>
+          <div class="reading-text" style="font-size:0.88rem;">
+            <p><strong>FROM: Registrar's Office — Exam Accommodations</strong></p>
+            <p>Dear students, the deadline to request exam accommodations for the winter session is Friday 21 November. Requests must include documentation from a medical or learning specialist and should be submitted through the student portal, not by email. Applications received after the deadline will be considered only in exceptional circumstances, such as a documented hospital stay. If you have already submitted a request, you do not need to act again; confirmations will be sent within five working days. Students with further questions should consult the FAQ page before calling the office; in-person help is available during drop-in hours (Monday–Thursday, 14:00–16:00).</p>
+          </div>
+          <div class="q-item"><div class="q-text">1. How must accommodation requests be submitted?</div><div class="q-opts">A By email &nbsp; B Through the student portal &nbsp; C In person at the registrar</div></div>
+          <div class="q-item"><div class="q-text">2. Late applications are considered:</div><div class="q-opts">A never &nbsp; B only in exceptional circumstances &nbsp; C within five working days</div></div>
+          <div class="q-item"><div class="q-text">3. What should students who have already applied do?</div><div class="q-opts">A Resubmit &nbsp; B Call to confirm &nbsp; C Nothing further</div></div>
+          <div class="q-item"><div class="q-text">4. Where should students check first with questions?</div><div class="q-opts">A The FAQ page &nbsp; B The drop-in hours &nbsp; C A specialist</div></div>
+          <div class="controls" style="margin-top:0.6rem;margin-bottom:0;">
+            <span class="timer-display" id="hwTimer" style="font-size:1.1rem;">10:00</span>
+            <button class="btn" onclick="startTimer('hwTimer',600)">Start 10 min</button>
+            <button class="btn btn-secondary" onclick="resetTimer('hwTimer',600)">Reset</button>
+            <button class="btn btn-secondary" onclick="toggleReveal('hwAns')">👁️ Show Answers</button>
+          </div>
+          <div class="reveal-box" id="hwAns"><strong>1 B</strong> ("through the student portal, not by email") &nbsp;<strong>2 B</strong> ("only in exceptional circumstances") &nbsp;<strong>3 C</strong> ("you do not need to act again") &nbsp;<strong>4 A</strong> ("consult the FAQ page before calling")</div>
+        </div>
+        <div style="margin-bottom:1rem;">
+          <p style="font-weight:600;margin-bottom:0.5rem;">2. Interview Sprint (record, one take each)</p>
+          <p style="font-size:0.88rem;color:var(--muted);">No prep, 30–45 seconds per answer. New questions:<br>
+          (a) What is one habit you would like to change, and why?<br>
+          (b) Do you prefer reading on paper or on a screen? Why?<br>
+          (c) Describe a time when you helped someone solve a problem.<br>
+          (d) Some people say university education should be free. What do you think?<br>
+          Send your best recording + one sentence: why was it the best?</p>
+        </div>
+        <div style="margin-bottom:1rem;">
+          <p style="font-weight:600;margin-bottom:0.5rem;">3. Build a Sentence — Speed Round</p>
+          <p style="font-size:0.88rem;color:var(--muted);">Redo today's six sentences from slide 06 (hide the answers). Target 45 seconds each; note your two slowest on the correction table and why (word order? connectors? little words?).</p>
+        </div>
+        <div>
+          <p style="font-weight:600;margin-bottom:0.5rem;">4. Daily Vocabulary Centre (5–10 min/day)</p>
+          <p style="font-size:0.88rem;color:var(--muted);">Every day: 5 new words (flashcards + audio), review queue, day's quiz. Keep the streak alive.</p>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <button class="mobile-nav-toggle" id="mobileNavBtn" aria-label="Open navigation">☰</button>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <script>
+    const TOTAL = 8;
+    let current = 0;
+
+    function switchSlide(n) {
+      document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById('slide-' + n).classList.add('active');
+      document.querySelectorAll('.nav-btn')[n].classList.add('active');
+      current = n;
+      document.getElementById('slideChip').textContent = (n + 1) + ' / ' + TOTAL;
+      window.scrollTo({top: 0, behavior: 'smooth'});
+    }
+
+    const timerIntervals = {};
+    function startTimer(id, seconds) {
+      if (timerIntervals[id]) { clearInterval(timerIntervals[id]); delete timerIntervals[id]; return; }
+      let remaining = seconds;
+      const el = document.getElementById(id);
+      timerIntervals[id] = setInterval(() => {
+        remaining--;
+        const m = Math.floor(remaining / 60);
+        const s = remaining % 60;
+        el.textContent = String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
+        if (remaining <= 0) { clearInterval(timerIntervals[id]); delete timerIntervals[id]; el.textContent = "TIME!"; el.style.color = 'var(--accent-red)'; }
+      }, 1000);
+    }
+    function resetTimer(id, seconds) {
+      if (timerIntervals[id]) { clearInterval(timerIntervals[id]); delete timerIntervals[id]; }
+      const el = document.getElementById(id);
+      const m = Math.floor(seconds / 60);
+      const s = seconds % 60;
+      el.textContent = String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
+      el.style.color = 'var(--primary)';
+    }
+
+    const cwInputs = [...document.querySelectorAll('.cw-input')];
+    if (cwInputs.length) {
+      const updateCw = () => {
+        const filled = cwInputs.filter(i => i.value.trim() !== '').length;
+        document.getElementById('cwCount').textContent = filled + ' / ' + cwInputs.length + ' completed';
+      };
+      cwInputs.forEach(i => i.addEventListener('input', updateCw));
+    }
+
+    const bsItems = [...document.querySelectorAll('.bs-item')];
+    if (bsItems.length) {
+      const updateBs = () => {
+        const built = bsItems.filter(it => it.querySelector('.bs-input').value.trim() !== '').length;
+        document.getElementById('bsCount').textContent = built + ' / ' + bsItems.length + ' built';
+      };
+      bsItems.forEach(it => it.querySelector('.bs-input').addEventListener('input', updateBs));
+    }
+
+    function toggleReveal(id) {
+      document.getElementById(id).classList.toggle('show');
+    }
+
+    function addErrorRow() {
+      const tbody = document.getElementById('errorBody');
+      const tr = document.createElement('tr');
+      tr.innerHTML = '<td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td>';
+      tbody.appendChild(tr);
+    }
+
+    document.getElementById('mobileNavBtn').addEventListener('click', () => {
+      document.querySelector('.sidebar').classList.toggle('open');
+      document.getElementById('sidebarOverlay').classList.toggle('open');
+    });
+    document.getElementById('sidebarOverlay').addEventListener('click', () => {
+      document.querySelector('.sidebar').classList.remove('open');
+      document.getElementById('sidebarOverlay').classList.remove('open');
+    });
+
+    switchSlide(0);
+  </script>
+</body>
+</html>
