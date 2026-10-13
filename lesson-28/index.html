@@ -206,15 +206,32 @@
         <div class="arg-box" style="border-color:var(--accent-purple);"><div class="arg-label" style="color:var(--accent-purple);">Q3</div><p style="font-size:0.92rem;">Describe a time when you had to manage several tasks at once.</p></div>
         <div class="arg-box" style="border-color:var(--primary);"><div class="arg-label" style="color:var(--primary);">Q4</div><p style="font-size:0.92rem;">Some students choose to study abroad. Would you? Why or why not?</p></div>
         <div class="controls" style="margin-top:0.75rem;margin-bottom:0;">
-          <button class="btn btn-secondary" onclick="toggleReveal('interviewModel')">👁️ Model Answer (Q1)</button>
-          <button class="btn btn-secondary" onclick="document.getElementById('interviewAudio').play()">🔊 Play Model</button>
-          <audio id="interviewAudio" src="audio/interview-model.mp3" preload="metadata" style="display:none;"></audio>
+          <button class="btn btn-secondary" onclick="toggleReveal('interviewModel')">👁️ Model Answers — Q1–Q4</button>
+          <button class="btn btn-secondary" onclick="toggleReveal('interviewPlan')">🔁 Practice Plan</button>
           <button class="btn btn-secondary" onclick="toggleReveal('interviewCheck')">✅ Interview Checklist</button>
         </div>
         <div class="reveal-box" id="interviewModel">
-          <strong>Model (~60 words — one skill, one reason, one concrete detail):</strong><br><br>
+          <strong>Q1 — a skill you would like to learn</strong>
+          <button class="btn btn-secondary" style="padding:0.25rem 0.55rem;font-size:0.78rem;margin-left:0.4rem;" onclick="playModel(1)">🔊</button><br>
           One skill I would like to learn this year is public speaking, because I want to present my ideas more confidently at university. I have started by practising short talks in front of a mirror, and I record myself once a week to check my pace and clarity. It feels uncomfortable, but that awkwardness is exactly why the skill is worth building.<br><br>
-          <span class="ans-note">Notice the shape: answer → reason → habit/detail → one closing line. One idea, fully developed — not three half-ideas.</span>
+          <strong>Q2 — studying alone or in a group</strong>
+          <button class="btn btn-secondary" style="padding:0.25rem 0.55rem;font-size:0.78rem;margin-left:0.4rem;" onclick="playModel(2)">🔊</button><br>
+          I prefer studying alone, because I concentrate better without background conversation. When I revise for exams, I work at my desk with my phone switched off, and I plan each session around one subject. That said, I check my understanding with a study group once a week — explaining an idea to someone else shows me what I actually know. So: alone for focus, together for feedback.<br><br>
+          <strong>Q3 — several tasks at once</strong>
+          <button class="btn btn-secondary" style="padding:0.25rem 0.55rem;font-size:0.78rem;margin-left:0.4rem;" onclick="playModel(3)">🔊</button><br>
+          Last semester I had two essays due in the same week, plus a presentation to prepare. I wrote everything down, ranked the tasks by deadline, and spent my first two hours each morning on the hardest one — the essay I understood least. Everything was finished on time, and honestly, the list kept me calm: when all the tasks are on paper, nothing can be forgotten.<br><br>
+          <strong>Q4 — studying abroad</strong>
+          <button class="btn btn-secondary" style="padding:0.25rem 0.55rem;font-size:0.78rem;margin-left:0.4rem;" onclick="playModel(4)">🔊</button><br>
+          Yes, I would study abroad, because living in another country teaches you things a classroom cannot. You manage your own budget, make friends in a second language, and solve problems without your family nearby. I would choose a country with a strong programme in my field, and prepare my English before I go. It is expensive, but I see it as an investment in independence.<br><br>
+          <span class="ans-note">Shape to copy in every answer: answer → one reason → one concrete detail → closing line. One idea, fully developed — not three half-ideas.</span>
+        </div>
+        <div class="reveal-box" id="interviewPlan">
+          <strong>The perfection loop — 5 minutes a day:</strong><br>
+          <strong>Day 1:</strong> answer all four questions without prep — one take each.<br>
+          <strong>Listen back once:</strong> note one fix per answer (long pause? vague reason? no detail?).<br>
+          <strong>Day 2:</strong> study the models, then answer again — same questions, one take.<br>
+          <strong>Day 3:</strong> answer in a different order (3 → 1 → 4 → 2) to break memorisation.<br>
+          <span class="ans-note">Goal: 30–45 s · start within ~2 seconds · one reason + one concrete detail · no restarts.</span>
         </div>
         <div class="reveal-box" id="interviewCheck">
           Answered within 30–45 seconds?<br>
@@ -299,11 +316,23 @@
         <div style="margin-bottom:1rem;">
           <p style="font-weight:600;margin-bottom:0.5rem;">2. Interview Sprint (record, one take each)</p>
           <p style="font-size:0.88rem;color:var(--muted);">No prep, 30–45 seconds per answer. New questions:<br>
-          (a) What is one habit you would like to change, and why?<br>
-          (b) Do you prefer reading on paper or on a screen? Why?<br>
-          (c) Describe a time when you helped someone solve a problem.<br>
-          (d) Some people say university education should be free. What do you think?<br>
-          Send your best recording + one sentence: why was it the best?</p>
+          (a) What is one habit you would like to change, and why? <button class="btn btn-secondary" style="padding:0.15rem 0.45rem;font-size:0.72rem;" onclick="playModel(5)">🔊 model</button><br>
+          (b) Do you prefer reading on paper or on a screen? Why? <button class="btn btn-secondary" style="padding:0.15rem 0.45rem;font-size:0.72rem;" onclick="playModel(6)">🔊 model</button><br>
+          (c) Describe a time when you helped someone solve a problem. <button class="btn btn-secondary" style="padding:0.15rem 0.45rem;font-size:0.72rem;" onclick="playModel(7)">🔊 model</button><br>
+          (d) Some people say university education should be free. What do you think? <button class="btn btn-secondary" style="padding:0.15rem 0.45rem;font-size:0.72rem;" onclick="playModel(8)">🔊 model</button><br>
+          Send your best recording + one sentence: why was it the best? Use the perfection loop (slide 05).</p>
+          <button class="btn btn-secondary" onclick="toggleReveal('hwModels')" style="margin-top:0.5rem;">👁️ Model Answers — Homework Set</button>
+          <div class="reveal-box" id="hwModels">
+            <strong>(a) One habit to change</strong><br>
+            One habit I would like to change is checking my phone first thing in the morning. It steals the quietest, most focused hour of my day — I often start university work already distracted. My plan is simple: the phone stays in my bag until breakfast, and I replace the habit with ten minutes of reading. It is a small change, but small changes are how routines actually improve.<br><br>
+            <strong>(b) Paper or screen</strong><br>
+            For serious study I prefer reading on paper, because I remember more when I can underline and write in the margins. Screens are faster for searching and storing texts, so I use them for articles and quick research. When a topic really matters I print it out; when I just need a fact, the screen wins. So it depends on the purpose, not the technology.<br><br>
+            <strong>(c) Helping someone solve a problem</strong><br>
+            Last year my classmate was about to miss a scholarship deadline because she could not find the right form. I helped her search the university website, we found the correct document, and we filled it in together that evening. She submitted it two days early and got the scholarship. I did not do much, but being calm and methodical was exactly what she needed.<br><br>
+            <strong>(d) Free university education</strong><br>
+            I think university should be free at the point of study, because education benefits the whole society, not only the individual. Doctors, teachers and engineers all come from universities, and student debt stops talented people from poorer families applying. The money has to come from somewhere, of course — so I would fund it through progressive taxation rather than tuition fees. Fair access, shared cost.<br><br>
+            <span class="ans-note">Same shape every time: answer → one reason → one concrete detail → closing line. Record after studying — not while reading.</span>
+          </div>
         </div>
         <div style="margin-bottom:1rem;">
           <p style="font-weight:600;margin-bottom:0.5rem;">3. Build a Sentence — Speed Round</p>
@@ -377,6 +406,11 @@
 
     function toggleReveal(id) {
       document.getElementById(id).classList.toggle('show');
+    }
+
+    function playModel(n) {
+      const files = {1:'interview-model-1',2:'interview-model-2',3:'interview-model-3',4:'interview-model-4',5:'interview-hw-a',6:'interview-hw-b',7:'interview-hw-c',8:'interview-hw-d'};
+      new Audio('audio/' + files[n] + '.mp3').play();
     }
 
     function addErrorRow() {
