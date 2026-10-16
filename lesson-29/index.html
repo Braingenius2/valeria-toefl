@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Valeria — Lesson 29: Error Surgery Across New Tasks</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg-dark:#090d16;--bg-card:#131a26;--border-color:#243042;--text-main:#f1f5f9;--text-muted:#8290a4;--primary:#f59e0b;--primary-hover:#d97706;--primary-dim:rgba(245,158,11,0.12);--accent-blue:#38bdf8;--accent-green:#10b981;--accent-red:#ef4444;--accent-purple:#a855f7;}
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:'Inter',sans-serif;background:var(--bg-dark);color:var(--text-main);display:flex;min-height:100vh;overflow-x:hidden;}
+    .sidebar{width:260px;background:var(--bg-card);border-right:1px solid var(--border-color);display:flex;flex-direction:column;padding:1.5rem 1rem;position:fixed;height:100vh;z-index:100;overflow-y:auto;scrollbar-width:thin;}
+    .brand{display:flex;align-items:center;gap:.75rem;margin-bottom:1.5rem;padding:0 .5rem;}
+    .brand-badge{background:var(--primary);color:#000;font-weight:700;font-size:.75rem;padding:.2rem .5rem;border-radius:4px;text-transform:uppercase;}
+    .brand-title{font-weight:600;font-size:1.05rem;color:var(--text-main);}
+    .nav-btn{background:transparent;border:1px solid transparent;color:var(--text-muted);padding:.68rem .85rem;border-radius:8px;text-align:left;font-size:.88rem;font-family:inherit;cursor:pointer;margin-bottom:.35rem;display:flex;align-items:center;gap:.7rem;}
+    .nav-btn:hover{background:rgba(255,255,255,.03);color:var(--text-main);}
+    .nav-btn.active{background:var(--primary-dim);border-color:rgba(245,158,11,.3);color:var(--primary);font-weight:600;}
+    .nav-num{font-family:'Fira Code',monospace;font-size:.75rem;opacity:.7;}
+    .rail-note{margin-top:auto;color:var(--text-muted);font-size:.75rem;line-height:1.5;padding:.5rem;}
+    .main-content{margin-left:260px;flex:1;padding:1.75rem clamp(1rem,3vw,3rem);max-width:1280px;min-width:0;}
+    .header{display:flex;justify-content:space-between;align-items:center;gap:.75rem;flex-wrap:wrap;margin-bottom:1.5rem;padding-bottom:.9rem;border-bottom:1px solid var(--border-color);}
+    .page-title{font-size:clamp(1.2rem,2.5vw,1.55rem);font-weight:700;color:var(--text-main);}
+    .subtitle{color:var(--text-muted);font-size:.84rem;margin-top:.2rem;}
+    .back-link{color:var(--text-muted);text-decoration:none;font-size:.78rem;font-family:'Fira Code',monospace;white-space:nowrap;}.back-link:hover{color:var(--primary);}
+    .slide-chip{font-family:'Fira Code',monospace;font-size:.72rem;font-weight:700;color:var(--primary);background:var(--bg-card);border:1px solid var(--border-color);padding:.25rem .65rem;border-radius:20px;white-space:nowrap;}
+    .slide{display:none;animation:fadeIn .22s ease;}.slide.active{display:block;}
+    @keyframes fadeIn{from{opacity:.7;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+    .card{background:var(--bg-card);border:1px solid var(--border-color);border-radius:12px;padding:1.15rem;margin-bottom:1rem;}
+    .card-title{font-size:1.03rem;font-weight:650;color:var(--primary);margin-bottom:.75rem;display:flex;align-items:center;gap:.5rem;}
+    .muted{color:var(--text-muted);font-size:.84rem;line-height:1.6;}
+    .btn{background:var(--primary);color:#000;border:none;padding:.55rem .95rem;border-radius:6px;font-weight:650;font-size:.84rem;font-family:inherit;cursor:pointer;display:inline-flex;align-items:center;gap:.4rem;}
+    .btn:hover{background:var(--primary-hover);}.btn-secondary{background:transparent;border:1px solid var(--border-color);color:var(--text-main);}.btn-secondary:hover{border-color:var(--primary);}
+    .timer-display{font-family:'Fira Code',monospace;font-size:1.25rem;font-weight:700;color:var(--primary);background:#000;padding:.35rem .75rem;border-radius:7px;border:1px solid var(--border-color);display:inline-block;}
+    .controls{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;margin:.65rem 0;}
+    .grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.8rem;}.grid-2 .card{margin-bottom:0;}
+    .focus-box{padding:.8rem 1rem;border:1px solid rgba(245,158,11,.35);border-left:3px solid var(--primary);background:rgba(245,158,11,.06);border-radius:0 8px 8px 0;margin:.75rem 0;line-height:1.55;}
+    .score-row{display:grid;grid-template-columns:minmax(0,1fr) 5.5rem;align-items:center;gap:.5rem;padding:.45rem 0;border-bottom:1px solid rgba(36,48,66,.7);font-size:.87rem;}.score-row:last-child{border-bottom:0;}
+    input[type=number],input[type=text],textarea{width:100%;background:rgba(0,0,0,.35);border:1px solid var(--border-color);color:var(--text-main);padding:.55rem .65rem;border-radius:6px;font:inherit;font-size:.88rem;}
+    input:focus,textarea:focus{outline:none;border-color:var(--primary);}input[type=number]{font-family:'Fira Code',monospace;text-align:center;}
+    .question{padding:.48rem 0;border-bottom:1px solid rgba(36,48,66,.7);font-size:.9rem;line-height:1.55;}.question:last-child{border-bottom:0;}
+    .opts{color:var(--text-muted);font-size:.82rem;margin-top:.18rem;line-height:1.6;}
+    .reading-text{background:rgba(0,0,0,.2);padding:.9rem;border-radius:8px;font-size:.88rem;line-height:1.65;color:#cbd5e1;margin:.55rem 0;}.reading-text p{margin-bottom:.65rem;}.reading-text p:last-child{margin-bottom:0;}
+    .reveal-box{display:none;background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.2);padding:.85rem;border-radius:8px;margin-top:.65rem;font-size:.87rem;line-height:1.65;}.reveal-box.show{display:block;}
+    .error-table{width:100%;border-collapse:collapse;margin-top:.7rem;font-size:.85rem;}.error-table th,.error-table td{padding:.6rem .7rem;border:1px solid var(--border-color);text-align:left;}.error-table th{background:rgba(0,0,0,.35);color:var(--primary);font-weight:600;}
+    .interview-meta{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.5rem;margin:.6rem 0;}.interview-meta label{font-size:.78rem;color:var(--text-muted);}.interview-meta select{display:block;width:100%;margin-top:.25rem;background:#090d16;color:var(--text-main);border:1px solid var(--border-color);border-radius:6px;padding:.45rem;font:inherit;font-size:.82rem;}
+    .bs-item{padding:.65rem .75rem;border:1px solid var(--border-color);border-radius:8px;margin-bottom:.5rem;background:rgba(0,0,0,.14);}.bs-chips{font-family:'Fira Code',monospace;font-size:.79rem;color:var(--accent-blue);line-height:1.7;margin-bottom:.4rem;}.bs-chip{display:inline-block;background:rgba(56,189,248,.08);border:1px solid rgba(56,189,248,.2);border-radius:4px;padding:.05rem .28rem;margin:.1rem .15rem .1rem 0;}
+    .word-count-badge{font-family:'Fira Code',monospace;font-size:.8rem;color:var(--accent-green);}
+    .arg-box{background:rgba(0,0,0,.18);border-left:3px solid var(--accent-blue);padding:.7rem .85rem;border-radius:0 7px 7px 0;margin:.55rem 0;}
+    .mobile-nav-toggle{display:none;position:fixed;bottom:20px;right:20px;z-index:200;width:48px;height:48px;border-radius:50%;background:var(--primary);color:#000;border:none;font-size:20px;cursor:pointer;align-items:center;justify-content:center;}.sidebar-overlay{display:none;position:fixed;inset:0;z-index:150;background:rgba(0,0,0,.4);}.sidebar-overlay.open{display:block;}
+    @media(max-width:768px){.main-content{margin-left:0;padding:1rem 1rem 84px}.header{gap:.5rem}.grid-2{grid-template-columns:1fr}.interview-meta{grid-template-columns:1fr}.mobile-nav-toggle{display:flex}.sidebar{left:0;top:0;z-index:175;transform:translateX(-100%);transition:transform .25s ease}.sidebar.open{transform:translateX(0)}}
+  </style>
+</head>
+<body>
+  <aside class="sidebar" aria-label="Lesson navigation">
+    <div class="brand"><span class="brand-badge">TOEFL</span><span class="brand-title">Valeria L29</span></div>
+    <button class="nav-btn active" onclick="switchSlide(0)"><span class="nav-num">01</span> L28 Evidence</button>
+    <button class="nav-btn" onclick="switchSlide(1)"><span class="nav-num">02</span> Reading Maintenance</button>
+    <button class="nav-btn" onclick="switchSlide(2)"><span class="nav-num">03</span> Interview Clinic</button>
+    <button class="nav-btn" onclick="switchSlide(3)"><span class="nav-num">04</span> Build a Sentence</button>
+    <button class="nav-btn" onclick="switchSlide(4)"><span class="nav-num">05</span> Writing Maintenance</button>
+    <button class="nav-btn" onclick="switchSlide(5)"><span class="nav-num">06</span> Error Map</button>
+    <button class="nav-btn" onclick="switchSlide(6)"><span class="nav-num">07</span> Homework</button>
+    <div class="rail-note"><strong>Repair what the evidence shows.</strong> Unknown L28 results stay unknown; probe rather than guess.</div>
+  </aside>
+  <main class="main-content">
+    <header class="header">
+      <div><h1 class="page-title">L29 — Error Surgery Across New Tasks</h1><p class="subtitle">Reading maintenance · interview repair · Build a Sentence · one writing sprint</p></div>
+      <span class="slide-chip" id="slideChip">1 / 7</span><a href="../index.html" class="back-link">← Portal</a><span class="tag">ROTATION · ERROR SURGERY</span>
+    </header>
+
+    <section class="slide active" id="slide-0">
+      <div class="card">
+        <div class="card-title">📊 L28 evidence — confirmed starting point</div>
+        <div class="focus-box"><strong>Reading:</strong> completed with ease — maintenance only today; exact scores were not recorded.<br><strong>Take an Interview:</strong> below target — primary repair focus. Pin down the specific failure (start latency, expansion, detail, or restart) before drilling.<br><strong>Build a Sentence:</strong> 4/6 — secondary clinic; diagnose the two missed items before reviewing the new set.</div>
+        <p class="muted">Do not invent reading or interview scores. Fill any exact L28 data below only if her work or notes are available; otherwise keep the qualitative report above.</p>
+        <div class="grid-2" style="margin-top:.65rem">
+          <div class="card">
+            <div class="card-title">Optional exact L28 reading counts</div>
+            <div class="score-row"><label for="score-cw">Complete the Words</label><span><input id="score-cw" class="l28-score" type="number" min="0" max="10" placeholder="/10" aria-label="Complete the Words score out of 10"></span></div>
+            <div class="score-row"><label for="score-daily">Read in Daily Life</label><span><input id="score-daily" class="l28-score" type="number" min="0" max="3" placeholder="/3" aria-label="Read in Daily Life score out of 3"></span></div>
+            <div class="score-row"><label for="score-academic">Academic Passage</label><span><input id="score-academic" class="l28-score" type="number" min="0" max="5" placeholder="/5" aria-label="Academic passage score out of 5"></span></div>
+          </div>
+          <div class="card">
+            <div class="card-title">Interview — identify the main snag</div>
+            <div class="interview-meta">
+              <label>Start latency<select id="int-latency"><option value="">Not recorded</option><option>≤2 sec</option><option>3–5 sec</option><option>&gt;5 sec</option></select></label>
+              <label>Answer length<select id="int-length"><option value="">Not recorded</option><option>&lt;20 sec</option><option>20–29 sec</option><option>30–45 sec</option><option>&gt;45 sec</option></select></label>
+              <label>Development<select id="int-development"><option value="">Not recorded</option><option>answer only</option><option>answer + reason</option><option>reason + detail</option><option>full answer</option></select></label>
+            </div>
+            <div class="score-row"><label for="score-sentence">Build a Sentence</label><span><input id="score-sentence" class="l28-score" type="number" min="0" max="6" value="4" aria-label="Build a Sentence score out of 6"></span></div>
+          </div>
+        </div>
+        <div class="focus-box" id="focusSuggestion" role="status"><strong>Today’s priority: Interview expansion.</strong> Reading is a quick maintenance check; Build a Sentence is the secondary repair (L28: 4/6).</div>
+        <p class="muted">Opening question: “Which interview answer felt least complete? What did you want to say next but couldn’t?” Use her answer to select the first clinic target.</p>
+      </div>
+    </section>
+
+    <section class="slide" id="slide-1">
+      <div class="card">
+        <div class="card-title">📖 Reading Maintenance — one quick lap (6 min)</div>
+        <p class="muted">Reading felt easy in L28, so this is a transfer check, not a re-teach. Complete one item from each new-format reading lane; move on if clean.</p>
+        <div class="controls"><span class="timer-display" id="readTimer">06:00</span><button class="btn" onclick="startTimer('readTimer',360)">Start 6 min</button><button class="btn btn-secondary" onclick="resetTimer('readTimer',360)">Reset</button></div>
+        <div class="arg-box" style="border-color:var(--accent-blue)"><div style="color:var(--accent-blue);font-family:'Fira Code',monospace;font-size:.72rem;font-weight:700">COMPLETE THE WORDS</div><p>Students who rece___ regular feedback are more likely to rev___ their work and imp___ their final results.</p><button class="btn btn-secondary" onclick="toggleReveal('read-cw-ans')">Check</button><div class="reveal-box" id="read-cw-ans">receive · review · improve — predict the word class before filling the gap.</div></div>
+        <div class="arg-box" style="border-color:var(--accent-green)"><div style="color:var(--accent-green);font-family:'Fira Code',monospace;font-size:.72rem;font-weight:700">READ IN DAILY LIFE</div><p>Lab access: book online at least 24 hours ahead. Cancellations within 6 hours count as a used session. What happens if you cancel 4 hours before?</p><p class="opts">A It is rescheduled free · B It counts as used · C You receive a reminder</p><button class="btn btn-secondary" onclick="toggleReveal('read-daily-ans')">Check</button><div class="reveal-box" id="read-daily-ans">B — the notice explicitly says cancellations within 6 hours count as a used session.</div></div>
+        <div class="arg-box" style="border-color:var(--accent-purple)"><div style="color:var(--accent-purple);font-family:'Fira Code',monospace;font-size:.72rem;font-weight:700">ACADEMIC PASSAGE</div><p>Brief retrieval tests help learners remember material longer than rereading alone. What is the passage’s main claim?</p><p class="opts">A Rereading is always ineffective · B Retrieval practice improves long-term recall · C Students should study for longer each evening</p><button class="btn btn-secondary" onclick="toggleReveal('read-acad-ans')">Check</button><div class="reveal-box" id="read-acad-ans">B — it captures the passage’s main idea without adding an absolute claim.</div></div>
+        <div class="focus-box">If all three are correct quickly, stop the reading block here. No extra reading just to fill time.</div>
+      </div>
+    </section>
+
+    <section class="slide" id="slide-2">
+      <div class="card">
+        <div class="card-title">🎤 Interview Clinic — main target (13 min)</div>
+        <p class="muted">L28 interview answers were below target; the exact snag is not yet logged. Ask one question at a time, zero prep, one take. Score the behaviour before coaching.</p>
+        <div class="focus-box"><strong>One-answer target:</strong> answer directly → give one reason → add one concrete detail/example → stop cleanly. 30–45 seconds, start within ~2 seconds, no restart.</div>
+        <div class="arg-box" style="border-color:var(--accent-green)"><div class="arg-label" style="color:var(--accent-green)">Fresh parallel prompts — teacher reads aloud, one at a time</div><p>1. What is one change you would make to improve student life at your university?</p><p>2. Do you prefer learning a new skill from a teacher or by yourself? Why?</p><p>3. Describe a time when a plan changed unexpectedly. What did you do?</p></div>
+        <div class="controls"><span class="timer-display" id="interviewTimer">00:45</span><button class="btn" onclick="startTimer('interviewTimer',45)">Start 45 sec</button><button class="btn btn-secondary" onclick="resetTimer('interviewTimer',45)">Reset for next answer</button></div>
+        <div class="interview-meta">
+          <label>Started within 2 sec?<select id="l29-latency"><option>Yes</option><option>No — 3–5 sec</option><option>No — &gt;5 sec</option></select></label>
+          <label>Reached 30–45 sec?<select id="l29-length"><option>Yes</option><option>Too short (&lt;30)</option><option>Ran long (&gt;45)</option></select></label>
+          <label>Expansion quality<select id="l29-expansion"><option>answer only</option><option>answer + reason</option><option>reason + one detail</option><option>full answer + clean close</option></select></label>
+        </div>
+        <div class="interview-meta">
+          <label>Restarts<select id="l29-restarts"><option>None</option><option>One smooth self-repair</option><option>Repeated / abandoned</option></select></label>
+          <label>Primary snag<select id="l29-snag"><option>Starting quickly</option><option>Extending with a reason</option><option>Adding a concrete detail</option><option>Grammar while speaking</option><option>Stopping cleanly</option></select></label>
+          <label>Second-move test<select id="l29-second"><option>Not tested</option><option>Extended after follow-up</option><option>Could not extend</option></select></label>
+        </div>
+        <div class="controls"><button class="btn btn-secondary" onclick="toggleReveal('int-repair')">Show the repair move</button></div>
+        <div class="reveal-box" id="int-repair"><strong>If the answer stalls:</strong> ask one follow-up (“Why?” / “Can you give me an example?”), then have her add exactly one sentence. Log the supported answer separately from the first, independent attempt. Do not give her the sentence.</div>
+      </div>
+    </section>
+
+    <section class="slide" id="slide-3">
+      <div class="card">
+        <div class="card-title">🧩 Build a Sentence — secondary repair (10 min)</div>
+        <p class="muted">L28 result: 4/6. First, have her reconstruct the two missed L28 items from memory or her notes; then use these four transfer items. Target: order, connectors, punctuation, small function words.</p>
+        <div class="bs-item"><div class="bs-chips"><span class="bs-chip">Although</span><span class="bs-chip">online classes</span><span class="bs-chip">offer flexibility</span><span class="bs-chip">they</span><span class="bs-chip">require</span><span class="bs-chip">self-discipline</span></div><input type="text" class="bs-input" placeholder="Build the sentence…" aria-label="Sentence 1"></div>
+        <div class="bs-item"><div class="bs-chips"><span class="bs-chip">Despite</span><span class="bs-chip">the initial cost</span><span class="bs-chip">the programme</span><span class="bs-chip">attracted</span><span class="bs-chip">many applicants</span></div><input type="text" class="bs-input" placeholder="Build the sentence…" aria-label="Sentence 2"></div>
+        <div class="bs-item"><div class="bs-chips"><span class="bs-chip">If</span><span class="bs-chip">students</span><span class="bs-chip">received earlier feedback</span><span class="bs-chip">they</span><span class="bs-chip">could revise</span><span class="bs-chip">more effectively</span></div><input type="text" class="bs-input" placeholder="Build the sentence…" aria-label="Sentence 3"></div>
+        <div class="bs-item"><div class="bs-chips"><span class="bs-chip">The report</span><span class="bs-chip">which</span><span class="bs-chip">was published last year</span><span class="bs-chip">examines</span><span class="bs-chip">student wellbeing</span></div><input type="text" class="bs-input" placeholder="Build the sentence…" aria-label="Sentence 4"></div>
+        <div class="controls"><span class="word-count-badge" id="bsCount">0 / 4 built</span><button class="btn btn-secondary" onclick="toggleReveal('bsAns')">Show answers</button></div>
+        <div class="reveal-box" id="bsAns">1. Although online classes offer flexibility, they require self-discipline. <strong>Although + clause; no “but”.</strong><br>2. Despite the initial cost, the programme attracted many applicants. <strong>Despite + noun phrase.</strong><br>3. If students received earlier feedback, they could revise more effectively. <strong>Second conditional: if + past, would/could + verb.</strong><br>4. The report, which was published last year, examines student wellbeing. <strong>Relative clause punctuation.</strong></div>
+      </div>
+    </section>
+
+    <section class="slide" id="slide-4">
+      <div class="card">
+        <div class="card-title">✍️ Weekly Writing Maintenance — one sprint only (10 min)</div>
+        <div class="prompt-block"><strong>Professor:</strong> “Some universities require students to complete community service before graduation. Should this be a requirement?”<br><br><strong>Priya:</strong> “It gives students practical experience and connects the university to its community.”<br><strong>Daniel:</strong> “Mandatory service takes time away from study and paid work, especially for students who need income.”</div>
+        <p class="muted">State your position, respond to at least one classmate, and use one concession + rebuttal. This is the week’s single writing sprint — no email sprint today.</p>
+        <div class="controls"><span class="timer-display" id="adTimer">10:00</span><button class="btn" onclick="startTimer('adTimer',600)">Start 10 min</button><button class="btn btn-secondary" onclick="resetTimer('adTimer',600)">Reset</button></div>
+        <textarea id="adText" rows="8" placeholder="Write your Academic Discussion response here..."></textarea>
+        <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:.5rem"><span class="word-count-badge" id="adWords">0 words</span><span class="word-count-badge" id="adWpm">— wpm</span></div>
+        <div class="focus-box"><strong>Maintenance target:</strong> 120–130 words · claim + evidence + one concession/rebuttal · reference a classmate · no “Although… but…” · chunk-write.</div>
+      </div>
+    </section>
+
+    <section class="slide" id="slide-5">
+      <div class="card">
+        <div class="card-title">🧾 Cross-Task Error Map</div>
+        <p class="muted">Record only what happened today. A pattern is repeated evidence, not one isolated miss. This map feeds the L30 capstone feedback.</p>
+        <table class="error-table"><thead><tr><th>Task / evidence</th><th>Observed pattern</th><th>Next-time rule</th></tr></thead><tbody>
+          <tr><td contenteditable="true">Reading — L28/L29</td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+          <tr><td contenteditable="true">Interview — latency / expansion / repair</td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+          <tr><td contenteditable="true">Build a Sentence — item #</td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+          <tr><td contenteditable="true">Academic Discussion</td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+        </tbody></table>
+        <div class="focus-box" style="margin-top:.75rem"><strong>Before L30:</strong> bring the L28 → L29 comparison: reading result (qualitative is OK), interview start/duration/development, sentence accuracy, AD word count/WPM.</div>
+      </div>
+    </section>
+
+    <section class="slide" id="slide-6">
+      <div class="card">
+        <div class="card-title">📝 Homework — pick ONE repair (10–15 min)</div>
+        <p class="muted">L30 capstone is three days away. Assign only the weakest lane; no homework pile.</p>
+        <div class="grid-2" style="margin-top:.65rem">
+          <div class="arg-box" style="border-color:var(--accent-purple)"><div class="arg-label" style="color:var(--accent-purple)">If Interview is still weakest</div><p>Record two fresh 30–45 s answers, one take each. Listen back once and note start latency + one reason/detail gap. Send the stronger one.</p></div>
+          <div class="arg-box" style="border-color:var(--accent-blue)"><div class="arg-label" style="color:var(--accent-blue)">If Build a Sentence is weakest</div><p>Redo only the two missed L28 items + the two slowest L29 items. Write one rule that would prevent each error.</p></div>
+          <div class="arg-box" style="border-color:var(--accent-green)"><div class="arg-label" style="color:var(--accent-green)">If a Reading lane actually leaked</div><p>Repeat that task type only; point to textual evidence for every answer. No full reading set.</p></div>
+          <div class="arg-box" style="border-color:var(--primary)"><div class="arg-label" style="color:var(--primary)">If all task lanes are steady</div><p>No extra practice. Vocabulary Centre only; protect energy for L30.</p></div>
+        </div>
+        <p class="muted" style="margin-top:.8rem">Send any recording or written repair via Telegram. Next: L30 new-format capstone.</p>
+      </div>
+    </section>
+  </main>
+  <button class="mobile-nav-toggle" id="mobileNavBtn" aria-label="Open navigation">☰</button><div class="sidebar-overlay" id="sidebarOverlay"></div>
+  <script>
+    const TOTAL=7;let current=0;
+    function switchSlide(n){document.querySelectorAll('.slide').forEach(s=>s.classList.remove('active'));document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));document.getElementById('slide-'+n).classList.add('active');document.querySelectorAll('.nav-btn')[n].classList.add('active');current=n;document.getElementById('slideChip').textContent=(n+1)+' / '+TOTAL;window.scrollTo({top:0,behavior:'smooth'});}
+    const timers={};
+    function startTimer(id,seconds){
+      const el=document.getElementById(id);
+      const state=timers[id]||(timers[id]={remain:seconds,interval:null,total:seconds});
+      if(state.interval){clearInterval(state.interval);state.interval=null;return;}
+      if(state.remain<=0)state.remain=state.total;
+      state.interval=setInterval(()=>{state.remain--;el.textContent=String(Math.floor(state.remain/60)).padStart(2,'0')+':'+String(state.remain%60).padStart(2,'0');if(state.remain<=0){clearInterval(state.interval);state.interval=null;el.textContent='TIME!';el.style.color='var(--accent-red)';}},1000);
+    }
+    function resetTimer(id,seconds){if(timers[id]?.interval)clearInterval(timers[id].interval);timers[id]={remain:seconds,interval:null,total:seconds};const el=document.getElementById(id);el.textContent=String(Math.floor(seconds/60)).padStart(2,'0')+':'+String(seconds%60).padStart(2,'0');el.style.color='var(--primary)';if(id==='adTimer'){adStart=null;document.getElementById('adWpm').textContent='— wpm';}}
+    function toggleReveal(id){document.getElementById(id).classList.toggle('show');}
+    function refreshFocus(){const out=document.getElementById('focusSuggestion');if(!out)return;const hasScores=['score-cw','score-daily','score-academic'].some(id=>document.getElementById(id).value!=='');if(!hasScores){out.innerHTML='<strong>Today’s priority: Interview expansion.</strong> Reading is a quick maintenance check; Build a Sentence is the secondary repair (L28: 4/6).';return;}const vals=[['Complete the Words','score-cw',10],['Read in Daily Life','score-daily',3],['Academic Passage','score-academic',5]].map(([n,id,m])=>{const v=document.getElementById(id).value;return v===''?null:{name:n,pct:Number(v)/m};}).filter(Boolean);if(vals.length){vals.sort((a,b)=>a.pct-b.pct);if(vals[0].pct<.8)out.innerHTML='<strong>Reading watch: '+vals[0].name+' ('+Math.round(vals[0].pct*100)+'%).</strong> Keep Interview as the main repair; use this result to choose the reading transfer item.';else out.innerHTML='<strong>Reading maintenance confirmed.</strong> Highest-leverage repair remains Interview; Build a Sentence is secondary.';}}
+    document.querySelectorAll('.l28-score').forEach(i=>i.addEventListener('input',refreshFocus));
+    const bsItems=[...document.querySelectorAll('.bs-item')];function updateBs(){const n=bsItems.filter(x=>x.querySelector('.bs-input').value.trim()).length;document.getElementById('bsCount').textContent=n+' / '+bsItems.length+' attempted';}bsItems.forEach(x=>x.querySelector('.bs-input').addEventListener('input',updateBs));
+    const ad=document.getElementById('adText');let adStart=null;ad.addEventListener('input',()=>{const w=ad.value.trim()?ad.value.trim().split(/\s+/).length:0;document.getElementById('adWords').textContent=w+' words';document.getElementById('adWpm').textContent=adStart?Math.round(w/((Date.now()-adStart)/60000))+' wpm':'— wpm';});
+    const adStartButton=document.querySelector('[onclick="startTimer(\'adTimer\',600)"]');if(adStartButton)adStartButton.addEventListener('click',()=>{if(!adStart)adStart=Date.now();});
+    document.getElementById('mobileNavBtn').addEventListener('click',()=>{document.querySelector('.sidebar').classList.toggle('open');document.getElementById('sidebarOverlay').classList.toggle('open');});document.getElementById('sidebarOverlay').addEventListener('click',()=>{document.querySelector('.sidebar').classList.remove('open');document.getElementById('sidebarOverlay').classList.remove('open');});
+    switchSlide(0);
+  </script>
+</body>
+</html>
