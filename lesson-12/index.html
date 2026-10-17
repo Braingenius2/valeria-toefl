@@ -591,6 +591,7 @@
     function switchSlide(i) {
       document.querySelectorAll('.slide').forEach((s, idx) => s.classList.toggle('active', idx === i));
       document.querySelectorAll('.nav-btn').forEach((b, idx) => b.classList.toggle('active', idx === i));
+      window.scrollTo(0, 0);
     }
 
     // Hash-based slide navigation

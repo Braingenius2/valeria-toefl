@@ -734,6 +734,7 @@
       document.querySelectorAll('.sidebar-btn').forEach(b => b.classList.remove('active'));
       document.getElementById(`slide-${index}`).classList.add('active');
       document.querySelectorAll('.sidebar-btn')[index].classList.add('active');
+      window.scrollTo(0, 0);
     }
 
     // ---- Shadowing ----

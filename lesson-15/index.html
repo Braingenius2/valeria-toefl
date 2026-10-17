@@ -287,7 +287,7 @@
 
   <script src="audio/shadowingTS.js"></script>
   <script>
-    function switchSlide(i){document.querySelectorAll('.slide').forEach((s,idx)=>s.classList.toggle('active',idx===i));document.querySelectorAll('.nav-btn').forEach((b,idx)=>b.classList.toggle('active',idx===i));}
+    function switchSlide(i){document.querySelectorAll('.slide').forEach((s,idx)=>s.classList.toggle('active',idx===i));document.querySelectorAll('.nav-btn').forEach((b,idx)=>b.classList.toggle('active',idx===i));window.scrollTo(0,0);}
     let pacerInterval=null,currentWordIndex=0,karaokeIndex=-1;
     const shadowingAudioEl=document.getElementById('shadowingAudio');
     function wrapShadowingWords(){const c=document.getElementById('shadowingTextDisplay');if(c.dataset.wrapped)return;if(typeof shadowingTS!=='undefined'&&shadowingTS.length){c.innerHTML=shadowingTS.map(w=>`<span class="shadowing-word">${w.word}</span>`).join(' ');}else{c.innerHTML=c.innerText.split(/\s+/).map(w=>`<span class="shadowing-word">${w}</span>`).join(' ');}c.dataset.wrapped="true";}

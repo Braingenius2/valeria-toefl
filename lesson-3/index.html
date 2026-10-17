@@ -520,6 +520,7 @@
       document.querySelectorAll('.sidebar-btn').forEach(b => b.classList.remove('active'));
       document.getElementById(`slide-${index}`).classList.add('active');
       document.querySelectorAll('.sidebar-btn')[index].classList.add('active');
+      window.scrollTo(0, 0);
     }
 
     const shadowingText = "The exploration of deep space represents one of humanity's most ambitious scientific undertakings. From the groundbreaking observations of the Hubble Space Telescope to the recent successful deployment of the James Webb Observatory, each new generation of instruments has fundamentally transformed our understanding of the cosmos. These technological marvels have enabled astronomers to peer billions of years into the past, capturing images of galaxies forming in the immediate aftermath of the Big Bang. As our instruments grow more powerful, the line between science fiction and scientific reality continues to blur.";

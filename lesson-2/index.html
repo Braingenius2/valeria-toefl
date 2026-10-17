@@ -371,6 +371,7 @@
       document.querySelectorAll('.sidebar-btn').forEach(b => b.classList.remove('active'));
       document.getElementById(`slide-${index}`).classList.add('active');
       document.querySelectorAll('.sidebar-btn')[index].classList.add('active');
+      window.scrollTo(0, 0);
     }
 
     const text = "Recent developments in behavioral psychology have fundamentally transformed our understanding of human decision-making. Researchers have demonstrated that individuals frequently act in ways that contradict their stated beliefs, a phenomenon known as cognitive dissonance. In a landmark study conducted at Stanford University, participants who were paid a minimal amount to perform a tedious task subsequently rated the task as more enjoyable than those who received generous compensation. This counterintuitive finding suggests that people unconsciously adjust their attitudes to align with their actions, particularly when external justification is insufficient.";

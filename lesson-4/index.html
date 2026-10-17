@@ -411,6 +411,7 @@
       document.querySelectorAll('.sidebar-btn').forEach(b => b.classList.remove('active'));
       document.getElementById(`slide-${index}`).classList.add('active');
       document.querySelectorAll('.sidebar-btn')[index].classList.add('active');
+      window.scrollTo(0, 0);
     }
 
     const shadowingText = "The proliferation of artificial intelligence in public spaces has ignited a fierce debate between security advocates and privacy defenders. Governments argue that AI-powered surveillance systems — equipped with facial recognition and behavioral analytics — are essential tools for preventing crime and enhancing public safety. Critics, however, contend that such systems represent an unprecedented encroachment on civil liberties, creating a surveillance infrastructure that could be exploited for authoritarian purposes. The central question remains whether society can strike a balance between security and privacy in an increasingly digital world.";

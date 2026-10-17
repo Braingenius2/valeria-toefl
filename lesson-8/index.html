@@ -480,6 +480,7 @@
       document.querySelectorAll('.sidebar-btn').forEach(b => b.classList.remove('active'));
       document.getElementById(`slide-${index}`).classList.add('active');
       document.querySelectorAll('.sidebar-btn')[index].classList.add('active');
+      window.scrollTo(0, 0);
     }
 
     const shadowingTextSpeaking = "The gig economy has completely changed how we work today. Platforms like Uber and Upwork give people way more flexibility, so they can choose when and where they work. But this freedom comes with a catch — gig workers don't get traditional benefits like health insurance, paid time off, or retirement plans. With more people freelancing now, lawmakers really need to figure out a new safety net to protect everyone, no matter what you call their job.";

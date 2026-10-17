@@ -349,7 +349,7 @@
 
   <script src="audio/shadowingTS.js"></script>
   <script>
-    function switchSlide(i){Object.keys(speakRec).forEach(k=>{const r=speakRec[k];if(r&&r.active&&r.recorder){try{r.recorder.stop();}catch(e){}}});document.querySelectorAll('.slide').forEach((s,idx)=>s.classList.toggle('active',idx===i));document.querySelectorAll('.nav-btn').forEach((b,idx)=>b.classList.toggle('active',idx===i));}
+    function switchSlide(i){Object.keys(speakRec).forEach(k=>{const r=speakRec[k];if(r&&r.active&&r.recorder){try{r.recorder.stop();}catch(e){}}});document.querySelectorAll('.slide').forEach((s,idx)=>s.classList.toggle('active',idx===i));document.querySelectorAll('.nav-btn').forEach((b,idx)=>b.classList.toggle('active',idx===i));window.scrollTo(0,0);}
 
     // Shadowing Pacer + Karaoke
     let pacerInterval=null,currentWordIndex=0,karaokeIndex=-1;
