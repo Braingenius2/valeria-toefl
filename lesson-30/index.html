@@ -94,12 +94,12 @@
 
     <section class="slide" id="slide-2" aria-labelledby="readlisten-title">
       <div class="card">
-        <div class="card-title" id="readlisten-title">📚 Reading &amp; Listening — current-format sampler (16 min)</div>
+        <div class="card-title" id="readlisten-title">📚 Reading &amp; Listening — current-format sampler (17 min)</div>
         <p class="muted">Reading: one short item from each task family. Listening: one sample from each task type. Treat this as a diagnostic sample, not a scaled section score.</p>
         <div class="grid-2" style="margin-top:.7rem">
           <div class="card">
             <div class="task-label">READING · COMPLETE THE WORDS</div>
-            <p>Students who take short bre___ often remem___ more. They can concen_____ for longer per_____ and feel less ti___ at the end.</p>
+            <p>Students who take short bre___ often remem___ more. They can concen_____ for longer per____ and feel less ti___ at the end.</p>
             <button class="btn btn-secondary" type="button" data-toggle="read-cw">Check</button>
             <div class="reveal-box" id="read-cw">breaks · remember · concentrate · periods · tired. Use the sentence meaning and word form to restore the missing letters.</div>
           </div>
@@ -144,6 +144,7 @@
           <div class="sent-row"><span class="num">5.</span><button class="btn btn-secondary" type="button" onclick="playL30(5)">🔊</button><button class="btn btn-secondary" type="button" data-toggle="lr5">Show</button><span class="sent-text" id="lr5">Furthermore, targeted proofreading for accuracy completes the toolkit.</span></div>
           <div class="sent-row"><span class="num">6.</span><button class="btn btn-secondary" type="button" onclick="playL30(6)">🔊</button><button class="btn btn-secondary" type="button" data-toggle="lr6">Show</button><span class="sent-text" id="lr6">Today's capstone sweep brings these skills together.</span></div>
           <div class="sent-row"><span class="num">7.</span><button class="btn btn-secondary" type="button" onclick="playL30(7)">🔊</button><button class="btn btn-secondary" type="button" data-toggle="lr7">Show</button><span class="sent-text" id="lr7">Apply each tool strategically and trust your preparation.</span></div>
+          <div class="sent-row"><span class="num">Bonus.</span><button class="btn btn-secondary" type="button" onclick="playL30(8)">🔊</button><button class="btn btn-secondary" type="button" data-toggle="lr8">Show</button><span class="sent-text" id="lr8">This is evidence of thirty sessions of focused, deliberate practice.</span><span class="score-note">Optional practice; not part of the seven-prompt count.</span></div>
         </div>
         </div>
     </section>
@@ -151,7 +152,7 @@
     <section class="slide" id="slide-4" aria-labelledby="writing-title">
       <div class="card">
         <div class="card-title" id="writing-title">✍️ Writing — the three task families (12 min)</div>
-        <div class="callout"><strong>Writing-sprint rule:</strong> L29's Academic Discussion was this week's timed writing sprint. Do not run another timed essay/email today. This slide samples Build a Sentence and Email planning, then reviews the L29 AD evidence.</div>
+        <div class="callout"><strong>Writing-sprint rule:</strong> L29 is designed to contain this week's one Academic Discussion sprint. If it was completed, review that actual response here—do not run another timed essay or email. If it was not completed or its response is unavailable, mark the evidence “not recorded”; do not add a catch-up sprint today. This slide samples Build a Sentence and Email planning.</div>
         <div class="grid-2">
           <div class="card">
             <div class="task-label">BUILD A SENTENCE · THREE TRANSFER ITEMS</div>
@@ -214,10 +215,10 @@
     const TOTAL=7;let current=0;
     function closeMobileNav(){document.querySelector('.sidebar').classList.remove('open');document.getElementById('sidebarOverlay').classList.remove('open');document.getElementById('mobileNavBtn').setAttribute('aria-expanded','false');}
     function switchSlide(n){document.querySelectorAll('.slide').forEach(s=>s.classList.remove('active'));document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));document.getElementById('slide-'+n).classList.add('active');document.querySelectorAll('.nav-btn')[n].classList.add('active');current=n;document.getElementById('slideChip').textContent=(n+1)+' / '+TOTAL;closeMobileNav();window.scrollTo(0,0);}
-    document.querySelectorAll('.nav-btn').forEach((b,i)=>b.addEventListener('click',()=>switchSlide(i)));
-    document.querySelectorAll('[data-toggle]').forEach(btn=>btn.addEventListener('click',()=>{const box=document.getElementById(btn.dataset.toggle);const open=box.classList.toggle('show');btn.setAttribute('aria-expanded',String(open));btn.textContent=open?'Hide answer':'Check';}));
+    document.querySelectorAll('[data-toggle]').forEach(btn=>btn.addEventListener('click',()=>{const box=document.getElementById(btn.dataset.toggle);const open=box.classList.toggle('show');btn.setAttribute('aria-expanded',String(open));if(!btn.dataset.closedLabel)btn.dataset.closedLabel=btn.textContent;btn.textContent=open?'Hide answer':btn.dataset.closedLabel;}));
     let pacerInterval=null;
     function stopShadowingPacer(reset=false){if(pacerInterval){clearInterval(pacerInterval);pacerInterval=null;}const audio=document.getElementById('shadowingAudio');audio.pause();if(reset)audio.currentTime=0;}
+    function playShadowingAudio(){resetShadowingPacer();const audio=document.getElementById('shadowingAudio');audio.play().catch(()=>{});}
     function startShadowingPacer(){stopShadowingPacer(true);const display=document.getElementById('shadowingTextDisplay');const words=display.textContent.trim().split(/\s+/);display.innerHTML=words.map((w,i)=>'<span class="shadowing-word" id="sw'+i+'">'+w+'</span>').join(' ');let i=0;const wpm=Number(document.getElementById('pacerSpeed').value);pacerInterval=setInterval(()=>{if(i>0)document.getElementById('sw'+(i-1))?.classList.remove('active');if(i<words.length){document.getElementById('sw'+i)?.classList.add('active');i++;}else{stopShadowingPacer(false);}},60000/wpm);}
     function resetShadowingPacer(){stopShadowingPacer(true);document.getElementById('shadowingTextDisplay').textContent='Over the course of thirty lessons, you have built a toolkit for academic English: planning before you write, shaping clear paragraphs, choosing precise language, managing your time, and proofreading with purpose. Today we will bring together evidence from your recent tasks and check what still needs practice. This is a skills sweep, not a full TOEFL mock and not a booking decision. Use each task to notice what already works and choose one useful next step.';}
     const sentencePlayer=new Audio();
