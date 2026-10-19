@@ -46,11 +46,12 @@
     .reveal-box{display:none;background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.2);padding:.85rem;border-radius:8px;margin-top:.65rem;font-size:.87rem;line-height:1.65;}.reveal-box.show{display:block;}
     .error-table{width:100%;border-collapse:collapse;margin-top:.7rem;font-size:.85rem;}.error-table th,.error-table td{padding:.6rem .7rem;border:1px solid var(--border-color);text-align:left;}.error-table th{background:rgba(0,0,0,.35);color:var(--primary);font-weight:600;}
     .interview-meta{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.5rem;margin:.6rem 0;}.interview-meta label{font-size:.78rem;color:var(--text-muted);}.interview-meta select{display:block;width:100%;margin-top:.25rem;background:#090d16;color:var(--text-main);border:1px solid var(--border-color);border-radius:6px;padding:.45rem;font:inherit;font-size:.82rem;}
+    .interview-meta.prompt-score{grid-template-columns:repeat(4,minmax(0,1fr));}.interview-log{margin:.75rem 0;padding:.8rem 1rem;border:1px solid var(--border-color);border-radius:8px;background:rgba(0,0,0,.18);}.interview-log>summary,.diagnostic-target>summary{cursor:pointer;color:var(--accent-blue);font-weight:600;font-size:.85rem;}.interview-log[open]>summary,.diagnostic-target[open]>summary{margin-bottom:.55rem;}.diagnostic-target{margin:.75rem 0;}
     .bs-item{padding:.65rem .75rem;border:1px solid var(--border-color);border-radius:8px;margin-bottom:.5rem;background:rgba(0,0,0,.14);}.bs-chips{font-family:'Fira Code',monospace;font-size:.79rem;color:var(--accent-blue);line-height:1.7;margin-bottom:.4rem;}.bs-chip{display:inline-block;background:rgba(56,189,248,.08);border:1px solid rgba(56,189,248,.2);border-radius:4px;padding:.05rem .28rem;margin:.1rem .15rem .1rem 0;}
     .word-count-badge{font-family:'Fira Code',monospace;font-size:.8rem;color:var(--accent-green);}
     .arg-box{background:rgba(0,0,0,.18);border-left:3px solid var(--accent-blue);padding:.7rem .85rem;border-radius:0 7px 7px 0;margin:.55rem 0;}
     .mobile-nav-toggle{display:none;position:fixed;bottom:20px;right:20px;z-index:200;width:48px;height:48px;border-radius:50%;background:var(--primary);color:#000;border:none;font-size:20px;cursor:pointer;align-items:center;justify-content:center;}.sidebar-overlay{display:none;position:fixed;inset:0;z-index:150;background:rgba(0,0,0,.4);}.sidebar-overlay.open{display:block;}
-    @media(max-width:768px){.main-content{margin-left:0;padding:1rem 1rem 84px}.header{gap:.5rem}.grid-2{grid-template-columns:1fr}.interview-meta{grid-template-columns:1fr}.mobile-nav-toggle{display:flex}.sidebar{left:0;top:0;z-index:175;transform:translateX(-100%);transition:transform .25s ease}.sidebar.open{transform:translateX(0)}}
+    @media(max-width:768px){.main-content{margin-left:0;padding:1rem 1rem 84px}.header{gap:.5rem}.grid-2{grid-template-columns:1fr}.interview-meta,.interview-meta.prompt-score{grid-template-columns:1fr}.mobile-nav-toggle{display:flex}.sidebar{left:0;top:0;z-index:175;transform:translateX(-100%);transition:transform .25s ease}.sidebar.open{transform:translateX(0)}}
   </style>
 </head>
 <body>
@@ -75,26 +76,7 @@
       <div class="card">
         <div class="card-title">📊 L28 evidence — confirmed starting point</div>
         <div class="focus-box"><strong>Reading:</strong> completed with ease — maintenance only today; exact scores were not recorded.<br><strong>Take an Interview:</strong> below target — primary repair focus. Pin down the specific failure (start latency, expansion, detail, or restart) before drilling.<br><strong>Build a Sentence:</strong> 4/6 — secondary clinic; diagnose the two missed items before reviewing the new set.</div>
-        <p class="muted">Do not invent reading or interview scores. Fill any exact L28 data below only if her work or notes are available; otherwise keep the qualitative report above.</p>
-        <div class="grid-2" style="margin-top:.65rem">
-          <div class="card">
-            <div class="card-title">Optional exact L28 reading counts</div>
-            <div class="score-row"><label for="score-cw">Complete the Words</label><span><input id="score-cw" class="l28-score" type="number" min="0" max="10" placeholder="/10" aria-label="Complete the Words score out of 10"></span></div>
-            <div class="score-row"><label for="score-daily">Read in Daily Life</label><span><input id="score-daily" class="l28-score" type="number" min="0" max="3" placeholder="/3" aria-label="Read in Daily Life score out of 3"></span></div>
-            <div class="score-row"><label for="score-academic">Academic Passage</label><span><input id="score-academic" class="l28-score" type="number" min="0" max="5" placeholder="/5" aria-label="Academic passage score out of 5"></span></div>
-          </div>
-          <div class="card">
-            <div class="card-title">Interview — identify the main snag</div>
-            <div class="interview-meta">
-              <label>Start latency<select id="int-latency"><option value="">Not recorded</option><option>≤2 sec</option><option>3–5 sec</option><option>&gt;5 sec</option></select></label>
-              <label>Answer length<select id="int-length"><option value="">Not recorded</option><option>&lt;20 sec</option><option>20–29 sec</option><option>30–45 sec</option><option>&gt;45 sec</option></select></label>
-              <label>Development<select id="int-development"><option value="">Not recorded</option><option>answer only</option><option>answer + reason</option><option>reason + detail</option><option>full answer</option></select></label>
-            </div>
-            <div class="score-row"><label for="score-sentence">Build a Sentence</label><span><input id="score-sentence" class="l28-score" type="number" min="0" max="6" value="4" aria-label="Build a Sentence score out of 6"></span></div>
-          </div>
-        </div>
         <div class="focus-box" id="focusSuggestion" role="status"><strong>Today’s priority: Interview expansion.</strong> Reading is a quick maintenance check; Build a Sentence is the secondary repair (L28: 4/6).</div>
-        <p class="muted">Opening question: “Which interview answer felt least complete? What did you want to say next but couldn’t?” Use her answer to select the first clinic target.</p>
       </div>
     </section>
 
@@ -106,27 +88,14 @@
         <div class="arg-box" style="border-color:var(--accent-blue)"><div style="color:var(--accent-blue);font-family:'Fira Code',monospace;font-size:.72rem;font-weight:700">COMPLETE THE WORDS</div><p>Students who rece___ regular feedback are more likely to rev___ their work and imp____ their final results.</p><button class="btn btn-secondary" onclick="toggleReveal('read-cw-ans')">Check</button><div class="reveal-box" id="read-cw-ans">receive · review · improve — predict the word class before filling the gap.</div></div>
         <div class="arg-box" style="border-color:var(--accent-green)"><div style="color:var(--accent-green);font-family:'Fira Code',monospace;font-size:.72rem;font-weight:700">READ IN DAILY LIFE</div><p>Lab access: book online at least 24 hours ahead. Cancellations within 6 hours count as a used session. What happens if you cancel 4 hours before?</p><p class="opts">A It is rescheduled free · B It counts as used · C You receive a reminder</p><button class="btn btn-secondary" onclick="toggleReveal('read-daily-ans')">Check</button><div class="reveal-box" id="read-daily-ans">B — the notice explicitly says cancellations within 6 hours count as a used session.</div></div>
         <div class="arg-box" style="border-color:var(--accent-purple)"><div style="color:var(--accent-purple);font-family:'Fira Code',monospace;font-size:.72rem;font-weight:700">ACADEMIC PASSAGE</div><p>Students often reread lecture notes the night before an exam. The material begins to feel familiar, but recognition is not the same as recalling an idea without help. In spaced practice, learners close their notes and try to explain a concept from memory; they return to it in short sessions over several days. The effort of retrieving an idea strengthens memory, even when the student cannot recall every detail at first. What is the passage’s main claim?</p><p class="opts">A Rereading is always ineffective · B Retrieval practice over time strengthens recall · C Students should study for longer each evening</p><button class="btn btn-secondary" onclick="toggleReveal('read-acad-ans')">Check</button><div class="reveal-box" id="read-acad-ans">B — the passage contrasts rereading with spaced retrieval and explains why retrieval strengthens recall.</div></div>
-        <div class="focus-box">If all three are correct quickly, stop the reading block here. No extra reading just to fill time.</div>
       </div>
     </section>
 
     <section class="slide" id="slide-2">
       <div class="card">
         <div class="card-title">🎤 Interview Clinic — main target (13 min)</div>
-        <p class="muted">L28 interview answers were below target; the exact snag is not yet logged. Ask one question at a time, zero prep, one take. Score the behaviour before coaching.</p>
-        <div class="focus-box"><strong>One-answer target:</strong> answer directly → give one reason → add one concrete detail/example → stop cleanly. 30–45 seconds, start within ~2 seconds, no restart.</div>
-        <div class="arg-box" style="border-color:var(--accent-green)"><div class="arg-label" style="color:var(--accent-green)">Zero-prep conditions</div><p>The tutor asks fresh questions aloud, one at a time. Do not preview the prompts. Start the 45-second timer immediately after each question; reset before the next one. Teacher-only prompts are in the lesson plan.</p></div>
         <div class="controls"><span class="timer-display" id="interviewTimer">00:45</span><button class="btn" onclick="startTimer('interviewTimer',45)">Start 45 sec</button><button class="btn btn-secondary" onclick="resetTimer('interviewTimer',45)">Reset for next answer</button></div>
-        <div class="interview-meta">
-          <label>Started within 2 sec?<select id="l29-latency"><option value="">Not recorded</option><option>Yes</option><option>No — 3–5 sec</option><option>No — &gt;5 sec</option></select></label>
-          <label>Reached 30–45 sec?<select id="l29-length"><option value="">Not recorded</option><option>Yes</option><option>Too short (&lt;30)</option><option>Ran long (&gt;45)</option></select></label>
-          <label>Expansion quality<select id="l29-expansion"><option value="">Not recorded</option><option>answer only</option><option>answer + reason</option><option>reason + one detail</option><option>full answer + clean close</option></select></label>
-        </div>
-        <div class="interview-meta">
-          <label>Restarts<select id="l29-restarts"><option value="">Not recorded</option><option>None</option><option>One smooth self-repair</option><option>Repeated / abandoned</option></select></label>
-          <label>Primary snag<select id="l29-snag"><option value="">Choose after observing</option><option>Starting quickly</option><option>Extending with a reason</option><option>Adding a concrete detail</option><option>Grammar while speaking</option><option>Stopping cleanly</option></select></label>
-          <label>Second-move test<select id="l29-second"><option>Not tested</option><option>Extended after follow-up</option><option>Could not extend</option></select></label>
-        </div>
+        <details class="focus-box diagnostic-target"><summary>After the diagnostic pass: reveal the answer target</summary><p><strong>One-answer target:</strong> answer directly → give one reason → add one concrete detail/example → stop cleanly. 30–45 seconds, start within ~2 seconds, no restart.</p></details>
         <div class="controls"><button class="btn btn-secondary" onclick="toggleReveal('int-repair')">Show the repair move</button></div>
         <div class="reveal-box" id="int-repair"><strong>If the answer stalls:</strong> ask one follow-up (“Why?” / “Can you give me an example?”), then have her add exactly one sentence. Log the supported answer separately from the first, independent attempt. Do not give her the sentence.</div>
       </div>
@@ -135,13 +104,13 @@
     <section class="slide" id="slide-3">
       <div class="card">
         <div class="card-title">🧩 Build a Sentence — secondary repair (10 min)</div>
-        <p class="muted">L28 result: 4/6. First, have her reconstruct the two missed L28 items from memory or her notes; then use these four transfer items. Target: order, connectors, punctuation, small function words.</p>
+        <p class="muted">L28 result: 4/6. Try these four transfer items — focus on word order, connectors, punctuation and small function words.</p>
         <div class="bs-item"><div class="bs-chips"><span class="bs-chip">self-discipline</span><span class="bs-chip">require</span><span class="bs-chip">Although</span><span class="bs-chip">they</span><span class="bs-chip">online classes</span><span class="bs-chip">offer flexibility</span></div><input type="text" class="bs-input" placeholder="Build the sentence…" aria-label="Sentence 1"></div>
         <div class="bs-item"><div class="bs-chips"><span class="bs-chip">attracted</span><span class="bs-chip">the programme</span><span class="bs-chip">Despite</span><span class="bs-chip">many applicants</span><span class="bs-chip">the initial cost</span></div><input type="text" class="bs-input" placeholder="Build the sentence…" aria-label="Sentence 2"></div>
         <div class="bs-item"><div class="bs-chips"><span class="bs-chip">however</span><span class="bs-chip">the rule limits choice</span><span class="bs-chip">evidence suggests</span><span class="bs-chip">Critics argue that</span><span class="bs-chip">it improves access</span></div><input type="text" class="bs-input" placeholder="Build the sentence…" aria-label="Sentence 3"></div>
         <div class="bs-item"><div class="bs-chips"><span class="bs-chip">received earlier feedback</span><span class="bs-chip">they</span><span class="bs-chip">If</span><span class="bs-chip">could revise</span><span class="bs-chip">students</span><span class="bs-chip">more effectively</span></div><input type="text" class="bs-input" placeholder="Build the sentence…" aria-label="Sentence 4"></div>
         <div class="controls"><span class="word-count-badge" id="bsCount">0 / 4 built</span><button class="btn btn-secondary" onclick="toggleReveal('bsAns')">Show answers</button></div>
-        <div class="reveal-box" id="bsAns">1. Although online classes offer flexibility, they require self-discipline. <strong>Although + clause; no “but”.</strong><br>2. Despite the initial cost, the programme attracted many applicants. <strong>Despite + noun phrase.</strong><br>3. If students received earlier feedback, they could revise more effectively. <strong>Second conditional: if + past, would/could + verb.</strong><br>4. The report, which was published last year, examines student wellbeing. <strong>Relative clause punctuation.</strong></div>
+        <div class="reveal-box" id="bsAns">1. Although online classes offer flexibility, they require self-discipline. <strong>Although + clause; no “but”.</strong><br>2. Despite the initial cost, the programme attracted many applicants. <strong>Despite + noun phrase.</strong><br>3. Critics argue that the rule limits choice; however, evidence suggests it improves access. <strong>Use a semicolon before the conjunctive adverb “however”.</strong><br>4. If students received earlier feedback, they could revise more effectively. <strong>Second conditional: if + past, could + verb.</strong></div>
       </div>
     </section>
 

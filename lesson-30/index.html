@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#090d16">
+  <title>Valeria — Lesson 30: Capstone Skills Sweep</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{color-scheme:dark;--bg-dark:#090d16;--bg-card:#131a26;--border-color:#243042;--text-main:#f1f5f9;--text-muted:#8290a4;--primary:#f59e0b;--primary-hover:#d97706;--primary-dim:rgba(245,158,11,.12);--accent-blue:#38bdf8;--accent-green:#10b981;--accent-red:#ef4444;--accent-purple:#a855f7;font-family:'Inter',sans-serif}
+    *{box-sizing:border-box;margin:0;padding:0}body{background:var(--bg-dark);color:var(--text-main);display:flex;min-height:100vh;overflow-x:hidden}
+    button,textarea,input,select{font:inherit}.sidebar{width:260px;background:var(--bg-card);border-right:1px solid var(--border-color);display:flex;flex-direction:column;padding:1.5rem 1rem;position:fixed;height:100vh;z-index:100;overflow-y:auto;scrollbar-width:thin}
+    .brand{display:flex;align-items:center;gap:.75rem;margin-bottom:1.5rem;padding:0 .5rem}.brand-badge{background:var(--primary);color:#000;font-weight:700;font-size:.75rem;padding:.2rem .5rem;border-radius:4px;text-transform:uppercase}.brand-title{font-weight:600;font-size:1.05rem}
+    .nav-btn{background:transparent;border:1px solid transparent;color:var(--text-muted);padding:.68rem .85rem;border-radius:8px;text-align:left;font-size:.88rem;cursor:pointer;margin-bottom:.35rem;display:flex;align-items:center;gap:.7rem}.nav-btn:hover{background:rgba(255,255,255,.03);color:var(--text-main)}.nav-btn.active{background:var(--primary-dim);border-color:rgba(245,158,11,.3);color:var(--primary);font-weight:600}.nav-num{font: .75rem 'Fira Code',monospace;opacity:.7}
+    .rail-note{margin-top:auto;color:var(--text-muted);font-size:.75rem;line-height:1.5;padding:.5rem}.rail-note strong{display:block;color:var(--text-main);margin-bottom:.2rem}
+    .main-content{margin-left:260px;flex:1;padding:1.5rem clamp(1rem,3vw,2.5rem) 2.5rem;max-width:1280px;min-width:0}.header{display:flex;justify-content:space-between;align-items:flex-start;gap:.75rem;flex-wrap:wrap;margin-bottom:1.25rem;padding-bottom:.9rem;border-bottom:1px solid var(--border-color)}.header-left{min-width:0}.page-title{font-size:clamp(1.2rem,2.5vw,1.55rem);font-weight:700}.subtitle{color:var(--text-muted);font-size:.84rem;margin-top:.2rem}.header-right{display:flex;align-items:center;gap:.65rem;flex-wrap:wrap}.slide-chip{font:.72rem 'Fira Code',monospace;font-weight:700;color:var(--primary);background:var(--bg-card);border:1px solid var(--border-color);padding:.25rem .65rem;border-radius:20px;white-space:nowrap}.back-link{color:var(--text-muted);text-decoration:none;font:.78rem 'Fira Code',monospace;white-space:nowrap}.back-link:hover{color:var(--primary)}.version{color:var(--text-muted);font:.62rem 'Fira Code',monospace;white-space:nowrap}
+    .slide{display:none;animation:fadeIn .2s ease}.slide.active{display:block}@keyframes fadeIn{from{opacity:.75;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+    .card{background:var(--bg-card);border:1px solid var(--border-color);border-radius:12px;padding:1rem;margin-bottom:.85rem}.card-title{font-size:1rem;font-weight:650;color:var(--primary);margin-bottom:.7rem;display:flex;align-items:center;gap:.5rem}.muted{color:var(--text-muted);font-size:.84rem;line-height:1.6}
+    .grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.8rem}.grid-2>.card{margin:0}.grid-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.65rem}
+    .callout{padding:.75rem .9rem;border:1px solid rgba(245,158,11,.35);border-left:3px solid var(--primary);background:rgba(245,158,11,.06);border-radius:0 8px 8px 0;margin:.7rem 0;line-height:1.55;font-size:.88rem}.callout.info{border-color:rgba(56,189,248,.3);border-left-color:var(--accent-blue);background:rgba(56,189,248,.05)}
+    .prompt-block{background:rgba(0,0,0,.25);padding:.8rem;border-radius:8px;font-size:.9rem;line-height:1.65;margin:.5rem 0;border-left:3px solid var(--primary)}.task-label{font:700 .68rem 'Fira Code',monospace;color:var(--accent-blue);letter-spacing:.06em;text-transform:uppercase;margin-bottom:.3rem}
+    .question{padding:.45rem 0;border-bottom:1px solid rgba(36,48,66,.7);font-size:.88rem;line-height:1.55}.question:last-child{border-bottom:0}.opts{color:var(--text-muted);font-size:.82rem;line-height:1.6;margin-top:.2rem}.reading-text{background:rgba(0,0,0,.2);padding:.8rem;border-radius:8px;font-size:.88rem;line-height:1.65;color:#cbd5e1;margin:.5rem 0}.reading-text p{margin-bottom:.6rem}.reading-text p:last-child{margin-bottom:0}
+    .reveal-box{display:none;background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.2);padding:.75rem;border-radius:8px;margin-top:.5rem;font-size:.86rem;line-height:1.65}.reveal-box.show{display:block}
+    .btn{background:var(--primary);color:#000;border:none;padding:.5rem .8rem;border-radius:6px;font-weight:650;font-size:.82rem;cursor:pointer;display:inline-flex;align-items:center;gap:.35rem}.btn:hover{background:var(--primary-hover)}.btn-secondary{background:transparent;border:1px solid var(--border-color);color:var(--text-main)}.btn-secondary:hover{border-color:var(--primary)}.btn:focus-visible,.nav-btn:focus-visible,a:focus-visible,textarea:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:2px solid var(--accent-blue);outline-offset:2px}
+    .controls{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;margin:.55rem 0}.audio-task{padding:.65rem .75rem;border:1px solid var(--border-color);border-radius:8px;background:rgba(0,0,0,.15);margin:.5rem 0}.audio-task audio{display:block;width:100%;height:2.35rem;margin:.4rem 0}.audio-task audio[preload="none"]{max-width:34rem}
+    .shadowing-text{font-size:1rem;line-height:1.75;color:#cbd5e1;margin-bottom:.8rem;background:rgba(0,0,0,.2);padding:.9rem;border-radius:8px;border-left:3px solid var(--primary)}.shadowing-word{border-radius:3px;padding:0 2px}.shadowing-word.active{background:var(--primary);color:#000;font-weight:600}
+    .sent-row{display:flex;align-items:flex-start;gap:.5rem;padding:.35rem 0;border-bottom:1px solid rgba(36,48,66,.5)}.sent-row:last-child{border-bottom:0}.sent-text{display:none;color:#e2e8f0;font-size:.86rem;margin:.3rem 0 0 1.8rem;line-height:1.55}.sent-text.show{display:block}.num{font-weight:700;color:var(--primary);min-width:1.25rem}
+    .interview-score{margin:.7rem 0;padding:.7rem .8rem;border:1px solid var(--border-color);border-radius:8px;background:rgba(0,0,0,.15)}.interview-score summary{cursor:pointer;color:var(--accent-blue);font-weight:600;font-size:.85rem}.interview-score[open] summary{margin-bottom:.6rem}.interview-meta{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.5rem;margin:.6rem 0}.interview-meta label{font-size:.76rem;color:var(--text-muted)}.interview-meta select{display:block;width:100%;margin-top:.25rem;background:#090d16;color:var(--text-main);border:1px solid var(--border-color);border-radius:6px;padding:.4rem;font-size:.78rem}
+    .sentence-item{padding:.55rem .65rem;border:1px solid var(--border-color);border-radius:8px;margin:.45rem 0;background:rgba(0,0,0,.13)}.sentence-chips{font:.78rem 'Fira Code',monospace;color:var(--accent-blue);line-height:1.75;margin-bottom:.35rem}.sentence-chip{display:inline-block;background:rgba(56,189,248,.08);border:1px solid rgba(56,189,248,.2);border-radius:4px;padding:.03rem .25rem;margin:.08rem .1rem}.sentence-item input,.email-plan textarea{width:100%;background:rgba(0,0,0,.35);border:1px solid var(--border-color);color:var(--text-main);padding:.55rem .6rem;border-radius:6px;font:inherit;font-size:.85rem}.email-plan textarea{min-height:6rem;resize:vertical}.email-plan label{display:block;color:var(--text-muted);font-size:.78rem;margin:.35rem 0}
+    .table-wrap{overflow-x:auto}.score-table{width:100%;border-collapse:collapse;font-size:.85rem;margin:.55rem 0}.score-table th,.score-table td{padding:.55rem .6rem;border:1px solid var(--border-color);text-align:left}.score-table th{color:var(--primary);background:rgba(0,0,0,.25)}.score-table input{width:6rem;max-width:100%;background:#090d16;color:var(--text-main);border:1px solid var(--border-color);border-radius:5px;padding:.45rem;font: .85rem 'Fira Code',monospace}.score-note{font-size:.78rem;color:var(--text-muted);line-height:1.55}.readiness-result{min-height:2rem;padding:.7rem .8rem;border-radius:8px;background:rgba(0,0,0,.2);border:1px solid var(--border-color);margin-top:.6rem;font-size:.88rem;line-height:1.6}
+    .mobile-nav-toggle{display:none;position:fixed;bottom:20px;right:20px;z-index:200;width:48px;height:48px;border-radius:50%;background:var(--primary);color:#000;border:none;font-size:20px;cursor:pointer;align-items:center;justify-content:center;box-shadow:3px 3px 0 rgba(0,0,0,.12)}.sidebar-overlay{display:none;position:fixed;inset:0;z-index:150;background:rgba(0,0,0,.4)}.sidebar-overlay.open{display:block}
+    @media(max-width:900px){.grid-3{grid-template-columns:1fr 1fr}}
+    @media(max-width:768px){.main-content{margin-left:0;padding:1rem 1rem 84px;max-width:100%}.header{gap:.5rem}.grid-2,.grid-3{grid-template-columns:1fr}.mobile-nav-toggle{display:flex}.sidebar{left:0;top:0;z-index:175;transform:translateX(-100%);transition:transform .25s ease}.sidebar.open{transform:translateX(0)}.interview-meta{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <aside class="sidebar" aria-label="Lesson navigation">
+    <div class="brand"><span class="brand-badge">TOEFL</span><span class="brand-title">Valeria L30</span></div>
+    <button class="nav-btn active" type="button" onclick="switchSlide(0)"><span class="nav-num">01</span> Warm-up</button>
+    <button class="nav-btn" type="button" onclick="switchSlide(1)"><span class="nav-num">02</span> Scope &amp; evidence</button>
+    <button class="nav-btn" type="button" onclick="switchSlide(2)"><span class="nav-num">03</span> Reading &amp; Listening</button>
+    <button class="nav-btn" type="button" onclick="switchSlide(3)"><span class="nav-num">04</span> Speaking sampler</button>
+    <button class="nav-btn" type="button" onclick="switchSlide(4)"><span class="nav-num">05</span> Writing task types</button>
+    <button class="nav-btn" type="button" onclick="switchSlide(5)"><span class="nav-num">06</span> Internal snapshot</button>
+    <button class="nav-btn" type="button" onclick="switchSlide(6)"><span class="nav-num">07</span> Next steps</button>
+    <div class="rail-note"><strong>Capstone sampler — not a full mock.</strong>Use L29 evidence, assess today's task samples, and choose the next step. No booking verdict from this lesson alone.</div>
+  </aside>
+
+  <main class="main-content">
+    <header class="header">
+      <div class="header-left"><h1 class="page-title">L30 — Capstone Skills Sweep &amp; Trajectory Review</h1><p class="subtitle">60-minute sampler · combines L29 evidence · one weekly timed writing task</p></div>
+      <div class="header-right"><span class="slide-chip" id="slideChip" aria-live="polite">1 / 7</span><a href="../index.html" class="back-link">← Portal</a><span class="version">deck v2 · 19 Oct 2026</span></div>
+    </header>
+
+    <section class="slide active" id="slide-0" aria-labelledby="warmup-title">
+      <div class="card">
+        <div class="card-title" id="warmup-title">🎙️ Shadowing — Capstone Reflection (4 min)</div>
+        <div class="shadowing-text" id="shadowingTextDisplay">Over the course of thirty lessons, you have built a toolkit for academic English: planning before you write, shaping clear paragraphs, choosing precise language, managing your time, and proofreading with purpose. Today we will bring together evidence from your recent tasks and check what still needs practice. This is a skills sweep, not a full TOEFL mock and not a booking decision. Use each task to notice what already works and choose one useful next step.</div>
+        <p class="muted" style="margin-bottom:.75rem">First listen for meaning; then shadow once. Which tool feels strongest? Which still needs work?</p>
+        <div class="controls">
+          <button class="btn" type="button" onclick="playShadowingAudio()">🔊 Play Audio</button>
+          <button class="btn btn-secondary" type="button" onclick="startShadowingPacer()">▶ Visual Pacer (no audio)</button>
+          <button class="btn btn-secondary" type="button" onclick="resetShadowingPacer()">↺ Reset</button>
+          <audio id="shadowingAudio" src="audio/shadowing-v2.mp3" preload="metadata" hidden></audio>
+          <select id="pacerSpeed" aria-label="Pacer speed" style="background:#000;color:#fff;padding:.4rem;border-radius:4px;border:1px solid var(--border-color)"><option value="130" selected>130 WPM</option><option value="150">150 WPM</option><option value="175">175 WPM</option></select>
+        </div>
+        <p class="muted" style="margin-top:.6rem">Shadow along the <strong>audio</strong> for the real task. The track is faster than a comfortable shadowing pace, so use the <strong>visual pacer</strong> instead if it is too quick: it highlights the text on its own timer and is <em>not</em> synced to the audio.</p>
+      </div>
+    </section>
+
+    <section class="slide" id="slide-1" aria-labelledby="scope-title">
+      <div class="card">
+        <div class="card-title" id="scope-title">🧭 Scope — what this capstone can tell us</div>
+        <div class="callout"><strong>This is a 60-minute skills sweep, not a full TOEFL mock.</strong> It samples current-format tasks and combines them with Lesson 29 evidence. It cannot produce an ETS score or, by itself, decide test booking.</div>
+        <div class="grid-2">
+          <div class="card"><div class="card-title">Carry forward actual L29 evidence</div>
+            <ul class="score-note" style="padding-left:1.2rem">
+              <li>Reading lap: use the recorded result, or write “not recorded”.</li>
+              <li>Interview: use per-prompt latency, length, development and restart notes.</li>
+              <li>Build a Sentence: L28 4/6 plus L29 transfer results.</li>
+              <li>Academic Discussion: L29 word count, WPM and error notes (the week's one timed writing sprint).</li>
+            </ul>
+          </div>
+          <div class="card"><div class="card-title">Trajectory guardrails</div>
+            <p class="score-note">L10 baseline is recorded: Reading 3.0 · Listening 4.0 · Speaking 3.5 · Writing 3.0 (/6). L20 is still marked <strong>PENDING_VERDICT</strong>. Recover its scores only if the original notes exist; do not reconstruct or guess them.</p>
+            <p class="score-note" style="margin-top:.55rem">TOEFL uses a 1–6 scale in half-band steps. ETS maps 5.0 to the approximate 95–106 comparison range and 4.5 to about 86–94. Valeria's 95+ goal is therefore near 5.0; institution-specific total and section requirements still take priority.</p>
+          </div>
+        </div>
+        <p class="muted" style="margin-top:.75rem">Today's tasks are representative samples. For a booking decision, follow this with one complete, timed official-format practice test and compare all section requirements.</p>
+      </div>
+    </section>
+
+    <section class="slide" id="slide-2" aria-labelledby="readlisten-title">
+      <div class="card">
+        <div class="card-title" id="readlisten-title">📚 Reading &amp; Listening — current-format sampler (16 min)</div>
+        <p class="muted">Reading: one short item from each task family. Listening: one sample from each task type. Treat this as a diagnostic sample, not a scaled section score.</p>
+        <div class="grid-2" style="margin-top:.7rem">
+          <div class="card">
+            <div class="task-label">READING · COMPLETE THE WORDS</div>
+            <p>Students who take short bre___ often remem___ more. They can concen_____ for longer per_____ and feel less ti___ at the end.</p>
+            <button class="btn btn-secondary" type="button" data-toggle="read-cw">Check</button>
+            <div class="reveal-box" id="read-cw">breaks · remember · concentrate · periods · tired. Use the sentence meaning and word form to restore the missing letters.</div>
+          </div>
+          <div class="card">
+            <div class="task-label">READING · READ IN DAILY LIFE</div>
+            <div class="prompt-block">Study Room Bookings: reserve at least 12 hours ahead. Cancellations made less than 2 hours before the start count as a used session. Group bookings last up to 45 minutes.</div>
+            <p>What happens if a student cancels 90 minutes before the booking?</p>
+            <p class="opts">A. The booking is moved automatically · B. It counts as used · C. The student gets a full refund</p>
+            <button class="btn btn-secondary" type="button" data-toggle="read-daily">Check</button>
+            <div class="reveal-box" id="read-daily">B — cancellation is less than two hours before the start.</div>
+          </div>
+        </div>
+        <div class="card" style="margin-top:.75rem">
+          <div class="task-label">READING · ACADEMIC PASSAGE</div>
+          <div class="reading-text"><p>A campus study compared students who used short retrieval quizzes with students who reread their notes. Both groups studied for the same amount of time. One week later, the quiz group recalled more details. The researchers cautioned that the quizzes were brief and focused on key concepts; they were not a replacement for careful reading. The team concluded that retrieving information helps learners identify what they have not understood and strengthens later recall.</p></div>
+          <p class="question">What is the passage's main claim? <span class="opts">A. Rereading is always harmful · B. Brief retrieval practice can strengthen later recall · C. Students should study for longer each day</span></p>
+          <button class="btn btn-secondary" type="button" data-toggle="read-academic">Check</button>
+          <div class="reveal-box" id="read-academic">B — the passage contrasts equal-time rereading with retrieval and reports stronger later recall for the retrieval group.</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">🎧 Listening — four short task types</div>
+        <p class="muted">Play each clip once before answering. Replay only if you are diagnosing a specific miss.</p>
+        <div class="grid-2">
+          <div class="audio-task"><div class="task-label">LISTEN AND CHOOSE A RESPONSE</div><audio controls preload="none" src="audio/l30-listening-choice.mp3" aria-label="Listen and choose a response clip"></audio><p class="question">Choose the most natural reply: <span class="opts">A. Not at all — I'll send it this afternoon. · B. The schedule was revised by the committee. · C. Lunch is served at twelve.</span></p><button class="btn btn-secondary" type="button" data-toggle="listen-choice">Check</button><div class="reveal-box" id="listen-choice">A — it directly accepts the request and says when the schedule will be sent.</div></div>
+          <div class="audio-task"><div class="task-label">LISTEN TO A CONVERSATION</div><audio controls preload="none" src="audio/l30-listening-conversation.mp3" aria-label="Campus writing lab conversation"></audio><p class="question">When is the room booked, and when are laptops needed?</p><button class="btn btn-secondary" type="button" data-toggle="listen-conversation">Check</button><div class="reveal-box" id="listen-conversation">Tuesday at three. They need their own laptops only if they want to use the editing software.</div></div>
+          <div class="audio-task"><div class="task-label">LISTEN TO AN ANNOUNCEMENT</div><audio controls preload="none" src="audio/l30-listening-announcement.mp3" aria-label="Campus reading room announcement"></audio><p class="question">When does the north reading room close? Where should students collect reserved items?</p><button class="btn btn-secondary" type="button" data-toggle="listen-announcement">Check</button><div class="reveal-box" id="listen-announcement">It closes at 6 p.m. Friday. Collect reserved materials at the service desk before 5:30.</div></div>
+          <div class="audio-task"><div class="task-label">LISTEN TO AN ACADEMIC TALK</div><audio controls preload="none" src="audio/l30-listening-talk.mp3" aria-label="Short academic talk about retrieval practice"></audio><p class="question">What is the main claim? What did the researchers say about the quizzes?</p><button class="btn btn-secondary" type="button" data-toggle="listen-talk">Check</button><div class="reveal-box" id="listen-talk">Short retrieval practice can improve later recall compared with equal-time rereading. The quizzes were low-stakes and focused on key concepts.</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" id="slide-3" aria-labelledby="speaking-title">
+      <div class="card">
+        <div class="card-title" id="speaking-title">🗣️ Speaking — Listen &amp; Repeat + Take an Interview</div>
+        <div class="callout info"><strong>Listen &amp; Repeat:</strong> seven official-format prompts. Play one, repeat immediately, then reveal the sentence. The interview is zero-prep; use two fresh teacher-read questions from the lesson plan.</div>
+        <div id="l30-lrSentences">
+          <div class="sent-row"><span class="num">1.</span><button class="btn btn-secondary" type="button" onclick="playL30(1)">🔊</button><button class="btn btn-secondary" type="button" data-toggle="lr1">Show</button><span class="sent-text" id="lr1">Over thirty lessons, you have developed a comprehensive writing toolkit.</span></div>
+          <div class="sent-row"><span class="num">2.</span><button class="btn btn-secondary" type="button" onclick="playL30(2)">🔊</button><button class="btn btn-secondary" type="button" data-toggle="lr2">Show</button><span class="sent-text" id="lr2">Chunk-writing for speed, transitions for flow, structure for coherence.</span></div>
+          <div class="sent-row"><span class="num">3.</span><button class="btn btn-secondary" type="button" onclick="playL30(3)">🔊</button><button class="btn btn-secondary" type="button" data-toggle="lr3">Show</button><span class="sent-text" id="lr3">Sentence variety for range, precise vocabulary for clarity.</span></div>
+          <div class="sent-row"><span class="num">4.</span><button class="btn btn-secondary" type="button" onclick="playL30(4)">🔊</button><button class="btn btn-secondary" type="button" data-toggle="lr4">Show</button><span class="sent-text" id="lr4">Argument frameworks for depth, time management for completeness.</span></div>
+          <div class="sent-row"><span class="num">5.</span><button class="btn btn-secondary" type="button" onclick="playL30(5)">🔊</button><button class="btn btn-secondary" type="button" data-toggle="lr5">Show</button><span class="sent-text" id="lr5">Furthermore, targeted proofreading for accuracy completes the toolkit.</span></div>
+          <div class="sent-row"><span class="num">6.</span><button class="btn btn-secondary" type="button" onclick="playL30(6)">🔊</button><button class="btn btn-secondary" type="button" data-toggle="lr6">Show</button><span class="sent-text" id="lr6">Today's capstone sweep brings these skills together.</span></div>
+          <div class="sent-row"><span class="num">7.</span><button class="btn btn-secondary" type="button" onclick="playL30(7)">🔊</button><button class="btn btn-secondary" type="button" data-toggle="lr7">Show</button><span class="sent-text" id="lr7">Apply each tool strategically and trust your preparation.</span></div>
+        </div>
+        </div>
+    </section>
+
+    <section class="slide" id="slide-4" aria-labelledby="writing-title">
+      <div class="card">
+        <div class="card-title" id="writing-title">✍️ Writing — the three task families (12 min)</div>
+        <div class="callout"><strong>Writing-sprint rule:</strong> L29's Academic Discussion was this week's timed writing sprint. Do not run another timed essay/email today. This slide samples Build a Sentence and Email planning, then reviews the L29 AD evidence.</div>
+        <div class="grid-2">
+          <div class="card">
+            <div class="task-label">BUILD A SENTENCE · THREE TRANSFER ITEMS</div>
+            <div class="sentence-item"><div class="sentence-chips">Although · the first attempt seemed efficient · it · missed one requirement</div><input id="l30-bs1" type="text" aria-label="Build a Sentence item 1" placeholder="Arrange the words into one sentence"></div>
+            <div class="sentence-item"><div class="sentence-chips">Despite · several revisions · the final email · remained too general</div><input id="l30-bs2" type="text" aria-label="Build a Sentence item 2" placeholder="Arrange the words into one sentence"></div>
+            <div class="sentence-item"><div class="sentence-chips">the survey · which · included 800 students · revealed a clear preference</div><input id="l30-bs3" type="text" aria-label="Build a Sentence item 3" placeholder="Arrange the words into one sentence"></div>
+            <button class="btn btn-secondary" type="button" data-toggle="l30-bs-key">Show answers</button>
+            <div class="reveal-box" id="l30-bs-key">1. Although the first attempt seemed efficient, it missed one requirement. · 2. Despite several revisions, the final email remained too general. · 3. The survey, which included 800 students, revealed a clear preference.</div>
+          </div>
+          <div class="card email-plan">
+            <div class="task-label">WRITE AN EMAIL · BULLET PLAN, NOT A SPRINT</div>
+            <div class="prompt-block">Write to a research coordinator: express interest in a student project, describe one relevant skill or course, and request a short meeting.</div>
+            <label for="l30-email-plan">Plan the three required points in keywords. Include an appropriate greeting and closing.</label>
+            <textarea id="l30-email-plan" rows="4" placeholder="1. Interest …&#10;2. Relevant skill/course …&#10;3. Meeting request …"></textarea>
+            <p class="score-note" style="margin-top:.4rem">Check: all three bullets · formal but natural tone · no invented details.</p>
+          </div>
+        </div>
+        <div class="card" style="margin-top:.75rem">
+          <div class="task-label">WRITE FOR AN ACADEMIC DISCUSSION · REVIEW L29, DON'T REWRITE</div>
+          <p class="muted">Use Valeria's L29 Academic Discussion response if it is available. Record its actual word count/WPM and check: clear claim · classmate reference · concession/rebuttal · targeted proofreading. If the response or metrics were not recorded, mark “not available”—do not estimate.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" id="slide-5" aria-labelledby="evidence-title">
+      <div class="card">
+        <div class="card-title" id="evidence-title">📊 Internal section snapshot — not an ETS score</div>
+        <div class="callout info"><strong>Enter one teacher estimate per section (1–6, half-band steps)</strong> using today's sampler plus recorded L29 evidence. This is not a full-length mock, not an official score, and cannot alone authorize booking.</div>
+        <div class="table-wrap">
+          <table class="score-table"><thead><tr><th>Section</th><th>L10 baseline (/6)</th><th>Current sampler estimate (/6)</th></tr></thead><tbody>
+            <tr><td>Reading</td><td>3.0</td><td><input type="number" id="l30Reading" min="1" max="6" step="0.5" aria-label="Internal reading estimate from 1 to 6" placeholder="1–6"></td></tr>
+            <tr><td>Listening</td><td>4.0</td><td><input type="number" id="l30Listening" min="1" max="6" step="0.5" aria-label="Internal listening estimate from 1 to 6" placeholder="1–6"></td></tr>
+            <tr><td>Speaking</td><td>3.5</td><td><input type="number" id="l30Speaking" min="1" max="6" step="0.5" aria-label="Internal speaking estimate from 1 to 6" placeholder="1–6"></td></tr>
+            <tr><td>Writing</td><td>3.0</td><td><input type="number" id="l30Writing" min="1" max="6" step="0.5" aria-label="Internal writing estimate from 1 to 6" placeholder="1–6"></td></tr>
+          </tbody></table>
+        </div>
+        <p class="score-note">L20 mock scores are still pending in the profile; compare to L20 only if the original scores are recovered. ETS reports the average rounded to the nearest half band. ETS comparison: 5.0 is approximately the 95–106 range; 4.5 approximately 86–94. Check the destination university's current total and section minimums.</p>
+        <button class="btn" type="button" id="calcSnapshot" style="margin-top:.75rem">Calculate internal snapshot</button>
+        <div id="snapshotResult" class="readiness-result" aria-live="polite">Enter all four section estimates to calculate a rounded internal snapshot.</div>
+        <div class="callout" style="margin-top:.75rem"><strong>Booking guardrail:</strong> use this result to choose the next step only. Before booking, Valeria needs one complete, timed official-format practice test and the university's required total/section scores.</div>
+      </div>
+    </section>
+
+    <section class="slide" id="slide-6" aria-labelledby="next-title">
+      <div class="card">
+        <div class="card-title" id="next-title">🧭 Next steps — one priority, one light task</div>
+        <p class="muted">Use the L28 → L29 → L30 evidence. Do not turn this sampler into an automatic test-booking verdict.</p>
+        <div class="grid-2" style="margin-top:.65rem">
+          <div class="card"><div class="task-label">IF ONE SECTION STILL LEAKS</div><p>Choose <strong>one</strong> repair lane for the next two weeks: the weakest demonstrated skill, not a pile of tasks. Record the evidence that made you choose it.</p></div>
+          <div class="card"><div class="task-label">BEFORE BOOKING</div><p>Recover the L20 verdict if its original notes exist. Then take one complete official-format practice test under timed conditions and check the university's score requirements.</p></div>
+        </div>
+        <div class="callout" style="margin-top:.75rem"><strong>One light reflection (5 minutes):</strong> Which task type feels strongest now? Which still needs practice? What is the one tool you will use first next time? Vocabulary Centre continues daily.</div>
+        <p class="muted">No second timed writing sprint is assigned this week.</p>
+      </div>
+    </section>
+  </main>
+  <button class="mobile-nav-toggle" id="mobileNavBtn" type="button" aria-label="Open navigation" aria-expanded="false">☰</button>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+  <script>
+    const TOTAL=7;let current=0;
+    function closeMobileNav(){document.querySelector('.sidebar').classList.remove('open');document.getElementById('sidebarOverlay').classList.remove('open');document.getElementById('mobileNavBtn').setAttribute('aria-expanded','false');}
+    function switchSlide(n){document.querySelectorAll('.slide').forEach(s=>s.classList.remove('active'));document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));document.getElementById('slide-'+n).classList.add('active');document.querySelectorAll('.nav-btn')[n].classList.add('active');current=n;document.getElementById('slideChip').textContent=(n+1)+' / '+TOTAL;closeMobileNav();window.scrollTo(0,0);}
+    document.querySelectorAll('.nav-btn').forEach((b,i)=>b.addEventListener('click',()=>switchSlide(i)));
+    document.querySelectorAll('[data-toggle]').forEach(btn=>btn.addEventListener('click',()=>{const box=document.getElementById(btn.dataset.toggle);const open=box.classList.toggle('show');btn.setAttribute('aria-expanded',String(open));btn.textContent=open?'Hide answer':'Check';}));
+    let pacerInterval=null;
+    function stopShadowingPacer(reset=false){if(pacerInterval){clearInterval(pacerInterval);pacerInterval=null;}const audio=document.getElementById('shadowingAudio');audio.pause();if(reset)audio.currentTime=0;}
+    function startShadowingPacer(){stopShadowingPacer(true);const display=document.getElementById('shadowingTextDisplay');const words=display.textContent.trim().split(/\s+/);display.innerHTML=words.map((w,i)=>'<span class="shadowing-word" id="sw'+i+'">'+w+'</span>').join(' ');let i=0;const wpm=Number(document.getElementById('pacerSpeed').value);pacerInterval=setInterval(()=>{if(i>0)document.getElementById('sw'+(i-1))?.classList.remove('active');if(i<words.length){document.getElementById('sw'+i)?.classList.add('active');i++;}else{stopShadowingPacer(false);}},60000/wpm);}
+    function resetShadowingPacer(){stopShadowingPacer(true);document.getElementById('shadowingTextDisplay').textContent='Over the course of thirty lessons, you have built a toolkit for academic English: planning before you write, shaping clear paragraphs, choosing precise language, managing your time, and proofreading with purpose. Today we will bring together evidence from your recent tasks and check what still needs practice. This is a skills sweep, not a full TOEFL mock and not a booking decision. Use each task to notice what already works and choose one useful next step.';}
+    const sentencePlayer=new Audio();
+    function playL30(n){sentencePlayer.pause();sentencePlayer.currentTime=0;sentencePlayer.src='audio/l30-s'+n+'.mp3';sentencePlayer.play().catch(()=>{});}
+    function calcSnapshot(){
+      const ids=['l30Reading','l30Listening','l30Speaking','l30Writing'];
+      const vals=ids.map(id=>document.getElementById(id).value.trim());
+      const out=document.getElementById('snapshotResult');
+      if(vals.some(v=>v==='')){out.textContent='Enter all four section estimates. Missing scores are not zero.';return;}
+      const scores=vals.map(Number);
+      if(scores.some(v=>!Number.isFinite(v)||v<1||v>6||Math.abs(v*2-Math.round(v*2))>1e-8)){out.textContent='Use section estimates from 1.0 to 6.0 in 0.5-band steps.';return;}
+      const average=scores.reduce((a,b)=>a+b,0)/scores.length;
+      const overall=Math.round(average*2)/2;
+      let note;
+      if(overall>=5.0)note='At or above the approximate 5.0 / 95+ reference band. This sampler is not an ETS score; verify with a full official practice test and university section requirements before booking.';
+      else if(overall===4.5)note='Near but below Valeria’s 5.0 / 95+ reference target (4.5 is approximately the 86–94 comparison range). Use a full official practice test and targeted polish before a booking decision.';
+      else note='Below the current 5.0 / 95+ reference target. Use the weakest observed section to plan the next repair phase; this sampler is not a booking decision.';
+      out.textContent='Internal average '+average.toFixed(2)+' / 6; ETS-style half-band rounding: '+overall.toFixed(1)+' / 6. '+note;
+    }
+    document.getElementById('calcSnapshot').addEventListener('click',calcSnapshot);
+    document.getElementById('mobileNavBtn').addEventListener('click',()=>{const open=!document.querySelector('.sidebar').classList.contains('open');document.querySelector('.sidebar').classList.toggle('open',open);document.getElementById('sidebarOverlay').classList.toggle('open',open);document.getElementById('mobileNavBtn').setAttribute('aria-expanded',String(open));});
+    document.getElementById('sidebarOverlay').addEventListener('click',closeMobileNav);
+    document.addEventListener('keydown',e=>{if(e.key==='Escape')closeMobileNav();});
+    switchSlide(0);
+  </script>
+</body>
+</html>
