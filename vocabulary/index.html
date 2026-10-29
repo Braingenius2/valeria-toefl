@@ -106,6 +106,7 @@
     .day-chip.done{border-color:rgba(52,211,153,0.45);color:var(--green);}
     .day-chip.today{border-color:var(--amber);color:var(--amber);font-weight:700;}
     .day-chip.missed{border-color:rgba(248,113,113,0.5);color:var(--red);}
+    .day-chip.review{border-color:rgba(56,189,248,0.45);color:var(--blue);}
     .day-chip.future{opacity:0.3;cursor:default;}
     .day-chip.current{background:rgba(245,158,11,0.16);}
     textarea.useit{width:100%;background:rgba(0,0,0,0.35);border:1px solid var(--border);color:var(--text);border-radius:8px;padding:0.65rem;font-family:inherit;font-size:0.92rem;resize:vertical;}
@@ -129,6 +130,7 @@
     <div>
       <h1>Daily Vocabulary Centre</h1>
       <div class="sub" id="dateLine">—</div>
+      <div class="sub" style="margin-top:0.15rem;font-size:0.75rem;">60-day cycle · 5 words/day · 36 days new + 24 days review</div>
     </div>
     <span class="spacer"></span>
     <a class="back" href="../index.html">&#8592; Portal</a>
@@ -136,7 +138,7 @@
 
   <div class="stats">
     <div class="stat"><div class="k">🔥 Streak</div><div class="v" id="statStreak">0 days</div></div>
-    <div class="stat"><div class="k">📚 Words started</div><div class="v" id="statLearned">0 / 120</div><div class="bar"><i id="barLearned"></i></div></div>
+    <div class="stat"><div class="k">📚 Words started</div><div class="v" id="statLearned">0 / 300</div><div class="bar"><i id="barLearned"></i></div></div>
     <div class="stat"><div class="k">🏆 Mastered</div><div class="v" id="statMastered">0</div></div>
   </div>
 
@@ -158,6 +160,7 @@
   </div>
 </div>
 
+<script src="packs-09-20.js"></script>
 <script src="packs-01-02.js"></script>
 <script src="packs-03-04.js"></script>
 <script src="packs-05-06.js"></script>
@@ -165,8 +168,11 @@
 <script>
 (function(){
   'use strict';
-  const LS_KEY = 'valeriaVocabV1';
+  const LS_KEY = 'valeriaVocabV2';
   const DAY_SIZE = 5;
+  const NEW_WORDS = 180;
+  const NEW_DAYS = Math.ceil(NEW_WORDS / DAY_SIZE);
+  const CYCLE_START = '2026-10-29';
 
   const WORDS = (window.VOCAB_PACKS || []).flatMap(p =>
     p.words.map(w => Object.assign({}, w, { pack: p.id, packTitle: p.title, color: p.color })));
@@ -202,7 +208,7 @@
   let state;
   function load(){
     try { const s = JSON.parse(localStorage.getItem(LS_KEY)); if (s && s.words) { s.startDate = s.startDate || todayStr(); return s; } } catch(e){}
-    return { startDate: todayStr(), words:{}, days:{}, streak:{count:0,last:null}, sentences:{} };
+    return { startDate: CYCLE_START, words:{}, days:{}, streak:{count:0,last:null}, sentences:{} };
   }
   function save(){ try { localStorage.setItem(LS_KEY, JSON.stringify(state)); } catch(e){} }
   state = load(); save();
@@ -273,15 +279,17 @@
       const done = !!state.days[dayKey(i)];
       const future = (i > ti);
       const isToday = (i === todayDay);
+      const isReview = i >= NEW_DAYS;
       let cls = 'day-chip ' + (done ? 'done' : future ? 'future' : (isToday ? 'today' : 'missed'));
+      if (isReview && !done) cls += ' review';
       if (i === showDay) cls += ' current';
       const mark = done ? '✓' : future ? '🔒' : (isToday ? '●' : '!');
-      chips.push('<button class="' + cls + '"' + (future ? ' disabled' : '') + ' onclick="openDay(' + i + ')" title="Day ' + (i+1) + '">' + (i+1) + ' ' + mark + '</button>');
+      chips.push('<button class="' + cls + '"' + (future ? ' disabled' : '') + ' onclick="openDay(' + i + ')' + ' title="Day ' + (i+1) + (isReview ? ' · review' : '') + '">' + (i+1) + ' ' + mark + '</button>');
     }
     const back = (learn.day !== null && learn.day !== todayDay)
       ? '<button class="btn sec" style="margin-top:0.7rem;" onclick="openDay(' + todayDay + ')">→ Back to today (Day ' + (todayDay+1) + ')</button>'
       : '';
-    return '<div class="card"><div class="muted" style="margin-bottom:0.5rem;"><strong style="color:var(--text);">Your 24 days</strong> — click any released day to open it: ' +
+    return '<div class="card"><div class="muted" style="margin-bottom:0.5rem;"><strong style="color:var(--text);">Your 60 days</strong> — 36 days new + 24 days review. Click any released day to open it: ' +
       '<span style="color:var(--green);">✓ done</span> · <span style="color:var(--red);">! missed</span> · <span style="color:var(--amber);">● today</span></div>' +
       '<div class="day-strip">' + chips.join('') + '</div>' + back + '</div>';
   }
@@ -309,7 +317,7 @@
         '<p class="muted" style="margin-top:0.5rem;">Review due words tomorrow — or replay any day from the strip above (Word Bank always works too).</p>' +
         sentenceBox(day) + '</div>';
       if (ti < TOTAL_DAYS - 1) html += '<div class="card"><h2>🔜 Next set</h2><p class="muted">Day ' + (ti+2) + ' unlocks tomorrow. Reviews of today\'s 5 words are due tomorrow too.</p></div>';
-      else html += '<div class="card"><h2>🏁 All 120 words released</h2><p class="muted">From now on, keep clearing the review queue — that is where mastery happens.</p></div>';
+      else html += '<div class="card"><h2>🏁 All 300 words released</h2><p class="muted">From now on, keep clearing the review queue — that is where mastery happens.</p></div>';
       el.innerHTML = html;
       return;
     }
@@ -327,7 +335,7 @@
     }
 
     html += '<div class="card">' +
-      '<div class="muted" style="margin-bottom:0.4rem;">Day ' + (showDay+1) + ' · ' + esc(pack.title) + ' · word ' + (learn.idx+1) + ' of ' + day.length + '</div>' +
+      '<div class="muted" style="margin-bottom:0.4rem;">Day ' + (showDay+1) + ' · ' + esc(pack.title) + (showDay >= NEW_DAYS ? ' · review' : ' · new') + ' · word ' + (learn.idx+1) + ' of ' + day.length + '</div>' +
       '<div class="flash' + (learn.flipped ? ' flipped' : '') + '" onclick="flipCard()">' +
         '<div class="flash-inner">' +
           '<div class="face front">' +

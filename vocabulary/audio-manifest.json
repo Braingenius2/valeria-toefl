@@ -478,5 +478,725 @@
  {
   "id": "p8w15",
   "text": "paramount. In academic writing, clarity is paramount."
+ },
+ {
+  "id": "p9w1",
+  "text": "criterion. The most important criterion is whether the argument is supported by evidence."
+ },
+ {
+  "id": "p9w2",
+  "text": "merit. The proposal has real merit, but its cost is too high."
+ },
+ {
+  "id": "p9w3",
+  "text": "flaw. The study has one serious flaw: the sample was too small."
+ },
+ {
+  "id": "p9w4",
+  "text": "drawback. The main drawback of online study is the lack of direct contact."
+ },
+ {
+  "id": "p9w5",
+  "text": "advantage. Small classes have a clear advantage: students receive more feedback."
+ },
+ {
+  "id": "p9w6",
+  "text": "effective. The campaign was effective because it targeted a specific group."
+ },
+ {
+  "id": "p9w7",
+  "text": "adequate. The evidence is adequate to support the main claim."
+ },
+ {
+  "id": "p9w8",
+  "text": "satisfactory. The explanation was satisfactory, but it missed one important detail."
+ },
+ {
+  "id": "p9w9",
+  "text": "questionable. The conclusion is questionable because the data are incomplete."
+ },
+ {
+  "id": "p9w10",
+  "text": "defensible. Her position is defensible because she acknowledges the counterargument."
+ },
+ {
+  "id": "p9w11",
+  "text": "superior. The new system is superior to the old one in both speed and accuracy."
+ },
+ {
+  "id": "p9w12",
+  "text": "inferior. The cheaper material is inferior in durability, even if it looks similar."
+ },
+ {
+  "id": "p9w13",
+  "text": "inefficient. The approval process is inefficient because every decision needs three signatures."
+ },
+ {
+  "id": "p9w14",
+  "text": "validity. The validity of the survey depends on how the questions were worded."
+ },
+ {
+  "id": "p9w15",
+  "text": "assessment. The assessment rewards clarity as well as accuracy."
+ },
+ {
+  "id": "p10w1",
+  "text": "trend. The trend is clear: more students are choosing online courses."
+ },
+ {
+  "id": "p10w2",
+  "text": "increase. The number of applicants increased by 20 percent last year."
+ },
+ {
+  "id": "p10w3",
+  "text": "decrease. The dropout rate decreased after the tutoring program began."
+ },
+ {
+  "id": "p10w4",
+  "text": "plateau. Sales plateaued after the first year and stayed flat for a decade."
+ },
+ {
+  "id": "p10w5",
+  "text": "peak. Demand peaked in July before falling sharply in August."
+ },
+ {
+  "id": "p10w6",
+  "text": "fluctuate. Prices fluctuated throughout the year, with no clear long-term trend."
+ },
+ {
+  "id": "p10w7",
+  "text": "surge. There was a surge in applications after the fee was removed."
+ },
+ {
+  "id": "p10w8",
+  "text": "decline. Enrolment declined steadily for three years before recovering."
+ },
+ {
+  "id": "p10w9",
+  "text": "stabilize. The figures stabilized at around 60 percent after 2020."
+ },
+ {
+  "id": "p10w10",
+  "text": "marginal. The difference between the two groups was marginal and not significant."
+ },
+ {
+  "id": "p10w11",
+  "text": "substantial. The policy led to a substantial reduction in waiting times."
+ },
+ {
+  "id": "p10w12",
+  "text": "gradual. There was a gradual improvement in scores over the semester."
+ },
+ {
+  "id": "p10w13",
+  "text": "rapid. The rapid growth of the platform surprised even its creators."
+ },
+ {
+  "id": "p10w14",
+  "text": "proportional. The funding is proportional to the number of students enrolled."
+ },
+ {
+  "id": "p10w15",
+  "text": "trough. The economy reached its trough in 2009 and then began to recover."
+ },
+ {
+  "id": "p11w1",
+  "text": "whereas. The first study used interviews, whereas the second relied on surveys."
+ },
+ {
+  "id": "p11w2",
+  "text": "albeit. The policy was popular, albeit expensive to maintain."
+ },
+ {
+  "id": "p11w3",
+  "text": "despite. Despite the rain, the event attracted a large crowd."
+ },
+ {
+  "id": "p11w4",
+  "text": "notwithstanding. Notwithstanding the criticism, the project continued."
+ },
+ {
+  "id": "p11w5",
+  "text": "comparable. The two cities have comparable populations but very different transport systems."
+ },
+ {
+  "id": "p11w6",
+  "text": "distinct. The two groups have distinct needs and should not be treated alike."
+ },
+ {
+  "id": "p11w7",
+  "text": "disparity. The disparity between urban and rural schools remains wide."
+ },
+ {
+  "id": "p11w8",
+  "text": "resemble. The new design resembles the original, but the materials are cheaper."
+ },
+ {
+  "id": "p11w9",
+  "text": "diverge. The two approaches diverge sharply when costs are considered."
+ },
+ {
+  "id": "p11w10",
+  "text": "converge. The two estimates converge around 40 percent."
+ },
+ {
+  "id": "p11w11",
+  "text": "counterpart. The minister met her Japanese counterpart to discuss trade."
+ },
+ {
+  "id": "p11w12",
+  "text": "analogous. The heart is often described as analogous to a pump."
+ },
+ {
+  "id": "p11w13",
+  "text": "contrast. The report contrasts the two systems without recommending either."
+ },
+ {
+  "id": "p11w14",
+  "text": "parallel. There is a parallel between the two crises."
+ },
+ {
+  "id": "p11w15",
+  "text": "differentiate. It is hard to differentiate between the two products."
+ },
+ {
+  "id": "p12w1",
+  "text": "stem. The problem stems from a lack of clear communication."
+ },
+ {
+  "id": "p12w2",
+  "text": "arise. Difficulties arise when the instructions are unclear."
+ },
+ {
+  "id": "p12w3",
+  "text": "entail. The job entails working with international students."
+ },
+ {
+  "id": "p12w4",
+  "text": "precipitate. The scandal precipitated a crisis in the government."
+ },
+ {
+  "id": "p12w5",
+  "text": "provoke. The decision provoked widespread criticism."
+ },
+ {
+  "id": "p12w6",
+  "text": "spur. Tax breaks spurred investment in renewable energy."
+ },
+ {
+  "id": "p12w7",
+  "text": "curb. The city introduced new rules to curb traffic in the centre."
+ },
+ {
+  "id": "p12w8",
+  "text": "offset. Higher fuel costs were offset by lower rent."
+ },
+ {
+  "id": "p12w9",
+  "text": "amplify. Social media can amplify small errors into major scandals."
+ },
+ {
+  "id": "p12w10",
+  "text": "contribute. Several factors contributed to the decline in sales."
+ },
+ {
+  "id": "p12w11",
+  "text": "account. The report accounts for the difference in costs."
+ },
+ {
+  "id": "p12w12",
+  "text": "induce. The drug induces sleep within twenty minutes."
+ },
+ {
+  "id": "p12w13",
+  "text": "propagate. The internet propagates information faster than any previous medium."
+ },
+ {
+  "id": "p12w14",
+  "text": "constrain. A small budget constrained the scope of the study."
+ },
+ {
+  "id": "p12w15",
+  "text": "engender. Trust is engendered by consistent behaviour over time."
+ },
+ {
+  "id": "p13w1",
+  "text": "challenge. The biggest challenge is keeping the project on schedule."
+ },
+ {
+  "id": "p13w2",
+  "text": "obstacle. Cost is the main obstacle to wider adoption."
+ },
+ {
+  "id": "p13w3",
+  "text": "constraint. Time constraints forced the team to simplify the design."
+ },
+ {
+  "id": "p13w4",
+  "text": "remedy. There is no simple remedy for the housing shortage."
+ },
+ {
+  "id": "p13w5",
+  "text": "intervention. Early intervention improved outcomes for the children."
+ },
+ {
+  "id": "p13w6",
+  "text": "address. The report addresses the causes of youth unemployment."
+ },
+ {
+  "id": "p13w7",
+  "text": "tackle. The city is tackling air pollution with new transport rules."
+ },
+ {
+  "id": "p13w8",
+  "text": "resolve. The two sides resolved the dispute without going to court."
+ },
+ {
+  "id": "p13w9",
+  "text": "prevent. Vaccination prevents many serious diseases."
+ },
+ {
+  "id": "p13w10",
+  "text": "restore. The program aims to restore trust in local government."
+ },
+ {
+  "id": "p13w11",
+  "text": "sustainable. The city needs a sustainable transport system, not more roads."
+ },
+ {
+  "id": "p13w12",
+  "text": "viable. Solar power is now a viable alternative to coal in many regions."
+ },
+ {
+  "id": "p13w13",
+  "text": "implement. The school implemented the new policy in September."
+ },
+ {
+  "id": "p13w14",
+  "text": "combat. The campaign aims to combat misinformation online."
+ },
+ {
+  "id": "p13w15",
+  "text": "safeguard. New rules safeguard students' personal data."
+ },
+ {
+  "id": "p14w1",
+  "text": "methodology. The methodology section explains how the participants were selected."
+ },
+ {
+  "id": "p14w2",
+  "text": "sample. The sample included 200 students from five schools."
+ },
+ {
+  "id": "p14w3",
+  "text": "variable. The study controlled for age and income as variables."
+ },
+ {
+  "id": "p14w4",
+  "text": "empirical. The claim is supported by empirical evidence from three studies."
+ },
+ {
+  "id": "p14w5",
+  "text": "qualitative. The qualitative interviews revealed why students dropped out."
+ },
+ {
+  "id": "p14w6",
+  "text": "quantitative. The quantitative analysis showed a small but consistent effect."
+ },
+ {
+  "id": "p14w7",
+  "text": "reliability. The reliability of the test was checked by repeating it twice."
+ },
+ {
+  "id": "p14w8",
+  "text": "replicate. Other researchers failed to replicate the original findings."
+ },
+ {
+  "id": "p14w9",
+  "text": "findings. The findings suggest that early feedback improves retention."
+ },
+ {
+  "id": "p14w10",
+  "text": "questionnaire. The questionnaire asked students about their study habits."
+ },
+ {
+  "id": "p14w11",
+  "text": "longitudinal. The longitudinal study followed the same children for ten years."
+ },
+ {
+  "id": "p14w12",
+  "text": "dataset. The dataset contains responses from 5,000 households."
+ },
+ {
+  "id": "p14w13",
+  "text": "correlation. There is a strong correlation between attendance and grades."
+ },
+ {
+  "id": "p14w14",
+  "text": "generalize. It is risky to generalize from such a small sample."
+ },
+ {
+  "id": "p14w15",
+  "text": "scrutiny. The proposal came under close scrutiny from the committee."
+ },
+ {
+  "id": "p15w1",
+  "text": "curriculum. The curriculum now includes more practical projects."
+ },
+ {
+  "id": "p15w2",
+  "text": "pedagogy. The course combines technology with sound pedagogy."
+ },
+ {
+  "id": "p15w3",
+  "text": "feedback. Detailed feedback helped her improve the next draft."
+ },
+ {
+  "id": "p15w4",
+  "text": "retention. Regular review improves retention of new vocabulary."
+ },
+ {
+  "id": "p15w5",
+  "text": "engagement. Group projects increased engagement among quieter students."
+ },
+ {
+  "id": "p15w6",
+  "text": "autonomy. Online learning requires more autonomy than a traditional class."
+ },
+ {
+  "id": "p15w7",
+  "text": "misconception. A common misconception is that memorizing is always the best way to learn."
+ },
+ {
+  "id": "p15w8",
+  "text": "attainment. The gap in attainment between the two groups narrowed."
+ },
+ {
+  "id": "p15w9",
+  "text": "literacy. The program combines digital literacy with traditional reading skills."
+ },
+ {
+  "id": "p15w10",
+  "text": "numeracy. Employers increasingly expect basic numeracy as well as literacy."
+ },
+ {
+  "id": "p15w11",
+  "text": "vocational. Vocational courses prepare students for specific careers."
+ },
+ {
+  "id": "p15w12",
+  "text": "extracurricular. Extracurricular activities can develop leadership skills."
+ },
+ {
+  "id": "p15w13",
+  "text": "mentor. A mentor helped him choose which courses to take."
+ },
+ {
+  "id": "p15w14",
+  "text": "aptitude. She showed an aptitude for languages at an early age."
+ },
+ {
+  "id": "p15w15",
+  "text": "rote. Rote learning can help with facts but not with deep understanding."
+ },
+ {
+  "id": "p16w1",
+  "text": "enrolment. Enrolment in the online program doubled this year."
+ },
+ {
+  "id": "p16w2",
+  "text": "tuition. Tuition has risen faster than inflation for a decade."
+ },
+ {
+  "id": "p16w3",
+  "text": "scholarship. She won a scholarship that covers her full tuition."
+ },
+ {
+  "id": "p16w4",
+  "text": "dormitory. Most first-year students live in a dormitory on campus."
+ },
+ {
+  "id": "p16w5",
+  "text": "faculty. The faculty voted to change the assessment policy."
+ },
+ {
+  "id": "p16w6",
+  "text": "syllabus. The syllabus lists every reading and deadline for the term."
+ },
+ {
+  "id": "p16w7",
+  "text": "extension. He asked for an extension because he was ill."
+ },
+ {
+  "id": "p16w8",
+  "text": "registrar. The registrar confirmed that her transcript was ready."
+ },
+ {
+  "id": "p16w9",
+  "text": "transcript. The application requires an official transcript from each university."
+ },
+ {
+  "id": "p16w10",
+  "text": "prerequisite. Statistics is a prerequisite for the research methods course."
+ },
+ {
+  "id": "p16w11",
+  "text": "elective. She chose an elective in psychology outside her major."
+ },
+ {
+  "id": "p16w12",
+  "text": "seminar. The seminar was limited to fifteen students."
+ },
+ {
+  "id": "p16w13",
+  "text": "lecture. The lecture covered the causes of the French Revolution."
+ },
+ {
+  "id": "p16w14",
+  "text": "tutorial. The tutorial gave students time to ask questions about the assignment."
+ },
+ {
+  "id": "p16w15",
+  "text": "orientation. Orientation week helps new students find their way around campus."
+ },
+ {
+  "id": "p17w1",
+  "text": "productivity. Remote work increased productivity for some teams but reduced it for others."
+ },
+ {
+  "id": "p17w2",
+  "text": "incentive. Tax incentives encouraged companies to invest in clean energy."
+ },
+ {
+  "id": "p17w3",
+  "text": "remuneration. The job offers flexible hours but modest remuneration."
+ },
+ {
+  "id": "p17w4",
+  "text": "unemployment. Youth unemployment rose sharply after the recession."
+ },
+ {
+  "id": "p17w5",
+  "text": "inflation. Inflation reduced the real value of wages."
+ },
+ {
+  "id": "p17w6",
+  "text": "recession. The country entered a recession after two quarters of negative growth."
+ },
+ {
+  "id": "p17w7",
+  "text": "entrepreneurship. The university runs a program to encourage entrepreneurship among students."
+ },
+ {
+  "id": "p17w8",
+  "text": "workforce. Women make up nearly half of the workforce in the sector."
+ },
+ {
+  "id": "p17w9",
+  "text": "outsourcing. Outsourcing customer service reduced costs but damaged quality."
+ },
+ {
+  "id": "p17w10",
+  "text": "underemployment. Underemployment is common among graduates in the creative sector."
+ },
+ {
+  "id": "p17w11",
+  "text": "inequality. Income inequality has widened over the past decade."
+ },
+ {
+  "id": "p17w12",
+  "text": "mobility. Social mobility is lower in countries with expensive education."
+ },
+ {
+  "id": "p17w13",
+  "text": "expenditure. Public expenditure on health rose by five percent."
+ },
+ {
+  "id": "p17w14",
+  "text": "revenue. The company's revenue grew, but its profits fell."
+ },
+ {
+  "id": "p17w15",
+  "text": "subsidy. The subsidy made solar panels affordable for low-income families."
+ },
+ {
+  "id": "p18w1",
+  "text": "biodiversity. The forest supports an extraordinary level of biodiversity."
+ },
+ {
+  "id": "p18w2",
+  "text": "ecosystem. The river is part of a fragile ecosystem."
+ },
+ {
+  "id": "p18w3",
+  "text": "emission. Carbon emissions must fall sharply to meet the target."
+ },
+ {
+  "id": "p18w4",
+  "text": "renewable. Renewable energy now supplies a third of the country's electricity."
+ },
+ {
+  "id": "p18w5",
+  "text": "conservation. The conservation project restored the wetland habitat."
+ },
+ {
+  "id": "p18w6",
+  "text": "contamination. The contamination of the water supply was traced to a nearby factory."
+ },
+ {
+  "id": "p18w7",
+  "text": "depletion. The depletion of fish stocks threatens the local economy."
+ },
+ {
+  "id": "p18w8",
+  "text": "habitat. Urban expansion is destroying the habitat of many species."
+ },
+ {
+  "id": "p18w9",
+  "text": "climate. The climate in the region has become hotter and drier."
+ },
+ {
+  "id": "p18w10",
+  "text": "erosion. Coastal erosion has forced several families to move inland."
+ },
+ {
+  "id": "p18w11",
+  "text": "pollutant. The factory released a pollutant into the river."
+ },
+ {
+  "id": "p18w12",
+  "text": "recycle. The city recycles more than half of its household waste."
+ },
+ {
+  "id": "p18w13",
+  "text": "geothermal. Geothermal energy heats many homes in Iceland."
+ },
+ {
+  "id": "p18w14",
+  "text": "drought. The drought lasted three years and ruined the harvest."
+ },
+ {
+  "id": "p18w15",
+  "text": "extinction. The species is facing extinction because its habitat is disappearing."
+ },
+ {
+  "id": "p19w1",
+  "text": "algorithm. The algorithm decides which posts appear at the top of your feed."
+ },
+ {
+  "id": "p19w2",
+  "text": "digital. Digital tools have changed how students collaborate."
+ },
+ {
+  "id": "p19w3",
+  "text": "platform. The platform connects tutors with students around the world."
+ },
+ {
+  "id": "p19w4",
+  "text": "surveillance. Surveillance cameras have reduced theft in the city centre."
+ },
+ {
+  "id": "p19w5",
+  "text": "misinformation. Misinformation spread quickly during the election."
+ },
+ {
+  "id": "p19w6",
+  "text": "privacy. Users are worried about the privacy of their personal data."
+ },
+ {
+  "id": "p19w7",
+  "text": "innovation. The company invests heavily in innovation."
+ },
+ {
+  "id": "p19w8",
+  "text": "obsolete. The software became obsolete after the new system was introduced."
+ },
+ {
+  "id": "p19w9",
+  "text": "interface. The interface is simple enough for new users to understand."
+ },
+ {
+  "id": "p19w10",
+  "text": "network. The university network was down for two hours."
+ },
+ {
+  "id": "p19w11",
+  "text": "virtual. Virtual labs allow students to run experiments online."
+ },
+ {
+  "id": "p19w12",
+  "text": "immersive. The immersive exhibit made visitors feel part of the story."
+ },
+ {
+  "id": "p19w13",
+  "text": "curation. The curation of the exhibition took six months."
+ },
+ {
+  "id": "p19w14",
+  "text": "accessibility. Accessibility features help students with disabilities use the platform."
+ },
+ {
+  "id": "p19w15",
+  "text": "automation. Automation has replaced some routine jobs but created others."
+ },
+ {
+  "id": "p20w1",
+  "text": "wellbeing. Regular exercise improves both physical and mental wellbeing."
+ },
+ {
+  "id": "p20w2",
+  "text": "obesity. Childhood obesity has risen in many countries."
+ },
+ {
+  "id": "p20w3",
+  "text": "sedentary. A sedentary lifestyle increases the risk of heart disease."
+ },
+ {
+  "id": "p20w4",
+  "text": "nutrition. Good nutrition is essential for children's development."
+ },
+ {
+  "id": "p20w5",
+  "text": "epidemic. The epidemic overwhelmed hospitals in the region."
+ },
+ {
+  "id": "p20w6",
+  "text": "immunity. Vaccination builds immunity against the virus."
+ },
+ {
+  "id": "p20w7",
+  "text": "healthcare. Access to healthcare remains unequal in rural areas."
+ },
+ {
+  "id": "p20w8",
+  "text": "diagnosis. An early diagnosis greatly improves the chance of recovery."
+ },
+ {
+  "id": "p20w9",
+  "text": "prevention. Prevention is cheaper than treating the disease later."
+ },
+ {
+  "id": "p20w10",
+  "text": "addiction. Social media addiction can affect sleep and concentration."
+ },
+ {
+  "id": "p20w11",
+  "text": "stigma. The stigma around mental illness prevents many people from seeking help."
+ },
+ {
+  "id": "p20w12",
+  "text": "demographic. The demographic shift has increased demand for healthcare."
+ },
+ {
+  "id": "p20w13",
+  "text": "urbanisation. Rapid urbanisation has put pressure on housing and transport."
+ },
+ {
+  "id": "p20w14",
+  "text": "welfare. The welfare system supports families on low incomes."
+ },
+ {
+  "id": "p20w15",
+  "text": "sanitation. Better sanitation reduced the spread of disease."
  }
 ]
