@@ -109,6 +109,7 @@
     .day-chip.review{border-color:rgba(56,189,248,0.45);color:var(--blue);}
     .day-chip.future{opacity:0.3;cursor:default;}
     .day-chip.current{background:rgba(245,158,11,0.16);}
+    .tab:focus-visible,.day-chip:focus-visible,.btn:focus-visible,.audio-btn:focus-visible,.bank-tools input:focus-visible,.bank-tools select:focus-visible,textarea:focus-visible{outline:2px solid var(--amber);outline-offset:2px;}
     textarea.useit{width:100%;background:rgba(0,0,0,0.35);border:1px solid var(--border);color:var(--text);border-radius:8px;padding:0.65rem;font-family:inherit;font-size:0.92rem;resize:vertical;}
     textarea.useit:focus{outline:none;border-color:var(--amber);}
     .hidden{display:none !important;}
@@ -130,7 +131,7 @@
     <div>
       <h1>Daily Vocabulary Centre</h1>
       <div class="sub" id="dateLine">—</div>
-      <div class="sub" style="margin-top:0.15rem;font-size:0.75rem;">60-day cycle · 5 words/day · 36 days new + 24 days review</div>
+      <div class="sub" id="cycleDescription" style="margin-top:0.15rem;font-size:0.75rem;">60-day cycle · 5 words/day · 36 days new + 24 days review</div>
     </div>
     <span class="spacer"></span>
     <a class="back" href="../index.html">&#8592; Portal</a>
@@ -170,28 +171,66 @@
   'use strict';
   const LS_KEY = 'valeriaVocabV2';
   const DAY_SIZE = 5;
-  const NEW_WORDS = 180;
-  const NEW_DAYS = Math.ceil(NEW_WORDS / DAY_SIZE);
   const CYCLE_START = '2026-10-29';
 
   const WORDS = (window.VOCAB_PACKS || []).flatMap(p =>
     p.words.map(w => Object.assign({}, w, { pack: p.id, packTitle: p.title, color: p.color })));
+  const NEW_WORDS = WORDS.filter(w => w.pack >= 9 && w.pack <= 20).length;
+  const NEW_DAYS = Math.ceil(NEW_WORDS / DAY_SIZE);
   const TOTAL_DAYS = Math.ceil(WORDS.length / DAY_SIZE);
+  const REVIEW_DAYS = TOTAL_DAYS - NEW_DAYS;
 
   function todayStr(d){ d = d || new Date(); return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0'); }
   function addDays(str, n){ const p = str.split('-').map(Number); const dt = new Date(p[0], p[1]-1, p[2], 12); dt.setDate(dt.getDate()+n); return todayStr(dt); }
   function dayDiff(a, b){ return Math.round((new Date(b+'T12:00:00') - new Date(a+'T12:00:00')) / 86400000); }
   function esc(s){ return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
   function escRe(s){ return String(s).replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
+  const IRREGULAR_FORMS = {
+    arise:['arises','arose','arisen'], be:['am','is','are','was','were','been','being'],
+    become:['becomes','became','become'], begin:['begins','began','begun'],
+    bring:['brings','brought'], build:['builds','built'], buy:['buys','bought'],
+    catch:['catches','caught'], choose:['chooses','chose','chosen'], come:['comes','came'],
+    cost:['costs'], do:['does','did','done'], draw:['draws','drew','drawn'],
+    drive:['drives','drove','driven'], eat:['eats','ate','eaten'], fall:['falls','fell','fallen'],
+    feel:['feels','felt'], find:['finds','found'], fly:['flies','flew','flown'],
+    get:['gets','got','gotten'], give:['gives','gave','given'], go:['goes','went','gone'],
+    grow:['grows','grew','grown'], have:['has','had'], hear:['hears','heard'],
+    hold:['holds','held'], keep:['keeps','kept'], know:['knows','knew','known'],
+    lead:['leads','led'], leave:['leaves','left'], lose:['loses','lost'],
+    make:['makes','made'], mean:['means','meant'], meet:['meets','met'],
+    pay:['pays','paid'], read:['reads'], rise:['rises','rose','risen'],
+    run:['runs','ran'], say:['says','said'], see:['sees','saw','seen'],
+    sell:['sells','sold'], send:['sends','sent'], set:['sets'], sit:['sits','sat'],
+    speak:['speaks','spoke','spoken'], spend:['spends','spent'], stand:['stands','stood'],
+    take:['takes','took','taken'], teach:['teaches','taught'], tell:['tells','told'],
+    think:['thinks','thought'], understand:['understands','understood'],
+    wear:['wears','wore','worn'], win:['wins','won'], write:['writes','wrote','written'],
+    criterion:['criteria'], analysis:['analyses'], basis:['bases'], crisis:['crises'],
+    hypothesis:['hypotheses'], thesis:['theses'], phenomenon:['phenomena'],
+    child:['children'], person:['people'], man:['men'], woman:['women'], foot:['feet'],
+    tooth:['teeth'], mouse:['mice'], goose:['geese'], ox:['oxen'],
+  };
   function wordForms(w){
-    const forms = [w];
-    const add = f => { if (f !== w && !forms.includes(f)) forms.push(f); };
-    add(w + 's'); add(w + 'es'); add(w + 'ed'); add(w + 'd'); add(w + 'ing');
-    if (w.endsWith('e')) add(w.slice(0, -1) + 'ing');
-    if (w.endsWith('y')) { add(w.slice(0, -1) + 'ies'); add(w.slice(0, -1) + 'ied'); }
-    if (/(s|x|ch|sh)$/.test(w)) add(w + 'es');
-    if (/[^aeiou][aeiou][^aeiouwxy]$/.test(w)) { add(w + w.slice(-1) + 'ed'); add(w + w.slice(-1) + 'ing'); }
-    return forms;
+    const forms = new Set([w]);
+    const add = f => { if (f && !forms.has(f)) forms.add(f); };
+    (IRREGULAR_FORMS[w.toLowerCase()] || []).forEach(add);
+    if (/[^aeiou]y$/i.test(w)) {
+      const stem = w.slice(0, -1);
+      add(stem + 'ies'); add(stem + 'ied'); add(w + 'ing');
+    } else if (/ie$/i.test(w)) {
+      add(w + 's'); add(w + 'd'); add(w.slice(0, -2) + 'ying');
+    } else if (/e$/i.test(w)) {
+      add(w + 's'); add(w + 'd'); add(w.slice(0, -1) + 'ing');
+    } else {
+      add(w + 's');
+      if (/(s|x|z|ch|sh|o)$/i.test(w)) add(w + 'es');
+      add(w + 'ed'); add(w + 'ing');
+      if (/[^aeiou][aeiou][^aeiouwxy]$/i.test(w)) {
+        add(w + w.slice(-1) + 'ed'); add(w + w.slice(-1) + 'ing');
+      }
+      if (/c$/i.test(w)) { add(w + 'ked'); add(w + 'king'); }
+    }
+    return [...forms];
   }
   function findForm(word, text){
     for (const f of wordForms(word)){ const m = new RegExp('\\b' + escRe(f) + '\\b', 'i').exec(text); if (m) return m[0]; }
@@ -207,7 +246,20 @@
 
   let state;
   function load(){
-    try { const s = JSON.parse(localStorage.getItem(LS_KEY)); if (s && s.words) { s.startDate = s.startDate || todayStr(); return s; } } catch(e){}
+    try {
+      const s = JSON.parse(localStorage.getItem(LS_KEY));
+      if (s && typeof s === 'object'){
+        const validDate = typeof s.startDate === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(s.startDate) && !Number.isNaN(Date.parse(s.startDate + 'T12:00:00'));
+        const streak = s.streak && typeof s.streak === 'object' ? s.streak : {};
+        return {
+          startDate: validDate ? s.startDate : CYCLE_START,
+          words: s.words && typeof s.words === 'object' && !Array.isArray(s.words) ? s.words : {},
+          days: s.days && typeof s.days === 'object' && !Array.isArray(s.days) ? s.days : {},
+          streak: { count: Number(streak.count) || 0, last: typeof streak.last === 'string' ? streak.last : null },
+          sentences: s.sentences && typeof s.sentences === 'object' && !Array.isArray(s.sentences) ? s.sentences : {},
+        };
+      }
+    } catch(e){}
     return { startDate: CYCLE_START, words:{}, days:{}, streak:{count:0,last:null}, sentences:{} };
   }
   function save(){ try { localStorage.setItem(LS_KEY, JSON.stringify(state)); } catch(e){} }
@@ -263,6 +315,7 @@
   /* ---------- header ---------- */
   function renderHeader(){
     document.getElementById('dateLine').textContent = new Date().toLocaleDateString('en-GB', { weekday:'long', day:'numeric', month:'long', year:'numeric' });
+    document.getElementById('cycleDescription').textContent = TOTAL_DAYS + '-day cycle · ' + DAY_SIZE + ' words/day · ' + NEW_DAYS + ' days new + ' + REVIEW_DAYS + ' days review';
     document.getElementById('statStreak').textContent = (state.streak.count || 0) + ' day' + ((state.streak.count||0) === 1 ? '' : 's');
     document.getElementById('statLearned').textContent = learnedCount() + ' / ' + WORDS.length;
     document.getElementById('statMastered').textContent = masteredCount() + ' / ' + WORDS.length;
@@ -284,19 +337,25 @@
       if (isReview && !done) cls += ' review';
       if (i === showDay) cls += ' current';
       const mark = done ? '✓' : future ? '🔒' : (isToday ? '●' : '!');
-      chips.push('<button class="' + cls + '"' + (future ? ' disabled' : '') + ' onclick="openDay(' + i + ')' + ' title="Day ' + (i+1) + (isReview ? ' · review' : '') + '">' + (i+1) + ' ' + mark + '</button>');
+      const disabled = future ? ' disabled' : '';
+      const current = isToday ? ' aria-current="date"' : '';
+      const label = 'Day ' + (i+1) + (isReview ? ', review' : ', new words') + (isToday ? ', today' : '') + (done ? ', complete' : '');
+      chips.push('<button type="button" class="' + cls + '"' + disabled + current + ' onclick="openDay(' + i + ')" title="' + label + '" aria-label="' + label + '">' + (i+1) + ' ' + mark + '</button>');
     }
     const back = (learn.day !== null && learn.day !== todayDay)
       ? '<button class="btn sec" style="margin-top:0.7rem;" onclick="openDay(' + todayDay + ')">→ Back to today (Day ' + (todayDay+1) + ')</button>'
       : '';
-    return '<div class="card"><div class="muted" style="margin-bottom:0.5rem;"><strong style="color:var(--text);">Your 60 days</strong> — 36 days new + 24 days review. Click any released day to open it: ' +
+    return '<div class="card"><div class="muted" style="margin-bottom:0.5rem;"><strong style="color:var(--text);">Your ' + TOTAL_DAYS + ' days</strong> — ' + NEW_DAYS + ' days new + ' + REVIEW_DAYS + ' days review. Click any released day to open it: ' +
       '<span style="color:var(--green);">✓ done</span> · <span style="color:var(--red);">! missed</span> · <span style="color:var(--amber);">● today</span></div>' +
       '<div class="day-strip">' + chips.join('') + '</div>' + back + '</div>';
   }
   function openDay(i){
-    const todayDay = Math.min(todayIndex(), TOTAL_DAYS - 1);
+    const ti = todayIndex();
+    if (!Number.isInteger(i) || i < 0 || i >= TOTAL_DAYS || i > ti) return;
+    const todayDay = Math.min(ti, TOTAL_DAYS - 1);
     learn = { day: (i === todayDay ? null : i), idx: 0, flipped: false };
     quiz = null;
+    showTab('today');
     renderToday();
     window.scrollTo(0, 0);
   }
@@ -316,8 +375,8 @@
         '<p class="celebrate">Score: ' + d.score + ' / ' + d.total + ' — streak ' + (state.streak.count||0) + ' 🔥</p>' +
         '<p class="muted" style="margin-top:0.5rem;">Review due words tomorrow — or replay any day from the strip above (Word Bank always works too).</p>' +
         sentenceBox(day) + '</div>';
-      if (ti < TOTAL_DAYS - 1) html += '<div class="card"><h2>🔜 Next set</h2><p class="muted">Day ' + (ti+2) + ' unlocks tomorrow. Reviews of today\'s 5 words are due tomorrow too.</p></div>';
-      else html += '<div class="card"><h2>🏁 All 300 words released</h2><p class="muted">From now on, keep clearing the review queue — that is where mastery happens.</p></div>';
+      if (ti < TOTAL_DAYS - 1) html += '<div class="card"><h2>🔜 Next set</h2><p class="muted">Day ' + (ti+2) + ' unlocks tomorrow. Reviews of today\'s ' + DAY_SIZE + ' words are due tomorrow too.</p></div>';
+      else html += '<div class="card"><h2>🏁 All ' + WORDS.length + ' words released</h2><p class="muted">From now on, keep clearing the review queue — that is where mastery happens.</p></div>';
       el.innerHTML = html;
       return;
     }
@@ -329,7 +388,7 @@
         el.innerHTML = html + renderQuizCard();
         return;
       }
-      html += '<div class="card"><h2>Day ' + (showDay+1) + ' — ' + esc(pack.title) + '</h2><p class="muted" style="margin-bottom:0.6rem;">You reviewed all 5 words. Take the quick quiz to lock them in.</p><button class="btn" onclick="startQuiz()">Start quiz ▶</button></div>';
+      html += '<div class="card"><h2>Day ' + (showDay+1) + ' — ' + esc(pack.title) + '</h2><p class="muted" style="margin-bottom:0.6rem;">You reviewed all ' + day.length + ' words. Take the quick quiz to lock them in.</p><button class="btn" type="button" onclick="startQuiz()">Start quiz ▶</button></div>';
       el.innerHTML = html;
       return;
     }
@@ -371,9 +430,12 @@
 
   /* ---------- quiz ---------- */
   function mcOptions(w){
-    let pool = WORDS.filter(x => x.id !== w.id && x.pos === w.pos);
-    if (pool.length < 3) pool = pool.concat(WORDS.filter(x => x.id !== w.id && x.pos !== w.pos));
-    return shuffle([w.word].concat(shuffle(pool).slice(0,3).map(x => x.word)));
+    const correct = w.word;
+    const candidates = WORDS.filter(x => x.id !== w.id && x.word.toLowerCase() !== correct.toLowerCase());
+    const unique = values => [...new Map(values.map(value => [value.toLowerCase(), value])).values()];
+    let options = unique(candidates.filter(x => x.pos === w.pos).map(x => x.word));
+    if (options.length < 3) options = unique(options.concat(candidates.filter(x => x.pos !== w.pos).map(x => x.word)));
+    return shuffle([correct].concat(shuffle(options).slice(0,3)));
   }
   function defQ(w){ return { type:'mc', word:w, prompt:'Which word means: “' + w.def + '”?', options: mcOptions(w), answer:w.word }; }
   function makeQuestions(day){
@@ -384,7 +446,7 @@
         const form = findForm(w.word, w.ex);
         if (form){
           const text = w.ex.replace(new RegExp('\\b' + escRe(form) + '\\b', 'i'), '_______');
-          return { type:'gap', word:w, prompt:'Type the missing word:', text:text, answer:w.word };
+          return { type:'gap', word:w, prompt:'Type the missing word:', text:text, answer:form };
         }
         return defQ(w);
       }
@@ -456,10 +518,20 @@
   function sentenceBox(day){
     const w = day[0];
     const saved = state.sentences[w.id] || '';
-    return '<div style="margin-top:0.7rem;"><strong>✍️ Use it:</strong><div class="muted" style="margin:0.3rem 0 0.45rem;">Write one sentence with “' + esc(w.word) + '” — your tutor can see it.</div>' +
-      '<textarea class="useit" rows="2" placeholder="Type your sentence..." oninput="saveSentence(\'' + w.id + '\', this.value)">' + esc(saved) + '</textarea></div>';
+    return '<div style="margin-top:0.7rem;"><strong>✍️ Use it:</strong><div class="muted" style="margin:0.3rem 0 0.45rem;">Write one sentence with “' + esc(w.word) + '”. It is saved on this device; copy it to share with your tutor.</div>' +
+      '<textarea class="useit" id="sentence-' + w.id + '" rows="2" placeholder="Type your sentence..." oninput="saveSentence(\'' + w.id + '\', this.value)">' + esc(saved) + '</textarea>' +
+      '<div style="display:flex;align-items:center;gap:0.6rem;margin-top:0.5rem;"><button class="btn sec" type="button" onclick="copySentence(\'' + w.id + '\')">Copy sentence</button><span class="muted" id="sentenceCopyStatus" aria-live="polite"></span></div></div>';
   }
   function saveSentence(id, v){ state.sentences[id] = v; save(); }
+  async function copySentence(id){
+    const text = (state.sentences[id] || '').trim();
+    const status = document.getElementById('sentenceCopyStatus');
+    if (!text){ if (status) status.textContent = 'Write a sentence first.'; return; }
+    try {
+      await navigator.clipboard.writeText(text);
+      if (status) status.textContent = 'Copied — send it to your tutor.';
+    } catch(e) { window.prompt('Copy your sentence:', text); }
+  }
 
   /* ---------- review ---------- */
   function renderReview(){
@@ -477,7 +549,7 @@
             '<div class="example" style="margin-top:0.5rem;">' + hl(w.word, w.ex) + '</div>' +
           '</div>' +
           '<div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-top:0.5rem;">' +
-            '<button class="btn sec" onclick="document.getElementById(\'rv-' + w.id + '\').classList.add(\'show\')">👁️ Reveal</button>' +
+            '<button class="btn sec" type="button" aria-expanded="false" onclick="toggleReview(\'' + w.id + '\', this)">👁️ Reveal</button>' +
             '<button class="btn red" onclick="rateReview(\'' + w.id + '\', false)">Again</button>' +
             '<button class="btn green" onclick="rateReview(\'' + w.id + '\', true)">Got it</button>' +
           '</div>' +
@@ -486,7 +558,15 @@
   }
   function rateReview(id, good){
     const w = WORDS.find(x => x.id === id);
+    if (!w) return;
     rateWord(w, good); bumpStreak(); save(); renderHeader(); renderReview();
+  }
+  function toggleReview(id, btn){
+    const card = document.getElementById('rv-' + id);
+    if (!card) return;
+    const open = card.classList.toggle('show');
+    btn.setAttribute('aria-expanded', String(open));
+    btn.textContent = open ? 'Hide answer' : '👁️ Reveal';
   }
 
   /* ---------- word bank ---------- */
@@ -495,7 +575,7 @@
   function renderBank(){
     const el = document.getElementById('tab-bank');
     el.innerHTML = '<div class="card"><div class="bank-tools">' +
-      '<input id="bankInput" placeholder="Search 120 words..." value="' + esc(bankQuery) + '" oninput="bankSearch(this.value)">' +
+      '<input id="bankInput" type="search" aria-label="Search the 300-word bank" placeholder="Search ' + WORDS.length + ' words..." value="' + esc(bankQuery) + '" oninput="bankSearch(this.value)">' +
       '<select id="bankSelect" onchange="bankPack(this.value)"><option value="0">All packs</option>' +
       window.VOCAB_PACKS.map(p => '<option value="' + p.id + '"' + (bankPackId === p.id ? ' selected' : '') + '>' + esc(p.id + '. ' + p.title) + '</option>').join('') +
       '</select></div><div class="muted" id="bankCount"></div></div><div id="bankList"></div>';
@@ -528,24 +608,25 @@
   /* ---------- export ---------- */
   function exportProgress(){
     const t = todayStr();
-    const daysDone = Object.keys(state.days).length;
+    const daysDone = Object.keys(state.days).filter(k => /^day\d+$/.test(k) && Number(k.slice(3)) >= 0 && Number(k.slice(3)) < TOTAL_DAYS && state.days[k] && state.days[k].done).length;
     const recent = [];
     for (let i = 0; i < 7; i++){
       const d = addDays(t, -i); const dayIdx = dayDiff(state.startDate, d);
-      const done = state.days[dayKey(dayIdx)];
-      recent.push(d + (done ? ' ✓ ' + done.score + '/' + done.total : ' —'));
+      const done = dayIdx >= 0 && dayIdx < TOTAL_DAYS ? state.days[dayKey(dayIdx)] : null;
+      recent.push(d + (dayIdx < 0 ? ' (before cycle)' : done ? ' ✓ ' + done.score + '/' + done.total : ' —'));
     }
     const mastered = WORDS.filter(w => state.words[w.id] && state.words[w.id].box >= 4).map(w => w.word);
     const txt = 'VOCABULARY CENTRE — ' + t + '\n' +
       'Streak: ' + (state.streak.count||0) + ' days · Days completed: ' + daysDone + '/' + TOTAL_DAYS + '\n' +
-      'Words started: ' + learnedCount() + '/120 · Mastered: ' + masteredCount() + '\n' +
+      'Words started: ' + learnedCount() + '/' + WORDS.length + ' · Mastered: ' + masteredCount() + '/' + WORDS.length + '\n' +
       'Last 7 days:\n' + recent.reverse().map(r => '  ' + r).join('\n') + '\n' +
       'Mastered: ' + (mastered.join(', ') || '(none yet)');
     if (navigator.clipboard && navigator.clipboard.writeText){
-      navigator.clipboard.writeText(txt).then(() => { document.getElementById('exportMsg').textContent = 'Copied ✓'; setTimeout(()=>{document.getElementById('exportMsg').textContent='';}, 2000); });
-    } else {
-      alert(txt);
-    }
+      navigator.clipboard.writeText(txt).then(() => {
+        document.getElementById('exportMsg').textContent = 'Copied ✓';
+        setTimeout(()=>{document.getElementById('exportMsg').textContent='';}, 2000);
+      }).catch(() => { window.prompt('Copy your progress summary:', txt); });
+    } else window.prompt('Copy your progress summary:', txt);
   }
 
   function renderAll(){
@@ -561,7 +642,8 @@
   window.openDay = openDay;
   window.nextQuestion = nextQuestion; window.pickOption = pickOption; window.rateReview = rateReview;
   window.playWord = playWord; window.bankSearch = bankSearch; window.bankPack = bankPack;
-  window.saveSentence = saveSentence; window.exportProgress = exportProgress;
+  window.saveSentence = saveSentence; window.copySentence = copySentence; window.exportProgress = exportProgress;
+  window.toggleReview = toggleReview;
   window.setQuizInput = setQuizInput;
 
   renderAll();
