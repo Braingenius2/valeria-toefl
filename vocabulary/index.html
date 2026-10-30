@@ -302,8 +302,10 @@
   /* ---------- flashcard flow ---------- */
   let learn = { day: null, idx: 0, flipped: false };
   let quiz = null;
+  let lastResult = null;
 
   function showTab(name){
+    if (name !== 'today') lastResult = null;
     document.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', t.dataset.tab === name));
     document.getElementById('tab-today').classList.toggle('hidden', name !== 'today');
     document.getElementById('tab-review').classList.toggle('hidden', name !== 'review');
@@ -355,6 +357,7 @@
     const todayDay = Math.min(ti, TOTAL_DAYS - 1);
     learn = { day: (i === todayDay ? null : i), idx: 0, flipped: false };
     quiz = null;
+    lastResult = null;
     showTab('today');
     renderToday();
     window.scrollTo(0, 0);
@@ -368,6 +371,12 @@
     const pack = window.VOCAB_PACKS.find(p => p.id === day[0].pack);
     const todayDay = Math.min(ti, TOTAL_DAYS - 1);
     let html = dayStripHtml(ti, showDay, todayDay);
+    if (lastResult){
+      const r = lastResult;
+      html += '<div class="card"><h2>' + (r.score === r.total ? '🎉 Perfect score!' : 'Quiz finished') + '</h2>' +
+        '<p class="celebrate">Day ' + (r.day+1) + ': ' + r.score + ' / ' + r.total + '</p>' +
+        '<p class="muted" style="margin-top:0.5rem;">' + (r.score === r.total ? 'All five correct — nicely done.' : 'Words you missed will come back in review — that is how they stick!') + '</p></div>';
+    }
 
     if (state.days[dayKey(showDay)] && learn.day === null){
       const d = state.days[dayKey(showDay)];
@@ -426,7 +435,7 @@
   function flipCard(){ learn.flipped = !learn.flipped; renderToday(); }
   function nextWord(){ learn.idx++; learn.flipped = false; renderToday(); }
   function startCatchup(i){ learn = { day: i, idx: 0, flipped: false }; quiz = null; renderToday(); window.scrollTo(0,0); }
-  function startQuiz(){ quiz = { qs: makeQuestions(wordsForDay(learn.day === null ? Math.min(todayIndex(), TOTAL_DAYS-1) : learn.day)), idx: 0, score: 0, answered: false, chosen: null, input: '' }; renderToday(); }
+  function startQuiz(){ lastResult = null; quiz = { qs: makeQuestions(wordsForDay(learn.day === null ? Math.min(todayIndex(), TOTAL_DAYS-1) : learn.day)), idx: 0, score: 0, answered: false, chosen: null, input: '' }; renderToday(); }
 
   /* ---------- quiz ---------- */
   function mcOptions(w){
@@ -511,9 +520,9 @@
     state.days[dayKey(day)] = { done:true, score: quiz.score, total: quiz.qs.length, date: todayStr() };
     bumpStreak(); save();
     const sc = quiz.score, tt = quiz.qs.length;
+    lastResult = { day: day, score: sc, total: tt };
     quiz = null; learn = { day: null, idx: 0, flipped: false };
     renderAll();
-    if (sc < tt) alert('Quiz finished: ' + sc + '/' + tt + '.\n\nWords you missed will come back in review — that is how they stick!');
   }
   function sentenceBox(day){
     const w = day[0];
@@ -600,7 +609,7 @@
       '</div>';
     }).join('');
     document.getElementById('bankList').innerHTML = list || '<div class="card"><p class="muted">No words match your search.</p></div>';
-    document.getElementById('bankCount').textContent = words.length + ' words';
+    document.getElementById('bankCount').textContent = words.length + (words.length === 1 ? ' word' : ' words');
   }
   function bankSearch(v){ bankQuery = v; refreshBankList(); }
   function bankPack(v){ bankPackId = parseInt(v) || 0; refreshBankList(); }
