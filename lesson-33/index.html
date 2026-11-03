@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#07110f">
+<title>Valeria — Lesson 33: Email Reply: All Bullets at 7-Minute Pace</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:dark;--bg:#07110f;--surface:#101d19;--raised:#152520;--line:#294039;--text:#f1f6f3;--muted:#a2b6ad;--green:#55d6a2;--amber:#f0c779;--blue:#83c9e8;--red:#ff8a80;--radius:.75rem;font-family:'Inter','Segoe UI',sans-serif}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background:var(--bg);color:var(--text);line-height:1.55}a{color:var(--green);text-decoration:none}button{font:inherit;cursor:pointer}
+.shell{display:grid;grid-template-columns:15rem minmax(0,1fr);min-height:100vh}
+.rail{position:sticky;top:0;height:100vh;padding:1.2rem .85rem;background:#0b1713;border-right:1px solid var(--line);display:flex;flex-direction:column;gap:1rem}
+.brand{display:flex;align-items:center;gap:.7rem;padding:.15rem .3rem .8rem;border-bottom:1px solid var(--line)}
+.mark{display:grid;place-items:center;width:2.15rem;height:2.15rem;background:var(--amber);color:#20170a;border-radius:.45rem;font:700 .68rem 'Fira Code',monospace}
+.brand-title{font-size:.9rem;font-weight:700}.brand-sub{font:.62rem 'Fira Code',monospace;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.nav{display:grid;gap:.28rem}.nav button{display:flex;gap:.6rem;align-items:center;width:100%;padding:.6rem .6rem;border:1px solid transparent;border-radius:.5rem;background:transparent;color:var(--muted);text-align:left;font-size:.83rem}
+.nav button:hover{color:var(--text);background:rgba(255,255,255,.03)}.nav button.active{color:var(--amber);background:rgba(240,199,121,.1);border-color:rgba(240,199,121,.28)}
+.n{font:.68rem 'Fira Code',monospace;color:#789188}.rail-note{margin-top:auto;color:var(--muted);font-size:.74rem;line-height:1.5}.rail-note strong{display:block;color:var(--text);margin-bottom:.2rem}
+.main{min-width:0;width:min(100%,74rem);margin:0 auto;padding:1.1rem clamp(1rem,3vw,2.2rem) 2rem}
+.top{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;flex-wrap:wrap;padding-bottom:.8rem;margin-bottom:1.2rem;border-bottom:1px solid var(--line)}
+.eyebrow{color:var(--amber);font:.68rem 'Fira Code',monospace;letter-spacing:.08em;text-transform:uppercase}h1{font-size:clamp(1.15rem,2.4vw,1.55rem);margin:.15rem 0}.sub{color:var(--muted);font-size:.84rem;margin:0}
+.top-right{display:flex;align-items:center;gap:.6rem}.chip{font:.7rem 'Fira Code',monospace;color:var(--muted);white-space:nowrap}.back{color:var(--muted);font:.72rem 'Fira Code',monospace}
+.slide{display:none}.slide.active{display:block}.heading{margin-bottom:.9rem}.heading h2{font-size:clamp(1.3rem,2.8vw,1.8rem);margin:.15rem 0 .3rem}.heading p{margin:0;color:var(--muted)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;margin-bottom:.85rem}.card h3{font-size:.95rem;color:var(--amber);margin:0 0 .55rem}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.85rem}.callout{padding:.75rem .9rem;border-left:3px solid var(--green);background:rgba(85,214,162,.07);border-radius:0 .6rem .6rem 0}.callout p:last-child{margin:0}
+.btn{display:inline-flex;align-items:center;gap:.35rem;min-height:2.3rem;padding:.45rem .7rem;border:1px solid var(--line);border-radius:.45rem;background:var(--raised);color:var(--text);font-size:.82rem}.btn:hover{border-color:var(--green)}.btn.primary{background:var(--green);border-color:var(--green);color:#072116;font-weight:650}
+.timer{display:inline-block;min-width:4.4rem;text-align:center;padding:.32rem .55rem;border:1px solid var(--line);border-radius:.4rem;color:var(--amber);background:#050a08;font:600 .95rem 'Fira Code',monospace}
+textarea{width:100%;padding:.7rem;background:#0b1713;border:1px solid var(--line);border-radius:.5rem;color:var(--text);font:inherit;line-height:1.6;resize:vertical}
+.meta{font:.72rem 'Fira Code',monospace;color:var(--muted)}.muted{color:var(--muted)}
+.reveal-box{border:1px solid var(--line);border-radius:.5rem;margin:.4rem 0;background:#0b1713;overflow:hidden}
+.reveal-header{display:flex;justify-content:space-between;gap:.8rem;padding:.55rem .65rem;cursor:pointer;font-size:.88rem}
+.reveal-content{display:none;padding:.1rem .65rem .55rem;color:var(--green);font-weight:600}.reveal-box.open .reveal-content{display:block}
+.reveal-explanation{display:none;padding:0 .65rem .6rem;color:var(--muted);font-size:.8rem}.reveal-box.open .reveal-explanation{display:block}
+.audio-row{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap;padding:.5rem 0;border-bottom:1px solid #1b2b26}.audio-row:last-child{border:0}.audio-row audio{height:2.2rem;flex:1 1 14rem}
+.shadow-text{padding:.8rem;background:#0b1713;border:1px solid var(--line);border-radius:.5rem;font-size:.98rem;line-height:1.7}
+.shadow-word{padding:0 .08rem;border-radius:.15rem}.shadow-word.active{background:rgba(240,199,121,.35);color:#fff}
+.clip{border:1px solid var(--line);border-radius:.5rem;padding:.55rem .65rem;margin:.45rem 0;background:#0b1713}
+.clip .clip-btn{min-width:9rem}.clip .clip-btn[disabled]{opacity:.65;cursor:default}
+.clip-body{margin-top:.55rem}.clip-body[hidden]{display:none}
+.convo{border:1px solid var(--line);border-radius:.5rem;padding:.55rem .65rem;margin:.45rem 0;background:#0b1713}
+.scoreline{display:grid;grid-template-columns:minmax(0,1fr) 8rem;gap:.6rem;align-items:center;padding:.4rem 0;border-bottom:1px solid #1b2b26;font-size:.85rem}
+.scoreline select{width:100%;padding:.3rem;background:#050a08;color:var(--text);border:1px solid var(--line);border-radius:.35rem}
+.footer{display:flex;justify-content:space-between;gap:.6rem;margin-top:1.2rem;padding-top:.8rem;border-top:1px solid var(--line)}
+.tag{display:inline-block;padding:.15rem .5rem;border:1px solid var(--line);border-radius:99px;font:.65rem 'Fira Code',monospace;color:var(--muted)}
+@media(max-width:760px){.shell{display:block}.rail{position:sticky;top:0;z-index:8;width:100%;height:auto;border-right:0;border-bottom:1px solid var(--line);padding:.55rem .7rem}.brand{padding:0 .1rem .4rem}.brand-sub,.rail-note{display:none}.nav{display:flex;overflow-x:auto}.nav button{flex:0 0 auto;width:auto;padding:.4rem .5rem;font-size:.74rem}.n{display:none}.main{padding-top:.8rem}.grid{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<div class="shell">
+  <aside class="rail" aria-label="Lesson navigation">
+    <div class="brand"><span class="mark">L33</span><div><div class="brand-title">Valeria's TOEFL</div><div class="brand-sub">Lesson 33 · Fri Oct 30, 2026</div></div></div>
+    <nav class="nav" aria-label="Slides"><button type="button" onclick="switchSlide(0)"><span class="n">01</span> Warm-up: Shadowing</button><button type="button" onclick="switchSlide(1)"><span class="n">02</span> Writing</button><button type="button" onclick="switchSlide(2)"><span class="n">03</span> Speaking</button><button type="button" onclick="switchSlide(3)"><span class="n">04</span> Review &amp; repair</button><button type="button" onclick="switchSlide(4)"><span class="n">05</span> Homework</button></nav>
+    <div class="rail-note"><strong>Email Reply: All Bullets at 7-Minute Pace</strong>Plan bullet two first, answer all numbered bullets, and finish inside seven minutes.</div>
+  </aside>
+  <main class="main">
+    <header class="top">
+      <div><div class="eyebrow">TOEFL iBT · Lesson 33</div><h1>Email Reply: All Bullets at 7-Minute Pace</h1><p class="sub">Plan bullet two first, answer all numbered bullets, and finish inside seven minutes.</p></div>
+      <div class="top-right"><span class="chip" id="slideChip">1 / 5</span><a class="back" href="https://braingenius2.github.io/valeria-toefl">← Portal</a><span class="tag">v1 · Fri Oct 30, 2026</span></div>
+    </header>
+    <section class="slide" id="slide-0"><div class="heading"><div class="eyebrow">Pre-test · warm-up</div><h2>Warm-up: Shadowing</h2></div>
+      <div class="card"><h3>Shadowing — today's focus</h3>
+        <div class="shadow-text" id="shadowText">An email reply is a checklist. Read the numbered instructions, choose the most useful bullet, plan it first, then build the message around it. Greet, answer every bullet, close politely, and leave one minute to proofread. Speed comes from planning, not from typing faster.</div>
+        <div class="audio-row"><audio id="shadowAudio" controls preload="metadata" src="audio/shadowing.mp3"></audio></div>
+        <div class="grid" style="margin-top:.6rem">
+          <div><button class="btn" id="pacerBtn" onclick="startPacer('shadowAudio','shadowText','pacerBtn',140)">Start pacer</button> <span class="meta">140 WPM</span></div>
+          <div class="muted" style="font-size:.82rem">Listen once for meaning → read along with the pacer → record yourself and compare.</div>
+        </div>
+        <div class="callout" style="margin-top:.7rem"><p><strong>Today:</strong> Plan bullet two first, answer all numbered bullets, and finish inside seven minutes.</p></div>
+      </div></section><section class="slide" id="slide-1"><div class="heading"><div class="eyebrow">Section 3 · Writing — timed</div><h2>Writing</h2></div><div class="card"><h3>EMAIL — 7 minutes</h3><div class="shadow-text" style="font-size:.9rem">Write to Professor Lambert. In your email, do the following: (1) say which research assistantship you are interested in, (2) explain one skill or course that makes you suitable, (3) ask whether a short meeting is possible this week. Write 100-120 words.</div><div style="margin:.6rem 0"><span class="timer" id="writeTimer">07:00</span> <button class="btn primary" id="btn-writeTimer" onclick="startTimer('writeTimer',420)">Start</button> <button class="btn" onclick="resetTimer('writeTimer',420)">Reset</button></div><textarea rows="10" data-count="wordCount" data-wpm="wpmCount" placeholder="Write here..."></textarea><div class="meta"><span id="wordCount">0 words</span> · <span id="wpmCount"></span></div><div style="margin:.3rem 0 .5rem"><button class="btn primary" onclick="startTest(this)">Start test</button> <button class="btn" onclick="submitAd(this)">Submit for review</button></div><div id="adReview" hidden><ul style="margin:.6rem 0 0;padding-left:1.2rem"><li>All three numbered bullets answered</li><li>Greeting + closing</li><li>100-120 words</li><li>No invented facts</li><li>One proofread pass</li></ul><div class="reveal-box"><div class="reveal-header"><span>Show the model answer</span><span>👁️</span></div><div class="reveal-content">Dear Professor Lambert,
+
+I am writing to ask about the research assistantship in your public-health lab, advertised on the department noticeboard. I am particularly interested in the data-collection side of the project, where my statistics course and my work on the student survey would be useful. Last term I cleaned and analysed a 300-response dataset and presented the results to our seminar group, so I am comfortable working with real, imperfect data. The role also appeals to me because it combines fieldwork with analysis.
+
+Could we meet briefly this week to discuss whether my background fits the role? I am free on Tuesday and Thursday afternoons.
+
+Thank you for your time.
+
+Best regards,
+Valeria</div></div></div></div></section><section class="slide" id="slide-2"><div class="heading"><div class="eyebrow">Section 4 · Speaking — one take</div><h2>Speaking</h2></div><div class="card"><h3>Listen &amp; Repeat — one play per sentence, repeat immediately</h3><div class="audio-row"><span class="tag">01</span><button class="btn clip-btn" onclick="playOnce(this)" data-src="audio/lr-1.mp3" data-reveal="rv-lr-1">▶ Play sentence</button><span class="meta">one play</span><div class="clip-body" id="rv-lr-1" hidden><div class="reveal-box"><div class="reveal-header"><span>Show sentence</span><span>👁️</span></div><div class="reveal-content">I am writing to ask whether the position is still available.</div></div></div></div><div class="audio-row"><span class="tag">02</span><button class="btn clip-btn" onclick="playOnce(this)" data-src="audio/lr-2.mp3" data-reveal="rv-lr-2">▶ Play sentence</button><span class="meta">one play</span><div class="clip-body" id="rv-lr-2" hidden><div class="reveal-box"><div class="reveal-header"><span>Show sentence</span><span>👁️</span></div><div class="reveal-content">Please let me know if you need any additional documents.</div></div></div></div><div class="audio-row"><span class="tag">03</span><button class="btn clip-btn" onclick="playOnce(this)" data-src="audio/lr-3.mp3" data-reveal="rv-lr-3">▶ Play sentence</button><span class="meta">one play</span><div class="clip-body" id="rv-lr-3" hidden><div class="reveal-box"><div class="reveal-header"><span>Show sentence</span><span>👁️</span></div><div class="reveal-content">The course would help me combine research methods with public policy.</div></div></div></div><div class="audio-row"><span class="tag">04</span><button class="btn clip-btn" onclick="playOnce(this)" data-src="audio/lr-4.mp3" data-reveal="rv-lr-4">▶ Play sentence</button><span class="meta">one play</span><div class="clip-body" id="rv-lr-4" hidden><div class="reveal-box"><div class="reveal-header"><span>Show sentence</span><span>👁️</span></div><div class="reveal-content">I have attached my transcript and a short statement of purpose.</div></div></div></div><div class="audio-row"><span class="tag">05</span><button class="btn clip-btn" onclick="playOnce(this)" data-src="audio/lr-5.mp3" data-reveal="rv-lr-5">▶ Play sentence</button><span class="meta">one play</span><div class="clip-body" id="rv-lr-5" hidden><div class="reveal-box"><div class="reveal-header"><span>Show sentence</span><span>👁️</span></div><div class="reveal-content">Thank you for considering my application on such short notice.</div></div></div></div><div class="audio-row"><span class="tag">06</span><button class="btn clip-btn" onclick="playOnce(this)" data-src="audio/lr-6.mp3" data-reveal="rv-lr-6">▶ Play sentence</button><span class="meta">one play</span><div class="clip-body" id="rv-lr-6" hidden><div class="reveal-box"><div class="reveal-header"><span>Show sentence</span><span>👁️</span></div><div class="reveal-content">Could we arrange a meeting later this week to discuss the project?</div></div></div></div><div class="audio-row"><span class="tag">07</span><button class="btn clip-btn" onclick="playOnce(this)" data-src="audio/lr-7.mp3" data-reveal="rv-lr-7">▶ Play sentence</button><span class="meta">one play</span><div class="clip-body" id="rv-lr-7" hidden><div class="reveal-box"><div class="reveal-header"><span>Show sentence</span><span>👁️</span></div><div class="reveal-content">I would be grateful for any advice you can offer.</div></div></div></div></div><div class="callout" style="margin-bottom:.8rem"><p><strong>Take an Interview:</strong> four questions on one theme, <strong>45 seconds each</strong>, no preparation, no notes. Structure every answer: <strong>Idea → Reason → Tie-in</strong>. Target ~110 words per answer.</p></div><div class="card"><h3>Set A — University life</h3><div style="margin:.2rem 0 .5rem"><span class="timer" id="intTimerA">00:45</span> <button class="btn" id="btn-intTimerA" onclick="startTimer('intTimerA',45)">Start 45 s</button> <button class="btn" onclick="resetTimer('intTimerA',45)">Reset</button></div><div class="clip"><button class="btn clip-btn" onclick="playOnce(this)" data-src="audio/intA1.mp3" data-reveal="rv-intA1">▶ Question 1</button><span class="meta">45 s · no prep · no notes</span><div class="clip-body" id="rv-intA1" hidden><p class="muted">Answer now: Idea → Reason → Tie-in.</p></div></div><div class="clip"><button class="btn clip-btn" onclick="playOnce(this)" data-src="audio/intA2.mp3" data-reveal="rv-intA2">▶ Question 2</button><span class="meta">45 s · no prep · no notes</span><div class="clip-body" id="rv-intA2" hidden><p class="muted">Answer now: Idea → Reason → Tie-in.</p></div></div><div class="clip"><button class="btn clip-btn" onclick="playOnce(this)" data-src="audio/intA3.mp3" data-reveal="rv-intA3">▶ Question 3</button><span class="meta">45 s · no prep · no notes</span><div class="clip-body" id="rv-intA3" hidden><p class="muted">Answer now: Idea → Reason → Tie-in.</p></div></div><div class="clip"><button class="btn clip-btn" onclick="playOnce(this)" data-src="audio/intA4.mp3" data-reveal="rv-intA4">▶ Question 4</button><span class="meta">45 s · no prep · no notes</span><div class="clip-body" id="rv-intA4" hidden><p class="muted">Answer now: Idea → Reason → Tie-in.</p></div></div></div></section><section class="slide" id="slide-3"><div class="heading"><div class="eyebrow">Post-test · review</div><h2>Review &amp; repair</h2></div><div class="card"><h3>Before we finish</h3><ul style="padding-left:1.2rem"><li>Bullet coverage: number every sentence you wrote and match it to a bullet.</li><li>Known spelling list: desure, phychology, usefull, sourses, researches.</li></ul></div><div class="card"><h3>Correction table — fill during the lesson</h3><table style="width:100%;border-collapse:collapse;font-size:.85rem"><tr><th style="text-align:left;padding:.4rem;border-bottom:1px solid var(--line)">You said / wrote</th><th style="text-align:left;padding:.4rem;border-bottom:1px solid var(--line)">Fix</th><th style="text-align:left;padding:.4rem;border-bottom:1px solid var(--line)">Category</th></tr><tr><td style="padding:.3rem"><input style="width:100%;background:#050a08;border:1px solid var(--line);border-radius:.35rem;color:var(--text);padding:.35rem"></td><td style="padding:.3rem"><input style="width:100%;background:#050a08;border:1px solid var(--line);border-radius:.35rem;color:var(--text);padding:.35rem"></td><td style="padding:.3rem"><input style="width:100%;background:#050a08;border:1px solid var(--line);border-radius:.35rem;color:var(--text);padding:.35rem"></td></tr><tr><td style="padding:.3rem"><input style="width:100%;background:#050a08;border:1px solid var(--line);border-radius:.35rem;color:var(--text);padding:.35rem"></td><td style="padding:.3rem"><input style="width:100%;background:#050a08;border:1px solid var(--line);border-radius:.35rem;color:var(--text);padding:.35rem"></td><td style="padding:.3rem"><input style="width:100%;background:#050a08;border:1px solid var(--line);border-radius:.35rem;color:var(--text);padding:.35rem"></td></tr><tr><td style="padding:.3rem"><input style="width:100%;background:#050a08;border:1px solid var(--line);border-radius:.35rem;color:var(--text);padding:.35rem"></td><td style="padding:.3rem"><input style="width:100%;background:#050a08;border:1px solid var(--line);border-radius:.35rem;color:var(--text);padding:.35rem"></td><td style="padding:.3rem"><input style="width:100%;background:#050a08;border:1px solid var(--line);border-radius:.35rem;color:var(--text);padding:.35rem"></td></tr></table><p class="meta" style="margin:.5rem 0 0">Category: article · verb pattern · clause · collocation · spelling · task completion</p></div></section><section class="slide" id="slide-4"><div class="heading"><div class="eyebrow">Homework</div><h2>Homework</h2></div><div class="card"><h3>One task — light by design</h3><p>Revise only the weakest bullet (10 minutes). No second timed sprint.</p><p class="muted" style="font-size:.82rem">Send via Telegram @fortune_chizzy. Vocabulary Centre continues daily.</p></div></section>
+    <div class="footer"><button class="btn" id="prev">← Previous</button><button class="btn primary" id="next">Next →</button></div>
+  </main>
+</div>
+<script>
+const TOTAL = 5; let current = 0;
+function switchSlide(n){current=Math.max(0,Math.min(n,TOTAL-1));
+  document.querySelectorAll('.slide').forEach((s,i)=>s.classList.toggle('active',i===current));
+  document.querySelectorAll('.nav button').forEach((b,i)=>b.classList.toggle('active',i===current));
+  document.getElementById('slideChip').textContent=(current+1)+' / '+TOTAL;
+  document.getElementById('prev').disabled=current===0;
+  document.getElementById('next').textContent=current===TOTAL-1?'Finish':'Next →';
+  window.scrollTo(0,0);}
+document.querySelectorAll('.nav button').forEach((b,i)=>b.addEventListener('click',()=>switchSlide(i)));
+document.getElementById('prev').addEventListener('click',()=>switchSlide(current-1));
+document.getElementById('next').addEventListener('click',()=>switchSlide(current+1));
+document.querySelectorAll('.reveal-header').forEach(h=>h.addEventListener('click',()=>h.parentElement.classList.toggle('open')));
+const timers={};
+function fmt(n){return String(Math.max(0,Math.floor(n/60))).padStart(2,'0')+':'+String(Math.max(0,n%60)).padStart(2,'0');}
+function startTimer(id,sec){const el=document.getElementById(id);const btn=document.getElementById('btn-'+id);
+  if(timers[id]&&timers[id].h){clearInterval(timers[id].h);timers[id].h=null;btn.textContent='Start';return;}
+  let left=(timers[id]&&timers[id].left>0)?timers[id].left:sec;
+  const h=setInterval(()=>{left--;el.textContent=fmt(left);timers[id].left=left;if(left<=0){clearInterval(h);timers[id]=null;el.textContent='TIME!';btn.textContent='Start';}},1000);
+  timers[id]={h,left};btn.textContent='Pause';}
+function resetTimer(id,sec){if(timers[id]){clearInterval(timers[id].h);timers[id]=null;}document.getElementById(id).textContent=fmt(sec);const btn=document.getElementById('btn-'+id);if(btn)btn.textContent='Start';}
+document.querySelectorAll('textarea[data-count]').forEach(t=>{const out=document.getElementById(t.dataset.count);const wpm=document.getElementById(t.dataset.wpm||'');let started=null;
+  t.addEventListener('input',()=>{const words=t.value.trim()?t.value.trim().split(/\s+/).length:0;out.textContent=words+' words';if(wpm){if(!started)started=Date.now();const mins=(Date.now()-started)/60000;wpm.textContent=mins>0.2?Math.round(words/mins)+' wpm':'';}});});
+function playAudio(id){const a=document.getElementById(id);if(a){a.currentTime=0;a.play().catch(()=>{});}}
+function playOnce(btn){if(btn.disabled)return;const src=btn.dataset.src;const reveal=btn.dataset.reveal;btn.disabled=true;btn.textContent='Playing…';
+  const a=new Audio(src);a.onended=()=>{btn.textContent='Played (one play only)';if(reveal){const el=document.getElementById(reveal);if(el)el.hidden=false;}};
+  a.onerror=()=>{btn.textContent='Audio unavailable';};a.play().catch(()=>{btn.textContent='Audio unavailable';});}
+function playConvo(btn){if(btn.disabled)return;const lines=btn.dataset.lines.split(',');const reveal=btn.dataset.reveal;btn.disabled=true;btn.textContent='Playing…';
+  let i=0;const next=()=>{if(i>=lines.length){btn.textContent='Played (one play only)';if(reveal){const el=document.getElementById(reveal);if(el)el.hidden=false;}return;}
+    const a=new Audio('audio/'+lines[i]+'.mp3');a.onended=()=>{i++;setTimeout(next,300);};a.onerror=()=>{i++;setTimeout(next,300);};a.play().catch(()=>{i++;setTimeout(next,300);});};next();}
+function startTest(btn){const ta=document.querySelector('textarea[data-count]');if(ta)ta.focus();const t=document.getElementById('writeTimer');if(t){const b=document.getElementById('btn-writeTimer');if(b&&!b.textContent.includes('Pause'))b.click();}
+  const form=document.getElementById('adForm');if(form)form.hidden=false;btn.textContent='Test started';btn.disabled=true;}
+function submitAd(btn){const out=document.getElementById('adReview');if(out)out.hidden=false;btn.textContent='Submitted';btn.disabled=true;}
+let pacer=null;
+function startPacer(audioId,textId,btnId,wpm){const btn=document.getElementById(btnId);if(pacer){clearInterval(pacer.h);pacer=null;document.querySelectorAll('.shadow-word.active').forEach(w=>w.classList.remove('active'));btn.textContent='Start pacer';return;}
+  const host=document.getElementById(textId);const words=host.textContent.trim().split(/\s+/);host.innerHTML=words.map((w,i)=>'<span class="shadow-word" id="sw'+audioId+'-'+i+'">'+w+'</span>').join(' ');
+  const a=document.getElementById(audioId);a.play().catch(()=>{});let i=0;const step=60000/wpm;
+  pacer={h:setInterval(()=>{if(i>0)document.getElementById('sw'+audioId+'-'+(i-1))?.classList.remove('active');if(i<words.length){document.getElementById('sw'+audioId+'-'+i)?.classList.add('active');i++;}else{clearInterval(pacer.h);pacer=null;btn.textContent='Start pacer';}},step)};
+  btn.textContent='Stop pacer';}
+switchSlide(0);
+</script>
+</body>
+</html>
